@@ -1,0 +1,20 @@
+{
+  "mantis_ambient": {
+    "subtitle": "sounds.slayersbeasts.mantis_ambient",
+    "sounds": [
+      "slayersbeasts:mantis_ambient"
+    ]
+  },
+  "mantis_death": {
+    "subtitle": "sounds.slayersbeasts.mantis_death",
+    "sounds": [
+      "slayersbeasts:mantis_death"
+    ]
+  },
+  "mantis_hurt": {
+    "subtitle": "sounds.slayersbeasts.mantis_hurt",
+    "sounds": [
+      "slayersbeasts:mantis_hurt"
+    ]
+  }
+}

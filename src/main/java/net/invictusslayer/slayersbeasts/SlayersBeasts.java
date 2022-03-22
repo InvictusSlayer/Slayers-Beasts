@@ -1,9 +1,11 @@
 package net.invictusslayer.slayersbeasts;
 
 import com.mojang.logging.LogUtils;
+import net.invictusslayer.slayersbeasts.init.ModBlocks;
+import net.invictusslayer.slayersbeasts.init.ModEntities;
+import net.invictusslayer.slayersbeasts.init.ModItems;
+import net.invictusslayer.slayersbeasts.init.ModSounds;
 import net.minecraft.world.level.block.Blocks;
-import net.minecraftforge.common.MinecraftForge;
-import net.minecraftforge.eventbus.api.Event;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
@@ -20,12 +22,14 @@ public class SlayersBeasts
 
     public SlayersBeasts()
     {
-        // Register the setup method for modloading
-        FMLJavaModLoadingContext.get().getModEventBus().addListener(this::setup);
+        IEventBus eventBus = FMLJavaModLoadingContext.get().getModEventBus();
 
-        // Register ourselves for server and other game events we are interested in
-        IEventBus eventBus = MinecraftForge.EVENT_BUS;
-        eventBus.register(this);
+        ModItems.register(eventBus);
+        ModBlocks.register(eventBus);
+        ModEntities.register(eventBus);
+        ModSounds.register(eventBus);
+
+        eventBus.addListener(this::setup);
     }
 
     private void setup(final FMLCommonSetupEvent event) {

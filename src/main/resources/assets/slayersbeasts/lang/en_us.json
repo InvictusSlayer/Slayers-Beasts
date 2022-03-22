@@ -1,0 +1,18 @@
+{
+  "item.slayersbeasts.tied_leather": "Tied Leather",
+  "item.slayersbeasts.tanned_leather": "Tanned Leather",
+  "item.slayersbeasts.witherbone": "Witherbone",
+
+  "item.slayersbeasts.mantis_spawn_egg": "Praying Mantis Spawn Egg",
+  "item.slayersbeasts.wither_spider_spawn_egg": "Wither Spider Spawn Egg",
+
+  "entity.slayersbeasts.mantis_entity": "Praying Mantis",
+  "entity.slayersbeasts.wither_spider_entity": "Wither Spider",
+  "entity.slayersbeasts.example_entity": "Example Entity",
+
+  "itemGroup.slayers_beasts_tab": "Slayer's Beasts",
+
+  "sounds.slayersbeasts.mantis_ambient": "Mantis chirps",
+  "sounds.slayersbeasts.mantis_death": "Mantis dies",
+  "sounds.slayersbeasts.mantis_hurt": "Mantis hurts"
+}
