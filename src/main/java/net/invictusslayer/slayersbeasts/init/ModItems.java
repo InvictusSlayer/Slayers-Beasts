@@ -12,12 +12,14 @@ public final class ModItems {
     public static final DeferredRegister<Item> ITEMS =
             DeferredRegister.create(ForgeRegistries.ITEMS, SlayersBeasts.MOD_ID);
 
+    public static final RegistryObject<Item> JADE = ITEMS.register("jade",
+            () -> new Item(new Item.Properties().tab(ModCreativeModeTab.SLAYERS_BEASTS_TAB).stacksTo(16)));
     public static final RegistryObject<Item> TIED_LEATHER = ITEMS.register("tied_leather",
             () -> new Item(new Item.Properties().tab(ModCreativeModeTab.SLAYERS_BEASTS_TAB)));
     public static final RegistryObject<Item> TANNED_LEATHER = ITEMS.register("tanned_leather",
             () -> new Item(new Item.Properties().tab(ModCreativeModeTab.SLAYERS_BEASTS_TAB)));
     public static final RegistryObject<Item> WITHERBONE = ITEMS.register("witherbone",
-            () -> new Item(new Item.Properties().tab(ModCreativeModeTab.SLAYERS_BEASTS_TAB).stacksTo(16)));
+            () -> new Item(new Item.Properties().tab(ModCreativeModeTab.SLAYERS_BEASTS_TAB)));
 
     public static final RegistryObject<ForgeSpawnEggItem> MANTIS_SPAWN_EGG = ITEMS.register("mantis_spawn_egg",
             () -> new ForgeSpawnEggItem(ModEntities.MANTIS_ENTITY, 0x2f7f2f, 0xffff31,

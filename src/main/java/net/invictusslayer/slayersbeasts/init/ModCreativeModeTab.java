@@ -7,7 +7,7 @@ public final class ModCreativeModeTab {
     public static final CreativeModeTab SLAYERS_BEASTS_TAB = new CreativeModeTab("slayers_beasts_tab") {
         @Override
         public ItemStack makeIcon() {
-            return new ItemStack(ModItems.WITHERBONE.get());
+            return new ItemStack(ModItems.JADE.get());
         }
     };
 }
