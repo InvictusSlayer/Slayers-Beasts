@@ -7,6 +7,8 @@
   "item.slayersbeasts.mantis_spawn_egg": "Praying Mantis Spawn Egg",
   "item.slayersbeasts.wither_spider_spawn_egg": "Wither Spider Spawn Egg",
 
+  "block.slayersbeasts.jade_block": "Jade Block",
+
   "entity.slayersbeasts.mantis_entity": "Praying Mantis",
   "entity.slayersbeasts.wither_spider_entity": "Wither Spider",
   "entity.slayersbeasts.example_entity": "Example Entity",
