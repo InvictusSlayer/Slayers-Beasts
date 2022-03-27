@@ -1,9 +1,9 @@
 package net.invictusslayer.slayersbeasts.init;
 
 import net.invictusslayer.slayersbeasts.SlayersBeasts;
-import net.invictusslayer.slayersbeasts.entities.ExampleEntity;
-import net.invictusslayer.slayersbeasts.entities.MantisEntity;
-import net.invictusslayer.slayersbeasts.entities.WitherSpiderEntity;
+import net.invictusslayer.slayersbeasts.entity.ExampleEntity;
+import net.invictusslayer.slayersbeasts.entity.MantisEntity;
+import net.invictusslayer.slayersbeasts.entity.WitherSpiderEntity;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.MobCategory;

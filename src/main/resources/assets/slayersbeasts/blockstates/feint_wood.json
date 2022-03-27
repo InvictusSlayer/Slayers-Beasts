@@ -1,0 +1,16 @@
+{
+  "variants": {
+    "axis=x": {
+      "model": "slayersbeasts:block/feint_wood",
+      "x": 90,
+      "y": 90
+    },
+    "axis=y": {
+      "model": "slayersbeasts:block/feint_wood"
+    },
+    "axis=z": {
+      "model": "slayersbeasts:block/feint_wood",
+      "x": 90
+    }
+  }
+}

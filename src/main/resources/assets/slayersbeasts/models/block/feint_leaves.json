@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:block/leaves",
+  "textures": {
+    "all": "slayersbeasts:block/feint_leaves"
+  }
+}

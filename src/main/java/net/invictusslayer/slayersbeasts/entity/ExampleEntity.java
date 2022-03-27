@@ -1,4 +1,4 @@
-package net.invictusslayer.slayersbeasts.entities;
+package net.invictusslayer.slayersbeasts.entity;
 
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;

@@ -9,6 +9,14 @@
 
   "block.slayersbeasts.jade_block": "Jade Block",
 
+  "block.slayersbeasts.feint_log": "Feint Log",
+  "block.slayersbeasts.stripped_feint_log": "Stripped Feint Log",
+  "block.slayersbeasts.feint_wood": "Feint Wood",
+  "block.slayersbeasts.stripped_feint_wood": "Stripped Feint Wood",
+  "block.slayersbeasts.feint_planks": "Feint Planks",
+  "block.slayersbeasts.feint_leaves": "Feint Leaves",
+  "block.slayersbeasts.feint_sapling": "Feint Sapling",
+
   "entity.slayersbeasts.mantis_entity": "Praying Mantis",
   "entity.slayersbeasts.wither_spider_entity": "Wither Spider",
   "entity.slayersbeasts.example_entity": "Example Entity",

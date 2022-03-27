@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:block/cube_column",
+  "textures": {
+    "end": "slayersbeasts:block/feint_log",
+    "side": "slayersbeasts:block/feint_log"
+  }
+}

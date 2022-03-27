@@ -5,9 +5,14 @@ import net.invictusslayer.slayersbeasts.init.ModBlocks;
 import net.invictusslayer.slayersbeasts.init.ModEntities;
 import net.invictusslayer.slayersbeasts.init.ModItems;
 import net.invictusslayer.slayersbeasts.init.ModSounds;
+import net.minecraft.client.renderer.ItemBlockRenderTypes;
+import net.minecraft.client.renderer.RenderType;
+import net.minecraft.client.renderer.entity.MobRenderer;
 import net.minecraft.world.level.block.Blocks;
+import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import org.slf4j.Logger;
@@ -30,6 +35,15 @@ public class SlayersBeasts
         ModSounds.register(eventBus);
 
         eventBus.addListener(this::setup);
+        eventBus.addListener(this::clientSetup);
+
+        MinecraftForge.EVENT_BUS.register(this);
+    }
+
+    private void clientSetup(final FMLClientSetupEvent event) {
+        ItemBlockRenderTypes.setRenderLayer(ModBlocks.FEINT_LEAVES.get(), RenderType.cutout());
+        ItemBlockRenderTypes.setRenderLayer(ModBlocks.FEINT_SAPLING.get(), RenderType.cutout());
+
     }
 
     private void setup(final FMLCommonSetupEvent event) {

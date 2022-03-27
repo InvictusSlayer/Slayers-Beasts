@@ -1,9 +1,9 @@
 package net.invictusslayer.slayersbeasts.events;
 
 import net.invictusslayer.slayersbeasts.SlayersBeasts;
-import net.invictusslayer.slayersbeasts.entities.ExampleEntity;
-import net.invictusslayer.slayersbeasts.entities.MantisEntity;
-import net.invictusslayer.slayersbeasts.entities.WitherSpiderEntity;
+import net.invictusslayer.slayersbeasts.entity.ExampleEntity;
+import net.invictusslayer.slayersbeasts.entity.MantisEntity;
+import net.invictusslayer.slayersbeasts.entity.WitherSpiderEntity;
 import net.invictusslayer.slayersbeasts.init.ModEntities;
 import net.minecraft.world.entity.SpawnPlacements;
 import net.minecraft.world.level.levelgen.Heightmap;

@@ -1,24 +1,22 @@
-package net.invictusslayer.slayersbeasts.entities;
+package net.invictusslayer.slayersbeasts.entity;
 
-import net.invictusslayer.slayersbeasts.init.ModSounds;
-import net.minecraft.core.BlockPos;
 import net.minecraft.sounds.SoundEvent;
-import net.minecraft.world.Difficulty;
+import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.damagesource.DamageSource;
+import net.minecraft.world.effect.MobEffectInstance;
+import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.ai.goal.*;
 import net.minecraft.world.entity.ai.goal.target.HurtByTargetGoal;
 import net.minecraft.world.entity.ai.goal.target.NearestAttackableTargetGoal;
+import net.minecraft.world.entity.monster.Spider;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.LevelAccessor;
 
-import java.util.Random;
-
-public class MantisEntity extends PathfinderMob {
-    public MantisEntity(EntityType<MantisEntity> entityType, Level level) {
+public class WitherSpiderEntity extends Spider {
+    public WitherSpiderEntity(EntityType<WitherSpiderEntity> entityType, Level level) {
         super(entityType, level);
     }
 
@@ -38,21 +36,33 @@ public class MantisEntity extends PathfinderMob {
         return Mob.createMobAttributes()
                 .add(Attributes.MOVEMENT_SPEED, 0.23F)
                 .add(Attributes.FOLLOW_RANGE, 16.0D)
-                .add(Attributes.MAX_HEALTH, 15.0D)
+                .add(Attributes.MAX_HEALTH, 30.0D)
                 .add(Attributes.ATTACK_DAMAGE, 2.0D)
                 .add(Attributes.ATTACK_SPEED, 2.0D)
                 .add(Attributes.ATTACK_KNOCKBACK, 1.0D);
     }
 
-    protected SoundEvent getAmbientSound() {return ModSounds.MANTIS_AMBIENT.get();}
-    protected SoundEvent getDeathSound() {return ModSounds.MANTIS_DEATH.get();}
-    protected SoundEvent getHurtSound(DamageSource damageSource) {return ModSounds.MANTIS_HURT.get();}
+    protected SoundEvent getAmbientSound() {return SoundEvents.WITHER_SKELETON_AMBIENT;}
+    protected SoundEvent getDeathSound() {return SoundEvents.WITHER_SKELETON_DEATH;}
+    protected SoundEvent getHurtSound(DamageSource damageSource) {return SoundEvents.WITHER_SKELETON_HURT;}
 
-    public static boolean canSpawn(EntityType<MantisEntity> entity, LevelAccessor levelAccess,
-                                   MobSpawnType spawnType, BlockPos pos, Random random) {
-        return PathfinderMob.checkMobSpawnRules(entity, levelAccess, spawnType, pos, random)
-                && levelAccess instanceof final Level level && level.getDifficulty() != Difficulty.PEACEFUL;
+    public boolean doHurtTarget(Entity pEntity) {
+        if (!super.doHurtTarget(pEntity)) {
+            return false;
+        } else {
+            if (pEntity instanceof LivingEntity) {
+                ((LivingEntity)pEntity).addEffect(new MobEffectInstance(MobEffects.WITHER, 200), this);
+            }
+            return true;
+        }
     }
 
-    public MobType getMobType() {return MobType.ARTHROPOD;}
+    @Override
+    public MobType getMobType() {
+        return MobType.UNDEAD;
+    }
+
+    public boolean canBeAffected(MobEffectInstance effectInstance) {
+        return effectInstance.getEffect() != MobEffects.WITHER && super.canBeAffected(effectInstance);
+    }
 }

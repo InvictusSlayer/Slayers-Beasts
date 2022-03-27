@@ -1,0 +1,9 @@
+{
+  "replace": false,
+  "values": [
+    "slayersbeasts:feint_log",
+    "slayersbeasts:feint_wood",
+    "slayersbeasts:stripped_feint_log",
+    "slayersbeasts:stripped_feint_wood"
+  ]
+}
