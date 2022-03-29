@@ -41,8 +41,8 @@ public class SlayersBeasts
     }
 
     private void clientSetup(final FMLClientSetupEvent event) {
-        ItemBlockRenderTypes.setRenderLayer(ModBlocks.FEINT_LEAVES.get(), RenderType.cutout());
-        ItemBlockRenderTypes.setRenderLayer(ModBlocks.FEINT_SAPLING.get(), RenderType.cutout());
+        ItemBlockRenderTypes.setRenderLayer(ModBlocks.CAJOLE_LEAVES.get(), RenderType.cutout());
+        ItemBlockRenderTypes.setRenderLayer(ModBlocks.CAJOLE_SAPLING.get(), RenderType.cutout());
 
     }
 

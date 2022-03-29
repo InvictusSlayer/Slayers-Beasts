@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:item/generated",
   "textures": {
-    "layer0": "slayersbeasts:block/feint_sapling"
+    "layer0": "slayersbeasts:block/cajole_sapling"
   }
 }

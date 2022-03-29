@@ -8,10 +8,10 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.Random;
 
-public class FeintTreeGrower extends AbstractTreeGrower {
+public class CajoleTreeGrower extends AbstractTreeGrower {
     @Nullable
     @Override
     protected Holder<? extends ConfiguredFeature<?, ?>> getConfiguredFeature(Random pRandom, boolean pLargeHive) {
-        return ModConfiguredFeatures.FEINT_TREE;
+        return ModConfiguredFeatures.CAJOLE_TREE;
     }
 }

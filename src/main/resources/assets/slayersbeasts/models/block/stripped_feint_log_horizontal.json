@@ -1,7 +1,0 @@
-{
-  "parent": "minecraft:block/cube_column_horizontal",
-  "textures": {
-    "end": "slayersbeasts:block/stripped_feint_top",
-    "side": "slayersbeasts:block/stripped_feint_log"
-  }
-}

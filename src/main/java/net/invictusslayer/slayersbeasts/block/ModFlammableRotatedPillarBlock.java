@@ -1,4 +1,4 @@
-package net.invictusslayer.slayersbeasts.block.custom;
+package net.invictusslayer.slayersbeasts.block;
 
 import net.invictusslayer.slayersbeasts.init.ModBlocks;
 import net.minecraft.core.BlockPos;
@@ -39,11 +39,11 @@ public class ModFlammableRotatedPillarBlock extends RotatedPillarBlock {
     public BlockState getToolModifiedState(BlockState state, Level world, BlockPos pos, Player player,
                                            ItemStack stack, ToolAction toolAction) {
         if(stack.getItem() instanceof AxeItem) {
-            if(state.is(ModBlocks.FEINT_LOG.get())) {
-                return ModBlocks.STRIPPED_FEINT_LOG.get().defaultBlockState().setValue(AXIS, state.getValue(AXIS));
+            if(state.is(ModBlocks.CAJOLE_LOG.get())) {
+                return ModBlocks.STRIPPED_CAJOLE_LOG.get().defaultBlockState().setValue(AXIS, state.getValue(AXIS));
             }
-            if(state.is(ModBlocks.FEINT_WOOD.get())) {
-                return ModBlocks.STRIPPED_FEINT_WOOD.get().defaultBlockState().setValue(AXIS, state.getValue(AXIS));
+            if(state.is(ModBlocks.CAJOLE_WOOD.get())) {
+                return ModBlocks.STRIPPED_CAJOLE_WOOD.get().defaultBlockState().setValue(AXIS, state.getValue(AXIS));
             }
         }
 

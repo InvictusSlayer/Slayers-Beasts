@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:block/leaves",
   "textures": {
-    "all": "slayersbeasts:block/feint_leaves"
+    "all": "slayersbeasts:block/cajole_leaves"
   }
 }

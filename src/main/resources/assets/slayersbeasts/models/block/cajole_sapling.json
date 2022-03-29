@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:block/cross",
   "textures": {
-    "cross": "slayersbeasts:block/feint_sapling"
+    "cross": "slayersbeasts:block/cajole_sapling"
   }
 }
