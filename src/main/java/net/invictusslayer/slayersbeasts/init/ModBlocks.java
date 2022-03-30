@@ -1,20 +1,15 @@
 package net.invictusslayer.slayersbeasts.init;
 
 import net.invictusslayer.slayersbeasts.SlayersBeasts;
-import net.invictusslayer.slayersbeasts.block.ModFlammableRotatedPillarBlock;
+import net.invictusslayer.slayersbeasts.block.flammable.*;
 import net.invictusslayer.slayersbeasts.world.feature.tree.CajoleTreeGrower;
-import net.minecraft.core.BlockPos;
-import net.minecraft.core.Direction;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.Item;
-import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
-import net.minecraft.world.level.block.LeavesBlock;
 import net.minecraft.world.level.block.SaplingBlock;
 import net.minecraft.world.level.block.state.BlockBehaviour;
-import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.material.Material;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.registries.DeferredRegister;
@@ -38,7 +33,6 @@ public final class ModBlocks {
             () -> new Block(BlockBehaviour.Properties.of(Material.STONE)
                     .strength(25f).requiresCorrectToolForDrops()), ModCreativeModeTab.SLAYERS_BEASTS_TAB);
 
-
     public static final RegistryObject<Block> CAJOLE_LOG = registerBlock("cajole_log",
             () -> new ModFlammableRotatedPillarBlock(BlockBehaviour.Properties.copy(Blocks.OAK_LOG)),
             ModCreativeModeTab.SLAYERS_BEASTS_TAB);
@@ -52,45 +46,30 @@ public final class ModBlocks {
             () -> new ModFlammableRotatedPillarBlock(BlockBehaviour.Properties.copy(Blocks.STRIPPED_OAK_WOOD)),
             ModCreativeModeTab.SLAYERS_BEASTS_TAB);
 
-    public static final RegistryObject<Block> CAJOLE_PLANKS = registerBlock("cajole_planks",
-            () -> new Block(BlockBehaviour.Properties.copy(Blocks.OAK_PLANKS)) {
-                @Override
-                public boolean isFlammable(BlockState state, BlockGetter world, BlockPos pos, Direction face) {
-                    return true;
-                }
-
-                @Override
-                public int getFlammability(BlockState state, BlockGetter world, BlockPos pos, Direction face) {
-                    return 20;
-                }
-
-                @Override
-                public int getFireSpreadSpeed(BlockState state, BlockGetter world, BlockPos pos, Direction face) {
-                    return 5;
-                }
-            }, ModCreativeModeTab.SLAYERS_BEASTS_TAB);
-
     public static final RegistryObject<Block> CAJOLE_LEAVES = registerBlock("cajole_leaves",
-            () -> new LeavesBlock(BlockBehaviour.Properties.copy(Blocks.OAK_LEAVES)) {
-                @Override
-                public boolean isFlammable(BlockState state, BlockGetter world, BlockPos pos, Direction face) {
-                    return true;
-                }
-
-                @Override
-                public int getFlammability(BlockState state, BlockGetter world, BlockPos pos, Direction face) {
-                    return 60;
-                }
-
-                @Override
-                public int getFireSpreadSpeed(BlockState state, BlockGetter world, BlockPos pos, Direction face) {
-                    return 30;
-                }
-            }, ModCreativeModeTab.SLAYERS_BEASTS_TAB);
-
+            () -> new ModFlammableLeavesBlock(BlockBehaviour.Properties.copy(Blocks.OAK_LEAVES), 60, 30),
+            ModCreativeModeTab.SLAYERS_BEASTS_TAB);
     public static final RegistryObject<Block> CAJOLE_SAPLING = registerBlock("cajole_sapling",
             () -> new SaplingBlock(new CajoleTreeGrower(), BlockBehaviour.Properties.copy(Blocks.OAK_SAPLING)),
             ModCreativeModeTab.SLAYERS_BEASTS_TAB);
+
+    public static final RegistryObject<Block> CAJOLE_PLANKS = registerBlock("cajole_planks",
+            () -> new ModFlammableBlock(BlockBehaviour.Properties.copy(Blocks.OAK_PLANKS), 20, 5),
+            ModCreativeModeTab.SLAYERS_BEASTS_TAB);
+    public static final RegistryObject<Block> CAJOLE_SLAB = registerBlock("cajole_slab",
+            () -> new ModFlammableSlabBlock(BlockBehaviour.Properties.copy(Blocks.OAK_SLAB), 20, 5),
+            ModCreativeModeTab.SLAYERS_BEASTS_TAB);
+    public static final RegistryObject<Block> CAJOLE_STAIRS = registerBlock("cajole_stairs",
+            () -> new ModFlammableStairBlock(() -> ModBlocks.CAJOLE_PLANKS.get().defaultBlockState(),
+                    BlockBehaviour.Properties.copy(Blocks.OAK_STAIRS), 20, 5),
+            ModCreativeModeTab.SLAYERS_BEASTS_TAB);
+    public static final RegistryObject<Block> CAJOLE_FENCE = registerBlock("cajole_fence",
+            () -> new ModFlammableFenceBlock(BlockBehaviour.Properties.copy(Blocks.OAK_FENCE), 20, 5),
+            ModCreativeModeTab.SLAYERS_BEASTS_TAB);
+    public static final RegistryObject<Block> CAJOLE_FENCE_GATE = registerBlock("cajole_fence_gate",
+            () -> new ModFlammableFenceGateBlock(BlockBehaviour.Properties.copy(Blocks.OAK_FENCE_GATE), 20, 5),
+            ModCreativeModeTab.SLAYERS_BEASTS_TAB);
+
 
     private static <T extends Block> RegistryObject<T> registerBlock(String name, Supplier<T> block, CreativeModeTab tab) {
         RegistryObject<T> toReturn = BLOCKS.register(name, block);

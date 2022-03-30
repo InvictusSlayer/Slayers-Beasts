@@ -1,0 +1,8 @@
+{
+  "replace": false,
+  "values": [
+    "slayersbeasts:exoskeleton_ore",
+    "slayersbeasts:deepslate_exoskeleton_ore",
+    "slayersbeasts:jade_block"
+  ]
+}

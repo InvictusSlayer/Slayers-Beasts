@@ -1,4 +1,4 @@
-package net.invictusslayer.slayersbeasts.block;
+package net.invictusslayer.slayersbeasts.block.flammable;
 
 import net.invictusslayer.slayersbeasts.init.ModBlocks;
 import net.minecraft.core.BlockPos;

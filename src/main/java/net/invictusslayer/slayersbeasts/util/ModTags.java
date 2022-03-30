@@ -21,6 +21,7 @@ public class ModTags {
     }
 
     public static class Items{
+        public static final TagKey<Item> JADE_GEMS = forgeTag("gems/jade");
 
         private static TagKey<Item> tag(String name) {
             return ItemTags.create(new ResourceLocation(SlayersBeasts.MOD_ID, name));

@@ -14,12 +14,17 @@
   "block.slayersbeasts.deepslate_exoskeleton_ore": "Embedded Crystal Exoskeleton",
 
   "block.slayersbeasts.cajole_log": "Cajole Log",
-  "block.slayersbeasts.stripped_cajole_log": "Stripped Cajole Log",
   "block.slayersbeasts.cajole_wood": "Cajole Wood",
+  "block.slayersbeasts.stripped_cajole_log": "Stripped Cajole Log",
   "block.slayersbeasts.stripped_cajole_wood": "Stripped Cajole Wood",
-  "block.slayersbeasts.cajole_planks": "Cajole Planks",
   "block.slayersbeasts.cajole_leaves": "Cajole Leaves",
   "block.slayersbeasts.cajole_sapling": "Cajole Sapling",
+
+  "block.slayersbeasts.cajole_planks": "Cajole Planks",
+  "block.slayersbeasts.cajole_slab": "Cajole Slab",
+  "block.slayersbeasts.cajole_stairs": "Cajole Stairs",
+  "block.slayersbeasts.cajole_fence": "Cajole Fence",
+  "block.slayersbeasts.cajole_fence_gate": "Cajole Fence Gate",
 
   "entity.slayersbeasts.mantis_entity": "Praying Mantis",
   "entity.slayersbeasts.wither_spider_entity": "Wither Spider",
