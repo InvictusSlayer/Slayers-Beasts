@@ -31,6 +31,13 @@ public final class ModBlocks {
             () -> new Block(BlockBehaviour.Properties.of(Material.METAL)
                     .strength(9f).requiresCorrectToolForDrops()), ModCreativeModeTab.SLAYERS_BEASTS_TAB);
 
+    public static final RegistryObject<Block> EXOSKELETON_ORE = registerBlock("exoskeleton_ore",
+            () -> new Block(BlockBehaviour.Properties.of(Material.STONE)
+                    .strength(15f).requiresCorrectToolForDrops()), ModCreativeModeTab.SLAYERS_BEASTS_TAB);
+    public static final RegistryObject<Block> DEEPSLATE_EXOSKELETON_ORE = registerBlock("deepslate_exoskeleton_ore",
+            () -> new Block(BlockBehaviour.Properties.of(Material.STONE)
+                    .strength(25f).requiresCorrectToolForDrops()), ModCreativeModeTab.SLAYERS_BEASTS_TAB);
+
 
     public static final RegistryObject<Block> CAJOLE_LOG = registerBlock("cajole_log",
             () -> new ModFlammableRotatedPillarBlock(BlockBehaviour.Properties.copy(Blocks.OAK_LOG)),

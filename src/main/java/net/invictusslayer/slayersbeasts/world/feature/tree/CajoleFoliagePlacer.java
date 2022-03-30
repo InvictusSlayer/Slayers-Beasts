@@ -25,9 +25,12 @@ public class CajoleFoliagePlacer extends FoliagePlacer {
     protected void createFoliage(LevelSimulatedReader pLevel, BiConsumer<BlockPos, BlockState> pBlockSetter, Random pRandom, TreeConfiguration pConfig, int pMaxFreeTreeHeight, FoliageAttachment pAttachment, int pFoliageHeight, int pFoliageRadius, int pOffset) {
         boolean flag = pAttachment.doubleTrunk();
         BlockPos blockpos = pAttachment.pos().above(pOffset);
-        this.placeLeavesRow(pLevel, pBlockSetter, pRandom, pConfig, blockpos, pFoliageRadius + pAttachment.radiusOffset(), -1 - pFoliageHeight, flag);
+        this.placeLeavesRow(pLevel, pBlockSetter, pRandom, pConfig, blockpos, pFoliageRadius + pAttachment.radiusOffset() - 1, -1 - pFoliageHeight, flag);
         this.placeLeavesRow(pLevel, pBlockSetter, pRandom, pConfig, blockpos, pFoliageRadius - 1, -pFoliageHeight, flag);
         this.placeLeavesRow(pLevel, pBlockSetter, pRandom, pConfig, blockpos, pFoliageRadius + pAttachment.radiusOffset() - 1, 0, flag);
+        this.placeLeavesRow(pLevel, pBlockSetter, pRandom, pConfig, blockpos, 0, 1 - pFoliageHeight, flag);
+        this.placeLeavesRow(pLevel, pBlockSetter, pRandom, pConfig, blockpos, 1, 2 - pFoliageHeight, flag);
+        this.placeLeavesRow(pLevel, pBlockSetter, pRandom, pConfig, blockpos, 0, 3 - pFoliageHeight, flag);
     }
 
     @Override

@@ -25,7 +25,7 @@ public class ModConfiguredFeatures {
     public static final Holder<ConfiguredFeature<TreeConfiguration, ?>> CAJOLE_TREE =
             FeatureUtils.register("cajole", Feature.TREE, new TreeConfiguration.TreeConfigurationBuilder(
                     BlockStateProvider.simple(ModBlocks.CAJOLE_LOG.get()),
-                    new SpreadTrunkPlacer(5, 6, 3),
+                    new SpreadTrunkPlacer(8, 6, 3),
                     BlockStateProvider.simple(ModBlocks.CAJOLE_LEAVES.get()),
                     new CajoleFoliagePlacer(ConstantInt.of(2), ConstantInt.of(0)),
                     new TwoLayersFeatureSize(1, 0, 2))
@@ -38,6 +38,5 @@ public class ModConfiguredFeatures {
             FeatureUtils.register("cajole_spawn", Feature.RANDOM_SELECTOR,
                     new RandomFeatureConfiguration(List.of(new WeightedPlacedFeature(CAJOLE_CHECKED,
                             0.5F)), CAJOLE_CHECKED));
-
 
 }

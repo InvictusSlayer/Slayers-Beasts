@@ -14,6 +14,8 @@ public final class ModItems {
 
     public static final RegistryObject<Item> JADE = ITEMS.register("jade",
             () -> new Item(new Item.Properties().tab(ModCreativeModeTab.SLAYERS_BEASTS_TAB).stacksTo(16)));
+    public static final RegistryObject<Item> CRYSTALLINE_WING = ITEMS.register("crystalline_wing",
+            () -> new Item(new Item.Properties().tab(ModCreativeModeTab.SLAYERS_BEASTS_TAB).stacksTo(1)));
     public static final RegistryObject<Item> TIED_LEATHER = ITEMS.register("tied_leather",
             () -> new Item(new Item.Properties().tab(ModCreativeModeTab.SLAYERS_BEASTS_TAB)));
     public static final RegistryObject<Item> TANNED_LEATHER = ITEMS.register("tanned_leather",

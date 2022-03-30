@@ -1,5 +1,6 @@
 {
   "item.slayersbeasts.jade": "Jade",
+  "item.slayersbeasts.crystalline_wing": "Crystalline Wing",
   "item.slayersbeasts.tied_leather": "Tied Leather",
   "item.slayersbeasts.tanned_leather": "Tanned Leather",
   "item.slayersbeasts.witherbone": "Witherbone",
@@ -8,6 +9,9 @@
   "item.slayersbeasts.wither_spider_spawn_egg": "Wither Spider Spawn Egg",
 
   "block.slayersbeasts.jade_block": "Jade Block",
+
+  "block.slayersbeasts.exoskeleton_ore": "Buried Crystal Exoskeleton",
+  "block.slayersbeasts.deepslate_exoskeleton_ore": "Embedded Crystal Exoskeleton",
 
   "block.slayersbeasts.cajole_log": "Cajole Log",
   "block.slayersbeasts.stripped_cajole_log": "Stripped Cajole Log",

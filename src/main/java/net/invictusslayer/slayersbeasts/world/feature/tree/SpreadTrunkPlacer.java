@@ -28,22 +28,37 @@ public class SpreadTrunkPlacer extends TrunkPlacer {
     @Override
     public List<FoliagePlacer.FoliageAttachment> placeTrunk(LevelSimulatedReader pLevel, BiConsumer<BlockPos, BlockState> pBlockSetter, Random pRandom, int pFreeTreeHeight, BlockPos pPos, TreeConfiguration pConfig) {
         setDirtAt(pLevel, pBlockSetter, pRandom, pPos.below(), pConfig);
+        setDirtAt(pLevel, pBlockSetter, pRandom, pPos.below().north(), pConfig);
+        setDirtAt(pLevel, pBlockSetter, pRandom, pPos.below().south(), pConfig);
+        setDirtAt(pLevel, pBlockSetter, pRandom, pPos.below().east(), pConfig);
+        setDirtAt(pLevel, pBlockSetter, pRandom, pPos.below().west(), pConfig);
         List<FoliagePlacer.FoliageAttachment> list = Lists.newArrayList();
         Direction direction = Direction.Plane.HORIZONTAL.getRandomDirection(pRandom);
-        int i = pFreeTreeHeight - pRandom.nextInt(6) + 4;
-        int j = 6 - pRandom.nextInt(6);
         BlockPos.MutableBlockPos blockpos$mutableblockpos = new BlockPos.MutableBlockPos();
+        int i = pFreeTreeHeight - pRandom.nextInt(6) - 1;
+        int j = 6 - pRandom.nextInt(6);
         int k = pPos.getX();
         int l = pPos.getZ();
         int m = pPos.getX();
         int n = pPos.getZ();
-        int o = 6 - pRandom.nextInt(3);
+        int o = pRandom.nextInt(4);
+        int p = 6 - pRandom.nextInt(3);
         OptionalInt optionalInt = OptionalInt.empty();
         OptionalInt optionalInt1 = OptionalInt.empty();
 
+        placeLog(pLevel, pBlockSetter, pRandom, pPos.north(), pConfig);
+        placeLog(pLevel, pBlockSetter, pRandom, pPos.south(), pConfig);
+        placeLog(pLevel, pBlockSetter, pRandom, pPos.east(), pConfig);
+        placeLog(pLevel, pBlockSetter, pRandom, pPos.west(), pConfig);
+
+        if (o == 0) {placeLog(pLevel, pBlockSetter, pRandom, pPos.above().north(), pConfig);}
+        if (o == 1) {placeLog(pLevel, pBlockSetter, pRandom, pPos.above().south(), pConfig);}
+        if (o == 2) {placeLog(pLevel, pBlockSetter, pRandom, pPos.above().east(), pConfig);}
+        if (o == 3) {placeLog(pLevel, pBlockSetter, pRandom, pPos.above().west(), pConfig);}
+
         for(int i1 = 0; i1 < pFreeTreeHeight; ++i1) {
             int j1 = pPos.getY() + i1;
-            int k1 = j1 - o;
+            int k1 = j1 - p;
             if (i1 >= i && j > 0) {
                 k += direction.getStepX();
                 l += direction.getStepZ();
@@ -71,6 +86,7 @@ public class SpreadTrunkPlacer extends TrunkPlacer {
         l = pPos.getZ();
         m = pPos.getX();
         n = pPos.getZ();
+        p = 6 - pRandom.nextInt(3);
         Direction direction1 = Direction.Plane.HORIZONTAL.getRandomDirection(pRandom);
         if (direction1 != direction) {
             int j2 = i - pRandom.nextInt(2) - 1;
@@ -81,7 +97,7 @@ public class SpreadTrunkPlacer extends TrunkPlacer {
             for(int l1 = j2; l1 < pFreeTreeHeight && k2 > 0; --k2) {
                 if (l1 >= 1) {
                     int i2 = pPos.getY() + l1;
-                    int l2 = i2 - o;
+                    int l2 = i2 - p;
                     k += direction1.getStepX();
                     l += direction1.getStepZ();
                     m -= direction1.getStepX();
