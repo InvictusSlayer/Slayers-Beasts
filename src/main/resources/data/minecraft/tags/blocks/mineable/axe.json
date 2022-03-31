@@ -1,6 +1,14 @@
 {
   "replace": false,
   "values": [
-
+    "slayersbeasts:cajole_button",
+    "slayersbeasts:cajole_door",
+    "slayersbeasts:cajole_fence",
+    "slayersbeasts:cajole_fence_gate",
+    "slayersbeasts:cajole_planks",
+    "slayersbeasts:cajole_pressure_plate",
+    "slayersbeasts:cajole_slab",
+    "slayersbeasts:cajole_stairs",
+    "slayersbeasts:cajole_trapdoor"
   ]
 }

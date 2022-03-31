@@ -1,14 +1,13 @@
 package net.invictusslayer.slayersbeasts.init;
 
 import net.invictusslayer.slayersbeasts.SlayersBeasts;
+import net.invictusslayer.slayersbeasts.block.CajoleLeavesBlock;
 import net.invictusslayer.slayersbeasts.block.flammable.*;
 import net.invictusslayer.slayersbeasts.world.feature.tree.CajoleTreeGrower;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.Item;
-import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.Blocks;
-import net.minecraft.world.level.block.SaplingBlock;
+import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.material.Material;
 import net.minecraftforge.eventbus.api.IEventBus;
@@ -27,11 +26,11 @@ public final class ModBlocks {
                     .strength(9f).requiresCorrectToolForDrops()), ModCreativeModeTab.SLAYERS_BEASTS_TAB);
 
     public static final RegistryObject<Block> EXOSKELETON_ORE = registerBlock("exoskeleton_ore",
-            () -> new Block(BlockBehaviour.Properties.of(Material.STONE)
-                    .strength(15f).requiresCorrectToolForDrops()), ModCreativeModeTab.SLAYERS_BEASTS_TAB);
+            () -> new Block(BlockBehaviour.Properties.of(Material.STONE).strength(15f)
+                    .requiresCorrectToolForDrops()), ModCreativeModeTab.SLAYERS_BEASTS_TAB);
     public static final RegistryObject<Block> DEEPSLATE_EXOSKELETON_ORE = registerBlock("deepslate_exoskeleton_ore",
-            () -> new Block(BlockBehaviour.Properties.of(Material.STONE)
-                    .strength(25f).requiresCorrectToolForDrops()), ModCreativeModeTab.SLAYERS_BEASTS_TAB);
+            () -> new Block(BlockBehaviour.Properties.of(Material.STONE).strength(25f)
+                    .requiresCorrectToolForDrops()), ModCreativeModeTab.SLAYERS_BEASTS_TAB);
 
     public static final RegistryObject<Block> CAJOLE_LOG = registerBlock("cajole_log",
             () -> new ModFlammableRotatedPillarBlock(BlockBehaviour.Properties.copy(Blocks.OAK_LOG)),
@@ -47,7 +46,7 @@ public final class ModBlocks {
             ModCreativeModeTab.SLAYERS_BEASTS_TAB);
 
     public static final RegistryObject<Block> CAJOLE_LEAVES = registerBlock("cajole_leaves",
-            () -> new ModFlammableLeavesBlock(BlockBehaviour.Properties.copy(Blocks.OAK_LEAVES), 60, 30),
+            () -> new CajoleLeavesBlock(BlockBehaviour.Properties.copy(Blocks.OAK_LEAVES)),
             ModCreativeModeTab.SLAYERS_BEASTS_TAB);
     public static final RegistryObject<Block> CAJOLE_SAPLING = registerBlock("cajole_sapling",
             () -> new SaplingBlock(new CajoleTreeGrower(), BlockBehaviour.Properties.copy(Blocks.OAK_SAPLING)),
@@ -70,6 +69,15 @@ public final class ModBlocks {
             () -> new ModFlammableFenceGateBlock(BlockBehaviour.Properties.copy(Blocks.OAK_FENCE_GATE), 20, 5),
             ModCreativeModeTab.SLAYERS_BEASTS_TAB);
 
+    public static final RegistryObject<Block> CAJOLE_BUTTON = registerBlock("cajole_button",
+            () -> new WoodButtonBlock(BlockBehaviour.Properties.copy(Blocks.OAK_BUTTON)), ModCreativeModeTab.SLAYERS_BEASTS_TAB);
+    public static final RegistryObject<Block> CAJOLE_PRESSURE_PLATE = registerBlock("cajole_pressure_plate",
+            () -> new PressurePlateBlock(PressurePlateBlock.Sensitivity.EVERYTHING, BlockBehaviour.Properties.copy(Blocks.OAK_PRESSURE_PLATE)), ModCreativeModeTab.SLAYERS_BEASTS_TAB);
+
+    public static final RegistryObject<Block> CAJOLE_DOOR = registerBlock("cajole_door",
+            () -> new DoorBlock(BlockBehaviour.Properties.copy(Blocks.OAK_DOOR)), ModCreativeModeTab.SLAYERS_BEASTS_TAB);
+    public static final RegistryObject<Block> CAJOLE_TRAPDOOR = registerBlock("cajole_trapdoor",
+            () -> new TrapDoorBlock(BlockBehaviour.Properties.copy(Blocks.OAK_TRAPDOOR)), ModCreativeModeTab.SLAYERS_BEASTS_TAB);
 
     private static <T extends Block> RegistryObject<T> registerBlock(String name, Supplier<T> block, CreativeModeTab tab) {
         RegistryObject<T> toReturn = BLOCKS.register(name, block);

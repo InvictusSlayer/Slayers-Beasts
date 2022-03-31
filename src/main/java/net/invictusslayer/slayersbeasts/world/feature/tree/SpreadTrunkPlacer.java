@@ -41,7 +41,7 @@ public class SpreadTrunkPlacer extends TrunkPlacer {
         int l = pPos.getZ();
         int m = pPos.getX();
         int n = pPos.getZ();
-        int o = pRandom.nextInt(4);
+        int o = pRandom.nextInt(5);
         int p = 6 - pRandom.nextInt(3);
         OptionalInt optionalInt = OptionalInt.empty();
         OptionalInt optionalInt1 = OptionalInt.empty();

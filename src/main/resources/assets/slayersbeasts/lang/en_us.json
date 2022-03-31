@@ -26,6 +26,11 @@
   "block.slayersbeasts.cajole_fence": "Cajole Fence",
   "block.slayersbeasts.cajole_fence_gate": "Cajole Fence Gate",
 
+  "block.slayersbeasts.cajole_button": "Cajole Button",
+  "block.slayersbeasts.cajole_pressure_plate": "Cajole Pressure Plate",
+  "block.slayersbeasts.cajole_door": "Cajole Door",
+  "block.slayersbeasts.cajole_trapdoor": "Cajole Trapdoor",
+
   "entity.slayersbeasts.mantis_entity": "Praying Mantis",
   "entity.slayersbeasts.wither_spider_entity": "Wither Spider",
   "entity.slayersbeasts.example_entity": "Example Entity",
