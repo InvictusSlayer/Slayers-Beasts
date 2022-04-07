@@ -18,8 +18,7 @@ public class ModTreeGeneration {
         ResourceKey<Biome> key = ResourceKey.create(Registry.BIOME_REGISTRY, event.getName());
         Set<BiomeDictionary.Type> types = BiomeDictionary.getTypes(key);
 
-        List<Holder<PlacedFeature>> base =
-                event.getGeneration().getFeatures(GenerationStep.Decoration.VEGETAL_DECORATION);
+        List<Holder<PlacedFeature>> base = event.getGeneration().getFeatures(GenerationStep.Decoration.VEGETAL_DECORATION);
 
         if (types.contains(BiomeDictionary.Type.JUNGLE)) {
             base.add(ModPlacedFeatures.CAJOLE_PLACED);

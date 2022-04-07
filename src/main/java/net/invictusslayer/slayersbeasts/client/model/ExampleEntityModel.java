@@ -52,20 +52,20 @@ public class ExampleEntityModel<Type extends ExampleEntity> extends EntityModel<
 	@Override
 	public void setupAnim(Type pEntity, float pLimbSwing, float pLimbSwingAmount, float pAgeInTicks, float pNetHeadYaw, float pHeadPitch) {
 
-		this.head.yRot = pNetHeadYaw * ((float)Math.PI / 180F);
+		this.head.yRot = pNetHeadYaw * Mth.PI / 180F;
 		this.body.yRot = 0.0F;
 		this.rightArm.z = 0.0F;
 		this.rightArm.x = -5.0F;
 		this.leftArm.z = 0.0F;
 		this.leftArm.x = 5.0F;
-		this.rightArm.xRot = Mth.cos(pLimbSwing * 0.6662F + (float)Math.PI) * 2.0F * pLimbSwingAmount * 0.5F;
-		this.leftArm.xRot = Mth.cos(pLimbSwing * 0.6662F) * 2.0F * pLimbSwingAmount * 0.5F;
+		this.rightArm.xRot = Mth.cos(pLimbSwing * 0.6662F + Mth.PI) * pLimbSwingAmount;
+		this.leftArm.xRot = Mth.cos(pLimbSwing * 0.6662F) * pLimbSwingAmount;
 		this.rightArm.yRot = 0.0F;
 		this.leftArm.yRot = 0.0F;
 		this.rightArm.zRot = 0.0F;
 		this.leftArm.zRot = 0.0F;
 		this.rightLeg.xRot = Mth.cos(pLimbSwing * 0.6662F) * 1.4F * pLimbSwingAmount;
-		this.leftLeg.xRot = Mth.cos(pLimbSwing * 0.6662F + (float)Math.PI) * 1.4F * pLimbSwingAmount;
+		this.leftLeg.xRot = Mth.cos(pLimbSwing * 0.6662F + Mth.PI) * 1.4F * pLimbSwingAmount;
 		this.rightLeg.yRot = 0.0F;
 		this.leftLeg.yRot = 0.0F;
 		this.rightLeg.zRot = 0.0F;

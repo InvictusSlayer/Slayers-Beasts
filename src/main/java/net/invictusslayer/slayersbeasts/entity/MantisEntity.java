@@ -1,10 +1,13 @@
 package net.invictusslayer.slayersbeasts.entity;
 
+import net.invictusslayer.slayersbeasts.init.ModEffects;
 import net.invictusslayer.slayersbeasts.init.ModSounds;
 import net.minecraft.core.BlockPos;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.world.Difficulty;
 import net.minecraft.world.damagesource.DamageSource;
+import net.minecraft.world.effect.MobEffectInstance;
+import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
@@ -26,7 +29,7 @@ public class MantisEntity extends PathfinderMob {
     protected void registerGoals() {
         super.registerGoals();
         this.goalSelector.addGoal(0, new FloatGoal(this));
-        this.goalSelector.addGoal(1, new MeleeAttackGoal(this, 1.0D, false));
+        this.goalSelector.addGoal(1, new MeleeAttackGoal(this, 1.2D, false));
         this.goalSelector.addGoal(2, new WaterAvoidingRandomStrollGoal(this, 0.8D));
         this.goalSelector.addGoal(3, new LookAtPlayerGoal(this, Player.class, 8.0F));
         this.goalSelector.addGoal(4, new RandomLookAroundGoal(this));
@@ -36,12 +39,24 @@ public class MantisEntity extends PathfinderMob {
 
     public static AttributeSupplier.Builder createAttributes() {
         return Mob.createMobAttributes()
-                .add(Attributes.MOVEMENT_SPEED, 0.23F)
+                .add(Attributes.MOVEMENT_SPEED, 0.25F)
                 .add(Attributes.FOLLOW_RANGE, 16.0D)
                 .add(Attributes.MAX_HEALTH, 15.0D)
                 .add(Attributes.ATTACK_DAMAGE, 2.0D)
                 .add(Attributes.ATTACK_SPEED, 2.0D)
                 .add(Attributes.ATTACK_KNOCKBACK, 1.0D);
+    }
+
+    @Override
+    public boolean doHurtTarget(Entity pEntity) {
+        if (!super.doHurtTarget(pEntity)) {
+            return false;
+        } else {
+            if (pEntity instanceof LivingEntity && random.nextBoolean()) {
+                ((LivingEntity)pEntity).addEffect(new MobEffectInstance(ModEffects.PARALYSIS.get(), 50), this);
+            }
+            return true;
+        }
     }
 
     protected SoundEvent getAmbientSound() {return ModSounds.MANTIS_AMBIENT.get();}

@@ -1,11 +1,20 @@
 {
   "item.slayersbeasts.jade": "Jade",
   "item.slayersbeasts.crystalline_wing": "Crystalline Wing",
+  "item.slayersbeasts.crystalline_claw": "Crystalline Claw",
+
+  "item.slayersbeasts.insect_wing": "Insect Wing",
+  "item.slayersbeasts.insect_claw": "Insect Claw",
+  "item.slayersbeasts.insect_eye": "Insect Eye",
+  "item.slayersbeasts.insect_leg": "Insect Leg",
+  "item.slayersbeasts.fried_insect_leg": "Fried Insect Leg",
+
+  "item.slayersbeasts.witherbone": "Witherbone",
   "item.slayersbeasts.tied_leather": "Tied Leather",
   "item.slayersbeasts.tanned_leather": "Tanned Leather",
-  "item.slayersbeasts.witherbone": "Witherbone",
 
   "item.slayersbeasts.mantis_spawn_egg": "Praying Mantis Spawn Egg",
+  "item.slayersbeasts.venus_flytrap_spawn_egg": "Venus Flytrap Spawn Egg",
   "item.slayersbeasts.wither_spider_spawn_egg": "Wither Spider Spawn Egg",
 
   "block.slayersbeasts.jade_block": "Jade Block",
@@ -32,10 +41,13 @@
   "block.slayersbeasts.cajole_trapdoor": "Cajole Trapdoor",
 
   "entity.slayersbeasts.mantis_entity": "Praying Mantis",
+  "entity.slayersbeasts.venus_flytrap_entity": "Venus Flytrap",
   "entity.slayersbeasts.wither_spider_entity": "Wither Spider",
   "entity.slayersbeasts.example_entity": "Example Entity",
 
   "itemGroup.slayers_beasts_tab": "Slayer's Beasts",
+
+  "effect.slayersbeasts.paralysis": "Paralysis",
 
   "sounds.slayersbeasts.mantis_ambient": "Mantis chirps",
   "sounds.slayersbeasts.mantis_death": "Mantis dies",

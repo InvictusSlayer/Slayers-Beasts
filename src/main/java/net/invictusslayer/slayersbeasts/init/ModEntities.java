@@ -3,6 +3,7 @@ package net.invictusslayer.slayersbeasts.init;
 import net.invictusslayer.slayersbeasts.SlayersBeasts;
 import net.invictusslayer.slayersbeasts.entity.ExampleEntity;
 import net.invictusslayer.slayersbeasts.entity.MantisEntity;
+import net.invictusslayer.slayersbeasts.entity.VenusFlytrapEntity;
 import net.invictusslayer.slayersbeasts.entity.WitherSpiderEntity;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.EntityType;
@@ -19,6 +20,10 @@ public final class ModEntities {
     public static final RegistryObject<EntityType<MantisEntity>> MANTIS_ENTITY = ENTITIES.register("mantis_entity",
             () -> EntityType.Builder.of(MantisEntity::new, MobCategory.MONSTER).sized(0.8f,1.2f)
                     .build(new ResourceLocation(SlayersBeasts.MOD_ID, "mantis_entity").toString()));
+
+    public static final RegistryObject<EntityType<VenusFlytrapEntity>> VENUS_FLYTRAP_ENTITY = ENTITIES.register("venus_flytrap_entity",
+            () -> EntityType.Builder.of(VenusFlytrapEntity::new, MobCategory.MONSTER).sized(1.0f,1.8f)
+                    .build(new ResourceLocation(SlayersBeasts.MOD_ID, "venus_flytrap_entity").toString()));
 
     public static final RegistryObject<EntityType<WitherSpiderEntity>> WITHER_SPIDER_ENTITY = ENTITIES.register("wither_spider_entity",
             () -> EntityType.Builder.of(WitherSpiderEntity::new, MobCategory.MONSTER).sized(1.6f,0.8f)

@@ -147,18 +147,24 @@ public class MantisEntityModel<Type extends MantisEntity> extends EntityModel<Ty
 
     @Override
     public void setupAnim(Type pEntity, float pLimbSwing, float pLimbSwingAmount, float pAgeInTicks, float pNetHeadYaw, float pHeadPitch) {
-        this.head.yRot = pNetHeadYaw * ((float)Math.PI / 180F);
-        this.head.xRot = pHeadPitch * ((float)Math.PI / 180F);
-        float f1 = Mth.cos(pLimbSwing * 1.4F) * 0.8F * pLimbSwingAmount;
-        this.abdomen.xRot = f1 / 4.0F;
-        this.leftFrontLeg.yRot = -10.0F;
-        this.rightFrontLeg.yRot = 10.0F;
-        this.leftBackLeg.yRot = 10.0F;
-        this.rightBackLeg.yRot = -10.0F;
+        float f1 = Mth.cos(pLimbSwing * 2.4F) * pLimbSwingAmount / 2F;
+        float f2 = Mth.cos(pLimbSwing * 2.4F + Mth.PI * 0.25F) * pLimbSwingAmount / 2F;
+        float f3 = Mth.cos(pLimbSwing * 2.4F + Mth.PI * 0.5F) * pLimbSwingAmount / 2F;
+        float f4 = Mth.cos(pLimbSwing * 2.4F + Mth.PI * 0.75F) * pLimbSwingAmount / 2F;
+        float f5 = Mth.cos(pLimbSwing * 2.4F + Mth.PI) * pLimbSwingAmount / 2F;
+        this.head.yRot = pNetHeadYaw * Mth.PI / 180F;
+        this.head.xRot = pHeadPitch * Mth.PI / 180F;
+        this.abdomen.xRot = f1 / 2F;
+        this.leftClaw.xRot += f1 * 0.1F;
+        this.rightClaw.xRot += f5 * 0.1F;
+        this.leftFrontLeg.yRot = 0.9F;
+        this.rightFrontLeg.yRot = -0.9F;
+        this.leftBackLeg.yRot = -0.9F;
+        this.rightBackLeg.yRot = 0.9F;
         this.leftFrontLeg.yRot += f1;
-        this.rightFrontLeg.yRot += f1;
-        this.leftBackLeg.yRot -= f1;
-        this.rightBackLeg.yRot -= f1;
+        this.rightFrontLeg.yRot += f3;
+        this.leftBackLeg.yRot += -f4;
+        this.rightBackLeg.yRot += -f2;
     }
 
     @Override

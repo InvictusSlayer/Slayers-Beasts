@@ -46,5 +46,5 @@ public class ModConfiguredFeatures {
             OreConfiguration.target(OreFeatures.DEEPSLATE_ORE_REPLACEABLES, ModBlocks.DEEPSLATE_EXOSKELETON_ORE.get().defaultBlockState()));
 
     public static final Holder<ConfiguredFeature<OreConfiguration, ?>> EXOSKELETON_ORE = FeatureUtils.register(
-            "exoskeleton_ore", Feature.ORE, new OreConfiguration(OVERWORLD_EXOSKELETON_ORES, 8));
+            "exoskeleton_ore", Feature.ORE, new OreConfiguration(OVERWORLD_EXOSKELETON_ORES, 3));
 }

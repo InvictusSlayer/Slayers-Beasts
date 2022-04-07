@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "slayersbeasts:jade_block"
+    }
+  ],
+  "result": {
+    "item": "slayersbeasts:jade",
+    "count": 9
+  }
+}

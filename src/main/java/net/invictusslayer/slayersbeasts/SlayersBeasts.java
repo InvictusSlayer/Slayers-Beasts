@@ -1,13 +1,14 @@
 package net.invictusslayer.slayersbeasts;
 
 import com.mojang.logging.LogUtils;
+import net.invictusslayer.slayersbeasts.init.ModEffects;
 import net.invictusslayer.slayersbeasts.init.ModBlocks;
 import net.invictusslayer.slayersbeasts.init.ModEntities;
 import net.invictusslayer.slayersbeasts.init.ModItems;
 import net.invictusslayer.slayersbeasts.init.ModSounds;
+import net.invictusslayer.slayersbeasts.init.ModStructures;
 import net.minecraft.client.renderer.ItemBlockRenderTypes;
 import net.minecraft.client.renderer.RenderType;
-import net.minecraft.client.renderer.entity.MobRenderer;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.eventbus.api.IEventBus;
@@ -33,6 +34,8 @@ public class SlayersBeasts
         ModBlocks.register(eventBus);
         ModEntities.register(eventBus);
         ModSounds.register(eventBus);
+        ModEffects.register(eventBus);
+        ModStructures.register(eventBus);
 
         eventBus.addListener(this::setup);
         eventBus.addListener(this::clientSetup);

@@ -17,6 +17,6 @@ public class ModPlacedFeatures {
                     HeightRangePlacement.triangle(VerticalAnchor.aboveBottom(-80), VerticalAnchor.aboveBottom(80))));
 
     public static final Holder<PlacedFeature> LUSH_EXOSKELETON_ORE_PLACED = PlacementUtils.register("exoskeleton_ore_placed",
-            ModConfiguredFeatures.EXOSKELETON_ORE, ModOrePlacement.commonOrePlacement(9,
-                    HeightRangePlacement.triangle(VerticalAnchor.aboveBottom(-80), VerticalAnchor.aboveBottom(80))));
+            ModConfiguredFeatures.EXOSKELETON_ORE, ModOrePlacement.commonOrePlacement(10,
+                    HeightRangePlacement.uniform(VerticalAnchor.bottom(), VerticalAnchor.absolute(64))));
 }
