@@ -35,9 +35,9 @@ public class ModConfiguredFeatures {
                     .decorators(ImmutableList.of(TrunkVineDecorator.INSTANCE, LeaveVineDecorator.INSTANCE)).ignoreVines().build());
     public static final Holder<ConfiguredFeature<TreeConfiguration, ?>> EUCALYPTUS_TREE =
             FeatureUtils.register("eucalyptus", Feature.TREE, new TreeConfiguration.TreeConfigurationBuilder(
-                    BlockStateProvider.simple(ModBlocks.CAJOLE_LOG.get()),
+                    BlockStateProvider.simple(ModBlocks.EUCALYPTUS_LOG.get()),
                     new SpreadTrunkPlacer(15, 10, 2),
-                    BlockStateProvider.simple(ModBlocks.CAJOLE_LEAVES.get()),
+                    BlockStateProvider.simple(ModBlocks.EUCALYPTUS_LEAVES.get()),
                     new EucalyptusFoliagePlacer(ConstantInt.of(2), ConstantInt.of(0)),
                     new TwoLayersFeatureSize(1, 0, 2)).build());
 
