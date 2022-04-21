@@ -41,7 +41,7 @@ public final class ModItems {
             () -> new Item(new Item.Properties().tab(ModCreativeModeTab.SLAYERS_BEASTS_TAB)));
 
     public static final RegistryObject<ForgeSpawnEggItem> MANTIS_SPAWN_EGG = ITEMS.register("mantis_spawn_egg",
-            () -> new ForgeSpawnEggItem(ModEntities.MANTIS_ENTITY, 0x2f7f2f, 0xffff31,
+            () -> new ForgeSpawnEggItem(ModEntities.MANTIS_ENTITY, 0x43df51, 0xecf171,
                     new Item.Properties().tab(ModCreativeModeTab.SLAYERS_BEASTS_TAB)));
     public static final RegistryObject<ForgeSpawnEggItem> VENUS_FLYTRAP_SPAWN_EGG = ITEMS.register("venus_flytrap_spawn_egg",
             () -> new ForgeSpawnEggItem(ModEntities.VENUS_FLYTRAP_ENTITY, 0x2f7f2f, 0xffff31,

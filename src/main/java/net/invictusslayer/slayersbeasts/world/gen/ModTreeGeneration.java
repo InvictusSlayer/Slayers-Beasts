@@ -17,11 +17,12 @@ public class ModTreeGeneration {
     public static void generateTrees(final BiomeLoadingEvent event) {
         ResourceKey<Biome> key = ResourceKey.create(Registry.BIOME_REGISTRY, event.getName());
         Set<BiomeDictionary.Type> types = BiomeDictionary.getTypes(key);
-
         List<Holder<PlacedFeature>> base = event.getGeneration().getFeatures(GenerationStep.Decoration.VEGETAL_DECORATION);
 
         if (types.contains(BiomeDictionary.Type.JUNGLE)) {
             base.add(ModPlacedFeatures.CAJOLE_PLACED);
+        } else if (types.contains(BiomeDictionary.Type.SAVANNA)) {
+            base.add(ModPlacedFeatures.EUCALYPTUS_PLACED);
         }
     }
 }

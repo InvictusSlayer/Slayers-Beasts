@@ -12,6 +12,10 @@ public class ModPlacedFeatures {
             ModConfiguredFeatures.CAJOLE_SPAWN, VegetationPlacements.treePlacement(
                     PlacementUtils.countExtra(1, 0.1f, 1)));
 
+    public static final Holder<PlacedFeature> EUCALYPTUS_PLACED = PlacementUtils.register("eucalyptus_placed",
+            ModConfiguredFeatures.EUCALYPTUS_SPAWN, VegetationPlacements.treePlacement(
+                    PlacementUtils.countExtra(1, 0.1f, 1)));
+
     public static final Holder<PlacedFeature> EXOSKELETON_ORE_PLACED = PlacementUtils.register("exoskeleton_ore_placed",
             ModConfiguredFeatures.EXOSKELETON_ORE, ModOrePlacement.rareOrePlacement(1,
                     HeightRangePlacement.triangle(VerticalAnchor.aboveBottom(-80), VerticalAnchor.aboveBottom(80))));

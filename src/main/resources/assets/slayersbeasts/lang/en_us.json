@@ -2,7 +2,6 @@
   "item.slayersbeasts.jade": "Jade",
   "item.slayersbeasts.crystalline_wing": "Crystalline Wing",
   "item.slayersbeasts.crystalline_claw": "Crystalline Claw",
-
   "item.slayersbeasts.insect_wing": "Insect Wing",
   "item.slayersbeasts.insect_claw": "Insect Claw",
   "item.slayersbeasts.insect_eye": "Insect Eye",
@@ -17,8 +16,14 @@
   "item.slayersbeasts.venus_flytrap_spawn_egg": "Venus Flytrap Spawn Egg",
   "item.slayersbeasts.wither_spider_spawn_egg": "Wither Spider Spawn Egg",
 
-  "block.slayersbeasts.jade_block": "Jade Block",
+  "item.minecraft.potion.effect.paralysis_potion": "Potion of Paralysis",
+  "item.minecraft.splash_potion.effect.paralysis_potion": "Splash Potion of Paralysis",
+  "item.minecraft.lingering_potion.effect.paralysis_potion": "Lingering Potion of Paralysis",
+  "item.minecraft.potion.effect.wither_potion": "Potion of Decay",
+  "item.minecraft.splash_potion.effect.wither_potion": "Splash Potion of Decay",
+  "item.minecraft.lingering_potion.effect.wither_potion": "Lingering Potion of Decay",
 
+  "block.slayersbeasts.jade_block": "Jade Block",
   "block.slayersbeasts.exoskeleton_ore": "Buried Crystal Exoskeleton",
   "block.slayersbeasts.deepslate_exoskeleton_ore": "Embedded Crystal Exoskeleton",
 
@@ -39,6 +44,8 @@
   "block.slayersbeasts.cajole_pressure_plate": "Cajole Pressure Plate",
   "block.slayersbeasts.cajole_door": "Cajole Door",
   "block.slayersbeasts.cajole_trapdoor": "Cajole Trapdoor",
+
+  "block.slayersbeasts.eucalyptus_sapling": "Eucalyptus Sapling",
 
   "entity.slayersbeasts.mantis_entity": "Praying Mantis",
   "entity.slayersbeasts.venus_flytrap_entity": "Venus Flytrap",

@@ -4,6 +4,8 @@ import net.invictusslayer.slayersbeasts.SlayersBeasts;
 import net.invictusslayer.slayersbeasts.block.CajoleLeavesBlock;
 import net.invictusslayer.slayersbeasts.block.flammable.*;
 import net.invictusslayer.slayersbeasts.world.feature.tree.CajoleTreeGrower;
+import net.invictusslayer.slayersbeasts.world.feature.tree.EucalyptusTreeGrower;
+import net.minecraft.util.valueproviders.UniformInt;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.Item;
@@ -26,11 +28,13 @@ public final class ModBlocks {
                     .strength(9f).requiresCorrectToolForDrops()), ModCreativeModeTab.SLAYERS_BEASTS_TAB);
 
     public static final RegistryObject<Block> EXOSKELETON_ORE = registerBlock("exoskeleton_ore",
-            () -> new Block(BlockBehaviour.Properties.of(Material.STONE).strength(15f)
-                    .requiresCorrectToolForDrops()), ModCreativeModeTab.SLAYERS_BEASTS_TAB);
+            () -> new OreBlock(BlockBehaviour.Properties.of(Material.STONE).strength(15f)
+                    .requiresCorrectToolForDrops(), UniformInt.of(3, 7)),
+            ModCreativeModeTab.SLAYERS_BEASTS_TAB);
     public static final RegistryObject<Block> DEEPSLATE_EXOSKELETON_ORE = registerBlock("deepslate_exoskeleton_ore",
-            () -> new Block(BlockBehaviour.Properties.of(Material.STONE).strength(25f)
-                    .requiresCorrectToolForDrops()), ModCreativeModeTab.SLAYERS_BEASTS_TAB);
+            () -> new OreBlock(BlockBehaviour.Properties.of(Material.STONE).strength(25f)
+                    .requiresCorrectToolForDrops(), UniformInt.of(3, 7)),
+            ModCreativeModeTab.SLAYERS_BEASTS_TAB);
 
     public static final RegistryObject<Block> CAJOLE_LOG = registerBlock("cajole_log",
             () -> new ModFlammableRotatedPillarBlock(BlockBehaviour.Properties.copy(Blocks.OAK_LOG)),
@@ -78,6 +82,10 @@ public final class ModBlocks {
             () -> new DoorBlock(BlockBehaviour.Properties.copy(Blocks.OAK_DOOR)), ModCreativeModeTab.SLAYERS_BEASTS_TAB);
     public static final RegistryObject<Block> CAJOLE_TRAPDOOR = registerBlock("cajole_trapdoor",
             () -> new TrapDoorBlock(BlockBehaviour.Properties.copy(Blocks.OAK_TRAPDOOR)), ModCreativeModeTab.SLAYERS_BEASTS_TAB);
+
+    public static final RegistryObject<Block> EUCALYPTUS_SAPLING = registerBlock("eucalyptus_sapling",
+            () -> new SaplingBlock(new EucalyptusTreeGrower(), BlockBehaviour.Properties.copy(Blocks.OAK_SAPLING)),
+            ModCreativeModeTab.SLAYERS_BEASTS_TAB);
 
     private static <T extends Block> RegistryObject<T> registerBlock(String name, Supplier<T> block, CreativeModeTab tab) {
         RegistryObject<T> toReturn = BLOCKS.register(name, block);
