@@ -4,6 +4,7 @@ import com.google.common.collect.ImmutableList;
 import net.invictusslayer.slayersbeasts.init.ModBlocks;
 import net.invictusslayer.slayersbeasts.world.feature.tree.CajoleFoliagePlacer;
 import net.invictusslayer.slayersbeasts.world.feature.tree.EucalyptusFoliagePlacer;
+import net.invictusslayer.slayersbeasts.world.feature.tree.OothecaDecorator;
 import net.invictusslayer.slayersbeasts.world.feature.tree.SpreadTrunkPlacer;
 import net.minecraft.core.Holder;
 import net.minecraft.data.worldgen.features.FeatureUtils;
@@ -32,7 +33,8 @@ public class ModConfiguredFeatures {
                     BlockStateProvider.simple(ModBlocks.CAJOLE_LEAVES.get()),
                     new CajoleFoliagePlacer(ConstantInt.of(2), ConstantInt.of(0)),
                     new TwoLayersFeatureSize(1, 0, 2))
-                    .decorators(ImmutableList.of(TrunkVineDecorator.INSTANCE, LeaveVineDecorator.INSTANCE)).ignoreVines().build());
+                    .decorators(ImmutableList.of(TrunkVineDecorator.INSTANCE, LeaveVineDecorator.INSTANCE
+                            )).ignoreVines().build());
     public static final Holder<ConfiguredFeature<TreeConfiguration, ?>> EUCALYPTUS_TREE =
             FeatureUtils.register("eucalyptus", Feature.TREE, new TreeConfiguration.TreeConfigurationBuilder(
                     BlockStateProvider.simple(ModBlocks.EUCALYPTUS_LOG.get()),

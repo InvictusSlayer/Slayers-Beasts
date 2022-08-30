@@ -1,7 +1,8 @@
 package net.invictusslayer.slayersbeasts.init;
 
 import net.invictusslayer.slayersbeasts.SlayersBeasts;
-import net.invictusslayer.slayersbeasts.block.CajoleLeavesBlock;
+import net.invictusslayer.slayersbeasts.block.custom.CajoleLeavesBlock;
+import net.invictusslayer.slayersbeasts.block.custom.OothecaBlock;
 import net.invictusslayer.slayersbeasts.block.flammable.*;
 import net.invictusslayer.slayersbeasts.world.feature.tree.CajoleTreeGrower;
 import net.invictusslayer.slayersbeasts.world.feature.tree.EucalyptusTreeGrower;
@@ -28,13 +29,15 @@ public final class ModBlocks {
                     .strength(9f).requiresCorrectToolForDrops()), ModCreativeModeTab.SLAYERS_BEASTS_TAB);
 
     public static final RegistryObject<Block> EXOSKELETON_ORE = registerBlock("exoskeleton_ore",
-            () -> new OreBlock(BlockBehaviour.Properties.of(Material.STONE).strength(15f)
-                    .requiresCorrectToolForDrops(), UniformInt.of(3, 7)),
-            ModCreativeModeTab.SLAYERS_BEASTS_TAB);
+            () -> new OreBlock(BlockBehaviour.Properties.of(Material.STONE).strength(15f).requiresCorrectToolForDrops(),
+                    UniformInt.of(3, 7)), ModCreativeModeTab.SLAYERS_BEASTS_TAB);
     public static final RegistryObject<Block> DEEPSLATE_EXOSKELETON_ORE = registerBlock("deepslate_exoskeleton_ore",
-            () -> new OreBlock(BlockBehaviour.Properties.of(Material.STONE).strength(25f)
-                    .requiresCorrectToolForDrops(), UniformInt.of(3, 7)),
-            ModCreativeModeTab.SLAYERS_BEASTS_TAB);
+            () -> new OreBlock(BlockBehaviour.Properties.of(Material.STONE).strength(25f).requiresCorrectToolForDrops(),
+                    UniformInt.of(3, 7)), ModCreativeModeTab.SLAYERS_BEASTS_TAB);
+
+    public static final RegistryObject<Block> OOTHECA = registerBlock("ootheca",
+            () -> new OothecaBlock(BlockBehaviour.Properties.of(Material.SCULK)
+                    .strength(1f)), ModCreativeModeTab.SLAYERS_BEASTS_TAB);
 
     public static final RegistryObject<Block> CAJOLE_LOG = registerBlock("cajole_log",
             () -> new ModFlammableRotatedPillarBlock(BlockBehaviour.Properties.copy(Blocks.OAK_LOG)),
@@ -48,7 +51,6 @@ public final class ModBlocks {
     public static final RegistryObject<Block> STRIPPED_CAJOLE_WOOD = registerBlock("stripped_cajole_wood",
             () -> new ModFlammableRotatedPillarBlock(BlockBehaviour.Properties.copy(Blocks.STRIPPED_OAK_WOOD)),
             ModCreativeModeTab.SLAYERS_BEASTS_TAB);
-
     public static final RegistryObject<Block> CAJOLE_LEAVES = registerBlock("cajole_leaves",
             () -> new CajoleLeavesBlock(BlockBehaviour.Properties.copy(Blocks.OAK_LEAVES)),
             ModCreativeModeTab.SLAYERS_BEASTS_TAB);
@@ -77,7 +79,6 @@ public final class ModBlocks {
             () -> new WoodButtonBlock(BlockBehaviour.Properties.copy(Blocks.OAK_BUTTON)), ModCreativeModeTab.SLAYERS_BEASTS_TAB);
     public static final RegistryObject<Block> CAJOLE_PRESSURE_PLATE = registerBlock("cajole_pressure_plate",
             () -> new PressurePlateBlock(PressurePlateBlock.Sensitivity.EVERYTHING, BlockBehaviour.Properties.copy(Blocks.OAK_PRESSURE_PLATE)), ModCreativeModeTab.SLAYERS_BEASTS_TAB);
-
     public static final RegistryObject<Block> CAJOLE_DOOR = registerBlock("cajole_door",
             () -> new DoorBlock(BlockBehaviour.Properties.copy(Blocks.OAK_DOOR)), ModCreativeModeTab.SLAYERS_BEASTS_TAB);
     public static final RegistryObject<Block> CAJOLE_TRAPDOOR = registerBlock("cajole_trapdoor",
@@ -95,7 +96,6 @@ public final class ModBlocks {
     public static final RegistryObject<Block> STRIPPED_EUCALYPTUS_WOOD = registerBlock("stripped_eucalyptus_wood",
             () -> new ModFlammableRotatedPillarBlock(BlockBehaviour.Properties.copy(Blocks.STRIPPED_OAK_WOOD)),
             ModCreativeModeTab.SLAYERS_BEASTS_TAB);
-
     public static final RegistryObject<Block> EUCALYPTUS_LEAVES = registerBlock("eucalyptus_leaves",
             () -> new ModFlammableLeavesBlock(BlockBehaviour.Properties.copy(Blocks.OAK_LEAVES), 60, 30),
             ModCreativeModeTab.SLAYERS_BEASTS_TAB);
@@ -124,7 +124,6 @@ public final class ModBlocks {
             () -> new WoodButtonBlock(BlockBehaviour.Properties.copy(Blocks.OAK_BUTTON)), ModCreativeModeTab.SLAYERS_BEASTS_TAB);
     public static final RegistryObject<Block> EUCALYPTUS_PRESSURE_PLATE = registerBlock("eucalyptus_pressure_plate",
             () -> new PressurePlateBlock(PressurePlateBlock.Sensitivity.EVERYTHING, BlockBehaviour.Properties.copy(Blocks.OAK_PRESSURE_PLATE)), ModCreativeModeTab.SLAYERS_BEASTS_TAB);
-
     public static final RegistryObject<Block> EUCALYPTUS_DOOR = registerBlock("eucalyptus_door",
             () -> new DoorBlock(BlockBehaviour.Properties.copy(Blocks.OAK_DOOR)), ModCreativeModeTab.SLAYERS_BEASTS_TAB);
     public static final RegistryObject<Block> EUCALYPTUS_TRAPDOOR = registerBlock("eucalyptus_trapdoor",

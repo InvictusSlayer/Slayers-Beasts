@@ -7,7 +7,6 @@
   "item.slayersbeasts.insect_eye": "Insect Eye",
   "item.slayersbeasts.insect_leg": "Insect Leg",
   "item.slayersbeasts.fried_insect_leg": "Fried Insect Leg",
-
   "item.slayersbeasts.witherbone": "Witherbone",
   "item.slayersbeasts.tied_leather": "Tied Leather",
   "item.slayersbeasts.tanned_leather": "Tanned Leather",
@@ -26,6 +25,7 @@
   "block.slayersbeasts.jade_block": "Jade Block",
   "block.slayersbeasts.exoskeleton_ore": "Buried Crystal Exoskeleton",
   "block.slayersbeasts.deepslate_exoskeleton_ore": "Embedded Crystal Exoskeleton",
+  "block.slayersbeasts.ootheca": "Ootheca",
 
   "block.slayersbeasts.cajole_log": "Cajole Log",
   "block.slayersbeasts.cajole_wood": "Cajole Wood",
@@ -33,20 +33,32 @@
   "block.slayersbeasts.stripped_cajole_wood": "Stripped Cajole Wood",
   "block.slayersbeasts.cajole_leaves": "Cajole Leaves",
   "block.slayersbeasts.cajole_sapling": "Cajole Sapling",
-
   "block.slayersbeasts.cajole_planks": "Cajole Planks",
   "block.slayersbeasts.cajole_slab": "Cajole Slab",
   "block.slayersbeasts.cajole_stairs": "Cajole Stairs",
   "block.slayersbeasts.cajole_fence": "Cajole Fence",
   "block.slayersbeasts.cajole_fence_gate": "Cajole Fence Gate",
-
   "block.slayersbeasts.cajole_button": "Cajole Button",
   "block.slayersbeasts.cajole_pressure_plate": "Cajole Pressure Plate",
   "block.slayersbeasts.cajole_door": "Cajole Door",
   "block.slayersbeasts.cajole_trapdoor": "Cajole Trapdoor",
 
+  "block.slayersbeasts.eucalyptus_log": "Eucalyptus Log",
+  "block.slayersbeasts.eucalyptus_wood": "Eucalyptus Wood",
+  "block.slayersbeasts.stripped_eucalyptus_log": "Stripped Eucalyptus Log",
+  "block.slayersbeasts.stripped_eucalyptus_wood": "Stripped Eucalyptus Wood",
+  "block.slayersbeasts.eucalyptus_leaves": "Eucalyptus Leaves",
   "block.slayersbeasts.eucalyptus_sapling": "Eucalyptus Sapling",
-
+  "block.slayersbeasts.eucalyptus_planks": "Eucalyptus Planks",
+  "block.slayersbeasts.eucalyptus_slab": "Eucalyptus Slab",
+  "block.slayersbeasts.eucalyptus_stairs": "Eucalyptus Stairs",
+  "block.slayersbeasts.eucalyptus_fence": "Eucalyptus Fence",
+  "block.slayersbeasts.eucalyptus_fence_gate": "Eucalyptus Fence Gate",
+  "block.slayersbeasts.eucalyptus_button": "Eucalyptus Button",
+  "block.slayersbeasts.eucalyptus_pressure_plate": "Eucalyptus Pressure Plate",
+  "block.slayersbeasts.eucalyptus_door": "Eucalyptus Door",
+  "block.slayersbeasts.eucalyptus_trapdoor": "Eucalyptus Trapdoor",
+  
   "entity.slayersbeasts.mantis_entity": "Praying Mantis",
   "entity.slayersbeasts.venus_flytrap_entity": "Venus Flytrap",
   "entity.slayersbeasts.wither_spider_entity": "Wither Spider",
