@@ -24,7 +24,7 @@ import java.util.Random;
 import java.util.function.BiConsumer;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
-
+/*
 public class OothecaDecorator extends TreeDecorator {
     private static final Direction WORLDGEN_FACING = Direction.SOUTH;
     private static final Direction[] SPAWN_DIRECTIONS = Direction.Plane.HORIZONTAL.stream().filter((p_202307_) -> {
@@ -62,3 +62,4 @@ public class OothecaDecorator extends TreeDecorator {
         }
     }
 }
+*/

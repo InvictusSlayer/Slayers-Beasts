@@ -4,6 +4,7 @@ import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import net.invictusslayer.slayersbeasts.SlayersBeasts;
 import net.invictusslayer.slayersbeasts.entity.MantisEntity;
+import net.invictusslayer.slayersbeasts.entity.MantisWingPose;
 import net.minecraft.client.model.EntityModel;
 import net.minecraft.client.model.geom.ModelLayerLocation;
 import net.minecraft.client.model.geom.ModelPart;
@@ -12,7 +13,7 @@ import net.minecraft.client.model.geom.builders.*;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.Mth;
 
-public class MantisEntityModel<Type extends MantisEntity> extends EntityModel<Type> {
+public class MantisModel<Type extends MantisEntity> extends EntityModel<Type> {
     public static final ModelLayerLocation LAYER_LOCATION = new ModelLayerLocation(new ResourceLocation(SlayersBeasts.MOD_ID, "mantis_entity"), "main");
     private final ModelPart head;
     private final ModelPart thorax;
@@ -26,7 +27,7 @@ public class MantisEntityModel<Type extends MantisEntity> extends EntityModel<Ty
     private final ModelPart leftBackLeg;
     private final ModelPart rightBackLeg;
 
-    public MantisEntityModel(ModelPart root) {
+    public MantisModel(ModelPart root) {
         this.head = root.getChild("head");
         this.thorax = root.getChild("thorax");
         this.abdomen = root.getChild("abdomen");
@@ -147,24 +148,40 @@ public class MantisEntityModel<Type extends MantisEntity> extends EntityModel<Ty
 
     @Override
     public void setupAnim(Type pEntity, float pLimbSwing, float pLimbSwingAmount, float pAgeInTicks, float pNetHeadYaw, float pHeadPitch) {
-        float f1 = Mth.cos(pLimbSwing * 2.4F) * pLimbSwingAmount / 2F;
-        float f2 = Mth.cos(pLimbSwing * 2.4F + Mth.PI * 0.25F) * pLimbSwingAmount / 2F;
-        float f3 = Mth.cos(pLimbSwing * 2.4F + Mth.PI * 0.5F) * pLimbSwingAmount / 2F;
-        float f4 = Mth.cos(pLimbSwing * 2.4F + Mth.PI * 0.75F) * pLimbSwingAmount / 2F;
-        float f5 = Mth.cos(pLimbSwing * 2.4F + Mth.PI) * pLimbSwingAmount / 2F;
-        this.head.yRot = pNetHeadYaw * Mth.PI / 180F;
+        float f1 = Mth.cos(pLimbSwing * 2F) * pLimbSwingAmount / 2F;
+        float f2 = Mth.cos(pLimbSwing * 2F + Mth.PI * 0.25F) * pLimbSwingAmount / 2F;
+        float f3 = Mth.cos(pLimbSwing * 2F + Mth.PI * 0.5F) * pLimbSwingAmount / 2F;
+        float f4 = Mth.cos(pLimbSwing * 2F + Mth.PI * 0.75F) * pLimbSwingAmount / 2F;
+        float f5 = Mth.cos(pAgeInTicks / 6F) / 24F;
         this.head.xRot = pHeadPitch * Mth.PI / 180F;
-        this.abdomen.xRot = f1 / 2F;
-        this.leftClaw.xRot += f1 * 0.1F;
-        this.rightClaw.xRot += f5 * 0.1F;
+        this.head.yRot = pNetHeadYaw * Mth.PI / 180F;
+        this.abdomen.xRot = f5;
+        //this.leftClaw.xRot += f1 * 0.1F;
+        //this.rightClaw.xRot += -f1 * 0.1F;
         this.leftFrontLeg.yRot = 0.9F;
         this.rightFrontLeg.yRot = -0.9F;
         this.leftBackLeg.yRot = -0.9F;
         this.rightBackLeg.yRot = 0.9F;
-        this.leftFrontLeg.yRot += f1;
-        this.rightFrontLeg.yRot += f3;
-        this.leftBackLeg.yRot += -f4;
-        this.rightBackLeg.yRot += -f2;
+        MantisWingPose mantisWingPose = pEntity.getWingPose();
+        if(mantisWingPose == MantisWingPose.LEAPING) {
+            this.leftWing.xRot = 0.7F;
+            this.rightWing.xRot = 0.7F;
+            this.leftWing.yRot = 1.2F;
+            this.rightWing.yRot = -1.2F;
+            this.leftWing.xRot += f1;
+            this.rightWing.xRot += f1;
+            this.leftWing.yRot += f1;
+            this.rightWing.yRot += -f1;
+        } else {
+            this.leftWing.xRot = 0F;
+            this.rightWing.xRot = 0F;
+            this.leftWing.yRot = 0F;
+            this.rightWing.yRot = 0F;
+            this.leftFrontLeg.yRot += f1;
+            this.rightFrontLeg.yRot += f3;
+            this.leftBackLeg.yRot += -f4;
+            this.rightBackLeg.yRot += -f2;
+        }
     }
 
     @Override

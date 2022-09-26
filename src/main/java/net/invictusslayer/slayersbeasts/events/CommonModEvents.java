@@ -1,10 +1,7 @@
 package net.invictusslayer.slayersbeasts.events;
 
 import net.invictusslayer.slayersbeasts.SlayersBeasts;
-import net.invictusslayer.slayersbeasts.entity.ExampleEntity;
-import net.invictusslayer.slayersbeasts.entity.MantisEntity;
-import net.invictusslayer.slayersbeasts.entity.VenusFlytrapEntity;
-import net.invictusslayer.slayersbeasts.entity.WitherSpiderEntity;
+import net.invictusslayer.slayersbeasts.entity.*;
 import net.invictusslayer.slayersbeasts.init.ModEntities;
 import net.minecraft.world.entity.SpawnPlacements;
 import net.minecraft.world.level.levelgen.Heightmap;
@@ -20,6 +17,8 @@ public class CommonModEvents {
         event.enqueueWork(() -> {
             SpawnPlacements.register(ModEntities.MANTIS_ENTITY.get(),
                     SpawnPlacements.Type.ON_GROUND, Heightmap.Types.WORLD_SURFACE, MantisEntity::canSpawn);
+            SpawnPlacements.register(ModEntities.WOOD_ANT_ENTITY.get(),
+                    SpawnPlacements.Type.ON_GROUND, Heightmap.Types.WORLD_SURFACE, TinyAntEntity::canSpawn);
             SpawnPlacements.register(ModEntities.VENUS_FLYTRAP_ENTITY.get(),
                     SpawnPlacements.Type.ON_GROUND, Heightmap.Types.WORLD_SURFACE, VenusFlytrapEntity::canSpawn);
         });
@@ -28,6 +27,7 @@ public class CommonModEvents {
     @SubscribeEvent
     public static void registerAttributes(EntityAttributeCreationEvent event) {
         event.put(ModEntities.MANTIS_ENTITY.get(), MantisEntity.createAttributes().build());
+        event.put(ModEntities.WOOD_ANT_ENTITY.get(), TinyAntEntity.createAttributes().build());
         event.put(ModEntities.VENUS_FLYTRAP_ENTITY.get(), VenusFlytrapEntity.createAttributes().build());
         event.put(ModEntities.WITHER_SPIDER_ENTITY.get(), WitherSpiderEntity.createAttributes().build());
         event.put(ModEntities.EXAMPLE_ENTITY.get(), ExampleEntity.createAttributes().build());

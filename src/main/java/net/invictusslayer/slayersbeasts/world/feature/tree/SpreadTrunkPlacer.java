@@ -3,6 +3,7 @@ package net.invictusslayer.slayersbeasts.world.feature.tree;
 import com.google.common.collect.Lists;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.LevelSimulatedReader;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.levelgen.feature.configurations.TreeConfiguration;
@@ -12,7 +13,6 @@ import net.minecraft.world.level.levelgen.feature.trunkplacers.TrunkPlacerType;
 
 import java.util.List;
 import java.util.OptionalInt;
-import java.util.Random;
 import java.util.function.BiConsumer;
 
 public class SpreadTrunkPlacer extends TrunkPlacer {
@@ -26,7 +26,7 @@ public class SpreadTrunkPlacer extends TrunkPlacer {
     }
 
     @Override
-    public List<FoliagePlacer.FoliageAttachment> placeTrunk(LevelSimulatedReader pLevel, BiConsumer<BlockPos, BlockState> pBlockSetter, Random pRandom, int pFreeTreeHeight, BlockPos pPos, TreeConfiguration pConfig) {
+    public List<FoliagePlacer.FoliageAttachment> placeTrunk(LevelSimulatedReader pLevel, BiConsumer<BlockPos, BlockState> pBlockSetter, RandomSource pRandom, int pFreeTreeHeight, BlockPos pPos, TreeConfiguration pConfig) {
         setDirtAt(pLevel, pBlockSetter, pRandom, pPos.below(), pConfig);
         setDirtAt(pLevel, pBlockSetter, pRandom, pPos.below().north(), pConfig);
         setDirtAt(pLevel, pBlockSetter, pRandom, pPos.below().south(), pConfig);
@@ -120,8 +120,6 @@ public class SpreadTrunkPlacer extends TrunkPlacer {
                 list.add(new FoliagePlacer.FoliageAttachment(new BlockPos(m, optionalInt1.getAsInt(), n), 0, false));
             }
         }
-
         return list;
     }
-
 }

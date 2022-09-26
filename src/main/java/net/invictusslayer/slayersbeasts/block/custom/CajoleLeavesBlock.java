@@ -1,6 +1,5 @@
 package net.invictusslayer.slayersbeasts.block.custom;
 
-import net.invictusslayer.slayersbeasts.entity.MantisEntity;
 import net.invictusslayer.slayersbeasts.init.ModEntities;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -16,13 +15,16 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
 
+import java.util.Random;
+import java.util.random.RandomGenerator;
+
 public class CajoleLeavesBlock extends Block {
     public CajoleLeavesBlock(Properties properties) {
         super(properties);
     }
 
     private void spawnInfestation(ServerLevel pLevel, BlockPos pPos) {
-        int randInt = RANDOM.nextInt(5);
+        int randInt = RandomGenerator.getDefault().nextInt(5);
         Mob mob = null;
         if (randInt == 0) {
             mob = ModEntities.MANTIS_ENTITY.get().create(pLevel);
@@ -37,7 +39,6 @@ public class CajoleLeavesBlock extends Block {
         }
     }
 
-    @Override
     public void spawnAfterBreak(BlockState pState, ServerLevel pLevel, BlockPos pPos, ItemStack pStack) {
         if (pLevel.getGameRules().getBoolean(GameRules.RULE_DOBLOCKDROPS) && EnchantmentHelper.getItemEnchantmentLevel(Enchantments.SILK_TOUCH, pStack) == 0) {
             this.spawnInfestation(pLevel, pPos);

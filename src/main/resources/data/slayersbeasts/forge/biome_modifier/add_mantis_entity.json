@@ -1,0 +1,17 @@
+{
+  "type": "forge:add_spawns",
+  "biomes": [
+    "minecraft:jungle",
+    "minecraft:sparse_jungle",
+    "minecraft:bamboo_jungle",
+    "minecraft:lush_caves",
+    "minecraft:mangrove_swamp"
+  ],
+  "spawners":
+  {
+    "type": "slayersbeasts:mantis_entity",
+    "weight": 6,
+    "minCount": 1,
+    "maxCount": 3
+  }
+}

@@ -27,7 +27,6 @@ public class OothecaBlock extends HorizontalDirectionalBlock {
         mob.spawnAnim();
     }
 
-    @Override
     public void spawnAfterBreak(BlockState pState, ServerLevel pLevel, BlockPos pPos, ItemStack pStack) {
         if (pLevel.getGameRules().getBoolean(GameRules.RULE_DOBLOCKDROPS) && EnchantmentHelper.getItemEnchantmentLevel(Enchantments.SILK_TOUCH, pStack) == 0) {
             this.spawnInfestation(pLevel, pPos);

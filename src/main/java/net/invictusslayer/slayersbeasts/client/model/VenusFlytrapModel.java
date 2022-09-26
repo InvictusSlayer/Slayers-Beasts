@@ -12,7 +12,7 @@ import net.minecraft.client.model.geom.builders.*;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.Mth;
 
-public class VenusFlytrapEntityModel<Type extends VenusFlytrapEntity> extends EntityModel<Type> {
+public class VenusFlytrapModel<Type extends VenusFlytrapEntity> extends EntityModel<Type> {
     public static final ModelLayerLocation LAYER_LOCATION = new ModelLayerLocation(new ResourceLocation(SlayersBeasts.MOD_ID, "venus_flytrap_entity"), "main");
     private final ModelPart base;
     private final ModelPart innerLeaf1;
@@ -23,7 +23,7 @@ public class VenusFlytrapEntityModel<Type extends VenusFlytrapEntity> extends En
     private final ModelPart mouthTop;
     private final ModelPart mouthBottom;
 
-    public VenusFlytrapEntityModel(ModelPart root) {
+    public VenusFlytrapModel(ModelPart root) {
         this.base = root.getChild("base");
         this.innerLeaf1 = root.getChild("innerLeaf1");
         this.innerLeaf2 = root.getChild("innerLeaf2");

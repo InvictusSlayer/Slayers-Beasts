@@ -1,19 +1,19 @@
 package net.invictusslayer.slayersbeasts.client.renderer;
 
 import net.invictusslayer.slayersbeasts.SlayersBeasts;
-import net.invictusslayer.slayersbeasts.client.model.MantisEntityModel;
-import net.invictusslayer.slayersbeasts.entity.MantisEntity;
+import net.invictusslayer.slayersbeasts.client.model.WitherSpiderModel;
+import net.invictusslayer.slayersbeasts.entity.WitherSpiderEntity;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.client.renderer.entity.MobRenderer;
 import net.minecraft.resources.ResourceLocation;
 
-public class MantisEntityRenderer<Type extends MantisEntity> extends MobRenderer<Type, MantisEntityModel<Type>> {
+public class WitherSpiderRenderer<Type extends WitherSpiderEntity> extends MobRenderer<Type, WitherSpiderModel<Type>> {
 
     private static final ResourceLocation TEXTURE = new ResourceLocation(SlayersBeasts.MOD_ID,
-            "textures/entity/mantis_entity.png");
+            "textures/entity/wither_spider_entity.png");
 
-    public MantisEntityRenderer(EntityRendererProvider.Context context) {
-        super(context, new MantisEntityModel<>(context.bakeLayer(MantisEntityModel.LAYER_LOCATION)), 0.5f);
+    public WitherSpiderRenderer(EntityRendererProvider.Context context) {
+        super(context, new WitherSpiderModel<>(context.bakeLayer(WitherSpiderModel.LAYER_LOCATION)), 0.5f);
     }
 
     @Override

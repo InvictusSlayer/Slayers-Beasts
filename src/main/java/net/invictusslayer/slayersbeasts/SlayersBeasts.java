@@ -2,8 +2,8 @@ package net.invictusslayer.slayersbeasts;
 
 import net.invictusslayer.slayersbeasts.init.*;
 import net.invictusslayer.slayersbeasts.util.ModBrewingRecipe;
-import net.minecraft.client.renderer.ItemBlockRenderTypes;
-import net.minecraft.client.renderer.RenderType;
+import net.invictusslayer.slayersbeasts.world.feature.ModConfiguredFeatures;
+import net.invictusslayer.slayersbeasts.world.feature.ModPlacedFeatures;
 import net.minecraft.world.item.alchemy.Potions;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.brewing.BrewingRecipeRegistry;
@@ -28,7 +28,10 @@ public class SlayersBeasts
         ModSounds.register(eventBus);
         ModEffects.register(eventBus);
         ModPotions.register(eventBus);
-        ModStructures.register(eventBus);
+
+        //ModStructures.register(eventBus);
+        ModConfiguredFeatures.register(eventBus);
+        ModPlacedFeatures.register(eventBus);
 
         eventBus.addListener(this::setup);
         eventBus.addListener(this::clientSetup);
@@ -37,15 +40,7 @@ public class SlayersBeasts
     }
 
     private void clientSetup(final FMLClientSetupEvent event) {
-        ItemBlockRenderTypes.setRenderLayer(ModBlocks.CAJOLE_LEAVES.get(), RenderType.cutout());
-        ItemBlockRenderTypes.setRenderLayer(ModBlocks.CAJOLE_SAPLING.get(), RenderType.cutout());
-        ItemBlockRenderTypes.setRenderLayer(ModBlocks.CAJOLE_DOOR.get(), RenderType.cutout());
-        ItemBlockRenderTypes.setRenderLayer(ModBlocks.CAJOLE_TRAPDOOR.get(), RenderType.cutout());
 
-        ItemBlockRenderTypes.setRenderLayer(ModBlocks.EUCALYPTUS_LEAVES.get(), RenderType.cutout());
-        ItemBlockRenderTypes.setRenderLayer(ModBlocks.EUCALYPTUS_SAPLING.get(), RenderType.cutout());
-        ItemBlockRenderTypes.setRenderLayer(ModBlocks.EUCALYPTUS_DOOR.get(), RenderType.cutout());
-        ItemBlockRenderTypes.setRenderLayer(ModBlocks.EUCALYPTUS_TRAPDOOR.get(), RenderType.cutout());
     }
 
     private void setup(final FMLCommonSetupEvent event) {

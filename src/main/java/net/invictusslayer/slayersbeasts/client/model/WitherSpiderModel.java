@@ -12,7 +12,7 @@ import net.minecraft.client.model.geom.builders.*;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.Mth;
 
-public class WitherSpiderEntityModel<Type extends WitherSpiderEntity> extends EntityModel<Type> {
+public class WitherSpiderModel<Type extends WitherSpiderEntity> extends EntityModel<Type> {
     public static final ModelLayerLocation LAYER_LOCATION = new ModelLayerLocation(new ResourceLocation(SlayersBeasts.MOD_ID, "wither_spider_entity"), "main");
     private final ModelPart body;
     private final ModelPart head;
@@ -27,7 +27,7 @@ public class WitherSpiderEntityModel<Type extends WitherSpiderEntity> extends En
     private final ModelPart extraLeg1;
     private final ModelPart extraLeg2;
 
-    public WitherSpiderEntityModel(ModelPart root) {
+    public WitherSpiderModel(ModelPart root) {
         this.body = root.getChild("body");
         this.head = root.getChild("head");
         this.leftFrontLeg = root.getChild("leftFrontLeg");

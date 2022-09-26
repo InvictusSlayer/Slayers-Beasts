@@ -1,6 +1,7 @@
 package net.invictusslayer.slayersbeasts.entity;
 
 import net.minecraft.core.BlockPos;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.Difficulty;
 import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
@@ -13,8 +14,6 @@ import net.minecraft.world.entity.ai.goal.target.NearestAttackableTargetGoal;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelAccessor;
-
-import java.util.Random;
 
 public class VenusFlytrapEntity extends PathfinderMob {
     public VenusFlytrapEntity(EntityType<VenusFlytrapEntity> entityType, Level level) {
@@ -42,8 +41,7 @@ public class VenusFlytrapEntity extends PathfinderMob {
                 .add(Attributes.ATTACK_KNOCKBACK, 0.0D);
     }
 
-    public static boolean canSpawn(EntityType<VenusFlytrapEntity> entity, LevelAccessor levelAccess,
-                                   MobSpawnType spawnType, BlockPos pos, Random random) {
+    public static boolean canSpawn(EntityType<VenusFlytrapEntity> entity, LevelAccessor levelAccess, MobSpawnType spawnType, BlockPos pos, RandomSource random) {
         return PathfinderMob.checkMobSpawnRules(entity, levelAccess, spawnType, pos, random)
                 && levelAccess instanceof final Level level && level.getDifficulty() != Difficulty.PEACEFUL;
     }

@@ -12,7 +12,7 @@ import net.minecraft.client.model.geom.builders.*;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.Mth;
 
-public class ExampleEntityModel<Type extends ExampleEntity> extends EntityModel<Type> {
+public class ExampleModel<Type extends ExampleEntity> extends EntityModel<Type> {
 	public static final ModelLayerLocation LAYER_LOCATION = new ModelLayerLocation(new ResourceLocation(SlayersBeasts.MOD_ID, "example_entity"), "main");
 	private final ModelPart body;
 	private final ModelPart rightArm;
@@ -21,7 +21,7 @@ public class ExampleEntityModel<Type extends ExampleEntity> extends EntityModel<
 	private final ModelPart leftArm;
 	private final ModelPart rightLeg;
 
-	public ExampleEntityModel(ModelPart root) {
+	public ExampleModel(ModelPart root) {
 		this.body = root.getChild("body");
 		this.rightArm = root.getChild("rightArm");
 		this.head = root.getChild("head");
@@ -51,7 +51,6 @@ public class ExampleEntityModel<Type extends ExampleEntity> extends EntityModel<
 
 	@Override
 	public void setupAnim(Type pEntity, float pLimbSwing, float pLimbSwingAmount, float pAgeInTicks, float pNetHeadYaw, float pHeadPitch) {
-
 		this.head.yRot = pNetHeadYaw * Mth.PI / 180F;
 		this.body.yRot = 0.0F;
 		this.rightArm.z = 0.0F;
