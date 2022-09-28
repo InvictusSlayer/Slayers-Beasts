@@ -29,7 +29,6 @@ public class SlayersBeasts
         ModEffects.register(eventBus);
         ModPotions.register(eventBus);
 
-        //ModStructures.register(eventBus);
         ModConfiguredFeatures.register(eventBus);
         ModPlacedFeatures.register(eventBus);
 

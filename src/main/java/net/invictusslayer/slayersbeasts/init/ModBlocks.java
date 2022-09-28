@@ -1,6 +1,7 @@
 package net.invictusslayer.slayersbeasts.init;
 
 import net.invictusslayer.slayersbeasts.SlayersBeasts;
+import net.invictusslayer.slayersbeasts.block.custom.AnthillBlock;
 import net.invictusslayer.slayersbeasts.block.custom.CajoleLeavesBlock;
 import net.invictusslayer.slayersbeasts.block.custom.OothecaBlock;
 import net.invictusslayer.slayersbeasts.block.flammable.*;
@@ -24,6 +25,14 @@ public final class ModBlocks {
     public static final DeferredRegister<Block> BLOCKS =
             DeferredRegister.create(ForgeRegistries.BLOCKS, SlayersBeasts.MOD_ID);
 
+    public static final RegistryObject<Block> OOTHECA = registerBlock("ootheca",
+            () -> new OothecaBlock(BlockBehaviour.Properties.of(Material.SCULK)
+                    .strength(1f)), ModCreativeModeTab.SLAYERS_BEASTS_TAB);
+
+    public static final RegistryObject<Block> ANTHILL_SURFACE = registerBlock("anthill_surface",
+            () -> new AnthillBlock(BlockBehaviour.Properties.of(Material.GRASS)
+                    .strength(1f)), ModCreativeModeTab.SLAYERS_BEASTS_TAB);
+
     public static final RegistryObject<Block> JADE_BLOCK = registerBlock("jade_block",
             () -> new Block(BlockBehaviour.Properties.of(Material.METAL)
                     .strength(9f).requiresCorrectToolForDrops()), ModCreativeModeTab.SLAYERS_BEASTS_TAB);
@@ -34,10 +43,6 @@ public final class ModBlocks {
     public static final RegistryObject<Block> DEEPSLATE_EXOSKELETON_ORE = registerBlock("deepslate_exoskeleton_ore",
             () -> new DropExperienceBlock(BlockBehaviour.Properties.of(Material.STONE).strength(25f).requiresCorrectToolForDrops(),
                     UniformInt.of(3, 7)), ModCreativeModeTab.SLAYERS_BEASTS_TAB);
-
-    public static final RegistryObject<Block> OOTHECA = registerBlock("ootheca",
-            () -> new OothecaBlock(BlockBehaviour.Properties.of(Material.SCULK)
-                    .strength(1f)), ModCreativeModeTab.SLAYERS_BEASTS_TAB);
 
     public static final RegistryObject<Block> CAJOLE_LOG = registerBlock("cajole_log",
             () -> new ModFlammableRotatedPillarBlock(BlockBehaviour.Properties.copy(Blocks.OAK_LOG)),
@@ -74,7 +79,6 @@ public final class ModBlocks {
     public static final RegistryObject<Block> CAJOLE_FENCE_GATE = registerBlock("cajole_fence_gate",
             () -> new ModFlammableFenceGateBlock(BlockBehaviour.Properties.copy(Blocks.OAK_FENCE_GATE), 20, 5),
             ModCreativeModeTab.SLAYERS_BEASTS_TAB);
-
     public static final RegistryObject<Block> CAJOLE_BUTTON = registerBlock("cajole_button",
             () -> new WoodButtonBlock(BlockBehaviour.Properties.copy(Blocks.OAK_BUTTON)), ModCreativeModeTab.SLAYERS_BEASTS_TAB);
     public static final RegistryObject<Block> CAJOLE_PRESSURE_PLATE = registerBlock("cajole_pressure_plate",
@@ -119,7 +123,6 @@ public final class ModBlocks {
     public static final RegistryObject<Block> EUCALYPTUS_FENCE_GATE = registerBlock("eucalyptus_fence_gate",
             () -> new ModFlammableFenceGateBlock(BlockBehaviour.Properties.copy(Blocks.OAK_FENCE_GATE), 20, 5),
             ModCreativeModeTab.SLAYERS_BEASTS_TAB);
-
     public static final RegistryObject<Block> EUCALYPTUS_BUTTON = registerBlock("eucalyptus_button",
             () -> new WoodButtonBlock(BlockBehaviour.Properties.copy(Blocks.OAK_BUTTON)), ModCreativeModeTab.SLAYERS_BEASTS_TAB);
     public static final RegistryObject<Block> EUCALYPTUS_PRESSURE_PLATE = registerBlock("eucalyptus_pressure_plate",

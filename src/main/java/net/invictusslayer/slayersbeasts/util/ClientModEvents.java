@@ -25,7 +25,7 @@ public final class ClientModEvents {
     @SubscribeEvent
     public static void registerLayers(EntityRenderersEvent.RegisterRenderers event) {
         event.registerEntityRenderer(ModEntities.MANTIS_ENTITY.get(), MantisRenderer::new);
-        event.registerEntityRenderer(ModEntities.WOOD_ANT_ENTITY.get(), TinyAntRenderer::new);
+        event.registerEntityRenderer(ModEntities.TINY_ANT_ENTITY.get(), TinyAntRenderer::new);
         event.registerEntityRenderer(ModEntities.VENUS_FLYTRAP_ENTITY.get(), VenusFlytrapRenderer::new);
         event.registerEntityRenderer(ModEntities.WITHER_SPIDER_ENTITY.get(), WitherSpiderRenderer::new);
         event.registerEntityRenderer(ModEntities.EXAMPLE_ENTITY.get(), ExampleRenderer::new);

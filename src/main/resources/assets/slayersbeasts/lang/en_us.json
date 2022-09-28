@@ -11,8 +11,8 @@
   "item.slayersbeasts.tied_leather": "Tied Leather",
   "item.slayersbeasts.tanned_leather": "Tanned Leather",
 
-  "item.slayersbeasts.mantis_spawn_egg": "Praying Mantis Spawn Egg",
-  "item.slayersbeasts.wood_ant_spawn_egg": "Wood Ant Spawn Egg",
+  "item.slayersbeasts.mantis_spawn_egg": "Mantis Spawn Egg",
+  "item.slayersbeasts.wood_ant_spawn_egg": "Tiny Ant Spawn Egg",
   "item.slayersbeasts.venus_flytrap_spawn_egg": "Venus Flytrap Spawn Egg",
   "item.slayersbeasts.wither_spider_spawn_egg": "Wither Spider Spawn Egg",
 
@@ -60,11 +60,14 @@
   "block.slayersbeasts.eucalyptus_door": "Eucalyptus Door",
   "block.slayersbeasts.eucalyptus_trapdoor": "Eucalyptus Trapdoor",
   
-  "entity.slayersbeasts.mantis_entity": "Praying Mantis",
-  "entity.slayersbeasts.wood_ant_entity": "Wood Ant",
+  "entity.slayersbeasts.mantis_entity": "Mantis",
+  "entity.slayersbeasts.tiny_ant_entity": "Tiny Ant",
   "entity.slayersbeasts.venus_flytrap_entity": "Venus Flytrap",
   "entity.slayersbeasts.wither_spider_entity": "Wither Spider",
   "entity.slayersbeasts.example_entity": "Example Entity",
+  "entity.minecraft.wood_ant": "Wood Ant",
+  "entity.minecraft.leafcutter_ant": "Leafcutter Ant",
+  "entity.minecraft.meadow_ant": "Meadow Ant",
 
   "itemGroup.slayers_beasts_tab": "Slayer's Beasts",
 

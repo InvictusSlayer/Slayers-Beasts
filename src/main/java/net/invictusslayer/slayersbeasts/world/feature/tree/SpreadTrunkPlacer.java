@@ -1,13 +1,17 @@
 package net.invictusslayer.slayersbeasts.world.feature.tree;
 
 import com.google.common.collect.Lists;
+import com.mojang.serialization.Codec;
+import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.core.Registry;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.LevelSimulatedReader;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.levelgen.feature.configurations.TreeConfiguration;
 import net.minecraft.world.level.levelgen.feature.foliageplacers.FoliagePlacer;
+import net.minecraft.world.level.levelgen.feature.trunkplacers.ForkingTrunkPlacer;
 import net.minecraft.world.level.levelgen.feature.trunkplacers.TrunkPlacer;
 import net.minecraft.world.level.levelgen.feature.trunkplacers.TrunkPlacerType;
 
@@ -16,6 +20,10 @@ import java.util.OptionalInt;
 import java.util.function.BiConsumer;
 
 public class SpreadTrunkPlacer extends TrunkPlacer {
+    public static final Codec<SpreadTrunkPlacer> CODEC = RecordCodecBuilder.create((p_70161_) -> {
+        return trunkPlacerParts(p_70161_).apply(p_70161_, SpreadTrunkPlacer::new);
+    });
+
     public SpreadTrunkPlacer(int pBaseHeight, int pHeightRandA, int pHeightRandB) {
         super(pBaseHeight, pHeightRandA, pHeightRandB);
     }
@@ -23,6 +31,10 @@ public class SpreadTrunkPlacer extends TrunkPlacer {
     @Override
     protected TrunkPlacerType<?> type() {
         return TrunkPlacerType.FORKING_TRUNK_PLACER;
+    }
+
+    private static <P extends TrunkPlacer> TrunkPlacerType<P> register(String key, Codec<P> type) {
+        return Registry.register(Registry.TRUNK_PLACER_TYPES, key, new TrunkPlacerType<>(type));
     }
 
     @Override

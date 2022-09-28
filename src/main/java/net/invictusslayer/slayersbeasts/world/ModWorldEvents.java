@@ -1,9 +1,6 @@
 package net.invictusslayer.slayersbeasts.world;
 
 import net.invictusslayer.slayersbeasts.SlayersBeasts;
-import net.invictusslayer.slayersbeasts.world.gen.ModOreGeneration;
-import net.invictusslayer.slayersbeasts.world.gen.ModTreeGeneration;
-import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 
 @Mod.EventBusSubscriber(modid = SlayersBeasts.MOD_ID)

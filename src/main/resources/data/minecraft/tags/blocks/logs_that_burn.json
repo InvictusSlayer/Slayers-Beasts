@@ -1,6 +1,7 @@
 {
   "replace": false,
   "values": [
-    "#slayersbeasts:cajole_logs"
+    "#slayersbeasts:cajole_logs",
+    "#slayersbeasts:eucalyptus_logs"
   ]
 }

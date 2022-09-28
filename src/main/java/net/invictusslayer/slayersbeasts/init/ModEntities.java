@@ -18,7 +18,7 @@ public final class ModEntities {
             () -> EntityType.Builder.of(MantisEntity::new, MobCategory.MONSTER).sized(0.8f,1.2f)
                     .build(new ResourceLocation(SlayersBeasts.MOD_ID, "mantis_entity").toString()));
 
-    public static final RegistryObject<EntityType<TinyAntEntity>> WOOD_ANT_ENTITY = ENTITY_TYPES.register("wood_ant_entity",
+    public static final RegistryObject<EntityType<TinyAntEntity>> TINY_ANT_ENTITY = ENTITY_TYPES.register("wood_ant_entity",
             () -> EntityType.Builder.of(TinyAntEntity::new, MobCategory.AMBIENT).sized(0.5f,0.3f)
                     .build(new ResourceLocation(SlayersBeasts.MOD_ID, "wood_ant_entity").toString()));
 
