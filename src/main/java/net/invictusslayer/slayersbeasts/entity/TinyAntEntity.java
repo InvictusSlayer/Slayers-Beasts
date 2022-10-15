@@ -22,6 +22,7 @@ import net.minecraft.world.level.ServerLevelAccessor;
 import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.biome.Biomes;
 import net.minecraftforge.common.ForgeMod;
+import org.jetbrains.annotations.NotNull;
 
 import javax.annotation.Nullable;
 
@@ -53,7 +54,7 @@ public class TinyAntEntity extends PathfinderMob {
         return PathfinderMob.checkMobSpawnRules(entity, levelAccess, spawnType, pos, random);
     }
 
-    public MobType getMobType() {
+    public @NotNull MobType getMobType() {
         return MobType.ARTHROPOD;
     }
 
@@ -65,6 +66,7 @@ public class TinyAntEntity extends PathfinderMob {
     public int getAntType() {
         return this.entityData.get(DATA_ANT_TYPE);
     }
+
     public void setAntType(int pTinyAntType) {
         if (pTinyAntType == 0) {
             if (!this.hasCustomName()) {
@@ -84,15 +86,15 @@ public class TinyAntEntity extends PathfinderMob {
     }
 
     @Nullable
-    public SpawnGroupData finalizeSpawn(ServerLevelAccessor pLevel, DifficultyInstance pDifficulty, MobSpawnType pReason, @Nullable SpawnGroupData pSpawnData, @Nullable CompoundTag pDataTag) {
-        int i = this.getRandomAntType(pLevel);
+    public SpawnGroupData finalizeSpawn(@NotNull ServerLevelAccessor pLevel, @NotNull DifficultyInstance pDifficulty, @NotNull MobSpawnType pReason, @Nullable SpawnGroupData pSpawnData, @Nullable CompoundTag pDataTag) {
+        int randomAntType = this.getRandomAntType(pLevel);
         if (pSpawnData instanceof TinyAntGroupData) {
-            i = ((TinyAntGroupData)pSpawnData).tinyAntType;
+            randomAntType = ((TinyAntGroupData)pSpawnData).tinyAntType;
         } else {
-            pSpawnData = new TinyAntGroupData(i);
+            pSpawnData = new TinyAntGroupData(randomAntType);
         }
 
-        this.setAntType(i);
+        this.setAntType(randomAntType);
         return pSpawnData;
     }
 

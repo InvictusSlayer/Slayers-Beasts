@@ -7,7 +7,7 @@ import net.invictusslayer.slayersbeasts.SlayersBeasts;
 import net.invictusslayer.slayersbeasts.init.ModBlocks;
 import net.invictusslayer.slayersbeasts.world.feature.foliageplacers.CajoleFoliagePlacer;
 import net.invictusslayer.slayersbeasts.world.feature.foliageplacers.EucalyptusFoliagePlacer;
-import net.invictusslayer.slayersbeasts.world.feature.tree.SpreadTrunkPlacer;
+import net.invictusslayer.slayersbeasts.world.feature.trunkplacer.CrossTrunkPlacer;
 import net.minecraft.core.Registry;
 import net.minecraft.data.worldgen.features.OreFeatures;
 import net.minecraft.util.valueproviders.ConstantInt;
@@ -35,7 +35,7 @@ public class ModConfiguredFeatures {
             CONFIGURED_FEATURES.register("cajole", () -> new ConfiguredFeature<>(
                     Feature.TREE, new TreeConfiguration.TreeConfigurationBuilder(
                             BlockStateProvider.simple(ModBlocks.CAJOLE_LOG.get()),
-                    new SpreadTrunkPlacer(7, 6, 3),
+                    new CrossTrunkPlacer(7, 6, 3),
                     BlockStateProvider.simple(ModBlocks.CAJOLE_LEAVES.get()),
                     new CajoleFoliagePlacer(ConstantInt.of(2), ConstantInt.of(0)),
                     new TwoLayersFeatureSize(1, 0, 2))
@@ -45,7 +45,7 @@ public class ModConfiguredFeatures {
             CONFIGURED_FEATURES.register("eucalyptus", () -> new ConfiguredFeature<>(
                     Feature.TREE, new TreeConfiguration.TreeConfigurationBuilder(
                             BlockStateProvider.simple(ModBlocks.EUCALYPTUS_LOG.get()),
-                    new SpreadTrunkPlacer(15, 10, 2),
+                    new CrossTrunkPlacer(15, 10, 2),
                     BlockStateProvider.simple(ModBlocks.EUCALYPTUS_LEAVES.get()),
                     new EucalyptusFoliagePlacer(ConstantInt.of(2), ConstantInt.of(0)),
                     new TwoLayersFeatureSize(1, 0, 2)).build()));

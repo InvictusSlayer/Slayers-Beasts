@@ -1,29 +1,19 @@
 package net.invictusslayer.slayersbeasts.world.feature.tree;
 
 import net.invictusslayer.slayersbeasts.block.custom.OothecaBlock;
-import net.invictusslayer.slayersbeasts.init.ModBlocks;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
-import net.minecraft.core.Registry;
-import net.minecraft.nbt.CompoundTag;
-import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.level.LevelSimulatedReader;
-import net.minecraft.world.level.block.BeehiveBlock;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.CocoaBlock;
-import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.levelgen.feature.Feature;
 import net.minecraft.world.level.levelgen.feature.treedecorators.TreeDecorator;
 import net.minecraft.world.level.levelgen.feature.treedecorators.TreeDecoratorType;
 
-import java.util.Collections;
 import java.util.List;
-import java.util.Optional;
 import java.util.Random;
 import java.util.function.BiConsumer;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
 /*
 public class OothecaDecorator extends TreeDecorator {
     private static final Direction WORLDGEN_FACING = Direction.SOUTH;
@@ -41,6 +31,11 @@ public class OothecaDecorator extends TreeDecorator {
     @Override
     protected TreeDecoratorType<?> type() {
         return null;
+    }
+
+    @Override
+    public void place(Context pContext) {
+
     }
 
     public void place(LevelSimulatedReader pLevel, BiConsumer<BlockPos, BlockState> pBlockSetter, Random pRandom,

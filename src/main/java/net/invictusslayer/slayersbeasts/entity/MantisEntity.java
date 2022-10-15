@@ -1,6 +1,6 @@
 package net.invictusslayer.slayersbeasts.entity;
 
-import net.invictusslayer.slayersbeasts.init.ModEffects;
+import net.invictusslayer.slayersbeasts.entity.poses.MantisWingPose;
 import net.invictusslayer.slayersbeasts.init.ModSounds;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.syncher.EntityDataAccessor;
@@ -10,38 +10,35 @@ import net.minecraft.sounds.SoundEvent;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.Difficulty;
 import net.minecraft.world.damagesource.DamageSource;
-import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.ai.goal.*;
 import net.minecraft.world.entity.ai.goal.target.HurtByTargetGoal;
 import net.minecraft.world.entity.ai.goal.target.NearestAttackableTargetGoal;
-import net.minecraft.world.entity.monster.Monster;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.phys.Vec3;
 
-import java.awt.*;
-import java.util.Random;
-
 public class MantisEntity extends PathfinderMob {
+    private static final EntityDataAccessor<Boolean> DATA_IS_LEAPING = SynchedEntityData.defineId(MantisEntity.class, EntityDataSerializers.BOOLEAN);
+    private static final EntityDataAccessor<Boolean> DATA_IS_FLUTTERING = SynchedEntityData.defineId(MantisEntity.class, EntityDataSerializers.BOOLEAN);
+
     public MantisEntity(EntityType<MantisEntity> entityType, Level level) {
         super(entityType, level);
     }
-    private static final EntityDataAccessor<Boolean> DATA_IS_LEAPING = SynchedEntityData.defineId(MantisEntity.class, EntityDataSerializers.BOOLEAN);
-    private static final EntityDataAccessor<Boolean> DATA_IS_FLUTTERING = SynchedEntityData.defineId(MantisEntity.class, EntityDataSerializers.BOOLEAN);
 
     @Override
     protected void registerGoals() {
         super.registerGoals();
         this.goalSelector.addGoal(0, new FloatGoal(this));
-        this.goalSelector.addGoal(1, new MantisLeapGoal(this, 0.4F, this));
+        this.goalSelector.addGoal(1, new MantisLeapGoal(this, 0.4F));
         this.goalSelector.addGoal(2, new MeleeAttackGoal(this, 1.2D, false));
         this.goalSelector.addGoal(3, new WaterAvoidingRandomStrollGoal(this, 0.8D));
         this.goalSelector.addGoal(4, new LookAtPlayerGoal(this, Player.class, 8.0F));
         this.goalSelector.addGoal(5, new RandomLookAroundGoal(this));
+        this.goalSelector.addGoal(6, new FlutterWingsGoal(this));
         this.targetSelector.addGoal(1, new HurtByTargetGoal(this));
         this.targetSelector.addGoal(2, new NearestAttackableTargetGoal<>(this, Player.class, true));
     }
@@ -104,60 +101,69 @@ public class MantisEntity extends PathfinderMob {
     public MantisWingPose getWingPose() {
         if (this.isLeaping()) {
             return MantisWingPose.LEAPING;
-        } else if (this.isAggressive()) {
-            return MantisWingPose.AGGRESSIVE;
+        } else if (this.isFluttering()) {
+            return MantisWingPose.FLUTTERING;
         } else {
             return MantisWingPose.PASSIVE;
         }
     }
 
-    static class MantisLeapGoal extends LeapAtTargetGoal {
-        private final Mob mob;
-        private LivingEntity target;
-        private final float yd;
-        private final MantisEntity mantis;
+    static class FlutterWingsGoal extends Goal {
+        private final MantisEntity mob;
+        private int flutterTime;
 
-        public MantisLeapGoal(Mob pMob, float pYd, MantisEntity mantisEntity) {
-            super(pMob, pYd);
+        public FlutterWingsGoal(MantisEntity pMob) {
+            super();
             this.mob = pMob;
-            this.yd = pYd;
-            this.mantis = mantisEntity;
         }
 
+        @Override
         public boolean canUse() {
-            if(this.mob.isOnGround() || this.mob.isInFluidType()) {
-                this.mantis.setLeaping(false);
-            }
+            return this.mob.isOnGround() && this.mob.getRandom().nextFloat() < 0.02F;
+        }
 
-            if (this.mob.isVehicle()) {
-                return false;
-            } else {
-                this.target = this.mob.getTarget();
-                if (this.target == null) {
-                    return false;
-                } else {
-                    double d0 = this.mob.distanceToSqr(this.target);
-                    if (!(d0 < 4.0D) && !(d0 > 16.0D)) {
-                        if (!this.mob.isOnGround()) {
-                            return false;
-                        } else {
-                            return this.mob.getRandom().nextInt(reducedTickDelay(5)) == 0;
-                        }
-                    } else {
-                        return false;
-                    }
-                }
-            }
+        public boolean canContinueToUse() {
+            return this.flutterTime >= 0;
         }
 
         public void start() {
-            this.mantis.setLeaping(true);
-            Vec3 vec3 = this.mob.getDeltaMovement();
-            Vec3 vec31 = new Vec3(this.target.getX() - this.mob.getX(), 0.0D, this.target.getZ() - this.mob.getZ());
-            if (vec31.lengthSqr() > 1.0E-7D) {
-                vec31 = vec31.normalize().scale(0.4D).add(vec3.scale(0.2D));
-            }
-            this.mob.setDeltaMovement(vec31.x, (double)this.yd, vec31.z);
+            this.mob.setFluttering(true);
+            this.flutterTime = 15 + this.mob.getRandom().nextInt(15);
         }
+
+        public void stop() {
+            this.mob.setFluttering(false);
+        }
+
+        public boolean requiresUpdateEveryTick() {
+            return true;
+        }
+
+        public void tick() {
+            --this.flutterTime;
+        }
+
+    }
+
+    static class MantisLeapGoal extends LeapAtTargetGoal {
+        private final MantisEntity mob;
+        private LivingEntity target;
+        private final float yd;
+
+        public MantisLeapGoal(MantisEntity pMob, float pYd) {
+            super(pMob, pYd);
+            this.mob = pMob;
+            this.yd = pYd;
+        }
+
+        public void start() {
+            this.mob.setLeaping(true);
+            super.start();
+        }
+
+        public void stop() {
+            this.mob.setLeaping(false);
+        }
+
     }
 }

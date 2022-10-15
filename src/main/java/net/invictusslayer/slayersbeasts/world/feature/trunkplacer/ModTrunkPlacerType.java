@@ -1,13 +1,12 @@
 package net.invictusslayer.slayersbeasts.world.feature.trunkplacer;
 
 import com.mojang.serialization.Codec;
-import net.invictusslayer.slayersbeasts.world.feature.tree.SpreadTrunkPlacer;
 import net.minecraft.core.Registry;
 import net.minecraft.world.level.levelgen.feature.trunkplacers.TrunkPlacer;
 import net.minecraft.world.level.levelgen.feature.trunkplacers.TrunkPlacerType;
 
 public class ModTrunkPlacerType<P extends TrunkPlacer> extends TrunkPlacerType<P> {
-    public static final ModTrunkPlacerType<SpreadTrunkPlacer> SPREAD_TRUNK_PLACER = register("spread_trunk_placer", SpreadTrunkPlacer.CODEC);
+    public static final ModTrunkPlacerType<CrossTrunkPlacer> CROSS_TRUNK_PLACER = register("cross_trunk_placer", CrossTrunkPlacer.CODEC);
     private final Codec<P> codec;
 
     private static  <P extends TrunkPlacer> ModTrunkPlacerType<P> register(String pKey, Codec<P> pCodec) {

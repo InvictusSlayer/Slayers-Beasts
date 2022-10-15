@@ -12,7 +12,8 @@
   "item.slayersbeasts.tanned_leather": "Tanned Leather",
 
   "item.slayersbeasts.mantis_spawn_egg": "Mantis Spawn Egg",
-  "item.slayersbeasts.wood_ant_spawn_egg": "Tiny Ant Spawn Egg",
+  "item.slayersbeasts.tiny_ant_spawn_egg": "Tiny Ant Spawn Egg",
+  "item.slayersbeasts.ambient_dragonfly_spawn_egg": "Ambient Dragonfly Spawn Egg",
   "item.slayersbeasts.venus_flytrap_spawn_egg": "Venus Flytrap Spawn Egg",
   "item.slayersbeasts.wither_spider_spawn_egg": "Wither Spider Spawn Egg",
 
@@ -62,6 +63,7 @@
   
   "entity.slayersbeasts.mantis_entity": "Mantis",
   "entity.slayersbeasts.tiny_ant_entity": "Tiny Ant",
+  "entity.slayersbeasts.ambient_dragonfly_entity": "Ambient Dragonfly",
   "entity.slayersbeasts.venus_flytrap_entity": "Venus Flytrap",
   "entity.slayersbeasts.wither_spider_entity": "Wither Spider",
   "entity.slayersbeasts.example_entity": "Example Entity",

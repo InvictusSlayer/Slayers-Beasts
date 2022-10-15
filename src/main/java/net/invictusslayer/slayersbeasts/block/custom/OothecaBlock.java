@@ -10,10 +10,13 @@ import net.minecraft.world.item.enchantment.Enchantments;
 import net.minecraft.world.level.Explosion;
 import net.minecraft.world.level.GameRules;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.DropExperienceBlock;
 import net.minecraft.world.level.block.HorizontalDirectionalBlock;
+import net.minecraft.world.level.block.InfestedBlock;
 import net.minecraft.world.level.block.state.BlockState;
 
-public class OothecaBlock extends HorizontalDirectionalBlock {
+public class OothecaBlock extends Block {
     public OothecaBlock(Properties properties) {
         super(properties);
     }
@@ -25,10 +28,9 @@ public class OothecaBlock extends HorizontalDirectionalBlock {
         mob.spawnAnim();
     }
 
-    public void spawnAfterBreak(BlockState pState, ServerLevel pLevel, BlockPos pPos, ItemStack pStack) {
-        if (pLevel.getGameRules().getBoolean(GameRules.RULE_DOBLOCKDROPS) && EnchantmentHelper.getItemEnchantmentLevel(Enchantments.SILK_TOUCH, pStack) == 0) {
-            this.spawnInfestation(pLevel, pPos);
-        }
+    @Override
+    public void spawnAfterBreak(BlockState pState, ServerLevel pLevel, BlockPos pPos, ItemStack pStack, boolean pDropExperience) {
+        this.spawnInfestation(pLevel, pPos);
     }
 
     public void wasExploded(Level pLevel, BlockPos pPos, Explosion pExplosion) {

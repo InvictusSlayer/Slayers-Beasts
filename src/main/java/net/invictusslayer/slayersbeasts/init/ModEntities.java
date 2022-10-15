@@ -22,6 +22,10 @@ public final class ModEntities {
             () -> EntityType.Builder.of(TinyAntEntity::new, MobCategory.AMBIENT).sized(0.5f,0.3f)
                     .build(new ResourceLocation(SlayersBeasts.MOD_ID, "wood_ant_entity").toString()));
 
+    public static final RegistryObject<EntityType<AmbientDragonflyEntity>> AMBIENT_DRAGONFLY_ENTITY = ENTITY_TYPES.register("ambient_dragonfly_entity",
+            () -> EntityType.Builder.of(AmbientDragonflyEntity::new, MobCategory.AMBIENT).sized(0.7f,0.1f)
+                    .build(new ResourceLocation(SlayersBeasts.MOD_ID, "ambient_dragonfly_entity").toString()));
+
     public static final RegistryObject<EntityType<VenusFlytrapEntity>> VENUS_FLYTRAP_ENTITY = ENTITY_TYPES.register("venus_flytrap_entity",
             () -> EntityType.Builder.of(VenusFlytrapEntity::new, MobCategory.MONSTER).sized(1.0f,1.8f)
                     .build(new ResourceLocation(SlayersBeasts.MOD_ID, "venus_flytrap_entity").toString()));

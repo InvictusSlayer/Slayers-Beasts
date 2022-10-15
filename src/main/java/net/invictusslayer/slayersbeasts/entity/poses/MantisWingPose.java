@@ -1,4 +1,4 @@
-package net.invictusslayer.slayersbeasts.entity;
+package net.invictusslayer.slayersbeasts.entity.poses;
 
 public enum MantisWingPose {
     PASSIVE,
