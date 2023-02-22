@@ -181,14 +181,13 @@ public class MantisModel<Type extends MantisEntity> extends EntityModel<Type> {
         float f3 = Mth.cos(pLimbSwing * 2F + Mth.PI) * pLimbSwingAmount / 2F;
         float f4 = Mth.cos(pLimbSwing * 2F + Mth.PI * 2F) * pLimbSwingAmount / 2F;
         float f5 = Mth.cos(pAgeInTicks / 6F) / 6F;
-        float f6 = Mth.cos(pAgeInTicks / 6F + Mth.PI * 0.5F) / 6F;
-        float f7 = Mth.cos(pAgeInTicks / 6F - Mth.PI * 0.5F) / 6F;
+        float f6 = Mth.sin(pAgeInTicks / 6F) / 24F;
         float f8 = Mth.cos(pAgeInTicks) / 6F;
         this.head.xRot = pHeadPitch * Mth.PI / 180F;
         this.head.yRot = pNetHeadYaw * Mth.PI / 180F;
         this.abdomen.xRot = f5 / 4F;
-        this.leftClaw.xRot = f6 / 4F;
-        this.rightClaw.xRot = f7 / 4F;
+        this.leftClaw.xRot = f6;
+        this.rightClaw.xRot = -f6;
         this.leftFrontLeg.yRot = 0.9F;
         this.rightFrontLeg.yRot = -0.9F;
         this.leftBackLeg.yRot = -0.9F;

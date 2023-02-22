@@ -14,8 +14,8 @@ import net.minecraft.world.level.levelgen.feature.foliageplacers.FoliagePlacerTy
 import java.util.function.BiConsumer;
 
 public class CajoleFoliagePlacer extends FoliagePlacer {
-    public static final Codec<CajoleFoliagePlacer> CODEC = RecordCodecBuilder.create((p_68380_) -> {
-        return foliagePlacerParts(p_68380_).apply(p_68380_, CajoleFoliagePlacer::new);
+    public static final Codec<CajoleFoliagePlacer> CODEC = RecordCodecBuilder.create((instance) -> {
+        return foliagePlacerParts(instance).apply(instance, CajoleFoliagePlacer::new);
     });
 
     public CajoleFoliagePlacer(IntProvider pRadius, IntProvider pOffset) {
@@ -24,7 +24,7 @@ public class CajoleFoliagePlacer extends FoliagePlacer {
 
     @Override
     protected FoliagePlacerType<?> type() {
-        return FoliagePlacerType.ACACIA_FOLIAGE_PLACER;
+        return ModFoliagePlacerType.CAJOLE_FOLIAGE_PLACER.get();
     }
 
     @Override

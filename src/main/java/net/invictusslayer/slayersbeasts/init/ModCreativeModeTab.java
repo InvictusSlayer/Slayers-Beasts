@@ -1,13 +1,22 @@
 package net.invictusslayer.slayersbeasts.init;
 
+import net.invictusslayer.slayersbeasts.SlayersBeasts;
+import net.minecraft.network.chat.Component;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.ItemStack;
+import net.minecraftforge.event.CreativeModeTabEvent;
+import net.minecraftforge.eventbus.api.SubscribeEvent;
+import net.minecraftforge.fml.common.Mod;
 
+@Mod.EventBusSubscriber(modid = SlayersBeasts.MOD_ID, bus = Mod.EventBusSubscriber.Bus.MOD)
 public final class ModCreativeModeTab {
-    public static final CreativeModeTab SLAYERS_BEASTS_TAB = new CreativeModeTab("slayers_beasts_tab") {
-        @Override
-        public ItemStack makeIcon() {
-            return new ItemStack(ModBlocks.CAJOLE_SAPLING.get());
-        }
-    };
+    public static CreativeModeTab SLAYERS_BEASTS_TAB;
+
+    @SubscribeEvent
+    public static void registerCreativeModeTabs(CreativeModeTabEvent.Register event) {
+        SLAYERS_BEASTS_TAB = event.registerCreativeModeTab(new ResourceLocation(SlayersBeasts.MOD_ID, "slayersbeasts_tab"),
+                builder -> builder.icon(() -> new ItemStack(ModBlocks.CAJOLE_SAPLING.get()))
+                        .title(Component.translatable("slayersbeasts_tabs")).build());
+    }
 }

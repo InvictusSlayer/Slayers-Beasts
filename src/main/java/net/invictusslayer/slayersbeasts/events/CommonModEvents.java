@@ -17,10 +17,14 @@ public class CommonModEvents {
         event.enqueueWork(() -> {
             SpawnPlacements.register(ModEntities.MANTIS_ENTITY.get(),
                     SpawnPlacements.Type.ON_GROUND, Heightmap.Types.WORLD_SURFACE, MantisEntity::canSpawn);
-            SpawnPlacements.register(ModEntities.TINY_ANT_ENTITY.get(),
-                    SpawnPlacements.Type.ON_GROUND, Heightmap.Types.WORLD_SURFACE, TinyAntEntity::canSpawn);
-            SpawnPlacements.register(ModEntities.AMBIENT_DRAGONFLY_ENTITY.get(),
-                    SpawnPlacements.Type.ON_GROUND, Heightmap.Types.WORLD_SURFACE, AmbientDragonflyEntity::canSpawn);
+            SpawnPlacements.register(ModEntities.WORKER_ANT_ENTITY.get(),
+                    SpawnPlacements.Type.ON_GROUND, Heightmap.Types.WORLD_SURFACE, WorkerAntEntity::canSpawn);
+            SpawnPlacements.register(ModEntities.SOLDIER_ANT_ENTITY.get(),
+                    SpawnPlacements.Type.ON_GROUND, Heightmap.Types.WORLD_SURFACE, SoldierAntEntity::canSpawn);
+            SpawnPlacements.register(ModEntities.QUEEN_ANT_ENTITY.get(),
+                    SpawnPlacements.Type.ON_GROUND, Heightmap.Types.WORLD_SURFACE, QueenAntEntity::canSpawn);
+            SpawnPlacements.register(ModEntities.DAMSELFLY_ENTITY.get(),
+                    SpawnPlacements.Type.ON_GROUND, Heightmap.Types.WORLD_SURFACE, DamselflyEntity::canSpawn);
             SpawnPlacements.register(ModEntities.VENUS_FLYTRAP_ENTITY.get(),
                     SpawnPlacements.Type.ON_GROUND, Heightmap.Types.WORLD_SURFACE, VenusFlytrapEntity::canSpawn);
         });
@@ -29,8 +33,10 @@ public class CommonModEvents {
     @SubscribeEvent
     public static void registerAttributes(EntityAttributeCreationEvent event) {
         event.put(ModEntities.MANTIS_ENTITY.get(), MantisEntity.createAttributes().build());
-        event.put(ModEntities.TINY_ANT_ENTITY.get(), TinyAntEntity.createAttributes().build());
-        event.put(ModEntities.AMBIENT_DRAGONFLY_ENTITY.get(), AmbientDragonflyEntity.createAttributes().build());
+        event.put(ModEntities.WORKER_ANT_ENTITY.get(), WorkerAntEntity.createAttributes().build());
+        event.put(ModEntities.SOLDIER_ANT_ENTITY.get(), SoldierAntEntity.createAttributes().build());
+        event.put(ModEntities.QUEEN_ANT_ENTITY.get(), QueenAntEntity.createAttributes().build());
+        event.put(ModEntities.DAMSELFLY_ENTITY.get(), DamselflyEntity.createAttributes().build());
         event.put(ModEntities.VENUS_FLYTRAP_ENTITY.get(), VenusFlytrapEntity.createAttributes().build());
         event.put(ModEntities.WITHER_SPIDER_ENTITY.get(), WitherSpiderEntity.createAttributes().build());
         event.put(ModEntities.EXAMPLE_ENTITY.get(), ExampleEntity.createAttributes().build());

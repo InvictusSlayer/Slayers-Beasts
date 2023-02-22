@@ -18,13 +18,19 @@ public final class ModEntities {
             () -> EntityType.Builder.of(MantisEntity::new, MobCategory.MONSTER).sized(0.8f,1.2f)
                     .build(new ResourceLocation(SlayersBeasts.MOD_ID, "mantis_entity").toString()));
 
-    public static final RegistryObject<EntityType<TinyAntEntity>> TINY_ANT_ENTITY = ENTITY_TYPES.register("wood_ant_entity",
-            () -> EntityType.Builder.of(TinyAntEntity::new, MobCategory.AMBIENT).sized(0.5f,0.3f)
-                    .build(new ResourceLocation(SlayersBeasts.MOD_ID, "wood_ant_entity").toString()));
+    public static final RegistryObject<EntityType<WorkerAntEntity>> WORKER_ANT_ENTITY = ENTITY_TYPES.register("worker_ant_entity",
+            () -> EntityType.Builder.of(WorkerAntEntity::new, MobCategory.AMBIENT).sized(0.6f,0.3f)
+                    .build(new ResourceLocation(SlayersBeasts.MOD_ID, "worker_ant_entity").toString()));
+    public static final RegistryObject<EntityType<SoldierAntEntity>> SOLDIER_ANT_ENTITY = ENTITY_TYPES.register("soldier_ant_entity",
+            () -> EntityType.Builder.of(SoldierAntEntity::new, MobCategory.CREATURE).sized(1.2f,0.6f)
+                    .build(new ResourceLocation(SlayersBeasts.MOD_ID, "soldier_ant_entity").toString()));
+    public static final RegistryObject<EntityType<QueenAntEntity>> QUEEN_ANT_ENTITY = ENTITY_TYPES.register("queen_ant_entity",
+            () -> EntityType.Builder.of(QueenAntEntity::new, MobCategory.CREATURE).sized(1.5f,0.8f)
+                    .build(new ResourceLocation(SlayersBeasts.MOD_ID, "queen_ant_entity").toString()));
 
-    public static final RegistryObject<EntityType<AmbientDragonflyEntity>> AMBIENT_DRAGONFLY_ENTITY = ENTITY_TYPES.register("ambient_dragonfly_entity",
-            () -> EntityType.Builder.of(AmbientDragonflyEntity::new, MobCategory.AMBIENT).sized(0.7f,0.1f)
-                    .build(new ResourceLocation(SlayersBeasts.MOD_ID, "ambient_dragonfly_entity").toString()));
+    public static final RegistryObject<EntityType<DamselflyEntity>> DAMSELFLY_ENTITY = ENTITY_TYPES.register("damselfly_entity",
+            () -> EntityType.Builder.of(DamselflyEntity::new, MobCategory.AMBIENT).sized(0.7f,0.1f)
+                    .build(new ResourceLocation(SlayersBeasts.MOD_ID, "damselfly_entity").toString()));
 
     public static final RegistryObject<EntityType<VenusFlytrapEntity>> VENUS_FLYTRAP_ENTITY = ENTITY_TYPES.register("venus_flytrap_entity",
             () -> EntityType.Builder.of(VenusFlytrapEntity::new, MobCategory.MONSTER).sized(1.0f,1.8f)

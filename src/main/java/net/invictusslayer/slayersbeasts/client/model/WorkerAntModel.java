@@ -3,7 +3,7 @@ package net.invictusslayer.slayersbeasts.client.model;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import net.invictusslayer.slayersbeasts.SlayersBeasts;
-import net.invictusslayer.slayersbeasts.entity.TinyAntEntity;
+import net.invictusslayer.slayersbeasts.entity.WorkerAntEntity;
 import net.minecraft.client.model.EntityModel;
 import net.minecraft.client.model.geom.ModelLayerLocation;
 import net.minecraft.client.model.geom.ModelPart;
@@ -12,7 +12,7 @@ import net.minecraft.client.model.geom.builders.*;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.Mth;
 
-public class TinyAntModel<Type extends TinyAntEntity> extends EntityModel<Type> {
+public class WorkerAntModel<Type extends WorkerAntEntity> extends EntityModel<Type> {
     public static final ModelLayerLocation LAYER_LOCATION = new ModelLayerLocation(new ResourceLocation(SlayersBeasts.MOD_ID, "wood_ant_entity"), "main");
     private final ModelPart body;
     private final ModelPart leftFrontLeg;
@@ -22,7 +22,7 @@ public class TinyAntModel<Type extends TinyAntEntity> extends EntityModel<Type> 
     private final ModelPart rightMiddleLeg;
     private final ModelPart rightBackLeg;
 
-    public TinyAntModel(ModelPart root) {
+    public WorkerAntModel(ModelPart root) {
         this.body = root.getChild("body");
         this.leftFrontLeg = root.getChild("leftFrontLeg");
         this.leftMiddleLeg = root.getChild("leftMiddleLeg");
@@ -62,36 +62,37 @@ public class TinyAntModel<Type extends TinyAntEntity> extends EntityModel<Type> 
 
     @Override
     public void setupAnim(Type pEntity, float pLimbSwing, float pLimbSwingAmount, float pAgeInTicks, float pNetHeadYaw, float pHeadPitch) {
-        float f1 = -(Mth.cos(pLimbSwing * 2F + Mth.PI * 1.5F) * 0.4F) * pLimbSwingAmount * 2F;
-        float f2 = -(Mth.cos(pLimbSwing * 2F + Mth.PI * 0.75F) * 0.4F) * pLimbSwingAmount * 2F;
-        float f3 = -(Mth.cos(pLimbSwing * 2F) * 0.4F) * pLimbSwingAmount * 2F;
-        float f4 = Mth.abs(Mth.sin(pLimbSwing + Mth.PI * 1.5F) * 0.4F) * pLimbSwingAmount * 2F;
-        float f5 = Mth.abs(Mth.sin(pLimbSwing + Mth.PI * 0.75F) * 0.4F) * pLimbSwingAmount * 2F;
-        float f6 = Mth.abs(Mth.sin(pLimbSwing) * 0.4F) * pLimbSwingAmount * 2F;
-        this.leftFrontLeg.yRot = Mth.PI / 4F;
-        this.rightFrontLeg.yRot = -Mth.PI / 4F;
-        this.leftMiddleLeg.yRot = 0F;
-        this.rightMiddleLeg.yRot = 0F;
-        this.leftBackLeg.yRot = -Mth.PI / 4F;
-        this.rightBackLeg.yRot = Mth.PI / 4F;
-        this.leftFrontLeg.zRot = Mth.PI / 4F;
-        this.rightFrontLeg.zRot = -Mth.PI / 4F;
-        this.leftMiddleLeg.zRot = Mth.PI / 6F;
-        this.rightMiddleLeg.zRot = -Mth.PI / 6F;
-        this.leftBackLeg.zRot = Mth.PI / 4F;
-        this.rightBackLeg.zRot = -Mth.PI / 4F;
-        this.leftFrontLeg.yRot += -f1;
-        this.rightFrontLeg.yRot += f1;
-        this.leftMiddleLeg.yRot += -f2;
-        this.rightMiddleLeg.yRot += f2;
-        this.leftBackLeg.yRot += -f3;
-        this.rightBackLeg.yRot += f3;
-        this.leftFrontLeg.zRot += -f4;
-        this.rightFrontLeg.zRot += f4;
-        this.leftMiddleLeg.zRot += -f5;
-        this.rightMiddleLeg.zRot += f5;
-        this.leftBackLeg.zRot += -f6;
-        this.rightBackLeg.zRot += f6;
+        float piB4 = Mth.PI * 0.25F;
+        float f1 = -Mth.cos(pLimbSwing * 2F + Mth.PI * 1.5F) * pLimbSwingAmount * 0.8F;
+        float f2 = -Mth.cos(pLimbSwing * 2F + Mth.PI * 0.75F) * pLimbSwingAmount * 0.8F;
+        float f3 = -Mth.cos(pLimbSwing * 2F) * pLimbSwingAmount * 0.8F;
+        float f4 = Mth.abs(Mth.sin(pLimbSwing + Mth.PI * 1.5F)) * pLimbSwingAmount * 0.8F;
+        float f5 = Mth.abs(Mth.sin(pLimbSwing + Mth.PI * 0.75F)) * pLimbSwingAmount * 0.8F;
+        float f6 = Mth.abs(Mth.sin(pLimbSwing)) * pLimbSwingAmount * 0.8F;
+        leftFrontLeg.yRot = piB4;
+        rightFrontLeg.yRot = -piB4;
+        leftMiddleLeg.yRot = 0F;
+        rightMiddleLeg.yRot = 0F;
+        leftBackLeg.yRot = -piB4;
+        rightBackLeg.yRot = piB4;
+        leftFrontLeg.zRot = piB4;
+        rightFrontLeg.zRot = -piB4;
+        leftMiddleLeg.zRot = Mth.PI / 6F;
+        rightMiddleLeg.zRot = -Mth.PI / 6F;
+        leftBackLeg.zRot = piB4;
+        rightBackLeg.zRot = -piB4;
+        leftFrontLeg.yRot += -f1;
+        rightFrontLeg.yRot += f1;
+        leftMiddleLeg.yRot += -f2;
+        rightMiddleLeg.yRot += f2;
+        leftBackLeg.yRot += -f3;
+        rightBackLeg.yRot += f3;
+        leftFrontLeg.zRot += -f4;
+        rightFrontLeg.zRot += f4;
+        leftMiddleLeg.zRot += -f5;
+        rightMiddleLeg.zRot += f5;
+        leftBackLeg.zRot += -f6;
+        rightBackLeg.zRot += f6;
     }
 
     @Override

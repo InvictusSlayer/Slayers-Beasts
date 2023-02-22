@@ -1,4 +1,4 @@
-package net.invictusslayer.slayersbeasts.block.custom;
+package net.invictusslayer.slayersbeasts.block;
 
 import net.invictusslayer.slayersbeasts.init.ModEntities;
 import net.minecraft.core.BlockPos;

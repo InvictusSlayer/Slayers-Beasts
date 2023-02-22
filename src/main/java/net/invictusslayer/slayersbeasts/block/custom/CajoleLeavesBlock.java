@@ -7,18 +7,11 @@ import net.minecraft.server.level.ServerLevel;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.entity.Mob;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.enchantment.EnchantmentHelper;
-import net.minecraft.world.item.enchantment.Enchantments;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Explosion;
-import net.minecraft.world.level.GameRules;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.LeavesBlock;
 import net.minecraft.world.level.block.state.BlockState;
-
-import java.util.Random;
-import java.util.random.RandomGenerator;
 
 public class CajoleLeavesBlock extends LeavesBlock {
     public CajoleLeavesBlock(Properties properties) {
@@ -30,7 +23,7 @@ public class CajoleLeavesBlock extends LeavesBlock {
         Mob mob;
         if (randInt < 2) {
             if (randInt == 0) {
-                mob = ModEntities.TINY_ANT_ENTITY.get().create(pLevel);
+                mob = ModEntities.WORKER_ANT_ENTITY.get().create(pLevel);
             } else {
                 mob = ModEntities.MANTIS_ENTITY.get().create(pLevel);
             }

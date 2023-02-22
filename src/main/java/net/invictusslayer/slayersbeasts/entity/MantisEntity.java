@@ -65,9 +65,9 @@ public class MantisEntity extends PathfinderMob {
         }
     }
 
-    protected SoundEvent getAmbientSound() {return ModSounds.MANTIS_AMBIENT.get();}
-    protected SoundEvent getDeathSound() {return ModSounds.MANTIS_DEATH.get();}
-    protected SoundEvent getHurtSound(DamageSource damageSource) {return ModSounds.MANTIS_HURT.get();}
+//    protected SoundEvent getAmbientSound() {return ModSounds.MANTIS_AMBIENT.get();}
+//    protected SoundEvent getDeathSound() {return ModSounds.MANTIS_DEATH.get();}
+//    protected SoundEvent getHurtSound(DamageSource damageSource) {return ModSounds.MANTIS_HURT.get();}
 
     public MobType getMobType() {
         return MobType.ARTHROPOD;

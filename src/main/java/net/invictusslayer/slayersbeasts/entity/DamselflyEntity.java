@@ -35,13 +35,13 @@ import java.util.EnumSet;
 import java.util.Optional;
 import java.util.function.Predicate;
 
-public class AmbientDragonflyEntity extends PathfinderMob {
-    private static final EntityDataAccessor<Boolean> DATA_IS_FLYING = SynchedEntityData.defineId(AmbientDragonflyEntity.class, EntityDataSerializers.BOOLEAN);
-    private static final EntityDataAccessor<Boolean> DATA_IS_PERCHED = SynchedEntityData.defineId(AmbientDragonflyEntity.class, EntityDataSerializers.BOOLEAN);
+public class DamselflyEntity extends PathfinderMob {
+    private static final EntityDataAccessor<Boolean> DATA_IS_FLYING = SynchedEntityData.defineId(DamselflyEntity.class, EntityDataSerializers.BOOLEAN);
+    private static final EntityDataAccessor<Boolean> DATA_IS_PERCHED = SynchedEntityData.defineId(DamselflyEntity.class, EntityDataSerializers.BOOLEAN);
     @Nullable BlockPos savedPerchPos;
     private int ticksUntilPerch;
 
-    public AmbientDragonflyEntity(EntityType<AmbientDragonflyEntity> entityType, Level level) {
+    public DamselflyEntity(EntityType<DamselflyEntity> entityType, Level level) {
         super(entityType, level);
         this.moveControl = new FlyingMoveControl(this, 20, true);
         this.navigation = this.createNavigation(level);
@@ -51,10 +51,10 @@ public class AmbientDragonflyEntity extends PathfinderMob {
     @Override
     protected void registerGoals() {
         super.registerGoals();
-        this.goalSelector.addGoal(0, new DragonflyPerchGoal(this));
-        this.goalSelector.addGoal(1, new DragonflyWanderGoal(this));
+        this.goalSelector.addGoal(0, new DamselflyPerchGoal(this));
+        this.goalSelector.addGoal(1, new DamselflyWanderGoal(this));
         this.goalSelector.addGoal(2, new FloatGoal(this));
-        this.goalSelector.addGoal(3, new DragonflyHoverGoal(this));
+        this.goalSelector.addGoal(3, new DamselflyHoverGoal(this));
     }
 
     public static AttributeSupplier.Builder createAttributes() {
@@ -68,7 +68,7 @@ public class AmbientDragonflyEntity extends PathfinderMob {
         return MobType.ARTHROPOD;
     }
 
-    public static boolean canSpawn(EntityType<AmbientDragonflyEntity> entity, LevelAccessor levelAccess, MobSpawnType spawnType, BlockPos pos, RandomSource random) {
+    public static boolean canSpawn(EntityType<DamselflyEntity> entity, LevelAccessor levelAccess, MobSpawnType spawnType, BlockPos pos, RandomSource random) {
         return PathfinderMob.checkMobSpawnRules(entity, levelAccess, spawnType, pos, random);
     }
 
@@ -90,8 +90,8 @@ public class AmbientDragonflyEntity extends PathfinderMob {
 
     public void addAdditionalSaveData(CompoundTag pCompound) {
         super.addAdditionalSaveData(pCompound);
-        if (this.hasSavedPerchPos()) {
-            pCompound.put("PerchPos", NbtUtils.writeBlockPos(this.getSavedPerchPos()));
+        if (this.savedPerchPos != null) {
+            pCompound.put("PerchPos", NbtUtils.writeBlockPos(this.savedPerchPos));
         }
 
         pCompound.putInt("TicksSincePerch", this.ticksUntilPerch);
@@ -122,14 +122,6 @@ public class AmbientDragonflyEntity extends PathfinderMob {
         } else {
             return DragonflyWingPose.STILL;
         }
-    }
-
-    @Nullable
-    public BlockPos getSavedPerchPos() {
-        return this.savedPerchPos;
-    }
-    public boolean hasSavedPerchPos() {
-        return this.savedPerchPos != null;
     }
     
     public boolean isFlying() {
@@ -167,8 +159,8 @@ public class AmbientDragonflyEntity extends PathfinderMob {
         }
     }
 
-    static class DragonflyPerchGoal extends Goal {
-        private final AmbientDragonflyEntity mob;
+    static class DamselflyPerchGoal extends Goal {
+        private final DamselflyEntity mob;
         private int perchTicks;
         private Vec3 perchPos;
         private final Predicate<BlockState> VALID_PERCH_BLOCKS = (blockState) -> {
@@ -181,7 +173,7 @@ public class AmbientDragonflyEntity extends PathfinderMob {
             }
         };
 
-        DragonflyPerchGoal(AmbientDragonflyEntity pMob) {
+        DamselflyPerchGoal(DamselflyEntity pMob) {
             this.setFlags(EnumSet.of(Flag.MOVE));
             this.mob = pMob;
         }
@@ -213,7 +205,7 @@ public class AmbientDragonflyEntity extends PathfinderMob {
 
         public void stop() {
             this.mob.setPerched(false);
-            this.mob.setFlying(false);
+            this.mob.setFlying(true);
             this.mob.resetTicksUntilPerch();
         }
 
@@ -249,16 +241,16 @@ public class AmbientDragonflyEntity extends PathfinderMob {
 
         private Optional<BlockPos> findNearestBlock(Predicate<BlockState> pPredicate) {
             BlockPos blockpos = this.mob.blockPosition();
-            BlockPos.MutableBlockPos blockpos$mutableblockpos = new BlockPos.MutableBlockPos();
+            BlockPos.MutableBlockPos mutableBlockPos = new BlockPos.MutableBlockPos();
 
-            for(int i = 0; (double)i <= 5.0; i = i > 0 ? -i : 1 - i) {
-                for(int j = 0; (double)j < 5.0; ++j) {
-                    for(int k = 0; k <= j; k = k > 0 ? -k : 1 - k) {
-                        for(int l = k < j && k > -j ? j : 0; l <= j; l = l > 0 ? -l : 1 - l) {
-                            blockpos$mutableblockpos.setWithOffset(blockpos, k, i - 1, l);
-                            if (blockpos.closerThan(blockpos$mutableblockpos, 5.0) &&
-                                    pPredicate.test(this.mob.level.getBlockState(blockpos$mutableblockpos))) {
-                                return Optional.of(blockpos$mutableblockpos);
+            for (int i = 0; (double) i <= 5.0; i = i > 0 ? -i : 1 - i) {
+                for (int j = 0; (double) j < 5.0; ++j) {
+                    for (int k = 0; k <= j; k = k > 0 ? -k : 1 - k) {
+                        for (int l = k < j && k > -j ? j : 0; l <= j; l = l > 0 ? -l : 1 - l) {
+                            mutableBlockPos.setWithOffset(blockpos, k, i - 1, l);
+                            if (blockpos.closerThan(mutableBlockPos, 5.0) &&
+                                    pPredicate.test(this.mob.level.getBlockState(mutableBlockPos))) {
+                                return Optional.of(mutableBlockPos);
                             }
                         }
                     }
@@ -269,11 +261,11 @@ public class AmbientDragonflyEntity extends PathfinderMob {
         }
     }
 
-    static class DragonflyHoverGoal extends Goal {
-        private final AmbientDragonflyEntity mob;
+    static class DamselflyHoverGoal extends Goal {
+        private final DamselflyEntity mob;
         private int hoverTime;
 
-        DragonflyHoverGoal(AmbientDragonflyEntity pMob) {
+        DamselflyHoverGoal(DamselflyEntity pMob) {
             this.setFlags(EnumSet.of(Flag.MOVE));
             this.mob = pMob;
         }
@@ -291,19 +283,15 @@ public class AmbientDragonflyEntity extends PathfinderMob {
             this.hoverTime = 20 + this.mob.getRandom().nextInt(20);
         }
 
-        public void stop() {
-            this.mob.setFlying(false);
-        }
-
         public void tick() {
             --hoverTime;
         }
     }
 
-    class DragonflyWanderGoal extends Goal {
-        private final AmbientDragonflyEntity mob;
+    class DamselflyWanderGoal extends Goal {
+        private final DamselflyEntity mob;
 
-        DragonflyWanderGoal(AmbientDragonflyEntity pMob) {
+        DamselflyWanderGoal(DamselflyEntity pMob) {
             this.setFlags(EnumSet.of(Flag.MOVE));
             this.mob = pMob;
         }
@@ -322,10 +310,6 @@ public class AmbientDragonflyEntity extends PathfinderMob {
             if (vec3 != null) {
                 this.mob.navigation.moveTo(this.mob.navigation.createPath(new BlockPos(vec3), 1), 1.0D);
             }
-        }
-
-        public void stop() {
-            this.mob.setFlying(false);
         }
 
         @Nullable

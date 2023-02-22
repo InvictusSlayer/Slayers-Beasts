@@ -1,19 +1,5 @@
 package net.invictusslayer.slayersbeasts.world.feature.tree;
 
-import net.invictusslayer.slayersbeasts.block.custom.OothecaBlock;
-import net.minecraft.core.BlockPos;
-import net.minecraft.core.Direction;
-import net.minecraft.world.level.LevelSimulatedReader;
-import net.minecraft.world.level.block.Blocks;
-import net.minecraft.world.level.block.CocoaBlock;
-import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.levelgen.feature.Feature;
-import net.minecraft.world.level.levelgen.feature.treedecorators.TreeDecorator;
-import net.minecraft.world.level.levelgen.feature.treedecorators.TreeDecoratorType;
-
-import java.util.List;
-import java.util.Random;
-import java.util.function.BiConsumer;
 /*
 public class OothecaDecorator extends TreeDecorator {
     private static final Direction WORLDGEN_FACING = Direction.SOUTH;

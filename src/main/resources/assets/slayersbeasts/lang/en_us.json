@@ -7,13 +7,16 @@
   "item.slayersbeasts.insect_eye": "Insect Eye",
   "item.slayersbeasts.insect_leg": "Insect Leg",
   "item.slayersbeasts.fried_insect_leg": "Fried Insect Leg",
+  "item.slayersbeasts.white_mushroom": "White Mushroom",
   "item.slayersbeasts.witherbone": "Witherbone",
   "item.slayersbeasts.tied_leather": "Tied Leather",
   "item.slayersbeasts.tanned_leather": "Tanned Leather",
 
   "item.slayersbeasts.mantis_spawn_egg": "Mantis Spawn Egg",
-  "item.slayersbeasts.tiny_ant_spawn_egg": "Tiny Ant Spawn Egg",
-  "item.slayersbeasts.ambient_dragonfly_spawn_egg": "Ambient Dragonfly Spawn Egg",
+  "item.slayersbeasts.worker_ant_spawn_egg": "Worker Ant Spawn Egg",
+  "item.slayersbeasts.soldier_ant_spawn_egg": "Soldier Ant Spawn Egg",
+  "item.slayersbeasts.queen_ant_spawn_egg": "Queen Ant Spawn Egg",
+  "item.slayersbeasts.damselfly_spawn_egg": "Damselfly Spawn Egg",
   "item.slayersbeasts.venus_flytrap_spawn_egg": "Venus Flytrap Spawn Egg",
   "item.slayersbeasts.wither_spider_spawn_egg": "Wither Spider Spawn Egg",
 
@@ -27,7 +30,9 @@
   "block.slayersbeasts.jade_block": "Jade Block",
   "block.slayersbeasts.exoskeleton_ore": "Buried Crystal Exoskeleton",
   "block.slayersbeasts.deepslate_exoskeleton_ore": "Embedded Crystal Exoskeleton",
+
   "block.slayersbeasts.ootheca": "Ootheca",
+  "block.slayersbeasts.anthill": "Anthill",
 
   "block.slayersbeasts.cajole_log": "Cajole Log",
   "block.slayersbeasts.cajole_wood": "Cajole Wood",
@@ -63,10 +68,13 @@
   
   "entity.slayersbeasts.mantis_entity": "Mantis",
   "entity.slayersbeasts.tiny_ant_entity": "Tiny Ant",
-  "entity.slayersbeasts.ambient_dragonfly_entity": "Ambient Dragonfly",
+  "entity.slayersbeasts.soldier_ant_entity": "Soldier Ant",
+  "entity.slayersbeasts.queen_ant_entity": "Queen Ant",
+  "entity.slayersbeasts.damselfly_entity": "Damselfly",
   "entity.slayersbeasts.venus_flytrap_entity": "Venus Flytrap",
   "entity.slayersbeasts.wither_spider_entity": "Wither Spider",
   "entity.slayersbeasts.example_entity": "Example Entity",
+
   "entity.minecraft.wood_ant": "Wood Ant",
   "entity.minecraft.leafcutter_ant": "Leafcutter Ant",
   "entity.minecraft.meadow_ant": "Meadow Ant",

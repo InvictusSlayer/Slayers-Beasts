@@ -15,6 +15,9 @@ public class ModFoliagePlacerType<P extends FoliagePlacer> {
     public static final RegistryObject<FoliagePlacerType<?>> CAJOLE_FOLIAGE_PLACER =
             FOLIAGE_PLACER_TYPES.register("cajole_foliage_placer", () -> new FoliagePlacerType<>(CajoleFoliagePlacer.CODEC));
 
+    public static final RegistryObject<FoliagePlacerType<?>> EUCALYPTUS_FOLIAGE_PLACER =
+            FOLIAGE_PLACER_TYPES.register("eucalyptus_foliage_placer", () -> new FoliagePlacerType<>(EucalyptusFoliagePlacer.CODEC));
+
     public static void register(IEventBus eventBus) {
         FOLIAGE_PLACER_TYPES.register(eventBus);
     }

@@ -1,5 +1,7 @@
 package net.invictusslayer.slayersbeasts.world.feature.foliageplacers;
 
+import com.mojang.serialization.Codec;
+import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.minecraft.core.BlockPos;
 import net.minecraft.util.RandomSource;
 import net.minecraft.util.valueproviders.IntProvider;
@@ -12,13 +14,17 @@ import net.minecraft.world.level.levelgen.feature.foliageplacers.FoliagePlacerTy
 import java.util.function.BiConsumer;
 
 public class EucalyptusFoliagePlacer extends FoliagePlacer {
+    public static final Codec<EucalyptusFoliagePlacer> CODEC = RecordCodecBuilder.create((instance) -> {
+        return foliagePlacerParts(instance).apply(instance, EucalyptusFoliagePlacer::new);
+    });
+
     public EucalyptusFoliagePlacer(IntProvider pRadius, IntProvider pOffset) {
         super(pRadius, pOffset);
     }
 
     @Override
     protected FoliagePlacerType<?> type() {
-        return FoliagePlacerType.ACACIA_FOLIAGE_PLACER;
+        return ModFoliagePlacerType.EUCALYPTUS_FOLIAGE_PLACER.get();
     }
 
     @Override

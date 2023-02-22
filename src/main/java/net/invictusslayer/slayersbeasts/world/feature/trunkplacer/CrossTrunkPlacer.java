@@ -6,6 +6,7 @@ import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.Registry;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.LevelSimulatedReader;
 import net.minecraft.world.level.block.state.BlockState;
@@ -33,7 +34,7 @@ public class CrossTrunkPlacer extends TrunkPlacer {
     }
 
     private static <P extends TrunkPlacer> TrunkPlacerType<P> register(String key, Codec<P> type) {
-        return Registry.register(Registry.TRUNK_PLACER_TYPES, key, new TrunkPlacerType<>(type));
+        return Registry.register(BuiltInRegistries.TRUNK_PLACER_TYPE, key, new TrunkPlacerType<>(type));
     }
 
     @Override
