@@ -63,6 +63,55 @@ public class SlayersBeasts
     private void addCreative(CreativeModeTabEvent.BuildContents buildContents) {
         if (buildContents.getTab() == ModCreativeModeTab.SLAYERS_BEASTS_TAB) {
             buildContents.accept(ModItems.JADE);
+            buildContents.accept(ModItems.JADE_SHARD);
+            buildContents.accept(ModItems.CRYSTALLINE_WING);
+            buildContents.accept(ModItems.CRYSTALLINE_CLAW);
+            buildContents.accept(ModItems.CRYSTALLINE_CARAPACE);
+            buildContents.accept(ModItems.INSECT_WING);
+            buildContents.accept(ModItems.INSECT_CLAW);
+            buildContents.accept(ModItems.INSECT_EYE);
+            buildContents.accept(ModItems.INSECT_LEG);
+            buildContents.accept(ModItems.FRIED_INSECT_LEG);
+            buildContents.accept(ModItems.WHITE_MUSHROOM);
+            buildContents.accept(ModItems.WITHERBONE);
+            buildContents.accept(ModItems.TIED_LEATHER);
+            buildContents.accept(ModItems.TANNED_LEATHER);
+            
+            buildContents.accept(ModBlocks.OOTHECA);
+            buildContents.accept(ModBlocks.ANTHILL);
+            buildContents.accept(ModBlocks.ANT_HATCHERY);
+            buildContents.accept(ModBlocks.JADE_BLOCK);
+            buildContents.accept(ModBlocks.EXOSKELETON_ORE);
+            buildContents.accept(ModBlocks.DEEPSLATE_EXOSKELETON_ORE);
+
+            buildContents.accept(ModBlocks.CAJOLE_LOG);
+            buildContents.accept(ModBlocks.STRIPPED_CAJOLE_LOG);
+            buildContents.accept(ModBlocks.CAJOLE_WOOD);
+            buildContents.accept(ModBlocks.STRIPPED_CAJOLE_WOOD);
+            buildContents.accept(ModBlocks.CAJOLE_LEAVES);
+            buildContents.accept(ModBlocks.CAJOLE_SAPLING);
+            buildContents.accept(ModBlocks.CAJOLE_PLANKS);
+            buildContents.accept(ModBlocks.CAJOLE_SLAB);
+            buildContents.accept(ModBlocks.CAJOLE_STAIRS);
+            buildContents.accept(ModBlocks.CAJOLE_FENCE);
+            buildContents.accept(ModBlocks.CAJOLE_FENCE_GATE);
+            buildContents.accept(ModBlocks.EUCALYPTUS_LOG);
+            buildContents.accept(ModBlocks.STRIPPED_EUCALYPTUS_LOG);
+            buildContents.accept(ModBlocks.EUCALYPTUS_WOOD);
+            buildContents.accept(ModBlocks.STRIPPED_EUCALYPTUS_WOOD);
+            buildContents.accept(ModBlocks.EUCALYPTUS_LEAVES);
+            buildContents.accept(ModBlocks.EUCALYPTUS_SAPLING);
+            buildContents.accept(ModBlocks.EUCALYPTUS_PLANKS);
+            buildContents.accept(ModBlocks.EUCALYPTUS_SLAB);
+            buildContents.accept(ModBlocks.EUCALYPTUS_STAIRS);
+            buildContents.accept(ModBlocks.EUCALYPTUS_FENCE);
+            buildContents.accept(ModBlocks.EUCALYPTUS_FENCE_GATE);
+            
+            buildContents.accept(ModItems.MANTIS_SPAWN_EGG);
+            buildContents.accept(ModItems.WORKER_ANT_SPAWN_EGG);
+            buildContents.accept(ModItems.SOLDIER_ANT_SPAWN_EGG);
+            buildContents.accept(ModItems.QUEEN_ANT_SPAWN_EGG);
+            buildContents.accept(ModItems.DAMSELFLY_SPAWN_EGG);
         }
     }
 }

@@ -1,8 +1,0 @@
-{
-  "parent": "minecraft:block/slab",
-  "textures": {
-    "bottom": "slayersbeasts:block/cajole_planks",
-    "top": "slayersbeasts:block/cajole_planks",
-    "side": "slayersbeasts:block/cajole_planks"
-  }
-}

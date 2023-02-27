@@ -1,7 +1,0 @@
-{
-  "parent": "minecraft:block/door_top_rh",
-  "textures": {
-    "top": "slayersbeasts:block/cajole_door_top",
-    "bottom": "slayersbeasts:block/cajole_door_bottom"
-  }
-}

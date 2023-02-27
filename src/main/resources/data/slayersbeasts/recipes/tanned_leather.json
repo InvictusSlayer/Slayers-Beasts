@@ -1,9 +1,0 @@
-{
-  "type": "minecraft:smoking",
-  "ingredient": {
-    "item": "slayersbeasts:tied_leather"
-  },
-  "result": "slayersbeasts:tanned_leather",
-  "experience": 0.5,
-  "cookingtime": 400
-}

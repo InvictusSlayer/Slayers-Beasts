@@ -17,6 +17,6 @@ public final class ModCreativeModeTab {
     public static void registerCreativeModeTabs(CreativeModeTabEvent.Register event) {
         SLAYERS_BEASTS_TAB = event.registerCreativeModeTab(new ResourceLocation(SlayersBeasts.MOD_ID, "slayersbeasts_tab"),
                 builder -> builder.icon(() -> new ItemStack(ModBlocks.CAJOLE_SAPLING.get()))
-                        .title(Component.translatable("slayersbeasts_tabs")).build());
+                        .title(Component.translatable("slayers_beasts_tab")).build());
     }
 }

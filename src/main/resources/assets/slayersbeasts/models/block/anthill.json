@@ -1,8 +1,0 @@
-{
-  "parent": "minecraft:block/cube_bottom_top",
-  "textures": {
-    "top": "slayersbeasts:block/anthill_top",
-    "bottom": "slayersbeasts:block/anthill_bottom",
-    "side": "slayersbeasts:block/anthill_side"
-  }
-}

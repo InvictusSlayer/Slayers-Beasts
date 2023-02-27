@@ -1,7 +1,0 @@
-{
-  "parent": "minecraft:block/cross",
-  "textures": {
-    "cross": "slayersbeasts:block/cajole_sapling"
-  },
-  "render_type": "cutout"
-}

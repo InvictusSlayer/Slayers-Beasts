@@ -1,7 +1,0 @@
-{
-  "parent": "minecraft:block/cube_column",
-  "textures": {
-    "end": "slayersbeasts:block/cajole_log_top",
-    "side": "slayersbeasts:block/cajole_log"
-  }
-}

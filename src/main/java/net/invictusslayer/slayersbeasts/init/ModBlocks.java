@@ -8,13 +8,11 @@ import net.invictusslayer.slayersbeasts.block.custom.CajoleLeavesBlock;
 import net.invictusslayer.slayersbeasts.block.flammable.*;
 import net.invictusslayer.slayersbeasts.world.feature.tree.CajoleTreeGrower;
 import net.invictusslayer.slayersbeasts.world.feature.tree.EucalyptusTreeGrower;
+import net.minecraft.sounds.SoundEvents;
 import net.minecraft.util.valueproviders.UniformInt;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
-import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.Blocks;
-import net.minecraft.world.level.block.DropExperienceBlock;
-import net.minecraft.world.level.block.SaplingBlock;
+import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.material.Material;
 import net.minecraftforge.eventbus.api.IEventBus;
@@ -29,12 +27,12 @@ public final class ModBlocks {
             DeferredRegister.create(ForgeRegistries.BLOCKS, SlayersBeasts.MOD_ID);
 
     public static final RegistryObject<Block> OOTHECA = registerBlock("ootheca",
-            () -> new OothecaBlock(BlockBehaviour.Properties.of(Material.SCULK).strength(1f)));
+            () -> new OothecaBlock(BlockBehaviour.Properties.of(Material.SCULK).strength(1f).noLootTable()));
 
     public static final RegistryObject<Block> ANTHILL = registerBlock("anthill",
-            () -> new AnthillBlock(BlockBehaviour.Properties.of(Material.GRASS).strength(1f)));
+            () -> new AnthillBlock(BlockBehaviour.Properties.of(Material.GRASS).strength(1f).noLootTable()));
     public static final RegistryObject<Block> ANT_HATCHERY = registerBlock("ant_hatchery",
-            () -> new AntHatcheryBlock(BlockBehaviour.Properties.of(Material.GRASS).strength(1f)));
+            () -> new AntHatcheryBlock(BlockBehaviour.Properties.of(Material.GRASS).strength(1f).noLootTable()));
 
     public static final RegistryObject<Block> JADE_BLOCK = registerBlock("jade_block",
             () -> new Block(BlockBehaviour.Properties.of(Material.METAL).strength(9f).requiresCorrectToolForDrops()));
@@ -58,7 +56,6 @@ public final class ModBlocks {
             () -> new CajoleLeavesBlock(BlockBehaviour.Properties.copy(Blocks.OAK_LEAVES)));
     public static final RegistryObject<Block> CAJOLE_SAPLING = registerBlock("cajole_sapling",
             () -> new SaplingBlock(new CajoleTreeGrower(), BlockBehaviour.Properties.copy(Blocks.OAK_SAPLING)));
-
     public static final RegistryObject<Block> CAJOLE_PLANKS = registerBlock("cajole_planks",
             () -> new ModFlammableBlock(BlockBehaviour.Properties.copy(Blocks.OAK_PLANKS), 20, 5));
     public static final RegistryObject<Block> CAJOLE_SLAB = registerBlock("cajole_slab",
@@ -70,14 +67,18 @@ public final class ModBlocks {
             () -> new ModFlammableFenceBlock(BlockBehaviour.Properties.copy(Blocks.OAK_FENCE), 20, 5));
     public static final RegistryObject<Block> CAJOLE_FENCE_GATE = registerBlock("cajole_fence_gate",
             () -> new ModFlammableFenceGateBlock(BlockBehaviour.Properties.copy(Blocks.OAK_FENCE_GATE), 20, 5));
-//    public static final RegistryObject<Block> CAJOLE_BUTTON = registerBlock("cajole_button",
-//            () -> new ButtonBlock(BlockBehaviour.Properties.copy(Blocks.OAK_BUTTON)));
-//    public static final RegistryObject<Block> CAJOLE_PRESSURE_PLATE = registerBlock("cajole_pressure_plate",
-//            () -> new PressurePlateBlock(PressurePlateBlock.Sensitivity.EVERYTHING, BlockBehaviour.Properties.copy(Blocks.OAK_PRESSURE_PLATE)));
-//    public static final RegistryObject<Block> CAJOLE_DOOR = registerBlock("cajole_door",
-//            () -> new DoorBlock(BlockBehaviour.Properties.copy(Blocks.OAK_DOOR)));
-//    public static final RegistryObject<Block> CAJOLE_TRAPDOOR = registerBlock("cajole_trapdoor",
-//            () -> new TrapDoorBlock(BlockBehaviour.Properties.copy(Blocks.OAK_TRAPDOOR)));
+    public static final RegistryObject<Block> CAJOLE_BUTTON = registerBlock("cajole_button",
+            () -> new ButtonBlock(BlockBehaviour.Properties.copy(Blocks.OAK_BUTTON), 15, true,
+                    SoundEvents.WOODEN_BUTTON_CLICK_OFF, SoundEvents.WOODEN_BUTTON_CLICK_ON));
+    public static final RegistryObject<Block> CAJOLE_PRESSURE_PLATE = registerBlock("cajole_pressure_plate",
+            () -> new PressurePlateBlock(PressurePlateBlock.Sensitivity.EVERYTHING, BlockBehaviour.Properties.copy(Blocks.OAK_PRESSURE_PLATE),
+                    SoundEvents.WOODEN_PRESSURE_PLATE_CLICK_OFF, SoundEvents.WOODEN_PRESSURE_PLATE_CLICK_ON));
+    public static final RegistryObject<Block> CAJOLE_DOOR = registerBlock("cajole_door",
+            () -> new DoorBlock(BlockBehaviour.Properties.copy(Blocks.OAK_DOOR),
+                    SoundEvents.WOODEN_DOOR_CLOSE, SoundEvents.WOODEN_DOOR_OPEN));
+    public static final RegistryObject<Block> CAJOLE_TRAPDOOR = registerBlock("cajole_trapdoor",
+            () -> new TrapDoorBlock(BlockBehaviour.Properties.copy(Blocks.OAK_TRAPDOOR),
+                    SoundEvents.WOODEN_TRAPDOOR_CLOSE, SoundEvents.WOODEN_TRAPDOOR_OPEN));
     
     public static final RegistryObject<Block> EUCALYPTUS_LOG = registerBlock("eucalyptus_log",
             () -> new ModFlammableRotatedPillarBlock(BlockBehaviour.Properties.copy(Blocks.OAK_LOG)));
@@ -91,7 +92,6 @@ public final class ModBlocks {
             () -> new ModFlammableLeavesBlock(BlockBehaviour.Properties.copy(Blocks.OAK_LEAVES), 60, 30));
     public static final RegistryObject<Block> EUCALYPTUS_SAPLING = registerBlock("eucalyptus_sapling",
             () -> new SaplingBlock(new EucalyptusTreeGrower(), BlockBehaviour.Properties.copy(Blocks.OAK_SAPLING)));
-
     public static final RegistryObject<Block> EUCALYPTUS_PLANKS = registerBlock("eucalyptus_planks",
             () -> new ModFlammableBlock(BlockBehaviour.Properties.copy(Blocks.OAK_PLANKS), 20, 5));
     public static final RegistryObject<Block> EUCALYPTUS_SLAB = registerBlock("eucalyptus_slab",
@@ -103,14 +103,18 @@ public final class ModBlocks {
             () -> new ModFlammableFenceBlock(BlockBehaviour.Properties.copy(Blocks.OAK_FENCE), 20, 5));
     public static final RegistryObject<Block> EUCALYPTUS_FENCE_GATE = registerBlock("eucalyptus_fence_gate",
             () -> new ModFlammableFenceGateBlock(BlockBehaviour.Properties.copy(Blocks.OAK_FENCE_GATE), 20, 5));
-//    public static final RegistryObject<Block> EUCALYPTUS_BUTTON = registerBlock("eucalyptus_button",
-//            () -> new ButtonBlock(BlockBehaviour.Properties.copy(Blocks.OAK_BUTTON)));
-//    public static final RegistryObject<Block> EUCALYPTUS_PRESSURE_PLATE = registerBlock("eucalyptus_pressure_plate",
-//            () -> new PressurePlateBlock(PressurePlateBlock.Sensitivity.EVERYTHING, BlockBehaviour.Properties.copy(Blocks.OAK_PRESSURE_PLATE)));
-//    public static final RegistryObject<Block> EUCALYPTUS_DOOR = registerBlock("eucalyptus_door",
-//            () -> new DoorBlock(BlockBehaviour.Properties.copy(Blocks.OAK_DOOR)));
-//    public static final RegistryObject<Block> EUCALYPTUS_TRAPDOOR = registerBlock("eucalyptus_trapdoor",
-//            () -> new TrapDoorBlock(BlockBehaviour.Properties.copy(Blocks.OAK_TRAPDOOR)));
+    public static final RegistryObject<Block> EUCALYPTUS_BUTTON = registerBlock("eucalyptus_button",
+            () -> new ButtonBlock(BlockBehaviour.Properties.copy(Blocks.OAK_BUTTON), 15, true,
+                    SoundEvents.WOODEN_BUTTON_CLICK_OFF, SoundEvents.WOODEN_BUTTON_CLICK_ON));
+    public static final RegistryObject<Block> EUCALYPTUS_PRESSURE_PLATE = registerBlock("eucalyptus_pressure_plate",
+            () -> new PressurePlateBlock(PressurePlateBlock.Sensitivity.EVERYTHING, BlockBehaviour.Properties.copy(Blocks.OAK_PRESSURE_PLATE),
+                    SoundEvents.WOODEN_PRESSURE_PLATE_CLICK_OFF, SoundEvents.WOODEN_PRESSURE_PLATE_CLICK_ON));
+    public static final RegistryObject<Block> EUCALYPTUS_DOOR = registerBlock("eucalyptus_door",
+            () -> new DoorBlock(BlockBehaviour.Properties.copy(Blocks.OAK_DOOR),
+                    SoundEvents.WOODEN_DOOR_CLOSE, SoundEvents.WOODEN_DOOR_OPEN));
+    public static final RegistryObject<Block> EUCALYPTUS_TRAPDOOR = registerBlock("eucalyptus_trapdoor",
+            () -> new TrapDoorBlock(BlockBehaviour.Properties.copy(Blocks.OAK_TRAPDOOR),
+                    SoundEvents.WOODEN_TRAPDOOR_CLOSE, SoundEvents.WOODEN_TRAPDOOR_OPEN));
 
     private static <T extends Block> RegistryObject<T> registerBlock(String name, Supplier<T> block) {
         RegistryObject<T> toReturn = BLOCKS.register(name, block);
