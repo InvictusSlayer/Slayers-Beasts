@@ -11,7 +11,6 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.item.crafting.RecipeSerializer;
-import net.minecraft.world.item.crafting.SimpleCookingSerializer;
 import net.minecraft.world.level.ItemLike;
 import net.minecraftforge.common.crafting.conditions.IConditionBuilder;
 
@@ -38,8 +37,8 @@ public class ModRecipeProvider extends RecipeProvider implements IConditionBuild
         woodFromLogs(consumer, ModBlocks.STRIPPED_CAJOLE_WOOD.get(), ModBlocks.STRIPPED_CAJOLE_LOG.get());
         woodFromLogs(consumer, ModBlocks.STRIPPED_EUCALYPTUS_WOOD.get(), ModBlocks.STRIPPED_EUCALYPTUS_LOG.get());
 
-        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModItems.TIED_LEATHER.get()).define('#', Items.STRING)
-                .define('X', Items.LEATHER).define('Y', Items.SLIME_BALL).pattern("X#X").pattern("#Y#").pattern("X#X")
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModItems.TIED_LEATHER.get()).define('S', Items.STRING)
+                .define('L', Items.LEATHER).define('B', Items.SLIME_BALL).pattern("LSL").pattern("SBS").pattern("LSL")
                 .unlockedBy("has_leather", inventoryTrigger(ItemPredicate.Builder.item().of(Items.LEATHER).build())).save(consumer);
 
     }

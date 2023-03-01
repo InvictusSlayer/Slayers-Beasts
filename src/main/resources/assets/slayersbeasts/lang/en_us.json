@@ -1,7 +1,9 @@
 {
   "item.slayersbeasts.jade": "Jade",
+  "item.slayersbeasts.jade_shard": "Jade Shard",
   "item.slayersbeasts.crystalline_wing": "Crystalline Wing",
   "item.slayersbeasts.crystalline_claw": "Crystalline Claw",
+  "item.slayersbeasts.crystalline_carapace": "Crystalline Carapace",
   "item.slayersbeasts.insect_wing": "Insect Wing",
   "item.slayersbeasts.insect_claw": "Insect Claw",
   "item.slayersbeasts.insect_eye": "Insect Eye",
@@ -33,6 +35,7 @@
 
   "block.slayersbeasts.ootheca": "Ootheca",
   "block.slayersbeasts.anthill": "Anthill",
+  "block.slayersbeasts.ant_hatchery": "Ant Hatchery",
 
   "block.slayersbeasts.cajole_log": "Cajole Log",
   "block.slayersbeasts.cajole_wood": "Cajole Wood",
