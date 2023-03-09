@@ -1,6 +1,8 @@
 {
   "replace": false,
   "values": [
-    "slayersbeasts:anthill"
+    "slayersbeasts:ant_soil",
+    "slayersbeasts:anthill",
+    "slayersbeasts:anthill_hatchery"
   ]
 }

@@ -9,7 +9,6 @@
   "item.slayersbeasts.insect_eye": "Insect Eye",
   "item.slayersbeasts.insect_leg": "Insect Leg",
   "item.slayersbeasts.fried_insect_leg": "Fried Insect Leg",
-  "item.slayersbeasts.white_mushroom": "White Mushroom",
   "item.slayersbeasts.witherbone": "Witherbone",
   "item.slayersbeasts.tied_leather": "Tied Leather",
   "item.slayersbeasts.tanned_leather": "Tanned Leather",
@@ -34,8 +33,12 @@
   "block.slayersbeasts.deepslate_exoskeleton_ore": "Embedded Crystal Exoskeleton",
 
   "block.slayersbeasts.ootheca": "Ootheca",
+  "block.slayersbeasts.ant_soil": "Ant Soil",
   "block.slayersbeasts.anthill": "Anthill",
-  "block.slayersbeasts.ant_hatchery": "Ant Hatchery",
+  "block.slayersbeasts.anthill_hatchery": "Ant Hatchery",
+
+  "block.slayersbeasts.white_mushroom": "White Mushroom",
+  "block.slayersbeasts.white_mushroom_block": "White Mushroom Block",
 
   "block.slayersbeasts.cajole_log": "Cajole Log",
   "block.slayersbeasts.cajole_wood": "Cajole Wood",
@@ -82,7 +85,7 @@
   "entity.minecraft.leafcutter_ant": "Leafcutter Ant",
   "entity.minecraft.meadow_ant": "Meadow Ant",
 
-  "itemGroup.slayers_beasts_tab": "Slayer's Beasts",
+  "creativemodetab.slayers_beasts_tab": "Slayer's Beasts",
 
   "effect.slayersbeasts.paralysis": "Paralysis",
 

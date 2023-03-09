@@ -72,17 +72,20 @@ public class SlayersBeasts
             buildContents.accept(ModItems.INSECT_EYE);
             buildContents.accept(ModItems.INSECT_LEG);
             buildContents.accept(ModItems.FRIED_INSECT_LEG);
-            buildContents.accept(ModItems.WHITE_MUSHROOM);
             buildContents.accept(ModItems.WITHERBONE);
             buildContents.accept(ModItems.TIED_LEATHER);
             buildContents.accept(ModItems.TANNED_LEATHER);
-            
-            buildContents.accept(ModBlocks.OOTHECA);
-            buildContents.accept(ModBlocks.ANTHILL);
-            buildContents.accept(ModBlocks.ANT_HATCHERY);
+
             buildContents.accept(ModBlocks.JADE_BLOCK);
             buildContents.accept(ModBlocks.EXOSKELETON_ORE);
             buildContents.accept(ModBlocks.DEEPSLATE_EXOSKELETON_ORE);
+            
+            buildContents.accept(ModBlocks.OOTHECA);
+            buildContents.accept(ModBlocks.ANT_SOIL);
+            buildContents.accept(ModBlocks.ANTHILL);
+            buildContents.accept(ModBlocks.ANTHILL_HATCHERY);
+            buildContents.accept(ModBlocks.WHITE_MUSHROOM);
+            buildContents.accept(ModBlocks.WHITE_MUSHROOM_BLOCK);
 
             buildContents.accept(ModBlocks.CAJOLE_LOG);
             buildContents.accept(ModBlocks.STRIPPED_CAJOLE_LOG);
@@ -95,6 +98,9 @@ public class SlayersBeasts
             buildContents.accept(ModBlocks.CAJOLE_STAIRS);
             buildContents.accept(ModBlocks.CAJOLE_FENCE);
             buildContents.accept(ModBlocks.CAJOLE_FENCE_GATE);
+            buildContents.accept(ModBlocks.CAJOLE_DOOR);
+            buildContents.accept(ModBlocks.CAJOLE_TRAPDOOR);
+
             buildContents.accept(ModBlocks.EUCALYPTUS_LOG);
             buildContents.accept(ModBlocks.STRIPPED_EUCALYPTUS_LOG);
             buildContents.accept(ModBlocks.EUCALYPTUS_WOOD);
@@ -106,6 +112,8 @@ public class SlayersBeasts
             buildContents.accept(ModBlocks.EUCALYPTUS_STAIRS);
             buildContents.accept(ModBlocks.EUCALYPTUS_FENCE);
             buildContents.accept(ModBlocks.EUCALYPTUS_FENCE_GATE);
+            buildContents.accept(ModBlocks.EUCALYPTUS_DOOR);
+            buildContents.accept(ModBlocks.EUCALYPTUS_TRAPDOOR);
             
             buildContents.accept(ModItems.MANTIS_SPAWN_EGG);
             buildContents.accept(ModItems.WORKER_ANT_SPAWN_EGG);

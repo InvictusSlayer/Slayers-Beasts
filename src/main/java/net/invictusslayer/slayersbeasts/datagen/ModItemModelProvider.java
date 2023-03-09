@@ -6,9 +6,9 @@ import net.invictusslayer.slayersbeasts.init.ModItems;
 import net.minecraft.data.PackOutput;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Item;
-import net.minecraft.world.level.block.Block;
 import net.minecraftforge.client.model.generators.ItemModelBuilder;
 import net.minecraftforge.client.model.generators.ItemModelProvider;
+import net.minecraftforge.common.ForgeSpawnEggItem;
 import net.minecraftforge.common.data.ExistingFileHelper;
 import net.minecraftforge.registries.RegistryObject;
 
@@ -29,7 +29,6 @@ public class ModItemModelProvider extends ItemModelProvider {
         simpleItem(ModItems.INSECT_EYE);
         simpleItem(ModItems.INSECT_LEG);
         simpleItem(ModItems.FRIED_INSECT_LEG);
-        simpleItem(ModItems.WHITE_MUSHROOM);
         simpleItem(ModItems.WITHERBONE);
         simpleItem(ModItems.TIED_LEATHER);
         simpleItem(ModItems.TANNED_LEATHER);
@@ -38,6 +37,13 @@ public class ModItemModelProvider extends ItemModelProvider {
         blockItem(ModBlocks.CAJOLE_SAPLING);
         simpleItem(ModBlocks.EUCALYPTUS_DOOR);
         blockItem(ModBlocks.EUCALYPTUS_SAPLING);
+        blockItem(ModBlocks.WHITE_MUSHROOM);
+
+        spawnEggItem(ModItems.MANTIS_SPAWN_EGG);
+        simpleItem(ModItems.WORKER_ANT_SPAWN_EGG);
+        simpleItem(ModItems.SOLDIER_ANT_SPAWN_EGG);
+        simpleItem(ModItems.QUEEN_ANT_SPAWN_EGG);
+        spawnEggItem(ModItems.DAMSELFLY_SPAWN_EGG);
     }
 
     private ItemModelBuilder blockItem(RegistryObject<?> block) {
@@ -56,5 +62,10 @@ public class ModItemModelProvider extends ItemModelProvider {
         return withExistingParent(item.getId().getPath(),
                 new ResourceLocation("item/handheld")).texture("layer0",
                 new ResourceLocation(SlayersBeasts.MOD_ID, "item/" + item.getId().getPath()));
+    }
+
+    private ItemModelBuilder spawnEggItem(RegistryObject<ForgeSpawnEggItem> item) {
+        return withExistingParent(item.getId().getPath(),
+                new ResourceLocation("item/template_spawn_egg"));
     }
 }

@@ -6,6 +6,7 @@ import net.invictusslayer.slayersbeasts.block.AnthillBlock;
 import net.invictusslayer.slayersbeasts.block.OothecaBlock;
 import net.invictusslayer.slayersbeasts.block.custom.CajoleLeavesBlock;
 import net.invictusslayer.slayersbeasts.block.flammable.*;
+import net.invictusslayer.slayersbeasts.world.feature.ModConfiguredFeatures;
 import net.invictusslayer.slayersbeasts.world.feature.tree.CajoleTreeGrower;
 import net.invictusslayer.slayersbeasts.world.feature.tree.EucalyptusTreeGrower;
 import net.minecraft.sounds.SoundEvents;
@@ -29,10 +30,12 @@ public final class ModBlocks {
     public static final RegistryObject<Block> OOTHECA = registerBlock("ootheca",
             () -> new OothecaBlock(BlockBehaviour.Properties.of(Material.SCULK).strength(1f).noLootTable()));
 
+    public static final RegistryObject<Block> ANT_SOIL = registerBlock("ant_soil",
+            () -> new Block(BlockBehaviour.Properties.of(Material.GRASS).strength(1f).sound(SoundType.ROOTED_DIRT)));
     public static final RegistryObject<Block> ANTHILL = registerBlock("anthill",
-            () -> new AnthillBlock(BlockBehaviour.Properties.of(Material.GRASS).strength(1f).noLootTable()));
-    public static final RegistryObject<Block> ANT_HATCHERY = registerBlock("ant_hatchery",
-            () -> new AntHatcheryBlock(BlockBehaviour.Properties.of(Material.GRASS).strength(1f).noLootTable()));
+            () -> new AnthillBlock(BlockBehaviour.Properties.of(Material.GRASS).strength(1f).sound(SoundType.ROOTED_DIRT)));
+    public static final RegistryObject<Block> ANTHILL_HATCHERY = registerBlock("anthill_hatchery",
+            () -> new AntHatcheryBlock(BlockBehaviour.Properties.of(Material.GRASS).strength(1f).sound(SoundType.ROOTED_DIRT)));
 
     public static final RegistryObject<Block> JADE_BLOCK = registerBlock("jade_block",
             () -> new Block(BlockBehaviour.Properties.of(Material.METAL).strength(9f).requiresCorrectToolForDrops()));
@@ -43,6 +46,11 @@ public final class ModBlocks {
     public static final RegistryObject<Block> DEEPSLATE_EXOSKELETON_ORE = registerBlock("deepslate_exoskeleton_ore",
             () -> new DropExperienceBlock(BlockBehaviour.Properties.of(Material.STONE).strength(25f).requiresCorrectToolForDrops(),
                     UniformInt.of(3, 7)));
+
+    public static final RegistryObject<Block> WHITE_MUSHROOM = registerBlock("white_mushroom",
+            () -> new MushroomBlock(BlockBehaviour.Properties.copy(Blocks.BROWN_MUSHROOM), ModConfiguredFeatures.HUGE_WHITE_MUSHROOM_KEY));
+    public static final RegistryObject<Block> WHITE_MUSHROOM_BLOCK = registerBlock("white_mushroom_block",
+            () -> new HugeMushroomBlock(BlockBehaviour.Properties.copy(Blocks.BROWN_MUSHROOM_BLOCK)));
 
     public static final RegistryObject<Block> CAJOLE_LOG = registerBlock("cajole_log",
             () -> new ModFlammableRotatedPillarBlock(BlockBehaviour.Properties.copy(Blocks.OAK_LOG)));

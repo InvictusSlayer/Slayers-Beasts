@@ -4,7 +4,13 @@ import net.invictusslayer.slayersbeasts.init.ModBlocks;
 import net.invictusslayer.slayersbeasts.init.ModItems;
 import net.minecraft.data.loot.BlockLootSubProvider;
 import net.minecraft.world.flag.FeatureFlags;
+import net.minecraft.world.item.enchantment.Enchantments;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.storage.loot.LootTable;
+import net.minecraft.world.level.storage.loot.entries.LootItem;
+import net.minecraft.world.level.storage.loot.functions.ApplyBonusCount;
+import net.minecraft.world.level.storage.loot.functions.SetItemCountFunction;
+import net.minecraft.world.level.storage.loot.providers.number.UniformGenerator;
 import net.minecraftforge.registries.RegistryObject;
 
 import java.util.Set;
@@ -18,10 +24,16 @@ public class ModBlockLootTables extends BlockLootSubProvider {
     protected void generate() {
         dropSelf(ModBlocks.JADE_BLOCK.get());
 
-        add(ModBlocks.EXOSKELETON_ORE.get(), (block) -> createOreDrop(
-                ModBlocks.EXOSKELETON_ORE.get(), ModItems.CRYSTALLINE_CLAW.get()));
-        add(ModBlocks.DEEPSLATE_EXOSKELETON_ORE.get(), (block) -> createOreDrop(
-                ModBlocks.DEEPSLATE_EXOSKELETON_ORE.get(), ModItems.CRYSTALLINE_CLAW.get()));
+        add(ModBlocks.EXOSKELETON_ORE.get(), (block -> createExoskeletonOreDrops(ModBlocks.EXOSKELETON_ORE.get())));
+        add(ModBlocks.DEEPSLATE_EXOSKELETON_ORE.get(), (block -> createExoskeletonOreDrops(ModBlocks.DEEPSLATE_EXOSKELETON_ORE.get())));
+
+        dropSelf(ModBlocks.ANT_SOIL.get());
+        dropOther(ModBlocks.ANTHILL.get(), ModBlocks.ANT_SOIL.get());
+        dropOther(ModBlocks.ANTHILL_HATCHERY.get(), ModBlocks.ANT_SOIL.get());
+
+        dropSelf(ModBlocks.WHITE_MUSHROOM.get());
+        add(ModBlocks.WHITE_MUSHROOM_BLOCK.get(), (block -> createMushroomBlockDrop(
+                ModBlocks.WHITE_MUSHROOM_BLOCK.get(), ModBlocks.WHITE_MUSHROOM.get())));
 
         dropSelf(ModBlocks.CAJOLE_LOG.get());
         dropSelf(ModBlocks.STRIPPED_CAJOLE_LOG.get());
@@ -56,6 +68,13 @@ public class ModBlockLootTables extends BlockLootSubProvider {
         dropSelf(ModBlocks.EUCALYPTUS_PRESSURE_PLATE.get());
         dropSelf(ModBlocks.EUCALYPTUS_DOOR.get());
         dropSelf(ModBlocks.EUCALYPTUS_TRAPDOOR.get());
+    }
+
+    protected LootTable.Builder createExoskeletonOreDrops(Block block) {
+        return createSilkTouchDispatchTable(block, this.applyExplosionDecay(block,
+                LootItem.lootTableItem(ModItems.CRYSTALLINE_CLAW.get())
+                .apply(SetItemCountFunction.setCount(UniformGenerator.between(0.0F, 1.0F)))
+                .apply(ApplyBonusCount.addOreBonusCount(Enchantments.BLOCK_FORTUNE))));
     }
 
     @Override

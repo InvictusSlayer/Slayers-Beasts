@@ -24,7 +24,6 @@ public final class ModItems {
     public static final RegistryObject<Item> INSECT_LEG = ITEMS.register("insect_leg", () -> new Item(new Item.Properties().food(ModFoods.INSECT_LEG)));
     public static final RegistryObject<Item> FRIED_INSECT_LEG = ITEMS.register("fried_insect_leg", () -> new Item(new Item.Properties().food(ModFoods.FRIED_INSECT_LEG)));
 
-    public static final RegistryObject<Item> WHITE_MUSHROOM = ITEMS.register("white_mushroom", () -> new Item(new Item.Properties()));
     public static final RegistryObject<Item> WITHERBONE = ITEMS.register("witherbone", () -> new Item(new Item.Properties()));
     public static final RegistryObject<Item> TIED_LEATHER = ITEMS.register("tied_leather", () -> new Item(new Item.Properties()));
     public static final RegistryObject<Item> TANNED_LEATHER = ITEMS.register("tanned_leather", () -> new Item(new Item.Properties()));
