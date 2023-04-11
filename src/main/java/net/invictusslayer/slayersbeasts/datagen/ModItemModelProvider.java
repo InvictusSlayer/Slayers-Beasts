@@ -44,6 +44,7 @@ public class ModItemModelProvider extends ItemModelProvider {
         simpleItem(ModItems.SOLDIER_ANT_SPAWN_EGG);
         simpleItem(ModItems.QUEEN_ANT_SPAWN_EGG);
         spawnEggItem(ModItems.DAMSELFLY_SPAWN_EGG);
+        spawnEggItem(ModItems.WITHER_SPIDER_SPAWN_EGG);
     }
 
     private ItemModelBuilder blockItem(RegistryObject<?> block) {
