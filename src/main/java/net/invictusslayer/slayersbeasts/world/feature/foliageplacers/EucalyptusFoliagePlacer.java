@@ -24,7 +24,7 @@ public class EucalyptusFoliagePlacer extends FoliagePlacer {
 
     @Override
     protected FoliagePlacerType<?> type() {
-        return ModFoliagePlacerType.EUCALYPTUS_FOLIAGE_PLACER.get();
+        return ModFoliagePlacerTypes.EUCALYPTUS_FOLIAGE_PLACER.get();
     }
 
     @Override

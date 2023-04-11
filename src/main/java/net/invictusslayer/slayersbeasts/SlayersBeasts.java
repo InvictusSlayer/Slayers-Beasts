@@ -4,7 +4,8 @@ import net.invictusslayer.slayersbeasts.block.entity.ModBlockEntities;
 import net.invictusslayer.slayersbeasts.init.*;
 import net.invictusslayer.slayersbeasts.util.ModBrewingRecipe;
 import net.invictusslayer.slayersbeasts.util.ModPoiTypes;
-import net.invictusslayer.slayersbeasts.world.feature.foliageplacers.ModFoliagePlacerType;
+import net.invictusslayer.slayersbeasts.world.feature.foliageplacers.ModFoliagePlacerTypes;
+import net.invictusslayer.slayersbeasts.world.feature.trunkplacer.ModTrunkPlacerTypes;
 import net.minecraft.world.item.alchemy.Potions;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.brewing.BrewingRecipeRegistry;
@@ -16,18 +17,15 @@ import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 
 @Mod(SlayersBeasts.MOD_ID)
-public class SlayersBeasts
-{
+public class SlayersBeasts {
     public static final String MOD_ID = "slayersbeasts";
 
-    public SlayersBeasts()
-    {
+    public SlayersBeasts() {
         IEventBus eventBus = FMLJavaModLoadingContext.get().getModEventBus();
 
         ModItems.register(eventBus);
         ModBlocks.register(eventBus);
         ModEntities.register(eventBus);
-        //ModSounds.register(eventBus);
         ModEffects.register(eventBus);
         ModPotions.register(eventBus);
 
@@ -35,7 +33,8 @@ public class SlayersBeasts
 
         ModBlockEntities.register(eventBus);
 
-        ModFoliagePlacerType.register(eventBus);
+        ModFoliagePlacerTypes.register(eventBus);
+        ModTrunkPlacerTypes.register(eventBus);
 
         eventBus.addListener(this::setup);
         eventBus.addListener(this::clientSetup);
@@ -52,10 +51,11 @@ public class SlayersBeasts
     private void setup(final FMLCommonSetupEvent event) {
         event.enqueueWork(() -> {
             ModPoiTypes.registerPOIs();
+            ModTrunkPlacerTypes.registerTrunkPlacers();
 
             BrewingRecipeRegistry.addRecipe(new ModBrewingRecipe(Potions.SLOWNESS,
                     ModItems.INSECT_EYE.get(), ModPotions.PARALYSIS_POTION.get()));
-            BrewingRecipeRegistry.addRecipe(new ModBrewingRecipe(Potions.HARMING,
+            BrewingRecipeRegistry.addRecipe(new ModBrewingRecipe(Potions.POISON,
                     ModItems.WITHERBONE.get(), ModPotions.WITHER_POTION.get()));
         });
     }
@@ -120,6 +120,7 @@ public class SlayersBeasts
             buildContents.accept(ModItems.SOLDIER_ANT_SPAWN_EGG);
             buildContents.accept(ModItems.QUEEN_ANT_SPAWN_EGG);
             buildContents.accept(ModItems.DAMSELFLY_SPAWN_EGG);
+            buildContents.accept(ModItems.WITHER_SPIDER_SPAWN_EGG);
         }
     }
 }

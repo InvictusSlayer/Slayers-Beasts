@@ -8,7 +8,7 @@ import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
 
-public class ModFoliagePlacerType<P extends FoliagePlacer> {
+public class ModFoliagePlacerTypes<P extends FoliagePlacer> {
     public static final DeferredRegister<FoliagePlacerType<?>> FOLIAGE_PLACER_TYPES =
             DeferredRegister.create(ForgeRegistries.FOLIAGE_PLACER_TYPES, SlayersBeasts.MOD_ID);
 

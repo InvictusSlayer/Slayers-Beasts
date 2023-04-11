@@ -4,13 +4,12 @@ import com.google.common.collect.ImmutableSet;
 import net.invictusslayer.slayersbeasts.SlayersBeasts;
 import net.invictusslayer.slayersbeasts.init.ModBlocks;
 import net.minecraft.world.entity.ai.village.poi.PoiType;
+import net.minecraft.world.entity.ai.village.poi.PoiTypes;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.util.ObfuscationReflectionHelper;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
-
-import java.lang.reflect.InvocationTargetException;
 
 public class ModPoiTypes {
     public static final DeferredRegister<PoiType> POI_TYPES =
@@ -24,8 +23,8 @@ public class ModPoiTypes {
         try {
             ObfuscationReflectionHelper.findMethod(PoiType.class, "registerBlockStates", PoiType.class)
                     .invoke(null, ANTHILL_POI);
-        } catch (InvocationTargetException | IllegalAccessException exception) {
-            exception.printStackTrace();
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 

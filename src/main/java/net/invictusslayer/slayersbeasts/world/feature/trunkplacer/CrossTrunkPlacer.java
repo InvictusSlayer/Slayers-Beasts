@@ -20,9 +20,8 @@ import java.util.OptionalInt;
 import java.util.function.BiConsumer;
 
 public class CrossTrunkPlacer extends TrunkPlacer {
-    public static final Codec<CrossTrunkPlacer> CODEC = RecordCodecBuilder.create((p_70161_) -> {
-        return trunkPlacerParts(p_70161_).apply(p_70161_, CrossTrunkPlacer::new);
-    });
+    public static final Codec<CrossTrunkPlacer> CODEC = RecordCodecBuilder.create((instance) ->
+            trunkPlacerParts(instance).apply(instance, CrossTrunkPlacer::new));
 
     public CrossTrunkPlacer(int pBaseHeight, int pHeightRandA, int pHeightRandB) {
         super(pBaseHeight, pHeightRandA, pHeightRandB);
@@ -30,11 +29,7 @@ public class CrossTrunkPlacer extends TrunkPlacer {
 
     @Override
     protected TrunkPlacerType<?> type() {
-        return TrunkPlacerType.FORKING_TRUNK_PLACER;
-    }
-
-    private static <P extends TrunkPlacer> TrunkPlacerType<P> register(String key, Codec<P> type) {
-        return Registry.register(BuiltInRegistries.TRUNK_PLACER_TYPE, key, new TrunkPlacerType<>(type));
+        return ModTrunkPlacerTypes.CROSS_TRUNK_PLACER.get();
     }
 
     @Override

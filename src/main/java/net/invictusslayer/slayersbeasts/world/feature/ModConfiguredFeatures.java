@@ -36,7 +36,7 @@ public class ModConfiguredFeatures {
     public static final ResourceKey<ConfiguredFeature<?, ?>> EUCALYPTUS_KEY = registerKey("eucalyptus");
     public static final ResourceKey<ConfiguredFeature<?, ?>> EUCALYPTUS_SPAWN_KEY = registerKey("eucalyptus_spawn");
 
-    public static final ResourceKey<ConfiguredFeature<?, ?>> HUGE_WHITE_MUSHROOM_KEY = registerKey("huge_white_mushroom");
+    public static final ResourceKey<ConfiguredFeature<?, ?>> HUGE_WHITE_MUSHROOM = registerKey("huge_white_mushroom");
 
     public static final ResourceKey<ConfiguredFeature<?, ?>> OVERWORLD_EXOSKELETON_ORE_KEY = registerKey("overworld_exoskeleton_ore");
 
@@ -69,7 +69,7 @@ public class ModConfiguredFeatures {
                 List.of(new WeightedPlacedFeature(placedFeatures.getOrThrow(ModPlacedFeatures.EUCALYPTUS_CHECKED_KEY),
                         0.5F)), placedFeatures.getOrThrow(ModPlacedFeatures.EUCALYPTUS_CHECKED_KEY)));
 
-        register(context, HUGE_WHITE_MUSHROOM_KEY, Feature.HUGE_BROWN_MUSHROOM, new HugeMushroomFeatureConfiguration(
+        register(context, HUGE_WHITE_MUSHROOM, Feature.HUGE_BROWN_MUSHROOM, new HugeMushroomFeatureConfiguration(
                 BlockStateProvider.simple(ModBlocks.WHITE_MUSHROOM_BLOCK.get().defaultBlockState()
                         .setValue(HugeMushroomBlock.UP, Boolean.TRUE).setValue(HugeMushroomBlock.DOWN, Boolean.FALSE)),
                 BlockStateProvider.simple(Blocks.MUSHROOM_STEM.defaultBlockState()
