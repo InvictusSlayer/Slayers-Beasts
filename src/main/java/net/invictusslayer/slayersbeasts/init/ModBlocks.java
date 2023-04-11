@@ -1,10 +1,10 @@
 package net.invictusslayer.slayersbeasts.init;
 
 import net.invictusslayer.slayersbeasts.SlayersBeasts;
-import net.invictusslayer.slayersbeasts.block.AntHatcheryBlock;
+import net.invictusslayer.slayersbeasts.block.AnthillHatcheryBlock;
 import net.invictusslayer.slayersbeasts.block.AnthillBlock;
 import net.invictusslayer.slayersbeasts.block.OothecaBlock;
-import net.invictusslayer.slayersbeasts.block.custom.CajoleLeavesBlock;
+import net.invictusslayer.slayersbeasts.block.CajoleLeavesBlock;
 import net.invictusslayer.slayersbeasts.block.flammable.*;
 import net.invictusslayer.slayersbeasts.world.feature.ModConfiguredFeatures;
 import net.invictusslayer.slayersbeasts.world.feature.tree.CajoleTreeGrower;
@@ -35,7 +35,7 @@ public final class ModBlocks {
     public static final RegistryObject<Block> ANTHILL = registerBlock("anthill",
             () -> new AnthillBlock(BlockBehaviour.Properties.of(Material.GRASS).strength(1f).sound(SoundType.ROOTED_DIRT)));
     public static final RegistryObject<Block> ANTHILL_HATCHERY = registerBlock("anthill_hatchery",
-            () -> new AntHatcheryBlock(BlockBehaviour.Properties.of(Material.GRASS).strength(1f).sound(SoundType.ROOTED_DIRT)));
+            () -> new AnthillHatcheryBlock(BlockBehaviour.Properties.of(Material.GRASS).strength(1f).sound(SoundType.ROOTED_DIRT)));
 
     public static final RegistryObject<Block> JADE_BLOCK = registerBlock("jade_block",
             () -> new Block(BlockBehaviour.Properties.of(Material.METAL).strength(9f).requiresCorrectToolForDrops()));
@@ -48,7 +48,7 @@ public final class ModBlocks {
                     UniformInt.of(3, 7)));
 
     public static final RegistryObject<Block> WHITE_MUSHROOM = registerBlock("white_mushroom",
-            () -> new MushroomBlock(BlockBehaviour.Properties.copy(Blocks.BROWN_MUSHROOM), ModConfiguredFeatures.HUGE_WHITE_MUSHROOM_KEY));
+            () -> new MushroomBlock(BlockBehaviour.Properties.copy(Blocks.BROWN_MUSHROOM), ModConfiguredFeatures.HUGE_WHITE_MUSHROOM));
     public static final RegistryObject<Block> WHITE_MUSHROOM_BLOCK = registerBlock("white_mushroom_block",
             () -> new HugeMushroomBlock(BlockBehaviour.Properties.copy(Blocks.BROWN_MUSHROOM_BLOCK)));
 
@@ -131,8 +131,7 @@ public final class ModBlocks {
     }
 
     private static <T extends Block> RegistryObject<Item> registerBlockItem(String name, RegistryObject<T> block) {
-        return ModItems.ITEMS.register(name, () -> new BlockItem(block.get(),
-                new Item.Properties()));
+        return ModItems.ITEMS.register(name, () -> new BlockItem(block.get(), new Item.Properties()));
     }
 
     public static void register(IEventBus eventBus) {

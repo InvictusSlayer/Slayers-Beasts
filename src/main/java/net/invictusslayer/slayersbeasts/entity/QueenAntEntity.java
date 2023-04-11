@@ -74,9 +74,4 @@ public class QueenAntEntity extends AbstractAntEntity implements NeutralMob {
     public void startPersistentAngerTimer() {
         this.setRemainingPersistentAngerTime(TimeUtil.rangeOfSeconds(30, 60).sample(random));
     }
-
-    @Override
-    protected boolean wantsToEnterNest() {
-        return true;
-    }
 }

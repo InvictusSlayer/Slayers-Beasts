@@ -104,40 +104,47 @@ public class SoldierAntModel<Type extends SoldierAntEntity> extends EntityModel<
 
     @Override
     public void setupAnim(Type entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {
-        float f1 = Mth.sin(ageInTicks / 6F) / 24F;
-        float f2 = Mth.cos(limbSwing * 2) * limbSwingAmount;
-        double f3 = Math.pow(Mth.cos(limbSwing + Mth.PI * 0.25F), 6D) * limbSwingAmount;
-        double f4 = Math.pow(Mth.sin(limbSwing + Mth.PI * 0.25F), 6D) * limbSwingAmount;
-        leftAntenna.xRot = f1;
-        rightAntenna.xRot = -f1;
-        leftFrontLeg.xRot = Mth.PI * 0.2F;
-        rightFrontLeg.xRot = Mth.PI * 0.2F;
-        leftBackLeg.xRot = -Mth.PI * 0.2F;
-        rightBackLeg.xRot = -Mth.PI * 0.2F;
-        leftFrontLeg.yRot = Mth.PI * 0.2F;
-        rightFrontLeg.yRot = -Mth.PI * 0.2F;
-        leftMiddleLeg.yRot = 0F;
-        rightMiddleLeg.yRot = 0F;
-        leftBackLeg.yRot = -Mth.PI * 0.2F;
-        rightBackLeg.yRot = Mth.PI * 0.2F;
-        leftFrontLeg.zRot = Mth.PI * 0.4F;
-        rightFrontLeg.zRot = -Mth.PI * 0.4F;
-        leftMiddleLeg.zRot = Mth.PI * 0.28F;
-        rightMiddleLeg.zRot = -Mth.PI * 0.28F;
-        leftBackLeg.zRot = Mth.PI * 0.35F;
-        rightBackLeg.zRot = -Mth.PI * 0.35F;
-        leftFrontLeg.yRot += -f2;
-        rightFrontLeg.yRot += -f2;
-        leftMiddleLeg.yRot += f2;
-        rightMiddleLeg.yRot += f2;
-        leftBackLeg.yRot += -f2;
-        rightBackLeg.yRot += -f2;
-        leftFrontLeg.zRot += -f4;
-        rightFrontLeg.zRot += f3;
-        leftMiddleLeg.zRot += -f3;
-        rightMiddleLeg.zRot += f4;
-        leftBackLeg.zRot += -f4;
-        rightBackLeg.zRot += f3;
+        float v1 = Mth.sin(ageInTicks / 6F) / 24F;
+        float f1 = Mth.cos(limbSwing * 2) * limbSwingAmount;
+        double d1 = Math.pow(Mth.cos(limbSwing + Mth.PI * 0.25F), 6) * limbSwingAmount;
+        double d2 = Math.pow(Mth.sin(limbSwing + Mth.PI * 0.25F), 6) * limbSwingAmount;
+        float a1 = Mth.PI * 0.2F;
+        float a2 = Mth.PI * 0.4F;
+        float a3 = Mth.PI * 0.28F;
+        float a4 = Mth.PI * 0.35F;
+        leftAntenna.xRot = v1;
+        rightAntenna.xRot = -v1;
+        leftFrontLeg.xRot = a1;
+        rightFrontLeg.xRot = a1;
+        leftMiddleLeg.xRot = 0;
+        rightMiddleLeg.xRot = 0;
+        leftBackLeg.xRot = -a1;
+        rightBackLeg.xRot = -a1;
+        leftFrontLeg.yRot = a1;
+        rightFrontLeg.yRot = -a1;
+        leftMiddleLeg.yRot = 0;
+        rightMiddleLeg.yRot = 0;
+        leftBackLeg.yRot = -a1;
+        rightBackLeg.yRot = a1;
+        leftFrontLeg.zRot = a2;
+        rightFrontLeg.zRot = -a2;
+        leftMiddleLeg.zRot = a3 ;
+        rightMiddleLeg.zRot = -a3;
+        leftBackLeg.zRot = a4;
+        rightBackLeg.zRot = -a4;
+
+        leftFrontLeg.yRot += -f1;
+        rightFrontLeg.yRot += -f1;
+        leftMiddleLeg.yRot += f1;
+        rightMiddleLeg.yRot += f1;
+        leftBackLeg.yRot += -f1;
+        rightBackLeg.yRot += -f1;
+        leftFrontLeg.zRot += -d2;
+        rightFrontLeg.zRot += d1;
+        leftMiddleLeg.zRot += -d1;
+        rightMiddleLeg.zRot += d2;
+        leftBackLeg.zRot += -d2;
+        rightBackLeg.zRot += d1;
     }
 
     @Override

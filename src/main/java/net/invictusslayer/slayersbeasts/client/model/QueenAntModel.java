@@ -95,38 +95,46 @@ public class QueenAntModel<Type extends QueenAntEntity> extends EntityModel<Type
     @Override
     public void setupAnim(Type entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {
         float f1 = Mth.cos(limbSwing * 2) * limbSwingAmount;
-        double f2 = Math.pow(Mth.cos(limbSwing + Mth.PI * 0.25F), 6D) * limbSwingAmount;
-        double f3 = Math.pow(Mth.sin(limbSwing + Mth.PI * 0.25F), 6D) * limbSwingAmount;
-        leftFrontLeg.xRot = Mth.PI * 0.22F;
-        rightFrontLeg.xRot = Mth.PI * 0.22F;
-        leftMiddleLeg.xRot = 0F;
-        rightMiddleLeg.xRot = 0F;
-        leftBackLeg.xRot = -Mth.PI * 0.15F;
-        rightBackLeg.xRot = -Mth.PI * 0.15F;
-        leftFrontLeg.yRot = Mth.PI * 0.14F;
-        rightFrontLeg.yRot = -Mth.PI * 0.14F;
-        leftMiddleLeg.yRot = 0F;
-        rightMiddleLeg.yRot = 0F;
-        leftBackLeg.yRot = -Mth.PI * 0.19F;
-        rightBackLeg.yRot = Mth.PI * 0.19F;
-        leftFrontLeg.zRot = Mth.PI * 0.35F;
-        rightFrontLeg.zRot = -Mth.PI * 0.35F;
-        leftMiddleLeg.zRot = Mth.PI * 0.26F;
-        rightMiddleLeg.zRot = -Mth.PI * 0.26F;
-        leftBackLeg.zRot = Mth.PI * 0.32F;
-        rightBackLeg.zRot = -Mth.PI * 0.32F;
+        double d1 = Math.pow(Mth.cos(limbSwing + Mth.PI * 0.25F), 6D) * limbSwingAmount;
+        double d2 = Math.pow(Mth.sin(limbSwing + Mth.PI * 0.25F), 6D) * limbSwingAmount;
+        float a1 = Mth.PI * 0.22F;
+        float a2 = Mth.PI * 0.14F;
+        float a3 = Mth.PI * 0.35F;
+        float a4 = Mth.PI * 0.26F;
+        float a5 = Mth.PI * 0.15F;
+        float a6 = Mth.PI * 0.19F;
+        float a7 = Mth.PI * 0.32F;
+        leftFrontLeg.xRot = a1;
+        rightFrontLeg.xRot = a1;
+        leftMiddleLeg.xRot = 0;
+        rightMiddleLeg.xRot = 0;
+        leftBackLeg.xRot = -a5;
+        rightBackLeg.xRot = -a5;
+        leftFrontLeg.yRot = a2;
+        rightFrontLeg.yRot = -a2;
+        leftMiddleLeg.yRot = 0;
+        rightMiddleLeg.yRot = 0;
+        leftBackLeg.yRot = -a6;
+        rightBackLeg.yRot = a6;
+        leftFrontLeg.zRot = a3;
+        rightFrontLeg.zRot = -a3;
+        leftMiddleLeg.zRot = a4;
+        rightMiddleLeg.zRot = -a4;
+        leftBackLeg.zRot = a7;
+        rightBackLeg.zRot = -a7;
+
         leftFrontLeg.yRot += -f1;
         rightFrontLeg.yRot += -f1;
         leftMiddleLeg.yRot += f1;
         rightMiddleLeg.yRot += f1;
         leftBackLeg.yRot += -f1;
         rightBackLeg.yRot += -f1;
-        leftFrontLeg.zRot += -f3;
-        rightFrontLeg.zRot += f2;
-        leftMiddleLeg.zRot += -f2;
-        rightMiddleLeg.zRot += f3;
-        leftBackLeg.zRot += -f3;
-        rightBackLeg.zRot += f2;
+        leftFrontLeg.zRot += -d2;
+        rightFrontLeg.zRot += d1;
+        leftMiddleLeg.zRot += -d1;
+        rightMiddleLeg.zRot += d2;
+        leftBackLeg.zRot += -d2;
+        rightBackLeg.zRot += d1;
     }
 
     @Override

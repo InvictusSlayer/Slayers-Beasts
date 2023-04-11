@@ -3,21 +3,21 @@ package net.invictusslayer.slayersbeasts.entity;
 import com.google.common.collect.Lists;
 import net.invictusslayer.slayersbeasts.block.entity.AnthillBlockEntity;
 import net.invictusslayer.slayersbeasts.util.ModTags;
-import net.minecraft.Util;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Holder;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.NbtUtils;
-import net.minecraft.network.chat.Component;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.tags.BiomeTags;
 import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.entity.*;
-import net.minecraft.world.entity.ai.goal.*;
+import net.minecraft.world.entity.ai.goal.FloatGoal;
+import net.minecraft.world.entity.ai.goal.Goal;
+import net.minecraft.world.entity.ai.goal.RandomLookAroundGoal;
+import net.minecraft.world.entity.ai.goal.WaterAvoidingRandomStrollGoal;
 import net.minecraft.world.entity.ai.goal.target.HurtByTargetGoal;
 import net.minecraft.world.entity.ai.village.poi.PoiManager;
 import net.minecraft.world.entity.ai.village.poi.PoiRecord;
@@ -36,12 +36,10 @@ import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-public class AbstractAntEntity extends PathfinderMob {
+public abstract class AbstractAntEntity extends PathfinderMob {
     private static final EntityDataAccessor<Byte> DATA_FLAGS_ID = SynchedEntityData.defineId(AbstractAntEntity.class, EntityDataSerializers.BYTE);
     private static final EntityDataAccessor<Integer> DATA_ANT_TYPE = SynchedEntityData.defineId(AbstractAntEntity.class, EntityDataSerializers.INT);
-    private static final ResourceLocation WOOD_ANT = new ResourceLocation("wood_ant");
-    private static final ResourceLocation LEAFCUTTER_ANT = new ResourceLocation("leafcutter_ant");
-    private static final ResourceLocation MEADOW_ANT = new ResourceLocation("meadow_ant");
+    private static final EntityDataAccessor<Integer> DATA_CARGO_TYPE = SynchedEntityData.defineId(AbstractAntEntity.class, EntityDataSerializers.INT);
     private int cooldownToEnterNest;
     private int cooldownToLocateNest;
     private int failedForagingTime;
@@ -70,11 +68,10 @@ public class AbstractAntEntity extends PathfinderMob {
         if (this.nestPos != null) {
             pCompound.put("NestPos", NbtUtils.writeBlockPos(this.nestPos));
         }
-        
-        pCompound.putBoolean("HasFood", this.hasFood());
-        pCompound.putBoolean("HasSupplies", this.hasSupplies());
+
         pCompound.putInt("CooldownToEnterNest", this.cooldownToEnterNest);
         pCompound.putInt("FailedForagingTime", this.failedForagingTime);
+        pCompound.putInt("CargoType", this.getCargoType());
         pCompound.putInt("AntType", this.getAntType());
     }
 
@@ -84,11 +81,10 @@ public class AbstractAntEntity extends PathfinderMob {
         if (pCompound.contains("NestPos")) {
             this.nestPos = NbtUtils.readBlockPos(pCompound.getCompound("NestPos"));
         }
-        
-        this.setHasFood(pCompound.getBoolean("HasFood"));
-        this.setHasSupplies(pCompound.getBoolean("HasSupplies"));
+
         this.setCooldownToEnterNest(pCompound.getInt("CooldownToEnterNest"));
         this.failedForagingTime = pCompound.getInt("FailedForagingTime");
+        this.setCargoType(pCompound.getInt("CargoType"));
         this.setAntType(pCompound.getInt("AntType"));
     }
 
@@ -100,26 +96,25 @@ public class AbstractAntEntity extends PathfinderMob {
         super.defineSynchedData();
         this.entityData.define(DATA_FLAGS_ID, (byte) 0);
         this.entityData.define(DATA_ANT_TYPE, 0);
+        this.entityData.define(DATA_CARGO_TYPE, 0);
     }
 
-    public boolean hasFood() {
+    public int getCargoType() {
+        return this.entityData.get(DATA_CARGO_TYPE);
+    }
+
+    public void setCargoType(int cargoType) {
+        if (cargoType != 0) {
+            failedForagingTime = 0;
+            this.setFlag(2, true);
+        } else {
+            this.setFlag(2, false);
+        }
+        this.entityData.set(DATA_CARGO_TYPE, cargoType);
+    }
+
+    public boolean hasCargo() {
         return this.getFlag(2);
-    }
-    private void setHasFood(boolean pHasFood) {
-        if (pHasFood) {
-            failedForagingTime = 0;
-        }
-        this.setFlag(2, pHasFood);
-    }
-
-    public boolean hasSupplies() {
-        return this.getFlag(4);
-    }
-    private void setHasSupplies(boolean pHasSupplies) {
-        if (pHasSupplies) {
-            failedForagingTime = 0;
-        }
-        this.setFlag(4, pHasSupplies);
     }
 
     private void setFlag(int id, boolean flag) {
@@ -134,11 +129,6 @@ public class AbstractAntEntity extends PathfinderMob {
         return (this.entityData.get(DATA_FLAGS_ID) & id) != 0;
     }
 
-    public void dropOffCargo() {
-        setHasFood(false);
-        setHasSupplies(false);
-    }
-
     @Override
     public void aiStep() {
         super.aiStep();
@@ -150,7 +140,7 @@ public class AbstractAntEntity extends PathfinderMob {
             --cooldownToLocateNest;
         }
 
-        if (!this.hasFood() && !this.hasSupplies()) {
+        if (!this.hasCargo()) {
             ++failedForagingTime;
         }
 
@@ -173,20 +163,6 @@ public class AbstractAntEntity extends PathfinderMob {
     }
 
     public void setAntType(int pTinyAntType) {
-        if (pTinyAntType == 0) {
-            if (!this.hasCustomName()) {
-                this.setCustomName(Component.translatable(Util.makeDescriptionId("entity", WOOD_ANT)));
-            }
-        } else if (pTinyAntType == 1) {
-            if (!this.hasCustomName()) {
-                this.setCustomName(Component.translatable(Util.makeDescriptionId("entity", LEAFCUTTER_ANT)));
-            }
-        } else if (pTinyAntType == 2) {
-            if (!this.hasCustomName()) {
-                this.setCustomName(Component.translatable(Util.makeDescriptionId("entity", MEADOW_ANT)));
-            }
-        }
-
         this.entityData.set(DATA_ANT_TYPE, pTinyAntType);
     }
 
@@ -208,11 +184,11 @@ public class AbstractAntEntity extends PathfinderMob {
         Holder<Biome> holder = pLevel.getBiome(this.blockPosition());
         int i = pLevel.getRandom().nextInt(3);
         if (holder.is(BiomeTags.IS_FOREST) && !holder.is(Biomes.GROVE)) {
-            return 0;
+            return 0; // Wood Ant
         } else if (holder.is(BiomeTags.IS_JUNGLE) || holder.is(BiomeTags.IS_SAVANNA)) {
-            return 1;
+            return 1; // Leafcutter Ant
         } else if (holder.is(Biomes.PLAINS) || holder.is(Biomes.MEADOW) || holder.is(Biomes.SUNFLOWER_PLAINS)) {
-            return 2;
+            return 2; // Meadow Ant
         } else {
             return i;
         }
@@ -225,24 +201,23 @@ public class AbstractAntEntity extends PathfinderMob {
     private boolean nestHasSpace(BlockPos pNestPos) {
         BlockEntity blockEntity = level.getBlockEntity(pNestPos);
         if (blockEntity instanceof AnthillBlockEntity anthillBlockEntity) {
-            return !anthillBlockEntity.isFull() && getAntType() == anthillBlockEntity.getInhabitantType();
-        } else {
-            return false;
+            return !anthillBlockEntity.isFull() && (anthillBlockEntity.getInhabitantType() == 99 ||
+                    anthillBlockEntity.getInhabitantType() == getAntType());
         }
+        return false;
     }
 
-    protected boolean wantsToEnterNest() {
+    protected boolean wantsToEnterNest(AbstractAntEntity ant) {
         if (this.cooldownToEnterNest <= 0) {
-            return this.failedForagingTime > 3600 || this.hasFood() || this.hasSupplies() || this.level.isRaining();
-        } else {
-            return false;
+            return failedForagingTime > 3600 || hasCargo() || level.isRaining() || ant instanceof QueenAntEntity;
         }
+        return false;
     }
 
     boolean closerThan(BlockPos pPos, double pDistance) {
         return pPos.closerThan(this.blockPosition(), pDistance);
     }
-    
+
     public static class AntGroupData implements SpawnGroupData {
         public final int tinyAntType;
         private AntGroupData(int pAntType) {
@@ -282,7 +257,7 @@ public class AbstractAntEntity extends PathfinderMob {
         }
 
         public boolean canUse() {
-            return mob.nestPos != null && !mob.hasRestriction() && mob.wantsToEnterNest() && mob.nestHasSpace(mob.nestPos)
+            return mob.nestPos != null && !mob.hasRestriction() && mob.wantsToEnterNest(mob) && mob.nestHasSpace(mob.nestPos)
                     && !this.hasReachedTarget(mob.nestPos) && mob.level.getBlockState(mob.nestPos).is(ModTags.Blocks.ANTHILLS);
         }
 
@@ -373,7 +348,7 @@ public class AbstractAntEntity extends PathfinderMob {
         }
 
         public boolean canUse() {
-            return mob.nestPos != null && mob.wantsToEnterNest() && mob.nestHasSpace(mob.nestPos) && mob.position()
+            return mob.nestPos != null && mob.wantsToEnterNest(mob) && mob.nestHasSpace(mob.nestPos) && mob.position()
                     .distanceToSqr(mob.nestPos.getX() + 0.5D, mob.nestPos.getY() + 1D, mob.nestPos.getZ() + 0.5D) <= 0.4D;
         }
 
@@ -384,7 +359,7 @@ public class AbstractAntEntity extends PathfinderMob {
         public void start() {
             BlockEntity blockEntity = mob.level.getBlockEntity(mob.nestPos);
             if (blockEntity instanceof AnthillBlockEntity anthillBlockEntity) {
-                anthillBlockEntity.addOccupant(mob, mob.getAntType(), mob.hasFood() || mob.hasSupplies());
+                anthillBlockEntity.addOccupant(mob, mob.getAntType(), mob.hasCargo());
             }
         }
     }
@@ -397,7 +372,7 @@ public class AbstractAntEntity extends PathfinderMob {
         }
 
         public boolean canUse() {
-            return mob.cooldownToLocateNest == 0 && mob.nestPos == null && mob.wantsToEnterNest();
+            return mob.cooldownToLocateNest == 0 && mob.nestPos == null && mob.wantsToEnterNest(mob);
         }
 
         public boolean canContinueToUse() {

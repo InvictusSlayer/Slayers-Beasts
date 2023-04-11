@@ -3,9 +3,8 @@ package net.invictusslayer.slayersbeasts.block;
 import net.invictusslayer.slayersbeasts.block.entity.AnthillBlockEntity;
 import net.invictusslayer.slayersbeasts.block.entity.ModBlockEntities;
 import net.invictusslayer.slayersbeasts.entity.SoldierAntEntity;
-import net.invictusslayer.slayersbeasts.init.ModItems;
+import net.invictusslayer.slayersbeasts.init.ModBlocks;
 import net.minecraft.core.BlockPos;
-import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.stats.Stats;
 import net.minecraft.world.InteractionHand;
@@ -22,12 +21,10 @@ import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
-import net.minecraft.world.item.enchantment.EnchantmentHelper;
-import net.minecraft.world.item.enchantment.Enchantments;
 import net.minecraft.world.level.GameRules;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.LevelAccessor;
-import net.minecraft.world.level.block.*;
+import net.minecraft.world.level.block.BaseEntityBlock;
+import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityTicker;
 import net.minecraft.world.level.block.entity.BlockEntityType;
@@ -44,8 +41,8 @@ import org.jetbrains.annotations.Nullable;
 import java.util.List;
 
 public class AnthillBlock extends BaseEntityBlock {
-    public static final IntegerProperty FUNGUS_LEVEL = IntegerProperty.create("fungus_level", 0, 8);
-    public static final IntegerProperty SUPPLY_LEVEL = IntegerProperty.create("supply_level", 0, 15);
+    public static final IntegerProperty FUNGUS_LEVEL = IntegerProperty.create("fungus_level", 0, 5);
+    public static final IntegerProperty SUPPLY_LEVEL = IntegerProperty.create("supply_level", 0, 10);
 
     public AnthillBlock(Properties properties) {
         super(properties);
@@ -63,7 +60,7 @@ public class AnthillBlock extends BaseEntityBlock {
     }
 
     public static void dropMushroom(Level pLevel, BlockPos pPos) {
-        popResource(pLevel, pPos, new ItemStack(ModItems.WHITE_MUSHROOM.get(), 3));
+        popResource(pLevel, pPos, new ItemStack(ModBlocks.WHITE_MUSHROOM.get(), pLevel.random.nextInt(1, 4)));
     }
 
     public void angerNearbyAnts(Level level, BlockPos pos) {
@@ -85,7 +82,7 @@ public class AnthillBlock extends BaseEntityBlock {
         ItemStack handItem = pPlayer.getItemInHand(pHand);
         int i = pState.getValue(FUNGUS_LEVEL);
         boolean flag = false;
-        if (i >= 8) {
+        if (i >= 5) {
             Item item = handItem.getItem();
             if (handItem.canPerformAction(net.minecraftforge.common.ToolActions.SHEARS_HARVEST)) {
                 dropMushroom(pLevel, pPos);
@@ -95,9 +92,9 @@ public class AnthillBlock extends BaseEntityBlock {
             } else if (handItem.is(Items.DIRT)) {
                 handItem.shrink(1);
                 if (handItem.isEmpty()) {
-                    pPlayer.setItemInHand(pHand, new ItemStack(Items.MYCELIUM));
-                } else if (!pPlayer.getInventory().add(new ItemStack(Items.MYCELIUM))) {
-                    pPlayer.drop(new ItemStack(Items.MYCELIUM), false);
+                    pPlayer.setItemInHand(pHand, new ItemStack(ModBlocks.ANT_SOIL.get()));
+                } else if (!pPlayer.getInventory().add(new ItemStack(ModBlocks.ANT_SOIL.get()))) {
+                    pPlayer.drop(new ItemStack(ModBlocks.ANT_SOIL.get()), false);
                 }
 
                 flag = true;
@@ -135,7 +132,7 @@ public class AnthillBlock extends BaseEntityBlock {
         this.resetMushroomLevel(level, state, pos);
         BlockEntity blockEntity = level.getBlockEntity(pos);
         if (blockEntity instanceof AnthillBlockEntity anthillBlockEntity) {
-            anthillBlockEntity.emptyAllLivingFromNest(player, state, releaseStatus);
+            anthillBlockEntity.emptyAntsFromNest(player, state, releaseStatus);
         }
     }
 
@@ -143,25 +140,21 @@ public class AnthillBlock extends BaseEntityBlock {
         level.setBlock(pos, state.setValue(FUNGUS_LEVEL, 0), 3);
     }
 
-    public void resetSupplyLevel(Level level, BlockState state, BlockPos pos) {
-        level.setBlock(pos, state.setValue(SUPPLY_LEVEL, 0), 3);
-    }
+//    public void resetSupplyLevel(Level level, BlockState state, BlockPos pos) {
+//        level.setBlock(pos, state.setValue(SUPPLY_LEVEL, 0), 3);
+//    }
 
     protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> pBuilder) {
         pBuilder.add(FUNGUS_LEVEL, SUPPLY_LEVEL);
     }
 
-    public RenderShape getRenderShape(BlockState pState) {
-        return RenderShape.MODEL;
-    }
-
     public void playerDestroy(Level pLevel, Player pPlayer, BlockPos pPos, BlockState pState, @Nullable BlockEntity pBlockEntity, ItemStack pTool) {
         super.playerDestroy(pLevel, pPlayer, pPos, pState, pBlockEntity, pTool);
         if (!pLevel.isClientSide && pBlockEntity instanceof AnthillBlockEntity anthillBlockEntity) {
-            if (EnchantmentHelper.getItemEnchantmentLevel(Enchantments.SILK_TOUCH, pTool) == 0) {
-                anthillBlockEntity.emptyAllLivingFromNest(pPlayer, pState, AnthillBlockEntity.AntReleaseStatus.EMERGENCY);
-                this.angerNearbyAnts(pLevel, pPos);
-            }
+            //if (EnchantmentHelper.getItemEnchantmentLevel(Enchantments.SILK_TOUCH, pTool) == 0) {
+            anthillBlockEntity.emptyAntsFromNest(pPlayer, pState, AnthillBlockEntity.AntReleaseStatus.EMERGENCY);
+            this.angerNearbyAnts(pLevel, pPos);
+            //}
         }
     }
 
@@ -171,8 +164,9 @@ public class AnthillBlock extends BaseEntityBlock {
             if (blockEntity instanceof AnthillBlockEntity anthillBlockEntity) {
                 ItemStack itemStack = new ItemStack(this);
                 int i = pState.getValue(FUNGUS_LEVEL);
+                int j = pState.getValue(SUPPLY_LEVEL);
                 boolean flag = !anthillBlockEntity.isEmpty();
-                if (flag || i > 0) {
+                if (flag || i > 0 || j > 0) {
                     if (flag) {
                         CompoundTag compoundTag = new CompoundTag();
                         compoundTag.put("Ants", anthillBlockEntity.writeAnts());
@@ -181,6 +175,7 @@ public class AnthillBlock extends BaseEntityBlock {
 
                     CompoundTag compoundTag1 = new CompoundTag();
                     compoundTag1.putInt("fungus_level", i);
+                    compoundTag1.putInt("supply_level", j);
                     itemStack.addTagElement("BlockStateTag", compoundTag1);
                     ItemEntity itemEntity = new ItemEntity(pLevel, pPos.getX(), pPos.getY(), pPos.getZ(), itemStack);
                     itemEntity.setDefaultPickUpDelay();
@@ -198,21 +193,10 @@ public class AnthillBlock extends BaseEntityBlock {
                 entity instanceof WitherBoss || entity instanceof MinecartTNT) {
             BlockEntity blockEntity = pBuilder.getOptionalParameter(LootContextParams.BLOCK_ENTITY);
             if (blockEntity instanceof AnthillBlockEntity anthillBlockEntity) {
-                anthillBlockEntity.emptyAllLivingFromNest(null, pState, AnthillBlockEntity.AntReleaseStatus.EMERGENCY);
+                anthillBlockEntity.emptyAntsFromNest(null, pState, AnthillBlockEntity.AntReleaseStatus.EMERGENCY);
             }
         }
 
         return super.getDrops(pState, pBuilder);
-    }
-
-    public BlockState updateShape(BlockState pState, Direction pDirection, BlockState pNeighborState, LevelAccessor pLevel, BlockPos pCurrentPos, BlockPos pNeighborPos) {
-        if (!(pLevel.getBlockState(pNeighborPos).getBlock() instanceof FireBlock)) {
-            BlockEntity blockEntity = pLevel.getBlockEntity(pCurrentPos);
-            if (blockEntity instanceof AnthillBlockEntity anthillBlockEntity) {
-                anthillBlockEntity.emptyAllLivingFromNest(null, pState, AnthillBlockEntity.AntReleaseStatus.EMERGENCY);
-            }
-        }
-
-        return super.updateShape(pState, pDirection, pNeighborState, pLevel, pCurrentPos, pNeighborPos);
     }
 }
