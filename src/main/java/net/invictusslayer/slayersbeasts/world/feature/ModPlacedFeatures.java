@@ -37,12 +37,12 @@ public class ModPlacedFeatures {
         register(context, CAJOLE_CHECKED_KEY, configuredFeatures.getOrThrow(ModConfiguredFeatures.CAJOLE_KEY),
                 List.of(PlacementUtils.filteredByBlockSurvival(ModBlocks.CAJOLE_SAPLING.get())));
         register(context, CAJOLE_PLACED_KEY, configuredFeatures.getOrThrow(ModConfiguredFeatures.CAJOLE_KEY),
-                VegetationPlacements.treePlacement(PlacementUtils.countExtra(1, 0.1f, 1)));
+                VegetationPlacements.treePlacement(PlacementUtils.countExtra(1, 0.1f, 1), ModBlocks.CAJOLE_SAPLING.get()));
 
         register(context, EUCALYPTUS_CHECKED_KEY, configuredFeatures.getOrThrow(ModConfiguredFeatures.EUCALYPTUS_KEY),
                 List.of(PlacementUtils.filteredByBlockSurvival(ModBlocks.EUCALYPTUS_SAPLING.get())));
         register(context, EUCALYPTUS_PLACED_KEY, configuredFeatures.getOrThrow(ModConfiguredFeatures.EUCALYPTUS_KEY),
-                VegetationPlacements.treePlacement(PlacementUtils.countExtra(1, 0.1f, 1)));
+                VegetationPlacements.treePlacement(PlacementUtils.countExtra(1, 0.1f, 1), ModBlocks.EUCALYPTUS_SAPLING.get()));
 
         register(context, EXOSKELETON_ORE_PLACED_KEY, configuredFeatures.getOrThrow(ModConfiguredFeatures.OVERWORLD_EXOSKELETON_ORE_KEY),
                 rareOrePlacement(1, HeightRangePlacement.triangle(VerticalAnchor.aboveBottom(-80), VerticalAnchor.aboveBottom(80))));
@@ -57,10 +57,5 @@ public class ModPlacedFeatures {
     private static void register(BootstapContext<PlacedFeature> context, ResourceKey<PlacedFeature> key,
                                  Holder<ConfiguredFeature<?, ?>> config, List<PlacementModifier> modifiers) {
         context.register(key, new PlacedFeature(config, List.copyOf(modifiers)));
-    }
-
-    private static void register(BootstapContext<PlacedFeature> context, ResourceKey<PlacedFeature> key,
-                                 Holder<ConfiguredFeature<?, ?>> config, PlacementModifier... modifiers) {
-        register(context, key, config, List.of(modifiers));
     }
 }

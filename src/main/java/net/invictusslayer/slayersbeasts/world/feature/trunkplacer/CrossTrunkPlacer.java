@@ -5,8 +5,6 @@ import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
-import net.minecraft.core.Registry;
-import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.LevelSimulatedReader;
 import net.minecraft.world.level.block.state.BlockState;
@@ -36,7 +34,7 @@ public class CrossTrunkPlacer extends TrunkPlacer {
     public List<FoliagePlacer.FoliageAttachment> placeTrunk(LevelSimulatedReader pLevel, BiConsumer<BlockPos, BlockState> pBlockSetter, RandomSource pRandom, int pFreeTreeHeight, BlockPos pPos, TreeConfiguration pConfig) {
         setDirtAt(pLevel, pBlockSetter, pRandom, pPos.below(), pConfig);
         List<FoliagePlacer.FoliageAttachment> list = Lists.newArrayList();
-        BlockPos.MutableBlockPos blockpos$mutableblockpos = new BlockPos.MutableBlockPos();
+        BlockPos.MutableBlockPos mutableBlockPos = new BlockPos.MutableBlockPos();
         int i = pFreeTreeHeight - pRandom.nextInt(6) - 1;
         int j = 6 - pRandom.nextInt(6);
         int k = pPos.getX();
@@ -60,10 +58,10 @@ public class CrossTrunkPlacer extends TrunkPlacer {
                 --j;
             }
 
-            if (placeLog(pLevel, pBlockSetter, pRandom, blockpos$mutableblockpos.set(k, j1, l), pConfig)) {
+            if (placeLog(pLevel, pBlockSetter, pRandom, mutableBlockPos.set(k, j1, l), pConfig)) {
                 optionalInt = OptionalInt.of(j1 + 1);
             }
-            if (placeLog(pLevel, pBlockSetter, pRandom, blockpos$mutableblockpos.set(m, k1, n), pConfig)) {
+            if (placeLog(pLevel, pBlockSetter, pRandom, mutableBlockPos.set(m, k1, n), pConfig)) {
                 optionalInt1 = OptionalInt.of(k1 + 1);
             }
         }
@@ -94,10 +92,10 @@ public class CrossTrunkPlacer extends TrunkPlacer {
                 l += direction1.getStepZ();
                 m -= direction1.getStepX();
                 n -= direction1.getStepZ();
-                if (placeLog(pLevel, pBlockSetter, pRandom, blockpos$mutableblockpos.set(k, i2, l), pConfig)) {
+                if (placeLog(pLevel, pBlockSetter, pRandom, mutableBlockPos.set(k, i2, l), pConfig)) {
                     optionalInt = OptionalInt.of(i2 + 1);
                 }
-                if (placeLog(pLevel, pBlockSetter, pRandom, blockpos$mutableblockpos.set(m, l2, n), pConfig)) {
+                if (placeLog(pLevel, pBlockSetter, pRandom, mutableBlockPos.set(m, l2, n), pConfig)) {
                     optionalInt1 = OptionalInt.of(l2 + 1);
                 }
             }

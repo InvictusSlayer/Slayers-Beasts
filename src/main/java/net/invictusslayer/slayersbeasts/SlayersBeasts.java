@@ -4,7 +4,8 @@ import net.invictusslayer.slayersbeasts.block.entity.ModBlockEntities;
 import net.invictusslayer.slayersbeasts.init.*;
 import net.invictusslayer.slayersbeasts.util.ModBrewingRecipe;
 import net.invictusslayer.slayersbeasts.util.ModPoiTypes;
-import net.invictusslayer.slayersbeasts.world.feature.foliageplacers.ModFoliagePlacerTypes;
+import net.invictusslayer.slayersbeasts.world.feature.ModFeatures;
+import net.invictusslayer.slayersbeasts.world.feature.foliageplacer.ModFoliagePlacerTypes;
 import net.invictusslayer.slayersbeasts.world.feature.trunkplacer.ModTrunkPlacerTypes;
 import net.minecraft.world.item.alchemy.Potions;
 import net.minecraftforge.common.MinecraftForge;
@@ -25,13 +26,14 @@ public class SlayersBeasts {
 
         ModItems.register(eventBus);
         ModBlocks.register(eventBus);
+        ModBlockEntities.register(eventBus);
         ModEntities.register(eventBus);
         ModEffects.register(eventBus);
         ModPotions.register(eventBus);
 
         ModPoiTypes.register(eventBus);
 
-        ModBlockEntities.register(eventBus);
+        ModFeatures.register(eventBus);
 
         ModFoliagePlacerTypes.register(eventBus);
         ModTrunkPlacerTypes.register(eventBus);
@@ -50,9 +52,6 @@ public class SlayersBeasts {
 
     private void setup(final FMLCommonSetupEvent event) {
         event.enqueueWork(() -> {
-            ModPoiTypes.registerPOIs();
-            ModTrunkPlacerTypes.registerTrunkPlacers();
-
             BrewingRecipeRegistry.addRecipe(new ModBrewingRecipe(Potions.SLOWNESS,
                     ModItems.INSECT_EYE.get(), ModPotions.PARALYSIS_POTION.get()));
             BrewingRecipeRegistry.addRecipe(new ModBrewingRecipe(Potions.POISON,

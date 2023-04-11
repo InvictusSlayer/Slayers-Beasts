@@ -5,8 +5,8 @@ import com.google.common.base.Suppliers;
 import com.google.common.collect.ImmutableList;
 import net.invictusslayer.slayersbeasts.SlayersBeasts;
 import net.invictusslayer.slayersbeasts.init.ModBlocks;
-import net.invictusslayer.slayersbeasts.world.feature.foliageplacers.CajoleFoliagePlacer;
-import net.invictusslayer.slayersbeasts.world.feature.foliageplacers.EucalyptusFoliagePlacer;
+import net.invictusslayer.slayersbeasts.world.feature.foliageplacer.CajoleFoliagePlacer;
+import net.invictusslayer.slayersbeasts.world.feature.foliageplacer.EucalyptusFoliagePlacer;
 import net.invictusslayer.slayersbeasts.world.feature.trunkplacer.CrossTrunkPlacer;
 import net.minecraft.core.HolderGetter;
 import net.minecraft.core.registries.Registries;
@@ -69,7 +69,7 @@ public class ModConfiguredFeatures {
                 List.of(new WeightedPlacedFeature(placedFeatures.getOrThrow(ModPlacedFeatures.EUCALYPTUS_CHECKED_KEY),
                         0.5F)), placedFeatures.getOrThrow(ModPlacedFeatures.EUCALYPTUS_CHECKED_KEY)));
 
-        register(context, HUGE_WHITE_MUSHROOM, Feature.HUGE_BROWN_MUSHROOM, new HugeMushroomFeatureConfiguration(
+        register(context, HUGE_WHITE_MUSHROOM, ModFeatures.HUGE_WHITE_MUSHROOM.get(), new HugeMushroomFeatureConfiguration(
                 BlockStateProvider.simple(ModBlocks.WHITE_MUSHROOM_BLOCK.get().defaultBlockState()
                         .setValue(HugeMushroomBlock.UP, Boolean.TRUE).setValue(HugeMushroomBlock.DOWN, Boolean.FALSE)),
                 BlockStateProvider.simple(Blocks.MUSHROOM_STEM.defaultBlockState()

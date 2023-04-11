@@ -1,10 +1,10 @@
 package net.invictusslayer.slayersbeasts.init;
 
 import net.invictusslayer.slayersbeasts.SlayersBeasts;
-import net.invictusslayer.slayersbeasts.block.AnthillHatcheryBlock;
 import net.invictusslayer.slayersbeasts.block.AnthillBlock;
-import net.invictusslayer.slayersbeasts.block.OothecaBlock;
+import net.invictusslayer.slayersbeasts.block.AnthillHatcheryBlock;
 import net.invictusslayer.slayersbeasts.block.CajoleLeavesBlock;
+import net.invictusslayer.slayersbeasts.block.OothecaBlock;
 import net.invictusslayer.slayersbeasts.block.flammable.*;
 import net.invictusslayer.slayersbeasts.world.feature.ModConfiguredFeatures;
 import net.invictusslayer.slayersbeasts.world.feature.tree.CajoleTreeGrower;

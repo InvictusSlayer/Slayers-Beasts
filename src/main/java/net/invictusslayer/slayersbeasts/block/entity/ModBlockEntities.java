@@ -20,7 +20,6 @@ public class ModBlockEntities {
             BLOCK_ENTITIES.register("anthill_hatchery", () -> BlockEntityType.Builder.of(
                     AnthillHatcheryBlockEntity::new, ModBlocks.ANTHILL_HATCHERY.get()).build(null));
 
-
     public static void register(IEventBus eventBus) {
         BLOCK_ENTITIES.register(eventBus);
     }

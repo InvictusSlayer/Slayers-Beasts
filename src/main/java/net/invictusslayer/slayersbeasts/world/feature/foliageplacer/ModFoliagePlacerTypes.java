@@ -1,4 +1,4 @@
-package net.invictusslayer.slayersbeasts.world.feature.foliageplacers;
+package net.invictusslayer.slayersbeasts.world.feature.foliageplacer;
 
 import net.invictusslayer.slayersbeasts.SlayersBeasts;
 import net.minecraft.world.level.levelgen.feature.foliageplacers.FoliagePlacer;

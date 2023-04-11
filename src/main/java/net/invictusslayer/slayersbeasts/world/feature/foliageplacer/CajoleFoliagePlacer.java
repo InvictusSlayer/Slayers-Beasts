@@ -1,4 +1,4 @@
-package net.invictusslayer.slayersbeasts.world.feature.foliageplacers;
+package net.invictusslayer.slayersbeasts.world.feature.foliageplacer;
 
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
@@ -13,34 +13,28 @@ import net.minecraft.world.level.levelgen.feature.foliageplacers.FoliagePlacerTy
 
 import java.util.function.BiConsumer;
 
-public class EucalyptusFoliagePlacer extends FoliagePlacer {
-    public static final Codec<EucalyptusFoliagePlacer> CODEC = RecordCodecBuilder.create((instance) -> {
-        return foliagePlacerParts(instance).apply(instance, EucalyptusFoliagePlacer::new);
-    });
+public class CajoleFoliagePlacer extends FoliagePlacer {
+    public static final Codec<CajoleFoliagePlacer> CODEC = RecordCodecBuilder.create((instance) ->
+            foliagePlacerParts(instance).apply(instance, CajoleFoliagePlacer::new));
 
-    public EucalyptusFoliagePlacer(IntProvider pRadius, IntProvider pOffset) {
+    public CajoleFoliagePlacer(IntProvider pRadius, IntProvider pOffset) {
         super(pRadius, pOffset);
     }
 
     @Override
     protected FoliagePlacerType<?> type() {
-        return ModFoliagePlacerTypes.EUCALYPTUS_FOLIAGE_PLACER.get();
+        return ModFoliagePlacerTypes.CAJOLE_FOLIAGE_PLACER.get();
     }
 
     @Override
     protected void createFoliage(LevelSimulatedReader pLevel, BiConsumer<BlockPos, BlockState> pBlockSetter, RandomSource pRandom, TreeConfiguration pConfig, int pMaxFreeTreeHeight, FoliageAttachment pAttachment, int pFoliageHeight, int pFoliageRadius, int pOffset) {
         boolean flag = pAttachment.doubleTrunk();
         BlockPos blockpos = pAttachment.pos().above(pOffset);
-        this.placeLeavesRow(pLevel, pBlockSetter, pRandom, pConfig, blockpos, 0, -3, flag);
-        this.placeLeavesRow(pLevel, pBlockSetter, pRandom, pConfig, blockpos, 1, -2, flag);
+        this.placeLeavesRow(pLevel, pBlockSetter, pRandom, pConfig, blockpos, 0, -2, flag);
         this.placeLeavesRow(pLevel, pBlockSetter, pRandom, pConfig, blockpos, pFoliageRadius + pAttachment.radiusOffset() - 1, -1, flag);
         this.placeLeavesRow(pLevel, pBlockSetter, pRandom, pConfig, blockpos, pFoliageRadius - 1, 0, flag);
         this.placeLeavesRow(pLevel, pBlockSetter, pRandom, pConfig, blockpos, pFoliageRadius + pAttachment.radiusOffset() - 1, 0, flag);
-        this.placeLeavesRow(pLevel, pBlockSetter, pRandom, pConfig, blockpos, 2, 1, flag);
-        this.placeLeavesRow(pLevel, pBlockSetter, pRandom, pConfig, blockpos, 1, 2, flag);
-        this.placeLeavesRow(pLevel, pBlockSetter, pRandom, pConfig, blockpos, 0, 3, flag);
-        this.placeLeavesRow(pLevel, pBlockSetter, pRandom, pConfig, blockpos, 1, 4, flag);
-        this.placeLeavesRow(pLevel, pBlockSetter, pRandom, pConfig, blockpos, 0, 5, flag);
+        this.placeLeavesRow(pLevel, pBlockSetter, pRandom, pConfig, blockpos, 0, 1, flag);
     }
 
     @Override
