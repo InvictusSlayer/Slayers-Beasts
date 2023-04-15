@@ -37,7 +37,6 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 public abstract class AbstractAntEntity extends PathfinderMob {
-    private static final EntityDataAccessor<Byte> DATA_FLAGS_ID = SynchedEntityData.defineId(AbstractAntEntity.class, EntityDataSerializers.BYTE);
     private static final EntityDataAccessor<Integer> DATA_ANT_TYPE = SynchedEntityData.defineId(AbstractAntEntity.class, EntityDataSerializers.INT);
     private static final EntityDataAccessor<Integer> DATA_CARGO_TYPE = SynchedEntityData.defineId(AbstractAntEntity.class, EntityDataSerializers.INT);
     private int cooldownToEnterNest;
@@ -94,39 +93,29 @@ public abstract class AbstractAntEntity extends PathfinderMob {
 
     protected void defineSynchedData() {
         super.defineSynchedData();
-        this.entityData.define(DATA_FLAGS_ID, (byte) 0);
         this.entityData.define(DATA_ANT_TYPE, 0);
         this.entityData.define(DATA_CARGO_TYPE, 0);
+    }
+
+    public void setCooldownToEnterNest(int cooldown) {
+        this.cooldownToEnterNest = cooldown;
+    }
+
+    public int getAntType() {
+        return this.entityData.get(DATA_ANT_TYPE);
+    }
+    public void setAntType(int pTinyAntType) {
+        this.entityData.set(DATA_ANT_TYPE, pTinyAntType);
     }
 
     public int getCargoType() {
         return this.entityData.get(DATA_CARGO_TYPE);
     }
-
     public void setCargoType(int cargoType) {
-        if (cargoType != 0) {
+        if (cargoType != 99) {
             failedForagingTime = 0;
-            this.setFlag(2, true);
-        } else {
-            this.setFlag(2, false);
         }
         this.entityData.set(DATA_CARGO_TYPE, cargoType);
-    }
-
-    public boolean hasCargo() {
-        return this.getFlag(2);
-    }
-
-    private void setFlag(int id, boolean flag) {
-        if (flag) {
-            this.entityData.set(DATA_FLAGS_ID, (byte) (this.entityData.get(DATA_FLAGS_ID) | id));
-        } else {
-            this.entityData.set(DATA_FLAGS_ID, (byte) (this.entityData.get(DATA_FLAGS_ID) & ~id));
-        }
-    }
-
-    private boolean getFlag(int id) {
-        return (this.entityData.get(DATA_FLAGS_ID) & id) != 0;
     }
 
     @Override
@@ -140,30 +129,13 @@ public abstract class AbstractAntEntity extends PathfinderMob {
             --cooldownToLocateNest;
         }
 
-        if (!this.hasCargo()) {
+        if (this.getCargoType() == 99) {
             ++failedForagingTime;
         }
 
         if (this.tickCount % 20 == 0 && !this.hasValidNest()) {
             this.nestPos = null;
         }
-    }
-
-    boolean hasValidNest() {
-        if (this.nestPos == null) {
-            return false;
-        } else {
-            BlockEntity blockEntity = this.level.getBlockEntity(this.nestPos);
-            return blockEntity instanceof AnthillBlockEntity;
-        }
-    }
-
-    public int getAntType() {
-        return this.entityData.get(DATA_ANT_TYPE);
-    }
-
-    public void setAntType(int pTinyAntType) {
-        this.entityData.set(DATA_ANT_TYPE, pTinyAntType);
     }
 
     @Nullable
@@ -194,8 +166,13 @@ public abstract class AbstractAntEntity extends PathfinderMob {
         }
     }
 
-    public void setCooldownToEnterNest(int cooldown) {
-        this.cooldownToEnterNest = cooldown;
+    boolean hasValidNest() {
+        if (this.nestPos == null) {
+            return false;
+        } else {
+            BlockEntity blockEntity = this.level.getBlockEntity(this.nestPos);
+            return blockEntity instanceof AnthillBlockEntity;
+        }
     }
 
     private boolean nestHasSpace(BlockPos pNestPos) {
@@ -209,7 +186,7 @@ public abstract class AbstractAntEntity extends PathfinderMob {
 
     protected boolean wantsToEnterNest(AbstractAntEntity ant) {
         if (this.cooldownToEnterNest <= 0) {
-            return failedForagingTime > 3600 || hasCargo() || level.isRaining() || ant instanceof QueenAntEntity;
+            return failedForagingTime > 3600 || getCargoType() != 99 || level.isRaining() || ant instanceof QueenAntEntity;
         }
         return false;
     }
@@ -359,7 +336,7 @@ public abstract class AbstractAntEntity extends PathfinderMob {
         public void start() {
             BlockEntity blockEntity = mob.level.getBlockEntity(mob.nestPos);
             if (blockEntity instanceof AnthillBlockEntity anthillBlockEntity) {
-                anthillBlockEntity.addOccupant(mob, mob.getAntType(), mob.hasCargo());
+                anthillBlockEntity.addOccupant(mob, mob.getAntType(), mob.getCargoType() != 99);
             }
         }
     }

@@ -27,7 +27,7 @@ public class AntCargoLayer extends RenderLayer<WorkerAntEntity, WorkerAntModel<W
 
     @Override
     public void render(PoseStack pPoseStack, MultiBufferSource pBuffer, int pPackedLight, WorkerAntEntity pLivingEntity, float pLimbSwing, float pLimbSwingAmount, float pPartialTick, float pAgeInTicks, float pNetHeadYaw, float pHeadPitch) {
-        if (pLivingEntity.hasCargo()) {
+        if (pLivingEntity.getCargoType() != 99) {
             if (pLivingEntity.isInvisible()) {
                 Minecraft minecraft = Minecraft.getInstance();
                 boolean flag = minecraft.shouldEntityAppearGlowing(pLivingEntity);

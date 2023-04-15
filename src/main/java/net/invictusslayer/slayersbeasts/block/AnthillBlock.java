@@ -25,6 +25,7 @@ import net.minecraft.world.level.GameRules;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.BaseEntityBlock;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.RenderShape;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityTicker;
 import net.minecraft.world.level.block.entity.BlockEntityType;
@@ -49,6 +50,10 @@ public class AnthillBlock extends BaseEntityBlock {
         this.registerDefaultState(this.stateDefinition.any().setValue(FUNGUS_LEVEL, 0).setValue(SUPPLY_LEVEL, 0));
     }
 
+    protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> pBuilder) {
+        pBuilder.add(FUNGUS_LEVEL, SUPPLY_LEVEL);
+    }
+
     @Nullable
     public BlockEntity newBlockEntity(BlockPos pPos, BlockState pState) {
         return new AnthillBlockEntity(pPos, pState);
@@ -57,6 +62,10 @@ public class AnthillBlock extends BaseEntityBlock {
     @Nullable
     public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level pLevel, BlockState pState, BlockEntityType<T> pBlockEntityType) {
         return createTickerHelper(pBlockEntityType, ModBlockEntities.ANTHILL_BLOCK_ENTITY.get(), AnthillBlockEntity::serverTick);
+    }
+
+    public RenderShape getRenderShape(BlockState pState) {
+        return RenderShape.MODEL;
     }
 
     public static void dropMushroom(Level pLevel, BlockPos pPos) {
@@ -127,8 +136,7 @@ public class AnthillBlock extends BaseEntityBlock {
         }
     }
 
-    public void releaseAntsAndResetMushroomLevel(Level level, BlockState state, BlockPos pos, @Nullable Player player,
-                                                 AnthillBlockEntity.AntReleaseStatus releaseStatus) {
+    public void releaseAntsAndResetMushroomLevel(Level level, BlockState state, BlockPos pos, @Nullable Player player, AnthillBlockEntity.AntReleaseStatus releaseStatus) {
         this.resetMushroomLevel(level, state, pos);
         BlockEntity blockEntity = level.getBlockEntity(pos);
         if (blockEntity instanceof AnthillBlockEntity anthillBlockEntity) {
@@ -140,21 +148,11 @@ public class AnthillBlock extends BaseEntityBlock {
         level.setBlock(pos, state.setValue(FUNGUS_LEVEL, 0), 3);
     }
 
-//    public void resetSupplyLevel(Level level, BlockState state, BlockPos pos) {
-//        level.setBlock(pos, state.setValue(SUPPLY_LEVEL, 0), 3);
-//    }
-
-    protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> pBuilder) {
-        pBuilder.add(FUNGUS_LEVEL, SUPPLY_LEVEL);
-    }
-
     public void playerDestroy(Level pLevel, Player pPlayer, BlockPos pPos, BlockState pState, @Nullable BlockEntity pBlockEntity, ItemStack pTool) {
         super.playerDestroy(pLevel, pPlayer, pPos, pState, pBlockEntity, pTool);
         if (!pLevel.isClientSide && pBlockEntity instanceof AnthillBlockEntity anthillBlockEntity) {
-            //if (EnchantmentHelper.getItemEnchantmentLevel(Enchantments.SILK_TOUCH, pTool) == 0) {
             anthillBlockEntity.emptyAntsFromNest(pPlayer, pState, AnthillBlockEntity.AntReleaseStatus.EMERGENCY);
             this.angerNearbyAnts(pLevel, pPos);
-            //}
         }
     }
 
