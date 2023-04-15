@@ -5,8 +5,8 @@ import net.invictusslayer.slayersbeasts.init.*;
 import net.invictusslayer.slayersbeasts.util.ModBrewingRecipe;
 import net.invictusslayer.slayersbeasts.util.ModPoiTypes;
 import net.invictusslayer.slayersbeasts.world.feature.ModFeatures;
-import net.invictusslayer.slayersbeasts.world.feature.foliageplacer.ModFoliagePlacerTypes;
-import net.invictusslayer.slayersbeasts.world.feature.trunkplacer.ModTrunkPlacerTypes;
+import net.invictusslayer.slayersbeasts.world.feature.foliageplacer.ModFoliagePlacers;
+import net.invictusslayer.slayersbeasts.world.feature.trunkplacer.ModTrunkPlacers;
 import net.minecraft.world.item.alchemy.Potions;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.brewing.BrewingRecipeRegistry;
@@ -35,8 +35,8 @@ public class SlayersBeasts {
 
         ModFeatures.register(eventBus);
 
-        ModFoliagePlacerTypes.register(eventBus);
-        ModTrunkPlacerTypes.register(eventBus);
+        ModFoliagePlacers.register(eventBus);
+        ModTrunkPlacers.register(eventBus);
 
         eventBus.addListener(this::setup);
         eventBus.addListener(this::clientSetup);

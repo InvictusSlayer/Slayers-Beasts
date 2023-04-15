@@ -8,17 +8,17 @@ import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
 
-public class ModFoliagePlacerTypes<P extends FoliagePlacer> {
-    public static final DeferredRegister<FoliagePlacerType<?>> FOLIAGE_PLACER_TYPES =
+public class ModFoliagePlacers<P extends FoliagePlacer> {
+    public static final DeferredRegister<FoliagePlacerType<?>> FOLIAGE_PLACERS =
             DeferredRegister.create(ForgeRegistries.FOLIAGE_PLACER_TYPES, SlayersBeasts.MOD_ID);
 
     public static final RegistryObject<FoliagePlacerType<?>> CAJOLE_FOLIAGE_PLACER =
-            FOLIAGE_PLACER_TYPES.register("cajole_foliage_placer", () -> new FoliagePlacerType<>(CajoleFoliagePlacer.CODEC));
+            FOLIAGE_PLACERS.register("cajole_foliage_placer", () -> new FoliagePlacerType<>(CajoleFoliagePlacer.CODEC));
 
     public static final RegistryObject<FoliagePlacerType<?>> EUCALYPTUS_FOLIAGE_PLACER =
-            FOLIAGE_PLACER_TYPES.register("eucalyptus_foliage_placer", () -> new FoliagePlacerType<>(EucalyptusFoliagePlacer.CODEC));
+            FOLIAGE_PLACERS.register("eucalyptus_foliage_placer", () -> new FoliagePlacerType<>(EucalyptusFoliagePlacer.CODEC));
 
     public static void register(IEventBus eventBus) {
-        FOLIAGE_PLACER_TYPES.register(eventBus);
+        FOLIAGE_PLACERS.register(eventBus);
     }
 }

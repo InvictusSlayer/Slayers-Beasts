@@ -23,7 +23,7 @@ public class CajoleFoliagePlacer extends FoliagePlacer {
 
     @Override
     protected FoliagePlacerType<?> type() {
-        return ModFoliagePlacerTypes.CAJOLE_FOLIAGE_PLACER.get();
+        return ModFoliagePlacers.CAJOLE_FOLIAGE_PLACER.get();
     }
 
     @Override

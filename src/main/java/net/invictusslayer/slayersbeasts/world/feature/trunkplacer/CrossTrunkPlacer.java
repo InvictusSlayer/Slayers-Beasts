@@ -27,7 +27,7 @@ public class CrossTrunkPlacer extends TrunkPlacer {
 
     @Override
     protected TrunkPlacerType<?> type() {
-        return ModTrunkPlacerTypes.CROSS_TRUNK_PLACER.get();
+        return ModTrunkPlacers.CROSS_TRUNK_PLACER.get();
     }
 
     @Override
