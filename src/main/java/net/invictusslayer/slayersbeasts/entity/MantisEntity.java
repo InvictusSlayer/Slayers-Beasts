@@ -1,15 +1,12 @@
 package net.invictusslayer.slayersbeasts.entity;
 
 import net.invictusslayer.slayersbeasts.entity.poses.MantisWingPose;
-import net.invictusslayer.slayersbeasts.init.ModSounds;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
-import net.minecraft.sounds.SoundEvent;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.Difficulty;
-import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
@@ -19,7 +16,6 @@ import net.minecraft.world.entity.ai.goal.target.NearestAttackableTargetGoal;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelAccessor;
-import net.minecraft.world.phys.Vec3;
 
 public class MantisEntity extends PathfinderMob {
     private static final EntityDataAccessor<Boolean> DATA_IS_LEAPING = SynchedEntityData.defineId(MantisEntity.class, EntityDataSerializers.BOOLEAN);

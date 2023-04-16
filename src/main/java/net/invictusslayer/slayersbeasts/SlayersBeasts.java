@@ -4,7 +4,7 @@ import net.invictusslayer.slayersbeasts.block.entity.ModBlockEntities;
 import net.invictusslayer.slayersbeasts.init.*;
 import net.invictusslayer.slayersbeasts.misc.ModBrewingRecipe;
 import net.invictusslayer.slayersbeasts.misc.ModCreativeModeTab;
-import net.invictusslayer.slayersbeasts.misc.ModEffects;
+import net.invictusslayer.slayersbeasts.effect.ModEffects;
 import net.invictusslayer.slayersbeasts.misc.ModPotions;
 import net.invictusslayer.slayersbeasts.util.ModPoiTypes;
 import net.invictusslayer.slayersbeasts.world.feature.ModFeatures;

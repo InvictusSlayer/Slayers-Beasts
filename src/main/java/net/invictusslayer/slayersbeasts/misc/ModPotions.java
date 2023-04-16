@@ -1,7 +1,7 @@
 package net.invictusslayer.slayersbeasts.misc;
 
 import net.invictusslayer.slayersbeasts.SlayersBeasts;
-import net.invictusslayer.slayersbeasts.misc.ModEffects;
+import net.invictusslayer.slayersbeasts.effect.ModEffects;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.item.alchemy.Potion;
