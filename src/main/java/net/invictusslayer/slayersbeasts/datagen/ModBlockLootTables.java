@@ -31,6 +31,8 @@ public class ModBlockLootTables extends BlockLootSubProvider {
         dropOther(ModBlocks.ANTHILL.get(), ModBlocks.ANT_SOIL.get());
         dropOther(ModBlocks.ANTHILL_HATCHERY.get(), ModBlocks.ANT_SOIL.get());
 
+        dropSelf(ModBlocks.BLACK_SAND.get());
+
         dropSelf(ModBlocks.WHITE_MUSHROOM.get());
         add(ModBlocks.WHITE_MUSHROOM_BLOCK.get(), (block -> createMushroomBlockDrop(
                 ModBlocks.WHITE_MUSHROOM_BLOCK.get(), ModBlocks.WHITE_MUSHROOM.get())));

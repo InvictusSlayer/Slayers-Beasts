@@ -28,6 +28,8 @@ public class ModBlockStateProvider extends BlockStateProvider {
         cubeBottomTopBlockWithItem(ModBlocks.ANTHILL.get());
         cubeBottomTopBlockWithItem(ModBlocks.ANTHILL_HATCHERY.get());
 
+        cubeWithItem(ModBlocks.BLACK_SAND.get());
+
         saplingBlock(ModBlocks.WHITE_MUSHROOM.get());
         mushroomBlockWithItem(ModBlocks.WHITE_MUSHROOM_BLOCK.get());
 

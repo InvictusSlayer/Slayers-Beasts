@@ -16,6 +16,7 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.material.Material;
+import net.minecraft.world.level.material.MaterialColor;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
@@ -27,6 +28,16 @@ public final class ModBlocks {
     public static final DeferredRegister<Block> BLOCKS =
             DeferredRegister.create(ForgeRegistries.BLOCKS, SlayersBeasts.MOD_ID);
 
+    public static final RegistryObject<Block> JADE_BLOCK = registerBlock("jade_block",
+            () -> new Block(BlockBehaviour.Properties.of(Material.METAL).strength(9f).requiresCorrectToolForDrops()));
+
+    public static final RegistryObject<Block> EXOSKELETON_ORE = registerBlock("exoskeleton_ore",
+            () -> new DropExperienceBlock(BlockBehaviour.Properties.of(Material.STONE).strength(15f).requiresCorrectToolForDrops(),
+                    UniformInt.of(3, 7)));
+    public static final RegistryObject<Block> DEEPSLATE_EXOSKELETON_ORE = registerBlock("deepslate_exoskeleton_ore",
+            () -> new DropExperienceBlock(BlockBehaviour.Properties.of(Material.STONE).strength(25f).requiresCorrectToolForDrops(),
+                    UniformInt.of(3, 7)));
+
     public static final RegistryObject<Block> OOTHECA = registerBlock("ootheca",
             () -> new OothecaBlock(BlockBehaviour.Properties.of(Material.SCULK).strength(1f).noLootTable()));
 
@@ -37,15 +48,8 @@ public final class ModBlocks {
     public static final RegistryObject<Block> ANTHILL_HATCHERY = registerBlock("anthill_hatchery",
             () -> new AnthillHatcheryBlock(BlockBehaviour.Properties.of(Material.GRASS).strength(1f).sound(SoundType.ROOTED_DIRT)));
 
-    public static final RegistryObject<Block> JADE_BLOCK = registerBlock("jade_block",
-            () -> new Block(BlockBehaviour.Properties.of(Material.METAL).strength(9f).requiresCorrectToolForDrops()));
-
-    public static final RegistryObject<Block> EXOSKELETON_ORE = registerBlock("exoskeleton_ore",
-            () -> new DropExperienceBlock(BlockBehaviour.Properties.of(Material.STONE).strength(15f).requiresCorrectToolForDrops(),
-                    UniformInt.of(3, 7)));
-    public static final RegistryObject<Block> DEEPSLATE_EXOSKELETON_ORE = registerBlock("deepslate_exoskeleton_ore",
-            () -> new DropExperienceBlock(BlockBehaviour.Properties.of(Material.STONE).strength(25f).requiresCorrectToolForDrops(),
-                    UniformInt.of(3, 7)));
+    public static final RegistryObject<Block> BLACK_SAND = registerBlock("black_sand",
+            () -> new SandBlock(3748886, BlockBehaviour.Properties.of(Material.SAND, MaterialColor.COLOR_BLACK).strength(0.5F).sound(SoundType.SAND)));
 
     public static final RegistryObject<Block> WHITE_MUSHROOM = registerBlock("white_mushroom",
             () -> new MushroomBlock(BlockBehaviour.Properties.copy(Blocks.BROWN_MUSHROOM), ModConfiguredFeatures.HUGE_WHITE_MUSHROOM));

@@ -24,5 +24,9 @@ public class ModBlockTagsProvider extends BlockTagsProvider {
         this.tag(ModTags.Blocks.ANTHILL_REPLACEABLE).addTag(BlockTags.DIRT).addTag(BlockTags.BASE_STONE_OVERWORLD);
         this.tag(ModTags.Blocks.CAJOLE_LOGS).add(ModBlocks.CAJOLE_LOG.get()).add(ModBlocks.STRIPPED_CAJOLE_LOG.get()).add(ModBlocks.CAJOLE_WOOD.get()).add(ModBlocks.STRIPPED_CAJOLE_WOOD.get());
         this.tag(ModTags.Blocks.EUCALYPTUS_LOGS).add(ModBlocks.EUCALYPTUS_LOG.get()).add(ModBlocks.STRIPPED_EUCALYPTUS_LOG.get()).add(ModBlocks.EUCALYPTUS_WOOD.get()).add(ModBlocks.STRIPPED_EUCALYPTUS_WOOD.get());
+
+        this.tag(BlockTags.SAND).add(ModBlocks.BLACK_SAND.get());
+        this.tag(BlockTags.LOGS).addTag(ModTags.Blocks.CAJOLE_LOGS).addTag(ModTags.Blocks.EUCALYPTUS_LOGS);
+        this.tag(BlockTags.LOGS_THAT_BURN).addTag(ModTags.Blocks.CAJOLE_LOGS).addTag(ModTags.Blocks.EUCALYPTUS_LOGS);
     }
 }

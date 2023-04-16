@@ -2,7 +2,10 @@ package net.invictusslayer.slayersbeasts;
 
 import net.invictusslayer.slayersbeasts.block.entity.ModBlockEntities;
 import net.invictusslayer.slayersbeasts.init.*;
-import net.invictusslayer.slayersbeasts.util.ModBrewingRecipe;
+import net.invictusslayer.slayersbeasts.misc.ModBrewingRecipe;
+import net.invictusslayer.slayersbeasts.misc.ModCreativeModeTab;
+import net.invictusslayer.slayersbeasts.misc.ModEffects;
+import net.invictusslayer.slayersbeasts.misc.ModPotions;
 import net.invictusslayer.slayersbeasts.util.ModPoiTypes;
 import net.invictusslayer.slayersbeasts.world.feature.ModFeatures;
 import net.invictusslayer.slayersbeasts.world.feature.foliageplacer.ModFoliagePlacers;
@@ -83,6 +86,7 @@ public class SlayersBeasts {
             buildContents.accept(ModBlocks.ANT_SOIL);
             buildContents.accept(ModBlocks.ANTHILL);
             buildContents.accept(ModBlocks.ANTHILL_HATCHERY);
+            buildContents.accept(ModBlocks.BLACK_SAND);
             buildContents.accept(ModBlocks.WHITE_MUSHROOM);
             buildContents.accept(ModBlocks.WHITE_MUSHROOM_BLOCK);
 

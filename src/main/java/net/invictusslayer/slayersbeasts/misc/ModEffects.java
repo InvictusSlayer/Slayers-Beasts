@@ -1,4 +1,4 @@
-package net.invictusslayer.slayersbeasts.init;
+package net.invictusslayer.slayersbeasts.misc;
 
 import net.invictusslayer.slayersbeasts.SlayersBeasts;
 import net.invictusslayer.slayersbeasts.effect.ParalysisEffect;
