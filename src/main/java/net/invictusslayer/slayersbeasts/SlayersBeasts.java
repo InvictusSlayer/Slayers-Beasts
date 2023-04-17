@@ -7,6 +7,8 @@ import net.invictusslayer.slayersbeasts.misc.ModCreativeModeTab;
 import net.invictusslayer.slayersbeasts.effect.ModEffects;
 import net.invictusslayer.slayersbeasts.misc.ModPotions;
 import net.invictusslayer.slayersbeasts.util.ModPoiTypes;
+import net.invictusslayer.slayersbeasts.world.biome.ModBiomes;
+import net.invictusslayer.slayersbeasts.world.dimension.ModDimensions;
 import net.invictusslayer.slayersbeasts.world.feature.ModFeatures;
 import net.invictusslayer.slayersbeasts.world.feature.foliageplacer.ModFoliagePlacers;
 import net.invictusslayer.slayersbeasts.world.feature.trunkplacer.ModTrunkPlacers;
@@ -40,6 +42,9 @@ public class SlayersBeasts {
 
         ModFoliagePlacers.register(eventBus);
         ModTrunkPlacers.register(eventBus);
+
+        ModBiomes.register();
+        ModDimensions.register();
 
         eventBus.addListener(this::setup);
         eventBus.addListener(this::clientSetup);
