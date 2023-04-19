@@ -1,7 +1,7 @@
 package net.invictusslayer.slayersbeasts.item;
 
 import net.invictusslayer.slayersbeasts.block.SepulchraPortalBlock;
-import net.invictusslayer.slayersbeasts.init.ModBlocks;
+import net.invictusslayer.slayersbeasts.block.ModBlocks;
 import net.invictusslayer.slayersbeasts.world.dimension.ModDimensions;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
