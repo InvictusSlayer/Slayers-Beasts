@@ -1,0 +1,6 @@
+{
+  "variants": {
+    "axis=x": { "model": "slayersbeasts:block/sepulchra_portal_ns"},
+    "axis=z": { "model": "slayersbeasts:block/sepulchra_portal_ew"}
+  }
+}

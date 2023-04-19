@@ -6,7 +6,7 @@ import net.invictusslayer.slayersbeasts.misc.ModBrewingRecipe;
 import net.invictusslayer.slayersbeasts.misc.ModCreativeModeTab;
 import net.invictusslayer.slayersbeasts.effect.ModEffects;
 import net.invictusslayer.slayersbeasts.misc.ModPotions;
-import net.invictusslayer.slayersbeasts.util.ModPoiTypes;
+import net.invictusslayer.slayersbeasts.util.ModPOIs;
 import net.invictusslayer.slayersbeasts.world.biome.ModBiomes;
 import net.invictusslayer.slayersbeasts.world.dimension.ModDimensions;
 import net.invictusslayer.slayersbeasts.world.feature.ModFeatures;
@@ -36,7 +36,7 @@ public class SlayersBeasts {
         ModEffects.register(eventBus);
         ModPotions.register(eventBus);
 
-        ModPoiTypes.register(eventBus);
+        ModPOIs.register(eventBus);
 
         ModFeatures.register(eventBus);
 

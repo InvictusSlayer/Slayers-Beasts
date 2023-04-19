@@ -1,6 +1,7 @@
 package net.invictusslayer.slayersbeasts.init;
 
 import net.invictusslayer.slayersbeasts.SlayersBeasts;
+import net.invictusslayer.slayersbeasts.item.SepulchraIgnitionItem;
 import net.invictusslayer.slayersbeasts.misc.ModFoods;
 import net.minecraft.world.item.Item;
 import net.minecraftforge.common.ForgeSpawnEggItem;
@@ -13,7 +14,7 @@ public final class ModItems {
     public static final DeferredRegister<Item> ITEMS =
             DeferredRegister.create(ForgeRegistries.ITEMS, SlayersBeasts.MOD_ID);
 
-    public static final RegistryObject<Item> JADE = ITEMS.register("jade", () -> new Item(new Item.Properties()));
+    public static final RegistryObject<Item> JADE = ITEMS.register("jade", SepulchraIgnitionItem::new);
     public static final RegistryObject<Item> JADE_SHARD = ITEMS.register("jade_shard", () -> new Item(new Item.Properties()));
     public static final RegistryObject<Item> CRYSTALLINE_WING = ITEMS.register("crystalline_wing", () -> new Item(new Item.Properties().stacksTo(1)));
     public static final RegistryObject<Item> CRYSTALLINE_CLAW = ITEMS.register("crystalline_claw", () -> new Item(new Item.Properties().stacksTo(1)));
@@ -39,8 +40,8 @@ public final class ModItems {
             () -> new ForgeSpawnEggItem(ModEntities.QUEEN_ANT_ENTITY, 0xffffff, 0xffffff, new Item.Properties()));
     public static final RegistryObject<ForgeSpawnEggItem> DAMSELFLY_SPAWN_EGG = ITEMS.register("damselfly_spawn_egg",
             () -> new ForgeSpawnEggItem(ModEntities.DAMSELFLY_ENTITY, 0x4f1785, 0x4dcf29, new Item.Properties()));
-    public static final RegistryObject<ForgeSpawnEggItem> VENUS_FLYTRAP_SPAWN_EGG = ITEMS.register("venus_flytrap_spawn_egg",
-            () -> new ForgeSpawnEggItem(ModEntities.VENUS_FLYTRAP_ENTITY, 0x2f7f2f, 0xffff31, new Item.Properties()));
+//    public static final RegistryObject<ForgeSpawnEggItem> VENUS_FLYTRAP_SPAWN_EGG = ITEMS.register("venus_flytrap_spawn_egg",
+//            () -> new ForgeSpawnEggItem(ModEntities.VENUS_FLYTRAP_ENTITY, 0x2f7f2f, 0xffff31, new Item.Properties()));
     public static final RegistryObject<ForgeSpawnEggItem> WITHER_SPIDER_SPAWN_EGG = ITEMS.register("wither_spider_spawn_egg",
             () -> new ForgeSpawnEggItem(ModEntities.WITHER_SPIDER_ENTITY, 0x3d0f0f, 0x171313, new Item.Properties()));
 

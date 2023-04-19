@@ -1,10 +1,7 @@
 package net.invictusslayer.slayersbeasts.init;
 
 import net.invictusslayer.slayersbeasts.SlayersBeasts;
-import net.invictusslayer.slayersbeasts.block.AnthillBlock;
-import net.invictusslayer.slayersbeasts.block.AnthillHatcheryBlock;
-import net.invictusslayer.slayersbeasts.block.CajoleLeavesBlock;
-import net.invictusslayer.slayersbeasts.block.OothecaBlock;
+import net.invictusslayer.slayersbeasts.block.*;
 import net.invictusslayer.slayersbeasts.block.flammable.*;
 import net.invictusslayer.slayersbeasts.world.feature.ModConfiguredFeatures;
 import net.invictusslayer.slayersbeasts.world.feature.tree.CajoleTreeGrower;
@@ -27,6 +24,8 @@ import java.util.function.Supplier;
 public final class ModBlocks {
     public static final DeferredRegister<Block> BLOCKS =
             DeferredRegister.create(ForgeRegistries.BLOCKS, SlayersBeasts.MOD_ID);
+
+    public static final RegistryObject<Block> SEPULCHRA_PORTAL = BLOCKS.register("sepulchra_portal", SepulchraPortalBlock::new);
 
     public static final RegistryObject<Block> JADE_BLOCK = registerBlock("jade_block",
             () -> new Block(BlockBehaviour.Properties.of(Material.METAL).strength(9f).requiresCorrectToolForDrops()));
@@ -134,8 +133,8 @@ public final class ModBlocks {
         return toReturn;
     }
 
-    private static <T extends Block> RegistryObject<Item> registerBlockItem(String name, RegistryObject<T> block) {
-        return ModItems.ITEMS.register(name, () -> new BlockItem(block.get(), new Item.Properties()));
+    private static <T extends Block> void registerBlockItem(String name, RegistryObject<T> block) {
+        ModItems.ITEMS.register(name, () -> new BlockItem(block.get(), new Item.Properties()));
     }
 
     public static void register(IEventBus eventBus) {
