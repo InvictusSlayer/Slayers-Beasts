@@ -87,6 +87,7 @@ public class AnthillBlock extends BaseEntityBlock {
         }
     }
 
+    @SuppressWarnings("deprecation")
     public InteractionResult use(BlockState pState, Level pLevel, BlockPos pPos, Player pPlayer, InteractionHand pHand, BlockHitResult pHit) {
         ItemStack handItem = pPlayer.getItemInHand(pHand);
         int i = pState.getValue(FUNGUS_LEVEL);
@@ -185,6 +186,7 @@ public class AnthillBlock extends BaseEntityBlock {
         super.playerWillDestroy(pLevel, pPos, pState, pPlayer);
     }
 
+    @SuppressWarnings("deprecation")
     public List<ItemStack> getDrops(BlockState pState, LootContext.Builder pBuilder) {
         Entity entity = pBuilder.getOptionalParameter(LootContextParams.THIS_ENTITY);
         if (entity instanceof PrimedTnt || entity instanceof Creeper || entity instanceof WitherSkull ||

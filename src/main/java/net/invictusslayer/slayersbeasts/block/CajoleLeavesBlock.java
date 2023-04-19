@@ -33,6 +33,7 @@ public class CajoleLeavesBlock extends LeavesBlock {
         }
     }
 
+    @SuppressWarnings("deprecation")
     @Override
     public void spawnAfterBreak(BlockState pState, ServerLevel pLevel, BlockPos pPos, ItemStack pStack, boolean pDropExperience) {
         this.spawnInfestation(pLevel, pPos);
