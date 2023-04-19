@@ -4,7 +4,7 @@ import net.invictusslayer.slayersbeasts.block.AnthillBlock;
 import net.invictusslayer.slayersbeasts.entity.AbstractAntEntity;
 import net.invictusslayer.slayersbeasts.entity.QueenAntEntity;
 import net.invictusslayer.slayersbeasts.entity.SoldierAntEntity;
-import net.invictusslayer.slayersbeasts.init.ModBlocks;
+import net.invictusslayer.slayersbeasts.block.ModBlocks;
 import net.invictusslayer.slayersbeasts.util.ModTags;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;

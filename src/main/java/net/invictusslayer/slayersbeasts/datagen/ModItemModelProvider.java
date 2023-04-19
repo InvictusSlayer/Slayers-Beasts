@@ -1,8 +1,8 @@
 package net.invictusslayer.slayersbeasts.datagen;
 
 import net.invictusslayer.slayersbeasts.SlayersBeasts;
-import net.invictusslayer.slayersbeasts.init.ModBlocks;
-import net.invictusslayer.slayersbeasts.init.ModItems;
+import net.invictusslayer.slayersbeasts.block.ModBlocks;
+import net.invictusslayer.slayersbeasts.item.ModItems;
 import net.minecraft.data.PackOutput;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Item;

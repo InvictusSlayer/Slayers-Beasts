@@ -1,6 +1,6 @@
 package net.invictusslayer.slayersbeasts.datagen;
 
-import net.invictusslayer.slayersbeasts.init.ModBlocks;
+import net.invictusslayer.slayersbeasts.block.ModBlocks;
 import net.minecraft.data.BlockFamily;
 import net.minecraft.world.level.block.Block;
 import net.minecraftforge.registries.ForgeRegistries;

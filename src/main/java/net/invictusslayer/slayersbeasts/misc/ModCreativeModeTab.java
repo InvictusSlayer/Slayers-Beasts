@@ -1,7 +1,7 @@
 package net.invictusslayer.slayersbeasts.misc;
 
 import net.invictusslayer.slayersbeasts.SlayersBeasts;
-import net.invictusslayer.slayersbeasts.init.ModBlocks;
+import net.invictusslayer.slayersbeasts.block.ModBlocks;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.CreativeModeTab;

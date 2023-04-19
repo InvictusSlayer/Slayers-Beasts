@@ -2,7 +2,7 @@ package net.invictusslayer.slayersbeasts.util;
 
 import com.google.common.collect.ImmutableSet;
 import net.invictusslayer.slayersbeasts.SlayersBeasts;
-import net.invictusslayer.slayersbeasts.init.ModBlocks;
+import net.invictusslayer.slayersbeasts.block.ModBlocks;
 import net.minecraft.world.entity.ai.village.poi.PoiType;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.registries.DeferredRegister;

@@ -2,7 +2,7 @@ package net.invictusslayer.slayersbeasts.event;
 
 import net.invictusslayer.slayersbeasts.SlayersBeasts;
 import net.invictusslayer.slayersbeasts.entity.*;
-import net.invictusslayer.slayersbeasts.init.ModEntities;
+import net.invictusslayer.slayersbeasts.entity.ModEntities;
 import net.minecraft.world.entity.SpawnPlacements;
 import net.minecraft.world.level.levelgen.Heightmap;
 import net.minecraftforge.event.entity.EntityAttributeCreationEvent;

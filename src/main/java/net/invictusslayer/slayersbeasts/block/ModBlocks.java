@@ -1,8 +1,8 @@
-package net.invictusslayer.slayersbeasts.init;
+package net.invictusslayer.slayersbeasts.block;
 
 import net.invictusslayer.slayersbeasts.SlayersBeasts;
-import net.invictusslayer.slayersbeasts.block.*;
 import net.invictusslayer.slayersbeasts.block.flammable.*;
+import net.invictusslayer.slayersbeasts.item.ModItems;
 import net.invictusslayer.slayersbeasts.world.feature.ModConfiguredFeatures;
 import net.invictusslayer.slayersbeasts.world.feature.tree.CajoleTreeGrower;
 import net.invictusslayer.slayersbeasts.world.feature.tree.EucalyptusTreeGrower;

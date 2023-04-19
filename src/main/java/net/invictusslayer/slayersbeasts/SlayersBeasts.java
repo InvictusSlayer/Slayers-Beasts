@@ -1,7 +1,9 @@
 package net.invictusslayer.slayersbeasts;
 
+import net.invictusslayer.slayersbeasts.block.ModBlocks;
 import net.invictusslayer.slayersbeasts.block.entity.ModBlockEntities;
-import net.invictusslayer.slayersbeasts.init.*;
+import net.invictusslayer.slayersbeasts.entity.ModEntities;
+import net.invictusslayer.slayersbeasts.item.ModItems;
 import net.invictusslayer.slayersbeasts.misc.ModBrewingRecipe;
 import net.invictusslayer.slayersbeasts.misc.ModCreativeModeTab;
 import net.invictusslayer.slayersbeasts.effect.ModEffects;
@@ -35,14 +37,10 @@ public class SlayersBeasts {
         ModEntities.register(eventBus);
         ModEffects.register(eventBus);
         ModPotions.register(eventBus);
-
-        ModPOIs.register(eventBus);
-
-        ModFeatures.register(eventBus);
-
         ModFoliagePlacers.register(eventBus);
         ModTrunkPlacers.register(eventBus);
-
+        ModFeatures.register(eventBus);
+        ModPOIs.register(eventBus);
         ModBiomes.register();
         ModDimensions.register();
 

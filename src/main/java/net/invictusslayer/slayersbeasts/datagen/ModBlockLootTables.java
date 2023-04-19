@@ -1,7 +1,7 @@
 package net.invictusslayer.slayersbeasts.datagen;
 
-import net.invictusslayer.slayersbeasts.init.ModBlocks;
-import net.invictusslayer.slayersbeasts.init.ModItems;
+import net.invictusslayer.slayersbeasts.block.ModBlocks;
+import net.invictusslayer.slayersbeasts.item.ModItems;
 import net.minecraft.data.loot.BlockLootSubProvider;
 import net.minecraft.world.flag.FeatureFlags;
 import net.minecraft.world.item.enchantment.Enchantments;

@@ -1,4 +1,4 @@
-package net.invictusslayer.slayersbeasts.init;
+package net.invictusslayer.slayersbeasts.entity;
 
 import net.invictusslayer.slayersbeasts.SlayersBeasts;
 import net.invictusslayer.slayersbeasts.entity.*;

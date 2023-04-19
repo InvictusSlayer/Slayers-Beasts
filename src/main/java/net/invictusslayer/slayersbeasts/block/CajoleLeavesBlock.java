@@ -1,6 +1,6 @@
 package net.invictusslayer.slayersbeasts.block;
 
-import net.invictusslayer.slayersbeasts.init.ModEntities;
+import net.invictusslayer.slayersbeasts.entity.ModEntities;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.server.level.ServerLevel;

@@ -1,7 +1,7 @@
 package net.invictusslayer.slayersbeasts.world.dimension.portal;
 
 import net.invictusslayer.slayersbeasts.block.SepulchraPortalBlock;
-import net.invictusslayer.slayersbeasts.init.ModBlocks;
+import net.invictusslayer.slayersbeasts.block.ModBlocks;
 import net.invictusslayer.slayersbeasts.util.ModPOIs;
 import net.invictusslayer.slayersbeasts.world.dimension.ModDimensions;
 import net.minecraft.BlockUtil;
@@ -40,12 +40,12 @@ public class ModPortalForcer implements ITeleporter {
 
     @Nullable
     @Override
-    public PortalInfo getPortalInfo(Entity entity, ServerLevel level, Function<ServerLevel, PortalInfo> defaultPortalInfo) {
-        boolean destinationIsUG = level.dimension() == ModDimensions.SEPULCHRA_KEY;
-        if (entity.level.dimension() != ModDimensions.SEPULCHRA_KEY && !destinationIsUG) return null;
+    public PortalInfo getPortalInfo(Entity entity, ServerLevel destLevel, Function<ServerLevel, PortalInfo> defaultPortalInfo) {
+        boolean isSepulchra = destLevel.dimension() == ModDimensions.SEPULCHRA_KEY;
+        if (entity.level.dimension() != ModDimensions.SEPULCHRA_KEY && !isSepulchra) return null;
         else {
-            WorldBorder worldBorder = level.getWorldBorder();
-            double scale = DimensionType.getTeleportationScale(entity.level.dimensionType(), level.dimensionType());
+            WorldBorder worldBorder = destLevel.getWorldBorder();
+            double scale = DimensionType.getTeleportationScale(entity.level.dimensionType(), destLevel.dimensionType());
             BlockPos blockPos = worldBorder.clampToBounds(entity.getX() * scale, entity.getY(), entity.getZ() * scale);
             return this.getPortal(entity, blockPos, worldBorder).map((result) -> {
                 BlockState blockstate = entity.level.getBlockState(entity.portalEntrancePos);
@@ -60,7 +60,7 @@ public class ModPortalForcer implements ITeleporter {
                     vec3 = new Vec3(0.5D, 0.0D, 0.0D);
                 }
 
-                return PortalShape.createPortalInfo(level, result, axis, vec3, entity, entity.getDeltaMovement(), entity.getYRot(), entity.getXRot());
+                return PortalShape.createPortalInfo(destLevel, result, axis, vec3, entity, entity.getDeltaMovement(), entity.getYRot(), entity.getXRot());
             }).orElse(null);
         }
     }

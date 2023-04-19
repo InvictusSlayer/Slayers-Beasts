@@ -1,6 +1,7 @@
-package net.invictusslayer.slayersbeasts.init;
+package net.invictusslayer.slayersbeasts.item;
 
 import net.invictusslayer.slayersbeasts.SlayersBeasts;
+import net.invictusslayer.slayersbeasts.entity.ModEntities;
 import net.invictusslayer.slayersbeasts.item.SepulchraIgnitionItem;
 import net.invictusslayer.slayersbeasts.misc.ModFoods;
 import net.minecraft.world.item.Item;

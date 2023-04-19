@@ -3,7 +3,6 @@ package net.invictusslayer.slayersbeasts.block;
 import net.invictusslayer.slayersbeasts.block.entity.AnthillBlockEntity;
 import net.invictusslayer.slayersbeasts.block.entity.ModBlockEntities;
 import net.invictusslayer.slayersbeasts.entity.SoldierAntEntity;
-import net.invictusslayer.slayersbeasts.init.ModBlocks;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.stats.Stats;
