@@ -1,7 +1,7 @@
 package net.invictusslayer.slayersbeasts.world.dimension.portal;
 
-import net.invictusslayer.slayersbeasts.block.SepulchraPortalBlock;
 import net.invictusslayer.slayersbeasts.block.ModBlocks;
+import net.invictusslayer.slayersbeasts.block.SepulchraPortalBlock;
 import net.invictusslayer.slayersbeasts.util.ModPOIs;
 import net.invictusslayer.slayersbeasts.world.dimension.ModDimensions;
 import net.minecraft.BlockUtil;
@@ -82,6 +82,7 @@ public class ModPortalForcer implements ITeleporter {
     private Optional<BlockUtil.FoundRectangle> locatePortal(BlockPos pos, WorldBorder worldBorder) {
         PoiManager poiManager = this.level.getPoiManager();
         poiManager.ensureLoadedAndValid(this.level, pos, 128);
+        System.out.println(ModPOIs.SEPULCHRA_PORTAL.getKey());
         Optional<PoiRecord> optional = poiManager
                 .getInSquare((poi) -> poi.is(ModPOIs.SEPULCHRA_PORTAL.getKey()), pos, 128, PoiManager.Occupancy.ANY)
                 .filter((poi) -> worldBorder.isWithinBounds(poi.getPos()))

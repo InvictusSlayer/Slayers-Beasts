@@ -23,7 +23,6 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.block.state.properties.EnumProperty;
-import net.minecraft.world.level.material.Material;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import net.minecraftforge.api.distmarker.Dist;
@@ -35,13 +34,13 @@ import net.minecraftforge.eventbus.api.Cancelable;
 import javax.annotation.Nullable;
 
 public class SepulchraPortalBlock extends Block {
-    public static final EnumProperty<Direction.Axis> AXIS = BlockStateProperties.AXIS;
+    public static final EnumProperty<Direction.Axis> AXIS = BlockStateProperties.HORIZONTAL_AXIS;
     protected static final VoxelShape X_AABB = Block.box(0, 0, 6, 16, 16, 10);
     protected static final VoxelShape Z_AABB = Block.box(6, 0, 0, 10, 16, 16);
 
-    public SepulchraPortalBlock() {
-        super(Properties.of(Material.PORTAL).strength(-1).noCollission().lightLevel((state) -> 10).noLootTable());
-        registerDefaultState(stateDefinition.any().setValue(AXIS, Direction.Axis.X));
+    public SepulchraPortalBlock(Properties properties) {
+        super(properties);
+        this.registerDefaultState(this.stateDefinition.any().setValue(AXIS, Direction.Axis.X));
     }
 
     @SuppressWarnings("deprecation")
