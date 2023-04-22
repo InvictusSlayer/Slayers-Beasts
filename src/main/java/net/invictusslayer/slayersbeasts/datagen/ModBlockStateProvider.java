@@ -68,6 +68,24 @@ public class ModBlockStateProvider extends BlockStateProvider {
                 extend(blockTexture(ModBlocks.EUCALYPTUS_DOOR.get()), "_bottom"),
                 extend(blockTexture(ModBlocks.EUCALYPTUS_DOOR.get()), "_top"), "cutout");
         trapdoorBlockWithRenderTypeAndItem((TrapDoorBlock) ModBlocks.EUCALYPTUS_TRAPDOOR.get(), true, "cutout");
+        
+        logBlockWithItem((RotatedPillarBlock) ModBlocks.ASPEN_LOG.get());
+        logBlockWithItem((RotatedPillarBlock) ModBlocks.STRIPPED_ASPEN_LOG.get());
+        woodBlockWithItem((RotatedPillarBlock) ModBlocks.ASPEN_WOOD.get(), blockTexture(ModBlocks.ASPEN_LOG.get()));
+        woodBlockWithItem((RotatedPillarBlock) ModBlocks.STRIPPED_ASPEN_WOOD.get(), blockTexture(ModBlocks.STRIPPED_ASPEN_LOG.get()));
+        cubeWithItem(ModBlocks.ASPEN_LEAVES.get());
+        saplingBlock(ModBlocks.ASPEN_SAPLING.get());
+        cubeWithItem(ModBlocks.ASPEN_PLANKS.get());
+        slabBlockWithItem((SlabBlock) ModBlocks.ASPEN_SLAB.get(), blockTexture(ModBlocks.ASPEN_PLANKS.get()), blockTexture(ModBlocks.ASPEN_PLANKS.get()));
+        stairBlockWithItem((StairBlock) ModBlocks.ASPEN_STAIRS.get(), blockTexture(ModBlocks.ASPEN_PLANKS.get()));
+        fenceBlockWithItem((FenceBlock) ModBlocks.ASPEN_FENCE.get(), blockTexture(ModBlocks.ASPEN_PLANKS.get()));
+        fenceGateBlockWithItem((FenceGateBlock) ModBlocks.ASPEN_FENCE_GATE.get(), blockTexture(ModBlocks.ASPEN_PLANKS.get()));
+        buttonBlockWithItem((ButtonBlock) ModBlocks.ASPEN_BUTTON.get(), blockTexture(ModBlocks.ASPEN_PLANKS.get()));
+        pressurePlateBlockWithItem((PressurePlateBlock) ModBlocks.ASPEN_PRESSURE_PLATE.get(), blockTexture(ModBlocks.ASPEN_PLANKS.get()));
+        doorBlockWithRenderType((DoorBlock) ModBlocks.ASPEN_DOOR.get(),
+                extend(blockTexture(ModBlocks.ASPEN_DOOR.get()), "_bottom"),
+                extend(blockTexture(ModBlocks.ASPEN_DOOR.get()), "_top"), "cutout");
+        trapdoorBlockWithRenderTypeAndItem((TrapDoorBlock) ModBlocks.ASPEN_TRAPDOOR.get(), true, "cutout");
     }
 
     private void mushroomBlockWithItem(Block block) {

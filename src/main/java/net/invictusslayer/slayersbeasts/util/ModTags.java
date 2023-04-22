@@ -17,20 +17,18 @@ public class ModTags {
         public static final TagKey<Block> ANTHILL_REPLACEABLE = tag("anthill_replaceable");
         public static final TagKey<Block> CAJOLE_LOGS = tag("cajole_logs");
         public static final TagKey<Block> EUCALYPTUS_LOGS = tag("eucalyptus_logs");
+        public static final TagKey<Block> ASPEN_LOGS = tag("aspen_logs");
         public static final TagKey<Block> SEPULCHRA_PORTAL_FRAME = tag("sepulchra_portal_frame");
 
         private static TagKey<Block> tag(String name) {
             return BlockTags.create(new ResourceLocation(SlayersBeasts.MOD_ID, name));
-        }
-
-        private static TagKey<Block> forgeTag(String name) {
-            return BlockTags.create(new ResourceLocation("forge", name));
         }
     }
 
     public static class Items {
         public static final TagKey<Item> CAJOLE_LOGS = tag("cajole_logs");
         public static final TagKey<Item> EUCALYPTUS_LOGS = tag("eucalyptus_logs");
+        public static final TagKey<Item> ASPEN_LOGS = tag("aspen_logs");
         public static final TagKey<Item> JADE_GEMS = forgeTag("gems/jade");
 
         private static TagKey<Item> tag(String name) {

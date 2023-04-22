@@ -70,6 +70,23 @@ public class ModBlockLootTables extends BlockLootSubProvider {
         dropSelf(ModBlocks.EUCALYPTUS_PRESSURE_PLATE.get());
         dropSelf(ModBlocks.EUCALYPTUS_DOOR.get());
         dropSelf(ModBlocks.EUCALYPTUS_TRAPDOOR.get());
+
+        dropSelf(ModBlocks.ASPEN_LOG.get());
+        dropSelf(ModBlocks.STRIPPED_ASPEN_LOG.get());
+        dropSelf(ModBlocks.ASPEN_WOOD.get());
+        dropSelf(ModBlocks.STRIPPED_ASPEN_WOOD.get());
+        add(ModBlocks.ASPEN_LEAVES.get(), (block) -> createLeavesDrops(
+                ModBlocks.ASPEN_LEAVES.get(), ModBlocks.ASPEN_SAPLING.get(), 0.05f));
+        dropSelf(ModBlocks.ASPEN_SAPLING.get());
+        dropSelf(ModBlocks.ASPEN_PLANKS.get());
+        add(ModBlocks.ASPEN_SLAB.get(), (block) -> createSlabItemTable(ModBlocks.ASPEN_SLAB.get()));
+        dropSelf(ModBlocks.ASPEN_STAIRS.get());
+        dropSelf(ModBlocks.ASPEN_FENCE.get());
+        dropSelf(ModBlocks.ASPEN_FENCE_GATE.get());
+        dropSelf(ModBlocks.ASPEN_BUTTON.get());
+        dropSelf(ModBlocks.ASPEN_PRESSURE_PLATE.get());
+        dropSelf(ModBlocks.ASPEN_DOOR.get());
+        dropSelf(ModBlocks.ASPEN_TRAPDOOR.get());
     }
 
     protected LootTable.Builder createExoskeletonOreDrops(Block block) {

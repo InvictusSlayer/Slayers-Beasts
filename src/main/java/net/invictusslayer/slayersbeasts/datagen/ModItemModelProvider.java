@@ -37,6 +37,8 @@ public class ModItemModelProvider extends ItemModelProvider {
         blockItem(ModBlocks.CAJOLE_SAPLING);
         simpleItem(ModBlocks.EUCALYPTUS_DOOR);
         blockItem(ModBlocks.EUCALYPTUS_SAPLING);
+        simpleItem(ModBlocks.ASPEN_DOOR);
+        blockItem(ModBlocks.ASPEN_SAPLING);
         blockItem(ModBlocks.WHITE_MUSHROOM);
 
         spawnEggItem(ModItems.MANTIS_SPAWN_EGG);

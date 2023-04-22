@@ -1,0 +1,8 @@
+{
+  "type": "forge:add_features",
+  "biomes": [
+    "slayersbeasts:aspen_forest"
+  ],
+  "features": "slayersbeasts:aspen_placed",
+  "step": "vegetal_decoration"
+}

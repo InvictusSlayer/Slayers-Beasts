@@ -25,6 +25,7 @@ import net.minecraft.world.level.levelgen.feature.featuresize.TwoLayersFeatureSi
 import net.minecraft.world.level.levelgen.feature.stateproviders.BlockStateProvider;
 import net.minecraft.world.level.levelgen.feature.treedecorators.LeaveVineDecorator;
 import net.minecraft.world.level.levelgen.feature.treedecorators.TrunkVineDecorator;
+import net.minecraft.world.level.levelgen.feature.trunkplacers.StraightTrunkPlacer;
 import net.minecraft.world.level.levelgen.placement.PlacedFeature;
 import net.minecraft.world.level.levelgen.structure.templatesystem.TagMatchTest;
 
@@ -35,6 +36,8 @@ public class ModConfiguredFeatures {
     public static final ResourceKey<ConfiguredFeature<?, ?>> CAJOLE_SPAWN_KEY = registerKey("cajole_spawn");
     public static final ResourceKey<ConfiguredFeature<?, ?>> EUCALYPTUS_KEY = registerKey("eucalyptus");
     public static final ResourceKey<ConfiguredFeature<?, ?>> EUCALYPTUS_SPAWN_KEY = registerKey("eucalyptus_spawn");
+    public static final ResourceKey<ConfiguredFeature<?, ?>> ASPEN_KEY = registerKey("aspen");
+    public static final ResourceKey<ConfiguredFeature<?, ?>> ASPEN_SPAWN_KEY = registerKey("aspen_spawn");
 
     public static final ResourceKey<ConfiguredFeature<?, ?>> HUGE_WHITE_MUSHROOM = registerKey("huge_white_mushroom");
 
@@ -57,8 +60,14 @@ public class ModConfiguredFeatures {
                 .ignoreVines().build());
         register(context, EUCALYPTUS_KEY, Feature.TREE, new TreeConfiguration.TreeConfigurationBuilder(
                 BlockStateProvider.simple(ModBlocks.EUCALYPTUS_LOG.get()),
-                new CrossTrunkPlacer(15, 10, 2),
+                new CrossTrunkPlacer(14, 8, 2),
                 BlockStateProvider.simple(ModBlocks.EUCALYPTUS_LEAVES.get()),
+                new EucalyptusFoliagePlacer(ConstantInt.of(2), ConstantInt.of(0)),
+                new TwoLayersFeatureSize(1, 0, 2)).build());
+        register(context, ASPEN_KEY, Feature.TREE, new TreeConfiguration.TreeConfigurationBuilder(
+                BlockStateProvider.simple(ModBlocks.ASPEN_LOG.get()),
+                new StraightTrunkPlacer(8, 5, 2),
+                BlockStateProvider.simple(ModBlocks.ASPEN_LEAVES.get()),
                 new EucalyptusFoliagePlacer(ConstantInt.of(2), ConstantInt.of(0)),
                 new TwoLayersFeatureSize(1, 0, 2)).build());
 
@@ -68,6 +77,9 @@ public class ModConfiguredFeatures {
         register(context, EUCALYPTUS_SPAWN_KEY, Feature.RANDOM_SELECTOR, new RandomFeatureConfiguration(
                 List.of(new WeightedPlacedFeature(placedFeatures.getOrThrow(ModPlacedFeatures.EUCALYPTUS_CHECKED_KEY),
                         0.5F)), placedFeatures.getOrThrow(ModPlacedFeatures.EUCALYPTUS_CHECKED_KEY)));
+        register(context, ASPEN_SPAWN_KEY, Feature.RANDOM_SELECTOR, new RandomFeatureConfiguration(
+                List.of(new WeightedPlacedFeature(placedFeatures.getOrThrow(ModPlacedFeatures.ASPEN_CHECKED_KEY),
+                        0.5F)), placedFeatures.getOrThrow(ModPlacedFeatures.ASPEN_CHECKED_KEY)));
 
         register(context, HUGE_WHITE_MUSHROOM, ModFeatures.HUGE_WHITE_MUSHROOM.get(), new HugeMushroomFeatureConfiguration(
                 BlockStateProvider.simple(ModBlocks.WHITE_MUSHROOM_BLOCK.get().defaultBlockState()

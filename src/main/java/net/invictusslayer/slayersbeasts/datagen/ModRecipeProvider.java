@@ -33,8 +33,7 @@ public class ModRecipeProvider extends RecipeProvider implements IConditionBuild
                 .define('L', Items.LEATHER).define('B', Items.SLIME_BALL).pattern("LSL").pattern("SBS").pattern("LSL")
                 .unlockedBy("has_leather", inventoryTrigger(ItemPredicate.Builder.item().of(Items.LEATHER).build())).save(consumer);
 
-        nineBlockStorageRecipes(consumer, RecipeCategory.MISC, ModItems.JADE.get(),
-                RecipeCategory.BUILDING_BLOCKS, ModBlocks.JADE_BLOCK.get());
+        nineBlockStorageRecipes(consumer, RecipeCategory.MISC, ModItems.JADE.get(), RecipeCategory.BUILDING_BLOCKS, ModBlocks.JADE_BLOCK.get());
 
         generateForModBlockFamilies(consumer);
         planksFromLog(consumer, ModBlocks.CAJOLE_PLANKS.get(), ModTags.Items.CAJOLE_LOGS, 4);
@@ -43,6 +42,9 @@ public class ModRecipeProvider extends RecipeProvider implements IConditionBuild
         planksFromLog(consumer, ModBlocks.EUCALYPTUS_PLANKS.get(), ModTags.Items.EUCALYPTUS_LOGS, 4);
         woodFromLogs(consumer, ModBlocks.EUCALYPTUS_WOOD.get(), ModBlocks.EUCALYPTUS_LOG.get());
         woodFromLogs(consumer, ModBlocks.STRIPPED_EUCALYPTUS_WOOD.get(), ModBlocks.STRIPPED_EUCALYPTUS_LOG.get());
+        planksFromLog(consumer, ModBlocks.ASPEN_PLANKS.get(), ModTags.Items.ASPEN_LOGS, 4);
+        woodFromLogs(consumer, ModBlocks.ASPEN_WOOD.get(), ModBlocks.ASPEN_LOG.get());
+        woodFromLogs(consumer, ModBlocks.STRIPPED_ASPEN_WOOD.get(), ModBlocks.STRIPPED_ASPEN_LOG.get());
 
     }
 

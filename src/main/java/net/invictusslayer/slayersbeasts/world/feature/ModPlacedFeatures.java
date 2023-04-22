@@ -28,6 +28,9 @@ public class ModPlacedFeatures {
     public static final ResourceKey<PlacedFeature> EUCALYPTUS_CHECKED_KEY = createKey("eucalyptus_checked");
     public static final ResourceKey<PlacedFeature> EUCALYPTUS_PLACED_KEY = createKey("eucalyptus_placed");
 
+    public static final ResourceKey<PlacedFeature> ASPEN_CHECKED_KEY = createKey("aspen_checked");
+    public static final ResourceKey<PlacedFeature> ASPEN_PLACED_KEY = createKey("aspen_placed");
+
     public static final ResourceKey<PlacedFeature> EXOSKELETON_ORE_PLACED_KEY = createKey("exoskeleton_ore_placed");
     public static final ResourceKey<PlacedFeature> LUSH_EXOSKELETON_ORE_PLACED_KEY = createKey("lush_exoskeleton_ore_placed");
 
@@ -43,6 +46,11 @@ public class ModPlacedFeatures {
                 List.of(PlacementUtils.filteredByBlockSurvival(ModBlocks.EUCALYPTUS_SAPLING.get())));
         register(context, EUCALYPTUS_PLACED_KEY, configuredFeatures.getOrThrow(ModConfiguredFeatures.EUCALYPTUS_KEY),
                 VegetationPlacements.treePlacement(PlacementUtils.countExtra(1, 0.1f, 1), ModBlocks.EUCALYPTUS_SAPLING.get()));
+        
+        register(context, ASPEN_CHECKED_KEY, configuredFeatures.getOrThrow(ModConfiguredFeatures.ASPEN_KEY),
+                List.of(PlacementUtils.filteredByBlockSurvival(ModBlocks.ASPEN_SAPLING.get())));
+        register(context, ASPEN_PLACED_KEY, configuredFeatures.getOrThrow(ModConfiguredFeatures.ASPEN_KEY),
+                VegetationPlacements.treePlacement(PlacementUtils.countExtra(1, 0.1f, 1), ModBlocks.ASPEN_SAPLING.get()));
 
         register(context, EXOSKELETON_ORE_PLACED_KEY, configuredFeatures.getOrThrow(ModConfiguredFeatures.OVERWORLD_EXOSKELETON_ORE_KEY),
                 rareOrePlacement(1, HeightRangePlacement.triangle(VerticalAnchor.aboveBottom(-80), VerticalAnchor.aboveBottom(80))));
