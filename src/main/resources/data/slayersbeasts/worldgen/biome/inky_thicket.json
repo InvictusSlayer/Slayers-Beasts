@@ -1,5 +1,5 @@
 {
-  "temperature": 0.8,
+  "temperature": 0.9,
   "downfall": 0.8,
   "precipitation": "rain",
   "effects": {
@@ -20,6 +20,12 @@
     ]
   },
   "spawn_costs": {},
-  "carvers": {},
+  "carvers": {
+    "air": [
+      "minecraft:cave",
+      "minecraft:cave_extra_underground",
+      "minecraft:canyon"
+    ]
+  },
   "features": []
 }

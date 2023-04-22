@@ -1,6 +1,10 @@
 {
   "type": "forge:add_features",
-  "biomes": "#minecraft:is_jungle",
+  "biomes": [
+    "slayersbeasts:inky_thicket",
+    "minecraft:sparse_jungle",
+    "minecraft:jungle"
+  ],
   "features": "slayersbeasts:cajole_placed",
   "step": "vegetal_decoration"
 }
