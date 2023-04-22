@@ -1,8 +1,0 @@
-{
-  "replace": false,
-  "values": [
-    "slayersbeasts:worker_ant_entity",
-    "slayersbeasts:soldier_ant_entity",
-    "slayersbeasts:queen_ant_entity"
-  ]
-}

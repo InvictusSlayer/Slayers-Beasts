@@ -1,4 +1,4 @@
-package net.invictusslayer.slayersbeasts.datagen;
+package net.invictusslayer.slayersbeasts.datagen.tags;
 
 import net.invictusslayer.slayersbeasts.SlayersBeasts;
 import net.invictusslayer.slayersbeasts.block.ModBlocks;

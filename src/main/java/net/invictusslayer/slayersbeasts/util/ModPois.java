@@ -9,7 +9,7 @@ import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
 
-public class ModPOIs {
+public class ModPois {
     public static final DeferredRegister<PoiType> POIS =
             DeferredRegister.create(ForgeRegistries.POI_TYPES, SlayersBeasts.MOD_ID);
 
