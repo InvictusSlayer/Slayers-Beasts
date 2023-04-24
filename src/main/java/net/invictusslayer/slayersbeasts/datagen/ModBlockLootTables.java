@@ -2,6 +2,7 @@ package net.invictusslayer.slayersbeasts.datagen;
 
 import net.invictusslayer.slayersbeasts.block.ModBlocks;
 import net.invictusslayer.slayersbeasts.item.ModItems;
+import net.minecraft.data.BlockFamily;
 import net.minecraft.data.loot.BlockLootSubProvider;
 import net.minecraft.world.flag.FeatureFlags;
 import net.minecraft.world.item.enchantment.Enchantments;
@@ -22,6 +23,8 @@ public class ModBlockLootTables extends BlockLootSubProvider {
 
     @Override
     protected void generate() {
+        ModBlockFamilies.getAllFamilies().forEach(this::generateForBlockFamily);
+
         dropSelf(ModBlocks.JADE_BLOCK.get());
 
         add(ModBlocks.EXOSKELETON_ORE.get(), (block -> createExoskeletonOreDrops(ModBlocks.EXOSKELETON_ORE.get())));
@@ -44,15 +47,6 @@ public class ModBlockLootTables extends BlockLootSubProvider {
         add(ModBlocks.CAJOLE_LEAVES.get(), (block) -> createLeavesDrops(
                 ModBlocks.CAJOLE_LEAVES.get(), ModBlocks.CAJOLE_SAPLING.get(), 0.025f));
         dropSelf(ModBlocks.CAJOLE_SAPLING.get());
-        dropSelf(ModBlocks.CAJOLE_PLANKS.get());
-        add(ModBlocks.CAJOLE_SLAB.get(), (block) -> createSlabItemTable(ModBlocks.CAJOLE_SLAB.get()));
-        dropSelf(ModBlocks.CAJOLE_STAIRS.get());
-        dropSelf(ModBlocks.CAJOLE_FENCE.get());
-        dropSelf(ModBlocks.CAJOLE_FENCE_GATE.get());
-        dropSelf(ModBlocks.CAJOLE_BUTTON.get());
-        dropSelf(ModBlocks.CAJOLE_PRESSURE_PLATE.get());
-        dropSelf(ModBlocks.CAJOLE_DOOR.get());
-        dropSelf(ModBlocks.CAJOLE_TRAPDOOR.get());
 
         dropSelf(ModBlocks.EUCALYPTUS_LOG.get());
         dropSelf(ModBlocks.STRIPPED_EUCALYPTUS_LOG.get());
@@ -61,15 +55,6 @@ public class ModBlockLootTables extends BlockLootSubProvider {
         add(ModBlocks.EUCALYPTUS_LEAVES.get(), (block) -> createLeavesDrops(
                 ModBlocks.EUCALYPTUS_LEAVES.get(), ModBlocks.EUCALYPTUS_SAPLING.get(), 0.05f));
         dropSelf(ModBlocks.EUCALYPTUS_SAPLING.get());
-        dropSelf(ModBlocks.EUCALYPTUS_PLANKS.get());
-        add(ModBlocks.EUCALYPTUS_SLAB.get(), (block) -> createSlabItemTable(ModBlocks.EUCALYPTUS_SLAB.get()));
-        dropSelf(ModBlocks.EUCALYPTUS_STAIRS.get());
-        dropSelf(ModBlocks.EUCALYPTUS_FENCE.get());
-        dropSelf(ModBlocks.EUCALYPTUS_FENCE_GATE.get());
-        dropSelf(ModBlocks.EUCALYPTUS_BUTTON.get());
-        dropSelf(ModBlocks.EUCALYPTUS_PRESSURE_PLATE.get());
-        dropSelf(ModBlocks.EUCALYPTUS_DOOR.get());
-        dropSelf(ModBlocks.EUCALYPTUS_TRAPDOOR.get());
 
         dropSelf(ModBlocks.ASPEN_LOG.get());
         dropSelf(ModBlocks.STRIPPED_ASPEN_LOG.get());
@@ -78,15 +63,18 @@ public class ModBlockLootTables extends BlockLootSubProvider {
         add(ModBlocks.ASPEN_LEAVES.get(), (block) -> createLeavesDrops(
                 ModBlocks.ASPEN_LEAVES.get(), ModBlocks.ASPEN_SAPLING.get(), 0.05f));
         dropSelf(ModBlocks.ASPEN_SAPLING.get());
-        dropSelf(ModBlocks.ASPEN_PLANKS.get());
-        add(ModBlocks.ASPEN_SLAB.get(), (block) -> createSlabItemTable(ModBlocks.ASPEN_SLAB.get()));
-        dropSelf(ModBlocks.ASPEN_STAIRS.get());
-        dropSelf(ModBlocks.ASPEN_FENCE.get());
-        dropSelf(ModBlocks.ASPEN_FENCE_GATE.get());
-        dropSelf(ModBlocks.ASPEN_BUTTON.get());
-        dropSelf(ModBlocks.ASPEN_PRESSURE_PLATE.get());
-        dropSelf(ModBlocks.ASPEN_DOOR.get());
-        dropSelf(ModBlocks.ASPEN_TRAPDOOR.get());
+    }
+
+    private void generateForBlockFamily(BlockFamily family) {
+        dropSelf(family.getBaseBlock());
+        add(family.get(BlockFamily.Variant.SLAB), this::createSlabItemTable);
+        dropSelf(family.get(BlockFamily.Variant.STAIRS));
+        dropSelf(family.get(BlockFamily.Variant.FENCE));
+        dropSelf(family.get(BlockFamily.Variant.FENCE_GATE));
+        dropSelf(family.get(BlockFamily.Variant.BUTTON));
+        dropSelf(family.get(BlockFamily.Variant.PRESSURE_PLATE));
+        add(family.get(BlockFamily.Variant.DOOR), this::createDoorTable);
+        dropSelf(family.get(BlockFamily.Variant.TRAPDOOR));
     }
 
     protected LootTable.Builder createExoskeletonOreDrops(Block block) {

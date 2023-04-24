@@ -13,17 +13,17 @@ import net.minecraft.world.level.levelgen.feature.foliageplacers.FoliagePlacerTy
 
 import java.util.function.BiConsumer;
 
-public class EucalyptusFoliagePlacer extends FoliagePlacer {
-    public static final Codec<EucalyptusFoliagePlacer> CODEC = RecordCodecBuilder.create((instance) ->
-            foliagePlacerParts(instance).apply(instance, EucalyptusFoliagePlacer::new));
+public class AspenFoliagePlacer extends FoliagePlacer {
+    public static final Codec<AspenFoliagePlacer> CODEC = RecordCodecBuilder.create((instance) ->
+            foliagePlacerParts(instance).apply(instance, AspenFoliagePlacer::new));
 
-    public EucalyptusFoliagePlacer(IntProvider pRadius, IntProvider pOffset) {
+    public AspenFoliagePlacer(IntProvider pRadius, IntProvider pOffset) {
         super(pRadius, pOffset);
     }
 
     @Override
     protected FoliagePlacerType<?> type() {
-        return ModFoliagePlacers.EUCALYPTUS_FOLIAGE_PLACER.get();
+        return ModFoliagePlacers.ASPEN_FOLIAGE_PLACER.get();
     }
 
     @Override

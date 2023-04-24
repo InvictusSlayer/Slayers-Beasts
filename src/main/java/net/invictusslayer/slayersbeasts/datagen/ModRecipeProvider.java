@@ -45,7 +45,6 @@ public class ModRecipeProvider extends RecipeProvider implements IConditionBuild
         planksFromLog(consumer, ModBlocks.ASPEN_PLANKS.get(), ModTags.Items.ASPEN_LOGS, 4);
         woodFromLogs(consumer, ModBlocks.ASPEN_WOOD.get(), ModBlocks.ASPEN_LOG.get());
         woodFromLogs(consumer, ModBlocks.STRIPPED_ASPEN_WOOD.get(), ModBlocks.STRIPPED_ASPEN_LOG.get());
-
     }
 
     protected void generateForModBlockFamilies(Consumer<FinishedRecipe> pFinishedRecipeConsumer) {

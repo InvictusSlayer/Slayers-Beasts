@@ -5,6 +5,7 @@ import com.google.common.base.Suppliers;
 import com.google.common.collect.ImmutableList;
 import net.invictusslayer.slayersbeasts.SlayersBeasts;
 import net.invictusslayer.slayersbeasts.block.ModBlocks;
+import net.invictusslayer.slayersbeasts.world.feature.foliageplacer.AspenFoliagePlacer;
 import net.invictusslayer.slayersbeasts.world.feature.foliageplacer.CajoleFoliagePlacer;
 import net.invictusslayer.slayersbeasts.world.feature.foliageplacer.EucalyptusFoliagePlacer;
 import net.invictusslayer.slayersbeasts.world.feature.trunkplacer.CrossTrunkPlacer;
@@ -68,7 +69,7 @@ public class ModConfiguredFeatures {
                 BlockStateProvider.simple(ModBlocks.ASPEN_LOG.get()),
                 new StraightTrunkPlacer(8, 5, 2),
                 BlockStateProvider.simple(ModBlocks.ASPEN_LEAVES.get()),
-                new EucalyptusFoliagePlacer(ConstantInt.of(2), ConstantInt.of(0)),
+                new AspenFoliagePlacer(ConstantInt.of(2), ConstantInt.of(0)),
                 new TwoLayersFeatureSize(1, 0, 2)).build());
 
         register(context, CAJOLE_SPAWN_KEY, Feature.RANDOM_SELECTOR, new RandomFeatureConfiguration(

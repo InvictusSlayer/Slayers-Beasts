@@ -33,13 +33,13 @@ public class ModItemModelProvider extends ItemModelProvider {
         simpleItem(ModItems.TIED_LEATHER);
         simpleItem(ModItems.TANNED_LEATHER);
 
+        blockItem(ModBlocks.WHITE_MUSHROOM);
         simpleItem(ModBlocks.CAJOLE_DOOR);
         blockItem(ModBlocks.CAJOLE_SAPLING);
         simpleItem(ModBlocks.EUCALYPTUS_DOOR);
         blockItem(ModBlocks.EUCALYPTUS_SAPLING);
         simpleItem(ModBlocks.ASPEN_DOOR);
         blockItem(ModBlocks.ASPEN_SAPLING);
-        blockItem(ModBlocks.WHITE_MUSHROOM);
 
         spawnEggItem(ModItems.MANTIS_SPAWN_EGG);
         simpleItem(ModItems.WORKER_ANT_SPAWN_EGG);

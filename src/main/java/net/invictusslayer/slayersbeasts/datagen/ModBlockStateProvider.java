@@ -2,6 +2,7 @@ package net.invictusslayer.slayersbeasts.datagen;
 
 import net.invictusslayer.slayersbeasts.SlayersBeasts;
 import net.invictusslayer.slayersbeasts.block.ModBlocks;
+import net.minecraft.data.BlockFamily;
 import net.minecraft.data.PackOutput;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.block.*;
@@ -19,6 +20,8 @@ public class ModBlockStateProvider extends BlockStateProvider {
 
     @Override
     protected void registerStatesAndModels() {
+        ModBlockFamilies.getAllFamilies().forEach(this::registerBlockFamily);
+
         cubeWithItem(ModBlocks.JADE_BLOCK.get());
         cubeWithItem(ModBlocks.EXOSKELETON_ORE.get());
         cubeWithItem(ModBlocks.DEEPSLATE_EXOSKELETON_ORE.get());
@@ -39,17 +42,6 @@ public class ModBlockStateProvider extends BlockStateProvider {
         woodBlockWithItem((RotatedPillarBlock) ModBlocks.STRIPPED_CAJOLE_WOOD.get(), blockTexture(ModBlocks.STRIPPED_CAJOLE_LOG.get()));
         cubeWithItem(ModBlocks.CAJOLE_LEAVES.get());
         saplingBlock(ModBlocks.CAJOLE_SAPLING.get());
-        cubeWithItem(ModBlocks.CAJOLE_PLANKS.get());
-        slabBlockWithItem((SlabBlock) ModBlocks.CAJOLE_SLAB.get(), blockTexture(ModBlocks.CAJOLE_PLANKS.get()), blockTexture(ModBlocks.CAJOLE_PLANKS.get()));
-        stairBlockWithItem((StairBlock) ModBlocks.CAJOLE_STAIRS.get(), blockTexture(ModBlocks.CAJOLE_PLANKS.get()));
-        fenceBlockWithItem((FenceBlock) ModBlocks.CAJOLE_FENCE.get(), blockTexture(ModBlocks.CAJOLE_PLANKS.get()));
-        fenceGateBlockWithItem((FenceGateBlock) ModBlocks.CAJOLE_FENCE_GATE.get(), blockTexture(ModBlocks.CAJOLE_PLANKS.get()));
-        buttonBlockWithItem((ButtonBlock) ModBlocks.CAJOLE_BUTTON.get(), blockTexture(ModBlocks.CAJOLE_PLANKS.get()));
-        pressurePlateBlockWithItem((PressurePlateBlock) ModBlocks.CAJOLE_PRESSURE_PLATE.get(), blockTexture(ModBlocks.CAJOLE_PLANKS.get()));
-        doorBlockWithRenderType((DoorBlock) ModBlocks.CAJOLE_DOOR.get(),
-                extend(blockTexture(ModBlocks.CAJOLE_DOOR.get()), "_bottom"),
-                extend(blockTexture(ModBlocks.CAJOLE_DOOR.get()), "_top"), "cutout");
-        trapdoorBlockWithRenderTypeAndItem((TrapDoorBlock) ModBlocks.CAJOLE_TRAPDOOR.get(), true, "cutout");
 
         logBlockWithItem((RotatedPillarBlock) ModBlocks.EUCALYPTUS_LOG.get());
         logBlockWithItem((RotatedPillarBlock) ModBlocks.STRIPPED_EUCALYPTUS_LOG.get());
@@ -57,35 +49,27 @@ public class ModBlockStateProvider extends BlockStateProvider {
         woodBlockWithItem((RotatedPillarBlock) ModBlocks.STRIPPED_EUCALYPTUS_WOOD.get(), blockTexture(ModBlocks.STRIPPED_EUCALYPTUS_LOG.get()));
         cubeWithItem(ModBlocks.EUCALYPTUS_LEAVES.get());
         saplingBlock(ModBlocks.EUCALYPTUS_SAPLING.get());
-        cubeWithItem(ModBlocks.EUCALYPTUS_PLANKS.get());
-        slabBlockWithItem((SlabBlock) ModBlocks.EUCALYPTUS_SLAB.get(), blockTexture(ModBlocks.EUCALYPTUS_PLANKS.get()), blockTexture(ModBlocks.EUCALYPTUS_PLANKS.get()));
-        stairBlockWithItem((StairBlock) ModBlocks.EUCALYPTUS_STAIRS.get(), blockTexture(ModBlocks.EUCALYPTUS_PLANKS.get()));
-        fenceBlockWithItem((FenceBlock) ModBlocks.EUCALYPTUS_FENCE.get(), blockTexture(ModBlocks.EUCALYPTUS_PLANKS.get()));
-        fenceGateBlockWithItem((FenceGateBlock) ModBlocks.EUCALYPTUS_FENCE_GATE.get(), blockTexture(ModBlocks.EUCALYPTUS_PLANKS.get()));
-        buttonBlockWithItem((ButtonBlock) ModBlocks.EUCALYPTUS_BUTTON.get(), blockTexture(ModBlocks.EUCALYPTUS_PLANKS.get()));
-        pressurePlateBlockWithItem((PressurePlateBlock) ModBlocks.EUCALYPTUS_PRESSURE_PLATE.get(), blockTexture(ModBlocks.EUCALYPTUS_PLANKS.get()));
-        doorBlockWithRenderType((DoorBlock) ModBlocks.EUCALYPTUS_DOOR.get(),
-                extend(blockTexture(ModBlocks.EUCALYPTUS_DOOR.get()), "_bottom"),
-                extend(blockTexture(ModBlocks.EUCALYPTUS_DOOR.get()), "_top"), "cutout");
-        trapdoorBlockWithRenderTypeAndItem((TrapDoorBlock) ModBlocks.EUCALYPTUS_TRAPDOOR.get(), true, "cutout");
-        
+
         logBlockWithItem((RotatedPillarBlock) ModBlocks.ASPEN_LOG.get());
         logBlockWithItem((RotatedPillarBlock) ModBlocks.STRIPPED_ASPEN_LOG.get());
         woodBlockWithItem((RotatedPillarBlock) ModBlocks.ASPEN_WOOD.get(), blockTexture(ModBlocks.ASPEN_LOG.get()));
         woodBlockWithItem((RotatedPillarBlock) ModBlocks.STRIPPED_ASPEN_WOOD.get(), blockTexture(ModBlocks.STRIPPED_ASPEN_LOG.get()));
         cubeWithItem(ModBlocks.ASPEN_LEAVES.get());
         saplingBlock(ModBlocks.ASPEN_SAPLING.get());
-        cubeWithItem(ModBlocks.ASPEN_PLANKS.get());
-        slabBlockWithItem((SlabBlock) ModBlocks.ASPEN_SLAB.get(), blockTexture(ModBlocks.ASPEN_PLANKS.get()), blockTexture(ModBlocks.ASPEN_PLANKS.get()));
-        stairBlockWithItem((StairBlock) ModBlocks.ASPEN_STAIRS.get(), blockTexture(ModBlocks.ASPEN_PLANKS.get()));
-        fenceBlockWithItem((FenceBlock) ModBlocks.ASPEN_FENCE.get(), blockTexture(ModBlocks.ASPEN_PLANKS.get()));
-        fenceGateBlockWithItem((FenceGateBlock) ModBlocks.ASPEN_FENCE_GATE.get(), blockTexture(ModBlocks.ASPEN_PLANKS.get()));
-        buttonBlockWithItem((ButtonBlock) ModBlocks.ASPEN_BUTTON.get(), blockTexture(ModBlocks.ASPEN_PLANKS.get()));
-        pressurePlateBlockWithItem((PressurePlateBlock) ModBlocks.ASPEN_PRESSURE_PLATE.get(), blockTexture(ModBlocks.ASPEN_PLANKS.get()));
-        doorBlockWithRenderType((DoorBlock) ModBlocks.ASPEN_DOOR.get(),
-                extend(blockTexture(ModBlocks.ASPEN_DOOR.get()), "_bottom"),
-                extend(blockTexture(ModBlocks.ASPEN_DOOR.get()), "_top"), "cutout");
-        trapdoorBlockWithRenderTypeAndItem((TrapDoorBlock) ModBlocks.ASPEN_TRAPDOOR.get(), true, "cutout");
+    }
+
+    private void registerBlockFamily(BlockFamily family) {
+        cubeWithItem(family.getBaseBlock());
+        slabBlockWithItem((SlabBlock) family.get(BlockFamily.Variant.SLAB), blockTexture(family.getBaseBlock()), blockTexture(family.getBaseBlock()));
+        stairBlockWithItem((StairBlock) family.get(BlockFamily.Variant.STAIRS), blockTexture(family.getBaseBlock()));
+        fenceBlockWithItem((FenceBlock) family.get(BlockFamily.Variant.FENCE), blockTexture(family.getBaseBlock()));
+        fenceGateBlockWithItem((FenceGateBlock) family.get(BlockFamily.Variant.FENCE_GATE), blockTexture(family.getBaseBlock()));
+        buttonBlockWithItem((ButtonBlock) family.get(BlockFamily.Variant.BUTTON), blockTexture(family.getBaseBlock()));
+        pressurePlateBlockWithItem((PressurePlateBlock) family.get(BlockFamily.Variant.PRESSURE_PLATE), blockTexture(family.getBaseBlock()));
+        doorBlockWithRenderType((DoorBlock) family.get(BlockFamily.Variant.DOOR),
+                extend(blockTexture(family.get(BlockFamily.Variant.DOOR)), "_bottom"),
+                extend(blockTexture(family.get(BlockFamily.Variant.DOOR)), "_top"), "cutout");
+        trapdoorBlockWithRenderTypeAndItem((TrapDoorBlock) family.get(BlockFamily.Variant.TRAPDOOR), true, "cutout");
     }
 
     private void mushroomBlockWithItem(Block block) {
@@ -146,7 +130,7 @@ public class ModBlockStateProvider extends BlockStateProvider {
         trapdoorBlockWithRenderType(block, blockTexture(block), orientable, renderType);
         simpleBlockItem(block, models().withExistingParent(name(block), "minecraft:block/template_trapdoor_bottom").texture("texture", blockTexture(block)));
     }
-
+    
     private void cubeWithItem(Block block) {
         simpleBlockWithItem(block, cubeAll(block));
     }
