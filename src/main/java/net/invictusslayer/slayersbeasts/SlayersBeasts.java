@@ -89,7 +89,19 @@ public class SlayersBeasts {
             buildContents.accept(ModBlocks.ANT_SOIL);
             buildContents.accept(ModBlocks.ANTHILL);
             buildContents.accept(ModBlocks.ANTHILL_HATCHERY);
+
             buildContents.accept(ModBlocks.BLACK_SAND);
+            buildContents.accept(ModBlocks.BLACK_SANDSTONE);
+            buildContents.accept(ModBlocks.BLACK_SANDSTONE_SLAB);
+            buildContents.accept(ModBlocks.BLACK_SANDSTONE_STAIRS);
+            buildContents.accept(ModBlocks.BLACK_SANDSTONE_WALL);
+            buildContents.accept(ModBlocks.SMOOTH_BLACK_SANDSTONE);
+            buildContents.accept(ModBlocks.SMOOTH_BLACK_SANDSTONE_SLAB);
+            buildContents.accept(ModBlocks.SMOOTH_BLACK_SANDSTONE_STAIRS);
+            buildContents.accept(ModBlocks.CUT_BLACK_SANDSTONE);
+            buildContents.accept(ModBlocks.CUT_BLACK_SANDSTONE_SLAB);
+            buildContents.accept(ModBlocks.CHISELED_BLACK_SANDSTONE);
+
             buildContents.accept(ModBlocks.WHITE_MUSHROOM);
             buildContents.accept(ModBlocks.WHITE_MUSHROOM_BLOCK);
 

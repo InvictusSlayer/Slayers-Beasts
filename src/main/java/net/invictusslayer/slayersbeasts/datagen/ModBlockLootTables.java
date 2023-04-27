@@ -23,7 +23,7 @@ public class ModBlockLootTables extends BlockLootSubProvider {
 
     @Override
     protected void generate() {
-        ModBlockFamilies.getAllFamilies().forEach(this::generateForBlockFamily);
+        generateForBlockFamilies();
 
         dropSelf(ModBlocks.JADE_BLOCK.get());
 
@@ -65,16 +65,19 @@ public class ModBlockLootTables extends BlockLootSubProvider {
         dropSelf(ModBlocks.ASPEN_SAPLING.get());
     }
 
-    private void generateForBlockFamily(BlockFamily family) {
-        dropSelf(family.getBaseBlock());
-        add(family.get(BlockFamily.Variant.SLAB), this::createSlabItemTable);
-        dropSelf(family.get(BlockFamily.Variant.STAIRS));
-        dropSelf(family.get(BlockFamily.Variant.FENCE));
-        dropSelf(family.get(BlockFamily.Variant.FENCE_GATE));
-        dropSelf(family.get(BlockFamily.Variant.BUTTON));
-        dropSelf(family.get(BlockFamily.Variant.PRESSURE_PLATE));
-        add(family.get(BlockFamily.Variant.DOOR), this::createDoorTable);
-        dropSelf(family.get(BlockFamily.Variant.TRAPDOOR));
+    private void generateForBlockFamilies() {
+        ModBlockFamilies.getAllFamilies().forEach(family -> {
+            dropSelf(family.getBaseBlock());
+            family.getVariants().forEach(((variant, block) -> {
+                if (variant.equals(BlockFamily.Variant.SLAB)) {
+                    add(block, this::createSlabItemTable);
+                } else if (variant.equals(BlockFamily.Variant.DOOR)) {
+                    add(block, this::createDoorTable);
+                } else {
+                    dropSelf(block);
+                }
+            }));
+        });
     }
 
     protected LootTable.Builder createExoskeletonOreDrops(Block block) {

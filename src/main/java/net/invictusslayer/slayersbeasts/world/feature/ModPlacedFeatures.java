@@ -24,10 +24,8 @@ import static net.invictusslayer.slayersbeasts.world.feature.ModOrePlacement.rar
 public class ModPlacedFeatures {
     public static final ResourceKey<PlacedFeature> CAJOLE_CHECKED_KEY = createKey("cajole_checked");
     public static final ResourceKey<PlacedFeature> CAJOLE_PLACED_KEY = createKey("cajole_placed");
-
     public static final ResourceKey<PlacedFeature> EUCALYPTUS_CHECKED_KEY = createKey("eucalyptus_checked");
     public static final ResourceKey<PlacedFeature> EUCALYPTUS_PLACED_KEY = createKey("eucalyptus_placed");
-
     public static final ResourceKey<PlacedFeature> ASPEN_CHECKED_KEY = createKey("aspen_checked");
     public static final ResourceKey<PlacedFeature> ASPEN_PLACED_KEY = createKey("aspen_placed");
 
@@ -37,20 +35,17 @@ public class ModPlacedFeatures {
     public static void bootstrap(BootstapContext<PlacedFeature> context) {
         HolderGetter<ConfiguredFeature<?, ?>> configuredFeatures = context.lookup(Registries.CONFIGURED_FEATURE);
 
-        register(context, CAJOLE_CHECKED_KEY, configuredFeatures.getOrThrow(ModConfiguredFeatures.CAJOLE_KEY),
-                List.of(PlacementUtils.filteredByBlockSurvival(ModBlocks.CAJOLE_SAPLING.get())));
+        register(context, CAJOLE_CHECKED_KEY, configuredFeatures.getOrThrow(ModConfiguredFeatures.CAJOLE_KEY), List.of(PlacementUtils.filteredByBlockSurvival(ModBlocks.CAJOLE_SAPLING.get())));
         register(context, CAJOLE_PLACED_KEY, configuredFeatures.getOrThrow(ModConfiguredFeatures.CAJOLE_KEY),
-                VegetationPlacements.treePlacement(PlacementUtils.countExtra(1, 0.1f, 1), ModBlocks.CAJOLE_SAPLING.get()));
+                VegetationPlacements.treePlacement(PlacementUtils.countExtra(3, 0.1f, 2), ModBlocks.CAJOLE_SAPLING.get()));
 
-        register(context, EUCALYPTUS_CHECKED_KEY, configuredFeatures.getOrThrow(ModConfiguredFeatures.EUCALYPTUS_KEY),
-                List.of(PlacementUtils.filteredByBlockSurvival(ModBlocks.EUCALYPTUS_SAPLING.get())));
+        register(context, EUCALYPTUS_CHECKED_KEY, configuredFeatures.getOrThrow(ModConfiguredFeatures.EUCALYPTUS_KEY), List.of(PlacementUtils.filteredByBlockSurvival(ModBlocks.EUCALYPTUS_SAPLING.get())));
         register(context, EUCALYPTUS_PLACED_KEY, configuredFeatures.getOrThrow(ModConfiguredFeatures.EUCALYPTUS_KEY),
-                VegetationPlacements.treePlacement(PlacementUtils.countExtra(1, 0.1f, 1), ModBlocks.EUCALYPTUS_SAPLING.get()));
+                VegetationPlacements.treePlacement(PlacementUtils.countExtra(2, 0.1f, 1), ModBlocks.EUCALYPTUS_SAPLING.get()));
         
-        register(context, ASPEN_CHECKED_KEY, configuredFeatures.getOrThrow(ModConfiguredFeatures.ASPEN_KEY),
-                List.of(PlacementUtils.filteredByBlockSurvival(ModBlocks.ASPEN_SAPLING.get())));
+        register(context, ASPEN_CHECKED_KEY, configuredFeatures.getOrThrow(ModConfiguredFeatures.ASPEN_KEY), List.of(PlacementUtils.filteredByBlockSurvival(ModBlocks.ASPEN_SAPLING.get())));
         register(context, ASPEN_PLACED_KEY, configuredFeatures.getOrThrow(ModConfiguredFeatures.ASPEN_KEY),
-                VegetationPlacements.treePlacement(PlacementUtils.countExtra(1, 0.1f, 1), ModBlocks.ASPEN_SAPLING.get()));
+                VegetationPlacements.treePlacement(PlacementUtils.countExtra(6, 0.1f, 3), ModBlocks.ASPEN_SAPLING.get()));
 
         register(context, EXOSKELETON_ORE_PLACED_KEY, configuredFeatures.getOrThrow(ModConfiguredFeatures.OVERWORLD_EXOSKELETON_ORE_KEY),
                 rareOrePlacement(1, HeightRangePlacement.triangle(VerticalAnchor.aboveBottom(-80), VerticalAnchor.aboveBottom(80))));

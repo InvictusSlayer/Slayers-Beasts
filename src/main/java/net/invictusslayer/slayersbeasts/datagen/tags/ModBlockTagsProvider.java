@@ -39,11 +39,12 @@ public class ModBlockTagsProvider extends BlockTagsProvider {
         this.tag(BlockTags.WOODEN_DOORS).add(ModBlocks.CAJOLE_DOOR.get(), ModBlocks.EUCALYPTUS_DOOR.get(), ModBlocks.ASPEN_DOOR.get());
         this.tag(BlockTags.WOODEN_TRAPDOORS).add(ModBlocks.CAJOLE_TRAPDOOR.get(), ModBlocks.EUCALYPTUS_TRAPDOOR.get(), ModBlocks.ASPEN_TRAPDOOR.get());
         this.tag(BlockTags.FENCE_GATES).add(ModBlocks.CAJOLE_FENCE_GATE.get(), ModBlocks.EUCALYPTUS_FENCE_GATE.get(), ModBlocks.ASPEN_FENCE_GATE.get());
+        this.tag(BlockTags.WALLS).add(ModBlocks.BLACK_SANDSTONE_WALL.get());
         this.tag(BlockTags.SAPLINGS).add(ModBlocks.CAJOLE_SAPLING.get(), ModBlocks.EUCALYPTUS_SAPLING.get(), ModBlocks.ASPEN_SAPLING.get());
         this.tag(BlockTags.MUSHROOM_GROW_BLOCK).add(ModBlocks.ANT_SOIL.get());
         this.tag(BlockTags.MINEABLE_WITH_AXE).add(ModBlocks.WHITE_MUSHROOM_BLOCK.get(), ModBlocks.WHITE_MUSHROOM.get());
         this.tag(BlockTags.MINEABLE_WITH_HOE).add(ModBlocks.CAJOLE_LEAVES.get(), ModBlocks.EUCALYPTUS_LEAVES.get(), ModBlocks.ASPEN_LEAVES.get(), ModBlocks.OOTHECA.get());
-        this.tag(BlockTags.MINEABLE_WITH_PICKAXE).add(ModBlocks.JADE_BLOCK.get(), ModBlocks.EXOSKELETON_ORE.get(), ModBlocks.DEEPSLATE_EXOSKELETON_ORE.get());
+        this.tag(BlockTags.MINEABLE_WITH_PICKAXE).add(ModBlocks.JADE_BLOCK.get(), ModBlocks.EXOSKELETON_ORE.get(), ModBlocks.DEEPSLATE_EXOSKELETON_ORE.get(), ModBlocks.BLACK_SANDSTONE.get(), ModBlocks.BLACK_SANDSTONE_SLAB.get(), ModBlocks.BLACK_SANDSTONE_STAIRS.get(), ModBlocks.BLACK_SANDSTONE_WALL.get(), ModBlocks.SMOOTH_BLACK_SANDSTONE.get(), ModBlocks.SMOOTH_BLACK_SANDSTONE_SLAB.get(), ModBlocks.SMOOTH_BLACK_SANDSTONE_STAIRS.get(), ModBlocks.CUT_BLACK_SANDSTONE.get(), ModBlocks.CUT_BLACK_SANDSTONE_SLAB.get(), ModBlocks.CHISELED_BLACK_SANDSTONE.get());
         this.tag(BlockTags.MINEABLE_WITH_SHOVEL).add(ModBlocks.BLACK_SAND.get(), ModBlocks.ANT_SOIL.get()).addTag(ModTags.Blocks.ANTHILLS);
         this.tag(BlockTags.NEEDS_DIAMOND_TOOL).add(ModBlocks.EXOSKELETON_ORE.get(), ModBlocks.DEEPSLATE_EXOSKELETON_ORE.get());
         this.tag(BlockTags.NEEDS_IRON_TOOL).add(ModBlocks.JADE_BLOCK.get());
