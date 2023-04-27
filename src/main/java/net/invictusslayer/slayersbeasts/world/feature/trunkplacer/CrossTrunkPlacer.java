@@ -45,7 +45,7 @@ public class CrossTrunkPlacer extends TrunkPlacer {
         OptionalInt optionalInt = OptionalInt.empty();
         OptionalInt optionalInt1 = OptionalInt.empty();
         Direction direction = Direction.Plane.HORIZONTAL.getRandomDirection(pRandom);
-        Direction direction1 = pRandom.nextInt(2) == 0 ? direction.getCounterClockWise() : direction.getClockWise();
+        Direction direction1 = pRandom.nextBoolean() ? direction.getCounterClockWise() : direction.getClockWise();
 
         for(int i1 = 0; i1 < pFreeTreeHeight; ++i1) {
             int j1 = pPos.getY() + i1;
@@ -57,12 +57,13 @@ public class CrossTrunkPlacer extends TrunkPlacer {
                 n -= direction.getStepZ();
                 --j;
             }
-
             if (placeLog(pLevel, pBlockSetter, pRandom, mutableBlockPos.set(k, j1, l), pConfig)) {
                 optionalInt = OptionalInt.of(j1 + 1);
             }
-            if (placeLog(pLevel, pBlockSetter, pRandom, mutableBlockPos.set(m, k1, n), pConfig)) {
-                optionalInt1 = OptionalInt.of(k1 + 1);
+            if (i1 > p) {
+                if (placeLog(pLevel, pBlockSetter, pRandom, mutableBlockPos.set(m, k1, n), pConfig)) {
+                    optionalInt1 = OptionalInt.of(k1 + 1);
+                }
             }
         }
 
@@ -95,8 +96,10 @@ public class CrossTrunkPlacer extends TrunkPlacer {
                 if (placeLog(pLevel, pBlockSetter, pRandom, mutableBlockPos.set(k, i2, l), pConfig)) {
                     optionalInt = OptionalInt.of(i2 + 1);
                 }
-                if (placeLog(pLevel, pBlockSetter, pRandom, mutableBlockPos.set(m, l2, n), pConfig)) {
-                    optionalInt1 = OptionalInt.of(l2 + 1);
+                if (l1 > p) {
+                    if (placeLog(pLevel, pBlockSetter, pRandom, mutableBlockPos.set(m, l2, n), pConfig)) {
+                        optionalInt1 = OptionalInt.of(l2 + 1);
+                    }
                 }
             }
 
