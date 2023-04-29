@@ -7,12 +7,12 @@
       "type": "minecraft:multi_noise",
       "biomes": [
         {
-          "biome": "slayersbeasts:inky_thicket",
+          "biome": "slayersbeasts:outback",
           "parameters": {
-            "temperature": 0.8,
-            "humidity": 0.8,
-            "continentalness": 1,
-            "erosion": 0,
+            "temperature": 0.7,
+            "humidity": -0.2,
+            "continentalness": 0.5,
+            "erosion": 0.2,
             "weirdness": 0,
             "depth": 0,
             "offset": 0
@@ -21,9 +21,57 @@
         {
           "biome": "slayersbeasts:tar_desert",
           "parameters": {
-            "temperature": 1,
-            "humidity": -1,
-            "continentalness": 1,
+            "temperature": 0.7,
+            "humidity": -0.2,
+            "continentalness": 0.5,
+            "erosion": 0,
+            "weirdness": 0,
+            "depth": 0,
+            "offset": 0
+          }
+        },
+        {
+          "biome": "slayersbeasts:black_dunes",
+          "parameters": {
+            "temperature": 0.7,
+            "humidity": -0.2,
+            "continentalness": 0.5,
+            "erosion": -0.2,
+            "weirdness": 0,
+            "depth": 0,
+            "offset": 0
+          }
+        },
+        {
+          "biome": "slayersbeasts:eucalypt_forest",
+          "parameters": {
+            "temperature": 0.4,
+            "humidity": -0.1,
+            "continentalness": 0.5,
+            "erosion": 0.2,
+            "weirdness": 0,
+            "depth": 0,
+            "offset": 0
+          }
+        },
+        {
+          "biome": "slayersbeasts:inky_thicket",
+          "parameters": {
+            "temperature": 0.1,
+            "humidity": 0.1,
+            "continentalness": 0.5,
+            "erosion": 0.2,
+            "weirdness": 0,
+            "depth": 0,
+            "offset": 0
+          }
+        },
+        {
+          "biome": "slayersbeasts:rainforest",
+          "parameters": {
+            "temperature": 0.6,
+            "humidity": 0.4,
+            "continentalness": 0.5,
             "erosion": 0,
             "weirdness": 0,
             "depth": 0,
@@ -33,15 +81,40 @@
         {
           "biome": "slayersbeasts:aspen_forest",
           "parameters": {
-            "temperature": 0,
-            "humidity": 0.7,
-            "continentalness": 1,
-            "erosion": 0,
+            "temperature": -0.2,
+            "humidity": 0,
+            "continentalness": 0.5,
+            "erosion": -0.1,
+            "weirdness": 0,
+            "depth": 0,
+            "offset": 0
+          }
+        },
+        {
+          "biome": "slayersbeasts:redwood_grove",
+          "parameters": {
+            "temperature": -0.4,
+            "humidity": 0,
+            "continentalness": 0.5,
+            "erosion": -0.1,
+            "weirdness": 0,
+            "depth": 0,
+            "offset": 0
+          }
+        },
+        {
+          "biome": "slayersbeasts:old_growth_redwood_taiga",
+          "parameters": {
+            "temperature": -0.4,
+            "humidity": 0,
+            "continentalness": 0.5,
+            "erosion": 0.1,
             "weirdness": 0,
             "depth": 0,
             "offset": 0
           }
         }
+
       ]
     }
   }

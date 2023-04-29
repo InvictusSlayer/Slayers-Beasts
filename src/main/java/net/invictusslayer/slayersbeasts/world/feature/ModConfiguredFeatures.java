@@ -1,6 +1,5 @@
 package net.invictusslayer.slayersbeasts.world.feature;
 
-import com.google.common.base.Supplier;
 import com.google.common.base.Suppliers;
 import com.google.common.collect.ImmutableList;
 import net.invictusslayer.slayersbeasts.SlayersBeasts;
@@ -31,6 +30,7 @@ import net.minecraft.world.level.levelgen.placement.PlacedFeature;
 import net.minecraft.world.level.levelgen.structure.templatesystem.TagMatchTest;
 
 import java.util.List;
+import java.util.function.Supplier;
 
 public class ModConfiguredFeatures {
     public static final ResourceKey<ConfiguredFeature<?, ?>> CAJOLE_KEY = registerKey("cajole");
@@ -67,27 +67,20 @@ public class ModConfiguredFeatures {
                 new TwoLayersFeatureSize(1, 0, 2)).build());
         register(context, ASPEN_KEY, Feature.TREE, new TreeConfiguration.TreeConfigurationBuilder(
                 BlockStateProvider.simple(ModBlocks.ASPEN_LOG.get()),
-                new StraightTrunkPlacer(8, 5, 2),
+                new StraightTrunkPlacer(5, 4, 2),
                 BlockStateProvider.simple(ModBlocks.ASPEN_LEAVES.get()),
                 new AspenFoliagePlacer(ConstantInt.of(2), ConstantInt.of(0)),
                 new TwoLayersFeatureSize(1, 0, 2)).build());
 
-        register(context, CAJOLE_SPAWN_KEY, Feature.RANDOM_SELECTOR, new RandomFeatureConfiguration(
-                List.of(new WeightedPlacedFeature(placedFeatures.getOrThrow(ModPlacedFeatures.CAJOLE_CHECKED_KEY),
-                        0.5F)), placedFeatures.getOrThrow(ModPlacedFeatures.CAJOLE_CHECKED_KEY)));
-        register(context, EUCALYPTUS_SPAWN_KEY, Feature.RANDOM_SELECTOR, new RandomFeatureConfiguration(
-                List.of(new WeightedPlacedFeature(placedFeatures.getOrThrow(ModPlacedFeatures.EUCALYPTUS_CHECKED_KEY),
-                        0.5F)), placedFeatures.getOrThrow(ModPlacedFeatures.EUCALYPTUS_CHECKED_KEY)));
-        register(context, ASPEN_SPAWN_KEY, Feature.RANDOM_SELECTOR, new RandomFeatureConfiguration(
-                List.of(new WeightedPlacedFeature(placedFeatures.getOrThrow(ModPlacedFeatures.ASPEN_CHECKED_KEY),
-                        0.5F)), placedFeatures.getOrThrow(ModPlacedFeatures.ASPEN_CHECKED_KEY)));
+        register(context, CAJOLE_SPAWN_KEY, Feature.RANDOM_SELECTOR, new RandomFeatureConfiguration(List.of(new WeightedPlacedFeature(placedFeatures.getOrThrow(ModPlacedFeatures.CAJOLE_CHECKED_KEY), 0.5F)), placedFeatures.getOrThrow(ModPlacedFeatures.CAJOLE_CHECKED_KEY)));
+        register(context, EUCALYPTUS_SPAWN_KEY, Feature.RANDOM_SELECTOR, new RandomFeatureConfiguration(List.of(new WeightedPlacedFeature(placedFeatures.getOrThrow(ModPlacedFeatures.EUCALYPTUS_CHECKED_KEY), 0.5F)), placedFeatures.getOrThrow(ModPlacedFeatures.EUCALYPTUS_CHECKED_KEY)));
+        register(context, ASPEN_SPAWN_KEY, Feature.RANDOM_SELECTOR, new RandomFeatureConfiguration(List.of(new WeightedPlacedFeature(placedFeatures.getOrThrow(ModPlacedFeatures.ASPEN_CHECKED_KEY), 0.5F)), placedFeatures.getOrThrow(ModPlacedFeatures.ASPEN_CHECKED_KEY)));
 
         register(context, HUGE_WHITE_MUSHROOM, ModFeatures.HUGE_WHITE_MUSHROOM.get(), new HugeMushroomFeatureConfiguration(
                 BlockStateProvider.simple(ModBlocks.WHITE_MUSHROOM_BLOCK.get().defaultBlockState()
                         .setValue(HugeMushroomBlock.UP, Boolean.TRUE).setValue(HugeMushroomBlock.DOWN, Boolean.FALSE)),
                 BlockStateProvider.simple(Blocks.MUSHROOM_STEM.defaultBlockState()
                         .setValue(HugeMushroomBlock.UP, Boolean.FALSE).setValue(HugeMushroomBlock.DOWN, Boolean.FALSE)), 3));
-
 
         register(context, OVERWORLD_EXOSKELETON_ORE_KEY, Feature.ORE, new OreConfiguration(OVERWORLD_EXOSKELETON_ORES.get(), 3));
     }

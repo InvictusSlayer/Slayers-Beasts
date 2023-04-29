@@ -45,7 +45,7 @@ public class ModPlacedFeatures {
         
         register(context, ASPEN_CHECKED_KEY, configuredFeatures.getOrThrow(ModConfiguredFeatures.ASPEN_KEY), List.of(PlacementUtils.filteredByBlockSurvival(ModBlocks.ASPEN_SAPLING.get())));
         register(context, ASPEN_PLACED_KEY, configuredFeatures.getOrThrow(ModConfiguredFeatures.ASPEN_KEY),
-                VegetationPlacements.treePlacement(PlacementUtils.countExtra(6, 0.1f, 3), ModBlocks.ASPEN_SAPLING.get()));
+                VegetationPlacements.treePlacement(PlacementUtils.countExtra(8, 0.1f, 3), ModBlocks.ASPEN_SAPLING.get()));
 
         register(context, EXOSKELETON_ORE_PLACED_KEY, configuredFeatures.getOrThrow(ModConfiguredFeatures.OVERWORLD_EXOSKELETON_ORE_KEY),
                 rareOrePlacement(1, HeightRangePlacement.triangle(VerticalAnchor.aboveBottom(-80), VerticalAnchor.aboveBottom(80))));
