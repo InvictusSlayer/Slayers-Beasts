@@ -2,14 +2,12 @@ package net.invictusslayer.slayersbeasts.client.renderer;
 
 import net.invictusslayer.slayersbeasts.SlayersBeasts;
 import net.invictusslayer.slayersbeasts.client.model.QueenAntModel;
-import net.invictusslayer.slayersbeasts.client.model.SoldierAntModel;
-import net.invictusslayer.slayersbeasts.entity.QueenAntEntity;
-import net.invictusslayer.slayersbeasts.entity.SoldierAntEntity;
+import net.invictusslayer.slayersbeasts.entity.QueenAnt;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.client.renderer.entity.MobRenderer;
 import net.minecraft.resources.ResourceLocation;
 
-public class QueenAntRenderer<Type extends QueenAntEntity> extends MobRenderer<Type, QueenAntModel<Type>> {
+public class QueenAntRenderer<Type extends QueenAnt> extends MobRenderer<Type, QueenAntModel<Type>> {
 
     private static final ResourceLocation WOOD_TEXTURE = new ResourceLocation(SlayersBeasts.MOD_ID,
             "textures/entity/wood_ant_queen.png");

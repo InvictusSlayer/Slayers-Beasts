@@ -15,8 +15,8 @@ import net.minecraft.world.entity.monster.Spider;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 
-public class WitherSpiderEntity extends Spider {
-    public WitherSpiderEntity(EntityType<WitherSpiderEntity> entityType, Level level) {
+public class WitherSpider extends Spider {
+    public WitherSpider(EntityType<WitherSpider> entityType, Level level) {
         super(entityType, level);
     }
 

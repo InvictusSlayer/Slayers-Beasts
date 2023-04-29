@@ -18,6 +18,6 @@ public class ModEntityTagsProvider extends EntityTypeTagsProvider {
 
     @Override
     protected void addTags(HolderLookup.Provider pProvider) {
-        this.tag(ModTags.EntityTypes.ANTHILL_INHABITANTS).add(ModEntities.WORKER_ANT_ENTITY.get(), ModEntities.SOLDIER_ANT_ENTITY.get(), ModEntities.QUEEN_ANT_ENTITY.get());
+        this.tag(ModTags.EntityTypes.ANTHILL_INHABITANTS).add(ModEntities.WORKER_ANT.get(), ModEntities.SOLDIER_ANT.get(), ModEntities.QUEEN_ANT.get());
     }
 }

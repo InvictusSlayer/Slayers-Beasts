@@ -3,7 +3,7 @@ package net.invictusslayer.slayersbeasts.client.model;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import net.invictusslayer.slayersbeasts.SlayersBeasts;
-import net.invictusslayer.slayersbeasts.entity.WorkerAntEntity;
+import net.invictusslayer.slayersbeasts.entity.WorkerAnt;
 import net.minecraft.client.model.EntityModel;
 import net.minecraft.client.model.geom.ModelLayerLocation;
 import net.minecraft.client.model.geom.ModelPart;
@@ -11,7 +11,7 @@ import net.minecraft.client.model.geom.PartPose;
 import net.minecraft.client.model.geom.builders.*;
 import net.minecraft.resources.ResourceLocation;
 
-public class AntCargoModel<T extends WorkerAntEntity> extends EntityModel<T> {
+public class AntCargoModel<T extends WorkerAnt> extends EntityModel<T> {
     public static final ModelLayerLocation LAYER_LOCATION = new ModelLayerLocation(new ResourceLocation(SlayersBeasts.MOD_ID, "worker_ant_model"), "cargo");
     private final ModelPart cargo;
 

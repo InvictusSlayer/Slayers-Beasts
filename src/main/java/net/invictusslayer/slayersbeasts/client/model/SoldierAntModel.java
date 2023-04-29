@@ -3,7 +3,7 @@ package net.invictusslayer.slayersbeasts.client.model;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import net.invictusslayer.slayersbeasts.SlayersBeasts;
-import net.invictusslayer.slayersbeasts.entity.SoldierAntEntity;
+import net.invictusslayer.slayersbeasts.entity.SoldierAnt;
 import net.minecraft.client.model.EntityModel;
 import net.minecraft.client.model.geom.ModelLayerLocation;
 import net.minecraft.client.model.geom.ModelPart;
@@ -12,7 +12,7 @@ import net.minecraft.client.model.geom.builders.*;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.Mth;
 
-public class SoldierAntModel<Type extends SoldierAntEntity> extends EntityModel<Type> {
+public class SoldierAntModel<Type extends SoldierAnt> extends EntityModel<Type> {
     public static final ModelLayerLocation LAYER_LOCATION = new ModelLayerLocation(new ResourceLocation(SlayersBeasts.MOD_ID, "soldier_ant_model"), "main");
     private final ModelPart body;
     private final ModelPart leftFrontLeg;

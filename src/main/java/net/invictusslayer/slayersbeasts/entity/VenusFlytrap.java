@@ -15,8 +15,8 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelAccessor;
 
-public class VenusFlytrapEntity extends PathfinderMob {
-    public VenusFlytrapEntity(EntityType<VenusFlytrapEntity> entityType, Level level) {
+public class VenusFlytrap extends PathfinderMob {
+    public VenusFlytrap(EntityType<VenusFlytrap> entityType, Level level) {
         super(entityType, level);
     }
 
@@ -41,7 +41,7 @@ public class VenusFlytrapEntity extends PathfinderMob {
                 .add(Attributes.ATTACK_KNOCKBACK, 0.0D);
     }
 
-    public static boolean canSpawn(EntityType<VenusFlytrapEntity> entity, LevelAccessor levelAccess, MobSpawnType spawnType, BlockPos pos, RandomSource random) {
+    public static boolean canSpawn(EntityType<VenusFlytrap> entity, LevelAccessor levelAccess, MobSpawnType spawnType, BlockPos pos, RandomSource random) {
         return PathfinderMob.checkMobSpawnRules(entity, levelAccess, spawnType, pos, random)
                 && levelAccess instanceof final Level level && level.getDifficulty() != Difficulty.PEACEFUL;
     }

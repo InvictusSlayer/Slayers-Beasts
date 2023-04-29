@@ -23,9 +23,9 @@ public class CajoleLeavesBlock extends LeavesBlock {
         Mob mob;
         if (randInt < 2) {
             if (randInt == 0) {
-                mob = ModEntities.WORKER_ANT_ENTITY.get().create(pLevel);
+                mob = ModEntities.WORKER_ANT.get().create(pLevel);
             } else {
-                mob = ModEntities.MANTIS_ENTITY.get().create(pLevel);
+                mob = ModEntities.MANTIS.get().create(pLevel);
             }
             mob.moveTo((double) pPos.getX() + 0.5D, (double) pPos.getY(), (double) pPos.getZ() + 0.5D, 0.0F, 0.0F);
             pLevel.addFreshEntity(mob);

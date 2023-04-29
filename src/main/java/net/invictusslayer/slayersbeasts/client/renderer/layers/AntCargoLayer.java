@@ -5,7 +5,7 @@ import com.mojang.blaze3d.vertex.VertexConsumer;
 import net.invictusslayer.slayersbeasts.SlayersBeasts;
 import net.invictusslayer.slayersbeasts.client.model.AntCargoModel;
 import net.invictusslayer.slayersbeasts.client.model.WorkerAntModel;
-import net.invictusslayer.slayersbeasts.entity.WorkerAntEntity;
+import net.invictusslayer.slayersbeasts.entity.WorkerAnt;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.geom.EntityModelSet;
 import net.minecraft.client.renderer.MultiBufferSource;
@@ -15,18 +15,18 @@ import net.minecraft.client.renderer.entity.RenderLayerParent;
 import net.minecraft.client.renderer.entity.layers.RenderLayer;
 import net.minecraft.resources.ResourceLocation;
 
-public class AntCargoLayer extends RenderLayer<WorkerAntEntity, WorkerAntModel<WorkerAntEntity>> {
+public class AntCargoLayer extends RenderLayer<WorkerAnt, WorkerAntModel<WorkerAnt>> {
     private static final ResourceLocation LEAF_TEXTURE = new ResourceLocation(SlayersBeasts.MOD_ID, "textures/entity/cargo_leaf.png");
     private static final ResourceLocation BARK_TEXTURE = new ResourceLocation(SlayersBeasts.MOD_ID, "textures/entity/cargo_bark.png");
-    private final AntCargoModel<WorkerAntEntity> model;
+    private final AntCargoModel<WorkerAnt> model;
 
-    public AntCargoLayer(RenderLayerParent<WorkerAntEntity, WorkerAntModel<WorkerAntEntity>> pRenderer, EntityModelSet modelSet) {
+    public AntCargoLayer(RenderLayerParent<WorkerAnt, WorkerAntModel<WorkerAnt>> pRenderer, EntityModelSet modelSet) {
         super(pRenderer);
         this.model = new AntCargoModel<>(modelSet.bakeLayer(AntCargoModel.LAYER_LOCATION));
     }
 
     @Override
-    public void render(PoseStack pPoseStack, MultiBufferSource pBuffer, int pPackedLight, WorkerAntEntity pLivingEntity, float pLimbSwing, float pLimbSwingAmount, float pPartialTick, float pAgeInTicks, float pNetHeadYaw, float pHeadPitch) {
+    public void render(PoseStack pPoseStack, MultiBufferSource pBuffer, int pPackedLight, WorkerAnt pLivingEntity, float pLimbSwing, float pLimbSwingAmount, float pPartialTick, float pAgeInTicks, float pNetHeadYaw, float pHeadPitch) {
         if (pLivingEntity.getCargoType() != 99) {
             if (pLivingEntity.isInvisible()) {
                 Minecraft minecraft = Minecraft.getInstance();

@@ -9,7 +9,7 @@
   ],
   "spawners":
   {
-    "type": "slayersbeasts:mantis_entity",
+    "type": "slayersbeasts:mantis",
     "weight": 6,
     "minCount": 1,
     "maxCount": 3

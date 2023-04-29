@@ -1,6 +1,9 @@
 {
   "type": "forge:add_features",
-  "biomes": "#minecraft:is_savanna",
+  "biomes": [
+    "slayersbeasts:eucalypt_forest",
+    "slayersbeasts:outback"
+  ],
   "features": "slayersbeasts:eucalyptus_placed",
   "step": "vegetal_decoration"
 }

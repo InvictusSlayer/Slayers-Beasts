@@ -1,9 +1,9 @@
 package net.invictusslayer.slayersbeasts.block.entity;
 
 import net.invictusslayer.slayersbeasts.block.AnthillBlock;
-import net.invictusslayer.slayersbeasts.entity.AbstractAntEntity;
-import net.invictusslayer.slayersbeasts.entity.QueenAntEntity;
-import net.invictusslayer.slayersbeasts.entity.SoldierAntEntity;
+import net.invictusslayer.slayersbeasts.entity.AbstractAnt;
+import net.invictusslayer.slayersbeasts.entity.QueenAnt;
+import net.invictusslayer.slayersbeasts.entity.SoldierAnt;
 import net.invictusslayer.slayersbeasts.block.ModBlocks;
 import net.invictusslayer.slayersbeasts.util.ModTags;
 import net.minecraft.core.BlockPos;
@@ -246,7 +246,7 @@ public class AnthillBlockEntity extends BlockEntity {
         List<Entity> list = this.releaseAllOccupants(blockState, releaseStatus);
         if (player != null) {
             for (Entity entity : list) {
-                if (entity instanceof AbstractAntEntity ant) {
+                if (entity instanceof AbstractAnt ant) {
                     ant.setCooldownToEnterNest(400);
                 }
             }
@@ -288,11 +288,11 @@ public class AnthillBlockEntity extends BlockEntity {
         if (!entity.getType().is(ModTags.EntityTypes.ANTHILL_INHABITANTS)) {
             return false;
         }
-        if (releaseStatus == AntReleaseStatus.PATROLLING && !(entity instanceof SoldierAntEntity)) {
+        if (releaseStatus == AntReleaseStatus.PATROLLING && !(entity instanceof SoldierAnt)) {
             return false;
         }
 
-        if (entity instanceof AbstractAntEntity ant) {
+        if (entity instanceof AbstractAnt ant) {
              if (releaseStatus == AntReleaseStatus.CARGO_DELIVERED) {
                 int cargo = ant.getCargoType();
                 ant.setCargoType(99);
@@ -350,7 +350,7 @@ public class AnthillBlockEntity extends BlockEntity {
     }
 
     public void storeAnt(CompoundTag data, int ticksInNest, boolean hasCargo, Entity entity) {
-        boolean isQueen = entity instanceof QueenAntEntity;
+        boolean isQueen = entity instanceof QueenAnt;
         this.storedAnts.add(new AntData(data, ticksInNest, hasCargo ? 2400 : 600, isQueen));
     }
 

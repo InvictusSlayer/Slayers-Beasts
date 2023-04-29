@@ -3,12 +3,12 @@ package net.invictusslayer.slayersbeasts.client.renderer;
 import net.invictusslayer.slayersbeasts.SlayersBeasts;
 import net.invictusslayer.slayersbeasts.client.model.WorkerAntModel;
 import net.invictusslayer.slayersbeasts.client.renderer.layers.AntCargoLayer;
-import net.invictusslayer.slayersbeasts.entity.WorkerAntEntity;
+import net.invictusslayer.slayersbeasts.entity.WorkerAnt;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.client.renderer.entity.MobRenderer;
 import net.minecraft.resources.ResourceLocation;
 
-public class WorkerAntRenderer extends MobRenderer<WorkerAntEntity, WorkerAntModel<WorkerAntEntity>> {
+public class WorkerAntRenderer extends MobRenderer<WorkerAnt, WorkerAntModel<WorkerAnt>> {
 
     private static final ResourceLocation WOOD_TEXTURE = new ResourceLocation(SlayersBeasts.MOD_ID,
             "textures/entity/wood_ant_worker.png");
@@ -23,7 +23,7 @@ public class WorkerAntRenderer extends MobRenderer<WorkerAntEntity, WorkerAntMod
     }
 
     @Override
-    public ResourceLocation getTextureLocation(WorkerAntEntity pEntity) {
+    public ResourceLocation getTextureLocation(WorkerAnt pEntity) {
         return switch (pEntity.getAntType()) {
             case 0 -> WOOD_TEXTURE;
             case 1 -> LEAFCUTTER_TEXTURE;

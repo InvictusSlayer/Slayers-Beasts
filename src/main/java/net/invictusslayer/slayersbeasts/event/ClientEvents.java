@@ -23,18 +23,16 @@ public final class ClientEvents {
         event.registerLayerDefinition(DamselflyModel.LAYER_LOCATION, DamselflyModel::createBodyLayer);
         event.registerLayerDefinition(VenusFlytrapModel.LAYER_LOCATION, VenusFlytrapModel::createBodyLayer);
         event.registerLayerDefinition(WitherSpiderModel.LAYER_LOCATION, WitherSpiderModel::createBodyLayer);
-        event.registerLayerDefinition(ExampleModel.LAYER_LOCATION, ExampleModel::createBodyLayer);
     }
 
     @SubscribeEvent
     public static void registerLayers(EntityRenderersEvent.RegisterRenderers event) {
-        event.registerEntityRenderer(ModEntities.MANTIS_ENTITY.get(), MantisRenderer::new);
-        event.registerEntityRenderer(ModEntities.WORKER_ANT_ENTITY.get(), WorkerAntRenderer::new);
-        event.registerEntityRenderer(ModEntities.SOLDIER_ANT_ENTITY.get(), SoldierAntRenderer::new);
-        event.registerEntityRenderer(ModEntities.QUEEN_ANT_ENTITY.get(), QueenAntRenderer::new);
-        event.registerEntityRenderer(ModEntities.DAMSELFLY_ENTITY.get(), DamselflyRenderer::new);
-        event.registerEntityRenderer(ModEntities.VENUS_FLYTRAP_ENTITY.get(), VenusFlytrapRenderer::new);
-        event.registerEntityRenderer(ModEntities.WITHER_SPIDER_ENTITY.get(), WitherSpiderRenderer::new);
-        event.registerEntityRenderer(ModEntities.EXAMPLE_ENTITY.get(), ExampleRenderer::new);
+        event.registerEntityRenderer(ModEntities.MANTIS.get(), MantisRenderer::new);
+        event.registerEntityRenderer(ModEntities.WORKER_ANT.get(), WorkerAntRenderer::new);
+        event.registerEntityRenderer(ModEntities.SOLDIER_ANT.get(), SoldierAntRenderer::new);
+        event.registerEntityRenderer(ModEntities.QUEEN_ANT.get(), QueenAntRenderer::new);
+        event.registerEntityRenderer(ModEntities.DAMSELFLY.get(), DamselflyRenderer::new);
+        event.registerEntityRenderer(ModEntities.VENUS_FLYTRAP.get(), VenusFlytrapRenderer::new);
+        event.registerEntityRenderer(ModEntities.WITHER_SPIDER.get(), WitherSpiderRenderer::new);
     }
 }

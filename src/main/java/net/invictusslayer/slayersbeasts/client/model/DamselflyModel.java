@@ -3,8 +3,8 @@ package net.invictusslayer.slayersbeasts.client.model;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import net.invictusslayer.slayersbeasts.SlayersBeasts;
-import net.invictusslayer.slayersbeasts.entity.DamselflyEntity;
-import net.invictusslayer.slayersbeasts.entity.poses.DragonflyWingPose;
+import net.invictusslayer.slayersbeasts.entity.Damselfly;
+import net.invictusslayer.slayersbeasts.entity.poses.DamselflyPose;
 import net.minecraft.client.model.EntityModel;
 import net.minecraft.client.model.geom.ModelLayerLocation;
 import net.minecraft.client.model.geom.ModelPart;
@@ -13,7 +13,7 @@ import net.minecraft.client.model.geom.builders.*;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.Mth;
 
-public class DamselflyModel<Type extends DamselflyEntity> extends EntityModel<Type> {
+public class DamselflyModel<Type extends Damselfly> extends EntityModel<Type> {
     public static final ModelLayerLocation LAYER_LOCATION = new ModelLayerLocation(new ResourceLocation(SlayersBeasts.MOD_ID, "damselfly_model"), "main");
     private final ModelPart main;
     private final ModelPart leftFrontWing;
@@ -58,8 +58,8 @@ public class DamselflyModel<Type extends DamselflyEntity> extends EntityModel<Ty
     @Override
     public void setupAnim(Type pEntity, float pLimbSwing, float pLimbSwingAmount, float pAgeInTicks, float pNetHeadYaw, float pHeadPitch) {
         float f1 = Mth.cos(pAgeInTicks * 3F) / 5F;
-        DragonflyWingPose wingPose = pEntity.getWingPose();
-        if (wingPose == DragonflyWingPose.FLYING) {
+        DamselflyPose wingPose = pEntity.getWingPose();
+        if (wingPose == DamselflyPose.FLYING) {
             leftFrontWing.xRot = 0;
             rightFrontWing.xRot = 0;
             leftBackWing.xRot = 0;
@@ -76,7 +76,7 @@ public class DamselflyModel<Type extends DamselflyEntity> extends EntityModel<Ty
             rightFrontWing.zRot += -f1;
             leftBackWing.zRot += -f1;
             rightBackWing.zRot += f1;
-        } else if (wingPose == DragonflyWingPose.PERCHED) {
+        } else if (wingPose == DamselflyPose.PERCHED) {
             leftFrontWing.xRot = -Mth.PI * 0.04F;
             rightFrontWing.xRot = -Mth.PI * 0.04F;
             leftBackWing.xRot = Mth.PI;

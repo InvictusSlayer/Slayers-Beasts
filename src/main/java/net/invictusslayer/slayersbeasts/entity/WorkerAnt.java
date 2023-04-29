@@ -12,8 +12,8 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraftforge.common.ForgeMod;
 
-public class WorkerAntEntity extends AbstractAntEntity {
-    public WorkerAntEntity(EntityType<WorkerAntEntity> entityType, Level level) {
+public class WorkerAnt extends AbstractAnt {
+    public WorkerAnt(EntityType<WorkerAnt> entityType, Level level) {
         super(entityType, level);
     }
 
@@ -29,7 +29,7 @@ public class WorkerAntEntity extends AbstractAntEntity {
                 .add(ForgeMod.ENTITY_GRAVITY.get(), 0.1D);
     }
 
-    public static boolean canSpawn(EntityType<WorkerAntEntity> entity, LevelAccessor levelAccess, MobSpawnType spawnType, BlockPos pos, RandomSource random) {
+    public static boolean canSpawn(EntityType<WorkerAnt> entity, LevelAccessor levelAccess, MobSpawnType spawnType, BlockPos pos, RandomSource random) {
         return PathfinderMob.checkMobSpawnRules(entity, levelAccess, spawnType, pos, random);
     }
 }

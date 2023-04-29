@@ -1,6 +1,6 @@
 package net.invictusslayer.slayersbeasts.entity.poses;
 
-public enum DragonflyWingPose {
+public enum DamselflyPose {
     FLYING,
     PERCHED,
     STILL

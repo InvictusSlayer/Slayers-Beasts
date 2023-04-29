@@ -1,6 +1,6 @@
 package net.invictusslayer.slayersbeasts.entity;
 
-import net.invictusslayer.slayersbeasts.entity.poses.DragonflyWingPose;
+import net.invictusslayer.slayersbeasts.entity.poses.DamselflyPose;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.NbtUtils;
@@ -35,13 +35,13 @@ import java.util.EnumSet;
 import java.util.Optional;
 import java.util.function.Predicate;
 
-public class DamselflyEntity extends PathfinderMob {
-    private static final EntityDataAccessor<Boolean> DATA_IS_FLYING = SynchedEntityData.defineId(DamselflyEntity.class, EntityDataSerializers.BOOLEAN);
-    private static final EntityDataAccessor<Boolean> DATA_IS_PERCHED = SynchedEntityData.defineId(DamselflyEntity.class, EntityDataSerializers.BOOLEAN);
+public class Damselfly extends PathfinderMob {
+    private static final EntityDataAccessor<Boolean> DATA_IS_FLYING = SynchedEntityData.defineId(Damselfly.class, EntityDataSerializers.BOOLEAN);
+    private static final EntityDataAccessor<Boolean> DATA_IS_PERCHED = SynchedEntityData.defineId(Damselfly.class, EntityDataSerializers.BOOLEAN);
     @Nullable BlockPos savedPerchPos;
     private int ticksUntilPerch;
 
-    public DamselflyEntity(EntityType<DamselflyEntity> entityType, Level level) {
+    public Damselfly(EntityType<Damselfly> entityType, Level level) {
         super(entityType, level);
         this.moveControl = new FlyingMoveControl(this, 20, true);
         this.navigation = this.createNavigation(level);
@@ -68,7 +68,7 @@ public class DamselflyEntity extends PathfinderMob {
         return MobType.ARTHROPOD;
     }
 
-    public static boolean canSpawn(EntityType<DamselflyEntity> entity, LevelAccessor levelAccess, MobSpawnType spawnType, BlockPos pos, RandomSource random) {
+    public static boolean canSpawn(EntityType<Damselfly> entity, LevelAccessor levelAccess, MobSpawnType spawnType, BlockPos pos, RandomSource random) {
         return PathfinderMob.checkMobSpawnRules(entity, levelAccess, spawnType, pos, random);
     }
 
@@ -114,13 +114,13 @@ public class DamselflyEntity extends PathfinderMob {
         this.entityData.define(DATA_IS_PERCHED, false);
     }
 
-    public DragonflyWingPose getWingPose() {
+    public DamselflyPose getWingPose() {
         if (this.isFlying()) {
-            return DragonflyWingPose.FLYING;
+            return DamselflyPose.FLYING;
         } else if (this.isPerched()) {
-            return DragonflyWingPose.PERCHED;
+            return DamselflyPose.PERCHED;
         } else {
-            return DragonflyWingPose.STILL;
+            return DamselflyPose.STILL;
         }
     }
     
@@ -160,7 +160,7 @@ public class DamselflyEntity extends PathfinderMob {
     }
 
     static class DamselflyPerchGoal extends Goal {
-        private final DamselflyEntity mob;
+        private final Damselfly mob;
         private int perchTicks;
         private Vec3 perchPos;
         private final Predicate<BlockState> VALID_PERCH_BLOCKS = (blockState) -> {
@@ -173,7 +173,7 @@ public class DamselflyEntity extends PathfinderMob {
             }
         };
 
-        DamselflyPerchGoal(DamselflyEntity pMob) {
+        DamselflyPerchGoal(Damselfly pMob) {
             this.setFlags(EnumSet.of(Flag.MOVE));
             this.mob = pMob;
         }
@@ -262,10 +262,10 @@ public class DamselflyEntity extends PathfinderMob {
     }
 
     static class DamselflyHoverGoal extends Goal {
-        private final DamselflyEntity mob;
+        private final Damselfly mob;
         private int hoverTime;
 
-        DamselflyHoverGoal(DamselflyEntity pMob) {
+        DamselflyHoverGoal(Damselfly pMob) {
             this.setFlags(EnumSet.of(Flag.MOVE));
             this.mob = pMob;
         }
@@ -289,9 +289,9 @@ public class DamselflyEntity extends PathfinderMob {
     }
 
     class DamselflyWanderGoal extends Goal {
-        private final DamselflyEntity mob;
+        private final Damselfly mob;
 
-        DamselflyWanderGoal(DamselflyEntity pMob) {
+        DamselflyWanderGoal(Damselfly pMob) {
             this.setFlags(EnumSet.of(Flag.MOVE));
             this.mob = pMob;
         }

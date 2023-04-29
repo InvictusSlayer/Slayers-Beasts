@@ -2,6 +2,7 @@
   "type": "forge:add_features",
   "biomes": [
     "slayersbeasts:inky_thicket",
+    "slayersbeasts:rainforest",
     "minecraft:sparse_jungle",
     "minecraft:jungle"
   ],

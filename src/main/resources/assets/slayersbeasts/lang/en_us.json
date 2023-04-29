@@ -17,9 +17,9 @@
   "item.slayersbeasts.worker_ant_spawn_egg": "Worker Ant Spawn Egg",
   "item.slayersbeasts.soldier_ant_spawn_egg": "Soldier Ant Spawn Egg",
   "item.slayersbeasts.queen_ant_spawn_egg": "Queen Ant Spawn Egg",
+  "item.slayersbeasts.wither_spider_spawn_egg": "Wither Spider Spawn Egg",
   "item.slayersbeasts.damselfly_spawn_egg": "Damselfly Spawn Egg",
   "item.slayersbeasts.venus_flytrap_spawn_egg": "Venus Flytrap Spawn Egg",
-  "item.slayersbeasts.wither_spider_spawn_egg": "Wither Spider Spawn Egg",
 
   "item.minecraft.potion.effect.paralysis_potion": "Potion of Paralysis",
   "item.minecraft.splash_potion.effect.paralysis_potion": "Splash Potion of Paralysis",
@@ -100,14 +100,13 @@
   "block.slayersbeasts.aspen_door": "Aspen Door",
   "block.slayersbeasts.aspen_trapdoor": "Aspen Trapdoor",
   
-  "entity.slayersbeasts.mantis_entity": "Mantis",
-  "entity.slayersbeasts.worker_ant_entity": "Worker Ant",
-  "entity.slayersbeasts.soldier_ant_entity": "Soldier Ant",
-  "entity.slayersbeasts.queen_ant_entity": "Queen Ant",
-  "entity.slayersbeasts.damselfly_entity": "Damselfly",
-  "entity.slayersbeasts.venus_flytrap_entity": "Venus Flytrap",
-  "entity.slayersbeasts.wither_spider_entity": "Wither Spider",
-  "entity.slayersbeasts.example_entity": "Example Entity",
+  "entity.slayersbeasts.mantis": "Mantis",
+  "entity.slayersbeasts.worker_ant": "Worker Ant",
+  "entity.slayersbeasts.soldier_ant": "Soldier Ant",
+  "entity.slayersbeasts.queen_ant": "Queen Ant",
+  "entity.slayersbeasts.wither_spider": "Wither Spider",
+  "entity.slayersbeasts.damselfly": "Damselfly",
+  "entity.slayersbeasts.venus_flytrap": "Venus Flytrap",
 
   "creativemodetab.slayers_beasts_tab": "Slayer's Beasts",
 

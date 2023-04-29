@@ -16,7 +16,7 @@ public class OothecaBlock extends Block {
     }
 
     private void spawnInfestation(ServerLevel pLevel, BlockPos pPos) {
-        Mob mob = ModEntities.MANTIS_ENTITY.get().create(pLevel);
+        Mob mob = ModEntities.MANTIS.get().create(pLevel);
         if (mob != null) {
             mob.moveTo((double) pPos.getX() + 0.5D, pPos.getY(), (double) pPos.getZ() + 0.5D, 0.0F, 0.0F);
             pLevel.addFreshEntity(mob);

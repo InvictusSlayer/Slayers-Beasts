@@ -3,8 +3,8 @@ package net.invictusslayer.slayersbeasts.client.model;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import net.invictusslayer.slayersbeasts.SlayersBeasts;
-import net.invictusslayer.slayersbeasts.entity.MantisEntity;
-import net.invictusslayer.slayersbeasts.entity.poses.MantisWingPose;
+import net.invictusslayer.slayersbeasts.entity.Mantis;
+import net.invictusslayer.slayersbeasts.entity.poses.MantisPose;
 import net.minecraft.client.model.EntityModel;
 import net.minecraft.client.model.geom.ModelLayerLocation;
 import net.minecraft.client.model.geom.ModelPart;
@@ -13,7 +13,7 @@ import net.minecraft.client.model.geom.builders.*;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.Mth;
 
-public class MantisModel<Type extends MantisEntity> extends EntityModel<Type> {
+public class MantisModel<Type extends Mantis> extends EntityModel<Type> {
     public static final ModelLayerLocation LAYER_LOCATION = new ModelLayerLocation(new ResourceLocation(SlayersBeasts.MOD_ID, "mantis_entity"), "main");
     private final ModelPart head;
     private final ModelPart thorax;
@@ -192,8 +192,8 @@ public class MantisModel<Type extends MantisEntity> extends EntityModel<Type> {
         this.rightFrontLeg.yRot = -0.9F;
         this.leftBackLeg.yRot = -0.9F;
         this.rightBackLeg.yRot = 0.9F;
-        MantisWingPose wingPose = pEntity.getWingPose();
-        if (wingPose == MantisWingPose.LEAPING) {
+        MantisPose wingPose = pEntity.getWingPose();
+        if (wingPose == MantisPose.LEAPING) {
             this.leftWing.xRot = 0.7F;
             this.rightWing.xRot = 0.7F;
             this.leftLowerWing.xRot = 0.35F;
@@ -212,7 +212,7 @@ public class MantisModel<Type extends MantisEntity> extends EntityModel<Type> {
             this.rightLowerWing.yRot += -f1;
             this.leftLowerWing.zRot += -f1 * 0.5F;
             this.rightLowerWing.zRot += f1 * 0.5F;
-        } else if (wingPose == MantisWingPose.FLUTTERING) {
+        } else if (wingPose == MantisPose.FLUTTERING) {
             this.leftWing.xRot = 0.1F;
             this.rightWing.xRot = 0.1F;
             this.leftLowerWing.xRot = 0.05F;

@@ -1,6 +1,6 @@
 package net.invictusslayer.slayersbeasts.entity.poses;
 
-public enum MantisWingPose {
+public enum MantisPose {
     PASSIVE,
     AGGRESSIVE,
     LEAPING,

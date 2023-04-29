@@ -1,6 +1,6 @@
 package net.invictusslayer.slayersbeasts.entity;
 
-import net.invictusslayer.slayersbeasts.entity.poses.MantisWingPose;
+import net.invictusslayer.slayersbeasts.entity.poses.MantisPose;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
@@ -17,11 +17,11 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelAccessor;
 
-public class MantisEntity extends PathfinderMob {
-    private static final EntityDataAccessor<Boolean> DATA_IS_LEAPING = SynchedEntityData.defineId(MantisEntity.class, EntityDataSerializers.BOOLEAN);
-    private static final EntityDataAccessor<Boolean> DATA_IS_FLUTTERING = SynchedEntityData.defineId(MantisEntity.class, EntityDataSerializers.BOOLEAN);
+public class Mantis extends PathfinderMob {
+    private static final EntityDataAccessor<Boolean> DATA_IS_LEAPING = SynchedEntityData.defineId(Mantis.class, EntityDataSerializers.BOOLEAN);
+    private static final EntityDataAccessor<Boolean> DATA_IS_FLUTTERING = SynchedEntityData.defineId(Mantis.class, EntityDataSerializers.BOOLEAN);
 
-    public MantisEntity(EntityType<MantisEntity> entityType, Level level) {
+    public Mantis(EntityType<Mantis> entityType, Level level) {
         super(entityType, level);
     }
 
@@ -69,7 +69,7 @@ public class MantisEntity extends PathfinderMob {
         return MobType.ARTHROPOD;
     }
 
-    public static boolean canSpawn(EntityType<MantisEntity> entity, LevelAccessor levelAccess, MobSpawnType spawnType, BlockPos pos, RandomSource random) {
+    public static boolean canSpawn(EntityType<Mantis> entity, LevelAccessor levelAccess, MobSpawnType spawnType, BlockPos pos, RandomSource random) {
         return PathfinderMob.checkMobSpawnRules(entity, levelAccess, spawnType, pos, random)
                 && levelAccess instanceof final Level level && level.getDifficulty() != Difficulty.PEACEFUL;
     }
@@ -94,21 +94,21 @@ public class MantisEntity extends PathfinderMob {
         this.entityData.set(DATA_IS_FLUTTERING, fluttering);
     }
 
-    public MantisWingPose getWingPose() {
+    public MantisPose getWingPose() {
         if (this.isLeaping()) {
-            return MantisWingPose.LEAPING;
+            return MantisPose.LEAPING;
         } else if (this.isFluttering()) {
-            return MantisWingPose.FLUTTERING;
+            return MantisPose.FLUTTERING;
         } else {
-            return MantisWingPose.PASSIVE;
+            return MantisPose.PASSIVE;
         }
     }
 
     static class FlutterWingsGoal extends Goal {
-        private final MantisEntity mob;
+        private final Mantis mob;
         private int flutterTime;
 
-        public FlutterWingsGoal(MantisEntity pMob) {
+        public FlutterWingsGoal(Mantis pMob) {
             super();
             this.mob = pMob;
         }
@@ -142,11 +142,11 @@ public class MantisEntity extends PathfinderMob {
     }
 
     static class MantisLeapGoal extends LeapAtTargetGoal {
-        private final MantisEntity mob;
+        private final Mantis mob;
         private LivingEntity target;
         private final float yd;
 
-        public MantisLeapGoal(MantisEntity pMob, float pYd) {
+        public MantisLeapGoal(Mantis pMob, float pYd) {
             super(pMob, pYd);
             this.mob = pMob;
             this.yd = pYd;

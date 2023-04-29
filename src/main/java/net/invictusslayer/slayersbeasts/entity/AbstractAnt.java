@@ -36,16 +36,16 @@ import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-public abstract class AbstractAntEntity extends PathfinderMob {
-    private static final EntityDataAccessor<Integer> DATA_ANT_TYPE = SynchedEntityData.defineId(AbstractAntEntity.class, EntityDataSerializers.INT);
-    private static final EntityDataAccessor<Integer> DATA_CARGO_TYPE = SynchedEntityData.defineId(AbstractAntEntity.class, EntityDataSerializers.INT);
+public abstract class AbstractAnt extends PathfinderMob {
+    private static final EntityDataAccessor<Integer> DATA_ANT_TYPE = SynchedEntityData.defineId(AbstractAnt.class, EntityDataSerializers.INT);
+    private static final EntityDataAccessor<Integer> DATA_CARGO_TYPE = SynchedEntityData.defineId(AbstractAnt.class, EntityDataSerializers.INT);
     private int cooldownToEnterNest;
     private int cooldownToLocateNest;
     private int failedForagingTime;
     BlockPos nestPos;
     AntGoToNestGoal antGoToNestGoal;
 
-    public AbstractAntEntity(EntityType<? extends AbstractAntEntity> entityType, Level level) {
+    public AbstractAnt(EntityType<? extends AbstractAnt> entityType, Level level) {
         super(entityType, level);
     }
 
@@ -184,9 +184,9 @@ public abstract class AbstractAntEntity extends PathfinderMob {
         return false;
     }
 
-    protected boolean wantsToEnterNest(AbstractAntEntity ant) {
+    protected boolean wantsToEnterNest(AbstractAnt ant) {
         if (this.cooldownToEnterNest <= 0) {
-            return failedForagingTime > 3600 || getCargoType() != 99 || level.isRaining() || ant instanceof QueenAntEntity;
+            return failedForagingTime > 3600 || getCargoType() != 99 || level.isRaining() || ant instanceof QueenAnt;
         }
         return false;
     }
@@ -203,17 +203,17 @@ public abstract class AbstractAntEntity extends PathfinderMob {
     }
 
     static class AntAttackedGoal extends HurtByTargetGoal {
-        AntAttackedGoal(AbstractAntEntity mob) {
+        AntAttackedGoal(AbstractAnt mob) {
             super(mob);
         }
 
         public boolean canContinueToUse() {
-            return mob instanceof SoldierAntEntity ant && ant.isAngry() && super.canContinueToUse();
+            return mob instanceof SoldierAnt ant && ant.isAngry() && super.canContinueToUse();
         }
 
         protected void alertOther(Mob pMob, LivingEntity pTarget) {
-            if (pMob instanceof SoldierAntEntity soldier && mob.hasLineOfSight(pTarget) &&
-                    ((AbstractAntEntity)mob).getAntType() == soldier.getAntType()) {
+            if (pMob instanceof SoldierAnt soldier && mob.hasLineOfSight(pTarget) &&
+                    ((AbstractAnt)mob).getAntType() == soldier.getAntType()) {
                 pMob.setTarget(pTarget);
             }
         }
@@ -225,9 +225,9 @@ public abstract class AbstractAntEntity extends PathfinderMob {
         @Nullable
         private Path lastPath;
         private int timeStuck;
-        private final AbstractAntEntity mob;
+        private final AbstractAnt mob;
         
-        AntGoToNestGoal(AbstractAntEntity pMob) {
+        AntGoToNestGoal(AbstractAnt pMob) {
             this.setFlags(EnumSet.of(Flag.MOVE, Flag.JUMP));
             this.mob = pMob;
             this.travellingTicks = mob.level.random.nextInt(10);
@@ -317,9 +317,9 @@ public abstract class AbstractAntEntity extends PathfinderMob {
     }
     
     static class AntEnterNestGoal extends Goal {
-        private final AbstractAntEntity mob;
+        private final AbstractAnt mob;
 
-        public AntEnterNestGoal(AbstractAntEntity pMob) {
+        public AntEnterNestGoal(AbstractAnt pMob) {
             this.setFlags(EnumSet.of(Flag.MOVE));
             this.mob = pMob;
         }
@@ -342,9 +342,9 @@ public abstract class AbstractAntEntity extends PathfinderMob {
     }
 
     static class AntLocateNestGoal extends Goal {
-        private final AbstractAntEntity mob;
+        private final AbstractAnt mob;
 
-        public AntLocateNestGoal(AbstractAntEntity pMob) {
+        public AntLocateNestGoal(AbstractAnt pMob) {
             this.mob = pMob;
         }
 

@@ -19,11 +19,11 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.UUID;
 
-public class QueenAntEntity extends AbstractAntEntity implements NeutralMob {
-    private static final EntityDataAccessor<Integer> DATA_REMAINING_ANGER_TIME = SynchedEntityData.defineId(SoldierAntEntity.class, EntityDataSerializers.INT);
+public class QueenAnt extends AbstractAnt implements NeutralMob {
+    private static final EntityDataAccessor<Integer> DATA_REMAINING_ANGER_TIME = SynchedEntityData.defineId(SoldierAnt.class, EntityDataSerializers.INT);
     private UUID target;
 
-    public QueenAntEntity(EntityType<QueenAntEntity> entityType, Level level) {
+    public QueenAnt(EntityType<QueenAnt> entityType, Level level) {
         super(entityType, level);
     }
 
@@ -50,7 +50,7 @@ public class QueenAntEntity extends AbstractAntEntity implements NeutralMob {
                 .add(Attributes.KNOCKBACK_RESISTANCE, 0.7D);
     }
 
-    public static boolean canSpawn(EntityType<QueenAntEntity> entity, LevelAccessor levelAccess, MobSpawnType spawnType, BlockPos pos, RandomSource random) {
+    public static boolean canSpawn(EntityType<QueenAnt> entity, LevelAccessor levelAccess, MobSpawnType spawnType, BlockPos pos, RandomSource random) {
         return PathfinderMob.checkMobSpawnRules(entity, levelAccess, spawnType, pos, random);
     }
 

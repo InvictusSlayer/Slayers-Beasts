@@ -13,8 +13,8 @@ import net.minecraft.world.item.Rarity;
 import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.level.Level;
 
-public class SepulchraIgnitionItem extends Item {
-    public SepulchraIgnitionItem() {
+public class SepulchraPortalLighter extends Item {
+    public SepulchraPortalLighter() {
         super(new Properties().stacksTo(1).rarity(Rarity.RARE));
     }
 
