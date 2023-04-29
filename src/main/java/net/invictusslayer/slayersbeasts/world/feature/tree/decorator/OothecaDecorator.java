@@ -1,4 +1,4 @@
-package net.invictusslayer.slayersbeasts.world.feature.tree;
+package net.invictusslayer.slayersbeasts.world.feature.tree.decorator;
 
 /*
 public class OothecaDecorator extends TreeDecorator {

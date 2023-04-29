@@ -36,15 +36,18 @@ public class ModRecipeProvider extends RecipeProvider implements IConditionBuild
         nineBlockStorageRecipes(consumer, RecipeCategory.MISC, ModItems.JADE.get(), RecipeCategory.BUILDING_BLOCKS, ModBlocks.JADE_BLOCK.get());
 
         generateForModBlockFamilies(consumer);
+        planksFromLog(consumer, ModBlocks.ASPEN_PLANKS.get(), ModTags.Items.ASPEN_LOGS, 4);
+        woodFromLogs(consumer, ModBlocks.ASPEN_WOOD.get(), ModBlocks.ASPEN_LOG.get());
+        woodFromLogs(consumer, ModBlocks.STRIPPED_ASPEN_WOOD.get(), ModBlocks.STRIPPED_ASPEN_LOG.get());
         planksFromLog(consumer, ModBlocks.CAJOLE_PLANKS.get(), ModTags.Items.CAJOLE_LOGS, 4);
         woodFromLogs(consumer, ModBlocks.CAJOLE_WOOD.get(), ModBlocks.CAJOLE_LOG.get());
         woodFromLogs(consumer, ModBlocks.STRIPPED_CAJOLE_WOOD.get(), ModBlocks.STRIPPED_CAJOLE_LOG.get());
         planksFromLog(consumer, ModBlocks.EUCALYPTUS_PLANKS.get(), ModTags.Items.EUCALYPTUS_LOGS, 4);
         woodFromLogs(consumer, ModBlocks.EUCALYPTUS_WOOD.get(), ModBlocks.EUCALYPTUS_LOG.get());
         woodFromLogs(consumer, ModBlocks.STRIPPED_EUCALYPTUS_WOOD.get(), ModBlocks.STRIPPED_EUCALYPTUS_LOG.get());
-        planksFromLog(consumer, ModBlocks.ASPEN_PLANKS.get(), ModTags.Items.ASPEN_LOGS, 4);
-        woodFromLogs(consumer, ModBlocks.ASPEN_WOOD.get(), ModBlocks.ASPEN_LOG.get());
-        woodFromLogs(consumer, ModBlocks.STRIPPED_ASPEN_WOOD.get(), ModBlocks.STRIPPED_ASPEN_LOG.get());
+        planksFromLog(consumer, ModBlocks.REDWOOD_PLANKS.get(), ModTags.Items.REDWOOD_LOGS, 4);
+        woodFromLogs(consumer, ModBlocks.REDWOOD_WOOD.get(), ModBlocks.REDWOOD_LOG.get());
+        woodFromLogs(consumer, ModBlocks.STRIPPED_REDWOOD_WOOD.get(), ModBlocks.STRIPPED_REDWOOD_LOG.get());
     }
 
     protected void generateForModBlockFamilies(Consumer<FinishedRecipe> pFinishedRecipeConsumer) {

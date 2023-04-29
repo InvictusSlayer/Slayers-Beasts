@@ -1,8 +1,6 @@
 {
   "type": "forge:add_features",
   "biomes": [
-    "slayersbeasts:eucalypt_forest",
-    "slayersbeasts:outback"
   ],
   "features": "slayersbeasts:eucalyptus_placed",
   "step": "vegetal_decoration"

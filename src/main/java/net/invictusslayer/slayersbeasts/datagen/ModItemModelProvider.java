@@ -34,12 +34,14 @@ public class ModItemModelProvider extends ItemModelProvider {
         simpleItem(ModItems.TANNED_LEATHER);
 
         blockItem(ModBlocks.WHITE_MUSHROOM);
+        simpleItem(ModBlocks.ASPEN_DOOR);
+        blockItem(ModBlocks.ASPEN_SAPLING);
         simpleItem(ModBlocks.CAJOLE_DOOR);
         blockItem(ModBlocks.CAJOLE_SAPLING);
         simpleItem(ModBlocks.EUCALYPTUS_DOOR);
         blockItem(ModBlocks.EUCALYPTUS_SAPLING);
-        simpleItem(ModBlocks.ASPEN_DOOR);
-        blockItem(ModBlocks.ASPEN_SAPLING);
+        simpleItem(ModBlocks.REDWOOD_DOOR);
+        blockItem(ModBlocks.REDWOOD_SAPLING);
 
         spawnEggItem(ModItems.MANTIS_SPAWN_EGG);
         simpleItem(ModItems.WORKER_ANT_SPAWN_EGG);
@@ -49,26 +51,26 @@ public class ModItemModelProvider extends ItemModelProvider {
         spawnEggItem(ModItems.WITHER_SPIDER_SPAWN_EGG);
     }
 
-    private ItemModelBuilder blockItem(RegistryObject<?> block) {
-        return withExistingParent(block.getId().getPath(),
+    private void blockItem(RegistryObject<?> block) {
+        withExistingParent(block.getId().getPath(),
                 new ResourceLocation("item/generated")).texture("layer0",
                 new ResourceLocation(SlayersBeasts.MOD_ID, "block/" + block.getId().getPath()));
     }
 
-    private ItemModelBuilder simpleItem(RegistryObject<?> item) {
-        return withExistingParent(item.getId().getPath(),
+    private void simpleItem(RegistryObject<?> item) {
+        withExistingParent(item.getId().getPath(),
                 new ResourceLocation("item/generated")).texture("layer0",
                 new ResourceLocation(SlayersBeasts.MOD_ID, "item/" + item.getId().getPath()));
     }
 
-    private ItemModelBuilder handheldItem(RegistryObject<Item> item) {
-        return withExistingParent(item.getId().getPath(),
+    private void handheldItem(RegistryObject<Item> item) {
+        withExistingParent(item.getId().getPath(),
                 new ResourceLocation("item/handheld")).texture("layer0",
                 new ResourceLocation(SlayersBeasts.MOD_ID, "item/" + item.getId().getPath()));
     }
 
-    private ItemModelBuilder spawnEggItem(RegistryObject<ForgeSpawnEggItem> item) {
-        return withExistingParent(item.getId().getPath(),
+    private void spawnEggItem(RegistryObject<ForgeSpawnEggItem> item) {
+        withExistingParent(item.getId().getPath(),
                 new ResourceLocation("item/template_spawn_egg"));
     }
 }

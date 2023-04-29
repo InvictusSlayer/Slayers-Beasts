@@ -105,6 +105,20 @@ public class SlayersBeasts {
             buildContents.accept(ModBlocks.WHITE_MUSHROOM);
             buildContents.accept(ModBlocks.WHITE_MUSHROOM_BLOCK);
 
+            buildContents.accept(ModBlocks.ASPEN_LOG);
+            buildContents.accept(ModBlocks.STRIPPED_ASPEN_LOG);
+            buildContents.accept(ModBlocks.ASPEN_WOOD);
+            buildContents.accept(ModBlocks.STRIPPED_ASPEN_WOOD);
+            buildContents.accept(ModBlocks.ASPEN_LEAVES);
+            buildContents.accept(ModBlocks.ASPEN_SAPLING);
+            buildContents.accept(ModBlocks.ASPEN_PLANKS);
+            buildContents.accept(ModBlocks.ASPEN_SLAB);
+            buildContents.accept(ModBlocks.ASPEN_STAIRS);
+            buildContents.accept(ModBlocks.ASPEN_FENCE);
+            buildContents.accept(ModBlocks.ASPEN_FENCE_GATE);
+            buildContents.accept(ModBlocks.ASPEN_DOOR);
+            buildContents.accept(ModBlocks.ASPEN_TRAPDOOR);
+            
             buildContents.accept(ModBlocks.CAJOLE_LOG);
             buildContents.accept(ModBlocks.STRIPPED_CAJOLE_LOG);
             buildContents.accept(ModBlocks.CAJOLE_WOOD);
@@ -133,19 +147,19 @@ public class SlayersBeasts {
             buildContents.accept(ModBlocks.EUCALYPTUS_DOOR);
             buildContents.accept(ModBlocks.EUCALYPTUS_TRAPDOOR);
             
-            buildContents.accept(ModBlocks.ASPEN_LOG);
-            buildContents.accept(ModBlocks.STRIPPED_ASPEN_LOG);
-            buildContents.accept(ModBlocks.ASPEN_WOOD);
-            buildContents.accept(ModBlocks.STRIPPED_ASPEN_WOOD);
-            buildContents.accept(ModBlocks.ASPEN_LEAVES);
-            buildContents.accept(ModBlocks.ASPEN_SAPLING);
-            buildContents.accept(ModBlocks.ASPEN_PLANKS);
-            buildContents.accept(ModBlocks.ASPEN_SLAB);
-            buildContents.accept(ModBlocks.ASPEN_STAIRS);
-            buildContents.accept(ModBlocks.ASPEN_FENCE);
-            buildContents.accept(ModBlocks.ASPEN_FENCE_GATE);
-            buildContents.accept(ModBlocks.ASPEN_DOOR);
-            buildContents.accept(ModBlocks.ASPEN_TRAPDOOR);
+            buildContents.accept(ModBlocks.REDWOOD_LOG);
+            buildContents.accept(ModBlocks.STRIPPED_REDWOOD_LOG);
+            buildContents.accept(ModBlocks.REDWOOD_WOOD);
+            buildContents.accept(ModBlocks.STRIPPED_REDWOOD_WOOD);
+            buildContents.accept(ModBlocks.REDWOOD_LEAVES);
+            buildContents.accept(ModBlocks.REDWOOD_SAPLING);
+            buildContents.accept(ModBlocks.REDWOOD_PLANKS);
+            buildContents.accept(ModBlocks.REDWOOD_SLAB);
+            buildContents.accept(ModBlocks.REDWOOD_STAIRS);
+            buildContents.accept(ModBlocks.REDWOOD_FENCE);
+            buildContents.accept(ModBlocks.REDWOOD_FENCE_GATE);
+            buildContents.accept(ModBlocks.REDWOOD_DOOR);
+            buildContents.accept(ModBlocks.REDWOOD_TRAPDOOR);
             
             buildContents.accept(ModItems.MANTIS_SPAWN_EGG);
             buildContents.accept(ModItems.WORKER_ANT_SPAWN_EGG);

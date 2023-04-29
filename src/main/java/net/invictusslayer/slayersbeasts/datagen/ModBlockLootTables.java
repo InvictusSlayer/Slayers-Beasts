@@ -40,6 +40,14 @@ public class ModBlockLootTables extends BlockLootSubProvider {
         add(ModBlocks.WHITE_MUSHROOM_BLOCK.get(), (block -> createMushroomBlockDrop(
                 ModBlocks.WHITE_MUSHROOM_BLOCK.get(), ModBlocks.WHITE_MUSHROOM.get())));
 
+        dropSelf(ModBlocks.ASPEN_LOG.get());
+        dropSelf(ModBlocks.STRIPPED_ASPEN_LOG.get());
+        dropSelf(ModBlocks.ASPEN_WOOD.get());
+        dropSelf(ModBlocks.STRIPPED_ASPEN_WOOD.get());
+        add(ModBlocks.ASPEN_LEAVES.get(), (block) -> createLeavesDrops(
+                ModBlocks.ASPEN_LEAVES.get(), ModBlocks.ASPEN_SAPLING.get(), 0.05f));
+        dropSelf(ModBlocks.ASPEN_SAPLING.get());
+        
         dropSelf(ModBlocks.CAJOLE_LOG.get());
         dropSelf(ModBlocks.STRIPPED_CAJOLE_LOG.get());
         dropSelf(ModBlocks.CAJOLE_WOOD.get());
@@ -56,13 +64,13 @@ public class ModBlockLootTables extends BlockLootSubProvider {
                 ModBlocks.EUCALYPTUS_LEAVES.get(), ModBlocks.EUCALYPTUS_SAPLING.get(), 0.05f));
         dropSelf(ModBlocks.EUCALYPTUS_SAPLING.get());
 
-        dropSelf(ModBlocks.ASPEN_LOG.get());
-        dropSelf(ModBlocks.STRIPPED_ASPEN_LOG.get());
-        dropSelf(ModBlocks.ASPEN_WOOD.get());
-        dropSelf(ModBlocks.STRIPPED_ASPEN_WOOD.get());
-        add(ModBlocks.ASPEN_LEAVES.get(), (block) -> createLeavesDrops(
-                ModBlocks.ASPEN_LEAVES.get(), ModBlocks.ASPEN_SAPLING.get(), 0.05f));
-        dropSelf(ModBlocks.ASPEN_SAPLING.get());
+        dropSelf(ModBlocks.REDWOOD_LOG.get());
+        dropSelf(ModBlocks.STRIPPED_REDWOOD_LOG.get());
+        dropSelf(ModBlocks.REDWOOD_WOOD.get());
+        dropSelf(ModBlocks.STRIPPED_REDWOOD_WOOD.get());
+        add(ModBlocks.REDWOOD_LEAVES.get(), (block) -> createLeavesDrops(
+                ModBlocks.REDWOOD_LEAVES.get(), ModBlocks.REDWOOD_SAPLING.get(), 0.05f));
+        dropSelf(ModBlocks.REDWOOD_SAPLING.get());
     }
 
     private void generateForBlockFamilies() {

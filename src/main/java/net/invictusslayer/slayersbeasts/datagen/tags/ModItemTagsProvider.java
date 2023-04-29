@@ -21,9 +21,10 @@ public class ModItemTagsProvider extends ItemTagsProvider {
 
     @Override
     protected void addTags(HolderLookup.Provider pProvider) {
+        this.copy(ModTags.Blocks.ASPEN_LOGS, ModTags.Items.ASPEN_LOGS);
         this.copy(ModTags.Blocks.CAJOLE_LOGS, ModTags.Items.CAJOLE_LOGS);
         this.copy(ModTags.Blocks.EUCALYPTUS_LOGS, ModTags.Items.EUCALYPTUS_LOGS);
-        this.copy(ModTags.Blocks.ASPEN_LOGS, ModTags.Items.ASPEN_LOGS);
+        this.copy(ModTags.Blocks.REDWOOD_LOGS, ModTags.Items.REDWOOD_LOGS);
 
         this.copy(BlockTags.PLANKS, ItemTags.PLANKS);
         this.copy(BlockTags.WOODEN_DOORS, ItemTags.WOODEN_DOORS);

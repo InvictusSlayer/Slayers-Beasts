@@ -45,6 +45,13 @@ public class ModBlockStateProvider extends BlockStateProvider {
 
         sapling(ModBlocks.WHITE_MUSHROOM.get());
         mushroomBlockWithItem(ModBlocks.WHITE_MUSHROOM_BLOCK.get());
+        
+        logWithItem((RotatedPillarBlock) ModBlocks.ASPEN_LOG.get());
+        logWithItem((RotatedPillarBlock) ModBlocks.STRIPPED_ASPEN_LOG.get());
+        woodWithItem((RotatedPillarBlock) ModBlocks.ASPEN_WOOD.get(), blockTexture(ModBlocks.ASPEN_LOG.get()));
+        woodWithItem((RotatedPillarBlock) ModBlocks.STRIPPED_ASPEN_WOOD.get(), blockTexture(ModBlocks.STRIPPED_ASPEN_LOG.get()));
+        cubeWithItem(ModBlocks.ASPEN_LEAVES.get());
+        sapling(ModBlocks.ASPEN_SAPLING.get());
 
         logWithItem((RotatedPillarBlock) ModBlocks.CAJOLE_LOG.get());
         logWithItem((RotatedPillarBlock) ModBlocks.STRIPPED_CAJOLE_LOG.get());
@@ -60,12 +67,12 @@ public class ModBlockStateProvider extends BlockStateProvider {
         cubeWithItem(ModBlocks.EUCALYPTUS_LEAVES.get());
         sapling(ModBlocks.EUCALYPTUS_SAPLING.get());
 
-        logWithItem((RotatedPillarBlock) ModBlocks.ASPEN_LOG.get());
-        logWithItem((RotatedPillarBlock) ModBlocks.STRIPPED_ASPEN_LOG.get());
-        woodWithItem((RotatedPillarBlock) ModBlocks.ASPEN_WOOD.get(), blockTexture(ModBlocks.ASPEN_LOG.get()));
-        woodWithItem((RotatedPillarBlock) ModBlocks.STRIPPED_ASPEN_WOOD.get(), blockTexture(ModBlocks.STRIPPED_ASPEN_LOG.get()));
-        cubeWithItem(ModBlocks.ASPEN_LEAVES.get());
-        sapling(ModBlocks.ASPEN_SAPLING.get());
+        logWithItem((RotatedPillarBlock) ModBlocks.REDWOOD_LOG.get());
+        logWithItem((RotatedPillarBlock) ModBlocks.STRIPPED_REDWOOD_LOG.get());
+        woodWithItem((RotatedPillarBlock) ModBlocks.REDWOOD_WOOD.get(), blockTexture(ModBlocks.REDWOOD_LOG.get()));
+        woodWithItem((RotatedPillarBlock) ModBlocks.STRIPPED_REDWOOD_WOOD.get(), blockTexture(ModBlocks.STRIPPED_REDWOOD_LOG.get()));
+        cubeWithItem(ModBlocks.REDWOOD_LEAVES.get());
+        sapling(ModBlocks.REDWOOD_SAPLING.get());
     }
 
     private void registerBlockFamily(BlockFamily family) {
