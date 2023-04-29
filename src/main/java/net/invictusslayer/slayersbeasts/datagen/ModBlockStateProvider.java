@@ -79,7 +79,7 @@ public class ModBlockStateProvider extends BlockStateProvider {
         doorBlockWithRenderType((DoorBlock) family.get(BlockFamily.Variant.DOOR),
                 extend(blockTexture(family.get(BlockFamily.Variant.DOOR)), "_bottom"),
                 extend(blockTexture(family.get(BlockFamily.Variant.DOOR)), "_top"), "cutout");
-        trapdoorWithRenderTypeAndItem((TrapDoorBlock) family.get(BlockFamily.Variant.TRAPDOOR), true, "cutout");
+        trapdoorWithItem((TrapDoorBlock) family.get(BlockFamily.Variant.TRAPDOOR), true);
     }
 
     private void mushroomBlockWithItem(Block block) {
@@ -138,7 +138,7 @@ public class ModBlockStateProvider extends BlockStateProvider {
     }
     private void wallWithItem(WallBlock block, ResourceLocation texture) {
         wallBlock(block, texture);
-        simpleBlockItem(block, models().withExistingParent(name(block), "minecraft:block/wall_inventory").texture("texture", texture));
+        simpleBlockItem(block, models().withExistingParent(name(block), "minecraft:block/wall_inventory").texture("wall", texture));
     }
     private void buttonWithItem(ButtonBlock block, ResourceLocation texture) {
         buttonBlock(block, texture);
@@ -148,8 +148,8 @@ public class ModBlockStateProvider extends BlockStateProvider {
         pressurePlateBlock(block, texture);
         simpleBlockItem(block, models().withExistingParent(name(block), "minecraft:block/pressure_plate_up"));
     }
-    private void trapdoorWithRenderTypeAndItem(TrapDoorBlock block, boolean orientable, String renderType) {
-        trapdoorBlockWithRenderType(block, blockTexture(block), orientable, renderType);
+    private void trapdoorWithItem(TrapDoorBlock block, boolean orientable) {
+        trapdoorBlockWithRenderType(block, blockTexture(block), orientable, "cutout");
         simpleBlockItem(block, models().withExistingParent(name(block), "minecraft:block/template_trapdoor_bottom").texture("texture", blockTexture(block)));
     }
     
