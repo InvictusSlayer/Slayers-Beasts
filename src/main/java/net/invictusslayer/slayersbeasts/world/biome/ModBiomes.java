@@ -15,7 +15,7 @@ public class ModBiomes {
     public static final ResourceKey<Biome> INKY_THICKET = ResourceKey.create(Registries.BIOME, new ResourceLocation(SlayersBeasts.MOD_ID, "inky_thicket"));
     public static final ResourceKey<Biome> ASPEN_FOREST = ResourceKey.create(Registries.BIOME, new ResourceLocation(SlayersBeasts.MOD_ID, "aspen_forest"));
     public static final ResourceKey<Biome> REDWOOD_GROVE = ResourceKey.create(Registries.BIOME, new ResourceLocation(SlayersBeasts.MOD_ID, "redwood_grove"));
-    public static final ResourceKey<Biome> OLD_GROWTH_REDWOOD_TAIGA = ResourceKey.create(Registries.BIOME, new ResourceLocation(SlayersBeasts.MOD_ID, "old_growth_redwood_taiga"));
+    public static final ResourceKey<Biome> OLD_GROWTH_REDWOOD_GROVE = ResourceKey.create(Registries.BIOME, new ResourceLocation(SlayersBeasts.MOD_ID, "old_growth_redwood_grove"));
 
     public static void register() {
         System.out.println("Registering " + SlayersBeasts.MOD_ID + " Biomes");
