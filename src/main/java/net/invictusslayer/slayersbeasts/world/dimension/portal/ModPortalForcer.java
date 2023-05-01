@@ -2,7 +2,7 @@ package net.invictusslayer.slayersbeasts.world.dimension.portal;
 
 import net.invictusslayer.slayersbeasts.block.ModBlocks;
 import net.invictusslayer.slayersbeasts.block.SepulchraPortalBlock;
-import net.invictusslayer.slayersbeasts.util.ModPois;
+import net.invictusslayer.slayersbeasts.datagen.tags.ModPois;
 import net.invictusslayer.slayersbeasts.world.dimension.ModDimensions;
 import net.minecraft.BlockUtil;
 import net.minecraft.core.BlockPos;

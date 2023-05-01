@@ -7,6 +7,7 @@ import net.invictusslayer.slayersbeasts.block.ModBlocks;
 import net.invictusslayer.slayersbeasts.world.feature.foliageplacer.AspenFoliagePlacer;
 import net.invictusslayer.slayersbeasts.world.feature.foliageplacer.CajoleFoliagePlacer;
 import net.invictusslayer.slayersbeasts.world.feature.foliageplacer.EucalyptusFoliagePlacer;
+import net.invictusslayer.slayersbeasts.world.feature.trunkplacer.ButtressTrunkPlacer;
 import net.invictusslayer.slayersbeasts.world.feature.trunkplacer.CrossTrunkPlacer;
 import net.minecraft.core.HolderGetter;
 import net.minecraft.core.registries.Registries;
@@ -26,6 +27,7 @@ import net.minecraft.world.level.levelgen.feature.WeightedPlacedFeature;
 import net.minecraft.world.level.levelgen.feature.configurations.*;
 import net.minecraft.world.level.levelgen.feature.featuresize.TwoLayersFeatureSize;
 import net.minecraft.world.level.levelgen.feature.foliageplacers.BlobFoliagePlacer;
+import net.minecraft.world.level.levelgen.feature.foliageplacers.MegaJungleFoliagePlacer;
 import net.minecraft.world.level.levelgen.feature.foliageplacers.MegaPineFoliagePlacer;
 import net.minecraft.world.level.levelgen.feature.stateproviders.BlockStateProvider;
 import net.minecraft.world.level.levelgen.feature.treedecorators.LeaveVineDecorator;
@@ -44,8 +46,10 @@ public class ModConfiguredFeatures {
     public static final ResourceKey<ConfiguredFeature<?, ?>> CAJOLE = registerKey("cajole");
     public static final ResourceKey<ConfiguredFeature<?, ?>> DESERT_OAK = registerKey("desert_oak");
     public static final ResourceKey<ConfiguredFeature<?, ?>> EUCALYPTUS = registerKey("eucalyptus");
+    public static final ResourceKey<ConfiguredFeature<?, ?>> KAPOK = registerKey("kapok");
     public static final ResourceKey<ConfiguredFeature<?, ?>> REDWOOD = registerKey("redwood");
     public static final ResourceKey<ConfiguredFeature<?, ?>> GIANT_REDWOOD = registerKey("giant_redwood");
+    public static final ResourceKey<ConfiguredFeature<?, ?>> PETRIFIED_TREE = registerKey("petrified_tree");
     public static final ResourceKey<ConfiguredFeature<?, ?>> HUGE_WHITE_MUSHROOM = registerKey("huge_white_mushroom");
 
     //VEGETATION
@@ -77,24 +81,30 @@ public class ModConfiguredFeatures {
                 BlockStateProvider.simple(ModBlocks.CAJOLE_LEAVES.get()), new CajoleFoliagePlacer(ConstantInt.of(2), ConstantInt.of(0)), new TwoLayersFeatureSize(1, 0, 2))
                 .decorators(ImmutableList.of(TrunkVineDecorator.INSTANCE, new LeaveVineDecorator(0.25F))).ignoreVines().build());
         register(context, DESERT_OAK, Feature.TREE, new TreeConfiguration.TreeConfigurationBuilder(
-                BlockStateProvider.simple(Blocks.OAK_LOG), new StraightTrunkPlacer(5, 2, 2),
-                BlockStateProvider.simple(Blocks.OAK_LEAVES), new BlobFoliagePlacer(ConstantInt.of(2), ConstantInt.of(0), 3), new TwoLayersFeatureSize(1, 0, 2)).build());
+                BlockStateProvider.simple(ModBlocks.DESERT_OAK_LOG.get()), new StraightTrunkPlacer(5, 2, 2),
+                BlockStateProvider.simple(ModBlocks.DESERT_OAK_LEAVES.get()), new BlobFoliagePlacer(ConstantInt.of(2), ConstantInt.of(0), 3), new TwoLayersFeatureSize(1, 0, 2)).build());
         register(context, EUCALYPTUS, Feature.TREE, new TreeConfiguration.TreeConfigurationBuilder(
                 BlockStateProvider.simple(ModBlocks.EUCALYPTUS_LOG.get()), new CrossTrunkPlacer(14, 8, 2),
                 BlockStateProvider.simple(ModBlocks.EUCALYPTUS_LEAVES.get()), new EucalyptusFoliagePlacer(ConstantInt.of(2), ConstantInt.of(0)), new TwoLayersFeatureSize(1, 0, 2)).build());
+        register(context, KAPOK, Feature.TREE, new TreeConfiguration.TreeConfigurationBuilder(
+                BlockStateProvider.simple(ModBlocks.KAPOK_LOG.get()), new ButtressTrunkPlacer(20, 8, 2),
+                BlockStateProvider.simple(ModBlocks.KAPOK_LEAVES.get()), new MegaJungleFoliagePlacer(ConstantInt.of(2), ConstantInt.of(0), 2), new TwoLayersFeatureSize(1, 0, 2)).build());
         register(context, REDWOOD, Feature.TREE, new TreeConfiguration.TreeConfigurationBuilder(
                 BlockStateProvider.simple(ModBlocks.REDWOOD_LOG.get()), new StraightTrunkPlacer(6, 5, 2),
                 BlockStateProvider.simple(ModBlocks.REDWOOD_LEAVES.get()), new AspenFoliagePlacer(ConstantInt.of(2), ConstantInt.of(0)), new TwoLayersFeatureSize(1, 0, 2)).build());
         register(context, GIANT_REDWOOD, Feature.TREE, new TreeConfiguration.TreeConfigurationBuilder(
                 BlockStateProvider.simple(ModBlocks.REDWOOD_LOG.get()), new GiantTrunkPlacer(20, 8, 2),
                 BlockStateProvider.simple(ModBlocks.REDWOOD_LEAVES.get()), new MegaPineFoliagePlacer(ConstantInt.of(0), ConstantInt.of(0), UniformInt.of(13, 17)), new TwoLayersFeatureSize(1, 0, 2)).build());
+        register(context, PETRIFIED_TREE, Feature.TREE, new TreeConfiguration.TreeConfigurationBuilder(
+                BlockStateProvider.simple(Blocks.STONE), new StraightTrunkPlacer(5, 2, 2),
+                BlockStateProvider.simple(Blocks.TUFF), new BlobFoliagePlacer(ConstantInt.of(2), ConstantInt.of(0), 3), new TwoLayersFeatureSize(1, 0, 2)).build());
         register(context, HUGE_WHITE_MUSHROOM, ModFeatures.HUGE_WHITE_MUSHROOM.get(), new HugeMushroomFeatureConfiguration(
                 BlockStateProvider.simple(ModBlocks.WHITE_MUSHROOM_BLOCK.get().defaultBlockState().setValue(HugeMushroomBlock.UP, Boolean.TRUE).setValue(HugeMushroomBlock.DOWN, Boolean.FALSE)),
                 BlockStateProvider.simple(Blocks.MUSHROOM_STEM.defaultBlockState().setValue(HugeMushroomBlock.UP, Boolean.FALSE).setValue(HugeMushroomBlock.DOWN, Boolean.FALSE)), 3));
 
         register(context, TREES_ASPEN, Feature.RANDOM_SELECTOR, new RandomFeatureConfiguration(List.of(new WeightedPlacedFeature(placed.getOrThrow(ModPlacedFeatures.ASPEN_CHECKED), 0.5F)), placed.getOrThrow(ModPlacedFeatures.ASPEN_CHECKED)));
         register(context, TREES_INKY, Feature.RANDOM_SELECTOR, new RandomFeatureConfiguration(List.of(new WeightedPlacedFeature(placed.getOrThrow(ModPlacedFeatures.CAJOLE_CHECKED), 0.5F)), placed.getOrThrow(ModPlacedFeatures.CAJOLE_CHECKED)));
-        register(context, TREES_RAINFOREST, Feature.RANDOM_SELECTOR, new RandomFeatureConfiguration(List.of(new WeightedPlacedFeature(placed.getOrThrow(ModPlacedFeatures.CAJOLE_CHECKED), 0.5F)), placed.getOrThrow(ModPlacedFeatures.CAJOLE_CHECKED)));
+        register(context, TREES_RAINFOREST, Feature.RANDOM_SELECTOR, new RandomFeatureConfiguration(List.of(new WeightedPlacedFeature(placed.getOrThrow(ModPlacedFeatures.KAPOK_CHECKED), 0.3F)), placed.getOrThrow(ModPlacedFeatures.CAJOLE_CHECKED)));
         register(context, TREES_EUCALYPT, Feature.RANDOM_SELECTOR, new RandomFeatureConfiguration(List.of(new WeightedPlacedFeature(placed.getOrThrow(ModPlacedFeatures.EUCALYPTUS_CHECKED), 0.5F)), placed.getOrThrow(ModPlacedFeatures.EUCALYPTUS_CHECKED)));
         register(context, TREES_OUTBACK, Feature.RANDOM_SELECTOR, new RandomFeatureConfiguration(List.of(new WeightedPlacedFeature(placed.getOrThrow(ModPlacedFeatures.DESERT_OAK_CHECKED), 0.5F)), placed.getOrThrow(ModPlacedFeatures.EUCALYPTUS_CHECKED)));
         register(context, TREES_REDWOOD, Feature.RANDOM_SELECTOR, new RandomFeatureConfiguration(List.of(new WeightedPlacedFeature(placed.getOrThrow(ModPlacedFeatures.REDWOOD_CHECKED), 0.5F)), placed.getOrThrow(ModPlacedFeatures.REDWOOD_CHECKED)));

@@ -2,7 +2,7 @@ package net.invictusslayer.slayersbeasts.entity;
 
 import com.google.common.collect.Lists;
 import net.invictusslayer.slayersbeasts.block.entity.AnthillBlockEntity;
-import net.invictusslayer.slayersbeasts.util.ModTags;
+import net.invictusslayer.slayersbeasts.datagen.tags.ModTags;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Holder;
 import net.minecraft.nbt.CompoundTag;

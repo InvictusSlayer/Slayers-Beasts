@@ -5,7 +5,7 @@ import net.invictusslayer.slayersbeasts.entity.AbstractAnt;
 import net.invictusslayer.slayersbeasts.entity.QueenAnt;
 import net.invictusslayer.slayersbeasts.entity.SoldierAnt;
 import net.invictusslayer.slayersbeasts.block.ModBlocks;
-import net.invictusslayer.slayersbeasts.util.ModTags;
+import net.invictusslayer.slayersbeasts.datagen.tags.ModTags;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.ListTag;

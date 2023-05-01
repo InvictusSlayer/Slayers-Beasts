@@ -1,4 +1,4 @@
-package net.invictusslayer.slayersbeasts.util;
+package net.invictusslayer.slayersbeasts.datagen.tags;
 
 import net.invictusslayer.slayersbeasts.SlayersBeasts;
 import net.minecraft.core.registries.Registries;
@@ -20,7 +20,9 @@ public class ModTags {
 
         public static final TagKey<Block> ASPEN_LOGS = tag("aspen_logs");
         public static final TagKey<Block> CAJOLE_LOGS = tag("cajole_logs");
+        public static final TagKey<Block> DESERT_OAK_LOGS = tag("desert_oak_logs");
         public static final TagKey<Block> EUCALYPTUS_LOGS = tag("eucalyptus_logs");
+        public static final TagKey<Block> KAPOK_LOGS = tag("kapok_logs");
         public static final TagKey<Block> REDWOOD_LOGS = tag("redwood_logs");
 
         private static TagKey<Block> tag(String name) {
@@ -31,7 +33,9 @@ public class ModTags {
     public static class Items {
         public static final TagKey<Item> ASPEN_LOGS = tag("aspen_logs");
         public static final TagKey<Item> CAJOLE_LOGS = tag("cajole_logs");
+        public static final TagKey<Item> DESERT_OAK_LOGS = tag("desert_oak_logs");
         public static final TagKey<Item> EUCALYPTUS_LOGS = tag("eucalyptus_logs");
+        public static final TagKey<Item> KAPOK_LOGS = tag("kapok_logs");
         public static final TagKey<Item> REDWOOD_LOGS = tag("redwood_logs");
 
         public static final TagKey<Item> JADE_GEMS = forgeTag("gems/jade");

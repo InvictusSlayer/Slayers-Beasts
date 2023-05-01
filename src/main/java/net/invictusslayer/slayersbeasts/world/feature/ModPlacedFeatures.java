@@ -11,7 +11,6 @@ import net.minecraft.data.worldgen.placement.PlacementUtils;
 import net.minecraft.data.worldgen.placement.VegetationPlacements;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.levelgen.VerticalAnchor;
 import net.minecraft.world.level.levelgen.feature.ConfiguredFeature;
 import net.minecraft.world.level.levelgen.placement.*;
@@ -28,6 +27,7 @@ public class ModPlacedFeatures {
     public static final ResourceKey<PlacedFeature> CAJOLE_CHECKED = createKey("cajole_checked");
     public static final ResourceKey<PlacedFeature> DESERT_OAK_CHECKED = createKey("desert_oak_checked");
     public static final ResourceKey<PlacedFeature> EUCALYPTUS_CHECKED = createKey("eucalyptus_checked");
+    public static final ResourceKey<PlacedFeature> KAPOK_CHECKED = createKey("kapok_checked");
     public static final ResourceKey<PlacedFeature> REDWOOD_CHECKED = createKey("redwood_checked");
     public static final ResourceKey<PlacedFeature> GIANT_REDWOOD_CHECKED = createKey("giant_redwood_checked");
 
@@ -51,16 +51,17 @@ public class ModPlacedFeatures {
 
         register(context, ASPEN_CHECKED, configured.getOrThrow(ModConfiguredFeatures.ASPEN), List.of(PlacementUtils.filteredByBlockSurvival(ModBlocks.ASPEN_SAPLING.get())));
         register(context, CAJOLE_CHECKED, configured.getOrThrow(ModConfiguredFeatures.CAJOLE), List.of(PlacementUtils.filteredByBlockSurvival(ModBlocks.CAJOLE_SAPLING.get())));
-        register(context, DESERT_OAK_CHECKED, configured.getOrThrow(ModConfiguredFeatures.DESERT_OAK), List.of(PlacementUtils.filteredByBlockSurvival(Blocks.OAK_SAPLING)));
+        register(context, DESERT_OAK_CHECKED, configured.getOrThrow(ModConfiguredFeatures.DESERT_OAK), List.of(PlacementUtils.filteredByBlockSurvival(ModBlocks.DESERT_OAK_SAPLING.get())));
         register(context, EUCALYPTUS_CHECKED, configured.getOrThrow(ModConfiguredFeatures.EUCALYPTUS), List.of(PlacementUtils.filteredByBlockSurvival(ModBlocks.EUCALYPTUS_SAPLING.get())));
+        register(context, KAPOK_CHECKED, configured.getOrThrow(ModConfiguredFeatures.KAPOK), List.of(PlacementUtils.filteredByBlockSurvival(ModBlocks.KAPOK_SAPLING.get())));
         register(context, REDWOOD_CHECKED, configured.getOrThrow(ModConfiguredFeatures.REDWOOD), List.of(PlacementUtils.filteredByBlockSurvival(ModBlocks.REDWOOD_SAPLING.get())));
         register(context, GIANT_REDWOOD_CHECKED, configured.getOrThrow(ModConfiguredFeatures.GIANT_REDWOOD), List.of(PlacementUtils.filteredByBlockSurvival(ModBlocks.REDWOOD_SAPLING.get())));
 
         register(context, TREES_ASPEN, configured.getOrThrow(ModConfiguredFeatures.TREES_ASPEN), VegetationPlacements.treePlacement(PlacementUtils.countExtra(10, 0.1f, 1), ModBlocks.ASPEN_SAPLING.get()));
         register(context, TREES_INKY, configured.getOrThrow(ModConfiguredFeatures.TREES_INKY), VegetationPlacements.treePlacement(PlacementUtils.countExtra(3, 0.1f, 1)));
-        register(context, TREES_RAINFOREST, configured.getOrThrow(ModConfiguredFeatures.TREES_RAINFOREST), VegetationPlacements.treePlacement(PlacementUtils.countExtra(3, 0.1f, 1)));
-        register(context, TREES_EUCALYPT, configured.getOrThrow(ModConfiguredFeatures.TREES_EUCALYPT), VegetationPlacements.treePlacement(PlacementUtils.countExtra(5, 0.1f, 1), ModBlocks.EUCALYPTUS_SAPLING.get()));
-        register(context, TREES_OUTBACK, configured.getOrThrow(ModConfiguredFeatures.TREES_OUTBACK), VegetationPlacements.treePlacement(PlacementUtils.countExtra(1, 0.1f, 1)));
+        register(context, TREES_RAINFOREST, configured.getOrThrow(ModConfiguredFeatures.TREES_RAINFOREST), VegetationPlacements.treePlacement(PlacementUtils.countExtra(10, 0.1f, 1)));
+        register(context, TREES_EUCALYPT, configured.getOrThrow(ModConfiguredFeatures.TREES_EUCALYPT), VegetationPlacements.treePlacement(PlacementUtils.countExtra(6, 0.1f, 1), ModBlocks.EUCALYPTUS_SAPLING.get()));
+        register(context, TREES_OUTBACK, configured.getOrThrow(ModConfiguredFeatures.TREES_OUTBACK), VegetationPlacements.treePlacement(PlacementUtils.countExtra(2, 0.1f, 1)));
         register(context, TREES_REDWOOD, configured.getOrThrow(ModConfiguredFeatures.TREES_REDWOOD), VegetationPlacements.treePlacement(PlacementUtils.countExtra(10, 0.1f, 1), ModBlocks.REDWOOD_SAPLING.get()));
         register(context, TREES_OLD_GROWTH_REDWOOD, configured.getOrThrow(ModConfiguredFeatures.TREES_OLD_GROWTH_REDWOOD), VegetationPlacements.treePlacement(PlacementUtils.countExtra(10, 0.1f, 1)));
         register(context, WHITE_MUSHROOM_COMMON, configured.getOrThrow(ModConfiguredFeatures.PATCH_WHITE_MUSHROOM), mushroomPlacement(4, CountPlacement.of(3)));

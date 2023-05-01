@@ -6,7 +6,6 @@ import net.invictusslayer.slayersbeasts.item.ModItems;
 import net.minecraft.data.PackOutput;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Item;
-import net.minecraftforge.client.model.generators.ItemModelBuilder;
 import net.minecraftforge.client.model.generators.ItemModelProvider;
 import net.minecraftforge.common.ForgeSpawnEggItem;
 import net.minecraftforge.common.data.ExistingFileHelper;
@@ -38,8 +37,12 @@ public class ModItemModelProvider extends ItemModelProvider {
         blockItem(ModBlocks.ASPEN_SAPLING);
         simpleItem(ModBlocks.CAJOLE_DOOR);
         blockItem(ModBlocks.CAJOLE_SAPLING);
+        simpleItem(ModBlocks.DESERT_OAK_DOOR);
+        blockItem(ModBlocks.DESERT_OAK_SAPLING);
         simpleItem(ModBlocks.EUCALYPTUS_DOOR);
         blockItem(ModBlocks.EUCALYPTUS_SAPLING);
+        simpleItem(ModBlocks.KAPOK_DOOR);
+        blockItem(ModBlocks.KAPOK_SAPLING);
         simpleItem(ModBlocks.REDWOOD_DOOR);
         blockItem(ModBlocks.REDWOOD_SAPLING);
 

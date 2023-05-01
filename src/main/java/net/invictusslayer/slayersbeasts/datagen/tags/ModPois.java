@@ -1,4 +1,4 @@
-package net.invictusslayer.slayersbeasts.util;
+package net.invictusslayer.slayersbeasts.datagen.tags;
 
 import com.google.common.collect.ImmutableSet;
 import net.invictusslayer.slayersbeasts.SlayersBeasts;

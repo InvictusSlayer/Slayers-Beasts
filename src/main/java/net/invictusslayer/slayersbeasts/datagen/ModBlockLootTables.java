@@ -56,6 +56,14 @@ public class ModBlockLootTables extends BlockLootSubProvider {
                 ModBlocks.CAJOLE_LEAVES.get(), ModBlocks.CAJOLE_SAPLING.get(), 0.025f));
         dropSelf(ModBlocks.CAJOLE_SAPLING.get());
 
+        dropSelf(ModBlocks.DESERT_OAK_LOG.get());
+        dropSelf(ModBlocks.STRIPPED_DESERT_OAK_LOG.get());
+        dropSelf(ModBlocks.DESERT_OAK_WOOD.get());
+        dropSelf(ModBlocks.STRIPPED_DESERT_OAK_WOOD.get());
+        add(ModBlocks.DESERT_OAK_LEAVES.get(), (block) -> createLeavesDrops(
+                ModBlocks.DESERT_OAK_LEAVES.get(), ModBlocks.DESERT_OAK_SAPLING.get(), 0.05f));
+        dropSelf(ModBlocks.DESERT_OAK_SAPLING.get());
+        
         dropSelf(ModBlocks.EUCALYPTUS_LOG.get());
         dropSelf(ModBlocks.STRIPPED_EUCALYPTUS_LOG.get());
         dropSelf(ModBlocks.EUCALYPTUS_WOOD.get());
@@ -64,6 +72,14 @@ public class ModBlockLootTables extends BlockLootSubProvider {
                 ModBlocks.EUCALYPTUS_LEAVES.get(), ModBlocks.EUCALYPTUS_SAPLING.get(), 0.05f));
         dropSelf(ModBlocks.EUCALYPTUS_SAPLING.get());
 
+        dropSelf(ModBlocks.KAPOK_LOG.get());
+        dropSelf(ModBlocks.STRIPPED_KAPOK_LOG.get());
+        dropSelf(ModBlocks.KAPOK_WOOD.get());
+        dropSelf(ModBlocks.STRIPPED_KAPOK_WOOD.get());
+        add(ModBlocks.KAPOK_LEAVES.get(), (block) -> createLeavesDrops(
+                ModBlocks.KAPOK_LEAVES.get(), ModBlocks.KAPOK_SAPLING.get(), 0.05f));
+        dropSelf(ModBlocks.KAPOK_SAPLING.get());
+        
         dropSelf(ModBlocks.REDWOOD_LOG.get());
         dropSelf(ModBlocks.STRIPPED_REDWOOD_LOG.get());
         dropSelf(ModBlocks.REDWOOD_WOOD.get());

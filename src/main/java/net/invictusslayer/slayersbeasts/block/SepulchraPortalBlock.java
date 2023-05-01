@@ -1,6 +1,6 @@
 package net.invictusslayer.slayersbeasts.block;
 
-import net.invictusslayer.slayersbeasts.util.ModTags;
+import net.invictusslayer.slayersbeasts.datagen.tags.ModTags;
 import net.invictusslayer.slayersbeasts.world.dimension.ModDimensions;
 import net.invictusslayer.slayersbeasts.world.dimension.portal.ModPortalForcer;
 import net.minecraft.core.BlockPos;

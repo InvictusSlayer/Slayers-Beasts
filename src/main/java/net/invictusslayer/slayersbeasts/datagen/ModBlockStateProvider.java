@@ -59,6 +59,13 @@ public class ModBlockStateProvider extends BlockStateProvider {
         woodWithItem((RotatedPillarBlock) ModBlocks.STRIPPED_CAJOLE_WOOD.get(), blockTexture(ModBlocks.STRIPPED_CAJOLE_LOG.get()));
         cubeWithItem(ModBlocks.CAJOLE_LEAVES.get());
         sapling(ModBlocks.CAJOLE_SAPLING.get());
+        
+        logWithItem((RotatedPillarBlock) ModBlocks.DESERT_OAK_LOG.get());
+        logWithItem((RotatedPillarBlock) ModBlocks.STRIPPED_DESERT_OAK_LOG.get());
+        woodWithItem((RotatedPillarBlock) ModBlocks.DESERT_OAK_WOOD.get(), blockTexture(ModBlocks.DESERT_OAK_LOG.get()));
+        woodWithItem((RotatedPillarBlock) ModBlocks.STRIPPED_DESERT_OAK_WOOD.get(), blockTexture(ModBlocks.STRIPPED_DESERT_OAK_LOG.get()));
+        cubeWithItem(ModBlocks.DESERT_OAK_LEAVES.get());
+        sapling(ModBlocks.DESERT_OAK_SAPLING.get());
 
         logWithItem((RotatedPillarBlock) ModBlocks.EUCALYPTUS_LOG.get());
         logWithItem((RotatedPillarBlock) ModBlocks.STRIPPED_EUCALYPTUS_LOG.get());
@@ -67,6 +74,13 @@ public class ModBlockStateProvider extends BlockStateProvider {
         cubeWithItem(ModBlocks.EUCALYPTUS_LEAVES.get());
         sapling(ModBlocks.EUCALYPTUS_SAPLING.get());
 
+        logWithItem((RotatedPillarBlock) ModBlocks.KAPOK_LOG.get());
+        logWithItem((RotatedPillarBlock) ModBlocks.STRIPPED_KAPOK_LOG.get());
+        woodWithItem((RotatedPillarBlock) ModBlocks.KAPOK_WOOD.get(), blockTexture(ModBlocks.KAPOK_LOG.get()));
+        woodWithItem((RotatedPillarBlock) ModBlocks.STRIPPED_KAPOK_WOOD.get(), blockTexture(ModBlocks.STRIPPED_KAPOK_LOG.get()));
+        cubeWithItem(ModBlocks.KAPOK_LEAVES.get());
+        sapling(ModBlocks.KAPOK_SAPLING.get());
+        
         logWithItem((RotatedPillarBlock) ModBlocks.REDWOOD_LOG.get());
         logWithItem((RotatedPillarBlock) ModBlocks.STRIPPED_REDWOOD_LOG.get());
         woodWithItem((RotatedPillarBlock) ModBlocks.REDWOOD_WOOD.get(), blockTexture(ModBlocks.REDWOOD_LOG.get()));

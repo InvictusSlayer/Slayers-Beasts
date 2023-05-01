@@ -1,7 +1,6 @@
 package net.invictusslayer.slayersbeasts.datagen.tags;
 
 import net.invictusslayer.slayersbeasts.SlayersBeasts;
-import net.invictusslayer.slayersbeasts.util.ModTags;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.tags.ItemTagsProvider;
@@ -23,7 +22,9 @@ public class ModItemTagsProvider extends ItemTagsProvider {
     protected void addTags(HolderLookup.Provider pProvider) {
         this.copy(ModTags.Blocks.ASPEN_LOGS, ModTags.Items.ASPEN_LOGS);
         this.copy(ModTags.Blocks.CAJOLE_LOGS, ModTags.Items.CAJOLE_LOGS);
+        this.copy(ModTags.Blocks.DESERT_OAK_LOGS, ModTags.Items.DESERT_OAK_LOGS);
         this.copy(ModTags.Blocks.EUCALYPTUS_LOGS, ModTags.Items.EUCALYPTUS_LOGS);
+        this.copy(ModTags.Blocks.KAPOK_LOGS, ModTags.Items.KAPOK_LOGS);
         this.copy(ModTags.Blocks.REDWOOD_LOGS, ModTags.Items.REDWOOD_LOGS);
 
         this.copy(BlockTags.PLANKS, ItemTags.PLANKS);

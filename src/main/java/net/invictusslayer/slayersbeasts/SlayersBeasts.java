@@ -8,7 +8,7 @@ import net.invictusslayer.slayersbeasts.misc.ModBrewingRecipe;
 import net.invictusslayer.slayersbeasts.misc.ModCreativeModeTab;
 import net.invictusslayer.slayersbeasts.effect.ModEffects;
 import net.invictusslayer.slayersbeasts.misc.ModPotions;
-import net.invictusslayer.slayersbeasts.util.ModPois;
+import net.invictusslayer.slayersbeasts.datagen.tags.ModPois;
 import net.invictusslayer.slayersbeasts.world.biome.ModBiomes;
 import net.invictusslayer.slayersbeasts.world.dimension.ModDimensions;
 import net.invictusslayer.slayersbeasts.world.feature.ModFeatures;

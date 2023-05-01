@@ -3,7 +3,7 @@ package net.invictusslayer.slayersbeasts.datagen;
 import net.invictusslayer.slayersbeasts.SlayersBeasts;
 import net.invictusslayer.slayersbeasts.block.ModBlocks;
 import net.invictusslayer.slayersbeasts.item.ModItems;
-import net.invictusslayer.slayersbeasts.util.ModTags;
+import net.invictusslayer.slayersbeasts.datagen.tags.ModTags;
 import net.minecraft.advancements.critereon.ItemPredicate;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.recipes.*;
