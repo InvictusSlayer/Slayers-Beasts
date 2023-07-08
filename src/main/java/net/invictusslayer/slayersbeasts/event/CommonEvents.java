@@ -37,8 +37,9 @@ public class CommonEvents {
         event.put(ModEntities.WORKER_ANT.get(), WorkerAnt.createAttributes().build());
         event.put(ModEntities.SOLDIER_ANT.get(), SoldierAnt.createAttributes().build());
         event.put(ModEntities.QUEEN_ANT.get(), QueenAnt.createAttributes().build());
+        event.put(ModEntities.WITHER_SPIDER.get(), WitherSpider.createAttributes().build());
+        event.put(ModEntities.TARANTULA.get(), Tarantula.createAttributes().build());
         event.put(ModEntities.DAMSELFLY.get(), Damselfly.createAttributes().build());
         event.put(ModEntities.VENUS_FLYTRAP.get(), VenusFlytrap.createAttributes().build());
-        event.put(ModEntities.WITHER_SPIDER.get(), WitherSpider.createAttributes().build());
     }
 }

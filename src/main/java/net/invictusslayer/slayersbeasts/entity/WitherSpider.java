@@ -59,7 +59,7 @@ public class WitherSpider extends Spider {
 
     @Override
     public MobType getMobType() {
-        return MobType.UNDEAD;
+        return MobType.ARTHROPOD;
     }
 
     public boolean canBeAffected(MobEffectInstance effectInstance) {

@@ -9,6 +9,7 @@ import net.invictusslayer.slayersbeasts.misc.ModCreativeModeTab;
 import net.invictusslayer.slayersbeasts.effect.ModEffects;
 import net.invictusslayer.slayersbeasts.misc.ModPotions;
 import net.invictusslayer.slayersbeasts.datagen.tags.ModPois;
+import net.invictusslayer.slayersbeasts.misc.ModSounds;
 import net.invictusslayer.slayersbeasts.world.biome.ModBiomes;
 import net.invictusslayer.slayersbeasts.world.dimension.ModDimensions;
 import net.invictusslayer.slayersbeasts.world.feature.ModFeatures;
@@ -37,6 +38,7 @@ public class SlayersBeasts {
         ModEntities.register(eventBus);
         ModEffects.register(eventBus);
         ModPotions.register(eventBus);
+        ModSounds.register(eventBus);
         ModFoliagePlacers.register(eventBus);
         ModTrunkPlacers.register(eventBus);
         ModFeatures.register(eventBus);

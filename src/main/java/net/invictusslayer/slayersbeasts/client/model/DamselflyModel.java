@@ -4,7 +4,6 @@ import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import net.invictusslayer.slayersbeasts.SlayersBeasts;
 import net.invictusslayer.slayersbeasts.entity.Damselfly;
-import net.invictusslayer.slayersbeasts.entity.poses.DamselflyPose;
 import net.minecraft.client.model.EntityModel;
 import net.minecraft.client.model.geom.ModelLayerLocation;
 import net.minecraft.client.model.geom.ModelPart;
@@ -58,8 +57,8 @@ public class DamselflyModel<Type extends Damselfly> extends EntityModel<Type> {
     @Override
     public void setupAnim(Type pEntity, float pLimbSwing, float pLimbSwingAmount, float pAgeInTicks, float pNetHeadYaw, float pHeadPitch) {
         float f1 = Mth.cos(pAgeInTicks * 3F) / 5F;
-        DamselflyPose wingPose = pEntity.getWingPose();
-        if (wingPose == DamselflyPose.FLYING) {
+        Damselfly.DamselflyPose wingPose = pEntity.getWingPose();
+        if (wingPose == Damselfly.DamselflyPose.FLYING) {
             leftFrontWing.xRot = 0;
             rightFrontWing.xRot = 0;
             leftBackWing.xRot = 0;
@@ -76,7 +75,7 @@ public class DamselflyModel<Type extends Damselfly> extends EntityModel<Type> {
             rightFrontWing.zRot += -f1;
             leftBackWing.zRot += -f1;
             rightBackWing.zRot += f1;
-        } else if (wingPose == DamselflyPose.PERCHED) {
+        } else if (wingPose == Damselfly.DamselflyPose.PERCHED) {
             leftFrontWing.xRot = -Mth.PI * 0.04F;
             rightFrontWing.xRot = -Mth.PI * 0.04F;
             leftBackWing.xRot = Mth.PI;

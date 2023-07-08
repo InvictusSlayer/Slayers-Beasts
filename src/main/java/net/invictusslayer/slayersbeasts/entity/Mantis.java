@@ -1,12 +1,14 @@
 package net.invictusslayer.slayersbeasts.entity;
 
-import net.invictusslayer.slayersbeasts.entity.poses.MantisPose;
+import net.invictusslayer.slayersbeasts.misc.ModSounds;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
+import net.minecraft.sounds.SoundEvent;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.Difficulty;
+import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
@@ -54,16 +56,16 @@ public class Mantis extends PathfinderMob {
         if (!super.doHurtTarget(pEntity)) {
             return false;
         } else {
-            /*if (pEntity instanceof LivingEntity && random.nextBoolean()) {
-                ((LivingEntity)pEntity).addEffect(new MobEffectInstance(ModEffects.PARALYSIS.get(), 30), this);
-            }*/
+//            if (pEntity instanceof LivingEntity && random.nextBoolean()) {
+//                ((LivingEntity)pEntity).addEffect(new MobEffectInstance(ModEffects.PARALYSIS.get(), 30), this);
+//            }
             return true;
         }
     }
 
-//    protected SoundEvent getAmbientSound() {return ModSounds.MANTIS_AMBIENT.get();}
-//    protected SoundEvent getDeathSound() {return ModSounds.MANTIS_DEATH.get();}
-//    protected SoundEvent getHurtSound(DamageSource damageSource) {return ModSounds.MANTIS_HURT.get();}
+    protected SoundEvent getAmbientSound() {return ModSounds.MANTIS_AMBIENT.get();}
+    protected SoundEvent getDeathSound() {return ModSounds.MANTIS_DEATH.get();}
+    protected SoundEvent getHurtSound(DamageSource damageSource) {return ModSounds.MANTIS_HURT.get();}
 
     public MobType getMobType() {
         return MobType.ARTHROPOD;
@@ -94,7 +96,7 @@ public class Mantis extends PathfinderMob {
         this.entityData.set(DATA_IS_FLUTTERING, fluttering);
     }
 
-    public MantisPose getWingPose() {
+    public MantisPose getMantisPose() {
         if (this.isLeaping()) {
             return MantisPose.LEAPING;
         } else if (this.isFluttering()) {
@@ -102,6 +104,11 @@ public class Mantis extends PathfinderMob {
         } else {
             return MantisPose.PASSIVE;
         }
+    }
+
+    @Override
+    public Pose getPose() {
+        return super.getPose();
     }
 
     static class FlutterWingsGoal extends Goal {
@@ -143,13 +150,10 @@ public class Mantis extends PathfinderMob {
 
     static class MantisLeapGoal extends LeapAtTargetGoal {
         private final Mantis mob;
-        private LivingEntity target;
-        private final float yd;
 
         public MantisLeapGoal(Mantis pMob, float pYd) {
             super(pMob, pYd);
             this.mob = pMob;
-            this.yd = pYd;
         }
 
         public void start() {
@@ -161,5 +165,13 @@ public class Mantis extends PathfinderMob {
             this.mob.setLeaping(false);
         }
 
+    }
+
+    public enum MantisPose {
+        PASSIVE,
+        AGGRESSIVE,
+        LEAPING,
+        FLUTTERING,
+        FLYING
     }
 }

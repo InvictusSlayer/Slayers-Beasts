@@ -1,6 +1,5 @@
 package net.invictusslayer.slayersbeasts.entity;
 
-import net.invictusslayer.slayersbeasts.entity.poses.DamselflyPose;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.NbtUtils;
@@ -319,5 +318,11 @@ public class Damselfly extends PathfinderMob {
             Vec3 vec32 = HoverRandomPos.getPos(this.mob, 8, 7, vec3.x, vec3.z, Mth.PI / 2F, 3, 1);
             return vec32 != null ? vec32 : AirAndWaterRandomPos.getPos(this.mob, 8, 4, -2, vec3.x, vec3.z, Mth.PI / 2F);
         }
+    }
+
+    public enum DamselflyPose {
+        FLYING,
+        PERCHED,
+        STILL
     }
 }

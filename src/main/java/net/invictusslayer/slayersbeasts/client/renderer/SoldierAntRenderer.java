@@ -1,8 +1,10 @@
 package net.invictusslayer.slayersbeasts.client.renderer;
 
+import com.mojang.blaze3d.vertex.PoseStack;
 import net.invictusslayer.slayersbeasts.SlayersBeasts;
 import net.invictusslayer.slayersbeasts.client.model.SoldierAntModel;
 import net.invictusslayer.slayersbeasts.entity.SoldierAnt;
+import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.client.renderer.entity.MobRenderer;
 import net.minecraft.resources.ResourceLocation;
@@ -21,12 +23,16 @@ public class SoldierAntRenderer<Type extends SoldierAnt> extends MobRenderer<Typ
     }
 
     @Override
+    public void render(Type pEntity, float pEntityYaw, float pPartialTicks, PoseStack pMatrixStack, MultiBufferSource pBuffer, int pPackedLight) {
+        pMatrixStack.scale(1.5f, 1.5f, 1.5f);
+    }
+
+    @Override
     public ResourceLocation getTextureLocation(Type pEntity) {
         return switch (pEntity.getAntType()) {
-            case 0 -> WOOD_TEXTURE;
             case 1 -> LEAFCUTTER_TEXTURE;
             case 2 -> MEADOW_TEXTURE;
-            default -> null;
+            default -> WOOD_TEXTURE;
         };
     }
 }

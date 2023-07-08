@@ -23,6 +23,7 @@ public final class ClientEvents {
         event.registerLayerDefinition(DamselflyModel.LAYER_LOCATION, DamselflyModel::createBodyLayer);
         event.registerLayerDefinition(VenusFlytrapModel.LAYER_LOCATION, VenusFlytrapModel::createBodyLayer);
         event.registerLayerDefinition(WitherSpiderModel.LAYER_LOCATION, WitherSpiderModel::createBodyLayer);
+        event.registerLayerDefinition(TarantulaModel.LAYER_LOCATION, TarantulaModel::createBodyLayer);
     }
 
     @SubscribeEvent
@@ -34,5 +35,6 @@ public final class ClientEvents {
         event.registerEntityRenderer(ModEntities.DAMSELFLY.get(), DamselflyRenderer::new);
         event.registerEntityRenderer(ModEntities.VENUS_FLYTRAP.get(), VenusFlytrapRenderer::new);
         event.registerEntityRenderer(ModEntities.WITHER_SPIDER.get(), WitherSpiderRenderer::new);
+        event.registerEntityRenderer(ModEntities.TARANTULA.get(), TarantulaRenderer::new);
     }
 }

@@ -1,8 +1,10 @@
 package net.invictusslayer.slayersbeasts.client.renderer;
 
+import com.mojang.blaze3d.vertex.PoseStack;
 import net.invictusslayer.slayersbeasts.SlayersBeasts;
 import net.invictusslayer.slayersbeasts.client.model.QueenAntModel;
 import net.invictusslayer.slayersbeasts.entity.QueenAnt;
+import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.client.renderer.entity.MobRenderer;
 import net.minecraft.resources.ResourceLocation;
@@ -18,6 +20,11 @@ public class QueenAntRenderer<Type extends QueenAnt> extends MobRenderer<Type, Q
 
     public QueenAntRenderer(EntityRendererProvider.Context context) {
         super(context, new QueenAntModel<>(context.bakeLayer(QueenAntModel.LAYER_LOCATION)), 0.3f);
+    }
+
+    @Override
+    public void render(Type pEntity, float pEntityYaw, float pPartialTicks, PoseStack pMatrixStack, MultiBufferSource pBuffer, int pPackedLight) {
+        pMatrixStack.scale(1.5f, 1.5f, 1.5f);
     }
 
     @Override
