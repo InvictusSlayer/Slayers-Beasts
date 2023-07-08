@@ -138,6 +138,7 @@ public abstract class AbstractAnt extends PathfinderMob {
         }
     }
 
+    @SuppressWarnings("deprecation")
     @Nullable
     public SpawnGroupData finalizeSpawn(ServerLevelAccessor pLevel, DifficultyInstance pDifficulty, MobSpawnType pReason,
                                         @Nullable SpawnGroupData pSpawnData, @Nullable CompoundTag pDataTag) {
@@ -170,13 +171,13 @@ public abstract class AbstractAnt extends PathfinderMob {
         if (this.nestPos == null) {
             return false;
         } else {
-            BlockEntity blockEntity = this.level.getBlockEntity(this.nestPos);
+            BlockEntity blockEntity = this.level().getBlockEntity(this.nestPos);
             return blockEntity instanceof AnthillBlockEntity;
         }
     }
 
     private boolean nestHasSpace(BlockPos pNestPos) {
-        BlockEntity blockEntity = level.getBlockEntity(pNestPos);
+        BlockEntity blockEntity = level().getBlockEntity(pNestPos);
         if (blockEntity instanceof AnthillBlockEntity anthillBlockEntity) {
             return !anthillBlockEntity.isFull() && (anthillBlockEntity.getInhabitantType() == 99 ||
                     anthillBlockEntity.getInhabitantType() == getAntType());
@@ -186,7 +187,7 @@ public abstract class AbstractAnt extends PathfinderMob {
 
     protected boolean wantsToEnterNest(AbstractAnt ant) {
         if (this.cooldownToEnterNest <= 0) {
-            return failedForagingTime > 3600 || getCargoType() != 99 || level.isRaining() || ant instanceof QueenAnt;
+            return failedForagingTime > 3600 || getCargoType() != 99 || level().isRaining() || ant instanceof QueenAnt;
         }
         return false;
     }
@@ -230,12 +231,12 @@ public abstract class AbstractAnt extends PathfinderMob {
         AntGoToNestGoal(AbstractAnt pMob) {
             this.setFlags(EnumSet.of(Flag.MOVE, Flag.JUMP));
             this.mob = pMob;
-            this.travellingTicks = mob.level.random.nextInt(10);
+            this.travellingTicks = mob.level().random.nextInt(10);
         }
 
         public boolean canUse() {
             return mob.nestPos != null && !mob.hasRestriction() && mob.wantsToEnterNest(mob) && mob.nestHasSpace(mob.nestPos)
-                    && !this.hasReachedTarget(mob.nestPos) && mob.level.getBlockState(mob.nestPos).is(ModTags.Blocks.ANTHILLS);
+                    && !this.hasReachedTarget(mob.nestPos) && mob.level().getBlockState(mob.nestPos).is(ModTags.Blocks.ANTHILLS);
         }
 
         public boolean canContinueToUse() {
@@ -334,7 +335,7 @@ public abstract class AbstractAnt extends PathfinderMob {
         }
 
         public void start() {
-            BlockEntity blockEntity = mob.level.getBlockEntity(mob.nestPos);
+            BlockEntity blockEntity = mob.level().getBlockEntity(mob.nestPos);
             if (blockEntity instanceof AnthillBlockEntity anthillBlockEntity) {
                 anthillBlockEntity.addOccupant(mob, mob.getAntType(), mob.getCargoType() != 99);
             }
@@ -373,7 +374,7 @@ public abstract class AbstractAnt extends PathfinderMob {
 
         private List<BlockPos> findNestWithSpace() {
             BlockPos blockPos = mob.blockPosition();
-            PoiManager poiManager = ((ServerLevel) mob.level).getPoiManager();
+            PoiManager poiManager = ((ServerLevel) mob.level()).getPoiManager();
             Stream<PoiRecord> stream = poiManager.getInRange(poiType ->
                     poiType.is(ModTags.PoiTypes.ANT_HOME), blockPos, 20, PoiManager.Occupancy.ANY);
             return stream.map(PoiRecord::getPos).filter(mob::nestHasSpace).sorted(Comparator.comparingDouble(key ->

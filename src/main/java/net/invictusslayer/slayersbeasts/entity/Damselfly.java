@@ -223,7 +223,7 @@ public class Damselfly extends PathfinderMob {
                     } else {
                         this.mob.setFlying(true);
                         this.mob.setPerched(false);
-                        this.mob.navigation.moveTo(this.mob.navigation.createPath(new BlockPos(this.perchPos), 1), 1.0D);
+                        this.mob.navigation.moveTo(this.mob.navigation.createPath(new BlockPos((int) perchPos.x, (int) perchPos.y, (int) perchPos.z), 1), 1.0D);
                         this.setWantedPos();
                     }
                 }
@@ -248,7 +248,7 @@ public class Damselfly extends PathfinderMob {
                         for (int l = k < j && k > -j ? j : 0; l <= j; l = l > 0 ? -l : 1 - l) {
                             mutableBlockPos.setWithOffset(blockpos, k, i - 1, l);
                             if (blockpos.closerThan(mutableBlockPos, 5.0) &&
-                                    pPredicate.test(this.mob.level.getBlockState(mutableBlockPos))) {
+                                    pPredicate.test(this.mob.level().getBlockState(mutableBlockPos))) {
                                 return Optional.of(mutableBlockPos);
                             }
                         }
@@ -307,7 +307,7 @@ public class Damselfly extends PathfinderMob {
             this.mob.setFlying(true);
             Vec3 vec3 = this.findPos();
             if (vec3 != null) {
-                this.mob.navigation.moveTo(this.mob.navigation.createPath(new BlockPos(vec3), 1), 1.0D);
+                this.mob.navigation.moveTo(this.mob.navigation.createPath(new BlockPos((int) vec3.x, (int) vec3.y, (int) vec3.z), 1), 1.0D);
             }
         }
 

@@ -108,21 +108,21 @@ public class SepulchraPortalBlock extends Block {
             if (entity.isOnPortalCooldown()) {
                 entity.setPortalCooldown();
             } else {
-                if (!entity.level.isClientSide && !pos.equals(entity.portalEntrancePos)) {
+                if (!entity.level().isClientSide && !pos.equals(entity.portalEntrancePos)) {
                     entity.portalEntrancePos = pos.immutable();
                 }
-                Level entityWorld = entity.level;
+                Level entityWorld = entity.level();
                 if (entityWorld != null) {
                     MinecraftServer minecraftserver = entityWorld.getServer();
-                    ResourceKey<Level> destination = entity.level.dimension() == ModDimensions.SEPULCHRA_KEY
+                    ResourceKey<Level> destination = entity.level().dimension() == ModDimensions.SEPULCHRA_KEY
                             ? Level.OVERWORLD : ModDimensions.SEPULCHRA_KEY;
                     if (minecraftserver != null) {
                         ServerLevel destinationWorld = minecraftserver.getLevel(destination);
                         if (destinationWorld != null && minecraftserver.isNetherEnabled() && !entity.isPassenger()) {
-                            entity.level.getProfiler().push("sepulchra_portal");
+                            entity.level().getProfiler().push("sepulchra_portal");
                             entity.setPortalCooldown();
                             entity.changeDimension(destinationWorld, new ModPortalForcer(destinationWorld));
-                            entity.level.getProfiler().pop();
+                            entity.level().getProfiler().pop();
                         }
                     }
                 }

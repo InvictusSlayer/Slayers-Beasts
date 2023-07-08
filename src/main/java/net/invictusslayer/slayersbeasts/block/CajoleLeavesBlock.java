@@ -20,14 +20,13 @@ public class CajoleLeavesBlock extends LeavesBlock {
 
     private void spawnInfestation(ServerLevel pLevel, BlockPos pPos) {
         int randInt = RandomSource.create().nextInt(5);
-        Mob mob;
+        Mob mob = ModEntities.MANTIS.get().create(pLevel);
         if (randInt < 2) {
             if (randInt == 0) {
                 mob = ModEntities.WORKER_ANT.get().create(pLevel);
-            } else {
-                mob = ModEntities.MANTIS.get().create(pLevel);
             }
-            mob.moveTo((double) pPos.getX() + 0.5D, (double) pPos.getY(), (double) pPos.getZ() + 0.5D, 0.0F, 0.0F);
+            assert mob != null;
+            mob.moveTo((double) pPos.getX() + 0.5D, pPos.getY(), (double) pPos.getZ() + 0.5D, 0.0F, 0.0F);
             pLevel.addFreshEntity(mob);
             mob.spawnAnim();
         }

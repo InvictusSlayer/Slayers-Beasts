@@ -42,18 +42,18 @@ public class ModPortalForcer implements ITeleporter {
     @Override
     public PortalInfo getPortalInfo(Entity entity, ServerLevel destLevel, Function<ServerLevel, PortalInfo> defaultPortalInfo) {
         boolean isSepulchra = destLevel.dimension() == ModDimensions.SEPULCHRA_KEY;
-        if (entity.level.dimension() != ModDimensions.SEPULCHRA_KEY && !isSepulchra) return null;
+        if (entity.level().dimension() != ModDimensions.SEPULCHRA_KEY && !isSepulchra) return null;
         else {
             WorldBorder worldBorder = destLevel.getWorldBorder();
-            double scale = DimensionType.getTeleportationScale(entity.level.dimensionType(), destLevel.dimensionType());
+            double scale = DimensionType.getTeleportationScale(entity.level().dimensionType(), destLevel.dimensionType());
             BlockPos blockPos = worldBorder.clampToBounds(entity.getX() * scale, entity.getY(), entity.getZ() * scale);
             return this.getPortal(entity, blockPos, worldBorder).map((result) -> {
-                BlockState blockstate = entity.level.getBlockState(entity.portalEntrancePos);
+                BlockState blockstate = entity.level().getBlockState(entity.portalEntrancePos);
                 Direction.Axis axis;
                 Vec3 vec3;
                 if (blockstate.hasProperty(BlockStateProperties.HORIZONTAL_AXIS)) {
                     axis = blockstate.getValue(BlockStateProperties.HORIZONTAL_AXIS);
-                    BlockUtil.FoundRectangle rectangle = BlockUtil.getLargestRectangleAround(entity.portalEntrancePos, axis, 21, Direction.Axis.Y, 21, (pos) -> entity.level.getBlockState(pos) == blockstate);
+                    BlockUtil.FoundRectangle rectangle = BlockUtil.getLargestRectangleAround(entity.portalEntrancePos, axis, 21, Direction.Axis.Y, 21, (pos) -> entity.level().getBlockState(pos) == blockstate);
                     vec3 = PortalShape.getRelativePosition(rectangle, axis, entity.position(), entity.getDimensions(entity.getPose()));
                 } else {
                     axis = Direction.Axis.X;
@@ -193,7 +193,7 @@ public class ModPortalForcer implements ITeleporter {
         for(int i = -1; i < 3; ++i) {
             for(int j = -1; j < 4; ++j) {
                 offsetPos.setWithOffset(originalPos, directionIn.getStepX() * i + direction.getStepX() * offsetScale, j, directionIn.getStepZ() * i + direction.getStepZ() * offsetScale);
-                if (j < 0 && !this.level.getBlockState(offsetPos).getMaterial().isSolid()) {
+                if (j < 0 && !this.level.getBlockState(offsetPos).isSolid()) {
                     return false;
                 }
 

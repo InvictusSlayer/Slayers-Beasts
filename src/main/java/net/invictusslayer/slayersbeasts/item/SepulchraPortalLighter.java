@@ -21,7 +21,7 @@ public class SepulchraPortalLighter extends Item {
     @Override
     public InteractionResult useOn(UseOnContext context) {
         if(context.getPlayer() != null) {
-            if(context.getPlayer().level.dimension() == ModDimensions.SEPULCHRA_KEY || context.getPlayer().level.dimension() == Level.OVERWORLD) {
+            if(context.getPlayer().level().dimension() == ModDimensions.SEPULCHRA_KEY || context.getPlayer().level().dimension() == Level.OVERWORLD) {
                 for(Direction direction : Direction.Plane.VERTICAL) {
                     BlockPos framePos = context.getClickedPos().relative(direction);
                     if(((SepulchraPortalBlock) ModBlocks.SEPULCHRA_PORTAL.get()).trySpawnPortal(context.getLevel(), framePos)) {

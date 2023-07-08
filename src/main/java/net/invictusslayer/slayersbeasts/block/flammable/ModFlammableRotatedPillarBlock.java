@@ -35,11 +35,23 @@ public class ModFlammableRotatedPillarBlock extends RotatedPillarBlock {
     @Override
     public @Nullable BlockState getToolModifiedState(BlockState state, UseOnContext context, ToolAction toolAction, boolean simulate) {
         if (context.getItemInHand().getItem() instanceof AxeItem) {
+            if (state.is(ModBlocks.ASPEN_LOG.get())) {
+                return ModBlocks.STRIPPED_ASPEN_LOG.get().defaultBlockState().setValue(AXIS, state.getValue(AXIS));
+            }
+            if (state.is(ModBlocks.ASPEN_WOOD.get())) {
+                return ModBlocks.STRIPPED_ASPEN_WOOD.get().defaultBlockState().setValue(AXIS, state.getValue(AXIS));
+            }
             if (state.is(ModBlocks.CAJOLE_LOG.get())) {
                 return ModBlocks.STRIPPED_CAJOLE_LOG.get().defaultBlockState().setValue(AXIS, state.getValue(AXIS));
             }
             if (state.is(ModBlocks.CAJOLE_WOOD.get())) {
                 return ModBlocks.STRIPPED_CAJOLE_WOOD.get().defaultBlockState().setValue(AXIS, state.getValue(AXIS));
+            }
+            if (state.is(ModBlocks.DESERT_OAK_LOG.get())) {
+                return ModBlocks.STRIPPED_DESERT_OAK_LOG.get().defaultBlockState().setValue(AXIS, state.getValue(AXIS));
+            }
+            if (state.is(ModBlocks.DESERT_OAK_WOOD.get())) {
+                return ModBlocks.STRIPPED_DESERT_OAK_WOOD.get().defaultBlockState().setValue(AXIS, state.getValue(AXIS));
             }
             if (state.is(ModBlocks.EUCALYPTUS_LOG.get())) {
                 return ModBlocks.STRIPPED_EUCALYPTUS_LOG.get().defaultBlockState().setValue(AXIS, state.getValue(AXIS));
@@ -47,11 +59,17 @@ public class ModFlammableRotatedPillarBlock extends RotatedPillarBlock {
             if (state.is(ModBlocks.EUCALYPTUS_WOOD.get())) {
                 return ModBlocks.STRIPPED_EUCALYPTUS_WOOD.get().defaultBlockState().setValue(AXIS, state.getValue(AXIS));
             }
-            if (state.is(ModBlocks.ASPEN_LOG.get())) {
-                return ModBlocks.STRIPPED_ASPEN_LOG.get().defaultBlockState().setValue(AXIS, state.getValue(AXIS));
+            if (state.is(ModBlocks.KAPOK_LOG.get())) {
+                return ModBlocks.STRIPPED_KAPOK_LOG.get().defaultBlockState().setValue(AXIS, state.getValue(AXIS));
             }
-            if (state.is(ModBlocks.ASPEN_WOOD.get())) {
-                return ModBlocks.STRIPPED_ASPEN_WOOD.get().defaultBlockState().setValue(AXIS, state.getValue(AXIS));
+            if (state.is(ModBlocks.KAPOK_WOOD.get())) {
+                return ModBlocks.STRIPPED_KAPOK_WOOD.get().defaultBlockState().setValue(AXIS, state.getValue(AXIS));
+            }
+            if (state.is(ModBlocks.REDWOOD_LOG.get())) {
+                return ModBlocks.STRIPPED_REDWOOD_LOG.get().defaultBlockState().setValue(AXIS, state.getValue(AXIS));
+            }
+            if (state.is(ModBlocks.REDWOOD_WOOD.get())) {
+                return ModBlocks.STRIPPED_REDWOOD_WOOD.get().defaultBlockState().setValue(AXIS, state.getValue(AXIS));
             }
         }
         return super.getToolModifiedState(state, context, toolAction, simulate);
