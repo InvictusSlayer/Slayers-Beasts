@@ -41,6 +41,7 @@ public final class ModCreativeModeTab {
                         pOutput.accept(ModBlocks.ANT_SOIL.get());
                         pOutput.accept(ModBlocks.ANTHILL.get());
                         pOutput.accept(ModBlocks.ANTHILL_HATCHERY.get());
+                        pOutput.accept(ModBlocks.CRACKED_MUD.get());
 
                         pOutput.accept(ModBlocks.BLACK_SAND.get());
                         pOutput.accept(ModBlocks.BLACK_SANDSTONE.get());

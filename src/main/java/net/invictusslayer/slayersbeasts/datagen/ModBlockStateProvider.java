@@ -7,6 +7,7 @@ import net.minecraft.data.PackOutput;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
+import net.minecraft.world.level.block.state.properties.Tilt;
 import net.minecraftforge.client.model.generators.BlockStateProvider;
 import net.minecraftforge.client.model.generators.ConfiguredModel;
 import net.minecraftforge.client.model.generators.ModelFile;
@@ -30,6 +31,7 @@ public class ModBlockStateProvider extends BlockStateProvider {
         cubeWithItem(ModBlocks.ANT_SOIL.get());
         simpleCubeBottomTopWithItem(ModBlocks.ANTHILL.get());
         simpleCubeBottomTopWithItem(ModBlocks.ANTHILL_HATCHERY.get());
+        simpleTiltCubeWithItem(ModBlocks.CRACKED_MUD.get());
 
         cubeWithItem(ModBlocks.BLACK_SAND.get());
         cubeBottomTopWithItem(ModBlocks.BLACK_SANDSTONE.get(), extend(blockTexture(ModBlocks.BLACK_SANDSTONE.get()), "_side"), extend(blockTexture(ModBlocks.BLACK_SANDSTONE.get()), "_bottom"), extend(blockTexture(ModBlocks.BLACK_SANDSTONE.get()), "_top"));
@@ -186,6 +188,18 @@ public class ModBlockStateProvider extends BlockStateProvider {
         getVariantBuilder(block).forAllStates(state -> ConfiguredModel.builder()
                 .modelFile(models().cubeColumn(name(block), side, end)).build());
         simpleBlockItem(block, models().withExistingParent(name(block), "minecraft:block/cube_column"));
+    }
+
+    private void simpleTiltCubeWithItem(Block block) {
+        tiltCubeWithItem(block, extend(blockTexture(block), "_none"), extend(blockTexture(block), "_unstable"), extend(blockTexture(block), "_partial"), extend(blockTexture(block), "_full"));
+    }
+    private void tiltCubeWithItem(Block block, ResourceLocation none, ResourceLocation unstable, ResourceLocation partial, ResourceLocation full) {
+        getVariantBuilder(block)
+                .partialState().with(BlockStateProperties.TILT, Tilt.NONE).modelForState().modelFile(models().cubeAll(name(block) + "_none", none)).addModel()
+                .partialState().with(BlockStateProperties.TILT, Tilt.UNSTABLE).modelForState().modelFile(models().cubeAll(name(block) + "_unstable", unstable)).addModel()
+                .partialState().with(BlockStateProperties.TILT, Tilt.PARTIAL).modelForState().modelFile(models().cubeAll(name(block) + "_partial", partial)).addModel()
+                .partialState().with(BlockStateProperties.TILT, Tilt.FULL).modelForState().modelFile(models().cubeAll(name(block) + "_full", full)).addModel();
+        simpleBlockItem(block, models().withExistingParent(name(block) + "_none", "minecraft:block/cube_all"));
     }
 
     private void simpleCubeBottomTopWithItem(Block block) {
