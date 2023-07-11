@@ -8,7 +8,7 @@ import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.Mth;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.entity.Entity;
-import net.minecraft.world.level.BlockGetter;
+import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
@@ -17,14 +17,11 @@ import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.block.state.properties.EnumProperty;
 import net.minecraft.world.level.block.state.properties.Tilt;
 import net.minecraft.world.level.gameevent.GameEvent;
-import net.minecraft.world.phys.shapes.CollisionContext;
-import net.minecraft.world.phys.shapes.VoxelShape;
 
 import javax.annotation.Nullable;
 
 public class CrackedMudBlock extends Block {
     private static final EnumProperty<Tilt> TILT = BlockStateProperties.TILT;
-    protected static final VoxelShape SHAPE = Block.box(0.0D, 0.0D, 0.0D, 16.0D, 14.0D, 16.0D);
 
     public CrackedMudBlock(Properties pProperties) {
         super(pProperties);
@@ -36,45 +33,46 @@ public class CrackedMudBlock extends Block {
     }
 
     @SuppressWarnings("deprecation")
-    @Override
-    public VoxelShape getCollisionShape(BlockState pState, BlockGetter pLevel, BlockPos pPos, CollisionContext pContext) {
-        return SHAPE;
-    }
-
-    @SuppressWarnings("deprecation")
     public void tick(BlockState pState, ServerLevel pLevel, BlockPos pPos, RandomSource pRandom) {
         Tilt tilt = pState.getValue(TILT);
         if (tilt == Tilt.UNSTABLE) {
-            this.setTiltAndScheduleTick(pState, pLevel, pPos, Tilt.NONE, SoundEvents.BASALT_HIT);
+            this.setTiltAndScheduleTick(pState, pLevel, pPos, Tilt.NONE, SoundEvents.PACKED_MUD_HIT);
         } else if (tilt == Tilt.PARTIAL) {
-            this.setTiltAndScheduleTick(pState, pLevel, pPos, Tilt.UNSTABLE, SoundEvents.BASALT_HIT);
+            this.setTiltAndScheduleTick(pState, pLevel, pPos, Tilt.UNSTABLE, SoundEvents.PACKED_MUD_HIT);
         } else if (tilt == Tilt.FULL) {
-            this.setTiltAndScheduleTick(pState, pLevel, pPos, Tilt.PARTIAL, SoundEvents.BASALT_HIT);
+            this.setTiltAndScheduleTick(pState, pLevel, pPos, Tilt.PARTIAL, SoundEvents.PACKED_MUD_HIT);
         }
     }
 
     @SuppressWarnings("deprecation")
-    public void entityInside(BlockState pState, Level pLevel, BlockPos pPos, Entity pEntity) {
+    public void stepOn(Level pLevel, BlockPos pPos, BlockState pState, Entity pEntity) {
         if (!pLevel.isClientSide) {
-            if (canEntityTilt(pLevel, pPos, pEntity)) {
+            if (!pEntity.isSteppingCarefully() && pEntity instanceof LivingEntity && !pLevel.getBlockState(pPos.below()).isSolid()) {
                 Tilt tilt = pState.getValue(TILT);
                 if (tilt == Tilt.NONE) {
-                    this.setTiltAndScheduleTick(pState, pLevel, pPos, Tilt.UNSTABLE, SoundEvents.BASALT_BREAK);
+                    this.setTiltAndScheduleTick(pState, pLevel, pPos, Tilt.UNSTABLE, SoundEvents.PACKED_MUD_FALL);
                 } else if (tilt == Tilt.UNSTABLE) {
-                    this.setTiltAndScheduleTick(pState, pLevel, pPos, Tilt.PARTIAL, SoundEvents.BASALT_BREAK);
+                    this.setTiltAndScheduleTick(pState, pLevel, pPos, Tilt.PARTIAL, SoundEvents.PACKED_MUD_FALL);
                 } else if (tilt == Tilt.PARTIAL) {
-                    this.setTiltAndScheduleTick(pState, pLevel, pPos, Tilt.FULL, SoundEvents.BASALT_BREAK);
+                    this.setTiltAndScheduleTick(pState, pLevel, pPos, Tilt.FULL, SoundEvents.PACKED_MUD_FALL);
                 } else if (tilt == Tilt.FULL) {
                     pLevel.removeBlock(pPos, false);
-                    playTiltSound(pLevel, pPos, SoundEvents.BASALT_BREAK);
+                    playTiltSound(pLevel, pPos, SoundEvents.PACKED_MUD_BREAK);
                 }
             }
         }
+
+        super.stepOn(pLevel, pPos, pState, pEntity);
     }
 
     @SuppressWarnings("deprecation")
-    private static boolean canEntityTilt(Level pLevel, BlockPos pPos, Entity pEntity) {
-        return pEntity.onGround() && pEntity.position().y > pPos.getY() + 0.6875D && !pLevel.getBlockState(pPos.below()).isSolid();
+    public void fallOn(Level pLevel, BlockState pState, BlockPos pPos, Entity pEntity, float pFallDistance) {
+        if (pFallDistance > 4 && pEntity instanceof LivingEntity && !pLevel.getBlockState(pPos.below()).isSolid()) {
+            pLevel.removeBlock(pPos, false);
+            playTiltSound(pLevel, pPos, SoundEvents.PACKED_MUD_BREAK);
+        }
+
+        super.fallOn(pLevel, pState, pPos, pEntity, pFallDistance);
     }
 
     private void setTiltAndScheduleTick(BlockState pState, Level pLevel, BlockPos pPos, Tilt pTilt, @Nullable SoundEvent pSound) {

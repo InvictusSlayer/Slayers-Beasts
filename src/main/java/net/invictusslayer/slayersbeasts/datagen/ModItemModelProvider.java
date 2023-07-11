@@ -31,6 +31,7 @@ public class ModItemModelProvider extends ItemModelProvider {
         simpleItem(ModItems.WITHERBONE);
         simpleItem(ModItems.TIED_LEATHER);
         simpleItem(ModItems.TANNED_LEATHER);
+        simpleItem(ModItems.MUD_BALL);
 
         blockItem(ModBlocks.WHITE_MUSHROOM);
         simpleItem(ModBlocks.ASPEN_DOOR);

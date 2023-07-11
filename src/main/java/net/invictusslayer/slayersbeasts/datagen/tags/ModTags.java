@@ -50,6 +50,7 @@ public class ModTags {
 
     public static class EntityTypes {
         public static final TagKey<EntityType<?>> ANTHILL_INHABITANTS = tag("anthill_inhabitants");
+        public static final TagKey<EntityType<?>> PEAT_WALKABLE_MOBS = tag("peat_walkable_mobs");
 
         private static TagKey<EntityType<?>> tag(String name) {
             return TagKey.create(Registries.ENTITY_TYPE, new ResourceLocation(SlayersBeasts.MOD_ID, name));

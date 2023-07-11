@@ -31,7 +31,9 @@ public class ModBlockStateProvider extends BlockStateProvider {
         cubeWithItem(ModBlocks.ANT_SOIL.get());
         simpleCubeBottomTopWithItem(ModBlocks.ANTHILL.get());
         simpleCubeBottomTopWithItem(ModBlocks.ANTHILL_HATCHERY.get());
+
         simpleTiltCubeWithItem(ModBlocks.CRACKED_MUD.get());
+        cubeWithItem(ModBlocks.PEAT.get());
 
         cubeWithItem(ModBlocks.BLACK_SAND.get());
         cubeBottomTopWithItem(ModBlocks.BLACK_SANDSTONE.get(), extend(blockTexture(ModBlocks.BLACK_SANDSTONE.get()), "_side"), extend(blockTexture(ModBlocks.BLACK_SANDSTONE.get()), "_bottom"), extend(blockTexture(ModBlocks.BLACK_SANDSTONE.get()), "_top"));

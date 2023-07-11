@@ -2,8 +2,8 @@ package net.invictusslayer.slayersbeasts.datagen;
 
 import net.invictusslayer.slayersbeasts.SlayersBeasts;
 import net.invictusslayer.slayersbeasts.block.ModBlocks;
-import net.invictusslayer.slayersbeasts.item.ModItems;
 import net.invictusslayer.slayersbeasts.datagen.tags.ModTags;
+import net.invictusslayer.slayersbeasts.item.ModItems;
 import net.minecraft.advancements.critereon.ItemPredicate;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.recipes.*;
@@ -12,8 +12,8 @@ import net.minecraft.world.flag.FeatureFlagSet;
 import net.minecraft.world.flag.FeatureFlags;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.Ingredient;
-import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.level.ItemLike;
+import net.minecraft.world.level.block.Blocks;
 import net.minecraftforge.common.crafting.conditions.IConditionBuilder;
 
 import javax.annotation.Nullable;
@@ -26,12 +26,16 @@ public class ModRecipeProvider extends RecipeProvider implements IConditionBuild
 
     @Override
     protected void buildRecipes(Consumer<FinishedRecipe> consumer) {
-        SimpleCookingRecipeBuilder.generic(Ingredient.of(ModItems.TIED_LEATHER.get()), RecipeCategory.MISC, ModItems.TANNED_LEATHER.get(), 0.5F, 400,
-                RecipeSerializer.SMOKING_RECIPE).unlockedBy("has_tied_leather", inventoryTrigger(ItemPredicate.Builder.item().of(ModItems.TIED_LEATHER.get()).build())).save(consumer);
-
+        SimpleCookingRecipeBuilder.smoking(Ingredient.of(ModItems.TIED_LEATHER.get()), RecipeCategory.MISC, ModItems.TANNED_LEATHER.get(), 0.5F, 200)
+                .unlockedBy("has_tied_leather", inventoryTrigger(ItemPredicate.Builder.item().of(ModItems.TIED_LEATHER.get()).build())).save(consumer);
         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModItems.TIED_LEATHER.get()).define('S', Items.STRING)
                 .define('L', Items.LEATHER).define('B', Items.SLIME_BALL).pattern("LSL").pattern("SBS").pattern("LSL")
                 .unlockedBy("has_leather", inventoryTrigger(ItemPredicate.Builder.item().of(Items.LEATHER).build())).save(consumer);
+
+        ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, Blocks.PACKED_MUD).define('X', ModItems.MUD_BALL.get()).pattern("XX").pattern("XX")
+                .unlockedBy("has_mud_ball", inventoryTrigger(ItemPredicate.Builder.item().of(ModItems.MUD_BALL.get()).build())).save(consumer);
+        SimpleCookingRecipeBuilder.smelting(Ingredient.of(Blocks.PACKED_MUD), RecipeCategory.BUILDING_BLOCKS, ModBlocks.CRACKED_MUD.get(), 0.1F, 200)
+                .unlockedBy("has_packed_mud", inventoryTrigger(ItemPredicate.Builder.item().of(Blocks.PACKED_MUD).build())).save(consumer);
 
         nineBlockStorageRecipes(consumer, RecipeCategory.MISC, ModItems.JADE.get(), RecipeCategory.BUILDING_BLOCKS, ModBlocks.JADE_BLOCK.get());
 

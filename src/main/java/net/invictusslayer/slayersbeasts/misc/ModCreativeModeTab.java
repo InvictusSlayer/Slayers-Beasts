@@ -32,6 +32,7 @@ public final class ModCreativeModeTab {
                         pOutput.accept(ModItems.WITHERBONE.get());
                         pOutput.accept(ModItems.TIED_LEATHER.get());
                         pOutput.accept(ModItems.TANNED_LEATHER.get());
+                        pOutput.accept(ModItems.MUD_BALL.get());
 
                         pOutput.accept(ModBlocks.JADE_BLOCK.get());
                         pOutput.accept(ModBlocks.EXOSKELETON_ORE.get());
@@ -42,6 +43,7 @@ public final class ModCreativeModeTab {
                         pOutput.accept(ModBlocks.ANTHILL.get());
                         pOutput.accept(ModBlocks.ANTHILL_HATCHERY.get());
                         pOutput.accept(ModBlocks.CRACKED_MUD.get());
+                        pOutput.accept(ModBlocks.PEAT.get());
 
                         pOutput.accept(ModBlocks.BLACK_SAND.get());
                         pOutput.accept(ModBlocks.BLACK_SANDSTONE.get());

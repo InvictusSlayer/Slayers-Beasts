@@ -7,10 +7,12 @@ import net.minecraft.data.loot.BlockLootSubProvider;
 import net.minecraft.world.flag.FeatureFlags;
 import net.minecraft.world.item.enchantment.Enchantments;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.storage.loot.LootTable;
 import net.minecraft.world.level.storage.loot.entries.LootItem;
 import net.minecraft.world.level.storage.loot.functions.ApplyBonusCount;
 import net.minecraft.world.level.storage.loot.functions.SetItemCountFunction;
+import net.minecraft.world.level.storage.loot.providers.number.ConstantValue;
 import net.minecraft.world.level.storage.loot.providers.number.UniformGenerator;
 import net.minecraftforge.registries.RegistryObject;
 
@@ -27,33 +29,36 @@ public class ModBlockLootTables extends BlockLootSubProvider {
 
         dropSelf(ModBlocks.JADE_BLOCK.get());
 
-        add(ModBlocks.EXOSKELETON_ORE.get(), (block -> createExoskeletonOreDrops(ModBlocks.EXOSKELETON_ORE.get())));
-        add(ModBlocks.DEEPSLATE_EXOSKELETON_ORE.get(), (block -> createExoskeletonOreDrops(ModBlocks.DEEPSLATE_EXOSKELETON_ORE.get())));
+        add(ModBlocks.EXOSKELETON_ORE.get(), block -> createExoskeletonOreDrops(ModBlocks.EXOSKELETON_ORE.get()));
+        add(ModBlocks.DEEPSLATE_EXOSKELETON_ORE.get(), block -> createExoskeletonOreDrops(ModBlocks.DEEPSLATE_EXOSKELETON_ORE.get()));
 
         dropSelf(ModBlocks.ANT_SOIL.get());
         dropOther(ModBlocks.ANTHILL.get(), ModBlocks.ANT_SOIL.get());
         dropOther(ModBlocks.ANTHILL_HATCHERY.get(), ModBlocks.ANT_SOIL.get());
 
+        add(ModBlocks.CRACKED_MUD.get(), block ->
+                createSingleItemTableWithSilkTouch(Blocks.PACKED_MUD, ModItems.MUD_BALL.get(), ConstantValue.exactly(4)));
+        dropSelf(ModBlocks.PEAT.get());
         dropSelf(ModBlocks.BLACK_SAND.get());
 
         dropSelf(ModBlocks.WHITE_MUSHROOM.get());
-        add(ModBlocks.WHITE_MUSHROOM_BLOCK.get(), (block -> createMushroomBlockDrop(
-                ModBlocks.WHITE_MUSHROOM_BLOCK.get(), ModBlocks.WHITE_MUSHROOM.get())));
+        add(ModBlocks.WHITE_MUSHROOM_BLOCK.get(), block ->
+                createMushroomBlockDrop(ModBlocks.WHITE_MUSHROOM_BLOCK.get(), ModBlocks.WHITE_MUSHROOM.get()));
 
         dropSelf(ModBlocks.ASPEN_LOG.get());
         dropSelf(ModBlocks.STRIPPED_ASPEN_LOG.get());
         dropSelf(ModBlocks.ASPEN_WOOD.get());
         dropSelf(ModBlocks.STRIPPED_ASPEN_WOOD.get());
-        add(ModBlocks.ASPEN_LEAVES.get(), (block) -> createLeavesDrops(
-                ModBlocks.ASPEN_LEAVES.get(), ModBlocks.ASPEN_SAPLING.get(), 0.05f));
+        add(ModBlocks.ASPEN_LEAVES.get(), block ->
+                createLeavesDrops(ModBlocks.ASPEN_LEAVES.get(), ModBlocks.ASPEN_SAPLING.get(), 0.05f));
         dropSelf(ModBlocks.ASPEN_SAPLING.get());
         
         dropSelf(ModBlocks.CAJOLE_LOG.get());
         dropSelf(ModBlocks.STRIPPED_CAJOLE_LOG.get());
         dropSelf(ModBlocks.CAJOLE_WOOD.get());
         dropSelf(ModBlocks.STRIPPED_CAJOLE_WOOD.get());
-        add(ModBlocks.CAJOLE_LEAVES.get(), (block) -> createLeavesDrops(
-                ModBlocks.CAJOLE_LEAVES.get(), ModBlocks.CAJOLE_SAPLING.get(), 0.025f));
+        add(ModBlocks.CAJOLE_LEAVES.get(), block ->
+                createLeavesDrops(ModBlocks.CAJOLE_LEAVES.get(), ModBlocks.CAJOLE_SAPLING.get(), 0.025f));
         dropSelf(ModBlocks.CAJOLE_SAPLING.get());
 
         dropSelf(ModBlocks.DESERT_OAK_LOG.get());

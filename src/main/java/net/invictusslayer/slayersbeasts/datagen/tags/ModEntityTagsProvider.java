@@ -5,6 +5,7 @@ import net.invictusslayer.slayersbeasts.entity.ModEntities;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.tags.EntityTypeTagsProvider;
+import net.minecraft.world.entity.EntityType;
 import net.minecraftforge.common.data.ExistingFileHelper;
 import org.jetbrains.annotations.Nullable;
 
@@ -18,5 +19,6 @@ public class ModEntityTagsProvider extends EntityTypeTagsProvider {
     @Override
     protected void addTags(HolderLookup.Provider pProvider) {
         this.tag(ModTags.EntityTypes.ANTHILL_INHABITANTS).add(ModEntities.WORKER_ANT.get(), ModEntities.SOLDIER_ANT.get(), ModEntities.QUEEN_ANT.get());
+        this.tag(ModTags.EntityTypes.PEAT_WALKABLE_MOBS).add(ModEntities.WORKER_ANT.get(), EntityType.FROG);
     }
 }

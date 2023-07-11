@@ -11,8 +11,7 @@ import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
 
 public final class ModItems {
-    public static final DeferredRegister<Item> ITEMS =
-            DeferredRegister.create(ForgeRegistries.ITEMS, SlayersBeasts.MOD_ID);
+    public static final DeferredRegister<Item> ITEMS = DeferredRegister.create(ForgeRegistries.ITEMS, SlayersBeasts.MOD_ID);
 
     public static final RegistryObject<Item> JADE = ITEMS.register("jade", SepulchraPortalLighter::new);
     public static final RegistryObject<Item> JADE_SHARD = ITEMS.register("jade_shard", () -> new Item(new Item.Properties()));
@@ -29,6 +28,8 @@ public final class ModItems {
     public static final RegistryObject<Item> WITHERBONE = ITEMS.register("witherbone", () -> new Item(new Item.Properties()));
     public static final RegistryObject<Item> TIED_LEATHER = ITEMS.register("tied_leather", () -> new Item(new Item.Properties()));
     public static final RegistryObject<Item> TANNED_LEATHER = ITEMS.register("tanned_leather", () -> new Item(new Item.Properties()));
+
+    public static final RegistryObject<Item> MUD_BALL = ITEMS.register("mud_ball", () -> new Item(new Item.Properties()));
 
     public static final RegistryObject<ForgeSpawnEggItem> MANTIS_SPAWN_EGG = ITEMS.register("mantis_spawn_egg",
             () -> new ForgeSpawnEggItem(ModEntities.MANTIS, 0x43df51, 0xecf171, new Item.Properties()));
