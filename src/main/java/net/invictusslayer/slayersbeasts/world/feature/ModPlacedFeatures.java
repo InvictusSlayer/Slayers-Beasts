@@ -30,6 +30,7 @@ public class ModPlacedFeatures {
     public static final ResourceKey<PlacedFeature> KAPOK_CHECKED = createKey("kapok_checked");
     public static final ResourceKey<PlacedFeature> REDWOOD_CHECKED = createKey("redwood_checked");
     public static final ResourceKey<PlacedFeature> GIANT_REDWOOD_CHECKED = createKey("giant_redwood_checked");
+    public static final ResourceKey<PlacedFeature> COLOSSAL_REDWOOD_CHECKED = createKey("colossal_redwood_checked");
 
     //VEGETATION
     public static final ResourceKey<PlacedFeature> TREES_ASPEN = createKey("trees_aspen");
@@ -56,6 +57,7 @@ public class ModPlacedFeatures {
         register(context, KAPOK_CHECKED, configured.getOrThrow(ModConfiguredFeatures.KAPOK), List.of(PlacementUtils.filteredByBlockSurvival(ModBlocks.KAPOK_SAPLING.get())));
         register(context, REDWOOD_CHECKED, configured.getOrThrow(ModConfiguredFeatures.REDWOOD), List.of(PlacementUtils.filteredByBlockSurvival(ModBlocks.REDWOOD_SAPLING.get())));
         register(context, GIANT_REDWOOD_CHECKED, configured.getOrThrow(ModConfiguredFeatures.GIANT_REDWOOD), List.of(PlacementUtils.filteredByBlockSurvival(ModBlocks.REDWOOD_SAPLING.get())));
+        register(context, COLOSSAL_REDWOOD_CHECKED, configured.getOrThrow(ModConfiguredFeatures.COLOSSAL_REDWOOD), List.of(PlacementUtils.filteredByBlockSurvival(ModBlocks.REDWOOD_SAPLING.get())));
 
         register(context, TREES_ASPEN, configured.getOrThrow(ModConfiguredFeatures.TREES_ASPEN), VegetationPlacements.treePlacement(PlacementUtils.countExtra(10, 0.1f, 1), ModBlocks.ASPEN_SAPLING.get()));
         register(context, TREES_INKY, configured.getOrThrow(ModConfiguredFeatures.TREES_INKY), VegetationPlacements.treePlacement(PlacementUtils.countExtra(3, 0.1f, 1)));

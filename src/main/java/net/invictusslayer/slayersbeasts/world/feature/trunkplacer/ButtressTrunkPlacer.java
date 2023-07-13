@@ -18,19 +18,17 @@ import java.util.List;
 import java.util.function.BiConsumer;
 
 public class ButtressTrunkPlacer extends GiantTrunkPlacer {
-    public static final Codec<ButtressTrunkPlacer> CODEC = RecordCodecBuilder.create((instance) ->
+    public static final Codec<ButtressTrunkPlacer> CODEC = RecordCodecBuilder.create(instance ->
             trunkPlacerParts(instance).apply(instance, ButtressTrunkPlacer::new));
 
     public ButtressTrunkPlacer(int pBaseHeight, int pHeightRandA, int pHeightRandB) {
         super(pBaseHeight, pHeightRandA, pHeightRandB);
     }
 
-    @Override
     protected TrunkPlacerType<?> type() {
         return ModTrunkPlacers.BUTTRESS_TRUNK_PLACER.get();
     }
 
-    @Override
     public List<FoliagePlacer.FoliageAttachment> placeTrunk(LevelSimulatedReader pLevel, BiConsumer<BlockPos, BlockState> pBlockSetter, RandomSource pRandom, int pFreeTreeHeight, BlockPos pPos, TreeConfiguration pConfig) {
         BlockPos blockpos = pPos.below();
         setDirtAt(pLevel, pBlockSetter, pRandom, blockpos, pConfig);

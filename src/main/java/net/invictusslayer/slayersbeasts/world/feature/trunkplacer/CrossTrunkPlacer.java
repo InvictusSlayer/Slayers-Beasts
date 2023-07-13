@@ -18,19 +18,17 @@ import java.util.OptionalInt;
 import java.util.function.BiConsumer;
 
 public class CrossTrunkPlacer extends TrunkPlacer {
-    public static final Codec<CrossTrunkPlacer> CODEC = RecordCodecBuilder.create((instance) ->
+    public static final Codec<CrossTrunkPlacer> CODEC = RecordCodecBuilder.create(instance ->
             trunkPlacerParts(instance).apply(instance, CrossTrunkPlacer::new));
 
     public CrossTrunkPlacer(int pBaseHeight, int pHeightRandA, int pHeightRandB) {
         super(pBaseHeight, pHeightRandA, pHeightRandB);
     }
 
-    @Override
     protected TrunkPlacerType<?> type() {
         return ModTrunkPlacers.CROSS_TRUNK_PLACER.get();
     }
 
-    @Override
     public List<FoliagePlacer.FoliageAttachment> placeTrunk(LevelSimulatedReader pLevel, BiConsumer<BlockPos, BlockState> pBlockSetter, RandomSource pRandom, int pFreeTreeHeight, BlockPos pPos, TreeConfiguration pConfig) {
         setDirtAt(pLevel, pBlockSetter, pRandom, pPos.below(), pConfig);
         List<FoliagePlacer.FoliageAttachment> list = Lists.newArrayList();

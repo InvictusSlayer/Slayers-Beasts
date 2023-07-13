@@ -11,19 +11,17 @@ import net.minecraft.world.level.levelgen.feature.foliageplacers.FoliagePlacer;
 import net.minecraft.world.level.levelgen.feature.foliageplacers.FoliagePlacerType;
 
 public class CajoleFoliagePlacer extends FoliagePlacer {
-    public static final Codec<CajoleFoliagePlacer> CODEC = RecordCodecBuilder.create((instance) ->
+    public static final Codec<CajoleFoliagePlacer> CODEC = RecordCodecBuilder.create(instance ->
             foliagePlacerParts(instance).apply(instance, CajoleFoliagePlacer::new));
 
     public CajoleFoliagePlacer(IntProvider pRadius, IntProvider pOffset) {
         super(pRadius, pOffset);
     }
 
-    @Override
     protected FoliagePlacerType<?> type() {
         return ModFoliagePlacers.CAJOLE_FOLIAGE_PLACER.get();
     }
 
-    @Override
     protected void createFoliage(LevelSimulatedReader pLevel, FoliageSetter pBlockSetter, RandomSource pRandom, TreeConfiguration pConfig, int pMaxFreeTreeHeight, FoliageAttachment pAttachment, int pFoliageHeight, int pFoliageRadius, int pOffset) {
         boolean flag = pAttachment.doubleTrunk();
         BlockPos blockpos = pAttachment.pos().above(pOffset);
@@ -34,12 +32,10 @@ public class CajoleFoliagePlacer extends FoliagePlacer {
         this.placeLeavesRow(pLevel, pBlockSetter, pRandom, pConfig, blockpos, 0, 1, flag);
     }
 
-    @Override
     public int foliageHeight(RandomSource pRandom, int pHeight, TreeConfiguration pConfig) {
         return 0;
     }
 
-    @Override
     protected boolean shouldSkipLocation(RandomSource pRandom, int pLocalX, int pLocalY, int pLocalZ, int pRange, boolean pLarge) {
         if (pLocalY == 0) {
             return (pLocalX > 1 || pLocalZ > 1) && pLocalX != 0 && pLocalZ != 0;

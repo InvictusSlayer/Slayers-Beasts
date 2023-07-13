@@ -7,7 +7,9 @@ import net.invictusslayer.slayersbeasts.block.ModBlocks;
 import net.invictusslayer.slayersbeasts.world.feature.foliageplacer.AspenFoliagePlacer;
 import net.invictusslayer.slayersbeasts.world.feature.foliageplacer.CajoleFoliagePlacer;
 import net.invictusslayer.slayersbeasts.world.feature.foliageplacer.EucalyptusFoliagePlacer;
+import net.invictusslayer.slayersbeasts.world.feature.foliageplacer.UltraRedwoodFoliagePlacer;
 import net.invictusslayer.slayersbeasts.world.feature.trunkplacer.ButtressTrunkPlacer;
+import net.invictusslayer.slayersbeasts.world.feature.trunkplacer.ColossalTrunkPlacer;
 import net.invictusslayer.slayersbeasts.world.feature.trunkplacer.CrossTrunkPlacer;
 import net.minecraft.core.HolderGetter;
 import net.minecraft.core.registries.Registries;
@@ -49,6 +51,7 @@ public class ModConfiguredFeatures {
     public static final ResourceKey<ConfiguredFeature<?, ?>> KAPOK = registerKey("kapok");
     public static final ResourceKey<ConfiguredFeature<?, ?>> REDWOOD = registerKey("redwood");
     public static final ResourceKey<ConfiguredFeature<?, ?>> GIANT_REDWOOD = registerKey("giant_redwood");
+    public static final ResourceKey<ConfiguredFeature<?, ?>> COLOSSAL_REDWOOD = registerKey("colossal_redwood");
     public static final ResourceKey<ConfiguredFeature<?, ?>> PETRIFIED_TREE = registerKey("petrified_tree");
     public static final ResourceKey<ConfiguredFeature<?, ?>> HUGE_WHITE_MUSHROOM = registerKey("huge_white_mushroom");
 
@@ -95,6 +98,9 @@ public class ModConfiguredFeatures {
         register(context, GIANT_REDWOOD, Feature.TREE, new TreeConfiguration.TreeConfigurationBuilder(
                 BlockStateProvider.simple(ModBlocks.REDWOOD_LOG.get()), new GiantTrunkPlacer(20, 8, 2),
                 BlockStateProvider.simple(ModBlocks.REDWOOD_LEAVES.get()), new MegaPineFoliagePlacer(ConstantInt.of(0), ConstantInt.of(0), UniformInt.of(13, 17)), new TwoLayersFeatureSize(1, 0, 2)).build());
+        register(context, COLOSSAL_REDWOOD, Feature.TREE, new TreeConfiguration.TreeConfigurationBuilder(
+                BlockStateProvider.simple(ModBlocks.REDWOOD_LOG.get()), new ColossalTrunkPlacer(32, 15, 15),
+                BlockStateProvider.simple(ModBlocks.REDWOOD_LEAVES.get()), new UltraRedwoodFoliagePlacer(ConstantInt.of(2), ConstantInt.of(0), UniformInt.of(19, 30)), new TwoLayersFeatureSize(1, 0, 2)).build());
         register(context, PETRIFIED_TREE, Feature.TREE, new TreeConfiguration.TreeConfigurationBuilder(
                 BlockStateProvider.simple(Blocks.STONE), new StraightTrunkPlacer(5, 2, 2),
                 BlockStateProvider.simple(Blocks.TUFF), new BlobFoliagePlacer(ConstantInt.of(2), ConstantInt.of(0), 3), new TwoLayersFeatureSize(1, 0, 2)).build());
@@ -108,7 +114,7 @@ public class ModConfiguredFeatures {
         register(context, TREES_EUCALYPT, Feature.RANDOM_SELECTOR, new RandomFeatureConfiguration(List.of(new WeightedPlacedFeature(placed.getOrThrow(ModPlacedFeatures.EUCALYPTUS_CHECKED), 0.5F)), placed.getOrThrow(ModPlacedFeatures.EUCALYPTUS_CHECKED)));
         register(context, TREES_OUTBACK, Feature.RANDOM_SELECTOR, new RandomFeatureConfiguration(List.of(new WeightedPlacedFeature(placed.getOrThrow(ModPlacedFeatures.DESERT_OAK_CHECKED), 0.5F)), placed.getOrThrow(ModPlacedFeatures.EUCALYPTUS_CHECKED)));
         register(context, TREES_REDWOOD, Feature.RANDOM_SELECTOR, new RandomFeatureConfiguration(List.of(new WeightedPlacedFeature(placed.getOrThrow(ModPlacedFeatures.REDWOOD_CHECKED), 0.5F)), placed.getOrThrow(ModPlacedFeatures.REDWOOD_CHECKED)));
-        register(context, TREES_OLD_GROWTH_REDWOOD, Feature.RANDOM_SELECTOR, new RandomFeatureConfiguration(List.of(new WeightedPlacedFeature(PlacementUtils.inlinePlaced(configured.getOrThrow(ModConfiguredFeatures.HUGE_WHITE_MUSHROOM)), 0.05F)), placed.getOrThrow(ModPlacedFeatures.GIANT_REDWOOD_CHECKED)));
+        register(context, TREES_OLD_GROWTH_REDWOOD, Feature.RANDOM_SELECTOR, new RandomFeatureConfiguration(List.of(new WeightedPlacedFeature(placed.getOrThrow(ModPlacedFeatures.GIANT_REDWOOD_CHECKED), 0.3F), new WeightedPlacedFeature(PlacementUtils.inlinePlaced(configured.getOrThrow(ModConfiguredFeatures.HUGE_WHITE_MUSHROOM)), 0.05F)), placed.getOrThrow(ModPlacedFeatures.COLOSSAL_REDWOOD_CHECKED)));
         register(context, PATCH_WHITE_MUSHROOM, Feature.RANDOM_PATCH, FeatureUtils.simplePatchConfiguration(Feature.SIMPLE_BLOCK, new SimpleBlockConfiguration(BlockStateProvider.simple(ModBlocks.WHITE_MUSHROOM.get()))));
 
         register(context, OVERWORLD_EXOSKELETON_ORE_KEY, Feature.ORE, new OreConfiguration(OVERWORLD_EXOSKELETON_ORES.get(), 3));
