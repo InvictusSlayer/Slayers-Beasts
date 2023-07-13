@@ -4,7 +4,6 @@ import net.invictusslayer.slayersbeasts.SlayersBeasts;
 import net.invictusslayer.slayersbeasts.block.ModBlocks;
 import net.invictusslayer.slayersbeasts.datagen.tags.ModTags;
 import net.invictusslayer.slayersbeasts.item.ModItems;
-import net.minecraft.advancements.critereon.ItemPredicate;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.recipes.*;
 import net.minecraft.resources.ResourceLocation;
@@ -26,16 +25,14 @@ public class ModRecipeProvider extends RecipeProvider implements IConditionBuild
 
     @Override
     protected void buildRecipes(Consumer<FinishedRecipe> consumer) {
-        SimpleCookingRecipeBuilder.smoking(Ingredient.of(ModItems.TIED_LEATHER.get()), RecipeCategory.MISC, ModItems.TANNED_LEATHER.get(), 0.5F, 200)
-                .unlockedBy("has_tied_leather", inventoryTrigger(ItemPredicate.Builder.item().of(ModItems.TIED_LEATHER.get()).build())).save(consumer);
-        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModItems.TIED_LEATHER.get()).define('S', Items.STRING)
-                .define('L', Items.LEATHER).define('B', Items.SLIME_BALL).pattern("LSL").pattern("SBS").pattern("LSL")
-                .unlockedBy("has_leather", inventoryTrigger(ItemPredicate.Builder.item().of(Items.LEATHER).build())).save(consumer);
+        SimpleCookingRecipeBuilder.smoking(Ingredient.of(ModItems.TIED_LEATHER.get()), RecipeCategory.MISC, ModItems.TANNED_LEATHER.get(), 0.5F, 200).unlockedBy("has_tied_leather", has(ModItems.TIED_LEATHER.get())).save(consumer);
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModItems.TIED_LEATHER.get()).define('S', Items.STRING).define('L', Items.LEATHER).define('B', Items.SLIME_BALL)
+                .pattern("LSL").pattern("SBS").pattern("LSL").unlockedBy("has_leather", has(Items.LEATHER)).save(consumer);
 
-        ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, Blocks.PACKED_MUD).define('X', ModItems.MUD_BALL.get()).pattern("XX").pattern("XX")
-                .unlockedBy("has_mud_ball", inventoryTrigger(ItemPredicate.Builder.item().of(ModItems.MUD_BALL.get()).build())).save(consumer);
-        SimpleCookingRecipeBuilder.smelting(Ingredient.of(Blocks.PACKED_MUD), RecipeCategory.BUILDING_BLOCKS, ModBlocks.CRACKED_MUD.get(), 0.1F, 200)
-                .unlockedBy("has_packed_mud", inventoryTrigger(ItemPredicate.Builder.item().of(Blocks.PACKED_MUD).build())).save(consumer);
+        twoByTwoPacker(consumer, RecipeCategory.BUILDING_BLOCKS, Blocks.PACKED_MUD, ModItems.MUD_BALL.get());
+        SimpleCookingRecipeBuilder.smelting(Ingredient.of(Blocks.PACKED_MUD), RecipeCategory.BUILDING_BLOCKS, ModBlocks.CRACKED_MUD.get(), 0.1F, 200).unlockedBy("has_packed_mud", has(Blocks.PACKED_MUD)).save(consumer);
+
+        ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, ModBlocks.PEAT.get(), 4).define('M', Blocks.MOSS_BLOCK).define('U', Blocks.MUD).pattern("MU").pattern("UM").unlockedBy("has_moss", has(Blocks.MOSS_BLOCK)).save(consumer);
 
         nineBlockStorageRecipes(consumer, RecipeCategory.MISC, ModItems.JADE.get(), RecipeCategory.BUILDING_BLOCKS, ModBlocks.JADE_BLOCK.get());
 
@@ -57,6 +54,10 @@ public class ModRecipeProvider extends RecipeProvider implements IConditionBuild
     protected void generateForModBlockFamilies(Consumer<FinishedRecipe> pFinishedRecipeConsumer) {
         ModBlockFamilies.getAllFamilies().filter((family) -> family.shouldGenerateRecipe(FeatureFlagSet.of(FeatureFlags.VANILLA)))
                 .forEach((family) -> generateRecipes(pFinishedRecipeConsumer, family));
+    }
+
+    protected static void twoByTwoPacker(Consumer<FinishedRecipe> pFinishedRecipeConsumer, RecipeCategory pCategory, ItemLike pPacked, ItemLike pUnpacked) {
+        ShapedRecipeBuilder.shaped(pCategory, pPacked, 1).define('#', pUnpacked).pattern("##").pattern("##").unlockedBy(getHasName(pUnpacked), has(pUnpacked)).save(pFinishedRecipeConsumer, new ResourceLocation(SlayersBeasts.MOD_ID, getSimpleRecipeName(pUnpacked)));
     }
 
     protected static void nineBlockStorageRecipes(Consumer<FinishedRecipe> pFinishedRecipeConsumer, RecipeCategory pUnpackedCategory, ItemLike pUnpacked, RecipeCategory pPackedCategory, ItemLike pPacked) {

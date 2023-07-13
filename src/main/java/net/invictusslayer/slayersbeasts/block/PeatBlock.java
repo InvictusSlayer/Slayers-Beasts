@@ -28,7 +28,7 @@ public class PeatBlock extends FallingBlock {
     @SuppressWarnings("deprecation")
     public void entityInside(BlockState pState, Level pLevel, BlockPos pPos, Entity pEntity) {
         if (!(pEntity instanceof LivingEntity) || pEntity.getFeetBlockState().is(this)) {
-            pEntity.makeStuckInBlock(pState, new Vec3(0.4D, 1.5D, 0.4D));
+            pEntity.makeStuckInBlock(pState, new Vec3(0.4D, 0.4D, 0.4D));
             if (pLevel.isClientSide) {
                 RandomSource random = pLevel.getRandom();
                 boolean flag = pEntity.xOld != pEntity.getX() || pEntity.zOld != pEntity.getZ();
