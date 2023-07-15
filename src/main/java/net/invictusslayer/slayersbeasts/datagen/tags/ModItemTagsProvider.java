@@ -26,6 +26,7 @@ public class ModItemTagsProvider extends ItemTagsProvider {
         this.copy(ModTags.Blocks.EUCALYPTUS_LOGS, ModTags.Items.EUCALYPTUS_LOGS);
         this.copy(ModTags.Blocks.KAPOK_LOGS, ModTags.Items.KAPOK_LOGS);
         this.copy(ModTags.Blocks.REDWOOD_LOGS, ModTags.Items.REDWOOD_LOGS);
+        this.copy(ModTags.Blocks.WILLOW_LOGS, ModTags.Items.WILLOW_LOGS);
 
         this.copy(BlockTags.PLANKS, ItemTags.PLANKS);
         this.copy(BlockTags.WOODEN_DOORS, ItemTags.WOODEN_DOORS);

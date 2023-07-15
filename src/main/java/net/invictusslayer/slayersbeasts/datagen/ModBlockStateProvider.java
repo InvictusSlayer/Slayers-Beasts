@@ -47,7 +47,7 @@ public class ModBlockStateProvider extends BlockStateProvider {
         slabWithItem((SlabBlock) ModBlocks.CUT_BLACK_SANDSTONE_SLAB.get(), blockTexture(ModBlocks.CUT_BLACK_SANDSTONE.get()), extend(blockTexture(ModBlocks.BLACK_SANDSTONE.get()), "_top"), blockTexture(ModBlocks.CUT_BLACK_SANDSTONE.get()), extend(blockTexture(ModBlocks.BLACK_SANDSTONE.get()), "_top"));
         columnWithItem(ModBlocks.CHISELED_BLACK_SANDSTONE.get(), blockTexture(ModBlocks.CHISELED_BLACK_SANDSTONE.get()), extend(blockTexture(ModBlocks.BLACK_SANDSTONE.get()), "_top"));
 
-        sapling(ModBlocks.WHITE_MUSHROOM.get());
+        cross(ModBlocks.WHITE_MUSHROOM.get());
         mushroomBlockWithItem(ModBlocks.WHITE_MUSHROOM_BLOCK.get());
         
         logWithItem((RotatedPillarBlock) ModBlocks.ASPEN_LOG.get());
@@ -55,42 +55,51 @@ public class ModBlockStateProvider extends BlockStateProvider {
         woodWithItem((RotatedPillarBlock) ModBlocks.ASPEN_WOOD.get(), blockTexture(ModBlocks.ASPEN_LOG.get()));
         woodWithItem((RotatedPillarBlock) ModBlocks.STRIPPED_ASPEN_WOOD.get(), blockTexture(ModBlocks.STRIPPED_ASPEN_LOG.get()));
         cubeWithItem(ModBlocks.ASPEN_LEAVES.get());
-        sapling(ModBlocks.ASPEN_SAPLING.get());
+        cross(ModBlocks.ASPEN_SAPLING.get());
 
         logWithItem((RotatedPillarBlock) ModBlocks.CAJOLE_LOG.get());
         logWithItem((RotatedPillarBlock) ModBlocks.STRIPPED_CAJOLE_LOG.get());
         woodWithItem((RotatedPillarBlock) ModBlocks.CAJOLE_WOOD.get(), blockTexture(ModBlocks.CAJOLE_LOG.get()));
         woodWithItem((RotatedPillarBlock) ModBlocks.STRIPPED_CAJOLE_WOOD.get(), blockTexture(ModBlocks.STRIPPED_CAJOLE_LOG.get()));
         cubeWithItem(ModBlocks.CAJOLE_LEAVES.get());
-        sapling(ModBlocks.CAJOLE_SAPLING.get());
+        cross(ModBlocks.CAJOLE_SAPLING.get());
         
         logWithItem((RotatedPillarBlock) ModBlocks.DESERT_OAK_LOG.get());
         logWithItem((RotatedPillarBlock) ModBlocks.STRIPPED_DESERT_OAK_LOG.get());
         woodWithItem((RotatedPillarBlock) ModBlocks.DESERT_OAK_WOOD.get(), blockTexture(ModBlocks.DESERT_OAK_LOG.get()));
         woodWithItem((RotatedPillarBlock) ModBlocks.STRIPPED_DESERT_OAK_WOOD.get(), blockTexture(ModBlocks.STRIPPED_DESERT_OAK_LOG.get()));
         cubeWithItem(ModBlocks.DESERT_OAK_LEAVES.get());
-        sapling(ModBlocks.DESERT_OAK_SAPLING.get());
+        cross(ModBlocks.DESERT_OAK_SAPLING.get());
 
         logWithItem((RotatedPillarBlock) ModBlocks.EUCALYPTUS_LOG.get());
         logWithItem((RotatedPillarBlock) ModBlocks.STRIPPED_EUCALYPTUS_LOG.get());
         woodWithItem((RotatedPillarBlock) ModBlocks.EUCALYPTUS_WOOD.get(), blockTexture(ModBlocks.EUCALYPTUS_LOG.get()));
         woodWithItem((RotatedPillarBlock) ModBlocks.STRIPPED_EUCALYPTUS_WOOD.get(), blockTexture(ModBlocks.STRIPPED_EUCALYPTUS_LOG.get()));
         cubeWithItem(ModBlocks.EUCALYPTUS_LEAVES.get());
-        sapling(ModBlocks.EUCALYPTUS_SAPLING.get());
+        cross(ModBlocks.EUCALYPTUS_SAPLING.get());
 
         logWithItem((RotatedPillarBlock) ModBlocks.KAPOK_LOG.get());
         logWithItem((RotatedPillarBlock) ModBlocks.STRIPPED_KAPOK_LOG.get());
         woodWithItem((RotatedPillarBlock) ModBlocks.KAPOK_WOOD.get(), blockTexture(ModBlocks.KAPOK_LOG.get()));
         woodWithItem((RotatedPillarBlock) ModBlocks.STRIPPED_KAPOK_WOOD.get(), blockTexture(ModBlocks.STRIPPED_KAPOK_LOG.get()));
         cubeWithItem(ModBlocks.KAPOK_LEAVES.get());
-        sapling(ModBlocks.KAPOK_SAPLING.get());
+        cross(ModBlocks.KAPOK_SAPLING.get());
         
         logWithItem((RotatedPillarBlock) ModBlocks.REDWOOD_LOG.get());
         logWithItem((RotatedPillarBlock) ModBlocks.STRIPPED_REDWOOD_LOG.get());
         woodWithItem((RotatedPillarBlock) ModBlocks.REDWOOD_WOOD.get(), blockTexture(ModBlocks.REDWOOD_LOG.get()));
         woodWithItem((RotatedPillarBlock) ModBlocks.STRIPPED_REDWOOD_WOOD.get(), blockTexture(ModBlocks.STRIPPED_REDWOOD_LOG.get()));
         cubeWithItem(ModBlocks.REDWOOD_LEAVES.get());
-        sapling(ModBlocks.REDWOOD_SAPLING.get());
+        cross(ModBlocks.REDWOOD_SAPLING.get());
+
+        logWithItem((RotatedPillarBlock) ModBlocks.WILLOW_LOG.get());
+        logWithItem((RotatedPillarBlock) ModBlocks.STRIPPED_WILLOW_LOG.get());
+        woodWithItem((RotatedPillarBlock) ModBlocks.WILLOW_WOOD.get(), blockTexture(ModBlocks.WILLOW_LOG.get()));
+        woodWithItem((RotatedPillarBlock) ModBlocks.STRIPPED_WILLOW_WOOD.get(), blockTexture(ModBlocks.STRIPPED_WILLOW_LOG.get()));
+        cubeWithItem(ModBlocks.WILLOW_LEAVES.get());
+        cross(ModBlocks.WILLOW_SAPLING.get());
+        cross(ModBlocks.WILLOW_BRANCH.get());
+        cross(ModBlocks.WILLOW_BRANCH_PLANT.get());
     }
 
     private void registerBlockFamily(BlockFamily family) {
@@ -133,7 +142,7 @@ public class ModBlockStateProvider extends BlockStateProvider {
         axisBlock(block, texture, texture);
         simpleBlockItem(block, models().withExistingParent(name(block), "minecraft:block/cube_column"));
     }
-    private void sapling(Block block) {
+    private void cross(Block block) {
         getVariantBuilder(block).forAllStates(state -> ConfiguredModel.builder()
                 .modelFile(models().cross(name(block), blockTexture(block)).renderType("cutout")).build());
     }

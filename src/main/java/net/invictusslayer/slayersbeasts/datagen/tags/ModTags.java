@@ -24,6 +24,7 @@ public class ModTags {
         public static final TagKey<Block> EUCALYPTUS_LOGS = tag("eucalyptus_logs");
         public static final TagKey<Block> KAPOK_LOGS = tag("kapok_logs");
         public static final TagKey<Block> REDWOOD_LOGS = tag("redwood_logs");
+        public static final TagKey<Block> WILLOW_LOGS = tag("willow_logs");
 
         private static TagKey<Block> tag(String name) {
             return BlockTags.create(new ResourceLocation(SlayersBeasts.MOD_ID, name));
@@ -37,6 +38,7 @@ public class ModTags {
         public static final TagKey<Item> EUCALYPTUS_LOGS = tag("eucalyptus_logs");
         public static final TagKey<Item> KAPOK_LOGS = tag("kapok_logs");
         public static final TagKey<Item> REDWOOD_LOGS = tag("redwood_logs");
+        public static final TagKey<Item> WILLOW_LOGS = tag("willow_logs");
 
         public static final TagKey<Item> JADE_GEMS = forgeTag("gems/jade");
 

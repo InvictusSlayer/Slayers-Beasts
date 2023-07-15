@@ -17,6 +17,7 @@ public record ModBlockSetType(String name, boolean canOpenByHand, SoundType soun
     public static final BlockSetType EUCALYPTUS = register(woodSetType("eucalyptus"));
     public static final BlockSetType KAPOK = register(woodSetType("kapok"));
     public static final BlockSetType REDWOOD = register(woodSetType("redwood"));
+    public static final BlockSetType WILLOW = register(woodSetType("willow"));
 
     public static BlockSetType woodSetType(String pName) {
         return new BlockSetType(pName, true, SoundType.WOOD, SoundEvents.WOODEN_DOOR_CLOSE, SoundEvents.WOODEN_DOOR_OPEN, SoundEvents.WOODEN_TRAPDOOR_CLOSE, SoundEvents.WOODEN_TRAPDOOR_OPEN, SoundEvents.WOODEN_PRESSURE_PLATE_CLICK_OFF, SoundEvents.WOODEN_PRESSURE_PLATE_CLICK_ON, SoundEvents.WOODEN_BUTTON_CLICK_OFF, SoundEvents.WOODEN_BUTTON_CLICK_ON);

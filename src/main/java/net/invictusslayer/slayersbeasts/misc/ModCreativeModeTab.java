@@ -116,6 +116,21 @@ public final class ModCreativeModeTab {
                         pOutput.accept(ModBlocks.REDWOOD_DOOR.get());
                         pOutput.accept(ModBlocks.REDWOOD_TRAPDOOR.get());
 
+                        pOutput.accept(ModBlocks.WILLOW_LOG.get());
+                        pOutput.accept(ModBlocks.STRIPPED_WILLOW_LOG.get());
+                        pOutput.accept(ModBlocks.WILLOW_WOOD.get());
+                        pOutput.accept(ModBlocks.STRIPPED_WILLOW_WOOD.get());
+                        pOutput.accept(ModBlocks.WILLOW_LEAVES.get());
+                        pOutput.accept(ModBlocks.WILLOW_SAPLING.get());
+                        pOutput.accept(ModBlocks.WILLOW_PLANKS.get());
+                        pOutput.accept(ModBlocks.WILLOW_SLAB.get());
+                        pOutput.accept(ModBlocks.WILLOW_STAIRS.get());
+                        pOutput.accept(ModBlocks.WILLOW_FENCE.get());
+                        pOutput.accept(ModBlocks.WILLOW_FENCE_GATE.get());
+                        pOutput.accept(ModBlocks.WILLOW_DOOR.get());
+                        pOutput.accept(ModBlocks.WILLOW_TRAPDOOR.get());
+                        pOutput.accept(ModBlocks.WILLOW_BRANCH.get());
+
                         pOutput.accept(ModItems.MANTIS_SPAWN_EGG.get());
                         pOutput.accept(ModItems.WORKER_ANT_SPAWN_EGG.get());
                         pOutput.accept(ModItems.SOLDIER_ANT_SPAWN_EGG.get());

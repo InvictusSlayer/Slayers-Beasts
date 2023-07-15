@@ -46,6 +46,10 @@ public class ModItemModelProvider extends ItemModelProvider {
         blockItem(ModBlocks.KAPOK_SAPLING);
         simpleItem(ModBlocks.REDWOOD_DOOR);
         blockItem(ModBlocks.REDWOOD_SAPLING);
+        simpleItem(ModBlocks.WILLOW_DOOR);
+        blockItem(ModBlocks.WILLOW_SAPLING);
+        blockItem(ModBlocks.WILLOW_BRANCH);
+        blockItem(ModBlocks.WILLOW_BRANCH_PLANT);
 
         spawnEggItem(ModItems.MANTIS_SPAWN_EGG);
         simpleItem(ModItems.WORKER_ANT_SPAWN_EGG);

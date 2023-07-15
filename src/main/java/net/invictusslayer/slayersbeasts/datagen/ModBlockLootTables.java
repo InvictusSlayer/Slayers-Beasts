@@ -92,6 +92,18 @@ public class ModBlockLootTables extends BlockLootSubProvider {
         add(ModBlocks.REDWOOD_LEAVES.get(), (block) -> createLeavesDrops(
                 ModBlocks.REDWOOD_LEAVES.get(), ModBlocks.REDWOOD_SAPLING.get(), 0.05f));
         dropSelf(ModBlocks.REDWOOD_SAPLING.get());
+
+        dropSelf(ModBlocks.WILLOW_LOG.get());
+        dropSelf(ModBlocks.STRIPPED_WILLOW_LOG.get());
+        dropSelf(ModBlocks.WILLOW_WOOD.get());
+        dropSelf(ModBlocks.STRIPPED_WILLOW_WOOD.get());
+        add(ModBlocks.WILLOW_LEAVES.get(), (block) -> createLeavesDrops(
+                ModBlocks.WILLOW_LEAVES.get(), ModBlocks.WILLOW_SAPLING.get(), 0.05f));
+        dropSelf(ModBlocks.WILLOW_SAPLING.get());
+        add(ModBlocks.WILLOW_BRANCH.get(), (block) -> createLeavesDrops(
+                ModBlocks.WILLOW_LEAVES.get(), ModBlocks.WILLOW_SAPLING.get(), 0.05f));
+        add(ModBlocks.WILLOW_BRANCH_PLANT.get(), (block) -> createLeavesDrops(
+                ModBlocks.WILLOW_LEAVES.get(), ModBlocks.WILLOW_SAPLING.get(), 0.05f));
     }
 
     private void generateForBlockFamilies() {
