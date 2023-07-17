@@ -10,11 +10,12 @@ import net.invictusslayer.slayersbeasts.misc.ModBrewingRecipe;
 import net.invictusslayer.slayersbeasts.misc.ModCreativeModeTab;
 import net.invictusslayer.slayersbeasts.misc.ModPotions;
 import net.invictusslayer.slayersbeasts.misc.ModSounds;
-import net.invictusslayer.slayersbeasts.world.biome.ModBiomes;
+import net.invictusslayer.slayersbeasts.world.biome.*;
 import net.invictusslayer.slayersbeasts.world.dimension.ModDimensions;
 import net.invictusslayer.slayersbeasts.world.feature.ModFeatures;
 import net.invictusslayer.slayersbeasts.world.feature.foliageplacer.ModFoliagePlacers;
 import net.invictusslayer.slayersbeasts.world.feature.trunkplacer.ModTrunkPlacers;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.alchemy.Potions;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.brewing.BrewingRecipeRegistry;
@@ -24,6 +25,8 @@ import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
+import terrablender.api.Regions;
+import terrablender.api.SurfaceRuleManager;
 
 @Mod(SlayersBeasts.MOD_ID)
 public class SlayersBeasts {
@@ -44,28 +47,30 @@ public class SlayersBeasts {
         ModTrunkPlacers.register(eventBus);
         ModFeatures.register(eventBus);
         ModPois.register(eventBus);
-        ModBiomes.register();
+        ModBiomes.registerBiomes();
         ModDimensions.register();
 
-        eventBus.addListener(this::setup);
+        eventBus.addListener(this::commonSetup);
         eventBus.addListener(this::clientSetup);
+        eventBus.addListener(this::addCreative);
 
         MinecraftForge.EVENT_BUS.register(this);
+    }
 
-        eventBus.addListener(this::addCreative);
+    private void commonSetup(final FMLCommonSetupEvent event) {
+        event.enqueueWork(() -> {
+            BrewingRecipeRegistry.addRecipe(new ModBrewingRecipe(Potions.SLOWNESS, ModItems.INSECT_EYE.get(), ModPotions.PARALYSIS_POTION.get()));
+            BrewingRecipeRegistry.addRecipe(new ModBrewingRecipe(Potions.POISON, ModItems.WITHERBONE.get(), ModPotions.WITHER_POTION.get()));
+
+            Regions.register(new OverworldRegion(new ResourceLocation(MOD_ID, "overworld"), 2));
+
+            SurfaceRuleManager.addSurfaceRules(SurfaceRuleManager.RuleCategory.OVERWORLD, MOD_ID, ModSurfaceRuleData.makeRules());
+            SurfaceRuleManager.addSurfaceRules(SurfaceRuleManager.RuleCategory.NETHER, MOD_ID, ModSurfaceRuleData.makeRules());
+        });
     }
 
     private void clientSetup(final FMLClientSetupEvent event) {
 
-    }
-
-    private void setup(final FMLCommonSetupEvent event) {
-        event.enqueueWork(() -> {
-            BrewingRecipeRegistry.addRecipe(new ModBrewingRecipe(Potions.SLOWNESS,
-                    ModItems.INSECT_EYE.get(), ModPotions.PARALYSIS_POTION.get()));
-            BrewingRecipeRegistry.addRecipe(new ModBrewingRecipe(Potions.POISON,
-                    ModItems.WITHERBONE.get(), ModPotions.WITHER_POTION.get()));
-        });
     }
 
     private void addCreative(BuildCreativeModeTabContentsEvent event) {
