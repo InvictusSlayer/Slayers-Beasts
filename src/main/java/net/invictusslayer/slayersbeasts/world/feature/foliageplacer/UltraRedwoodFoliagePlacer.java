@@ -45,7 +45,8 @@ public class UltraRedwoodFoliagePlacer extends FoliagePlacer {
             }
 
             if (k % 5 == 0 && k > 9) {
-                int l = k == 10 ? 0 : 1 + pRandom.nextInt(3);
+                int l = k == 10 ? 0 : 1 + pRandom.nextInt(2);
+                placeLeavesRow(pLevel, pBlockSetter, pRandom, pConfig, blockpos, l,-k + 1, large);
                 placeLeavesRow(pLevel, pBlockSetter, pRandom, pConfig, blockpos, f + l,-k, large);
                 placeLeavesRow(pLevel, pBlockSetter, pRandom, pConfig, blockpos, f + l + 1, -k - 1, large);
                 placeLeavesRow(pLevel, pBlockSetter, pRandom, pConfig, blockpos, f + l + 2, -k - 2, large);
