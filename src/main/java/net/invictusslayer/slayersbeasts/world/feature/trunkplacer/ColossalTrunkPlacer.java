@@ -38,23 +38,35 @@ public class ColossalTrunkPlacer extends TrunkPlacer {
         setDirtAt(pLevel, pBlockSetter, pRandom, dirtPos.south().south(), pConfig);
         setDirtAt(pLevel, pBlockSetter, pRandom, dirtPos.south().south().east(), pConfig);
         setDirtAt(pLevel, pBlockSetter, pRandom, dirtPos.south().south().east().east(), pConfig);
+        setDirtAt(pLevel, pBlockSetter, pRandom, dirtPos.south().west(), pConfig);
+        setDirtAt(pLevel, pBlockSetter, pRandom, dirtPos.north().east(), pConfig);
+        setDirtAt(pLevel, pBlockSetter, pRandom, dirtPos.south().south().south().east(), pConfig);
+        setDirtAt(pLevel, pBlockSetter, pRandom, dirtPos.south().east().east().east(), pConfig);
         BlockPos.MutableBlockPos pMutableBlockPos = new BlockPos.MutableBlockPos();
 
-        for(int i = 0; i < pFreeTreeHeight; ++i) {
-            if (i < pFreeTreeHeight - 1) {
-                this.placeLogIfFreeWithOffset(pLevel, pBlockSetter, pRandom, pMutableBlockPos, pConfig, pPos, 0, i, 0);
-                this.placeLogIfFreeWithOffset(pLevel, pBlockSetter, pRandom, pMutableBlockPos, pConfig, pPos, 1, i, 0);
-                this.placeLogIfFreeWithOffset(pLevel, pBlockSetter, pRandom, pMutableBlockPos, pConfig, pPos, 2, i, 0);
-                this.placeLogIfFreeWithOffset(pLevel, pBlockSetter, pRandom, pMutableBlockPos, pConfig, pPos, 0, i, 1);
-                this.placeLogIfFreeWithOffset(pLevel, pBlockSetter, pRandom, pMutableBlockPos, pConfig, pPos, 1, i, 1);
-                this.placeLogIfFreeWithOffset(pLevel, pBlockSetter, pRandom, pMutableBlockPos, pConfig, pPos, 2, i, 1);
-                this.placeLogIfFreeWithOffset(pLevel, pBlockSetter, pRandom, pMutableBlockPos, pConfig, pPos, 0, i, 2);
-                this.placeLogIfFreeWithOffset(pLevel, pBlockSetter, pRandom, pMutableBlockPos, pConfig, pPos, 1, i, 2);
-                this.placeLogIfFreeWithOffset(pLevel, pBlockSetter, pRandom, pMutableBlockPos, pConfig, pPos, 2, i, 2);
+        int root = 3 + pRandom.nextInt(5);
+        int base = root + 4 + pRandom.nextInt(5);
+        for (int i = 0; i < pFreeTreeHeight; ++i) {
+            if (i < root) {
+                placeLogIfFreeWithOffset(pLevel, pBlockSetter, pRandom, pMutableBlockPos, pConfig, pPos, 1, i, -1);
+                placeLogIfFreeWithOffset(pLevel, pBlockSetter, pRandom, pMutableBlockPos, pConfig, pPos, -1, i, 1);
+                placeLogIfFreeWithOffset(pLevel, pBlockSetter, pRandom, pMutableBlockPos, pConfig, pPos, 1, i, 3);
+                placeLogIfFreeWithOffset(pLevel, pBlockSetter, pRandom, pMutableBlockPos, pConfig, pPos, 3, i, 1);
             }
+            if (i < base) {
+                placeLogIfFreeWithOffset(pLevel, pBlockSetter, pRandom, pMutableBlockPos, pConfig, pPos, 0, i, 0);
+                placeLogIfFreeWithOffset(pLevel, pBlockSetter, pRandom, pMutableBlockPos, pConfig, pPos, 2, i, 0);
+                placeLogIfFreeWithOffset(pLevel, pBlockSetter, pRandom, pMutableBlockPos, pConfig, pPos, 0, i, 2);
+                placeLogIfFreeWithOffset(pLevel, pBlockSetter, pRandom, pMutableBlockPos, pConfig, pPos, 2, i, 2);
+            }
+            placeLogIfFreeWithOffset(pLevel, pBlockSetter, pRandom, pMutableBlockPos, pConfig, pPos, 1, i, 0);
+            placeLogIfFreeWithOffset(pLevel, pBlockSetter, pRandom, pMutableBlockPos, pConfig, pPos, 0, i, 1);
+            placeLogIfFreeWithOffset(pLevel, pBlockSetter, pRandom, pMutableBlockPos, pConfig, pPos, 1, i, 1);
+            placeLogIfFreeWithOffset(pLevel, pBlockSetter, pRandom, pMutableBlockPos, pConfig, pPos, 2, i, 1);
+            placeLogIfFreeWithOffset(pLevel, pBlockSetter, pRandom, pMutableBlockPos, pConfig, pPos, 1, i, 2);
         }
 
-        return ImmutableList.of(new FoliagePlacer.FoliageAttachment(pPos.above(pFreeTreeHeight).south().east(), 0, false));
+        return ImmutableList.of(new FoliagePlacer.FoliageAttachment(pPos.above(pFreeTreeHeight - 1).south().east(), 0, false));
     }
 
     private void placeLogIfFreeWithOffset(LevelSimulatedReader pLevel, BiConsumer<BlockPos, BlockState> pBlockSetter, RandomSource pRandom, BlockPos.MutableBlockPos pPos, TreeConfiguration pConfig, BlockPos pOffsetPos, int pOffsetX, int pOffsetY, int pOffsetZ) {

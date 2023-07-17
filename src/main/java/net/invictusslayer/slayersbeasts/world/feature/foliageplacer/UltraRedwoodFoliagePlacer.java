@@ -3,7 +3,6 @@ package net.invictusslayer.slayersbeasts.world.feature.foliageplacer;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.minecraft.core.BlockPos;
-import net.minecraft.util.Mth;
 import net.minecraft.util.RandomSource;
 import net.minecraft.util.valueproviders.IntProvider;
 import net.minecraft.world.level.LevelSimulatedReader;
@@ -28,20 +27,33 @@ public class UltraRedwoodFoliagePlacer extends FoliagePlacer {
 
     protected void createFoliage(LevelSimulatedReader pLevel, FoliageSetter pBlockSetter, RandomSource pRandom, TreeConfiguration pConfig, int pMaxFreeTreeHeight, FoliageAttachment pAttachment, int pFoliageHeight, int pFoliageRadius, int pOffset) {
         BlockPos blockpos = pAttachment.pos();
-        int i = 0;
+        boolean flag = pAttachment.doubleTrunk();
+        int l = pFoliageRadius + pAttachment.radiusOffset();
+
+        this.placeLeavesRow(pLevel, pBlockSetter, pRandom, pConfig, blockpos, 0, 3, flag);
+        this.placeLeavesRow(pLevel, pBlockSetter, pRandom, pConfig, blockpos, 1, 2, flag);
+        this.placeLeavesRow(pLevel, pBlockSetter, pRandom, pConfig, blockpos, 2, 1, flag);
+        this.placeLeavesRow(pLevel, pBlockSetter, pRandom, pConfig, blockpos, 3,  -1 - pFoliageHeight, flag);
+        this.placeLeavesRow(pLevel, pBlockSetter, pRandom, pConfig, blockpos, 4, -2 - pFoliageHeight, flag);
+        this.placeLeavesRow(pLevel, pBlockSetter, pRandom, pConfig, blockpos, 2,  -4 - pFoliageHeight, flag);
+        this.placeLeavesRow(pLevel, pBlockSetter, pRandom, pConfig, blockpos, 3, -5 - pFoliageHeight, flag);
 
         for (int j = blockpos.getY() - pFoliageHeight + pOffset; j <= blockpos.getY() + pOffset; ++j) {
             int k = blockpos.getY() - j;
-            int l = pFoliageRadius + pAttachment.radiusOffset() + Mth.floor((float) k / (float) pFoliageHeight * 3.5F);
-            int i1;
-            if (k > 0 && l == i && (j & 1) == 0) {
-                i1 = l + 1;
-            } else {
-                i1 = l;
-            }
+            int r;
 
-            this.placeLeavesRow(pLevel, pBlockSetter, pRandom, pConfig, new BlockPos(blockpos.getX(), j, blockpos.getZ()), i1, 0, pAttachment.doubleTrunk());
-            i = l;
+            if (k % 4 == 0) {
+                r = 0;
+            } else if (k < 4) {
+                r = k + 2;
+            } else if (k % 4 == 1) {
+                r = l + pRandom.nextInt(2);
+            } else if (k % 4 == 2) {
+                r = l + 1 + pRandom.nextInt(2);
+            } else {
+                r = l + 3 + pRandom.nextInt(2);
+            }
+            this.placeLeavesRow(pLevel, pBlockSetter, pRandom, pConfig, blockpos, r, -k, flag);
         }
     }
 
