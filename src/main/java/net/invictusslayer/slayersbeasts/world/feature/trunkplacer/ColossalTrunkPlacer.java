@@ -46,6 +46,7 @@ public class ColossalTrunkPlacer extends TrunkPlacer {
 
         int root = 3 + pRandom.nextInt(5);
         int base = root + 4 + pRandom.nextInt(5);
+        int top = 3 + pRandom.nextInt(3);
         for (int i = 0; i < pFreeTreeHeight; ++i) {
             if (i < root) {
                 placeLogIfFreeWithOffset(pLevel, pBlockSetter, pRandom, pMutableBlockPos, pConfig, pPos, 1, i, -1);
@@ -59,14 +60,16 @@ public class ColossalTrunkPlacer extends TrunkPlacer {
                 placeLogIfFreeWithOffset(pLevel, pBlockSetter, pRandom, pMutableBlockPos, pConfig, pPos, 0, i, 2);
                 placeLogIfFreeWithOffset(pLevel, pBlockSetter, pRandom, pMutableBlockPos, pConfig, pPos, 2, i, 2);
             }
-            placeLogIfFreeWithOffset(pLevel, pBlockSetter, pRandom, pMutableBlockPos, pConfig, pPos, 1, i, 0);
-            placeLogIfFreeWithOffset(pLevel, pBlockSetter, pRandom, pMutableBlockPos, pConfig, pPos, 0, i, 1);
+            if (i < pFreeTreeHeight - top) {
+                placeLogIfFreeWithOffset(pLevel, pBlockSetter, pRandom, pMutableBlockPos, pConfig, pPos, 1, i, 0);
+                placeLogIfFreeWithOffset(pLevel, pBlockSetter, pRandom, pMutableBlockPos, pConfig, pPos, 0, i, 1);
+                placeLogIfFreeWithOffset(pLevel, pBlockSetter, pRandom, pMutableBlockPos, pConfig, pPos, 2, i, 1);
+                placeLogIfFreeWithOffset(pLevel, pBlockSetter, pRandom, pMutableBlockPos, pConfig, pPos, 1, i, 2);
+            }
             placeLogIfFreeWithOffset(pLevel, pBlockSetter, pRandom, pMutableBlockPos, pConfig, pPos, 1, i, 1);
-            placeLogIfFreeWithOffset(pLevel, pBlockSetter, pRandom, pMutableBlockPos, pConfig, pPos, 2, i, 1);
-            placeLogIfFreeWithOffset(pLevel, pBlockSetter, pRandom, pMutableBlockPos, pConfig, pPos, 1, i, 2);
         }
 
-        return ImmutableList.of(new FoliagePlacer.FoliageAttachment(pPos.above(pFreeTreeHeight - 1).south().east(), 0, false));
+        return ImmutableList.of(new FoliagePlacer.FoliageAttachment(pPos.above(pFreeTreeHeight).south().east(), 0, false));
     }
 
     private void placeLogIfFreeWithOffset(LevelSimulatedReader pLevel, BiConsumer<BlockPos, BlockState> pBlockSetter, RandomSource pRandom, BlockPos.MutableBlockPos pPos, TreeConfiguration pConfig, BlockPos pOffsetPos, int pOffsetX, int pOffsetY, int pOffsetZ) {

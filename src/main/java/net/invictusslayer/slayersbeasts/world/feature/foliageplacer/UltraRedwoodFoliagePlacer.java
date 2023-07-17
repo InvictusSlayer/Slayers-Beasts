@@ -12,7 +12,7 @@ import net.minecraft.world.level.levelgen.feature.foliageplacers.FoliagePlacerTy
 
 public class UltraRedwoodFoliagePlacer extends FoliagePlacer {
     public static final Codec<UltraRedwoodFoliagePlacer> CODEC = RecordCodecBuilder.create(instance ->
-            foliagePlacerParts(instance).and(IntProvider.codec(0, 30).fieldOf("height")
+            foliagePlacerParts(instance).and(IntProvider.codec(0, 35).fieldOf("height")
                     .forGetter(placer -> placer.height)).apply(instance, UltraRedwoodFoliagePlacer::new));
     private final IntProvider height;
 
@@ -27,33 +27,32 @@ public class UltraRedwoodFoliagePlacer extends FoliagePlacer {
 
     protected void createFoliage(LevelSimulatedReader pLevel, FoliageSetter pBlockSetter, RandomSource pRandom, TreeConfiguration pConfig, int pMaxFreeTreeHeight, FoliageAttachment pAttachment, int pFoliageHeight, int pFoliageRadius, int pOffset) {
         BlockPos blockpos = pAttachment.pos();
-        boolean flag = pAttachment.doubleTrunk();
-        int l = pFoliageRadius + pAttachment.radiusOffset();
+        boolean large = pAttachment.doubleTrunk();
+        int f = pFoliageRadius + pAttachment.radiusOffset();
+        boolean flag = pRandom.nextBoolean();
 
-        this.placeLeavesRow(pLevel, pBlockSetter, pRandom, pConfig, blockpos, 0, 3, flag);
-        this.placeLeavesRow(pLevel, pBlockSetter, pRandom, pConfig, blockpos, 1, 2, flag);
-        this.placeLeavesRow(pLevel, pBlockSetter, pRandom, pConfig, blockpos, 2, 1, flag);
-        this.placeLeavesRow(pLevel, pBlockSetter, pRandom, pConfig, blockpos, 3,  -1 - pFoliageHeight, flag);
-        this.placeLeavesRow(pLevel, pBlockSetter, pRandom, pConfig, blockpos, 4, -2 - pFoliageHeight, flag);
-        this.placeLeavesRow(pLevel, pBlockSetter, pRandom, pConfig, blockpos, 2,  -4 - pFoliageHeight, flag);
-        this.placeLeavesRow(pLevel, pBlockSetter, pRandom, pConfig, blockpos, 3, -5 - pFoliageHeight, flag);
+        placeLeavesRow(pLevel, pBlockSetter, pRandom, pConfig, blockpos, 3,  -1 - pFoliageHeight, large);
+        placeLeavesRow(pLevel, pBlockSetter, pRandom, pConfig, blockpos, 4, -2 - pFoliageHeight, large);
+        placeLeavesRow(pLevel, pBlockSetter, pRandom, pConfig, blockpos, 2,  -4 - pFoliageHeight, large);
+        placeLeavesRow(pLevel, pBlockSetter, pRandom, pConfig, blockpos, 3, -5 - pFoliageHeight, large);
 
-        for (int j = blockpos.getY() - pFoliageHeight + pOffset; j <= blockpos.getY() + pOffset; ++j) {
+        for (int j = blockpos.getY() - pFoliageHeight + pOffset; j <= blockpos.getY() + pOffset + 2; ++j) {
             int k = blockpos.getY() - j;
-            int r;
+            int r = k < 0 ? 0 : k < 3 ? 1 : k < 9 ? 2 : 0;
 
-            if (k % 4 == 0) {
-                r = 0;
-            } else if (k < 4) {
-                r = k + 2;
-            } else if (k % 4 == 1) {
-                r = l + pRandom.nextInt(2);
-            } else if (k % 4 == 2) {
-                r = l + 1 + pRandom.nextInt(2);
-            } else {
-                r = l + 3 + pRandom.nextInt(2);
+            if (flag ? k == 6 || k == 7 : k == 5 || k == 8) {
+                r = 3;
             }
-            this.placeLeavesRow(pLevel, pBlockSetter, pRandom, pConfig, blockpos, r, -k, flag);
+
+            if (k % 5 == 0 && k > 9) {
+                int l = k == 10 ? 0 : 1 + pRandom.nextInt(3);
+                placeLeavesRow(pLevel, pBlockSetter, pRandom, pConfig, blockpos, f + l,-k, large);
+                placeLeavesRow(pLevel, pBlockSetter, pRandom, pConfig, blockpos, f + l + 1, -k - 1, large);
+                placeLeavesRow(pLevel, pBlockSetter, pRandom, pConfig, blockpos, f + l + 2, -k - 2, large);
+                continue;
+            }
+
+            placeLeavesRow(pLevel, pBlockSetter, pRandom, pConfig, blockpos, r, -k, large);
         }
     }
 
@@ -62,7 +61,7 @@ public class UltraRedwoodFoliagePlacer extends FoliagePlacer {
     }
 
     protected boolean shouldSkipLocation(RandomSource pRandom, int pLocalX, int pLocalY, int pLocalZ, int pRange, boolean pLarge) {
-        if (pLocalX + pLocalZ >= 7) {
+        if (pLocalX + pLocalZ >= 9) {
             return true;
         } else {
             return pLocalX * pLocalX + pLocalZ * pLocalZ > pRange * pRange;
