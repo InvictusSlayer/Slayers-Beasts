@@ -23,7 +23,9 @@
       "minecraft:lake_lava_underground",
       "minecraft:lake_lava_surface"
     ],
-    [],
+    [
+      "minecraft:forest_rock"
+    ],
     [],
     [],
     [],
@@ -64,6 +66,8 @@
     ],
     [
       "minecraft:glow_lichen",
+      "minecraft:patch_large_fern",
+      "minecraft:patch_grass_taiga_2",
       "minecraft:brown_mushroom_normal",
       "minecraft:red_mushroom_normal",
       "minecraft:patch_sugar_cane",

@@ -13,6 +13,7 @@ import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.levelgen.VerticalAnchor;
 import net.minecraft.world.level.levelgen.feature.ConfiguredFeature;
+import net.minecraft.world.level.levelgen.heightproviders.VeryBiasedToBottomHeight;
 import net.minecraft.world.level.levelgen.placement.*;
 
 import javax.annotation.Nullable;
@@ -47,6 +48,10 @@ public class ModPlacedFeatures {
     public static final ResourceKey<PlacedFeature> EXOSKELETON_ORE_PLACED = createKey("exoskeleton_ore_placed");
     public static final ResourceKey<PlacedFeature> LUSH_EXOSKELETON_ORE_PLACED = createKey("lush_exoskeleton_ore_placed");
 
+    //MISC
+    public static final ResourceKey<PlacedFeature> LAKE_LAVA_VOLCANIC = createKey("lake_lava_volcanic");
+    public static final ResourceKey<PlacedFeature> SPRING_LAVA_VOLCANIC = createKey("spring_lava_volcanic");
+
     public static void bootstrap(BootstapContext<PlacedFeature> context) {
         HolderGetter<ConfiguredFeature<?, ?>> configured = context.lookup(Registries.CONFIGURED_FEATURE);
 
@@ -69,10 +74,11 @@ public class ModPlacedFeatures {
         register(context, WHITE_MUSHROOM_COMMON, configured.getOrThrow(ModConfiguredFeatures.PATCH_WHITE_MUSHROOM), mushroomPlacement(4, CountPlacement.of(3)));
         register(context, WHITE_MUSHROOM_RARE, configured.getOrThrow(ModConfiguredFeatures.PATCH_WHITE_MUSHROOM), mushroomPlacement(128, null));
 
-        register(context, EXOSKELETON_ORE_PLACED, configured.getOrThrow(ModConfiguredFeatures.OVERWORLD_EXOSKELETON_ORE_KEY),
-                rareOrePlacement(1, HeightRangePlacement.triangle(VerticalAnchor.aboveBottom(-80), VerticalAnchor.aboveBottom(80))));
-        register(context, LUSH_EXOSKELETON_ORE_PLACED, configured.getOrThrow(ModConfiguredFeatures.OVERWORLD_EXOSKELETON_ORE_KEY),
-                commonOrePlacement(10, HeightRangePlacement.uniform(VerticalAnchor.bottom(), VerticalAnchor.absolute(64))));
+        register(context, EXOSKELETON_ORE_PLACED, configured.getOrThrow(ModConfiguredFeatures.OVERWORLD_EXOSKELETON_ORE_KEY), rareOrePlacement(1, HeightRangePlacement.triangle(VerticalAnchor.aboveBottom(-80), VerticalAnchor.aboveBottom(80))));
+        register(context, LUSH_EXOSKELETON_ORE_PLACED, configured.getOrThrow(ModConfiguredFeatures.OVERWORLD_EXOSKELETON_ORE_KEY), commonOrePlacement(10, HeightRangePlacement.uniform(VerticalAnchor.bottom(), VerticalAnchor.absolute(64))));
+
+        register(context, LAKE_LAVA_VOLCANIC, configured.getOrThrow(ModConfiguredFeatures.LAKE_LAVA_VOLCANIC), List.of(RarityFilter.onAverageOnceEvery(4), InSquarePlacement.spread(), PlacementUtils.HEIGHTMAP_WORLD_SURFACE, BiomeFilter.biome()));
+        register(context, SPRING_LAVA_VOLCANIC, configured.getOrThrow(ModConfiguredFeatures.SPRING_LAVA_VOLCANIC), List.of(CountPlacement.of(20), InSquarePlacement.spread(), HeightRangePlacement.of(VeryBiasedToBottomHeight.of(VerticalAnchor.bottom(), VerticalAnchor.belowTop(8), 8)), BiomeFilter.biome()));
     }
 
     private static List<PlacementModifier> mushroomPlacement(int rarity, @Nullable PlacementModifier pPlacement) {
@@ -95,8 +101,7 @@ public class ModPlacedFeatures {
         return ResourceKey.create(Registries.PLACED_FEATURE, new ResourceLocation(SlayersBeasts.MOD_ID, name));
     }
 
-    private static void register(BootstapContext<PlacedFeature> context, ResourceKey<PlacedFeature> key,
-                                 Holder<ConfiguredFeature<?, ?>> config, List<PlacementModifier> modifiers) {
+    private static void register(BootstapContext<PlacedFeature> context, ResourceKey<PlacedFeature> key, Holder<ConfiguredFeature<?, ?>> config, List<PlacementModifier> modifiers) {
         context.register(key, new PlacedFeature(config, List.copyOf(modifiers)));
     }
 }

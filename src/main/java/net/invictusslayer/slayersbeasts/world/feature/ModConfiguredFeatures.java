@@ -12,6 +12,7 @@ import net.invictusslayer.slayersbeasts.world.feature.trunkplacer.ButtressTrunkP
 import net.invictusslayer.slayersbeasts.world.feature.trunkplacer.ColossalTrunkPlacer;
 import net.invictusslayer.slayersbeasts.world.feature.trunkplacer.CrossTrunkPlacer;
 import net.minecraft.core.HolderGetter;
+import net.minecraft.core.HolderSet;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.data.worldgen.BootstapContext;
 import net.minecraft.data.worldgen.features.FeatureUtils;
@@ -21,10 +22,12 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.util.valueproviders.ConstantInt;
 import net.minecraft.util.valueproviders.UniformInt;
+import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.HugeMushroomBlock;
 import net.minecraft.world.level.levelgen.feature.ConfiguredFeature;
 import net.minecraft.world.level.levelgen.feature.Feature;
+import net.minecraft.world.level.levelgen.feature.LakeFeature;
 import net.minecraft.world.level.levelgen.feature.WeightedPlacedFeature;
 import net.minecraft.world.level.levelgen.feature.configurations.*;
 import net.minecraft.world.level.levelgen.feature.featuresize.TwoLayersFeatureSize;
@@ -38,6 +41,7 @@ import net.minecraft.world.level.levelgen.feature.trunkplacers.GiantTrunkPlacer;
 import net.minecraft.world.level.levelgen.feature.trunkplacers.StraightTrunkPlacer;
 import net.minecraft.world.level.levelgen.placement.PlacedFeature;
 import net.minecraft.world.level.levelgen.structure.templatesystem.TagMatchTest;
+import net.minecraft.world.level.material.Fluids;
 
 import java.util.List;
 import java.util.function.Supplier;
@@ -67,6 +71,10 @@ public class ModConfiguredFeatures {
 
     //ORE
     public static final ResourceKey<ConfiguredFeature<?, ?>> OVERWORLD_EXOSKELETON_ORE_KEY = registerKey("overworld_exoskeleton_ore");
+
+    //MISC
+    public static final ResourceKey<ConfiguredFeature<?, ?>> LAKE_LAVA_VOLCANIC = registerKey("lake_lava_volcanic");
+    public static final ResourceKey<ConfiguredFeature<?, ?>> SPRING_LAVA_VOLCANIC = registerKey("spring_lava_volcanic");
 
     public static final Supplier<List<OreConfiguration.TargetBlockState>> OVERWORLD_EXOSKELETON_ORES = Suppliers.memoize(() -> List.of(
             OreConfiguration.target(new TagMatchTest(BlockTags.STONE_ORE_REPLACEABLES), ModBlocks.EXOSKELETON_ORE.get().defaultBlockState()),
@@ -100,7 +108,7 @@ public class ModConfiguredFeatures {
                 BlockStateProvider.simple(ModBlocks.REDWOOD_LEAVES.get()), new MegaPineFoliagePlacer(ConstantInt.of(0), ConstantInt.of(0), UniformInt.of(13, 17)), new TwoLayersFeatureSize(1, 0, 2)).build());
         register(context, COLOSSAL_REDWOOD, Feature.TREE, new TreeConfiguration.TreeConfigurationBuilder(
                 BlockStateProvider.simple(ModBlocks.REDWOOD_LOG.get()), new ColossalTrunkPlacer(32, 15, 15),
-                BlockStateProvider.simple(ModBlocks.REDWOOD_LEAVES.get()), new UltraRedwoodFoliagePlacer(ConstantInt.of(2), ConstantInt.of(0), UniformInt.of(19, 30)), new TwoLayersFeatureSize(1, 0, 2)).build());
+                BlockStateProvider.simple(ModBlocks.REDWOOD_LEAVES.get()), new UltraRedwoodFoliagePlacer(ConstantInt.of(2), ConstantInt.of(0), UniformInt.of(25, 35)), new TwoLayersFeatureSize(1, 0, 2)).build());
         register(context, PETRIFIED_TREE, Feature.TREE, new TreeConfiguration.TreeConfigurationBuilder(
                 BlockStateProvider.simple(Blocks.STONE), new StraightTrunkPlacer(5, 2, 2),
                 BlockStateProvider.simple(Blocks.TUFF), new BlobFoliagePlacer(ConstantInt.of(2), ConstantInt.of(0), 3), new TwoLayersFeatureSize(1, 0, 2)).build());
@@ -110,14 +118,17 @@ public class ModConfiguredFeatures {
 
         register(context, TREES_ASPEN, Feature.RANDOM_SELECTOR, new RandomFeatureConfiguration(List.of(new WeightedPlacedFeature(placed.getOrThrow(ModPlacedFeatures.ASPEN_CHECKED), 0.5F)), placed.getOrThrow(ModPlacedFeatures.ASPEN_CHECKED)));
         register(context, TREES_INKY, Feature.RANDOM_SELECTOR, new RandomFeatureConfiguration(List.of(new WeightedPlacedFeature(placed.getOrThrow(ModPlacedFeatures.CAJOLE_CHECKED), 0.5F)), placed.getOrThrow(ModPlacedFeatures.CAJOLE_CHECKED)));
-        register(context, TREES_RAINFOREST, Feature.RANDOM_SELECTOR, new RandomFeatureConfiguration(List.of(new WeightedPlacedFeature(placed.getOrThrow(ModPlacedFeatures.KAPOK_CHECKED), 0.3F)), placed.getOrThrow(ModPlacedFeatures.CAJOLE_CHECKED)));
+        register(context, TREES_RAINFOREST, Feature.RANDOM_SELECTOR, new RandomFeatureConfiguration(List.of(new WeightedPlacedFeature(placed.getOrThrow(ModPlacedFeatures.KAPOK_CHECKED), 0.2F)), placed.getOrThrow(ModPlacedFeatures.CAJOLE_CHECKED)));
         register(context, TREES_EUCALYPT, Feature.RANDOM_SELECTOR, new RandomFeatureConfiguration(List.of(new WeightedPlacedFeature(placed.getOrThrow(ModPlacedFeatures.EUCALYPTUS_CHECKED), 0.5F)), placed.getOrThrow(ModPlacedFeatures.EUCALYPTUS_CHECKED)));
         register(context, TREES_OUTBACK, Feature.RANDOM_SELECTOR, new RandomFeatureConfiguration(List.of(new WeightedPlacedFeature(placed.getOrThrow(ModPlacedFeatures.DESERT_OAK_CHECKED), 0.5F)), placed.getOrThrow(ModPlacedFeatures.EUCALYPTUS_CHECKED)));
-        register(context, TREES_REDWOOD, Feature.RANDOM_SELECTOR, new RandomFeatureConfiguration(List.of(new WeightedPlacedFeature(placed.getOrThrow(ModPlacedFeatures.REDWOOD_CHECKED), 0.5F)), placed.getOrThrow(ModPlacedFeatures.REDWOOD_CHECKED)));
+        register(context, TREES_REDWOOD, Feature.RANDOM_SELECTOR, new RandomFeatureConfiguration(List.of(new WeightedPlacedFeature(placed.getOrThrow(ModPlacedFeatures.GIANT_REDWOOD_CHECKED), 0.2F), new WeightedPlacedFeature(PlacementUtils.inlinePlaced(configured.getOrThrow(ModConfiguredFeatures.HUGE_WHITE_MUSHROOM)), 0.05F)), placed.getOrThrow(ModPlacedFeatures.REDWOOD_CHECKED)));
         register(context, TREES_OLD_GROWTH_REDWOOD, Feature.RANDOM_SELECTOR, new RandomFeatureConfiguration(List.of(new WeightedPlacedFeature(placed.getOrThrow(ModPlacedFeatures.GIANT_REDWOOD_CHECKED), 0.3F), new WeightedPlacedFeature(PlacementUtils.inlinePlaced(configured.getOrThrow(ModConfiguredFeatures.HUGE_WHITE_MUSHROOM)), 0.05F)), placed.getOrThrow(ModPlacedFeatures.COLOSSAL_REDWOOD_CHECKED)));
         register(context, PATCH_WHITE_MUSHROOM, Feature.RANDOM_PATCH, FeatureUtils.simplePatchConfiguration(Feature.SIMPLE_BLOCK, new SimpleBlockConfiguration(BlockStateProvider.simple(ModBlocks.WHITE_MUSHROOM.get()))));
 
         register(context, OVERWORLD_EXOSKELETON_ORE_KEY, Feature.ORE, new OreConfiguration(OVERWORLD_EXOSKELETON_ORES.get(), 3));
+
+        register(context, LAKE_LAVA_VOLCANIC, Feature.LAKE, new LakeFeature.Configuration(BlockStateProvider.simple(Blocks.LAVA.defaultBlockState()), BlockStateProvider.simple(Blocks.MAGMA_BLOCK.defaultBlockState())));
+        register(context, SPRING_LAVA_VOLCANIC, Feature.SPRING, new SpringConfiguration(Fluids.LAVA.defaultFluidState(), true, 4, 1, HolderSet.direct(Block::builtInRegistryHolder, Blocks.BASALT, Blocks.MAGMA_BLOCK, Blocks.SMOOTH_BASALT, Blocks.BLACKSTONE, Blocks.OBSIDIAN)));
     }
 
     public static ResourceKey<ConfiguredFeature<?, ?>> registerKey(String name) {
