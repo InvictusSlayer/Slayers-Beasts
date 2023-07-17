@@ -22,7 +22,7 @@ public class UltraRedwoodFoliagePlacer extends FoliagePlacer {
     }
 
     protected FoliagePlacerType<?> type() {
-        return ModFoliagePlacers.ULTRA_REDWOOD_FOLIAGE_PLACER.get();
+        return SBFoliagePlacers.ULTRA_REDWOOD_FOLIAGE_PLACER.get();
     }
 
     protected void createFoliage(LevelSimulatedReader pLevel, FoliageSetter pBlockSetter, RandomSource pRandom, TreeConfiguration pConfig, int pMaxFreeTreeHeight, FoliageAttachment pAttachment, int pFoliageHeight, int pFoliageRadius, int pOffset) {

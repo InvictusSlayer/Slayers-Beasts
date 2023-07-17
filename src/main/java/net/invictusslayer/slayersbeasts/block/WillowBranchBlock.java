@@ -28,7 +28,7 @@ public class WillowBranchBlock extends GrowingPlantHeadBlock {
     }
 
     protected Block getBodyBlock() {
-        return ModBlocks.WILLOW_BRANCH_PLANT.get();
+        return SBBlocks.WILLOW_BRANCH_PLANT.get();
     }
 
     public BlockState getMaxAgeState(BlockState pState) {

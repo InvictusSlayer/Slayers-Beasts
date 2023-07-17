@@ -1,6 +1,6 @@
 package net.invictusslayer.slayersbeasts.block;
 
-import net.invictusslayer.slayersbeasts.datagen.tags.ModTags;
+import net.invictusslayer.slayersbeasts.datagen.tags.SBTags;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.particles.ParticleTypes;
@@ -69,7 +69,7 @@ public class PeatBlock extends FallingBlock {
                     return Shapes.box(0.0D, 0.0D, 0.0D, 1.0D, 0.9D, 1.0D);
                 }
 
-                if (entity.getType().is(ModTags.EntityTypes.PEAT_WALKABLE_MOBS) && pContext.isAbove(Shapes.block(), pPos, false) && !pContext.isDescending()) {
+                if (entity.getType().is(SBTags.EntityTypes.PEAT_WALKABLE_MOBS) && pContext.isAbove(Shapes.block(), pPos, false) && !pContext.isDescending()) {
                     return super.getCollisionShape(pState, pLevel, pPos, pContext);
                 }
             }

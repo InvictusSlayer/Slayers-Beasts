@@ -4,8 +4,8 @@ import net.invictusslayer.slayersbeasts.block.AnthillBlock;
 import net.invictusslayer.slayersbeasts.entity.AbstractAnt;
 import net.invictusslayer.slayersbeasts.entity.QueenAnt;
 import net.invictusslayer.slayersbeasts.entity.SoldierAnt;
-import net.invictusslayer.slayersbeasts.block.ModBlocks;
-import net.invictusslayer.slayersbeasts.datagen.tags.ModTags;
+import net.invictusslayer.slayersbeasts.block.SBBlocks;
+import net.invictusslayer.slayersbeasts.datagen.tags.SBTags;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.ListTag;
@@ -34,7 +34,7 @@ public class AnthillBlockEntity extends BlockEntity {
     private boolean hasQueen;
 
     public AnthillBlockEntity(BlockPos pPos, BlockState pBlockState) {
-        super(ModBlockEntities.ANTHILL_BLOCK_ENTITY.get(), pPos, pBlockState);
+        super(SBBlockEntities.ANTHILL_BLOCK_ENTITY.get(), pPos, pBlockState);
         this.inhabitantType = 99;
     }
 
@@ -155,7 +155,7 @@ public class AnthillBlockEntity extends BlockEntity {
         if (level.getGameTime() % 200 == 0) {
             int blockType = 1;
 
-            List<BlockPos> list = blockEntity.scanNest(level, pos, null, ModTags.Blocks.ANTHILLS);
+            List<BlockPos> list = blockEntity.scanNest(level, pos, null, SBTags.Blocks.ANTHILLS);
             Set<BlockPos> set = blockEntity.nestUpgrades.keySet();
 
             for (BlockPos pos1 : list) {
@@ -191,14 +191,14 @@ public class AnthillBlockEntity extends BlockEntity {
     private void upgradeNest(Level level, BlockPos nestPos, BlockState blockState, int upgradeType) {
         Block block = null;
 
-        List<BlockPos> posList = scanNest(level, nestPos, ModBlocks.ANT_SOIL.get(), null);
+        List<BlockPos> posList = scanNest(level, nestPos, SBBlocks.ANT_SOIL.get(), null);
         if (posList.isEmpty() || nestUpgrades.size() > 5) return;
 
         BlockPos blockPos = posList.get(level.random.nextInt(posList.size()));
         if (upgradeType == 1) {
-            block = ModBlocks.ANTHILL_HATCHERY.get();
+            block = SBBlocks.ANTHILL_HATCHERY.get();
         } else if (upgradeType == 99) {
-            block = ModBlocks.ANT_SOIL.get();
+            block = SBBlocks.ANT_SOIL.get();
         }
 
         if (block != null) {
@@ -213,11 +213,11 @@ public class AnthillBlockEntity extends BlockEntity {
     }
 
     private void expandNest(Level level, BlockPos nestPos, BlockState blockState) {
-        List<BlockPos> posList = scanNest(level, nestPos, null, ModTags.Blocks.ANTHILL_REPLACEABLE);
+        List<BlockPos> posList = scanNest(level, nestPos, null, SBTags.Blocks.ANTHILL_REPLACEABLE);
         if (posList.isEmpty()) return;
 
         BlockPos blockPos = posList.get(level.random.nextInt(posList.size()));
-        level.setBlockAndUpdate(blockPos, ModBlocks.ANT_SOIL.get().defaultBlockState());
+        level.setBlockAndUpdate(blockPos, SBBlocks.ANT_SOIL.get().defaultBlockState());
         level.setBlock(nestPos, blockState.setValue(AnthillBlock.SUPPLY_LEVEL, getSupplyLevel(blockState) - 3), 3);
         setChanged(level, nestPos, blockState);
     }
@@ -285,7 +285,7 @@ public class AnthillBlockEntity extends BlockEntity {
         if (entity == null) {
             return false;
         }
-        if (!entity.getType().is(ModTags.EntityTypes.ANTHILL_INHABITANTS)) {
+        if (!entity.getType().is(SBTags.EntityTypes.ANTHILL_INHABITANTS)) {
             return false;
         }
         if (releaseStatus == AntReleaseStatus.PATROLLING && !(entity instanceof SoldierAnt)) {
@@ -297,14 +297,14 @@ public class AnthillBlockEntity extends BlockEntity {
                 int cargo = ant.getCargoType();
                 ant.setCargoType(99);
                 if (cargo == 1) {
-                    if (state.is(ModTags.Blocks.ANTHILLS, stateBase -> stateBase.hasProperty(AnthillBlock.FUNGUS_LEVEL))) {
+                    if (state.is(SBTags.Blocks.ANTHILLS, stateBase -> stateBase.hasProperty(AnthillBlock.FUNGUS_LEVEL))) {
                         int i = getFungusLevel(state);
                         if (i < 8) {
                             level.setBlockAndUpdate(pos, state.setValue(AnthillBlock.FUNGUS_LEVEL, i + 1));
                         }
                     }
                 } else if (cargo == 2) {
-                    if (state.is(ModTags.Blocks.ANTHILLS, stateBase -> stateBase.hasProperty(AnthillBlock.SUPPLY_LEVEL))) {
+                    if (state.is(SBTags.Blocks.ANTHILLS, stateBase -> stateBase.hasProperty(AnthillBlock.SUPPLY_LEVEL))) {
                         int i = getSupplyLevel(state);
                         if (i < 15) {
                             level.setBlockAndUpdate(pos, state.setValue(AnthillBlock.SUPPLY_LEVEL, i + 1));

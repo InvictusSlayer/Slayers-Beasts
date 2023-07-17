@@ -1,10 +1,10 @@
 package net.invictusslayer.slayersbeasts.datagen;
 
 import net.invictusslayer.slayersbeasts.SlayersBeasts;
-import net.invictusslayer.slayersbeasts.datagen.tags.ModBlockTagsProvider;
-import net.invictusslayer.slayersbeasts.datagen.tags.ModEntityTagsProvider;
-import net.invictusslayer.slayersbeasts.datagen.tags.ModItemTagsProvider;
-import net.invictusslayer.slayersbeasts.datagen.tags.ModPoiTagsProvider;
+import net.invictusslayer.slayersbeasts.datagen.tags.SBBlockTagsProvider;
+import net.invictusslayer.slayersbeasts.datagen.tags.SBEntityTagsProvider;
+import net.invictusslayer.slayersbeasts.datagen.tags.SBItemTagsProvider;
+import net.invictusslayer.slayersbeasts.datagen.tags.SBPoiTagsProvider;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.data.PackOutput;
@@ -24,17 +24,17 @@ public class DataGenerators {
         CompletableFuture<HolderLookup.Provider> lookupProvider = event.getLookupProvider();
         ExistingFileHelper existingFileHelper = event.getExistingFileHelper();
 
-        ModBlockTagsProvider blockTags = new ModBlockTagsProvider(packOutput, lookupProvider, existingFileHelper);
+        SBBlockTagsProvider blockTags = new SBBlockTagsProvider(packOutput, lookupProvider, existingFileHelper);
 
         generator.addProvider(true, blockTags);
-        generator.addProvider(true, new ModItemTagsProvider(packOutput, lookupProvider, blockTags, existingFileHelper));
-        generator.addProvider(true, new ModEntityTagsProvider(packOutput, lookupProvider, existingFileHelper));
-        generator.addProvider(true, new ModPoiTagsProvider(packOutput, lookupProvider, existingFileHelper));
-        generator.addProvider(true, new ModRecipeProvider(packOutput));
-        generator.addProvider(true, ModLootTableProvider.create(packOutput));
-        generator.addProvider(true, new ModBlockStateProvider(packOutput, existingFileHelper));
-        generator.addProvider(true, new ModItemModelProvider(packOutput, existingFileHelper));
+        generator.addProvider(true, new SBItemTagsProvider(packOutput, lookupProvider, blockTags, existingFileHelper));
+        generator.addProvider(true, new SBEntityTagsProvider(packOutput, lookupProvider, existingFileHelper));
+        generator.addProvider(true, new SBPoiTagsProvider(packOutput, lookupProvider, existingFileHelper));
+        generator.addProvider(true, new SBRecipeProvider(packOutput));
+        generator.addProvider(true, SBLootTableProvider.create(packOutput));
+        generator.addProvider(true, new SBBlockStateProvider(packOutput, existingFileHelper));
+        generator.addProvider(true, new SBItemModelProvider(packOutput, existingFileHelper));
 
-        generator.addProvider(event.includeServer(), new ModWorldGenProvider(packOutput, lookupProvider));
+        generator.addProvider(event.includeServer(), new SBWorldGenProvider(packOutput, lookupProvider));
     }
 }

@@ -2,7 +2,7 @@ package net.invictusslayer.slayersbeasts.block;
 
 import net.invictusslayer.slayersbeasts.block.entity.AnthillBlockEntity;
 import net.invictusslayer.slayersbeasts.block.entity.AnthillHatcheryBlockEntity;
-import net.invictusslayer.slayersbeasts.block.entity.ModBlockEntities;
+import net.invictusslayer.slayersbeasts.block.entity.SBBlockEntities;
 import net.invictusslayer.slayersbeasts.entity.SoldierAnt;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.entity.player.Player;
@@ -42,7 +42,7 @@ public class AnthillHatcheryBlock extends BaseEntityBlock {
 
     @Nullable
     public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level pLevel, BlockState pState, BlockEntityType<T> pBlockEntityType) {
-        return createTickerHelper(pBlockEntityType, ModBlockEntities.ANTHILL_HATCHERY_BLOCK_ENTITY.get(), AnthillHatcheryBlockEntity::serverTick);
+        return createTickerHelper(pBlockEntityType, SBBlockEntities.ANTHILL_HATCHERY_BLOCK_ENTITY.get(), AnthillHatcheryBlockEntity::serverTick);
     }
 
     public RenderShape getRenderShape(BlockState pState) {

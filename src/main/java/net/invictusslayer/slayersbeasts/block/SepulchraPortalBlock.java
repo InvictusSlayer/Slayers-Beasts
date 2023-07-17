@@ -1,8 +1,8 @@
 package net.invictusslayer.slayersbeasts.block;
 
-import net.invictusslayer.slayersbeasts.datagen.tags.ModTags;
-import net.invictusslayer.slayersbeasts.world.dimension.ModDimensions;
-import net.invictusslayer.slayersbeasts.world.dimension.portal.ModPortalForcer;
+import net.invictusslayer.slayersbeasts.datagen.tags.SBTags;
+import net.invictusslayer.slayersbeasts.world.dimension.SBDimensions;
+import net.invictusslayer.slayersbeasts.world.dimension.portal.SBPortalForcer;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.resources.ResourceKey;
@@ -114,14 +114,14 @@ public class SepulchraPortalBlock extends Block {
                 Level entityWorld = entity.level();
                 if (entityWorld != null) {
                     MinecraftServer minecraftserver = entityWorld.getServer();
-                    ResourceKey<Level> destination = entity.level().dimension() == ModDimensions.SEPULCHRA_KEY
-                            ? Level.OVERWORLD : ModDimensions.SEPULCHRA_KEY;
+                    ResourceKey<Level> destination = entity.level().dimension() == SBDimensions.SEPULCHRA_KEY
+                            ? Level.OVERWORLD : SBDimensions.SEPULCHRA_KEY;
                     if (minecraftserver != null) {
                         ServerLevel destinationWorld = minecraftserver.getLevel(destination);
                         if (destinationWorld != null && minecraftserver.isNetherEnabled() && !entity.isPassenger()) {
                             entity.level().getProfiler().push("sepulchra_portal");
                             entity.setPortalCooldown();
-                            entity.changeDimension(destinationWorld, new ModPortalForcer(destinationWorld));
+                            entity.changeDimension(destinationWorld, new SBPortalForcer(destinationWorld));
                             entity.level().getProfiler().pop();
                         }
                     }
@@ -230,13 +230,13 @@ public class SepulchraPortalBlock extends Block {
             for (i = 0; i < 22; ++i) {
                 BlockPos blockpos = pos.relative(directionIn, i);
                 if (!this.canConnect(this.level.getBlockState(blockpos)) ||
-                        !(this.level.getBlockState(blockpos.below()).is(ModTags.Blocks.SEPULCHRA_PORTAL_FRAME))) {
+                        !(this.level.getBlockState(blockpos.below()).is(SBTags.Blocks.SEPULCHRA_PORTAL_FRAME))) {
                     break;
                 }
             }
 
             BlockPos framePos = pos.relative(directionIn, i);
-            return this.level.getBlockState(framePos).is(ModTags.Blocks.SEPULCHRA_PORTAL_FRAME) ? i : 0;
+            return this.level.getBlockState(framePos).is(SBTags.Blocks.SEPULCHRA_PORTAL_FRAME) ? i : 0;
         }
 
         protected int calculatePortalHeight() {
@@ -250,18 +250,18 @@ public class SepulchraPortalBlock extends Block {
                     }
 
                     Block block = blockstate.getBlock();
-                    if (block == ModBlocks.SEPULCHRA_PORTAL.get()) {
+                    if (block == SBBlocks.SEPULCHRA_PORTAL.get()) {
                         ++this.portalBlockCount;
                     }
 
                     if (i == 0) {
                         BlockPos framePos = blockpos.relative(this.leftDir);
-                        if (!(this.level.getBlockState(framePos).is(ModTags.Blocks.SEPULCHRA_PORTAL_FRAME))) {
+                        if (!(this.level.getBlockState(framePos).is(SBTags.Blocks.SEPULCHRA_PORTAL_FRAME))) {
                             break label56;
                         }
                     } else if (i == this.width - 1) {
                         BlockPos framePos = blockpos.relative(this.rightDir);
-                        if (!(this.level.getBlockState(framePos).is(ModTags.Blocks.SEPULCHRA_PORTAL_FRAME))) {
+                        if (!(this.level.getBlockState(framePos).is(SBTags.Blocks.SEPULCHRA_PORTAL_FRAME))) {
                             break label56;
                         }
                     }
@@ -270,7 +270,7 @@ public class SepulchraPortalBlock extends Block {
 
             for (int j = 0; j < this.width; ++j) {
                 BlockPos framePos = this.bottomLeft.relative(this.rightDir, j).above(this.height);
-                if (!(this.level.getBlockState(framePos).is(ModTags.Blocks.SEPULCHRA_PORTAL_FRAME))) {
+                if (!(this.level.getBlockState(framePos).is(SBTags.Blocks.SEPULCHRA_PORTAL_FRAME))) {
                     this.height = 0;
                     break;
                 }
@@ -288,7 +288,7 @@ public class SepulchraPortalBlock extends Block {
 
         protected boolean canConnect(BlockState pos) {
             Block block = pos.getBlock();
-            return pos.isAir() || block == ModBlocks.SEPULCHRA_PORTAL.get();
+            return pos.isAir() || block == SBBlocks.SEPULCHRA_PORTAL.get();
         }
 
         public boolean isValid() {
@@ -300,7 +300,7 @@ public class SepulchraPortalBlock extends Block {
                 BlockPos blockpos = this.bottomLeft.relative(this.rightDir, i);
 
                 for (int j = 0; j < this.height; ++j) {
-                    this.level.setBlock(blockpos.above(j), ModBlocks.SEPULCHRA_PORTAL.get().defaultBlockState().setValue(SepulchraPortalBlock.AXIS, this.axis), 18);
+                    this.level.setBlock(blockpos.above(j), SBBlocks.SEPULCHRA_PORTAL.get().defaultBlockState().setValue(SepulchraPortalBlock.AXIS, this.axis), 18);
                 }
             }
 

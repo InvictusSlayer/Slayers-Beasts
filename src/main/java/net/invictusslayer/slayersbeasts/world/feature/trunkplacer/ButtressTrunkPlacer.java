@@ -26,7 +26,7 @@ public class ButtressTrunkPlacer extends GiantTrunkPlacer {
     }
 
     protected TrunkPlacerType<?> type() {
-        return ModTrunkPlacers.BUTTRESS_TRUNK_PLACER.get();
+        return SBTrunkPlacers.BUTTRESS_TRUNK_PLACER.get();
     }
 
     public List<FoliagePlacer.FoliageAttachment> placeTrunk(LevelSimulatedReader pLevel, BiConsumer<BlockPos, BlockState> pBlockSetter, RandomSource pRandom, int pFreeTreeHeight, BlockPos pPos, TreeConfiguration pConfig) {

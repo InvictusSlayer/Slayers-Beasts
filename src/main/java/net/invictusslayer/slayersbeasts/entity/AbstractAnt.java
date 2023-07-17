@@ -2,7 +2,7 @@ package net.invictusslayer.slayersbeasts.entity;
 
 import com.google.common.collect.Lists;
 import net.invictusslayer.slayersbeasts.block.entity.AnthillBlockEntity;
-import net.invictusslayer.slayersbeasts.datagen.tags.ModTags;
+import net.invictusslayer.slayersbeasts.datagen.tags.SBTags;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Holder;
 import net.minecraft.nbt.CompoundTag;
@@ -236,7 +236,7 @@ public abstract class AbstractAnt extends PathfinderMob {
 
         public boolean canUse() {
             return mob.nestPos != null && !mob.hasRestriction() && mob.wantsToEnterNest(mob) && mob.nestHasSpace(mob.nestPos)
-                    && !this.hasReachedTarget(mob.nestPos) && mob.level().getBlockState(mob.nestPos).is(ModTags.Blocks.ANTHILLS);
+                    && !this.hasReachedTarget(mob.nestPos) && mob.level().getBlockState(mob.nestPos).is(SBTags.Blocks.ANTHILLS);
         }
 
         public boolean canContinueToUse() {
@@ -376,7 +376,7 @@ public abstract class AbstractAnt extends PathfinderMob {
             BlockPos blockPos = mob.blockPosition();
             PoiManager poiManager = ((ServerLevel) mob.level()).getPoiManager();
             Stream<PoiRecord> stream = poiManager.getInRange(poiType ->
-                    poiType.is(ModTags.PoiTypes.ANT_HOME), blockPos, 20, PoiManager.Occupancy.ANY);
+                    poiType.is(SBTags.PoiTypes.ANT_HOME), blockPos, 20, PoiManager.Occupancy.ANY);
             return stream.map(PoiRecord::getPos).filter(mob::nestHasSpace).sorted(Comparator.comparingDouble(key ->
                     key.distSqr(blockPos))).collect(Collectors.toList());
         }

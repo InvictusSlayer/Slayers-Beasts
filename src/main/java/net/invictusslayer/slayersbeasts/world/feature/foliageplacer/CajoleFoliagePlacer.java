@@ -19,7 +19,7 @@ public class CajoleFoliagePlacer extends FoliagePlacer {
     }
 
     protected FoliagePlacerType<?> type() {
-        return ModFoliagePlacers.CAJOLE_FOLIAGE_PLACER.get();
+        return SBFoliagePlacers.CAJOLE_FOLIAGE_PLACER.get();
     }
 
     protected void createFoliage(LevelSimulatedReader pLevel, FoliageSetter pBlockSetter, RandomSource pRandom, TreeConfiguration pConfig, int pMaxFreeTreeHeight, FoliageAttachment pAttachment, int pFoliageHeight, int pFoliageRadius, int pOffset) {

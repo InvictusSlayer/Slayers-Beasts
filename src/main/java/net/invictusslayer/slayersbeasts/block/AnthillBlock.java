@@ -1,7 +1,7 @@
 package net.invictusslayer.slayersbeasts.block;
 
 import net.invictusslayer.slayersbeasts.block.entity.AnthillBlockEntity;
-import net.invictusslayer.slayersbeasts.block.entity.ModBlockEntities;
+import net.invictusslayer.slayersbeasts.block.entity.SBBlockEntities;
 import net.invictusslayer.slayersbeasts.entity.SoldierAnt;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
@@ -60,7 +60,7 @@ public class AnthillBlock extends BaseEntityBlock {
 
     @Nullable
     public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level pLevel, BlockState pState, BlockEntityType<T> pBlockEntityType) {
-        return createTickerHelper(pBlockEntityType, ModBlockEntities.ANTHILL_BLOCK_ENTITY.get(), AnthillBlockEntity::serverTick);
+        return createTickerHelper(pBlockEntityType, SBBlockEntities.ANTHILL_BLOCK_ENTITY.get(), AnthillBlockEntity::serverTick);
     }
 
     public RenderShape getRenderShape(BlockState pState) {
@@ -68,7 +68,7 @@ public class AnthillBlock extends BaseEntityBlock {
     }
 
     public static void dropMushroom(Level pLevel, BlockPos pPos) {
-        popResource(pLevel, pPos, new ItemStack(ModBlocks.WHITE_MUSHROOM.get(), pLevel.random.nextInt(1, 4)));
+        popResource(pLevel, pPos, new ItemStack(SBBlocks.WHITE_MUSHROOM.get(), pLevel.random.nextInt(1, 4)));
     }
 
     public void angerNearbyAnts(Level level, BlockPos pos) {
@@ -101,9 +101,9 @@ public class AnthillBlock extends BaseEntityBlock {
             } else if (handItem.is(Items.DIRT)) {
                 handItem.shrink(1);
                 if (handItem.isEmpty()) {
-                    pPlayer.setItemInHand(pHand, new ItemStack(ModBlocks.ANT_SOIL.get()));
-                } else if (!pPlayer.getInventory().add(new ItemStack(ModBlocks.ANT_SOIL.get()))) {
-                    pPlayer.drop(new ItemStack(ModBlocks.ANT_SOIL.get()), false);
+                    pPlayer.setItemInHand(pHand, new ItemStack(SBBlocks.ANT_SOIL.get()));
+                } else if (!pPlayer.getInventory().add(new ItemStack(SBBlocks.ANT_SOIL.get()))) {
+                    pPlayer.drop(new ItemStack(SBBlocks.ANT_SOIL.get()), false);
                 }
 
                 flag = true;
@@ -168,7 +168,7 @@ public class AnthillBlock extends BaseEntityBlock {
                     if (flag) {
                         CompoundTag compoundTag = new CompoundTag();
                         compoundTag.put("Ants", anthillBlockEntity.writeAnts());
-                        BlockItem.setBlockEntityData(itemStack, ModBlockEntities.ANTHILL_BLOCK_ENTITY.get(), compoundTag);
+                        BlockItem.setBlockEntityData(itemStack, SBBlockEntities.ANTHILL_BLOCK_ENTITY.get(), compoundTag);
                     }
 
                     CompoundTag compoundTag1 = new CompoundTag();

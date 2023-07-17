@@ -1,20 +1,20 @@
 package net.invictusslayer.slayersbeasts;
 
-import net.invictusslayer.slayersbeasts.block.ModBlocks;
-import net.invictusslayer.slayersbeasts.block.entity.ModBlockEntities;
-import net.invictusslayer.slayersbeasts.datagen.tags.ModPois;
-import net.invictusslayer.slayersbeasts.effect.ModEffects;
-import net.invictusslayer.slayersbeasts.entity.ModEntities;
-import net.invictusslayer.slayersbeasts.item.ModItems;
-import net.invictusslayer.slayersbeasts.misc.ModBrewingRecipe;
-import net.invictusslayer.slayersbeasts.misc.ModCreativeModeTab;
-import net.invictusslayer.slayersbeasts.misc.ModPotions;
-import net.invictusslayer.slayersbeasts.misc.ModSounds;
+import net.invictusslayer.slayersbeasts.block.SBBlocks;
+import net.invictusslayer.slayersbeasts.block.entity.SBBlockEntities;
+import net.invictusslayer.slayersbeasts.datagen.tags.SBPois;
+import net.invictusslayer.slayersbeasts.effect.SBEffects;
+import net.invictusslayer.slayersbeasts.entity.SBEntities;
+import net.invictusslayer.slayersbeasts.item.SBItems;
+import net.invictusslayer.slayersbeasts.misc.SBBrewingRecipe;
+import net.invictusslayer.slayersbeasts.misc.SBCreativeModeTab;
+import net.invictusslayer.slayersbeasts.misc.SBPotions;
+import net.invictusslayer.slayersbeasts.misc.SBSounds;
 import net.invictusslayer.slayersbeasts.world.biome.*;
-import net.invictusslayer.slayersbeasts.world.dimension.ModDimensions;
-import net.invictusslayer.slayersbeasts.world.feature.ModFeatures;
-import net.invictusslayer.slayersbeasts.world.feature.foliageplacer.ModFoliagePlacers;
-import net.invictusslayer.slayersbeasts.world.feature.trunkplacer.ModTrunkPlacers;
+import net.invictusslayer.slayersbeasts.world.dimension.SBDimensions;
+import net.invictusslayer.slayersbeasts.world.feature.SBFeatures;
+import net.invictusslayer.slayersbeasts.world.feature.foliageplacer.SBFoliagePlacers;
+import net.invictusslayer.slayersbeasts.world.feature.trunkplacer.SBTrunkPlacers;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.alchemy.Potions;
 import net.minecraftforge.common.MinecraftForge;
@@ -35,20 +35,20 @@ public class SlayersBeasts {
     public SlayersBeasts() {
         IEventBus eventBus = FMLJavaModLoadingContext.get().getModEventBus();
 
-        ModCreativeModeTab.register(eventBus);
-        ModItems.register(eventBus);
-        ModBlocks.register(eventBus);
-        ModBlockEntities.register(eventBus);
-        ModEntities.register(eventBus);
-        ModEffects.register(eventBus);
-        ModPotions.register(eventBus);
-        ModSounds.register(eventBus);
-        ModFoliagePlacers.register(eventBus);
-        ModTrunkPlacers.register(eventBus);
-        ModFeatures.register(eventBus);
-        ModPois.register(eventBus);
-        ModBiomes.registerBiomes();
-        ModDimensions.register();
+        SBCreativeModeTab.register(eventBus);
+        SBItems.register(eventBus);
+        SBBlocks.register(eventBus);
+        SBBlockEntities.register(eventBus);
+        SBEntities.register(eventBus);
+        SBEffects.register(eventBus);
+        SBPotions.register(eventBus);
+        SBSounds.register(eventBus);
+        SBFoliagePlacers.register(eventBus);
+        SBTrunkPlacers.register(eventBus);
+        SBFeatures.register(eventBus);
+        SBPois.register(eventBus);
+        SBBiomes.registerBiomes();
+        SBDimensions.register();
 
         eventBus.addListener(this::commonSetup);
         eventBus.addListener(this::clientSetup);
@@ -59,13 +59,13 @@ public class SlayersBeasts {
 
     private void commonSetup(final FMLCommonSetupEvent event) {
         event.enqueueWork(() -> {
-            BrewingRecipeRegistry.addRecipe(new ModBrewingRecipe(Potions.SLOWNESS, ModItems.INSECT_EYE.get(), ModPotions.PARALYSIS_POTION.get()));
-            BrewingRecipeRegistry.addRecipe(new ModBrewingRecipe(Potions.POISON, ModItems.WITHERBONE.get(), ModPotions.WITHER_POTION.get()));
+            BrewingRecipeRegistry.addRecipe(new SBBrewingRecipe(Potions.SLOWNESS, SBItems.INSECT_EYE.get(), SBPotions.PARALYSIS_POTION.get()));
+            BrewingRecipeRegistry.addRecipe(new SBBrewingRecipe(Potions.POISON, SBItems.WITHERBONE.get(), SBPotions.WITHER_POTION.get()));
 
-            Regions.register(new OverworldRegion(new ResourceLocation(MOD_ID, "overworld"), 2));
+            Regions.register(new SBOverworldRegion(new ResourceLocation(MOD_ID, "overworld"), 2));
 
-            SurfaceRuleManager.addSurfaceRules(SurfaceRuleManager.RuleCategory.OVERWORLD, MOD_ID, ModSurfaceRuleData.makeRules());
-            SurfaceRuleManager.addSurfaceRules(SurfaceRuleManager.RuleCategory.NETHER, MOD_ID, ModSurfaceRuleData.makeRules());
+            SurfaceRuleManager.addSurfaceRules(SurfaceRuleManager.RuleCategory.OVERWORLD, MOD_ID, SBSurfaceRuleData.makeRules());
+            SurfaceRuleManager.addSurfaceRules(SurfaceRuleManager.RuleCategory.NETHER, MOD_ID, SBSurfaceRuleData.makeRules());
         });
     }
 

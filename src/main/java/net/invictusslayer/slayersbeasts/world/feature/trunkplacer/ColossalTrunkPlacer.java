@@ -24,7 +24,7 @@ public class ColossalTrunkPlacer extends TrunkPlacer {
     }
 
     protected TrunkPlacerType<?> type() {
-        return ModTrunkPlacers.COLOSSAL_TRUNK_PLACER.get();
+        return SBTrunkPlacers.COLOSSAL_TRUNK_PLACER.get();
     }
 
     public List<FoliagePlacer.FoliageAttachment> placeTrunk(LevelSimulatedReader pLevel, BiConsumer<BlockPos, BlockState> pBlockSetter, RandomSource pRandom, int pFreeTreeHeight, BlockPos pPos, TreeConfiguration pConfig) {

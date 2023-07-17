@@ -14,6 +14,6 @@ public class WillowBranchPlantBlock extends GrowingPlantBodyBlock {
     }
 
     protected GrowingPlantHeadBlock getHeadBlock() {
-        return (GrowingPlantHeadBlock) ModBlocks.WILLOW_BRANCH.get();
+        return (GrowingPlantHeadBlock) SBBlocks.WILLOW_BRANCH.get();
     }
 }

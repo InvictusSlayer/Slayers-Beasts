@@ -8,7 +8,7 @@ import net.minecraft.world.level.block.state.BlockState;
 public class AnthillHatcheryBlockEntity extends BaseAnthillBlockEntity {
 
     public AnthillHatcheryBlockEntity(BlockPos pPos, BlockState pBlockState) {
-        super(ModBlockEntities.ANTHILL_HATCHERY_BLOCK_ENTITY.get(), pPos, pBlockState);
+        super(SBBlockEntities.ANTHILL_HATCHERY_BLOCK_ENTITY.get(), pPos, pBlockState);
     }
 
     public static int getLarvalStage(BlockState state) {

@@ -1,6 +1,6 @@
 package net.invictusslayer.slayersbeasts.block;
 
-import net.invictusslayer.slayersbeasts.entity.ModEntities;
+import net.invictusslayer.slayersbeasts.entity.SBEntities;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.entity.Mob;
@@ -16,7 +16,7 @@ public class OothecaBlock extends Block {
     }
 
     private void spawnInfestation(ServerLevel pLevel, BlockPos pPos) {
-        Mob mob = ModEntities.MANTIS.get().create(pLevel);
+        Mob mob = SBEntities.MANTIS.get().create(pLevel);
         if (mob != null) {
             mob.moveTo((double) pPos.getX() + 0.5D, pPos.getY(), (double) pPos.getZ() + 0.5D, 0.0F, 0.0F);
             pLevel.addFreshEntity(mob);

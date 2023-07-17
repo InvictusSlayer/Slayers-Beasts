@@ -1,6 +1,6 @@
 package net.invictusslayer.slayersbeasts.entity;
 
-import net.invictusslayer.slayersbeasts.misc.ModSounds;
+import net.invictusslayer.slayersbeasts.misc.SBSounds;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
@@ -63,9 +63,9 @@ public class Mantis extends PathfinderMob {
         }
     }
 
-    protected SoundEvent getAmbientSound() {return ModSounds.MANTIS_AMBIENT.get();}
-    protected SoundEvent getDeathSound() {return ModSounds.MANTIS_DEATH.get();}
-    protected SoundEvent getHurtSound(DamageSource damageSource) {return ModSounds.MANTIS_HURT.get();}
+    protected SoundEvent getAmbientSound() {return SBSounds.MANTIS_AMBIENT.get();}
+    protected SoundEvent getDeathSound() {return SBSounds.MANTIS_DEATH.get();}
+    protected SoundEvent getHurtSound(DamageSource damageSource) {return SBSounds.MANTIS_HURT.get();}
 
     public MobType getMobType() {
         return MobType.ARTHROPOD;
