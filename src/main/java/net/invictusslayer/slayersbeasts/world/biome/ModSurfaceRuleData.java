@@ -34,7 +34,8 @@ public class ModSurfaceRuleData {
                                 ifTrue(noiseCondition(Noises.ICE, 0), setBlock(ModBlocks.BLACK_SAND.get())),
                                 setBlock(Blocks.RED_SAND))),
                         ifTrue(isBiome(ModBiomes.VOLCANIC_PEAKS), sequence(
-                                ifTrue(ON_CEILING, setBlock(ModBlocks.BLACK_SANDSTONE.get())),
+                                ifTrue(ON_CEILING, setBlock(Blocks.BASALT)),
+                                ifTrue(noiseCondition(Noises.ICE, 0, 0.1), setBlock(Blocks.MAGMA_BLOCK)),
                                 ifTrue(noiseCondition(Noises.SURFACE, 0), setBlock(Blocks.SMOOTH_BASALT)),
                                 setBlock(Blocks.BLACKSTONE))),
                         ifTrue(waterBlockCheck(0, 0), setBlock(Blocks.GRASS_BLOCK)),
@@ -51,13 +52,18 @@ public class ModSurfaceRuleData {
                                         ifTrue(noiseCondition(Noises.ICE, 0), setBlock(ModBlocks.BLACK_SAND.get())),
                                         setBlock(Blocks.RED_SAND))),
                                 ifTrue(isBiome(ModBiomes.VOLCANIC_PEAKS), sequence(
-                                        ifTrue(ON_CEILING, setBlock(ModBlocks.BLACK_SANDSTONE.get())),
+                                        ifTrue(ON_CEILING, setBlock(Blocks.BASALT)),
                                         ifTrue(noiseCondition(Noises.SURFACE, 0), setBlock(Blocks.SMOOTH_BASALT)),
                                         setBlock(Blocks.BLACKSTONE))),
                                 setBlock(Blocks.DIRT)
                         )),
-                        ifTrue(VERY_DEEP_UNDER_FLOOR, ifTrue(isBiome(ModBiomes.BLACK_DUNES, ModBiomes.TAR_DESERT, ModBiomes.VOLCANIC_PEAKS),
-                                setBlock(ModBlocks.BLACK_SANDSTONE.get())))))
+                        ifTrue(DEEP_UNDER_FLOOR, sequence(
+                                ifTrue(isBiome(ModBiomes.BLACK_DUNES, ModBiomes.TAR_DESERT), setBlock(ModBlocks.BLACK_SANDSTONE.get()))
+                        )),
+                        ifTrue(VERY_DEEP_UNDER_FLOOR, sequence(
+                                ifTrue(isBiome(ModBiomes.VOLCANIC_PEAKS), setBlock(Blocks.BASALT))
+                        ))
+                ))
         );
     }
 
