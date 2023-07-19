@@ -116,7 +116,7 @@ public class SBConfiguredFeatures {
                 BlockStateProvider.simple(SBBlocks.WHITE_MUSHROOM_BLOCK.get().defaultBlockState().setValue(HugeMushroomBlock.UP, Boolean.TRUE).setValue(HugeMushroomBlock.DOWN, Boolean.FALSE)),
                 BlockStateProvider.simple(Blocks.MUSHROOM_STEM.defaultBlockState().setValue(HugeMushroomBlock.UP, Boolean.FALSE).setValue(HugeMushroomBlock.DOWN, Boolean.FALSE)), 3));
 
-        register(context, TREES_ASPEN, Feature.RANDOM_SELECTOR, new RandomFeatureConfiguration(List.of(new WeightedPlacedFeature(placed.getOrThrow(SBPlacedFeatures.ASPEN_CHECKED), 0.5F)), placed.getOrThrow(SBPlacedFeatures.ASPEN_CHECKED)));
+        register(context, TREES_ASPEN, Feature.RANDOM_SELECTOR, new RandomFeatureConfiguration(List.of(new WeightedPlacedFeature(placed.getOrThrow(SBPlacedFeatures.ASPEN_CHECKED), 0.7F)), placed.getOrThrow(SBPlacedFeatures.ASPEN_CHECKED)));
         register(context, TREES_INKY, Feature.RANDOM_SELECTOR, new RandomFeatureConfiguration(List.of(new WeightedPlacedFeature(placed.getOrThrow(SBPlacedFeatures.CAJOLE_CHECKED), 0.5F)), placed.getOrThrow(SBPlacedFeatures.CAJOLE_CHECKED)));
         register(context, TREES_RAINFOREST, Feature.RANDOM_SELECTOR, new RandomFeatureConfiguration(List.of(new WeightedPlacedFeature(placed.getOrThrow(SBPlacedFeatures.KAPOK_CHECKED), 0.2F)), placed.getOrThrow(SBPlacedFeatures.CAJOLE_CHECKED)));
         register(context, TREES_EUCALYPT, Feature.RANDOM_SELECTOR, new RandomFeatureConfiguration(List.of(new WeightedPlacedFeature(placed.getOrThrow(SBPlacedFeatures.EUCALYPTUS_CHECKED), 0.5F)), placed.getOrThrow(SBPlacedFeatures.EUCALYPTUS_CHECKED)));

@@ -47,7 +47,6 @@ public class SlayersBeasts {
         SBTrunkPlacers.register(eventBus);
         SBFeatures.register(eventBus);
         SBPois.register(eventBus);
-        SBBiomes.registerBiomes();
         SBDimensions.register();
 
         eventBus.addListener(this::commonSetup);
