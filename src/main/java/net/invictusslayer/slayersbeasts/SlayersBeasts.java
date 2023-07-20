@@ -13,6 +13,7 @@ import net.invictusslayer.slayersbeasts.misc.SBSounds;
 import net.invictusslayer.slayersbeasts.world.biome.*;
 import net.invictusslayer.slayersbeasts.world.dimension.SBDimensions;
 import net.invictusslayer.slayersbeasts.world.feature.SBFeatures;
+import net.invictusslayer.slayersbeasts.world.feature.decorator.SBTreeDecorators;
 import net.invictusslayer.slayersbeasts.world.feature.foliageplacer.SBFoliagePlacers;
 import net.invictusslayer.slayersbeasts.world.feature.trunkplacer.SBTrunkPlacers;
 import net.minecraft.resources.ResourceLocation;
@@ -43,6 +44,7 @@ public class SlayersBeasts {
         SBEffects.register(eventBus);
         SBPotions.register(eventBus);
         SBSounds.register(eventBus);
+        SBTreeDecorators.register(eventBus);
         SBFoliagePlacers.register(eventBus);
         SBTrunkPlacers.register(eventBus);
         SBFeatures.register(eventBus);

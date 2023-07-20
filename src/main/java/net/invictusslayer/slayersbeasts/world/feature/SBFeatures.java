@@ -2,6 +2,7 @@ package net.invictusslayer.slayersbeasts.world.feature;
 
 import com.mojang.serialization.Codec;
 import net.invictusslayer.slayersbeasts.SlayersBeasts;
+import net.invictusslayer.slayersbeasts.world.feature.misc.HugeWhiteMushroomFeature;
 import net.minecraft.world.level.levelgen.feature.Feature;
 import net.minecraft.world.level.levelgen.feature.configurations.FeatureConfiguration;
 import net.minecraft.world.level.levelgen.feature.configurations.HugeMushroomFeatureConfiguration;

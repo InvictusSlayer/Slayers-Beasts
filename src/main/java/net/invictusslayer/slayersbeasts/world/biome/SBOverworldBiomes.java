@@ -72,6 +72,7 @@ public class SBOverworldBiomes {
         BiomeDefaultFeatures.addDefaultSoftDisks(biomeSettings);
         biomeSettings.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, VegetationPlacements.PATCH_LARGE_FERN);
         biomeSettings.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, VegetationPlacements.PATCH_GRASS_TAIGA_2);
+        biomeSettings.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, VegetationPlacements.BROWN_MUSHROOM_OLD_GROWTH);
         BiomeDefaultFeatures.addDefaultMushrooms(biomeSettings);
         addModUndergroundVariety(biomeSettings);
         addModMushrooms(biomeSettings);

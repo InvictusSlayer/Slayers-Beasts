@@ -1,4 +1,4 @@
-package net.invictusslayer.slayersbeasts.world.feature;
+package net.invictusslayer.slayersbeasts.world.feature.misc;
 
 import com.mojang.serialization.Codec;
 import net.minecraft.core.BlockPos;
@@ -111,17 +111,17 @@ public class HugeWhiteMushroomFeature extends AbstractHugeMushroomFeature {
 
     @Override
     public boolean place(FeaturePlaceContext<HugeMushroomFeatureConfiguration> pContext) {
-        WorldGenLevel worldgenlevel = pContext.level();
-        BlockPos blockpos = pContext.origin();
+        WorldGenLevel level = pContext.level();
+        BlockPos blockPos = pContext.origin();
         RandomSource randomsource = pContext.random();
-        HugeMushroomFeatureConfiguration hugemushroomfeatureconfiguration = pContext.config();
+        HugeMushroomFeatureConfiguration config = pContext.config();
         int i = this.getTreeHeight(randomsource);
-        BlockPos.MutableBlockPos blockpos$mutableblockpos = new BlockPos.MutableBlockPos();
-        if (!this.isValidPosition(worldgenlevel, blockpos, i, blockpos$mutableblockpos, hugemushroomfeatureconfiguration)) {
+        BlockPos.MutableBlockPos mutableBlockPos = new BlockPos.MutableBlockPos();
+        if (!this.isValidPosition(level, blockPos, i, mutableBlockPos, config)) {
             return false;
         } else {
-            this.makeCap(worldgenlevel, randomsource, blockpos, i, blockpos$mutableblockpos, hugemushroomfeatureconfiguration);
-            this.placeTrunk(worldgenlevel, randomsource, blockpos, hugemushroomfeatureconfiguration, i, blockpos$mutableblockpos);
+            this.makeCap(level, randomsource, blockPos, i, mutableBlockPos, config);
+            this.placeTrunk(level, randomsource, blockPos, config, i, mutableBlockPos);
             return true;
         }
     }
