@@ -33,6 +33,7 @@ public class SBItemModelProvider extends ItemModelProvider {
         simpleItem(SBItems.TANNED_LEATHER);
         simpleItem(SBItems.MUD_BALL);
 
+        blockItem(SBBlocks.ICICLE, "_tip_merge_down");
         blockItem(SBBlocks.WHITE_MUSHROOM);
         simpleItem(SBBlocks.ASPEN_DOOR);
         blockItem(SBBlocks.ASPEN_SAPLING);
@@ -60,9 +61,13 @@ public class SBItemModelProvider extends ItemModelProvider {
     }
 
     private void blockItem(RegistryObject<?> block) {
+        blockItem(block, "");
+    }
+
+    private void blockItem(RegistryObject<?> block, String suffix) {
         withExistingParent(block.getId().getPath(),
                 new ResourceLocation("item/generated")).texture("layer0",
-                new ResourceLocation(SlayersBeasts.MOD_ID, "block/" + block.getId().getPath()));
+                new ResourceLocation(SlayersBeasts.MOD_ID, "block/" + block.getId().getPath() + suffix));
     }
 
     private void simpleItem(RegistryObject<?> item) {

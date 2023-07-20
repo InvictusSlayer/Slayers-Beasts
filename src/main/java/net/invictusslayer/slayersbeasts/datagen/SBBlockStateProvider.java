@@ -7,7 +7,6 @@ import net.minecraft.data.PackOutput;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
-import net.minecraft.world.level.block.state.properties.Tilt;
 import net.minecraftforge.client.model.generators.BlockStateProvider;
 import net.minecraftforge.client.model.generators.ConfiguredModel;
 import net.minecraftforge.client.model.generators.ModelFile;
@@ -32,7 +31,8 @@ public class SBBlockStateProvider extends BlockStateProvider {
         simpleCubeBottomTopWithItem(SBBlocks.ANTHILL.get());
         simpleCubeBottomTopWithItem(SBBlocks.ANTHILL_HATCHERY.get());
 
-        simpleTiltCubeWithItem(SBBlocks.CRACKED_MUD.get());
+        icicle(SBBlocks.ICICLE.get());
+        tiltCubeWithItem(SBBlocks.CRACKED_MUD.get());
         cubeWithItem(SBBlocks.PEAT.get());
 
         cubeWithItem(SBBlocks.BLACK_SAND.get());
@@ -130,6 +130,13 @@ public class SBBlockStateProvider extends BlockStateProvider {
         });
     }
 
+    private void icicle(Block block) {
+        getVariantBuilder(block).forAllStates(state -> {
+            String suffix = "_" + state.getValue(BlockStateProperties.DRIPSTONE_THICKNESS).getSerializedName() + "_" + state.getValue(BlockStateProperties.VERTICAL_DIRECTION).getSerializedName();
+            return ConfiguredModel.builder().modelFile(models().cross(name(block) + suffix, extend(blockTexture(block), suffix)).renderType("cutout")).build();
+        });
+    }
+
     private void mushroomBlockWithItem(Block block) {
         ModelFile outsideModel = models().withExistingParent(name(block), "minecraft:block/template_single_face").texture("texture", blockTexture(block));
         ModelFile insideModel = models().getExistingFile(new ResourceLocation("minecraft:block/mushroom_block_inside"));
@@ -215,15 +222,11 @@ public class SBBlockStateProvider extends BlockStateProvider {
         simpleBlockItem(block, models().withExistingParent(name(block), "minecraft:block/cube_column"));
     }
 
-    private void simpleTiltCubeWithItem(Block block) {
-        tiltCubeWithItem(block, extend(blockTexture(block), "_none"), extend(blockTexture(block), "_unstable"), extend(blockTexture(block), "_partial"), extend(blockTexture(block), "_full"));
-    }
-    private void tiltCubeWithItem(Block block, ResourceLocation none, ResourceLocation unstable, ResourceLocation partial, ResourceLocation full) {
-        getVariantBuilder(block)
-                .partialState().with(BlockStateProperties.TILT, Tilt.NONE).modelForState().modelFile(models().cubeAll(name(block) + "_none", none)).addModel()
-                .partialState().with(BlockStateProperties.TILT, Tilt.UNSTABLE).modelForState().modelFile(models().cubeAll(name(block) + "_unstable", unstable)).addModel()
-                .partialState().with(BlockStateProperties.TILT, Tilt.PARTIAL).modelForState().modelFile(models().cubeAll(name(block) + "_partial", partial)).addModel()
-                .partialState().with(BlockStateProperties.TILT, Tilt.FULL).modelForState().modelFile(models().cubeAll(name(block) + "_full", full)).addModel();
+    private void tiltCubeWithItem(Block block) {
+        getVariantBuilder(block).forAllStates(state -> {
+            String tilt = "_" + state.getValue(BlockStateProperties.TILT).getSerializedName();
+            return ConfiguredModel.builder().modelFile(models().cubeAll(name(block) + tilt, extend(blockTexture(block), tilt))).build();
+        });
         simpleBlockItem(block, models().withExistingParent(name(block) + "_none", "minecraft:block/cube_all"));
     }
 

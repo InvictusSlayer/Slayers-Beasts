@@ -17,7 +17,7 @@ public final class SBCreativeModeTab {
     public static final DeferredRegister<CreativeModeTab> CREATIVE_MODE_TABS = DeferredRegister.create(Registries.CREATIVE_MODE_TAB, SlayersBeasts.MOD_ID);
 
     public static final RegistryObject<CreativeModeTab> SLAYERS_BEASTS_TAB = CREATIVE_MODE_TABS.register("slayers_beasts_tab",
-            () -> CreativeModeTab.builder().icon(() -> new ItemStack(SBBlocks.CAJOLE_SAPLING.get())).title(Component.translatable("creativemodetab.slayers_beasts_tab"))
+            () -> CreativeModeTab.builder().icon(() -> new ItemStack(SBBlocks.REDWOOD_SAPLING.get())).title(Component.translatable("creativemodetab.slayers_beasts_tab"))
                     .displayItems(((pParameters, pOutput) -> {
                         pOutput.accept(SBItems.JADE.get());
                         pOutput.accept(SBItems.JADE_SHARD.get());
@@ -42,6 +42,7 @@ public final class SBCreativeModeTab {
                         pOutput.accept(SBBlocks.ANT_SOIL.get());
                         pOutput.accept(SBBlocks.ANTHILL.get());
                         pOutput.accept(SBBlocks.ANTHILL_HATCHERY.get());
+                        pOutput.accept(SBBlocks.ICICLE.get());
                         pOutput.accept(SBBlocks.CRACKED_MUD.get());
                         pOutput.accept(SBBlocks.PEAT.get());
 

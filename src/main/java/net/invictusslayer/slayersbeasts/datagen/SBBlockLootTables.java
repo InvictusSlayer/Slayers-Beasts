@@ -36,6 +36,7 @@ public class SBBlockLootTables extends BlockLootSubProvider {
         dropOther(SBBlocks.ANTHILL.get(), SBBlocks.ANT_SOIL.get());
         dropOther(SBBlocks.ANTHILL_HATCHERY.get(), SBBlocks.ANT_SOIL.get());
 
+        dropWhenSilkTouch(SBBlocks.ICICLE.get());
         add(SBBlocks.CRACKED_MUD.get(), block ->
                 createSingleItemTableWithSilkTouch(Blocks.PACKED_MUD, SBItems.MUD_BALL.get(), ConstantValue.exactly(4)));
         dropSelf(SBBlocks.PEAT.get());
