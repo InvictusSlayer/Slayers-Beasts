@@ -30,6 +30,7 @@ public class SBPlacedFeatures {
     public static final ResourceKey<PlacedFeature> REDWOOD_CHECKED = createKey("redwood_checked");
     public static final ResourceKey<PlacedFeature> GIANT_REDWOOD_CHECKED = createKey("giant_redwood_checked");
     public static final ResourceKey<PlacedFeature> COLOSSAL_REDWOOD_CHECKED = createKey("colossal_redwood_checked");
+    public static final ResourceKey<PlacedFeature> WILLOW_CHECKED = createKey("willow_checked");
 
     //VEGETATION
     public static final ResourceKey<PlacedFeature> TREES_ASPEN = createKey("trees_aspen");
@@ -67,6 +68,7 @@ public class SBPlacedFeatures {
         register(context, REDWOOD_CHECKED, configured.getOrThrow(SBConfiguredFeatures.REDWOOD), List.of(PlacementUtils.filteredByBlockSurvival(SBBlocks.REDWOOD_SAPLING.get())));
         register(context, GIANT_REDWOOD_CHECKED, configured.getOrThrow(SBConfiguredFeatures.GIANT_REDWOOD), List.of(PlacementUtils.filteredByBlockSurvival(SBBlocks.REDWOOD_SAPLING.get())));
         register(context, COLOSSAL_REDWOOD_CHECKED, configured.getOrThrow(SBConfiguredFeatures.COLOSSAL_REDWOOD), List.of(PlacementUtils.filteredByBlockSurvival(SBBlocks.REDWOOD_SAPLING.get())));
+        register(context, WILLOW_CHECKED, configured.getOrThrow(SBConfiguredFeatures.WILLOW), List.of(PlacementUtils.filteredByBlockSurvival(SBBlocks.WILLOW_SAPLING.get())));
 
         register(context, TREES_ASPEN, configured.getOrThrow(SBConfiguredFeatures.TREES_ASPEN), VegetationPlacements.treePlacement(PlacementUtils.countExtra(10, 0.1f, 1), SBBlocks.ASPEN_SAPLING.get()));
         register(context, TREES_INKY, configured.getOrThrow(SBConfiguredFeatures.TREES_INKY), VegetationPlacements.treePlacement(PlacementUtils.countExtra(3, 0.1f, 1)));

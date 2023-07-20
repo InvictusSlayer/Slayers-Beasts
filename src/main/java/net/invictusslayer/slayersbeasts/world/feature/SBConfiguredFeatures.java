@@ -1,8 +1,8 @@
 package net.invictusslayer.slayersbeasts.world.feature;
 
-import com.google.common.collect.ImmutableList;
 import net.invictusslayer.slayersbeasts.SlayersBeasts;
 import net.invictusslayer.slayersbeasts.block.SBBlocks;
+import net.invictusslayer.slayersbeasts.block.WillowBranchBlock;
 import net.invictusslayer.slayersbeasts.world.feature.foliageplacer.AspenFoliagePlacer;
 import net.invictusslayer.slayersbeasts.world.feature.foliageplacer.CajoleFoliagePlacer;
 import net.invictusslayer.slayersbeasts.world.feature.foliageplacer.EucalyptusFoliagePlacer;
@@ -10,6 +10,7 @@ import net.invictusslayer.slayersbeasts.world.feature.foliageplacer.UltraRedwood
 import net.invictusslayer.slayersbeasts.world.feature.trunkplacer.ButtressTrunkPlacer;
 import net.invictusslayer.slayersbeasts.world.feature.trunkplacer.ColossalTrunkPlacer;
 import net.invictusslayer.slayersbeasts.world.feature.trunkplacer.CrossTrunkPlacer;
+import net.minecraft.core.Direction;
 import net.minecraft.core.HolderGetter;
 import net.minecraft.core.HolderSet;
 import net.minecraft.core.registries.Registries;
@@ -34,6 +35,8 @@ import net.minecraft.world.level.levelgen.feature.foliageplacers.BlobFoliagePlac
 import net.minecraft.world.level.levelgen.feature.foliageplacers.MegaJungleFoliagePlacer;
 import net.minecraft.world.level.levelgen.feature.foliageplacers.MegaPineFoliagePlacer;
 import net.minecraft.world.level.levelgen.feature.stateproviders.BlockStateProvider;
+import net.minecraft.world.level.levelgen.feature.stateproviders.RandomizedIntStateProvider;
+import net.minecraft.world.level.levelgen.feature.treedecorators.AttachedToLeavesDecorator;
 import net.minecraft.world.level.levelgen.feature.treedecorators.LeaveVineDecorator;
 import net.minecraft.world.level.levelgen.feature.treedecorators.TrunkVineDecorator;
 import net.minecraft.world.level.levelgen.feature.trunkplacers.GiantTrunkPlacer;
@@ -55,6 +58,7 @@ public class SBConfiguredFeatures {
     public static final ResourceKey<ConfiguredFeature<?, ?>> GIANT_REDWOOD = registerKey("giant_redwood");
     public static final ResourceKey<ConfiguredFeature<?, ?>> COLOSSAL_REDWOOD = registerKey("colossal_redwood");
     public static final ResourceKey<ConfiguredFeature<?, ?>> PETRIFIED_TREE = registerKey("petrified_tree");
+    public static final ResourceKey<ConfiguredFeature<?, ?>> WILLOW = registerKey("willow");
     public static final ResourceKey<ConfiguredFeature<?, ?>> HUGE_WHITE_MUSHROOM = registerKey("huge_white_mushroom");
 
     //VEGETATION
@@ -88,7 +92,7 @@ public class SBConfiguredFeatures {
         register(context, CAJOLE, Feature.TREE, new TreeConfiguration.TreeConfigurationBuilder(
                 BlockStateProvider.simple(SBBlocks.CAJOLE_LOG.get()), new CrossTrunkPlacer(7, 6, 3),
                 BlockStateProvider.simple(SBBlocks.CAJOLE_LEAVES.get()), new CajoleFoliagePlacer(ConstantInt.of(2), ConstantInt.of(0)), new TwoLayersFeatureSize(1, 0, 2))
-                .decorators(ImmutableList.of(TrunkVineDecorator.INSTANCE, new LeaveVineDecorator(0.25F))).ignoreVines().build());
+                .decorators(List.of(TrunkVineDecorator.INSTANCE, new LeaveVineDecorator(0.25F))).ignoreVines().build());
         register(context, DESERT_OAK, Feature.TREE, new TreeConfiguration.TreeConfigurationBuilder(
                 BlockStateProvider.simple(SBBlocks.DESERT_OAK_LOG.get()), new StraightTrunkPlacer(5, 2, 2),
                 BlockStateProvider.simple(SBBlocks.DESERT_OAK_LEAVES.get()), new BlobFoliagePlacer(ConstantInt.of(2), ConstantInt.of(0), 3), new TwoLayersFeatureSize(1, 0, 2)).build());
@@ -110,6 +114,10 @@ public class SBConfiguredFeatures {
         register(context, PETRIFIED_TREE, Feature.TREE, new TreeConfiguration.TreeConfigurationBuilder(
                 BlockStateProvider.simple(Blocks.STONE), new StraightTrunkPlacer(5, 2, 2),
                 BlockStateProvider.simple(Blocks.TUFF), new BlobFoliagePlacer(ConstantInt.of(2), ConstantInt.of(0), 3), new TwoLayersFeatureSize(1, 0, 2)).build());
+        register(context, WILLOW, Feature.TREE, new TreeConfiguration.TreeConfigurationBuilder(
+                BlockStateProvider.simple(SBBlocks.WILLOW_LOG.get()), new ButtressTrunkPlacer(10, 4, 4),
+                BlockStateProvider.simple(SBBlocks.WILLOW_LEAVES.get()), new MegaJungleFoliagePlacer(ConstantInt.of(2), ConstantInt.of(0), 2), new TwoLayersFeatureSize(1, 0, 2))
+                .decorators(List.of(new AttachedToLeavesDecorator(0.5F, 0, 0, new RandomizedIntStateProvider(BlockStateProvider.simple(SBBlocks.WILLOW_BRANCH.get().defaultBlockState().getBlock()), WillowBranchBlock.AGE, UniformInt.of(0, 10)), 5, List.of(Direction.DOWN)))).build());
         register(context, HUGE_WHITE_MUSHROOM, SBFeatures.HUGE_WHITE_MUSHROOM.get(), new HugeMushroomFeatureConfiguration(
                 BlockStateProvider.simple(SBBlocks.WHITE_MUSHROOM_BLOCK.get().defaultBlockState().setValue(HugeMushroomBlock.UP, Boolean.TRUE).setValue(HugeMushroomBlock.DOWN, Boolean.FALSE)),
                 BlockStateProvider.simple(Blocks.MUSHROOM_STEM.defaultBlockState().setValue(HugeMushroomBlock.UP, Boolean.FALSE).setValue(HugeMushroomBlock.DOWN, Boolean.FALSE)), 3));
