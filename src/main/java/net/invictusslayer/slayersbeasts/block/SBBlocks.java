@@ -38,6 +38,14 @@ public final class SBBlocks {
     public static final RegistryObject<Block> CRACKED_MUD = registerBlock("cracked_mud", () -> new CrackedMudBlock(BlockBehaviour.Properties.copy(Blocks.PACKED_MUD)));
     public static final RegistryObject<Block> PEAT = registerBlock("peat", () -> new PeatBlock(BlockBehaviour.Properties.copy(Blocks.POWDER_SNOW).mapColor(MapColor.TERRACOTTA_BLACK).strength(1F).sound(SoundType.MUD).forceSolidOn().pushReaction(PushReaction.DESTROY)));
 
+    public static final RegistryObject<Block> PEGMATITE = registerBlock("pegmatite", () -> new Block(BlockBehaviour.Properties.copy(Blocks.STONE).mapColor(MapColor.SAND)));
+    public static final RegistryObject<Block> PEGMATITE_SLAB = registerBlock("pegmatite_slab", () -> new SlabBlock(BlockBehaviour.Properties.copy(PEGMATITE.get())));
+    public static final RegistryObject<Block> PEGMATITE_STAIRS = registerBlock("pegmatite_stairs", () -> new StairBlock(() -> PEGMATITE.get().defaultBlockState(), BlockBehaviour.Properties.copy(PEGMATITE.get())));
+    public static final RegistryObject<Block> PEGMATITE_WALL = registerBlock("pegmatite_wall", () -> new WallBlock(BlockBehaviour.Properties.copy(PEGMATITE.get()).forceSolidOn()));
+    public static final RegistryObject<Block> POLISHED_PEGMATITE = registerBlock("polished_pegmatite", () -> new Block(BlockBehaviour.Properties.copy(Blocks.STONE).mapColor(MapColor.SAND)));
+    public static final RegistryObject<Block> POLISHED_PEGMATITE_SLAB = registerBlock("polished_pegmatite_slab", () -> new SlabBlock(BlockBehaviour.Properties.copy(POLISHED_PEGMATITE.get())));
+    public static final RegistryObject<Block> POLISHED_PEGMATITE_STAIRS = registerBlock("polished_pegmatite_stairs", () -> new StairBlock(() -> POLISHED_PEGMATITE.get().defaultBlockState(), BlockBehaviour.Properties.copy(POLISHED_PEGMATITE.get())));
+
     public static final RegistryObject<Block> BLACK_SAND = registerBlock("black_sand", () -> new SandBlock(3748886, BlockBehaviour.Properties.copy(Blocks.SAND).mapColor(MapColor.COLOR_BLACK)));
     public static final RegistryObject<Block> BLACK_SANDSTONE = registerBlock("black_sandstone", () -> new Block(BlockBehaviour.Properties.copy(Blocks.SANDSTONE).mapColor(MapColor.COLOR_BLACK)));
     public static final RegistryObject<Block> BLACK_SANDSTONE_SLAB = registerBlock("black_sandstone_slab", () -> new SlabBlock(BlockBehaviour.Properties.copy(Blocks.SANDSTONE_SLAB).mapColor(MapColor.COLOR_BLACK)));

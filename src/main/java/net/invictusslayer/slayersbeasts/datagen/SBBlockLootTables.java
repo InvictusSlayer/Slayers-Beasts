@@ -25,7 +25,7 @@ public class SBBlockLootTables extends BlockLootSubProvider {
 
     @Override
     protected void generate() {
-        generateForBlockFamilies();
+        generateBlockFamilies();
 
         dropSelf(SBBlocks.JADE_BLOCK.get());
 
@@ -106,7 +106,7 @@ public class SBBlockLootTables extends BlockLootSubProvider {
                 SBBlocks.WILLOW_LEAVES.get(), SBBlocks.WILLOW_SAPLING.get(), 0.05f));
     }
 
-    private void generateForBlockFamilies() {
+    private void generateBlockFamilies() {
         SBBlockFamilies.getAllFamilies().forEach(family -> {
             dropSelf(family.getBaseBlock());
             family.getVariants().forEach(((variant, block) -> {

@@ -38,6 +38,9 @@ public class SBItemTagsProvider extends ItemTagsProvider {
         this.copy(BlockTags.WOODEN_PRESSURE_PLATES, ItemTags.WOODEN_PRESSURE_PLATES);
         this.copy(BlockTags.LOGS_THAT_BURN, ItemTags.LOGS_THAT_BURN);
         this.copy(BlockTags.SAPLINGS, ItemTags.SAPLINGS);
+        this.copy(BlockTags.SLABS, ItemTags.SLABS);
+        this.copy(BlockTags.STAIRS, ItemTags.STAIRS);
+        this.copy(BlockTags.WALLS, ItemTags.WALLS);
         this.copy(BlockTags.SAND, ItemTags.SAND);
     }
 }

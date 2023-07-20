@@ -40,6 +40,14 @@
   "block.slayersbeasts.cracked_mud": "Cracked Mud",
   "block.slayersbeasts.peat": "Peat",
 
+  "block.slayersbeasts.pegmatite": "Pegmatite",
+  "block.slayersbeasts.pegmatite_slab": "Pegmatite Slab",
+  "block.slayersbeasts.pegmatite_stairs": "Pegmatite Stairs",
+  "block.slayersbeasts.pegmatite_wall": "Pegmatite Wall",
+  "block.slayersbeasts.polished_pegmatite": "Polished Pegmatite",
+  "block.slayersbeasts.polished_pegmatite_slab": "Polished Pegmatite Slab",
+  "block.slayersbeasts.polished_pegmatite_stairs": "Polished Pegmatite Stairs",
+
   "block.slayersbeasts.black_sand": "Black Sand",
   "block.slayersbeasts.black_sandstone": "Black Sandstone",
   "block.slayersbeasts.black_sandstone_slab": "Black Sandstone Slab",

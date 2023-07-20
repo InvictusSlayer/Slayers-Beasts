@@ -21,7 +21,7 @@ public class SBBlockStateProvider extends BlockStateProvider {
 
     @Override
     protected void registerStatesAndModels() {
-        SBBlockFamilies.getAllFamilies().filter(BlockFamily::shouldGenerateModel).forEach(this::registerBlockFamily);
+        generateBlockFamilies();
 
         cubeWithItem(SBBlocks.JADE_BLOCK.get());
         cubeWithItem(SBBlocks.EXOSKELETON_ORE.get());
@@ -102,18 +102,32 @@ public class SBBlockStateProvider extends BlockStateProvider {
         cross(SBBlocks.WILLOW_BRANCH_PLANT.get());
     }
 
-    private void registerBlockFamily(BlockFamily family) {
-        cubeWithItem(family.getBaseBlock());
-        simpleSlabWithItem((SlabBlock) family.get(BlockFamily.Variant.SLAB), blockTexture(family.getBaseBlock()), blockTexture(family.getBaseBlock()));
-        simpleStairWithItem((StairBlock) family.get(BlockFamily.Variant.STAIRS), blockTexture(family.getBaseBlock()));
-        fenceWithItem((FenceBlock) family.get(BlockFamily.Variant.FENCE), blockTexture(family.getBaseBlock()));
-        fenceGateWithItem((FenceGateBlock) family.get(BlockFamily.Variant.FENCE_GATE), blockTexture(family.getBaseBlock()));
-        buttonWithItem((ButtonBlock) family.get(BlockFamily.Variant.BUTTON), blockTexture(family.getBaseBlock()));
-        pressurePlateWithItem((PressurePlateBlock) family.get(BlockFamily.Variant.PRESSURE_PLATE), blockTexture(family.getBaseBlock()));
-        doorBlockWithRenderType((DoorBlock) family.get(BlockFamily.Variant.DOOR),
-                extend(blockTexture(family.get(BlockFamily.Variant.DOOR)), "_bottom"),
-                extend(blockTexture(family.get(BlockFamily.Variant.DOOR)), "_top"), "cutout");
-        trapdoorWithItem((TrapDoorBlock) family.get(BlockFamily.Variant.TRAPDOOR), true);
+    private void generateBlockFamilies() {
+        SBBlockFamilies.getAllFamilies().filter(BlockFamily::shouldGenerateModel).forEach(family -> {
+            Block base = family.getBaseBlock();
+            cubeWithItem(base);
+            family.getVariants().forEach((variant, block) -> {
+                if (variant == BlockFamily.Variant.SLAB) {
+                    simpleSlabWithItem((SlabBlock) block, blockTexture(base), blockTexture(base));
+                } else if (variant == BlockFamily.Variant.STAIRS) {
+                    simpleStairWithItem((StairBlock) block, blockTexture(base));
+                } else if (variant == BlockFamily.Variant.FENCE) {
+                    fenceWithItem((FenceBlock) block, blockTexture(base));
+                } else if (variant == BlockFamily.Variant.FENCE_GATE) {
+                    fenceGateWithItem((FenceGateBlock) block, blockTexture(base));
+                } else if (variant == BlockFamily.Variant.BUTTON) {
+                    buttonWithItem((ButtonBlock) block, blockTexture(base));
+                } else if (variant == BlockFamily.Variant.PRESSURE_PLATE) {
+                    pressurePlateWithItem((PressurePlateBlock) block, blockTexture(base));
+                } else if (variant == BlockFamily.Variant.DOOR) {
+                    doorBlockWithRenderType((DoorBlock) block, extend(blockTexture(block), "_bottom"), extend(blockTexture(block), "_top"), "cutout");
+                } else if (variant == BlockFamily.Variant.TRAPDOOR) {
+                    trapdoorWithItem((TrapDoorBlock) block, true);
+                } else if (variant == BlockFamily.Variant.WALL) {
+                    wallWithItem((WallBlock) block, blockTexture(base));
+                }
+            });
+        });
     }
 
     private void mushroomBlockWithItem(Block block) {

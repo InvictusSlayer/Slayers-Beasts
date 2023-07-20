@@ -45,6 +45,14 @@ public final class SBCreativeModeTab {
                         pOutput.accept(SBBlocks.CRACKED_MUD.get());
                         pOutput.accept(SBBlocks.PEAT.get());
 
+                        pOutput.accept(SBBlocks.PEGMATITE.get());
+                        pOutput.accept(SBBlocks.PEGMATITE_SLAB.get());
+                        pOutput.accept(SBBlocks.PEGMATITE_STAIRS.get());
+                        pOutput.accept(SBBlocks.PEGMATITE_WALL.get());
+                        pOutput.accept(SBBlocks.POLISHED_PEGMATITE.get());
+                        pOutput.accept(SBBlocks.POLISHED_PEGMATITE_SLAB.get());
+                        pOutput.accept(SBBlocks.POLISHED_PEGMATITE_STAIRS.get());
+
                         pOutput.accept(SBBlocks.BLACK_SAND.get());
                         pOutput.accept(SBBlocks.BLACK_SANDSTONE.get());
                         pOutput.accept(SBBlocks.BLACK_SANDSTONE_SLAB.get());
