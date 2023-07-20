@@ -34,9 +34,9 @@ public class SBSurfaceRuleData {
                                 ifTrue(noiseCondition(Noises.ICE, 0), setBlock(SBBlocks.BLACK_SAND.get())),
                                 setBlock(Blocks.RED_SAND))),
                         ifTrue(isBiome(SBBiomes.VOLCANIC_PEAKS), sequence(
-                                ifTrue(ON_CEILING, setBlock(Blocks.BASALT)),
-                                ifTrue(noiseCondition(Noises.ICE, 0, 0.1), setBlock(Blocks.MAGMA_BLOCK)),
-                                ifTrue(noiseCondition(Noises.SURFACE, 0), setBlock(Blocks.SMOOTH_BASALT)),
+                                ifTrue(noiseCondition(Noises.ICE, -0.05, 0.05), setBlock(Blocks.LAVA)),
+                                ifTrue(noiseCondition(Noises.ICE, -0.1, 0.1), setBlock(Blocks.MAGMA_BLOCK)),
+                                ifTrue(noiseCondition(Noises.SURFACE, 0), setBlock(Blocks.BASALT)),
                                 setBlock(Blocks.TUFF))),
                         ifTrue(waterBlockCheck(0, 0), setBlock(Blocks.GRASS_BLOCK)),
                         setBlock(Blocks.DIRT)

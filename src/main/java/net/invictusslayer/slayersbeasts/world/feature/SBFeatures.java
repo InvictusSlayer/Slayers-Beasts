@@ -13,8 +13,7 @@ import net.minecraftforge.registries.RegistryObject;
 public abstract class SBFeatures<FC extends FeatureConfiguration> extends Feature<FC> {
     public static final DeferredRegister<Feature<?>> FEATURES = DeferredRegister.create(ForgeRegistries.FEATURES, SlayersBeasts.MOD_ID);
 
-    public static final RegistryObject<HugeWhiteMushroomFeature> HUGE_WHITE_MUSHROOM = FEATURES.register("huge_white_mushroom",
-            () -> new HugeWhiteMushroomFeature(HugeMushroomFeatureConfiguration.CODEC));
+    public static final RegistryObject<HugeWhiteMushroomFeature> HUGE_WHITE_MUSHROOM = FEATURES.register("huge_white_mushroom", () -> new HugeWhiteMushroomFeature(HugeMushroomFeatureConfiguration.CODEC));
 
     public SBFeatures(Codec<FC> pCodec) {
         super(pCodec);

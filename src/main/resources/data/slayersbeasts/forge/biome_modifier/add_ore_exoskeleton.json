@@ -1,6 +1,6 @@
 {
   "type": "forge:add_features",
   "biomes": "#minecraft:is_overworld",
-  "features": "slayersbeasts:exoskeleton_ore_placed",
+  "features": "slayersbeasts:ore_exoskeleton",
   "step": "underground_ores"
 }

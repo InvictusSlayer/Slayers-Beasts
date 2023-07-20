@@ -7,6 +7,7 @@ import net.minecraft.core.Holder;
 import net.minecraft.core.HolderGetter;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.data.worldgen.BootstapContext;
+import net.minecraft.data.worldgen.features.OreFeatures;
 import net.minecraft.data.worldgen.placement.PlacementUtils;
 import net.minecraft.data.worldgen.placement.VegetationPlacements;
 import net.minecraft.resources.ResourceKey;
@@ -18,9 +19,6 @@ import net.minecraft.world.level.levelgen.placement.*;
 
 import javax.annotation.Nullable;
 import java.util.List;
-
-import static net.invictusslayer.slayersbeasts.world.feature.SBOrePlacement.commonOrePlacement;
-import static net.invictusslayer.slayersbeasts.world.feature.SBOrePlacement.rareOrePlacement;
 
 public class SBPlacedFeatures {
     //TREE
@@ -45,8 +43,14 @@ public class SBPlacedFeatures {
     public static final ResourceKey<PlacedFeature> WHITE_MUSHROOM_RARE = createKey("white_mushroom_rare");
 
     //ORE
-    public static final ResourceKey<PlacedFeature> EXOSKELETON_ORE_PLACED = createKey("exoskeleton_ore_placed");
-    public static final ResourceKey<PlacedFeature> LUSH_EXOSKELETON_ORE_PLACED = createKey("lush_exoskeleton_ore_placed");
+    public static final ResourceKey<PlacedFeature> ORE_EXOSKELETON = createKey("ore_exoskeleton");
+    public static final ResourceKey<PlacedFeature> ORE_EXOSKELETON_LUSH = createKey("ore_exoskeleton_lush");
+    public static final ResourceKey<PlacedFeature> ORE_OBSIDIAN = createKey("ore_obsidian");
+    public static final ResourceKey<PlacedFeature> ORE_PEGMATITE_UPPER = createKey("ore_pegmatite_upper");
+    public static final ResourceKey<PlacedFeature> ORE_PEGMATITE_LOWER = createKey("ore_pegmatite_lower");
+    public static final ResourceKey<PlacedFeature> ORE_BASALT_VOLCANIC = createKey("ore_basalt_volcanic");
+    public static final ResourceKey<PlacedFeature> ORE_GRANITE_VOLCANIC = createKey("ore_granite_volcanic");
+    public static final ResourceKey<PlacedFeature> ORE_PEGMATITE_VOLCANIC = createKey("ore_pegmatite_volcanic");
 
     //MISC
     public static final ResourceKey<PlacedFeature> LAKE_LAVA_VOLCANIC = createKey("lake_lava_volcanic");
@@ -70,12 +74,18 @@ public class SBPlacedFeatures {
         register(context, TREES_EUCALYPT, configured.getOrThrow(SBConfiguredFeatures.TREES_EUCALYPT), VegetationPlacements.treePlacement(PlacementUtils.countExtra(6, 0.1f, 1), SBBlocks.EUCALYPTUS_SAPLING.get()));
         register(context, TREES_OUTBACK, configured.getOrThrow(SBConfiguredFeatures.TREES_OUTBACK), VegetationPlacements.treePlacement(PlacementUtils.countExtra(2, 0.1f, 1)));
         register(context, TREES_REDWOOD, configured.getOrThrow(SBConfiguredFeatures.TREES_REDWOOD), VegetationPlacements.treePlacement(PlacementUtils.countExtra(10, 0.1f, 1), SBBlocks.REDWOOD_SAPLING.get()));
-        register(context, TREES_OLD_GROWTH_REDWOOD, configured.getOrThrow(SBConfiguredFeatures.TREES_OLD_GROWTH_REDWOOD), VegetationPlacements.treePlacement(PlacementUtils.countExtra(10, 0.1f, 1)));
+        register(context, TREES_OLD_GROWTH_REDWOOD, configured.getOrThrow(SBConfiguredFeatures.TREES_OLD_GROWTH_REDWOOD), VegetationPlacements.treePlacement(PlacementUtils.countExtra(10, 0.1f, 1), SBBlocks.REDWOOD_SAPLING.get()));
         register(context, WHITE_MUSHROOM_COMMON, configured.getOrThrow(SBConfiguredFeatures.PATCH_WHITE_MUSHROOM), mushroomPlacement(4, CountPlacement.of(3)));
-        register(context, WHITE_MUSHROOM_RARE, configured.getOrThrow(SBConfiguredFeatures.PATCH_WHITE_MUSHROOM), mushroomPlacement(128, null));
+        register(context, WHITE_MUSHROOM_RARE, configured.getOrThrow(SBConfiguredFeatures.PATCH_WHITE_MUSHROOM), mushroomPlacement(256, null));
 
-        register(context, EXOSKELETON_ORE_PLACED, configured.getOrThrow(SBConfiguredFeatures.OVERWORLD_EXOSKELETON_ORE_KEY), rareOrePlacement(1, HeightRangePlacement.triangle(VerticalAnchor.aboveBottom(-80), VerticalAnchor.aboveBottom(80))));
-        register(context, LUSH_EXOSKELETON_ORE_PLACED, configured.getOrThrow(SBConfiguredFeatures.OVERWORLD_EXOSKELETON_ORE_KEY), commonOrePlacement(10, HeightRangePlacement.uniform(VerticalAnchor.bottom(), VerticalAnchor.absolute(64))));
+        register(context, ORE_EXOSKELETON, configured.getOrThrow(SBConfiguredFeatures.ORE_EXOSKELETON), rareOrePlacement(1, HeightRangePlacement.triangle(VerticalAnchor.aboveBottom(-80), VerticalAnchor.aboveBottom(80))));
+        register(context, ORE_EXOSKELETON_LUSH, configured.getOrThrow(SBConfiguredFeatures.ORE_EXOSKELETON), commonOrePlacement(10, HeightRangePlacement.uniform(VerticalAnchor.bottom(), VerticalAnchor.absolute(64))));
+        register(context, ORE_OBSIDIAN, configured.getOrThrow(SBConfiguredFeatures.ORE_OBSIDIAN), commonOrePlacement(10, HeightRangePlacement.uniform(VerticalAnchor.absolute(0), VerticalAnchor.absolute(160))));
+        register(context, ORE_PEGMATITE_UPPER, configured.getOrThrow(SBConfiguredFeatures.ORE_PEGMATITE), rareOrePlacement(6, HeightRangePlacement.uniform(VerticalAnchor.absolute(64), VerticalAnchor.absolute(128))));
+        register(context, ORE_PEGMATITE_LOWER, configured.getOrThrow(SBConfiguredFeatures.ORE_PEGMATITE), commonOrePlacement(2, HeightRangePlacement.uniform(VerticalAnchor.absolute(0), VerticalAnchor.absolute(60))));
+        register(context, ORE_BASALT_VOLCANIC, configured.getOrThrow(SBConfiguredFeatures.ORE_BASALT), commonOrePlacement(4, HeightRangePlacement.uniform(VerticalAnchor.absolute(0), VerticalAnchor.absolute(160))));
+        register(context, ORE_GRANITE_VOLCANIC, configured.getOrThrow(OreFeatures.ORE_GRANITE), commonOrePlacement(4, HeightRangePlacement.uniform(VerticalAnchor.absolute(0), VerticalAnchor.absolute(160))));
+        register(context, ORE_PEGMATITE_VOLCANIC, configured.getOrThrow(SBConfiguredFeatures.ORE_PEGMATITE), commonOrePlacement(4, HeightRangePlacement.uniform(VerticalAnchor.absolute(0), VerticalAnchor.absolute(160))));
 
         register(context, LAKE_LAVA_VOLCANIC, configured.getOrThrow(SBConfiguredFeatures.LAKE_LAVA_VOLCANIC), List.of(RarityFilter.onAverageOnceEvery(4), InSquarePlacement.spread(), PlacementUtils.HEIGHTMAP_WORLD_SURFACE, BiomeFilter.biome()));
         register(context, SPRING_LAVA_VOLCANIC, configured.getOrThrow(SBConfiguredFeatures.SPRING_LAVA_VOLCANIC), List.of(CountPlacement.of(20), InSquarePlacement.spread(), HeightRangePlacement.of(VeryBiasedToBottomHeight.of(VerticalAnchor.bottom(), VerticalAnchor.belowTop(8), 8)), BiomeFilter.biome()));
@@ -86,15 +96,23 @@ public class SBPlacedFeatures {
         if (pPlacement != null) {
             builder.add(pPlacement);
         }
-
         if (rarity != 0) {
             builder.add(RarityFilter.onAverageOnceEvery(rarity));
         }
-
-        builder.add(InSquarePlacement.spread());
-        builder.add(PlacementUtils.HEIGHTMAP);
-        builder.add(BiomeFilter.biome());
+        builder.add(InSquarePlacement.spread(), PlacementUtils.HEIGHTMAP, BiomeFilter.biome());
         return builder.build();
+    }
+
+    public static List<PlacementModifier> orePlacement(PlacementModifier rarity, PlacementModifier placementModifier) {
+        return List.of(rarity, InSquarePlacement.spread(), placementModifier, BiomeFilter.biome());
+    }
+
+    public static List<PlacementModifier> commonOrePlacement(int veinsPerChunk, PlacementModifier placementModifier) {
+        return orePlacement(CountPlacement.of(veinsPerChunk), placementModifier);
+    }
+
+    public static List<PlacementModifier> rareOrePlacement(int chunksPerVein, PlacementModifier placementModifier) {
+        return orePlacement(RarityFilter.onAverageOnceEvery(chunksPerVein), placementModifier);
     }
 
     public static ResourceKey<PlacedFeature> createKey(String name) {

@@ -1,6 +1,5 @@
 package net.invictusslayer.slayersbeasts.world.feature;
 
-import com.google.common.base.Suppliers;
 import com.google.common.collect.ImmutableList;
 import net.invictusslayer.slayersbeasts.SlayersBeasts;
 import net.invictusslayer.slayersbeasts.block.SBBlocks;
@@ -44,7 +43,6 @@ import net.minecraft.world.level.levelgen.structure.templatesystem.TagMatchTest;
 import net.minecraft.world.level.material.Fluids;
 
 import java.util.List;
-import java.util.function.Supplier;
 
 public class SBConfiguredFeatures {
     //TREE
@@ -70,16 +68,16 @@ public class SBConfiguredFeatures {
     public static final ResourceKey<ConfiguredFeature<?, ?>> PATCH_WHITE_MUSHROOM = registerKey("patch_white_mushroom");
 
     //ORE
-    public static final ResourceKey<ConfiguredFeature<?, ?>> OVERWORLD_EXOSKELETON_ORE_KEY = registerKey("overworld_exoskeleton_ore");
+    public static final ResourceKey<ConfiguredFeature<?, ?>> ORE_EXOSKELETON = registerKey("ore_exoskeleton");
+    public static final ResourceKey<ConfiguredFeature<?, ?>> ORE_OBSIDIAN = registerKey("ore_obsidian");
+    public static final ResourceKey<ConfiguredFeature<?, ?>> ORE_BASALT = registerKey("ore_basalt");
+    public static final ResourceKey<ConfiguredFeature<?, ?>> ORE_PEGMATITE = registerKey("ore_pegmatite");
 
     //MISC
     public static final ResourceKey<ConfiguredFeature<?, ?>> LAKE_LAVA_VOLCANIC = registerKey("lake_lava_volcanic");
     public static final ResourceKey<ConfiguredFeature<?, ?>> SPRING_LAVA_VOLCANIC = registerKey("spring_lava_volcanic");
 
-    public static final Supplier<List<OreConfiguration.TargetBlockState>> OVERWORLD_EXOSKELETON_ORES = Suppliers.memoize(() -> List.of(
-            OreConfiguration.target(new TagMatchTest(BlockTags.STONE_ORE_REPLACEABLES), SBBlocks.EXOSKELETON_ORE.get().defaultBlockState()),
-            OreConfiguration.target(new TagMatchTest(BlockTags.DEEPSLATE_ORE_REPLACEABLES), SBBlocks.DEEPSLATE_EXOSKELETON_ORE.get().defaultBlockState())));
-
+    @SuppressWarnings("deprecation")
     public static void bootstrap(BootstapContext<ConfiguredFeature<?, ?>> context) {
         HolderGetter<ConfiguredFeature<?, ?>> configured = context.lookup(Registries.CONFIGURED_FEATURE);
         HolderGetter<PlacedFeature> placed = context.lookup(Registries.PLACED_FEATURE);
@@ -125,7 +123,12 @@ public class SBConfiguredFeatures {
         register(context, TREES_OLD_GROWTH_REDWOOD, Feature.RANDOM_SELECTOR, new RandomFeatureConfiguration(List.of(new WeightedPlacedFeature(placed.getOrThrow(SBPlacedFeatures.GIANT_REDWOOD_CHECKED), 0.3F), new WeightedPlacedFeature(PlacementUtils.inlinePlaced(configured.getOrThrow(SBConfiguredFeatures.HUGE_WHITE_MUSHROOM)), 0.05F)), placed.getOrThrow(SBPlacedFeatures.COLOSSAL_REDWOOD_CHECKED)));
         register(context, PATCH_WHITE_MUSHROOM, Feature.RANDOM_PATCH, FeatureUtils.simplePatchConfiguration(Feature.SIMPLE_BLOCK, new SimpleBlockConfiguration(BlockStateProvider.simple(SBBlocks.WHITE_MUSHROOM.get()))));
 
-        register(context, OVERWORLD_EXOSKELETON_ORE_KEY, Feature.ORE, new OreConfiguration(OVERWORLD_EXOSKELETON_ORES.get(), 3));
+        register(context, ORE_EXOSKELETON, Feature.ORE, new OreConfiguration(List.of(
+                OreConfiguration.target(new TagMatchTest(BlockTags.STONE_ORE_REPLACEABLES), SBBlocks.EXOSKELETON_ORE.get().defaultBlockState()),
+                OreConfiguration.target(new TagMatchTest(BlockTags.DEEPSLATE_ORE_REPLACEABLES), SBBlocks.DEEPSLATE_EXOSKELETON_ORE.get().defaultBlockState())), 3));
+        register(context, ORE_OBSIDIAN, Feature.ORE, new OreConfiguration(new TagMatchTest(BlockTags.BASE_STONE_OVERWORLD), Blocks.OBSIDIAN.defaultBlockState(), 33));
+        register(context, ORE_BASALT, Feature.ORE, new OreConfiguration(new TagMatchTest(BlockTags.BASE_STONE_OVERWORLD), Blocks.BASALT.defaultBlockState(), 64));
+        register(context, ORE_PEGMATITE, Feature.ORE, new OreConfiguration(new TagMatchTest(BlockTags.BASE_STONE_OVERWORLD), SBBlocks.PEGMATITE.get().defaultBlockState(), 64));
 
         register(context, LAKE_LAVA_VOLCANIC, Feature.LAKE, new LakeFeature.Configuration(BlockStateProvider.simple(Blocks.LAVA.defaultBlockState()), BlockStateProvider.simple(Blocks.MAGMA_BLOCK.defaultBlockState())));
         register(context, SPRING_LAVA_VOLCANIC, Feature.SPRING, new SpringConfiguration(Fluids.LAVA.defaultFluidState(), true, 4, 1, HolderSet.direct(Block::builtInRegistryHolder, Blocks.BASALT, Blocks.MAGMA_BLOCK, Blocks.SMOOTH_BASALT, Blocks.BLACKSTONE, Blocks.OBSIDIAN)));
