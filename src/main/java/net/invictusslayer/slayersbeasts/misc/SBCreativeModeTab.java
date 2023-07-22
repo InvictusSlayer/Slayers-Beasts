@@ -97,6 +97,20 @@ public final class SBCreativeModeTab {
                         pOutput.accept(SBBlocks.CAJOLE_DOOR.get());
                         pOutput.accept(SBBlocks.CAJOLE_TRAPDOOR.get());
 
+                        pOutput.accept(SBBlocks.DESERT_OAK_LOG.get());
+                        pOutput.accept(SBBlocks.STRIPPED_DESERT_OAK_LOG.get());
+                        pOutput.accept(SBBlocks.DESERT_OAK_WOOD.get());
+                        pOutput.accept(SBBlocks.STRIPPED_DESERT_OAK_WOOD.get());
+                        pOutput.accept(SBBlocks.DESERT_OAK_LEAVES.get());
+                        pOutput.accept(SBBlocks.DESERT_OAK_SAPLING.get());
+                        pOutput.accept(SBBlocks.DESERT_OAK_PLANKS.get());
+                        pOutput.accept(SBBlocks.DESERT_OAK_SLAB.get());
+                        pOutput.accept(SBBlocks.DESERT_OAK_STAIRS.get());
+                        pOutput.accept(SBBlocks.DESERT_OAK_FENCE.get());
+                        pOutput.accept(SBBlocks.DESERT_OAK_FENCE_GATE.get());
+                        pOutput.accept(SBBlocks.DESERT_OAK_DOOR.get());
+                        pOutput.accept(SBBlocks.DESERT_OAK_TRAPDOOR.get());
+
                         pOutput.accept(SBBlocks.EUCALYPTUS_LOG.get());
                         pOutput.accept(SBBlocks.STRIPPED_EUCALYPTUS_LOG.get());
                         pOutput.accept(SBBlocks.EUCALYPTUS_WOOD.get());
@@ -110,6 +124,20 @@ public final class SBCreativeModeTab {
                         pOutput.accept(SBBlocks.EUCALYPTUS_FENCE_GATE.get());
                         pOutput.accept(SBBlocks.EUCALYPTUS_DOOR.get());
                         pOutput.accept(SBBlocks.EUCALYPTUS_TRAPDOOR.get());
+
+                        pOutput.accept(SBBlocks.KAPOK_LOG.get());
+                        pOutput.accept(SBBlocks.STRIPPED_KAPOK_LOG.get());
+                        pOutput.accept(SBBlocks.KAPOK_WOOD.get());
+                        pOutput.accept(SBBlocks.STRIPPED_KAPOK_WOOD.get());
+                        pOutput.accept(SBBlocks.KAPOK_LEAVES.get());
+                        pOutput.accept(SBBlocks.KAPOK_SAPLING.get());
+                        pOutput.accept(SBBlocks.KAPOK_PLANKS.get());
+                        pOutput.accept(SBBlocks.KAPOK_SLAB.get());
+                        pOutput.accept(SBBlocks.KAPOK_STAIRS.get());
+                        pOutput.accept(SBBlocks.KAPOK_FENCE.get());
+                        pOutput.accept(SBBlocks.KAPOK_FENCE_GATE.get());
+                        pOutput.accept(SBBlocks.KAPOK_DOOR.get());
+                        pOutput.accept(SBBlocks.KAPOK_TRAPDOOR.get());
 
                         pOutput.accept(SBBlocks.REDWOOD_LOG.get());
                         pOutput.accept(SBBlocks.STRIPPED_REDWOOD_LOG.get());

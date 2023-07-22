@@ -23,8 +23,9 @@ public class SBSurfaceRuleData {
                         ifTrue(isBiome(SBBiomes.OUTBACK), sequence(
                                 ifTrue(ON_CEILING, setBlock(Blocks.SANDSTONE)),
                                 ifTrue(noiseCondition(Noises.SURFACE, 0.21), setBlock(Blocks.COARSE_DIRT)),
-                                ifTrue(noiseCondition(Noises.ICE, 0.1), setBlock(Blocks.GRAVEL)),
-                                setBlock(Blocks.RED_SAND))),
+                                ifTrue(noiseCondition(Noises.ICE, 0.1), setBlock(Blocks.RED_SAND)),
+                                ifTrue(noiseCondition(Noises.SWAMP, 0.1), setBlock(Blocks.SAND)),
+                                setBlock(Blocks.COARSE_DIRT))),
                         ifTrue(isBiome(SBBiomes.REDWOOD_GROVE, SBBiomes.OLD_GROWTH_REDWOOD_GROVE), sequence(
                                 ifTrue(noiseCondition(Noises.SURFACE, 0.21), setBlock(Blocks.COARSE_DIRT)),
                                 ifTrue(noiseCondition(Noises.SURFACE, -0.12), setBlock(Blocks.PODZOL)),

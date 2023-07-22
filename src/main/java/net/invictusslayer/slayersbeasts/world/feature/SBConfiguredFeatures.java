@@ -3,10 +3,7 @@ package net.invictusslayer.slayersbeasts.world.feature;
 import net.invictusslayer.slayersbeasts.SlayersBeasts;
 import net.invictusslayer.slayersbeasts.block.SBBlocks;
 import net.invictusslayer.slayersbeasts.block.WillowBranchBlock;
-import net.invictusslayer.slayersbeasts.world.feature.foliageplacer.AspenFoliagePlacer;
-import net.invictusslayer.slayersbeasts.world.feature.foliageplacer.CajoleFoliagePlacer;
-import net.invictusslayer.slayersbeasts.world.feature.foliageplacer.EucalyptusFoliagePlacer;
-import net.invictusslayer.slayersbeasts.world.feature.foliageplacer.UltraRedwoodFoliagePlacer;
+import net.invictusslayer.slayersbeasts.world.feature.foliageplacer.*;
 import net.invictusslayer.slayersbeasts.world.feature.trunkplacer.ButtressTrunkPlacer;
 import net.invictusslayer.slayersbeasts.world.feature.trunkplacer.ColossalTrunkPlacer;
 import net.invictusslayer.slayersbeasts.world.feature.trunkplacer.CrossTrunkPlacer;
@@ -87,15 +84,15 @@ public class SBConfiguredFeatures {
         HolderGetter<PlacedFeature> placed = context.lookup(Registries.PLACED_FEATURE);
 
         register(context, ASPEN, Feature.TREE, new TreeConfiguration.TreeConfigurationBuilder(
-                BlockStateProvider.simple(SBBlocks.ASPEN_LOG.get()), new StraightTrunkPlacer(5, 3, 2),
-                BlockStateProvider.simple(SBBlocks.ASPEN_LEAVES.get()), new AspenFoliagePlacer(ConstantInt.of(2), ConstantInt.of(0)), new TwoLayersFeatureSize(1, 0, 2)).build());
+                BlockStateProvider.simple(SBBlocks.ASPEN_LOG.get()), new StraightTrunkPlacer(12, 3, 2),
+                BlockStateProvider.simple(SBBlocks.ASPEN_LEAVES.get()), new TallFoliagePlacer(ConstantInt.of(3), ConstantInt.of(0)), new TwoLayersFeatureSize(1, 0, 2)).build());
         register(context, CAJOLE, Feature.TREE, new TreeConfiguration.TreeConfigurationBuilder(
                 BlockStateProvider.simple(SBBlocks.CAJOLE_LOG.get()), new CrossTrunkPlacer(7, 6, 3),
                 BlockStateProvider.simple(SBBlocks.CAJOLE_LEAVES.get()), new CajoleFoliagePlacer(ConstantInt.of(2), ConstantInt.of(0)), new TwoLayersFeatureSize(1, 0, 2))
                 .decorators(List.of(TrunkVineDecorator.INSTANCE, new LeaveVineDecorator(0.25F))).ignoreVines().build());
         register(context, DESERT_OAK, Feature.TREE, new TreeConfiguration.TreeConfigurationBuilder(
-                BlockStateProvider.simple(SBBlocks.DESERT_OAK_LOG.get()), new StraightTrunkPlacer(5, 2, 2),
-                BlockStateProvider.simple(SBBlocks.DESERT_OAK_LEAVES.get()), new BlobFoliagePlacer(ConstantInt.of(2), ConstantInt.of(0), 3), new TwoLayersFeatureSize(1, 0, 2)).build());
+                BlockStateProvider.simple(SBBlocks.DESERT_OAK_LOG.get()), new StraightTrunkPlacer(6, 2, 2),
+                BlockStateProvider.simple(SBBlocks.DESERT_OAK_LEAVES.get()), new TallFoliagePlacer(ConstantInt.of(2), ConstantInt.of(0)), new TwoLayersFeatureSize(1, 0, 2)).build());
         register(context, EUCALYPTUS, Feature.TREE, new TreeConfiguration.TreeConfigurationBuilder(
                 BlockStateProvider.simple(SBBlocks.EUCALYPTUS_LOG.get()), new CrossTrunkPlacer(14, 8, 2),
                 BlockStateProvider.simple(SBBlocks.EUCALYPTUS_LEAVES.get()), new EucalyptusFoliagePlacer(ConstantInt.of(2), ConstantInt.of(0)), new TwoLayersFeatureSize(1, 0, 2)).build());
@@ -103,8 +100,8 @@ public class SBConfiguredFeatures {
                 BlockStateProvider.simple(SBBlocks.KAPOK_LOG.get()), new ButtressTrunkPlacer(20, 8, 2),
                 BlockStateProvider.simple(SBBlocks.KAPOK_LEAVES.get()), new MegaJungleFoliagePlacer(ConstantInt.of(2), ConstantInt.of(0), 2), new TwoLayersFeatureSize(1, 0, 2)).build());
         register(context, REDWOOD, Feature.TREE, new TreeConfiguration.TreeConfigurationBuilder(
-                BlockStateProvider.simple(SBBlocks.REDWOOD_LOG.get()), new StraightTrunkPlacer(6, 5, 2),
-                BlockStateProvider.simple(SBBlocks.REDWOOD_LEAVES.get()), new AspenFoliagePlacer(ConstantInt.of(2), ConstantInt.of(0)), new TwoLayersFeatureSize(1, 0, 2)).build());
+                BlockStateProvider.simple(SBBlocks.REDWOOD_LOG.get()), new StraightTrunkPlacer(12, 5, 2),
+                BlockStateProvider.simple(SBBlocks.REDWOOD_LEAVES.get()), new TallFoliagePlacer(ConstantInt.of(3), ConstantInt.of(0)), new TwoLayersFeatureSize(1, 0, 2)).build());
         register(context, GIANT_REDWOOD, Feature.TREE, new TreeConfiguration.TreeConfigurationBuilder(
                 BlockStateProvider.simple(SBBlocks.REDWOOD_LOG.get()), new GiantTrunkPlacer(20, 8, 2),
                 BlockStateProvider.simple(SBBlocks.REDWOOD_LEAVES.get()), new MegaPineFoliagePlacer(ConstantInt.of(0), ConstantInt.of(0), UniformInt.of(13, 17)), new TwoLayersFeatureSize(1, 0, 2)).build());

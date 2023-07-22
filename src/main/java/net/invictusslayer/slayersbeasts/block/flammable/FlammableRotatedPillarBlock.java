@@ -71,6 +71,12 @@ public class FlammableRotatedPillarBlock extends RotatedPillarBlock {
             if (state.is(SBBlocks.REDWOOD_WOOD.get())) {
                 return SBBlocks.STRIPPED_REDWOOD_WOOD.get().defaultBlockState().setValue(AXIS, state.getValue(AXIS));
             }
+            if (state.is(SBBlocks.WILLOW_LOG.get())) {
+                return SBBlocks.STRIPPED_WILLOW_LOG.get().defaultBlockState().setValue(AXIS, state.getValue(AXIS));
+            }
+            if (state.is(SBBlocks.WILLOW_WOOD.get())) {
+                return SBBlocks.STRIPPED_WILLOW_WOOD.get().defaultBlockState().setValue(AXIS, state.getValue(AXIS));
+            }
         }
         return super.getToolModifiedState(state, context, toolAction, simulate);
     }

@@ -62,10 +62,6 @@ public class UltraRedwoodFoliagePlacer extends FoliagePlacer {
     }
 
     protected boolean shouldSkipLocation(RandomSource pRandom, int pLocalX, int pLocalY, int pLocalZ, int pRange, boolean pLarge) {
-        if (pLocalX + pLocalZ >= 9) {
-            return true;
-        } else {
-            return pLocalX * pLocalX + pLocalZ * pLocalZ > pRange * pRange;
-        }
+        return pLocalX * pLocalX + pLocalZ * pLocalZ > pRange * pRange;
     }
 }
