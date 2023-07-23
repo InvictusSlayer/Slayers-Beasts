@@ -12,6 +12,6 @@ public class WillowGrower extends AbstractMegaTreeGrower {
     }
 
     protected ResourceKey<ConfiguredFeature<?, ?>> getConfiguredMegaFeature(RandomSource pRandom) {
-        return SBConfiguredFeatures.WILLOW;
+        return SBConfiguredFeatures.GIANT_WILLOW;
     }
 }

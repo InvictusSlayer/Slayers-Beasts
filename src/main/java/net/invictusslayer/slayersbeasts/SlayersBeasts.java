@@ -13,7 +13,7 @@ import net.invictusslayer.slayersbeasts.misc.SBSounds;
 import net.invictusslayer.slayersbeasts.world.biome.*;
 import net.invictusslayer.slayersbeasts.world.dimension.SBDimensions;
 import net.invictusslayer.slayersbeasts.world.feature.SBFeatures;
-import net.invictusslayer.slayersbeasts.world.feature.decorator.SBTreeDecorators;
+import net.invictusslayer.slayersbeasts.world.feature.treedecorator.SBTreeDecorators;
 import net.invictusslayer.slayersbeasts.world.feature.foliageplacer.SBFoliagePlacers;
 import net.invictusslayer.slayersbeasts.world.feature.trunkplacer.SBTrunkPlacers;
 import net.minecraft.resources.ResourceLocation;

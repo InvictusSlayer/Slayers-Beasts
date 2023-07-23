@@ -12,6 +12,6 @@ public class KapokGrower extends AbstractMegaTreeGrower {
     }
 
     protected ResourceKey<ConfiguredFeature<?, ?>> getConfiguredMegaFeature(RandomSource pRandom) {
-        return SBConfiguredFeatures.KAPOK;
+        return SBConfiguredFeatures.GIANT_KAPOK;
     }
 }

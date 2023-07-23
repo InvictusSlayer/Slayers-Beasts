@@ -12,10 +12,13 @@ import net.minecraft.world.level.levelgen.feature.foliageplacers.FoliagePlacerTy
 
 public class TallFoliagePlacer extends FoliagePlacer {
     public static final Codec<TallFoliagePlacer> CODEC = RecordCodecBuilder.create(instance ->
-            foliagePlacerParts(instance).apply(instance, TallFoliagePlacer::new));
+            foliagePlacerParts(instance).and(Codec.intRange(1, 5).fieldOf("stacks").forGetter(placer -> placer.stacks))
+                    .apply(instance, TallFoliagePlacer::new));
+    private final int stacks;
 
-    public TallFoliagePlacer(IntProvider pRadius, IntProvider pOffset) {
+    public TallFoliagePlacer(IntProvider pRadius, IntProvider pOffset, int pStacks) {
         super(pRadius, pOffset);
+        this.stacks = pStacks;
     }
 
     protected FoliagePlacerType<?> type() {
@@ -26,20 +29,18 @@ public class TallFoliagePlacer extends FoliagePlacer {
         boolean flag = pAttachment.doubleTrunk();
         BlockPos blockPos = pAttachment.pos().above(pOffset);
         int r = pFoliageRadius + pAttachment.radiusOffset();
-        placeLeavesRow(pLevel, pBlockSetter, pRandom, pConfig, blockPos, r - 2, -13, flag);
-        placeLeavesRow(pLevel, pBlockSetter, pRandom, pConfig, blockPos, r - 1, -12, flag);
-        placeLeavesRow(pLevel, pBlockSetter, pRandom, pConfig, blockPos, r, -11, flag);
-        placeLeavesRow(pLevel, pBlockSetter, pRandom, pConfig, blockPos, r, -10, flag);
-        placeLeavesRow(pLevel, pBlockSetter, pRandom, pConfig, blockPos, r, -9, flag);
-        placeLeavesRow(pLevel, pBlockSetter, pRandom, pConfig, blockPos, r - 1, -8, flag);
-        placeLeavesRow(pLevel, pBlockSetter, pRandom, pConfig, blockPos, r, -7, flag);
-        placeLeavesRow(pLevel, pBlockSetter, pRandom, pConfig, blockPos, r, -6, flag);
-        placeLeavesRow(pLevel, pBlockSetter, pRandom, pConfig, blockPos, r, -5, flag);
-        placeLeavesRow(pLevel, pBlockSetter, pRandom, pConfig, blockPos, r - 1, -4, flag);
-        placeLeavesRow(pLevel, pBlockSetter, pRandom, pConfig, blockPos, r, -3, flag);
-        placeLeavesRow(pLevel, pBlockSetter, pRandom, pConfig, blockPos, r, -2, flag);
-        placeLeavesRow(pLevel, pBlockSetter, pRandom, pConfig, blockPos, r, -1, flag);
-        placeLeavesRow(pLevel, pBlockSetter, pRandom, pConfig, blockPos, r - 1, 0, flag);
+        int h = -this.stacks * 4;
+        placeLeavesRow(pLevel, pBlockSetter, pRandom, pConfig, blockPos, r - 2, h - 1, flag);
+        placeLeavesRow(pLevel, pBlockSetter, pRandom, pConfig, blockPos, r - 1, h, flag);
+
+        for (int i = 0; i < this.stacks; i++) {
+            int j = -4 * i;
+            placeLeavesRow(pLevel, pBlockSetter, pRandom, pConfig, blockPos, r, j - 3, flag);
+            placeLeavesRow(pLevel, pBlockSetter, pRandom, pConfig, blockPos, r, j - 2, flag);
+            placeLeavesRow(pLevel, pBlockSetter, pRandom, pConfig, blockPos, r, j - 1, flag);
+            placeLeavesRow(pLevel, pBlockSetter, pRandom, pConfig, blockPos, r - 1, j, flag);
+        }
+
         placeLeavesRow(pLevel, pBlockSetter, pRandom, pConfig, blockPos, r - 2, 1, flag);
     }
 
@@ -48,12 +49,6 @@ public class TallFoliagePlacer extends FoliagePlacer {
     }
 
     protected boolean shouldSkipLocation(RandomSource pRandom, int pLocalX, int pLocalY, int pLocalZ, int pRange, boolean pLarge) {
-        if (pLocalX + pLocalZ > pRange || pLocalX > 2 || pLocalZ > 2) {
-            return true;
-        }
-        if (pLocalX == 2 || pLocalZ == 2) {
-            return pRandom.nextBoolean();
-        }
-        return false;
+        return pLocalX + pLocalZ > pRange || pLocalX > 2 || pLocalZ > 2;
     }
 }
