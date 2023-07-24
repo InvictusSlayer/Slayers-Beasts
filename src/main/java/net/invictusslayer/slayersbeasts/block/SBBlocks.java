@@ -59,8 +59,8 @@ public final class SBBlocks {
     public static final RegistryObject<Block> CUT_BLACK_SANDSTONE_SLAB = registerBlock("cut_black_sandstone_slab", () -> new SlabBlock(BlockBehaviour.Properties.copy(Blocks.CUT_SANDSTONE_SLAB).mapColor(MapColor.COLOR_BLACK)));
     public static final RegistryObject<Block> CHISELED_BLACK_SANDSTONE = registerBlock("chiseled_black_sandstone", () -> new Block(BlockBehaviour.Properties.copy(Blocks.CHISELED_SANDSTONE).mapColor(MapColor.COLOR_BLACK)));
 
-    public static final RegistryObject<Block> WHITE_MUSHROOM = registerBlock("white_mushroom", () -> new MushroomBlock(BlockBehaviour.Properties.copy(Blocks.RED_MUSHROOM).mapColor(MapColor.TERRACOTTA_WHITE), SBConfiguredFeatures.HUGE_WHITE_MUSHROOM));
     public static final RegistryObject<Block> WHITE_MUSHROOM_BLOCK = registerBlock("white_mushroom_block", () -> new HugeMushroomBlock(BlockBehaviour.Properties.copy(Blocks.RED_MUSHROOM_BLOCK).mapColor(MapColor.TERRACOTTA_WHITE)));
+    public static final RegistryObject<Block> WHITE_MUSHROOM = registerBlock("white_mushroom", () -> new MushroomBlock(BlockBehaviour.Properties.copy(Blocks.RED_MUSHROOM).mapColor(MapColor.TERRACOTTA_WHITE), SBConfiguredFeatures.HUGE_WHITE_MUSHROOM));
 
     public static final RegistryObject<Block> ASPEN_LOG = registerBlock("aspen_log", () -> new FlammableRotatedPillarBlock(BlockBehaviour.Properties.copy(Blocks.OAK_LOG)));
     public static final RegistryObject<Block> STRIPPED_ASPEN_LOG = registerBlock("stripped_aspen_log", () -> new FlammableRotatedPillarBlock(BlockBehaviour.Properties.copy(Blocks.STRIPPED_OAK_LOG)));
@@ -73,10 +73,10 @@ public final class SBBlocks {
     public static final RegistryObject<Block> ASPEN_STAIRS = registerBlock("aspen_stairs", () -> new FlammableStairBlock(() -> ASPEN_PLANKS.get().defaultBlockState(), BlockBehaviour.Properties.copy(Blocks.OAK_STAIRS), 20, 5));
     public static final RegistryObject<Block> ASPEN_FENCE = registerBlock("aspen_fence", () -> new FlammableFenceBlock(BlockBehaviour.Properties.copy(Blocks.OAK_FENCE), 20, 5));
     public static final RegistryObject<Block> ASPEN_FENCE_GATE = registerBlock("aspen_fence_gate", () -> new FlammableFenceGateBlock(BlockBehaviour.Properties.copy(Blocks.OAK_FENCE_GATE), 20, 5));
-    public static final RegistryObject<Block> ASPEN_BUTTON = registerBlock("aspen_button", () -> new ButtonBlock(BlockBehaviour.Properties.copy(Blocks.OAK_BUTTON), SBBlockSetType.ASPEN, 15, true));
-    public static final RegistryObject<Block> ASPEN_PRESSURE_PLATE = registerBlock("aspen_pressure_plate", () -> new PressurePlateBlock(PressurePlateBlock.Sensitivity.EVERYTHING, BlockBehaviour.Properties.copy(Blocks.OAK_PRESSURE_PLATE), SBBlockSetType.ASPEN));
-    public static final RegistryObject<Block> ASPEN_DOOR = registerBlock("aspen_door", () -> new DoorBlock(BlockBehaviour.Properties.copy(Blocks.OAK_DOOR), SBBlockSetType.ASPEN));
-    public static final RegistryObject<Block> ASPEN_TRAPDOOR = registerBlock("aspen_trapdoor", () -> new TrapDoorBlock(BlockBehaviour.Properties.copy(Blocks.OAK_TRAPDOOR), SBBlockSetType.ASPEN));
+    public static final RegistryObject<Block> ASPEN_BUTTON = registerBlock("aspen_button", () -> new ButtonBlock(BlockBehaviour.Properties.copy(Blocks.OAK_BUTTON), SBBlockSets.ASPEN, 15, true));
+    public static final RegistryObject<Block> ASPEN_PRESSURE_PLATE = registerBlock("aspen_pressure_plate", () -> new PressurePlateBlock(PressurePlateBlock.Sensitivity.EVERYTHING, BlockBehaviour.Properties.copy(Blocks.OAK_PRESSURE_PLATE), SBBlockSets.ASPEN));
+    public static final RegistryObject<Block> ASPEN_DOOR = registerBlock("aspen_door", () -> new DoorBlock(BlockBehaviour.Properties.copy(Blocks.OAK_DOOR), SBBlockSets.ASPEN));
+    public static final RegistryObject<Block> ASPEN_TRAPDOOR = registerBlock("aspen_trapdoor", () -> new TrapDoorBlock(BlockBehaviour.Properties.copy(Blocks.OAK_TRAPDOOR), SBBlockSets.ASPEN));
 
     public static final RegistryObject<Block> CAJOLE_LOG = registerBlock("cajole_log", () -> new FlammableRotatedPillarBlock(BlockBehaviour.Properties.copy(Blocks.OAK_LOG)));
     public static final RegistryObject<Block> STRIPPED_CAJOLE_LOG = registerBlock("stripped_cajole_log", () -> new FlammableRotatedPillarBlock(BlockBehaviour.Properties.copy(Blocks.STRIPPED_OAK_LOG)));
@@ -89,10 +89,10 @@ public final class SBBlocks {
     public static final RegistryObject<Block> CAJOLE_STAIRS = registerBlock("cajole_stairs", () -> new FlammableStairBlock(() -> CAJOLE_PLANKS.get().defaultBlockState(), BlockBehaviour.Properties.copy(Blocks.OAK_STAIRS), 20, 5));
     public static final RegistryObject<Block> CAJOLE_FENCE = registerBlock("cajole_fence", () -> new FlammableFenceBlock(BlockBehaviour.Properties.copy(Blocks.OAK_FENCE), 20, 5));
     public static final RegistryObject<Block> CAJOLE_FENCE_GATE = registerBlock("cajole_fence_gate", () -> new FlammableFenceGateBlock(BlockBehaviour.Properties.copy(Blocks.OAK_FENCE_GATE), 20, 5));
-    public static final RegistryObject<Block> CAJOLE_BUTTON = registerBlock("cajole_button", () -> new ButtonBlock(BlockBehaviour.Properties.copy(Blocks.OAK_BUTTON), SBBlockSetType.CAJOLE, 15, true));
-    public static final RegistryObject<Block> CAJOLE_PRESSURE_PLATE = registerBlock("cajole_pressure_plate", () -> new PressurePlateBlock(PressurePlateBlock.Sensitivity.EVERYTHING, BlockBehaviour.Properties.copy(Blocks.OAK_PRESSURE_PLATE), SBBlockSetType.CAJOLE));
-    public static final RegistryObject<Block> CAJOLE_DOOR = registerBlock("cajole_door", () -> new DoorBlock(BlockBehaviour.Properties.copy(Blocks.OAK_DOOR), SBBlockSetType.CAJOLE));
-    public static final RegistryObject<Block> CAJOLE_TRAPDOOR = registerBlock("cajole_trapdoor", () -> new TrapDoorBlock(BlockBehaviour.Properties.copy(Blocks.OAK_TRAPDOOR), SBBlockSetType.CAJOLE));
+    public static final RegistryObject<Block> CAJOLE_BUTTON = registerBlock("cajole_button", () -> new ButtonBlock(BlockBehaviour.Properties.copy(Blocks.OAK_BUTTON), SBBlockSets.CAJOLE, 15, true));
+    public static final RegistryObject<Block> CAJOLE_PRESSURE_PLATE = registerBlock("cajole_pressure_plate", () -> new PressurePlateBlock(PressurePlateBlock.Sensitivity.EVERYTHING, BlockBehaviour.Properties.copy(Blocks.OAK_PRESSURE_PLATE), SBBlockSets.CAJOLE));
+    public static final RegistryObject<Block> CAJOLE_DOOR = registerBlock("cajole_door", () -> new DoorBlock(BlockBehaviour.Properties.copy(Blocks.OAK_DOOR), SBBlockSets.CAJOLE));
+    public static final RegistryObject<Block> CAJOLE_TRAPDOOR = registerBlock("cajole_trapdoor", () -> new TrapDoorBlock(BlockBehaviour.Properties.copy(Blocks.OAK_TRAPDOOR), SBBlockSets.CAJOLE));
     
     public static final RegistryObject<Block> DESERT_OAK_LOG = registerBlock("desert_oak_log", () -> new FlammableRotatedPillarBlock(BlockBehaviour.Properties.copy(Blocks.OAK_LOG)));
     public static final RegistryObject<Block> STRIPPED_DESERT_OAK_LOG = registerBlock("stripped_desert_oak_log", () -> new FlammableRotatedPillarBlock(BlockBehaviour.Properties.copy(Blocks.STRIPPED_OAK_LOG)));
@@ -105,10 +105,10 @@ public final class SBBlocks {
     public static final RegistryObject<Block> DESERT_OAK_STAIRS = registerBlock("desert_oak_stairs", () -> new FlammableStairBlock(() -> DESERT_OAK_PLANKS.get().defaultBlockState(), BlockBehaviour.Properties.copy(Blocks.OAK_STAIRS), 20, 5));
     public static final RegistryObject<Block> DESERT_OAK_FENCE = registerBlock("desert_oak_fence", () -> new FlammableFenceBlock(BlockBehaviour.Properties.copy(Blocks.OAK_FENCE), 20, 5));
     public static final RegistryObject<Block> DESERT_OAK_FENCE_GATE = registerBlock("desert_oak_fence_gate", () -> new FlammableFenceGateBlock(BlockBehaviour.Properties.copy(Blocks.OAK_FENCE_GATE), 20, 5));
-    public static final RegistryObject<Block> DESERT_OAK_BUTTON = registerBlock("desert_oak_button", () -> new ButtonBlock(BlockBehaviour.Properties.copy(Blocks.OAK_BUTTON), SBBlockSetType.DESERT_OAK, 15, true));
-    public static final RegistryObject<Block> DESERT_OAK_PRESSURE_PLATE = registerBlock("desert_oak_pressure_plate", () -> new PressurePlateBlock(PressurePlateBlock.Sensitivity.EVERYTHING, BlockBehaviour.Properties.copy(Blocks.OAK_PRESSURE_PLATE), SBBlockSetType.DESERT_OAK));
-    public static final RegistryObject<Block> DESERT_OAK_DOOR = registerBlock("desert_oak_door", () -> new DoorBlock(BlockBehaviour.Properties.copy(Blocks.OAK_DOOR), SBBlockSetType.DESERT_OAK));
-    public static final RegistryObject<Block> DESERT_OAK_TRAPDOOR = registerBlock("desert_oak_trapdoor", () -> new TrapDoorBlock(BlockBehaviour.Properties.copy(Blocks.OAK_TRAPDOOR), SBBlockSetType.DESERT_OAK));
+    public static final RegistryObject<Block> DESERT_OAK_BUTTON = registerBlock("desert_oak_button", () -> new ButtonBlock(BlockBehaviour.Properties.copy(Blocks.OAK_BUTTON), SBBlockSets.DESERT_OAK, 15, true));
+    public static final RegistryObject<Block> DESERT_OAK_PRESSURE_PLATE = registerBlock("desert_oak_pressure_plate", () -> new PressurePlateBlock(PressurePlateBlock.Sensitivity.EVERYTHING, BlockBehaviour.Properties.copy(Blocks.OAK_PRESSURE_PLATE), SBBlockSets.DESERT_OAK));
+    public static final RegistryObject<Block> DESERT_OAK_DOOR = registerBlock("desert_oak_door", () -> new DoorBlock(BlockBehaviour.Properties.copy(Blocks.OAK_DOOR), SBBlockSets.DESERT_OAK));
+    public static final RegistryObject<Block> DESERT_OAK_TRAPDOOR = registerBlock("desert_oak_trapdoor", () -> new TrapDoorBlock(BlockBehaviour.Properties.copy(Blocks.OAK_TRAPDOOR), SBBlockSets.DESERT_OAK));
 
     public static final RegistryObject<Block> EUCALYPTUS_LOG = registerBlock("eucalyptus_log", () -> new FlammableRotatedPillarBlock(BlockBehaviour.Properties.copy(Blocks.OAK_LOG)));
     public static final RegistryObject<Block> STRIPPED_EUCALYPTUS_LOG = registerBlock("stripped_eucalyptus_log", () -> new FlammableRotatedPillarBlock(BlockBehaviour.Properties.copy(Blocks.STRIPPED_OAK_LOG)));
@@ -121,10 +121,10 @@ public final class SBBlocks {
     public static final RegistryObject<Block> EUCALYPTUS_STAIRS = registerBlock("eucalyptus_stairs", () -> new FlammableStairBlock(() -> EUCALYPTUS_PLANKS.get().defaultBlockState(), BlockBehaviour.Properties.copy(Blocks.OAK_STAIRS), 20, 5));
     public static final RegistryObject<Block> EUCALYPTUS_FENCE = registerBlock("eucalyptus_fence", () -> new FlammableFenceBlock(BlockBehaviour.Properties.copy(Blocks.OAK_FENCE), 20, 5));
     public static final RegistryObject<Block> EUCALYPTUS_FENCE_GATE = registerBlock("eucalyptus_fence_gate", () -> new FlammableFenceGateBlock(BlockBehaviour.Properties.copy(Blocks.OAK_FENCE_GATE), 20, 5));
-    public static final RegistryObject<Block> EUCALYPTUS_BUTTON = registerBlock("eucalyptus_button", () -> new ButtonBlock(BlockBehaviour.Properties.copy(Blocks.OAK_BUTTON), SBBlockSetType.EUCALYPTUS, 15, true));
-    public static final RegistryObject<Block> EUCALYPTUS_PRESSURE_PLATE = registerBlock("eucalyptus_pressure_plate", () -> new PressurePlateBlock(PressurePlateBlock.Sensitivity.EVERYTHING, BlockBehaviour.Properties.copy(Blocks.OAK_PRESSURE_PLATE), SBBlockSetType.EUCALYPTUS));
-    public static final RegistryObject<Block> EUCALYPTUS_DOOR = registerBlock("eucalyptus_door", () -> new DoorBlock(BlockBehaviour.Properties.copy(Blocks.OAK_DOOR), SBBlockSetType.EUCALYPTUS));
-    public static final RegistryObject<Block> EUCALYPTUS_TRAPDOOR = registerBlock("eucalyptus_trapdoor", () -> new TrapDoorBlock(BlockBehaviour.Properties.copy(Blocks.OAK_TRAPDOOR), SBBlockSetType.EUCALYPTUS));
+    public static final RegistryObject<Block> EUCALYPTUS_BUTTON = registerBlock("eucalyptus_button", () -> new ButtonBlock(BlockBehaviour.Properties.copy(Blocks.OAK_BUTTON), SBBlockSets.EUCALYPTUS, 15, true));
+    public static final RegistryObject<Block> EUCALYPTUS_PRESSURE_PLATE = registerBlock("eucalyptus_pressure_plate", () -> new PressurePlateBlock(PressurePlateBlock.Sensitivity.EVERYTHING, BlockBehaviour.Properties.copy(Blocks.OAK_PRESSURE_PLATE), SBBlockSets.EUCALYPTUS));
+    public static final RegistryObject<Block> EUCALYPTUS_DOOR = registerBlock("eucalyptus_door", () -> new DoorBlock(BlockBehaviour.Properties.copy(Blocks.OAK_DOOR), SBBlockSets.EUCALYPTUS));
+    public static final RegistryObject<Block> EUCALYPTUS_TRAPDOOR = registerBlock("eucalyptus_trapdoor", () -> new TrapDoorBlock(BlockBehaviour.Properties.copy(Blocks.OAK_TRAPDOOR), SBBlockSets.EUCALYPTUS));
 
     public static final RegistryObject<Block> KAPOK_LOG = registerBlock("kapok_log", () -> new FlammableRotatedPillarBlock(BlockBehaviour.Properties.copy(Blocks.OAK_LOG)));
     public static final RegistryObject<Block> STRIPPED_KAPOK_LOG = registerBlock("stripped_kapok_log", () -> new FlammableRotatedPillarBlock(BlockBehaviour.Properties.copy(Blocks.STRIPPED_OAK_LOG)));
@@ -137,10 +137,10 @@ public final class SBBlocks {
     public static final RegistryObject<Block> KAPOK_STAIRS = registerBlock("kapok_stairs", () -> new FlammableStairBlock(() -> KAPOK_PLANKS.get().defaultBlockState(), BlockBehaviour.Properties.copy(Blocks.OAK_STAIRS), 20, 5));
     public static final RegistryObject<Block> KAPOK_FENCE = registerBlock("kapok_fence", () -> new FlammableFenceBlock(BlockBehaviour.Properties.copy(Blocks.OAK_FENCE), 20, 5));
     public static final RegistryObject<Block> KAPOK_FENCE_GATE = registerBlock("kapok_fence_gate", () -> new FlammableFenceGateBlock(BlockBehaviour.Properties.copy(Blocks.OAK_FENCE_GATE), 20, 5));
-    public static final RegistryObject<Block> KAPOK_BUTTON = registerBlock("kapok_button", () -> new ButtonBlock(BlockBehaviour.Properties.copy(Blocks.OAK_BUTTON), SBBlockSetType.KAPOK, 15, true));
-    public static final RegistryObject<Block> KAPOK_PRESSURE_PLATE = registerBlock("kapok_pressure_plate", () -> new PressurePlateBlock(PressurePlateBlock.Sensitivity.EVERYTHING, BlockBehaviour.Properties.copy(Blocks.OAK_PRESSURE_PLATE), SBBlockSetType.KAPOK));
-    public static final RegistryObject<Block> KAPOK_DOOR = registerBlock("kapok_door", () -> new DoorBlock(BlockBehaviour.Properties.copy(Blocks.OAK_DOOR), SBBlockSetType.KAPOK));
-    public static final RegistryObject<Block> KAPOK_TRAPDOOR = registerBlock("kapok_trapdoor", () -> new TrapDoorBlock(BlockBehaviour.Properties.copy(Blocks.OAK_TRAPDOOR), SBBlockSetType.KAPOK));
+    public static final RegistryObject<Block> KAPOK_BUTTON = registerBlock("kapok_button", () -> new ButtonBlock(BlockBehaviour.Properties.copy(Blocks.OAK_BUTTON), SBBlockSets.KAPOK, 15, true));
+    public static final RegistryObject<Block> KAPOK_PRESSURE_PLATE = registerBlock("kapok_pressure_plate", () -> new PressurePlateBlock(PressurePlateBlock.Sensitivity.EVERYTHING, BlockBehaviour.Properties.copy(Blocks.OAK_PRESSURE_PLATE), SBBlockSets.KAPOK));
+    public static final RegistryObject<Block> KAPOK_DOOR = registerBlock("kapok_door", () -> new DoorBlock(BlockBehaviour.Properties.copy(Blocks.OAK_DOOR), SBBlockSets.KAPOK));
+    public static final RegistryObject<Block> KAPOK_TRAPDOOR = registerBlock("kapok_trapdoor", () -> new TrapDoorBlock(BlockBehaviour.Properties.copy(Blocks.OAK_TRAPDOOR), SBBlockSets.KAPOK));
 
     public static final RegistryObject<Block> REDWOOD_LOG = registerBlock("redwood_log", () -> new FlammableRotatedPillarBlock(BlockBehaviour.Properties.copy(Blocks.OAK_LOG)));
     public static final RegistryObject<Block> STRIPPED_REDWOOD_LOG = registerBlock("stripped_redwood_log", () -> new FlammableRotatedPillarBlock(BlockBehaviour.Properties.copy(Blocks.STRIPPED_OAK_LOG)));
@@ -153,10 +153,10 @@ public final class SBBlocks {
     public static final RegistryObject<Block> REDWOOD_STAIRS = registerBlock("redwood_stairs", () -> new FlammableStairBlock(() -> REDWOOD_PLANKS.get().defaultBlockState(), BlockBehaviour.Properties.copy(Blocks.OAK_STAIRS), 20, 5));
     public static final RegistryObject<Block> REDWOOD_FENCE = registerBlock("redwood_fence", () -> new FlammableFenceBlock(BlockBehaviour.Properties.copy(Blocks.OAK_FENCE), 20, 5));
     public static final RegistryObject<Block> REDWOOD_FENCE_GATE = registerBlock("redwood_fence_gate", () -> new FlammableFenceGateBlock(BlockBehaviour.Properties.copy(Blocks.OAK_FENCE_GATE), 20, 5));
-    public static final RegistryObject<Block> REDWOOD_BUTTON = registerBlock("redwood_button", () -> new ButtonBlock(BlockBehaviour.Properties.copy(Blocks.OAK_BUTTON), SBBlockSetType.REDWOOD, 15, true));
-    public static final RegistryObject<Block> REDWOOD_PRESSURE_PLATE = registerBlock("redwood_pressure_plate", () -> new PressurePlateBlock(PressurePlateBlock.Sensitivity.EVERYTHING, BlockBehaviour.Properties.copy(Blocks.OAK_PRESSURE_PLATE), SBBlockSetType.REDWOOD));
-    public static final RegistryObject<Block> REDWOOD_DOOR = registerBlock("redwood_door", () -> new DoorBlock(BlockBehaviour.Properties.copy(Blocks.OAK_DOOR), SBBlockSetType.REDWOOD));
-    public static final RegistryObject<Block> REDWOOD_TRAPDOOR = registerBlock("redwood_trapdoor", () -> new TrapDoorBlock(BlockBehaviour.Properties.copy(Blocks.OAK_TRAPDOOR), SBBlockSetType.REDWOOD));
+    public static final RegistryObject<Block> REDWOOD_BUTTON = registerBlock("redwood_button", () -> new ButtonBlock(BlockBehaviour.Properties.copy(Blocks.OAK_BUTTON), SBBlockSets.REDWOOD, 15, true));
+    public static final RegistryObject<Block> REDWOOD_PRESSURE_PLATE = registerBlock("redwood_pressure_plate", () -> new PressurePlateBlock(PressurePlateBlock.Sensitivity.EVERYTHING, BlockBehaviour.Properties.copy(Blocks.OAK_PRESSURE_PLATE), SBBlockSets.REDWOOD));
+    public static final RegistryObject<Block> REDWOOD_DOOR = registerBlock("redwood_door", () -> new DoorBlock(BlockBehaviour.Properties.copy(Blocks.OAK_DOOR), SBBlockSets.REDWOOD));
+    public static final RegistryObject<Block> REDWOOD_TRAPDOOR = registerBlock("redwood_trapdoor", () -> new TrapDoorBlock(BlockBehaviour.Properties.copy(Blocks.OAK_TRAPDOOR), SBBlockSets.REDWOOD));
 
     public static final RegistryObject<Block> WILLOW_LOG = registerBlock("willow_log", () -> new FlammableRotatedPillarBlock(BlockBehaviour.Properties.copy(Blocks.OAK_LOG)));
     public static final RegistryObject<Block> STRIPPED_WILLOW_LOG = registerBlock("stripped_willow_log", () -> new FlammableRotatedPillarBlock(BlockBehaviour.Properties.copy(Blocks.STRIPPED_OAK_LOG)));
@@ -169,10 +169,10 @@ public final class SBBlocks {
     public static final RegistryObject<Block> WILLOW_STAIRS = registerBlock("willow_stairs", () -> new FlammableStairBlock(() -> WILLOW_PLANKS.get().defaultBlockState(), BlockBehaviour.Properties.copy(Blocks.OAK_STAIRS), 20, 5));
     public static final RegistryObject<Block> WILLOW_FENCE = registerBlock("willow_fence", () -> new FlammableFenceBlock(BlockBehaviour.Properties.copy(Blocks.OAK_FENCE), 20, 5));
     public static final RegistryObject<Block> WILLOW_FENCE_GATE = registerBlock("willow_fence_gate", () -> new FlammableFenceGateBlock(BlockBehaviour.Properties.copy(Blocks.OAK_FENCE_GATE), 20, 5));
-    public static final RegistryObject<Block> WILLOW_BUTTON = registerBlock("willow_button", () -> new ButtonBlock(BlockBehaviour.Properties.copy(Blocks.OAK_BUTTON), SBBlockSetType.WILLOW, 15, true));
-    public static final RegistryObject<Block> WILLOW_PRESSURE_PLATE = registerBlock("willow_pressure_plate", () -> new PressurePlateBlock(PressurePlateBlock.Sensitivity.EVERYTHING, BlockBehaviour.Properties.copy(Blocks.OAK_PRESSURE_PLATE), SBBlockSetType.WILLOW));
-    public static final RegistryObject<Block> WILLOW_DOOR = registerBlock("willow_door", () -> new DoorBlock(BlockBehaviour.Properties.copy(Blocks.OAK_DOOR), SBBlockSetType.WILLOW));
-    public static final RegistryObject<Block> WILLOW_TRAPDOOR = registerBlock("willow_trapdoor", () -> new TrapDoorBlock(BlockBehaviour.Properties.copy(Blocks.OAK_TRAPDOOR), SBBlockSetType.WILLOW));
+    public static final RegistryObject<Block> WILLOW_BUTTON = registerBlock("willow_button", () -> new ButtonBlock(BlockBehaviour.Properties.copy(Blocks.OAK_BUTTON), SBBlockSets.WILLOW, 15, true));
+    public static final RegistryObject<Block> WILLOW_PRESSURE_PLATE = registerBlock("willow_pressure_plate", () -> new PressurePlateBlock(PressurePlateBlock.Sensitivity.EVERYTHING, BlockBehaviour.Properties.copy(Blocks.OAK_PRESSURE_PLATE), SBBlockSets.WILLOW));
+    public static final RegistryObject<Block> WILLOW_DOOR = registerBlock("willow_door", () -> new DoorBlock(BlockBehaviour.Properties.copy(Blocks.OAK_DOOR), SBBlockSets.WILLOW));
+    public static final RegistryObject<Block> WILLOW_TRAPDOOR = registerBlock("willow_trapdoor", () -> new TrapDoorBlock(BlockBehaviour.Properties.copy(Blocks.OAK_TRAPDOOR), SBBlockSets.WILLOW));
     public static final RegistryObject<Block> WILLOW_BRANCH = registerBlock("willow_branch", () -> new WillowBranchBlock(BlockBehaviour.Properties.of().mapColor(MapColor.PLANT).randomTicks().noCollission().strength(0.2F).sound(SoundType.GRASS).ignitedByLava().pushReaction(PushReaction.DESTROY)));
     public static final RegistryObject<Block> WILLOW_BRANCH_PLANT = registerBlock("willow_branch_plant", () -> new WillowBranchPlantBlock(BlockBehaviour.Properties.of().mapColor(MapColor.PLANT).noCollission().strength(0.2F).sound(SoundType.GRASS).ignitedByLava().pushReaction(PushReaction.DESTROY)));
 

@@ -9,7 +9,7 @@ import net.minecraft.world.level.block.state.properties.BlockSetType;
 import java.util.Set;
 import java.util.stream.Stream;
 
-public record SBBlockSetType(String name, boolean canOpenByHand, SoundType soundType, SoundEvent doorClose, SoundEvent doorOpen, SoundEvent trapdoorClose, SoundEvent trapdoorOpen, SoundEvent pressurePlateClickOff, SoundEvent pressurePlateClickOn, SoundEvent buttonClickOff, SoundEvent buttonClickOn) {
+public record SBBlockSets(String name, boolean canOpenByHand, SoundType soundType, SoundEvent doorClose, SoundEvent doorOpen, SoundEvent trapdoorClose, SoundEvent trapdoorOpen, SoundEvent pressurePlateClickOff, SoundEvent pressurePlateClickOn, SoundEvent buttonClickOff, SoundEvent buttonClickOn) {
     private static final Set<BlockSetType> VALUES = new ObjectArraySet<>();
     public static final BlockSetType ASPEN = register(woodSetType("aspen"));
     public static final BlockSetType CAJOLE = register(woodSetType("cajole"));

@@ -66,8 +66,8 @@ public final class SBCreativeModeTab {
                         pOutput.accept(SBBlocks.CUT_BLACK_SANDSTONE_SLAB.get());
                         pOutput.accept(SBBlocks.CHISELED_BLACK_SANDSTONE.get());
 
-                        pOutput.accept(SBBlocks.WHITE_MUSHROOM.get());
                         pOutput.accept(SBBlocks.WHITE_MUSHROOM_BLOCK.get());
+                        pOutput.accept(SBBlocks.WHITE_MUSHROOM.get());
 
                         pOutput.accept(SBBlocks.ASPEN_LOG.get());
                         pOutput.accept(SBBlocks.STRIPPED_ASPEN_LOG.get());
