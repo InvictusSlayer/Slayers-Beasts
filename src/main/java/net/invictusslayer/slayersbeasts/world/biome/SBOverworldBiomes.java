@@ -60,6 +60,7 @@ public class SBOverworldBiomes {
         BiomeDefaultFeatures.addDefaultMushrooms(biomeSettings);
         addModUndergroundVariety(biomeSettings);
         addModMushrooms(biomeSettings);
+        addMudPits(biomeSettings);
         return biome(false, 2F, 0F, mobSettings, biomeSettings, MUSIC_DESERT);
     }
 
@@ -126,6 +127,7 @@ public class SBOverworldBiomes {
         BiomeDefaultFeatures.addDefaultMushrooms(biomeSettings);
         addModUndergroundVariety(biomeSettings);
         addModMushrooms(biomeSettings);
+        addMudPits(biomeSettings);
         biomeSettings.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, SBPlacedFeatures.TREES_OUTBACK);
         return biome(false, 2F, 0F, mobSettings, biomeSettings, MUSIC_OUTBACK); // gc-9470285 fc-10387789
     }
@@ -222,6 +224,12 @@ public class SBOverworldBiomes {
         BiomeDefaultFeatures.addDefaultUndergroundVariety(biomeSettings);
         BiomeDefaultFeatures.addDefaultSprings(biomeSettings);
         BiomeDefaultFeatures.addSurfaceFreezing(biomeSettings);
+    }
+
+    private static void addMudPits(BiomeGenerationSettings.Builder biomeSettings) {
+        biomeSettings.addFeature(GenerationStep.Decoration.LAKES, SBPlacedFeatures.MUD_PIT_SHALLOW);
+        biomeSettings.addFeature(GenerationStep.Decoration.LAKES, SBPlacedFeatures.MUD_PIT_NORMAL);
+        biomeSettings.addFeature(GenerationStep.Decoration.LAKES, SBPlacedFeatures.MUD_PIT_DEEP);
     }
 
     private static void addModUndergroundVariety(BiomeGenerationSettings.Builder biomeSettings) {

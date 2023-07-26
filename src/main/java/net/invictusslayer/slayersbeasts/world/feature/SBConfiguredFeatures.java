@@ -3,6 +3,7 @@ package net.invictusslayer.slayersbeasts.world.feature;
 import net.invictusslayer.slayersbeasts.SlayersBeasts;
 import net.invictusslayer.slayersbeasts.block.SBBlocks;
 import net.invictusslayer.slayersbeasts.world.feature.foliageplacer.*;
+import net.invictusslayer.slayersbeasts.world.feature.misc.PitFeature;
 import net.invictusslayer.slayersbeasts.world.feature.treedecorator.ButtressRootDecorator;
 import net.invictusslayer.slayersbeasts.world.feature.treedecorator.HangingBranchDecorator;
 import net.invictusslayer.slayersbeasts.world.feature.trunkplacer.ColossalTrunkPlacer;
@@ -72,6 +73,9 @@ public class SBConfiguredFeatures {
     public static final ResourceKey<ConfiguredFeature<?, ?>> ORE_PEGMATITE = registerKey("ore_pegmatite");
 
     //MISC
+    public static final ResourceKey<ConfiguredFeature<?, ?>> MUD_PIT_SHALLOW = registerKey("mud_pit_shallow");
+    public static final ResourceKey<ConfiguredFeature<?, ?>> MUD_PIT_NORMAL = registerKey("mud_pit_normal");
+    public static final ResourceKey<ConfiguredFeature<?, ?>> MUD_PIT_DEEP = registerKey("mud_pit_deep");
     public static final ResourceKey<ConfiguredFeature<?, ?>> LAKE_LAVA_VOLCANIC = registerKey("lake_lava_volcanic");
     public static final ResourceKey<ConfiguredFeature<?, ?>> SPRING_LAVA_VOLCANIC = registerKey("spring_lava_volcanic");
 
@@ -110,7 +114,7 @@ public class SBConfiguredFeatures {
                 BlockStateProvider.simple(Blocks.STONE), new StraightTrunkPlacer(5, 2, 2),
                 BlockStateProvider.simple(Blocks.TUFF), new BlobFoliagePlacer(ConstantInt.of(2), ConstantInt.of(0), 3), new TwoLayersFeatureSize(1, 0, 2)).build());
         register(context, GIANT_WILLOW, Feature.TREE, new TreeConfiguration.TreeConfigurationBuilder(
-                BlockStateProvider.simple(SBBlocks.WILLOW_LOG.get()), new GiantTrunkPlacer(10, 4, 4),
+                BlockStateProvider.simple(SBBlocks.WILLOW_LOG.get()), new GiantTrunkPlacer(8, 3, 2),
                 BlockStateProvider.simple(SBBlocks.WILLOW_LEAVES.get()), new WillowFoliagePlacer(ConstantInt.of(2), ConstantInt.of(0), 2), new TwoLayersFeatureSize(1, 0, 2))
                 .decorators(List.of(new HangingBranchDecorator(0.25F, BlockStateProvider.simple(SBBlocks.WILLOW_BRANCH.get()), BlockStateProvider.simple(SBBlocks.WILLOW_BRANCH_PLANT.get())), new ButtressRootDecorator(BlockStateProvider.simple(SBBlocks.WILLOW_WOOD.get()), BlockStateProvider.simple(Blocks.DIRT)))).build());
         register(context, HUGE_WHITE_MUSHROOM, SBFeatures.HUGE_WHITE_MUSHROOM.get(), new HugeMushroomFeatureConfiguration(
@@ -121,7 +125,7 @@ public class SBConfiguredFeatures {
         register(context, TREES_INKY, Feature.RANDOM_SELECTOR, new RandomFeatureConfiguration(List.of(new WeightedPlacedFeature(placed.getOrThrow(SBPlacedFeatures.CAJOLE_CHECKED), 0.5F)), placed.getOrThrow(SBPlacedFeatures.CAJOLE_CHECKED)));
         register(context, TREES_RAINFOREST, Feature.RANDOM_SELECTOR, new RandomFeatureConfiguration(List.of(new WeightedPlacedFeature(placed.getOrThrow(SBPlacedFeatures.GIANT_KAPOK_CHECKED), 0.2F)), placed.getOrThrow(SBPlacedFeatures.CAJOLE_CHECKED)));
         register(context, TREES_EUCALYPT, Feature.RANDOM_SELECTOR, new RandomFeatureConfiguration(List.of(new WeightedPlacedFeature(placed.getOrThrow(SBPlacedFeatures.EUCALYPTUS_CHECKED), 0.5F)), placed.getOrThrow(SBPlacedFeatures.EUCALYPTUS_CHECKED)));
-        register(context, TREES_OUTBACK, Feature.RANDOM_SELECTOR, new RandomFeatureConfiguration(List.of(new WeightedPlacedFeature(placed.getOrThrow(SBPlacedFeatures.DESERT_OAK_CHECKED), 0.5F)), placed.getOrThrow(SBPlacedFeatures.EUCALYPTUS_CHECKED)));
+        register(context, TREES_OUTBACK, Feature.RANDOM_SELECTOR, new RandomFeatureConfiguration(List.of(new WeightedPlacedFeature(placed.getOrThrow(SBPlacedFeatures.DESERT_OAK_CHECKED), 0.7F)), placed.getOrThrow(SBPlacedFeatures.EUCALYPTUS_CHECKED)));
         register(context, TREES_REDWOOD, Feature.RANDOM_SELECTOR, new RandomFeatureConfiguration(List.of(new WeightedPlacedFeature(placed.getOrThrow(SBPlacedFeatures.GIANT_REDWOOD_CHECKED), 0.2F), new WeightedPlacedFeature(PlacementUtils.inlinePlaced(configured.getOrThrow(SBConfiguredFeatures.HUGE_WHITE_MUSHROOM)), 0.05F)), placed.getOrThrow(SBPlacedFeatures.REDWOOD_CHECKED)));
         register(context, TREES_OLD_GROWTH_REDWOOD, Feature.RANDOM_SELECTOR, new RandomFeatureConfiguration(List.of(new WeightedPlacedFeature(placed.getOrThrow(SBPlacedFeatures.GIANT_REDWOOD_CHECKED), 0.3F), new WeightedPlacedFeature(PlacementUtils.inlinePlaced(configured.getOrThrow(SBConfiguredFeatures.HUGE_WHITE_MUSHROOM)), 0.05F)), placed.getOrThrow(SBPlacedFeatures.COLOSSAL_REDWOOD_CHECKED)));
         register(context, PATCH_WHITE_MUSHROOM, Feature.RANDOM_PATCH, FeatureUtils.simplePatchConfiguration(Feature.SIMPLE_BLOCK, new SimpleBlockConfiguration(BlockStateProvider.simple(SBBlocks.WHITE_MUSHROOM.get()))));
@@ -133,6 +137,9 @@ public class SBConfiguredFeatures {
         register(context, ORE_BASALT, Feature.ORE, new OreConfiguration(new TagMatchTest(BlockTags.BASE_STONE_OVERWORLD), Blocks.BASALT.defaultBlockState(), 64));
         register(context, ORE_PEGMATITE, Feature.ORE, new OreConfiguration(new TagMatchTest(BlockTags.BASE_STONE_OVERWORLD), SBBlocks.PEGMATITE.get().defaultBlockState(), 64));
 
+        register(context, MUD_PIT_SHALLOW, SBFeatures.PIT.get(), new PitFeature.Configuration(BlockStateProvider.simple(SBBlocks.CRACKED_MUD.get()), BlockStateProvider.simple(Blocks.PACKED_MUD), 8, 6, 8));
+        register(context, MUD_PIT_NORMAL, SBFeatures.PIT.get(), new PitFeature.Configuration(BlockStateProvider.simple(SBBlocks.CRACKED_MUD.get()), BlockStateProvider.simple(Blocks.PACKED_MUD), 8, 14, 8));
+        register(context, MUD_PIT_DEEP, SBFeatures.PIT.get(), new PitFeature.Configuration(BlockStateProvider.simple(SBBlocks.CRACKED_MUD.get()), BlockStateProvider.simple(Blocks.PACKED_MUD), 12, 28, 12));
         register(context, LAKE_LAVA_VOLCANIC, Feature.LAKE, new LakeFeature.Configuration(BlockStateProvider.simple(Blocks.LAVA.defaultBlockState()), BlockStateProvider.simple(Blocks.MAGMA_BLOCK.defaultBlockState())));
         register(context, SPRING_LAVA_VOLCANIC, Feature.SPRING, new SpringConfiguration(Fluids.LAVA.defaultFluidState(), true, 4, 1, HolderSet.direct(Block::builtInRegistryHolder, Blocks.BASALT, Blocks.MAGMA_BLOCK, Blocks.SMOOTH_BASALT, Blocks.BLACKSTONE, Blocks.OBSIDIAN)));
     }

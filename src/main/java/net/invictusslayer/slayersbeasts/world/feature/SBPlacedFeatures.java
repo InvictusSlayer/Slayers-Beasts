@@ -54,6 +54,9 @@ public class SBPlacedFeatures {
     public static final ResourceKey<PlacedFeature> ORE_PEGMATITE_VOLCANIC = createKey("ore_pegmatite_volcanic");
 
     //MISC
+    public static final ResourceKey<PlacedFeature> MUD_PIT_SHALLOW = createKey("mud_pit_shallow");
+    public static final ResourceKey<PlacedFeature> MUD_PIT_NORMAL = createKey("mud_pit_normal");
+    public static final ResourceKey<PlacedFeature> MUD_PIT_DEEP = createKey("mud_pit_deep");
     public static final ResourceKey<PlacedFeature> LAKE_LAVA_VOLCANIC = createKey("lake_lava_volcanic");
     public static final ResourceKey<PlacedFeature> SPRING_LAVA_VOLCANIC = createKey("spring_lava_volcanic");
 
@@ -70,11 +73,11 @@ public class SBPlacedFeatures {
         register(context, COLOSSAL_REDWOOD_CHECKED, configured.getOrThrow(SBConfiguredFeatures.COLOSSAL_REDWOOD), List.of(PlacementUtils.filteredByBlockSurvival(SBBlocks.REDWOOD_SAPLING.get())));
         register(context, GIANT_WILLOW_CHECKED, configured.getOrThrow(SBConfiguredFeatures.GIANT_WILLOW), List.of(PlacementUtils.filteredByBlockSurvival(SBBlocks.WILLOW_SAPLING.get())));
 
-        register(context, TREES_ASPEN, configured.getOrThrow(SBConfiguredFeatures.TREES_ASPEN), VegetationPlacements.treePlacement(PlacementUtils.countExtra(10, 0.1f, 1), SBBlocks.ASPEN_SAPLING.get()));
+        register(context, TREES_ASPEN, configured.getOrThrow(SBConfiguredFeatures.TREES_ASPEN), VegetationPlacements.treePlacement(PlacementUtils.countExtra(10, 0.2f, 3), SBBlocks.ASPEN_SAPLING.get()));
         register(context, TREES_INKY, configured.getOrThrow(SBConfiguredFeatures.TREES_INKY), VegetationPlacements.treePlacement(PlacementUtils.countExtra(3, 0.1f, 1)));
         register(context, TREES_RAINFOREST, configured.getOrThrow(SBConfiguredFeatures.TREES_RAINFOREST), VegetationPlacements.treePlacement(PlacementUtils.countExtra(10, 0.1f, 1)));
         register(context, TREES_EUCALYPT, configured.getOrThrow(SBConfiguredFeatures.TREES_EUCALYPT), VegetationPlacements.treePlacement(PlacementUtils.countExtra(6, 0.1f, 1), SBBlocks.EUCALYPTUS_SAPLING.get()));
-        register(context, TREES_OUTBACK, configured.getOrThrow(SBConfiguredFeatures.TREES_OUTBACK), VegetationPlacements.treePlacement(PlacementUtils.countExtra(2, 0.1f, 1)));
+        register(context, TREES_OUTBACK, configured.getOrThrow(SBConfiguredFeatures.TREES_OUTBACK), VegetationPlacements.treePlacement(PlacementUtils.countExtra(1, 0.1f, 1)));
         register(context, TREES_REDWOOD, configured.getOrThrow(SBConfiguredFeatures.TREES_REDWOOD), VegetationPlacements.treePlacement(PlacementUtils.countExtra(10, 0.1f, 1), SBBlocks.REDWOOD_SAPLING.get()));
         register(context, TREES_OLD_GROWTH_REDWOOD, configured.getOrThrow(SBConfiguredFeatures.TREES_OLD_GROWTH_REDWOOD), VegetationPlacements.treePlacement(PlacementUtils.countExtra(10, 0.1f, 1), SBBlocks.REDWOOD_SAPLING.get()));
         register(context, WHITE_MUSHROOM_COMMON, configured.getOrThrow(SBConfiguredFeatures.PATCH_WHITE_MUSHROOM), mushroomPlacement(4, CountPlacement.of(3)));
@@ -89,6 +92,9 @@ public class SBPlacedFeatures {
         register(context, ORE_GRANITE_VOLCANIC, configured.getOrThrow(OreFeatures.ORE_GRANITE), commonOrePlacement(4, HeightRangePlacement.uniform(VerticalAnchor.absolute(0), VerticalAnchor.absolute(160))));
         register(context, ORE_PEGMATITE_VOLCANIC, configured.getOrThrow(SBConfiguredFeatures.ORE_PEGMATITE), commonOrePlacement(4, HeightRangePlacement.uniform(VerticalAnchor.absolute(0), VerticalAnchor.absolute(160))));
 
+        register(context, MUD_PIT_SHALLOW, configured.getOrThrow(SBConfiguredFeatures.MUD_PIT_SHALLOW), List.of(RarityFilter.onAverageOnceEvery(4), InSquarePlacement.spread(), PlacementUtils.HEIGHTMAP_WORLD_SURFACE, BiomeFilter.biome()));
+        register(context, MUD_PIT_NORMAL, configured.getOrThrow(SBConfiguredFeatures.MUD_PIT_NORMAL), List.of(RarityFilter.onAverageOnceEvery(6), InSquarePlacement.spread(), PlacementUtils.HEIGHTMAP_WORLD_SURFACE, BiomeFilter.biome()));
+        register(context, MUD_PIT_DEEP, configured.getOrThrow(SBConfiguredFeatures.MUD_PIT_DEEP), List.of(RarityFilter.onAverageOnceEvery(9), InSquarePlacement.spread(), PlacementUtils.HEIGHTMAP_WORLD_SURFACE, BiomeFilter.biome()));
         register(context, LAKE_LAVA_VOLCANIC, configured.getOrThrow(SBConfiguredFeatures.LAKE_LAVA_VOLCANIC), List.of(RarityFilter.onAverageOnceEvery(4), InSquarePlacement.spread(), PlacementUtils.HEIGHTMAP_WORLD_SURFACE, BiomeFilter.biome()));
         register(context, SPRING_LAVA_VOLCANIC, configured.getOrThrow(SBConfiguredFeatures.SPRING_LAVA_VOLCANIC), List.of(CountPlacement.of(20), InSquarePlacement.spread(), HeightRangePlacement.of(VeryBiasedToBottomHeight.of(VerticalAnchor.bottom(), VerticalAnchor.belowTop(8), 8)), BiomeFilter.biome()));
     }
@@ -105,19 +111,19 @@ public class SBPlacedFeatures {
         return builder.build();
     }
 
-    public static List<PlacementModifier> orePlacement(PlacementModifier rarity, PlacementModifier placementModifier) {
+    private static List<PlacementModifier> orePlacement(PlacementModifier rarity, PlacementModifier placementModifier) {
         return List.of(rarity, InSquarePlacement.spread(), placementModifier, BiomeFilter.biome());
     }
 
-    public static List<PlacementModifier> commonOrePlacement(int veinsPerChunk, PlacementModifier placementModifier) {
+    private static List<PlacementModifier> commonOrePlacement(int veinsPerChunk, PlacementModifier placementModifier) {
         return orePlacement(CountPlacement.of(veinsPerChunk), placementModifier);
     }
 
-    public static List<PlacementModifier> rareOrePlacement(int chunksPerVein, PlacementModifier placementModifier) {
+    private static List<PlacementModifier> rareOrePlacement(int chunksPerVein, PlacementModifier placementModifier) {
         return orePlacement(RarityFilter.onAverageOnceEvery(chunksPerVein), placementModifier);
     }
 
-    public static ResourceKey<PlacedFeature> createKey(String name) {
+    private static ResourceKey<PlacedFeature> createKey(String name) {
         return ResourceKey.create(Registries.PLACED_FEATURE, new ResourceLocation(SlayersBeasts.MOD_ID, name));
     }
 

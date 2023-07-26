@@ -1,0 +1,15 @@
+{
+  "type": "forge:add_features",
+  "biomes": [
+    "minecraft:badlands",
+    "minecraft:wooded_badlands",
+    "minecraft:eroded_badlands",
+    "minecraft:desert"
+  ],
+  "features": [
+    "slayersbeasts:mud_pit_shallow",
+    "slayersbeasts:mud_pit_normal",
+    "slayersbeasts:mud_pit_deep"
+  ],
+  "step": "lakes"
+}

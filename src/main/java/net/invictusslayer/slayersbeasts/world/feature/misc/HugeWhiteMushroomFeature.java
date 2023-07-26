@@ -17,17 +17,15 @@ public class HugeWhiteMushroomFeature extends AbstractHugeMushroomFeature {
         super(pCodec);
     }
 
-    @Override
     protected void placeTrunk(LevelAccessor pLevel, RandomSource pRandom, BlockPos pPos, HugeMushroomFeatureConfiguration pConfig, int pMaxHeight, BlockPos.MutableBlockPos pMutablePos) {
         for(int i = 0; i < pMaxHeight - 4; ++i) {
             pMutablePos.set(pPos).move(Direction.UP, i);
             if (!pLevel.getBlockState(pMutablePos).isSolidRender(pLevel, pMutablePos)) {
-                this.setBlock(pLevel, pMutablePos, pConfig.stemProvider.getState(pRandom, pPos));
+                setBlock(pLevel, pMutablePos, pConfig.stemProvider.getState(pRandom, pPos));
             }
         }
     }
 
-    @Override
     protected void makeCap(LevelAccessor pLevel, RandomSource pRandom, BlockPos pPos, int pTreeHeight, BlockPos.MutableBlockPos pMutablePos, HugeMushroomFeatureConfiguration pConfig) {
         int dir = pRandom.nextInt(4);
         for (int hgt = pTreeHeight - 6; hgt <= pTreeHeight; ++hgt) {
@@ -73,13 +71,13 @@ public class HugeWhiteMushroomFeature extends AbstractHugeMushroomFeature {
                         boolean westFlag = flag1 || x < 0;
 
                         if (!pLevel.getBlockState(pMutablePos).isSolidRender(pLevel, pMutablePos)) {
-                            BlockState blockstate = pConfig.capProvider.getState(pRandom, pPos);
+                            BlockState state = pConfig.capProvider.getState(pRandom, pPos);
 
-                            if (blockstate.hasProperty(HugeMushroomBlock.WEST) && blockstate.hasProperty(HugeMushroomBlock.EAST) && blockstate.hasProperty(HugeMushroomBlock.NORTH) && blockstate.hasProperty(HugeMushroomBlock.SOUTH) && blockstate.hasProperty(HugeMushroomBlock.UP) && blockstate.hasProperty(HugeMushroomBlock.DOWN)) {
-                                blockstate = blockstate.setValue(HugeMushroomBlock.UP, true).setValue(HugeMushroomBlock.DOWN, hgt == pTreeHeight).setValue(HugeMushroomBlock.WEST, westFlag).setValue(HugeMushroomBlock.EAST, eastFlag).setValue(HugeMushroomBlock.NORTH, northFlag).setValue(HugeMushroomBlock.SOUTH, southFlag);
+                            if (state.hasProperty(HugeMushroomBlock.WEST) && state.hasProperty(HugeMushroomBlock.EAST) && state.hasProperty(HugeMushroomBlock.NORTH) && state.hasProperty(HugeMushroomBlock.SOUTH) && state.hasProperty(HugeMushroomBlock.UP) && state.hasProperty(HugeMushroomBlock.DOWN)) {
+                                state = state.setValue(HugeMushroomBlock.UP, true).setValue(HugeMushroomBlock.DOWN, hgt == pTreeHeight).setValue(HugeMushroomBlock.WEST, westFlag).setValue(HugeMushroomBlock.EAST, eastFlag).setValue(HugeMushroomBlock.NORTH, northFlag).setValue(HugeMushroomBlock.SOUTH, southFlag);
                             }
 
-                            this.setBlock(pLevel, pMutablePos, blockstate);
+                            setBlock(pLevel, pMutablePos, state);
                         }
                     }
                 }
@@ -87,7 +85,6 @@ public class HugeWhiteMushroomFeature extends AbstractHugeMushroomFeature {
         }
     }
 
-    @Override
     protected int getTreeHeight(RandomSource pRandom) {
         int i = pRandom.nextInt(4) + 8;
         if (pRandom.nextInt(12) == 0) {
@@ -97,7 +94,6 @@ public class HugeWhiteMushroomFeature extends AbstractHugeMushroomFeature {
         return i;
     }
 
-    @Override
     protected int getTreeRadiusForHeight(int p_65094_, int treeHeight, int pFoliageRadius, int pY) {
         int i = 0;
         if (pY < treeHeight && pY >= treeHeight - 5) {
@@ -109,19 +105,18 @@ public class HugeWhiteMushroomFeature extends AbstractHugeMushroomFeature {
         return i;
     }
 
-    @Override
     public boolean place(FeaturePlaceContext<HugeMushroomFeatureConfiguration> pContext) {
         WorldGenLevel level = pContext.level();
         BlockPos blockPos = pContext.origin();
         RandomSource randomsource = pContext.random();
         HugeMushroomFeatureConfiguration config = pContext.config();
-        int i = this.getTreeHeight(randomsource);
+        int i = getTreeHeight(randomsource);
         BlockPos.MutableBlockPos mutableBlockPos = new BlockPos.MutableBlockPos();
-        if (!this.isValidPosition(level, blockPos, i, mutableBlockPos, config)) {
+        if (!isValidPosition(level, blockPos, i, mutableBlockPos, config)) {
             return false;
         } else {
-            this.makeCap(level, randomsource, blockPos, i, mutableBlockPos, config);
-            this.placeTrunk(level, randomsource, blockPos, config, i, mutableBlockPos);
+            makeCap(level, randomsource, blockPos, i, mutableBlockPos, config);
+            placeTrunk(level, randomsource, blockPos, config, i, mutableBlockPos);
             return true;
         }
     }
