@@ -1,6 +1,5 @@
 package net.invictusslayer.slayersbeasts.block;
 
-import com.google.common.annotations.VisibleForTesting;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.particles.ParticleTypes;
@@ -33,6 +32,8 @@ import net.minecraft.world.phys.shapes.BooleanOp;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
 
 import javax.annotation.Nullable;
 import java.util.Optional;
@@ -108,6 +109,7 @@ public class IcicleBlock extends Block implements Fallable, SimpleWaterloggedBlo
         }
     }
 
+    @OnlyIn(Dist.CLIENT)
     public void animateTick(BlockState pState, Level pLevel, BlockPos pPos, RandomSource pRandom) {
         if (canDrip(pState)) {
             float f = pRandom.nextFloat();
@@ -219,15 +221,14 @@ public class IcicleBlock extends Block implements Fallable, SimpleWaterloggedBlo
         }
     }
 
-    @VisibleForTesting
     public static void growStalactiteOrStalagmiteIfPossible(BlockState pState, ServerLevel pLevel, BlockPos pPos, RandomSource pRandom) {
         BlockState blockState = pLevel.getBlockState(pPos.above(1));
         BlockState blockState1 = pLevel.getBlockState(pPos.above(2));
         if (canGrow(blockState, blockState1)) {
             BlockPos blockpos = findTip(pState, pLevel, pPos, 7, false);
             if (blockpos != null) {
-                BlockState blockstate2 = pLevel.getBlockState(blockpos);
-                if (canDrip(blockstate2) && canTipGrow(blockstate2, pLevel, blockpos)) {
+                BlockState blockState2 = pLevel.getBlockState(blockpos);
+                if (canDrip(blockState2) && canTipGrow(blockState2, pLevel, blockpos)) {
                     if (pRandom.nextBoolean()) {
                         grow(pLevel, blockpos, Direction.DOWN);
                     } else {

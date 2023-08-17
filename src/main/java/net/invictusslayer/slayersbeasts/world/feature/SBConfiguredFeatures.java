@@ -44,40 +44,40 @@ import java.util.List;
 
 public class SBConfiguredFeatures {
     //TREE
-    public static final ResourceKey<ConfiguredFeature<?, ?>> ASPEN = registerKey("aspen");
-    public static final ResourceKey<ConfiguredFeature<?, ?>> CAJOLE = registerKey("cajole");
-    public static final ResourceKey<ConfiguredFeature<?, ?>> DESERT_OAK = registerKey("desert_oak");
-    public static final ResourceKey<ConfiguredFeature<?, ?>> EUCALYPTUS = registerKey("eucalyptus");
-    public static final ResourceKey<ConfiguredFeature<?, ?>> GIANT_KAPOK = registerKey("giant_kapok");
-    public static final ResourceKey<ConfiguredFeature<?, ?>> REDWOOD = registerKey("redwood");
-    public static final ResourceKey<ConfiguredFeature<?, ?>> GIANT_REDWOOD = registerKey("giant_redwood");
-    public static final ResourceKey<ConfiguredFeature<?, ?>> COLOSSAL_REDWOOD = registerKey("colossal_redwood");
-    public static final ResourceKey<ConfiguredFeature<?, ?>> PETRIFIED_TREE = registerKey("petrified_tree");
-    public static final ResourceKey<ConfiguredFeature<?, ?>> GIANT_WILLOW = registerKey("giant_willow");
-    public static final ResourceKey<ConfiguredFeature<?, ?>> HUGE_WHITE_MUSHROOM = registerKey("huge_white_mushroom");
+    public static final ResourceKey<ConfiguredFeature<?, ?>> ASPEN = createKey("aspen");
+    public static final ResourceKey<ConfiguredFeature<?, ?>> CAJOLE = createKey("cajole");
+    public static final ResourceKey<ConfiguredFeature<?, ?>> DESERT_OAK = createKey("desert_oak");
+    public static final ResourceKey<ConfiguredFeature<?, ?>> EUCALYPTUS = createKey("eucalyptus");
+    public static final ResourceKey<ConfiguredFeature<?, ?>> GIANT_KAPOK = createKey("giant_kapok");
+    public static final ResourceKey<ConfiguredFeature<?, ?>> REDWOOD = createKey("redwood");
+    public static final ResourceKey<ConfiguredFeature<?, ?>> GIANT_REDWOOD = createKey("giant_redwood");
+    public static final ResourceKey<ConfiguredFeature<?, ?>> COLOSSAL_REDWOOD = createKey("colossal_redwood");
+    public static final ResourceKey<ConfiguredFeature<?, ?>> PETRIFIED_TREE = createKey("petrified_tree");
+    public static final ResourceKey<ConfiguredFeature<?, ?>> GIANT_WILLOW = createKey("giant_willow");
+    public static final ResourceKey<ConfiguredFeature<?, ?>> HUGE_WHITE_MUSHROOM = createKey("huge_white_mushroom");
 
     //VEGETATION
-    public static final ResourceKey<ConfiguredFeature<?, ?>> TREES_ASPEN = registerKey("trees_aspen");
-    public static final ResourceKey<ConfiguredFeature<?, ?>> TREES_INKY = registerKey("trees_inky");
-    public static final ResourceKey<ConfiguredFeature<?, ?>> TREES_RAINFOREST = registerKey("trees_rainforest");
-    public static final ResourceKey<ConfiguredFeature<?, ?>> TREES_EUCALYPT = registerKey("trees_eucalypt");
-    public static final ResourceKey<ConfiguredFeature<?, ?>> TREES_OUTBACK = registerKey("trees_outback");
-    public static final ResourceKey<ConfiguredFeature<?, ?>> TREES_REDWOOD = registerKey("trees_redwood");
-    public static final ResourceKey<ConfiguredFeature<?, ?>> TREES_OLD_GROWTH_REDWOOD = registerKey("trees_old_growth_redwood");
-    public static final ResourceKey<ConfiguredFeature<?, ?>> PATCH_WHITE_MUSHROOM = registerKey("patch_white_mushroom");
+    public static final ResourceKey<ConfiguredFeature<?, ?>> TREES_ASPEN = createKey("trees_aspen");
+    public static final ResourceKey<ConfiguredFeature<?, ?>> TREES_INKY = createKey("trees_inky");
+    public static final ResourceKey<ConfiguredFeature<?, ?>> TREES_RAINFOREST = createKey("trees_rainforest");
+    public static final ResourceKey<ConfiguredFeature<?, ?>> TREES_EUCALYPT = createKey("trees_eucalypt");
+    public static final ResourceKey<ConfiguredFeature<?, ?>> TREES_OUTBACK = createKey("trees_outback");
+    public static final ResourceKey<ConfiguredFeature<?, ?>> TREES_REDWOOD = createKey("trees_redwood");
+    public static final ResourceKey<ConfiguredFeature<?, ?>> TREES_OLD_GROWTH_REDWOOD = createKey("trees_old_growth_redwood");
+    public static final ResourceKey<ConfiguredFeature<?, ?>> PATCH_WHITE_MUSHROOM = createKey("patch_white_mushroom");
 
     //ORE
-    public static final ResourceKey<ConfiguredFeature<?, ?>> ORE_EXOSKELETON = registerKey("ore_exoskeleton");
-    public static final ResourceKey<ConfiguredFeature<?, ?>> ORE_OBSIDIAN = registerKey("ore_obsidian");
-    public static final ResourceKey<ConfiguredFeature<?, ?>> ORE_BASALT = registerKey("ore_basalt");
-    public static final ResourceKey<ConfiguredFeature<?, ?>> ORE_PEGMATITE = registerKey("ore_pegmatite");
+    public static final ResourceKey<ConfiguredFeature<?, ?>> ORE_EXOSKELETON = createKey("ore_exoskeleton");
+    public static final ResourceKey<ConfiguredFeature<?, ?>> ORE_OBSIDIAN = createKey("ore_obsidian");
+    public static final ResourceKey<ConfiguredFeature<?, ?>> ORE_BASALT = createKey("ore_basalt");
+    public static final ResourceKey<ConfiguredFeature<?, ?>> ORE_PEGMATITE = createKey("ore_pegmatite");
 
     //MISC
-    public static final ResourceKey<ConfiguredFeature<?, ?>> MUD_PIT_SHALLOW = registerKey("mud_pit_shallow");
-    public static final ResourceKey<ConfiguredFeature<?, ?>> MUD_PIT_NORMAL = registerKey("mud_pit_normal");
-    public static final ResourceKey<ConfiguredFeature<?, ?>> MUD_PIT_DEEP = registerKey("mud_pit_deep");
-    public static final ResourceKey<ConfiguredFeature<?, ?>> LAKE_LAVA_VOLCANIC = registerKey("lake_lava_volcanic");
-    public static final ResourceKey<ConfiguredFeature<?, ?>> SPRING_LAVA_VOLCANIC = registerKey("spring_lava_volcanic");
+    public static final ResourceKey<ConfiguredFeature<?, ?>> MUD_PIT_SHALLOW = createKey("mud_pit_shallow");
+    public static final ResourceKey<ConfiguredFeature<?, ?>> MUD_PIT_NORMAL = createKey("mud_pit_normal");
+    public static final ResourceKey<ConfiguredFeature<?, ?>> MUD_PIT_DEEP = createKey("mud_pit_deep");
+    public static final ResourceKey<ConfiguredFeature<?, ?>> LAKE_LAVA_VOLCANIC = createKey("lake_lava_volcanic");
+    public static final ResourceKey<ConfiguredFeature<?, ?>> SPRING_LAVA_VOLCANIC = createKey("spring_lava_volcanic");
 
     @SuppressWarnings("deprecation")
     public static void bootstrap(BootstapContext<ConfiguredFeature<?, ?>> context) {
@@ -126,8 +126,8 @@ public class SBConfiguredFeatures {
         register(context, TREES_RAINFOREST, Feature.RANDOM_SELECTOR, new RandomFeatureConfiguration(List.of(new WeightedPlacedFeature(placed.getOrThrow(SBPlacedFeatures.GIANT_KAPOK_CHECKED), 0.2F)), placed.getOrThrow(SBPlacedFeatures.CAJOLE_CHECKED)));
         register(context, TREES_EUCALYPT, Feature.RANDOM_SELECTOR, new RandomFeatureConfiguration(List.of(new WeightedPlacedFeature(placed.getOrThrow(SBPlacedFeatures.EUCALYPTUS_CHECKED), 0.5F)), placed.getOrThrow(SBPlacedFeatures.EUCALYPTUS_CHECKED)));
         register(context, TREES_OUTBACK, Feature.RANDOM_SELECTOR, new RandomFeatureConfiguration(List.of(new WeightedPlacedFeature(placed.getOrThrow(SBPlacedFeatures.DESERT_OAK_CHECKED), 0.7F)), placed.getOrThrow(SBPlacedFeatures.EUCALYPTUS_CHECKED)));
-        register(context, TREES_REDWOOD, Feature.RANDOM_SELECTOR, new RandomFeatureConfiguration(List.of(new WeightedPlacedFeature(placed.getOrThrow(SBPlacedFeatures.GIANT_REDWOOD_CHECKED), 0.2F), new WeightedPlacedFeature(PlacementUtils.inlinePlaced(configured.getOrThrow(SBConfiguredFeatures.HUGE_WHITE_MUSHROOM)), 0.05F)), placed.getOrThrow(SBPlacedFeatures.REDWOOD_CHECKED)));
-        register(context, TREES_OLD_GROWTH_REDWOOD, Feature.RANDOM_SELECTOR, new RandomFeatureConfiguration(List.of(new WeightedPlacedFeature(placed.getOrThrow(SBPlacedFeatures.GIANT_REDWOOD_CHECKED), 0.3F), new WeightedPlacedFeature(PlacementUtils.inlinePlaced(configured.getOrThrow(SBConfiguredFeatures.HUGE_WHITE_MUSHROOM)), 0.05F)), placed.getOrThrow(SBPlacedFeatures.COLOSSAL_REDWOOD_CHECKED)));
+        register(context, TREES_REDWOOD, Feature.RANDOM_SELECTOR, new RandomFeatureConfiguration(List.of(new WeightedPlacedFeature(placed.getOrThrow(SBPlacedFeatures.GIANT_REDWOOD_CHECKED), 0.2F), new WeightedPlacedFeature(PlacementUtils.inlinePlaced(configured.getOrThrow(HUGE_WHITE_MUSHROOM)), 0.05F)), placed.getOrThrow(SBPlacedFeatures.REDWOOD_CHECKED)));
+        register(context, TREES_OLD_GROWTH_REDWOOD, Feature.RANDOM_SELECTOR, new RandomFeatureConfiguration(List.of(new WeightedPlacedFeature(placed.getOrThrow(SBPlacedFeatures.GIANT_REDWOOD_CHECKED), 0.3F), new WeightedPlacedFeature(PlacementUtils.inlinePlaced(configured.getOrThrow(HUGE_WHITE_MUSHROOM)), 0.05F)), placed.getOrThrow(SBPlacedFeatures.COLOSSAL_REDWOOD_CHECKED)));
         register(context, PATCH_WHITE_MUSHROOM, Feature.RANDOM_PATCH, FeatureUtils.simplePatchConfiguration(Feature.SIMPLE_BLOCK, new SimpleBlockConfiguration(BlockStateProvider.simple(SBBlocks.WHITE_MUSHROOM.get()))));
 
         register(context, ORE_EXOSKELETON, Feature.ORE, new OreConfiguration(List.of(
@@ -144,7 +144,7 @@ public class SBConfiguredFeatures {
         register(context, SPRING_LAVA_VOLCANIC, Feature.SPRING, new SpringConfiguration(Fluids.LAVA.defaultFluidState(), true, 4, 1, HolderSet.direct(Block::builtInRegistryHolder, Blocks.BASALT, Blocks.MAGMA_BLOCK, Blocks.SMOOTH_BASALT, Blocks.BLACKSTONE, Blocks.OBSIDIAN)));
     }
 
-    public static ResourceKey<ConfiguredFeature<?, ?>> registerKey(String name) {
+    private static ResourceKey<ConfiguredFeature<?, ?>> createKey(String name) {
         return ResourceKey.create(Registries.CONFIGURED_FEATURE, new ResourceLocation(SlayersBeasts.MOD_ID, name));
     }
 

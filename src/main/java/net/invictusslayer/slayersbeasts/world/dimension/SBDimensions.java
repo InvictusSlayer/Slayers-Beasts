@@ -8,10 +8,11 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.dimension.DimensionType;
 
 public class SBDimensions {
-    public static final ResourceKey<Level> SEPULCHRA_KEY = ResourceKey.create(Registries.DIMENSION,
-            new ResourceLocation(SlayersBeasts.MOD_ID, "sepulchra"));
-    public static final ResourceKey<DimensionType> SEPULCHRA_TYPE_KEY = ResourceKey.create(Registries.DIMENSION_TYPE,
-            new ResourceLocation(SlayersBeasts.MOD_ID, "sepulchra"));
+    public static final ResourceKey<Level> SEPULCHRA_KEY = ResourceKey.create(Registries.DIMENSION, new ResourceLocation(SlayersBeasts.MOD_ID, "sepulchra"));
+    public static final ResourceKey<DimensionType> SEPULCHRA_TYPE_KEY = ResourceKey.create(Registries.DIMENSION_TYPE, new ResourceLocation(SlayersBeasts.MOD_ID, "sepulchra"));
+
+    public static final ResourceKey<Level> CRYPT_KEY = ResourceKey.create(Registries.DIMENSION, new ResourceLocation(SlayersBeasts.MOD_ID, "crypt"));
+    public static final ResourceKey<DimensionType> CRYPT_TYPE_KEY = ResourceKey.create(Registries.DIMENSION_TYPE, new ResourceLocation(SlayersBeasts.MOD_ID, "crypt"));
 
     public static void register() {
         System.out.println("Registering " + SlayersBeasts.MOD_ID + " Dimensions");

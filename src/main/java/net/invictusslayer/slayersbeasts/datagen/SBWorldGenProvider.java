@@ -4,6 +4,9 @@ import net.invictusslayer.slayersbeasts.SlayersBeasts;
 import net.invictusslayer.slayersbeasts.world.biome.SBBiomes;
 import net.invictusslayer.slayersbeasts.world.feature.SBConfiguredFeatures;
 import net.invictusslayer.slayersbeasts.world.feature.SBPlacedFeatures;
+import net.invictusslayer.slayersbeasts.world.structure.SBPools;
+import net.invictusslayer.slayersbeasts.world.structure.SBStructureSets;
+import net.invictusslayer.slayersbeasts.world.structure.SBStructures;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.RegistrySetBuilder;
 import net.minecraft.core.registries.Registries;
@@ -17,7 +20,10 @@ public class SBWorldGenProvider extends DatapackBuiltinEntriesProvider {
     public static final RegistrySetBuilder BUILDER = new RegistrySetBuilder()
             .add(Registries.CONFIGURED_FEATURE, SBConfiguredFeatures::bootstrap)
             .add(Registries.PLACED_FEATURE, SBPlacedFeatures::bootstrap)
-            .add(Registries.BIOME, SBBiomes::bootstrap);
+            .add(Registries.BIOME, SBBiomes::bootstrap)
+            .add(Registries.STRUCTURE, SBStructures::bootstrap)
+            .add(Registries.STRUCTURE_SET, SBStructureSets::bootstrap)
+            .add(Registries.TEMPLATE_POOL, SBPools::bootstrap);
 
     public SBWorldGenProvider(PackOutput output, CompletableFuture<HolderLookup.Provider> registries) {
         super(output, registries, BUILDER, Collections.singleton(SlayersBeasts.MOD_ID));

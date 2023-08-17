@@ -34,6 +34,8 @@ public final class SBCreativeModeTab {
                         pOutput.accept(SBItems.TANNED_LEATHER.get());
                         pOutput.accept(SBItems.MUD_BALL.get());
 
+                        pOutput.accept(SBBlocks.CRYPTALITH.get());
+                        pOutput.accept(SBBlocks.RUNIC_CRYPTALITH.get());
                         pOutput.accept(SBBlocks.JADE_BLOCK.get());
                         pOutput.accept(SBBlocks.EXOSKELETON_ORE.get());
                         pOutput.accept(SBBlocks.DEEPSLATE_EXOSKELETON_ORE.get());

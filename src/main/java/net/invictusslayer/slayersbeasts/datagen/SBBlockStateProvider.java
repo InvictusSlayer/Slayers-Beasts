@@ -22,6 +22,8 @@ public class SBBlockStateProvider extends BlockStateProvider {
     protected void registerStatesAndModels() {
         generateBlockFamilies();
 
+        cubeWithItem(SBBlocks.CRYPTALITH.get());
+        runicCryptalith();
         cubeWithItem(SBBlocks.JADE_BLOCK.get());
         cubeWithItem(SBBlocks.EXOSKELETON_ORE.get());
         cubeWithItem(SBBlocks.DEEPSLATE_EXOSKELETON_ORE.get());
@@ -31,7 +33,7 @@ public class SBBlockStateProvider extends BlockStateProvider {
         simpleCubeBottomTopWithItem(SBBlocks.ANTHILL.get());
         simpleCubeBottomTopWithItem(SBBlocks.ANTHILL_HATCHERY.get());
 
-        icicle(SBBlocks.ICICLE.get());
+        icicle();
         tiltCubeWithItem(SBBlocks.CRACKED_MUD.get());
         cubeWithItem(SBBlocks.PEAT.get());
 
@@ -130,7 +132,20 @@ public class SBBlockStateProvider extends BlockStateProvider {
         });
     }
 
-    private void icicle(Block block) {
+    private void runicCryptalith() {
+        Block block = SBBlocks.RUNIC_CRYPTALITH.get();
+        getVariantBuilder(block).forAllStates(state -> {
+            String suffix = "";
+            if (state.getValue(BlockStateProperties.EYE)) {
+                suffix = "_active";
+            }
+            return ConfiguredModel.builder().modelFile(models().cubeAll(name(block) + suffix, extend(blockTexture(block), suffix))).build();
+        });
+        simpleBlockItem(block, models().withExistingParent(name(block), "minecraft:block/cube_all"));
+    }
+
+    private void icicle() {
+        Block block = SBBlocks.ICICLE.get();
         getVariantBuilder(block).forAllStates(state -> {
             String suffix = "_" + state.getValue(BlockStateProperties.DRIPSTONE_THICKNESS).getSerializedName() + "_" + state.getValue(BlockStateProperties.VERTICAL_DIRECTION).getSerializedName();
             return ConfiguredModel.builder().modelFile(models().cross(name(block) + suffix, extend(blockTexture(block), suffix)).renderType("cutout")).build();

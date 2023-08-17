@@ -2,7 +2,7 @@ package net.invictusslayer.slayersbeasts.block;
 
 import net.invictusslayer.slayersbeasts.datagen.tags.SBTags;
 import net.invictusslayer.slayersbeasts.world.dimension.SBDimensions;
-import net.invictusslayer.slayersbeasts.world.dimension.portal.SBPortalForcer;
+import net.invictusslayer.slayersbeasts.world.dimension.SBPortalForcer;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.resources.ResourceKey;
@@ -44,7 +44,6 @@ public class SepulchraPortalBlock extends Block {
     }
 
     @SuppressWarnings("deprecation")
-    @Override
     public VoxelShape getShape(BlockState pState, BlockGetter pLevel, BlockPos pPos, CollisionContext pContext) {
         if (pState.getValue(AXIS) == Direction.Axis.Z) {
             return Z_AABB;
@@ -54,7 +53,7 @@ public class SepulchraPortalBlock extends Block {
 
     public boolean trySpawnPortal(LevelAccessor worldIn, BlockPos pos) {
         SepulchraPortalBlock.Size size = this.isPortal(worldIn, pos);
-        if (size != null && !onTrySpawnPortal(worldIn, pos, size)) {
+        if (size != null && !onTrySpawnPortal(worldIn, pos)) {
             size.placePortalBlocks();
             return true;
         } else {
@@ -62,21 +61,14 @@ public class SepulchraPortalBlock extends Block {
         }
     }
 
-    public static boolean onTrySpawnPortal(LevelAccessor world, BlockPos pos, SepulchraPortalBlock.Size size) {
-        return MinecraftForge.EVENT_BUS.post(new PortalSpawnEvent(world, pos, world.getBlockState(pos), size));
+    public static boolean onTrySpawnPortal(LevelAccessor world, BlockPos pos) {
+        return MinecraftForge.EVENT_BUS.post(new PortalSpawnEvent(world, pos, world.getBlockState(pos)));
     }
 
     @Cancelable
     public static class PortalSpawnEvent extends BlockEvent {
-        private final SepulchraPortalBlock.Size size;
-
-        public PortalSpawnEvent(LevelAccessor world, BlockPos pos, BlockState state, SepulchraPortalBlock.Size size) {
+        public PortalSpawnEvent(LevelAccessor world, BlockPos pos, BlockState state) {
             super(world, pos, state);
-            this.size = size;
-        }
-
-        public SepulchraPortalBlock.Size getPortalSize() {
-            return size;
         }
     }
 
@@ -92,7 +84,6 @@ public class SepulchraPortalBlock extends Block {
     }
 
     @SuppressWarnings("deprecation")
-    @Override
     public BlockState updateShape(BlockState stateIn, Direction facing, BlockState facingState, LevelAccessor worldIn, BlockPos currentPos, BlockPos facingPos) {
         Direction.Axis axis = facing.getAxis();
         Direction.Axis axis1 = stateIn.getValue(AXIS);
@@ -102,7 +93,6 @@ public class SepulchraPortalBlock extends Block {
     }
 
     @SuppressWarnings("deprecation")
-    @Override
     public void entityInside(BlockState state, Level worldIn, BlockPos pos, Entity entity) {
         if (!entity.isPassenger() && !entity.isVehicle() && entity.canChangeDimensions()) {
             if (entity.isOnPortalCooldown()) {
@@ -112,18 +102,15 @@ public class SepulchraPortalBlock extends Block {
                     entity.portalEntrancePos = pos.immutable();
                 }
                 Level entityWorld = entity.level();
-                if (entityWorld != null) {
-                    MinecraftServer minecraftserver = entityWorld.getServer();
-                    ResourceKey<Level> destination = entity.level().dimension() == SBDimensions.SEPULCHRA_KEY
-                            ? Level.OVERWORLD : SBDimensions.SEPULCHRA_KEY;
-                    if (minecraftserver != null) {
-                        ServerLevel destinationWorld = minecraftserver.getLevel(destination);
-                        if (destinationWorld != null && minecraftserver.isNetherEnabled() && !entity.isPassenger()) {
-                            entity.level().getProfiler().push("sepulchra_portal");
-                            entity.setPortalCooldown();
-                            entity.changeDimension(destinationWorld, new SBPortalForcer(destinationWorld));
-                            entity.level().getProfiler().pop();
-                        }
+                MinecraftServer minecraftserver = entityWorld.getServer();
+                ResourceKey<Level> destination = entity.level().dimension() == SBDimensions.SEPULCHRA_KEY ? Level.OVERWORLD : SBDimensions.SEPULCHRA_KEY;
+                if (minecraftserver != null) {
+                    ServerLevel destinationWorld = minecraftserver.getLevel(destination);
+                    if (destinationWorld != null && minecraftserver.isNetherEnabled() && !entity.isPassenger()) {
+                        entity.level().getProfiler().push("sepulchra_portal");
+                        entity.setPortalCooldown();
+                        entity.changeDimension(destinationWorld, new SBPortalForcer(destinationWorld));
+                        entity.level().getProfiler().pop();
                     }
                 }
             }
@@ -131,43 +118,20 @@ public class SepulchraPortalBlock extends Block {
     }
 
     @OnlyIn(Dist.CLIENT)
-    @Override
     public void animateTick(BlockState state, Level level, BlockPos pos, RandomSource random) {
         if (random.nextInt(100) == 0) {
             level.playLocalSound((double)pos.getX() + 0.5D, (double)pos.getY() + 0.5D,
                     (double)pos.getZ() + 0.5D, SoundEvents.PORTAL_AMBIENT,
                     SoundSource.BLOCKS, 0.5F, random.nextFloat() * 0.4F + 0.8F, false);
         }
-
-//        for(int i = 0; i < 4; ++i) {
-//            double x = (double)pos.getX() + random.nextDouble();
-//            double y = (double)pos.getY() + random.nextDouble();
-//            double z = (double)pos.getZ() + random.nextDouble();
-//            double xSpeed = ((double)random.nextFloat() - 0.5D) * 0.5D;
-//            double ySpeed = ((double)random.nextFloat() - 0.5D) * 0.5D;
-//            double zSpeed = ((double)random.nextFloat() - 0.5D) * 0.5D;
-//            int j = random.nextInt(2) * 2 - 1;
-//            if (!level.getBlockState(pos.west()).is(this) && !level.getBlockState(pos.east()).is(this)) {
-//                x = (double)pos.getX() + 0.5D + 0.25D * (double)j;
-//                xSpeed = random.nextFloat() * 2.0F * (float)j;
-//            } else {
-//                z = (double)pos.getZ() + 0.5D + 0.25D * (double)j;
-//                zSpeed = random.nextFloat() * 2.0F * (float)j;
-//            }
-//
-//            // TODO: Particles
-//            // level.addParticle(PARTICLE_TYPE, x, y, z, xSpeed, ySpeed, zSpeed);
-//        }
     }
 
     @SuppressWarnings("deprecation")
-    @Override
     public ItemStack getCloneItemStack(BlockGetter worldIn, BlockPos pos, BlockState state) {
         return ItemStack.EMPTY;
     }
 
     @SuppressWarnings("deprecation")
-    @Override
     public BlockState rotate(BlockState state, Rotation rot) {
         return switch (rot) {
             case COUNTERCLOCKWISE_90, CLOCKWISE_90 -> switch (state.getValue(AXIS)) {
@@ -179,7 +143,6 @@ public class SepulchraPortalBlock extends Block {
         };
     }
 
-    @Override
     protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
         builder.add(AXIS);
     }

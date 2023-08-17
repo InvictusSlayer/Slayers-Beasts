@@ -29,6 +29,10 @@
   "item.minecraft.splash_potion.effect.wither_potion": "Splash Potion of Decay",
   "item.minecraft.lingering_potion.effect.wither_potion": "Lingering Potion of Decay",
 
+  "block.slayersbeasts.crypt_portal": "Crypt Portal",
+  "block.slayersbeasts.cryptalith": "Cryptalith",
+  "block.slayersbeasts.runic_cryptalith": "Runic Cryptalith",
+
   "block.slayersbeasts.jade_block": "Jade Block",
   "block.slayersbeasts.exoskeleton_ore": "Buried Crystal Exoskeleton",
   "block.slayersbeasts.deepslate_exoskeleton_ore": "Embedded Crystal Exoskeleton",

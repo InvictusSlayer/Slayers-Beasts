@@ -27,6 +27,8 @@ public class SBBlockLootTables extends BlockLootSubProvider {
     protected void generate() {
         generateBlockFamilies();
 
+        dropSelf(SBBlocks.CRYPTALITH.get());
+        dropOther(SBBlocks.RUNIC_CRYPTALITH.get(), SBBlocks.CRYPTALITH.get());
         dropSelf(SBBlocks.JADE_BLOCK.get());
 
         add(SBBlocks.EXOSKELETON_ORE.get(), block -> createExoskeletonOreDrops(SBBlocks.EXOSKELETON_ORE.get()));

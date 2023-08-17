@@ -1,9 +1,8 @@
-package net.invictusslayer.slayersbeasts.world.dimension.portal;
+package net.invictusslayer.slayersbeasts.world.dimension;
 
 import net.invictusslayer.slayersbeasts.block.SBBlocks;
 import net.invictusslayer.slayersbeasts.block.SepulchraPortalBlock;
 import net.invictusslayer.slayersbeasts.datagen.tags.SBPois;
-import net.invictusslayer.slayersbeasts.world.dimension.SBDimensions;
 import net.minecraft.BlockUtil;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -187,6 +186,7 @@ public class SBPortalForcer implements ITeleporter {
         return Optional.of(new BlockUtil.FoundRectangle(blockpos.immutable(), 2, 3));
     }
 
+    @SuppressWarnings("deprecation")
     private boolean checkRegionForPlacement(BlockPos originalPos, BlockPos.MutableBlockPos offsetPos, Direction directionIn, int offsetScale) {
         Direction direction = directionIn.getClockWise();
 

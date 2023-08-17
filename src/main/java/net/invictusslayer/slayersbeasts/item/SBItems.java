@@ -13,7 +13,7 @@ import net.minecraftforge.registries.RegistryObject;
 public final class SBItems {
     public static final DeferredRegister<Item> ITEMS = DeferredRegister.create(ForgeRegistries.ITEMS, SlayersBeasts.MOD_ID);
 
-    public static final RegistryObject<Item> JADE = ITEMS.register("jade", SepulchraPortalLighter::new);
+    public static final RegistryObject<Item> JADE = ITEMS.register("jade", () -> new CryptPortalItem(new Item.Properties()));
     public static final RegistryObject<Item> JADE_SHARD = ITEMS.register("jade_shard", () -> new Item(new Item.Properties()));
     public static final RegistryObject<Item> CRYSTALLINE_WING = ITEMS.register("crystalline_wing", () -> new Item(new Item.Properties().stacksTo(1)));
     public static final RegistryObject<Item> CRYSTALLINE_CLAW = ITEMS.register("crystalline_claw", () -> new Item(new Item.Properties().stacksTo(1)));
