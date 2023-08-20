@@ -25,7 +25,6 @@ import net.minecraft.world.level.portal.PortalShape;
 import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.common.util.ITeleporter;
 
-import javax.annotation.Nullable;
 import java.util.Comparator;
 import java.util.Optional;
 import java.util.function.Function;
@@ -37,16 +36,13 @@ public class SBPortalForcer implements ITeleporter {
         this.level = level;
     }
 
-    @Nullable
-    @Override
-    public PortalInfo getPortalInfo(Entity entity, ServerLevel destLevel, Function<ServerLevel, PortalInfo> defaultPortalInfo) {
-        boolean isSepulchra = destLevel.dimension() == SBDimensions.SEPULCHRA_KEY;
-        if (entity.level().dimension() != SBDimensions.SEPULCHRA_KEY && !isSepulchra) return null;
+    public PortalInfo getPortalInfo(Entity entity, ServerLevel destination, Function<ServerLevel, PortalInfo> portalInfo) {
+        if (entity.level().dimension() != SBDimensions.SEPULCHRA_KEY && destination.dimension() != SBDimensions.SEPULCHRA_KEY) return null;
         else {
-            WorldBorder worldBorder = destLevel.getWorldBorder();
-            double scale = DimensionType.getTeleportationScale(entity.level().dimensionType(), destLevel.dimensionType());
+            WorldBorder worldBorder = destination.getWorldBorder();
+            double scale = DimensionType.getTeleportationScale(entity.level().dimensionType(), destination.dimensionType());
             BlockPos blockPos = worldBorder.clampToBounds(entity.getX() * scale, entity.getY(), entity.getZ() * scale);
-            return this.getPortal(entity, blockPos, worldBorder).map((result) -> {
+            return this.getPortal(entity, blockPos, worldBorder).map(result -> {
                 BlockState blockstate = entity.level().getBlockState(entity.portalEntrancePos);
                 Direction.Axis axis;
                 Vec3 vec3;
@@ -59,7 +55,7 @@ public class SBPortalForcer implements ITeleporter {
                     vec3 = new Vec3(0.5D, 0.0D, 0.0D);
                 }
 
-                return PortalShape.createPortalInfo(destLevel, result, axis, vec3, entity, entity.getDeltaMovement(), entity.getYRot(), entity.getXRot());
+                return PortalShape.createPortalInfo(destination, result, axis, vec3, entity, entity.getDeltaMovement(), entity.getYRot(), entity.getXRot());
             }).orElse(null);
         }
     }
@@ -83,12 +79,12 @@ public class SBPortalForcer implements ITeleporter {
         poiManager.ensureLoadedAndValid(this.level, pos, 128);
         System.out.println(SBPois.SEPULCHRA_PORTAL.getKey());
         Optional<PoiRecord> optional = poiManager
-                .getInSquare((poi) -> poi.is(SBPois.SEPULCHRA_PORTAL.getKey()), pos, 128, PoiManager.Occupancy.ANY)
-                .filter((poi) -> worldBorder.isWithinBounds(poi.getPos()))
-                .sorted(Comparator.<PoiRecord>comparingDouble((poi) -> poi.getPos().distSqr(pos)).thenComparingInt((poi) -> poi.getPos().getY()))
-                .filter((poi) -> this.level.getBlockState(poi.getPos()).hasProperty(BlockStateProperties.HORIZONTAL_AXIS))
+                .getInSquare(poi -> poi.is(SBPois.SEPULCHRA_PORTAL.getKey()), pos, 128, PoiManager.Occupancy.ANY)
+                .filter(poi -> worldBorder.isWithinBounds(poi.getPos()))
+                .sorted(Comparator.<PoiRecord>comparingDouble(poi -> poi.getPos().distSqr(pos)).thenComparingInt(poi -> poi.getPos().getY()))
+                .filter(poi -> this.level.getBlockState(poi.getPos()).hasProperty(BlockStateProperties.HORIZONTAL_AXIS))
                 .findFirst();
-        return optional.map((poi) -> {
+        return optional.map(poi -> {
             BlockPos blockpos = poi.getPos();
             this.level.getChunkSource().addRegionTicket(TicketType.PORTAL, new ChunkPos(blockpos), 3, blockpos);
             BlockState blockstate = this.level.getBlockState(blockpos);
@@ -116,6 +112,7 @@ public class SBPortalForcer implements ITeleporter {
                     mutableBlockPos.setY(l);
                     if (this.level.isEmptyBlock(mutableBlockPos)) {
                         int i1;
+
                         for(i1 = l; l > 0 && this.level.isEmptyBlock(mutableBlockPos.move(Direction.DOWN)); --l) {
                         }
 
@@ -206,7 +203,6 @@ public class SBPortalForcer implements ITeleporter {
         return true;
     }
 
-    @Override
     public boolean playTeleportSound(ServerPlayer player, ServerLevel sourceWorld, ServerLevel destWorld) {
         return false;
     }

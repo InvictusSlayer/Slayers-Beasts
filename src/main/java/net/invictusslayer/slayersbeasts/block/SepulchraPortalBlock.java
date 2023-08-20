@@ -94,7 +94,7 @@ public class SepulchraPortalBlock extends Block {
 
     @SuppressWarnings("deprecation")
     public void entityInside(BlockState state, Level worldIn, BlockPos pos, Entity entity) {
-        if (!entity.isPassenger() && !entity.isVehicle() && entity.canChangeDimensions()) {
+        if (entity.canChangeDimensions()) {
             if (entity.isOnPortalCooldown()) {
                 entity.setPortalCooldown();
             } else {

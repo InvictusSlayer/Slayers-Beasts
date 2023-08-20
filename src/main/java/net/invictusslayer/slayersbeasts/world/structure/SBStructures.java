@@ -29,14 +29,14 @@ public class SBStructures {
         HolderGetter<StructureTemplatePool> pools = context.lookup(Registries.TEMPLATE_POOL);
         HolderGetter<Biome> biomes = context.lookup(Registries.BIOME);
 
-        context.register(CRYPT, new JigsawStructure(structure(HolderSet.direct(biomes.getOrThrow(Biomes.THE_VOID)), TerrainAdjustment.NONE), pools.getOrThrow(CryptPools.START), 7, ConstantHeight.of(VerticalAnchor.absolute(60)), false));
+        context.register(CRYPT, new JigsawStructure(structure(HolderSet.direct(biomes.getOrThrow(Biomes.THE_VOID)), Map.of(), GenerationStep.Decoration.UNDERGROUND_STRUCTURES, TerrainAdjustment.NONE), pools.getOrThrow(CryptPools.START), 7, ConstantHeight.of(VerticalAnchor.absolute(60)), false));
     }
 
     private static Structure.StructureSettings structure(HolderSet<Biome> biomes, Map<MobCategory, StructureSpawnOverride> spawns, GenerationStep.Decoration step, TerrainAdjustment terrain) {
         return new Structure.StructureSettings(biomes, spawns, step, terrain);
     }
 
-    private static Structure.StructureSettings structure(HolderSet<Biome> biomes, TerrainAdjustment terrain) {
+    private static Structure.StructureSettings basicStructure(HolderSet<Biome> biomes, TerrainAdjustment terrain) {
         return structure(biomes, Map.of(), GenerationStep.Decoration.SURFACE_STRUCTURES, terrain);
     }
 
