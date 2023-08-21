@@ -1,6 +1,7 @@
 package net.invictusslayer.slayersbeasts.world.structure;
 
 import net.invictusslayer.slayersbeasts.SlayersBeasts;
+import net.invictusslayer.slayersbeasts.world.biome.SBBiomes;
 import net.invictusslayer.slayersbeasts.world.structure.pools.CryptPools;
 import net.minecraft.core.HolderGetter;
 import net.minecraft.core.HolderSet;
@@ -10,7 +11,6 @@ import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.MobCategory;
 import net.minecraft.world.level.biome.Biome;
-import net.minecraft.world.level.biome.Biomes;
 import net.minecraft.world.level.levelgen.GenerationStep;
 import net.minecraft.world.level.levelgen.VerticalAnchor;
 import net.minecraft.world.level.levelgen.heightproviders.ConstantHeight;
@@ -29,7 +29,7 @@ public class SBStructures {
         HolderGetter<StructureTemplatePool> pools = context.lookup(Registries.TEMPLATE_POOL);
         HolderGetter<Biome> biomes = context.lookup(Registries.BIOME);
 
-        context.register(CRYPT, new JigsawStructure(structure(HolderSet.direct(biomes.getOrThrow(Biomes.THE_VOID)), Map.of(), GenerationStep.Decoration.UNDERGROUND_STRUCTURES, TerrainAdjustment.NONE), pools.getOrThrow(CryptPools.START), 7, ConstantHeight.of(VerticalAnchor.absolute(60)), false));
+        context.register(CRYPT, new JigsawStructure(structure(HolderSet.direct(biomes.getOrThrow(SBBiomes.THE_CRYPT)), Map.of(), GenerationStep.Decoration.UNDERGROUND_STRUCTURES, TerrainAdjustment.NONE), pools.getOrThrow(CryptPools.START), 7, ConstantHeight.of(VerticalAnchor.absolute(60)), false));
     }
 
     private static Structure.StructureSettings structure(HolderSet<Biome> biomes, Map<MobCategory, StructureSpawnOverride> spawns, GenerationStep.Decoration step, TerrainAdjustment terrain) {

@@ -11,8 +11,13 @@ import net.minecraft.world.level.levelgen.carver.ConfiguredWorldCarver;
 import net.minecraft.world.level.levelgen.placement.PlacedFeature;
 
 public class SBBiomes {
+    //OVERWORLD
+    public static final ResourceKey<Biome> ANCIENT_GROVE = registerKey("ancient_grove");
     public static final ResourceKey<Biome> ASPEN_FOREST = registerKey("aspen_forest");
     public static final ResourceKey<Biome> BLACK_DUNES = registerKey("black_dunes");
+    public static final ResourceKey<Biome> BRUSHLAND = registerKey("brushland");
+    public static final ResourceKey<Biome> ROCKY_BRUSHLAND = registerKey("rocky_brushland");
+    public static final ResourceKey<Biome> WOODED_BRUSHLAND = registerKey("wooded_brushland");
     public static final ResourceKey<Biome> EUCALYPT_FOREST = registerKey("eucalypt_forest");
     public static final ResourceKey<Biome> FROZEN_THICKET = registerKey("frozen_thicket");
     public static final ResourceKey<Biome> INKY_MOOR = registerKey("inky_moor");
@@ -23,6 +28,19 @@ public class SBBiomes {
     public static final ResourceKey<Biome> OLD_GROWTH_REDWOOD_GROVE = registerKey("old_growth_redwood_grove");
     public static final ResourceKey<Biome> TAR_DESERT = registerKey("tar_desert");
     public static final ResourceKey<Biome> VOLCANIC_PEAKS = registerKey("volcanic_peaks");
+
+    //UNDERGROUND
+    public static final ResourceKey<Biome> FUNGAL_DEPTHS = registerKey("fungal_depths");
+    public static final ResourceKey<Biome> ICE_CAVES = registerKey("ice_caves");
+    public static final ResourceKey<Biome> SLIME_CAVERNS = registerKey("slime_caverns");
+
+    //NETHER
+
+    //END
+    public static final ResourceKey<Biome> END_SPIKES = registerKey("end_spikes");
+
+    //CRYPT
+    public static final ResourceKey<Biome> THE_CRYPT = registerKey("the_crypt");
 
     public static void bootstrap(BootstapContext<Biome> context) {
         HolderGetter<PlacedFeature> placed = context.lookup(Registries.PLACED_FEATURE);
@@ -40,6 +58,8 @@ public class SBBiomes {
         register(context, OLD_GROWTH_REDWOOD_GROVE, SBOverworldBiomes.redwoodGrove(placed, carver, true));
         register(context, TAR_DESERT, SBOverworldBiomes.desert(placed, carver));
         register(context, VOLCANIC_PEAKS, SBOverworldBiomes.volcanicPeaks(placed, carver));
+
+        register(context, THE_CRYPT, SBCryptBiomes.theCrypt(placed, carver));
     }
 
     private static ResourceKey<Biome> registerKey(String name) {
