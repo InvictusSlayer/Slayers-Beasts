@@ -7,6 +7,7 @@ import net.minecraft.data.PackOutput;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
+import net.minecraft.world.level.block.state.properties.DoubleBlockHalf;
 import net.minecraftforge.client.model.generators.BlockStateProvider;
 import net.minecraftforge.client.model.generators.ConfiguredModel;
 import net.minecraftforge.client.model.generators.ModelFile;
@@ -18,11 +19,10 @@ public class SBBlockStateProvider extends BlockStateProvider {
         super(output, SlayersBeasts.MOD_ID, exFileHelper);
     }
 
-    @Override
     protected void registerStatesAndModels() {
         generateBlockFamilies();
 
-        cubeWithItem(SBBlocks.CRYPTALITH.get());
+        cubeNaturalWithItem(SBBlocks.CRYPTALITH.get());
         runicCryptalith();
         cubeWithItem(SBBlocks.JADE_BLOCK.get());
         cubeWithItem(SBBlocks.EXOSKELETON_ORE.get());
@@ -33,11 +33,12 @@ public class SBBlockStateProvider extends BlockStateProvider {
         simpleCubeBottomTopWithItem(SBBlocks.ANTHILL.get());
         simpleCubeBottomTopWithItem(SBBlocks.ANTHILL_HATCHERY.get());
 
-        icicle();
+        dripstone(SBBlocks.ICICLE.get());
+        doubleCrossBlock(SBBlocks.TALL_DEAD_BUSH.get(), "cutout");
         tiltCubeWithItem(SBBlocks.CRACKED_MUD.get());
         cubeWithItem(SBBlocks.PEAT.get());
 
-        cubeWithItem(SBBlocks.BLACK_SAND.get());
+        cubeNaturalWithItem(SBBlocks.BLACK_SAND.get());
         cubeBottomTopWithItem(SBBlocks.BLACK_SANDSTONE.get(), extend(blockTexture(SBBlocks.BLACK_SANDSTONE.get()), "_side"), extend(blockTexture(SBBlocks.BLACK_SANDSTONE.get()), "_bottom"), extend(blockTexture(SBBlocks.BLACK_SANDSTONE.get()), "_top"));
         slabWithItem((SlabBlock) SBBlocks.BLACK_SANDSTONE_SLAB.get(), blockTexture(SBBlocks.BLACK_SANDSTONE.get()), extend(blockTexture(SBBlocks.BLACK_SANDSTONE.get()), "_side"), extend(blockTexture(SBBlocks.BLACK_SANDSTONE.get()), "_bottom"), extend(blockTexture(SBBlocks.BLACK_SANDSTONE.get()), "_top"));
         stairWithItem((StairBlock) SBBlocks.BLACK_SANDSTONE_STAIRS.get(), extend(blockTexture(SBBlocks.BLACK_SANDSTONE.get()), "_side"), extend(blockTexture(SBBlocks.BLACK_SANDSTONE.get()), "_bottom"), extend(blockTexture(SBBlocks.BLACK_SANDSTONE.get()), "_top"));
@@ -132,20 +133,27 @@ public class SBBlockStateProvider extends BlockStateProvider {
         });
     }
 
+    private void doubleCrossBlock(Block block, String renderType) {
+        getVariantBuilder(block).forAllStates(state -> {
+            String suffix = "_top";
+            if (state.getValue(BlockStateProperties.DOUBLE_BLOCK_HALF) == DoubleBlockHalf.LOWER) {
+                suffix = "_bottom";
+            }
+
+            return ConfiguredModel.builder().modelFile(models().cross(name(block) + suffix, extend(blockTexture(block), suffix)).renderType(renderType)).build();
+        });
+    }
+
     private void runicCryptalith() {
         Block block = SBBlocks.RUNIC_CRYPTALITH.get();
         getVariantBuilder(block).forAllStates(state -> {
-            String suffix = "";
-            if (state.getValue(BlockStateProperties.EYE)) {
-                suffix = "_active";
-            }
+            String suffix = state.getValue(BlockStateProperties.EYE) ? "_active" : "";
             return ConfiguredModel.builder().modelFile(models().cubeAll(name(block) + suffix, extend(blockTexture(block), suffix))).build();
         });
         simpleBlockItem(block, models().withExistingParent(name(block), "minecraft:block/cube_all"));
     }
 
-    private void icicle() {
-        Block block = SBBlocks.ICICLE.get();
+    private void dripstone(Block block) {
         getVariantBuilder(block).forAllStates(state -> {
             String suffix = "_" + state.getValue(BlockStateProperties.DRIPSTONE_THICKNESS).getSerializedName() + "_" + state.getValue(BlockStateProperties.VERTICAL_DIRECTION).getSerializedName();
             return ConfiguredModel.builder().modelFile(models().cross(name(block) + suffix, extend(blockTexture(block), suffix)).renderType("cutout")).build();
@@ -222,7 +230,12 @@ public class SBBlockStateProvider extends BlockStateProvider {
         trapdoorBlockWithRenderType(block, blockTexture(block), orientable, "cutout");
         simpleBlockItem(block, models().withExistingParent(name(block), "minecraft:block/template_trapdoor_bottom").texture("texture", blockTexture(block)));
     }
-    
+
+    private void cubeNaturalWithItem(Block block) {
+        ModelFile model = models().cubeAll(name(block), blockTexture(block));
+        getVariantBuilder(block).forAllStates(state -> ConfiguredModel.allYRotations(model, 0, false));
+        simpleBlockItem(block, models().withExistingParent(name(block), "minecraft:block/cube_all"));
+    }
     private void cubeWithItem(Block block) {
         cubeOtherWithItem(block, blockTexture(block));
     }

@@ -42,7 +42,7 @@ public class SlayersBeasts {
         SBBlocks.register(eventBus);
         SBBlockEntities.register(eventBus);
         SBEntities.register(eventBus);
-        SBVillagerType.register(eventBus);
+//        SBVillagerType.register(eventBus);
         SBEffects.register(eventBus);
         SBPotions.register(eventBus);
         SBSounds.register(eventBus);

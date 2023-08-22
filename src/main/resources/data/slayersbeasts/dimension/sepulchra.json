@@ -169,7 +169,7 @@
           }
         },
         {
-          "biome": "slayersbeasts:tar_desert",
+          "biome": "slayersbeasts:dead_sands",
           "parameters": {
             "temperature": [
               0.55,
@@ -196,7 +196,7 @@
           }
         },
         {
-          "biome": "slayersbeasts:tar_desert",
+          "biome": "slayersbeasts:dead_sands",
           "parameters": {
             "temperature": [
               0.55,
@@ -331,7 +331,7 @@
           }
         },
         {
-          "biome": "slayersbeasts:eucalypt_forest",
+          "biome": "slayersbeasts:eucalypt_woodland",
           "parameters": {
             "temperature": [
               0.2,
@@ -358,7 +358,7 @@
           }
         },
         {
-          "biome": "slayersbeasts:eucalypt_forest",
+          "biome": "slayersbeasts:eucalypt_woodland",
           "parameters": {
             "temperature": [
               0.2,
