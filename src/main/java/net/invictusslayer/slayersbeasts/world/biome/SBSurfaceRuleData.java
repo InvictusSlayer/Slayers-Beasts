@@ -17,7 +17,7 @@ public class SBSurfaceRuleData {
                         ifTrue(isBiome(SBBiomes.BLACK_DUNES), sequence(
                                 ifTrue(ON_CEILING, setBlock(SBBlocks.BLACK_SANDSTONE.get())),
                                 setBlock(SBBlocks.BLACK_SAND.get()))),
-                        ifTrue(isBiome(SBBiomes.EUCALYPT_FOREST),
+                        ifTrue(isBiome(SBBiomes.EUCALYPT_WOODLAND),
                                 ifTrue(noiseCondition(Noises.SURFACE, -0.5), setBlock(Blocks.PODZOL))),
                         ifTrue(isBiome(SBBiomes.INKY_MOOR), setBlock(Blocks.MUD)),
                         ifTrue(isBiome(SBBiomes.OUTBACK), sequence(
@@ -30,7 +30,7 @@ public class SBSurfaceRuleData {
                                 ifTrue(noiseCondition(Noises.SURFACE, 0.21), setBlock(Blocks.COARSE_DIRT)),
                                 ifTrue(noiseCondition(Noises.SURFACE, -0.12), setBlock(Blocks.PODZOL)),
                                 setBlock(Blocks.MOSS_BLOCK))),
-                        ifTrue(isBiome(SBBiomes.TAR_DESERT), sequence(
+                        ifTrue(isBiome(SBBiomes.DEAD_SANDS), sequence(
                                 ifTrue(ON_CEILING, setBlock(SBBlocks.BLACK_SANDSTONE.get())),
                                 ifTrue(noiseCondition(Noises.ICE, 0), setBlock(SBBlocks.BLACK_SAND.get())),
                                 setBlock(Blocks.RED_SAND))),
@@ -48,7 +48,7 @@ public class SBSurfaceRuleData {
                                         ifTrue(ON_CEILING, setBlock(SBBlocks.BLACK_SANDSTONE.get())),
                                         setBlock(SBBlocks.BLACK_SAND.get()))),
                                 ifTrue(isBiome(SBBiomes.INKY_MOOR), setBlock(Blocks.MUD)),
-                                ifTrue(isBiome(SBBiomes.TAR_DESERT), sequence(
+                                ifTrue(isBiome(SBBiomes.DEAD_SANDS), sequence(
                                         ifTrue(ON_CEILING, setBlock(SBBlocks.BLACK_SANDSTONE.get())),
                                         ifTrue(noiseCondition(Noises.ICE, 0), setBlock(SBBlocks.BLACK_SAND.get())),
                                         setBlock(Blocks.RED_SAND))),
@@ -59,7 +59,7 @@ public class SBSurfaceRuleData {
                                 setBlock(Blocks.DIRT)
                         )),
                         ifTrue(DEEP_UNDER_FLOOR, sequence(
-                                ifTrue(isBiome(SBBiomes.BLACK_DUNES, SBBiomes.TAR_DESERT), setBlock(SBBlocks.BLACK_SANDSTONE.get()))
+                                ifTrue(isBiome(SBBiomes.BLACK_DUNES, SBBiomes.DEAD_SANDS), setBlock(SBBlocks.BLACK_SANDSTONE.get()))
                         )),
                         ifTrue(VERY_DEEP_UNDER_FLOOR, sequence(
                                 ifTrue(isBiome(SBBiomes.VOLCANIC_PEAKS), setBlock(Blocks.GRANITE))

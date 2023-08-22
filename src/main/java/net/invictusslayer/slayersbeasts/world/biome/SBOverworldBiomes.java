@@ -4,6 +4,7 @@ import net.invictusslayer.slayersbeasts.entity.SBEntities;
 import net.invictusslayer.slayersbeasts.world.feature.SBPlacedFeatures;
 import net.minecraft.core.HolderGetter;
 import net.minecraft.data.worldgen.BiomeDefaultFeatures;
+import net.minecraft.data.worldgen.placement.MiscOverworldPlacements;
 import net.minecraft.data.worldgen.placement.VegetationPlacements;
 import net.minecraft.sounds.Music;
 import net.minecraft.sounds.Musics;
@@ -33,6 +34,21 @@ public class SBOverworldBiomes {
     private static final Music MUSIC_SWAMP = Musics.createGameMusic(SoundEvents.MUSIC_BIOME_SWAMP);
     private static final Music MUSIC_VOLCANIC = Musics.createGameMusic(SoundEvents.MUSIC_BIOME_BASALT_DELTAS);
 
+    public static Biome ancientGrove(HolderGetter<PlacedFeature> pPlacedFeatures, HolderGetter<ConfiguredWorldCarver<?>> pWorldCarvers) {
+        MobSpawnSettings.Builder mobSettings = new MobSpawnSettings.Builder();
+        BiomeDefaultFeatures.commonSpawns(mobSettings);
+
+        BiomeGenerationSettings.Builder biomeSettings = new BiomeGenerationSettings.Builder(pPlacedFeatures, pWorldCarvers);
+        globalOverworldGeneration(biomeSettings);
+        BiomeDefaultFeatures.addDefaultSoftDisks(biomeSettings);
+        biomeSettings.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, VegetationPlacements.PATCH_GRASS_FOREST);
+        BiomeDefaultFeatures.addDefaultMushrooms(biomeSettings);
+        addModUndergroundVariety(biomeSettings);
+        addModMushrooms(biomeSettings);
+        biomeSettings.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, SBPlacedFeatures.TREES_RAINFOREST);
+        return biome(true, 0.6F, 0.6F, mobSettings, biomeSettings, MUSIC_RAINFOREST);
+    }
+
     public static Biome aspenForest(HolderGetter<PlacedFeature> pPlacedFeatures, HolderGetter<ConfiguredWorldCarver<?>> pWorldCarvers) {
         MobSpawnSettings.Builder mobSettings = new MobSpawnSettings.Builder();
         BiomeDefaultFeatures.commonSpawns(mobSettings);
@@ -46,6 +62,38 @@ public class SBOverworldBiomes {
         addModMushrooms(biomeSettings);
         biomeSettings.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, SBPlacedFeatures.TREES_ASPEN);
         return biome(true, 0.6F, 0.6F, mobSettings, biomeSettings, MUSIC_FOREST);
+    }
+
+    public static Biome brushland(HolderGetter<PlacedFeature> pPlacedFeatures, HolderGetter<ConfiguredWorldCarver<?>> pWorldCarvers, boolean pIsWooded, boolean pIsRocky) {
+        MobSpawnSettings.Builder mobSettings = new MobSpawnSettings.Builder();
+        BiomeDefaultFeatures.commonSpawns(mobSettings);
+
+        BiomeGenerationSettings.Builder biomeSettings = new BiomeGenerationSettings.Builder(pPlacedFeatures, pWorldCarvers);
+        globalOverworldGeneration(biomeSettings);
+        if (pIsRocky) biomeSettings.addFeature(GenerationStep.Decoration.LOCAL_MODIFICATIONS, MiscOverworldPlacements.FOREST_ROCK);
+        BiomeDefaultFeatures.addDefaultSoftDisks(biomeSettings);
+        biomeSettings.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, VegetationPlacements.PATCH_GRASS_SAVANNA);
+        biomeSettings.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, VegetationPlacements.PATCH_DEAD_BUSH);
+        BiomeDefaultFeatures.addDefaultMushrooms(biomeSettings);
+        addModUndergroundVariety(biomeSettings);
+        addModMushrooms(biomeSettings);
+        if (pIsWooded) biomeSettings.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, SBPlacedFeatures.TREES_OUTBACK);
+        return biome(false, 2F, 0F, mobSettings, biomeSettings, MUSIC_FOREST);
+    }
+
+    public static Biome chaparral(HolderGetter<PlacedFeature> pPlacedFeatures, HolderGetter<ConfiguredWorldCarver<?>> pWorldCarvers) {
+        MobSpawnSettings.Builder mobSettings = new MobSpawnSettings.Builder();
+        BiomeDefaultFeatures.commonSpawns(mobSettings);
+
+        BiomeGenerationSettings.Builder biomeSettings = new BiomeGenerationSettings.Builder(pPlacedFeatures, pWorldCarvers);
+        globalOverworldGeneration(biomeSettings);
+        BiomeDefaultFeatures.addDefaultSoftDisks(biomeSettings);
+        biomeSettings.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, VegetationPlacements.PATCH_GRASS_SAVANNA);
+        biomeSettings.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, VegetationPlacements.PATCH_DEAD_BUSH);
+        BiomeDefaultFeatures.addDefaultMushrooms(biomeSettings);
+        addModUndergroundVariety(biomeSettings);
+        addModMushrooms(biomeSettings);
+        return biome(true, 0.8F, 0.4F, mobSettings, biomeSettings, MUSIC_FOREST);
     }
 
     public static Biome desert(HolderGetter<PlacedFeature> pPlacedFeatures, HolderGetter<ConfiguredWorldCarver<?>> pWorldCarvers) {
@@ -64,7 +112,7 @@ public class SBOverworldBiomes {
         return biome(false, 2F, 0F, mobSettings, biomeSettings, MUSIC_DESERT);
     }
 
-    public static Biome eucalyptForest(HolderGetter<PlacedFeature> pPlacedFeatures, HolderGetter<ConfiguredWorldCarver<?>> pWorldCarvers) {
+    public static Biome eucalyptWoodland(HolderGetter<PlacedFeature> pPlacedFeatures, HolderGetter<ConfiguredWorldCarver<?>> pWorldCarvers) {
         MobSpawnSettings.Builder mobSettings = new MobSpawnSettings.Builder();
         BiomeDefaultFeatures.commonSpawns(mobSettings);
 
@@ -196,6 +244,11 @@ public class SBOverworldBiomes {
         biomeSettings.addFeature(GenerationStep.Decoration.UNDERGROUND_ORES, SBPlacedFeatures.ORE_PEGMATITE_VOLCANIC);
         biomeSettings.addFeature(GenerationStep.Decoration.FLUID_SPRINGS, SBPlacedFeatures.SPRING_LAVA_VOLCANIC);
         return biome(true, 2F, 0F, NONE, DEFAULT_WATER, DEFAULT_WATER_FOG, 8230780, null, null, mobSettings, biomeSettings, MUSIC_VOLCANIC);
+    }
+
+    public static Biome theCrypt(HolderGetter<PlacedFeature> pPlacedFeatures, HolderGetter<ConfiguredWorldCarver<?>> pWorldCarvers) {
+        BiomeGenerationSettings.Builder biomeSettings = new BiomeGenerationSettings.Builder(pPlacedFeatures, pWorldCarvers);
+        return biome(false, 0.5F, 0.5F, new MobSpawnSettings.Builder(), biomeSettings, null);
     }
 
     private static Biome biome(boolean pHasPrecipitation, float pTemperature, float pDownfall, MobSpawnSettings.Builder pMobSpawnSettings, BiomeGenerationSettings.Builder pGenerationSettings, @Nullable Music pBackgroundMusic) {

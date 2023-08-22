@@ -48,7 +48,7 @@ public class SBOverworldRegion extends Region {
                 .erosion(Erosion.FULL_RANGE)
                 .depth(Depth.FLOOR, Depth.SURFACE)
                 .weirdness(NORMAL_WEIRDNESS, VARIANT_WEIRDNESS)
-                .build().forEach(point -> builder.add(point, SBBiomes.EUCALYPT_FOREST));
+                .build().forEach(point -> builder.add(point, SBBiomes.EUCALYPT_WOODLAND));
         new ParameterPointListBuilder()
                 .temperature(Temperature.ICY)
                 .humidity(Humidity.span(Humidity.ARID, Humidity.DRY))
@@ -112,7 +112,7 @@ public class SBOverworldRegion extends Region {
                 .erosion(Erosion.EROSION_3)
                 .depth(Depth.FLOOR, Depth.SURFACE)
                 .weirdness(NORMAL_WEIRDNESS, VARIANT_WEIRDNESS)
-                .build().forEach(point -> builder.add(point, SBBiomes.TAR_DESERT));
+                .build().forEach(point -> builder.add(point, SBBiomes.DEAD_SANDS));
         new ParameterPointListBuilder()
                 .temperature(Temperature.span(Temperature.NEUTRAL, Temperature.WARM))
                 .humidity(Humidity.span(Humidity.ARID, Humidity.DRY))

@@ -9,6 +9,7 @@ import net.minecraft.tags.TagKey;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.ai.village.poi.PoiType;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.block.Block;
 
 public class SBTags {
@@ -47,6 +48,14 @@ public class SBTags {
         }
         private static TagKey<Item> forgeTag(String name) {
             return ItemTags.create(new ResourceLocation("forge", name));
+        }
+    }
+
+    public static class Biomes {
+        public static final TagKey<Biome> IS_BRUSHLAND = tag("is_brushland");
+
+        private static TagKey<Biome> tag(String name) {
+            return TagKey.create(Registries.BIOME, new ResourceLocation(SlayersBeasts.MOD_ID, name));
         }
     }
 

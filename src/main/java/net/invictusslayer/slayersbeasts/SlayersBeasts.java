@@ -5,6 +5,7 @@ import net.invictusslayer.slayersbeasts.block.entity.SBBlockEntities;
 import net.invictusslayer.slayersbeasts.datagen.tags.SBPois;
 import net.invictusslayer.slayersbeasts.effect.SBEffects;
 import net.invictusslayer.slayersbeasts.entity.SBEntities;
+import net.invictusslayer.slayersbeasts.entity.npc.SBVillagerType;
 import net.invictusslayer.slayersbeasts.item.SBItems;
 import net.invictusslayer.slayersbeasts.misc.SBBrewingRecipe;
 import net.invictusslayer.slayersbeasts.misc.SBCreativeModeTab;
@@ -41,6 +42,7 @@ public class SlayersBeasts {
         SBBlocks.register(eventBus);
         SBBlockEntities.register(eventBus);
         SBEntities.register(eventBus);
+        SBVillagerType.register(eventBus);
         SBEffects.register(eventBus);
         SBPotions.register(eventBus);
         SBSounds.register(eventBus);
