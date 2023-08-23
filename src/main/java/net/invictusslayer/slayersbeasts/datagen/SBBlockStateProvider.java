@@ -2,6 +2,7 @@ package net.invictusslayer.slayersbeasts.datagen;
 
 import net.invictusslayer.slayersbeasts.SlayersBeasts;
 import net.invictusslayer.slayersbeasts.block.SBBlocks;
+import net.minecraft.core.Direction;
 import net.minecraft.data.BlockFamily;
 import net.minecraft.data.PackOutput;
 import net.minecraft.resources.ResourceLocation;
@@ -22,6 +23,8 @@ public class SBBlockStateProvider extends BlockStateProvider {
     protected void registerStatesAndModels() {
         generateBlockFamilies();
 
+        verticalPortal(SBBlocks.SEPULCHRA_PORTAL.get(), "translucent");
+        horizontalPortal(SBBlocks.CRYPT_PORTAL.get(), "solid");
         cubeNaturalWithItem(SBBlocks.CRYPTALITH.get());
         runicCryptalith();
         cubeWithItem(SBBlocks.JADE_BLOCK.get());
@@ -34,7 +37,7 @@ public class SBBlockStateProvider extends BlockStateProvider {
         simpleCubeBottomTopWithItem(SBBlocks.ANTHILL_HATCHERY.get());
 
         dripstone(SBBlocks.ICICLE.get());
-        doubleCrossBlock(SBBlocks.TALL_DEAD_BUSH.get(), "cutout");
+        doubleCrossBlock(SBBlocks.TALL_DEAD_BUSH.get());
         tiltCubeWithItem(SBBlocks.CRACKED_MUD.get());
         cubeWithItem(SBBlocks.PEAT.get());
 
@@ -133,14 +136,29 @@ public class SBBlockStateProvider extends BlockStateProvider {
         });
     }
 
-    private void doubleCrossBlock(Block block, String renderType) {
-        getVariantBuilder(block).forAllStates(state -> {
-            String suffix = "_top";
-            if (state.getValue(BlockStateProperties.DOUBLE_BLOCK_HALF) == DoubleBlockHalf.LOWER) {
-                suffix = "_bottom";
-            }
+    private void horizontalPortal(Block block, String renderType) {
+        getVariantBuilder(block).forAllStates(state -> ConfiguredModel.builder().modelFile(models().getBuilder(name(block))
+                .texture("portal", blockTexture(block)).texture("particle", blockTexture(block))
+                .element().from(0, 6, 0).to(16, 12, 16)
+                .face(Direction.UP).texture("#portal").end().face(Direction.DOWN).texture("#portal").end()
+                .end().renderType(renderType)).build());
+    }
 
-            return ConfiguredModel.builder().modelFile(models().cross(name(block) + suffix, extend(blockTexture(block), suffix)).renderType(renderType)).build();
+    private void verticalPortal(Block block, String renderType) {
+        getVariantBuilder(block).forAllStates(state -> {
+            boolean isX = state.getValue(BlockStateProperties.HORIZONTAL_AXIS) == Direction.Axis.X;
+            return ConfiguredModel.builder().modelFile(models().getBuilder(name(block) + (isX ? "_ns" : "_ew"))
+                    .texture("portal", blockTexture(block)).texture("particle", blockTexture(block))
+                    .element().from(isX ? 0 : 6, 0, isX ? 6 : 0).to(isX ? 16 : 10, 16, isX ? 10 : 16)
+                    .face(isX ? Direction.NORTH : Direction.EAST).texture("#portal").end().face(isX ? Direction.SOUTH : Direction.WEST).texture("#portal").end()
+                    .end().renderType(renderType)).build();
+        });
+    }
+
+    private void doubleCrossBlock(Block block) {
+        getVariantBuilder(block).forAllStates(state -> {
+            String suffix = state.getValue(BlockStateProperties.DOUBLE_BLOCK_HALF) == DoubleBlockHalf.LOWER ? "_bottom" : "_top";
+            return ConfiguredModel.builder().modelFile(models().cross(name(block) + suffix, extend(blockTexture(block), suffix)).renderType("cutout")).build();
         });
     }
 
