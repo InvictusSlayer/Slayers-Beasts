@@ -72,12 +72,14 @@ public class SBOverworldBiomes {
         globalOverworldGeneration(biomeSettings);
         if (pIsRocky) biomeSettings.addFeature(GenerationStep.Decoration.LOCAL_MODIFICATIONS, MiscOverworldPlacements.FOREST_ROCK);
         BiomeDefaultFeatures.addDefaultSoftDisks(biomeSettings);
-        biomeSettings.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, VegetationPlacements.PATCH_GRASS_SAVANNA);
-        biomeSettings.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, VegetationPlacements.PATCH_DEAD_BUSH);
+        biomeSettings.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, VegetationPlacements.PATCH_TALL_GRASS);
+        biomeSettings.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, VegetationPlacements.PATCH_DEAD_BUSH_2);
         BiomeDefaultFeatures.addDefaultMushrooms(biomeSettings);
         addModUndergroundVariety(biomeSettings);
+        addMudPits(biomeSettings);
+        biomeSettings.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, SBPlacedFeatures.PATCH_TALL_DEAD_BUSH_BRUSH);
         addModMushrooms(biomeSettings);
-        if (pIsWooded) biomeSettings.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, SBPlacedFeatures.TREES_OUTBACK);
+        biomeSettings.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, pIsWooded ? SBPlacedFeatures.TREES_WOODED_BRUSH : SBPlacedFeatures.TREES_BRUSH);
         return biome(false, 2F, 0F, mobSettings, biomeSettings, MUSIC_FOREST);
     }
 
@@ -92,7 +94,9 @@ public class SBOverworldBiomes {
         biomeSettings.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, VegetationPlacements.PATCH_DEAD_BUSH);
         BiomeDefaultFeatures.addDefaultMushrooms(biomeSettings);
         addModUndergroundVariety(biomeSettings);
+        biomeSettings.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, SBPlacedFeatures.PATCH_TALL_DEAD_BUSH);
         addModMushrooms(biomeSettings);
+        biomeSettings.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, SBPlacedFeatures.TREES_BRUSH);
         return biome(true, 0.8F, 0.4F, mobSettings, biomeSettings, MUSIC_FOREST);
     }
 
@@ -107,8 +111,8 @@ public class SBOverworldBiomes {
         biomeSettings.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, VegetationPlacements.PATCH_DEAD_BUSH);
         BiomeDefaultFeatures.addDefaultMushrooms(biomeSettings);
         addModUndergroundVariety(biomeSettings);
-        addModMushrooms(biomeSettings);
         addMudPits(biomeSettings);
+        addModMushrooms(biomeSettings);
         return biome(false, 2F, 0F, mobSettings, biomeSettings, MUSIC_DESERT);
     }
 
@@ -174,8 +178,8 @@ public class SBOverworldBiomes {
         biomeSettings.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, VegetationPlacements.PATCH_DEAD_BUSH);
         BiomeDefaultFeatures.addDefaultMushrooms(biomeSettings);
         addModUndergroundVariety(biomeSettings);
-        addModMushrooms(biomeSettings);
         addMudPits(biomeSettings);
+        addModMushrooms(biomeSettings);
         biomeSettings.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, SBPlacedFeatures.TREES_OUTBACK);
         return biome(false, 2F, 0F, mobSettings, biomeSettings, MUSIC_OUTBACK); // gc-9470285 fc-10387789
     }

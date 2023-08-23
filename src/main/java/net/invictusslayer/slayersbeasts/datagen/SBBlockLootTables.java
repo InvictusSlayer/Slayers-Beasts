@@ -12,12 +12,14 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.block.state.properties.DoubleBlockHalf;
+import net.minecraft.world.level.storage.loot.LootContext;
 import net.minecraft.world.level.storage.loot.LootPool;
 import net.minecraft.world.level.storage.loot.LootTable;
 import net.minecraft.world.level.storage.loot.entries.LootItem;
 import net.minecraft.world.level.storage.loot.functions.ApplyBonusCount;
 import net.minecraft.world.level.storage.loot.functions.SetItemCountFunction;
 import net.minecraft.world.level.storage.loot.predicates.LootItemBlockStatePropertyCondition;
+import net.minecraft.world.level.storage.loot.predicates.LootItemEntityPropertyCondition;
 import net.minecraft.world.level.storage.loot.providers.number.ConstantValue;
 import net.minecraft.world.level.storage.loot.providers.number.UniformGenerator;
 import net.minecraftforge.registries.RegistryObject;
@@ -122,11 +124,12 @@ public class SBBlockLootTables extends BlockLootSubProvider {
 
     private LootTable.Builder createTallDeadBushDrops(Block block) {
         return LootTable.lootTable().withPool(LootPool.lootPool().setRolls(ConstantValue.exactly(1.0F))
-                .when(LootItemBlockStatePropertyCondition.hasBlockStateProperties(block)
-                        .setProperties(StatePropertiesPredicate.Builder.properties()
-                                .hasProperty(BlockStateProperties.DOUBLE_BLOCK_HALF, DoubleBlockHalf.LOWER)))
-                .add(LootItem.lootTableItem(block).when(HAS_SHEARS).otherwise(applyExplosionDecay(block,
-                        LootItem.lootTableItem(Items.STICK).apply(SetItemCountFunction.setCount(UniformGenerator.between(1.0F, 4.0F)))))));
+                .add(LootItem.lootTableItem(block).when(HAS_SHEARS)
+                        .otherwise(applyExplosionDecay(block, LootItem.lootTableItem(Items.STICK)
+                                .when(LootItemBlockStatePropertyCondition.hasBlockStateProperties(block)
+                                        .setProperties(StatePropertiesPredicate.Builder.properties().hasProperty(BlockStateProperties.DOUBLE_BLOCK_HALF, DoubleBlockHalf.LOWER))
+                                        .and(LootItemEntityPropertyCondition.entityPresent(LootContext.EntityTarget.THIS)))
+                                .apply(SetItemCountFunction.setCount(UniformGenerator.between(1.0F, 4.0F)))))));
     }
 
     private LootTable.Builder createExoskeletonOreDrops(Block block) {
