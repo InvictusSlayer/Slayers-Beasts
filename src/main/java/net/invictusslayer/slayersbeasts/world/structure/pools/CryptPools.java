@@ -32,9 +32,9 @@ public class CryptPools extends SBPools {
 
         register(context, START, pools.getOrThrow(Pools.EMPTY), StructureTemplatePool.Projection.RIGID, ImmutableList.of(element("entrance1", 1)));
         register(context, CORRIDOR, pools.getOrThrow(ROOM), StructureTemplatePool.Projection.RIGID, ImmutableList.of(element("corridor1", 1)));
-        register(context, JUNCTION, pools.getOrThrow(ROOM), StructureTemplatePool.Projection.RIGID, ImmutableList.of(element("junction1", 1)));
-        register(context, ROOM, pools.getOrThrow(WALL), StructureTemplatePool.Projection.RIGID, ImmutableList.of(element("room1", 3), element("wall1", 1)));
-        register(context, WALL, pools.getOrThrow(Pools.EMPTY), StructureTemplatePool.Projection.RIGID, ImmutableList.of(element("wall1", 1)));
+        register(context, JUNCTION, pools.getOrThrow(ROOM), StructureTemplatePool.Projection.RIGID, ImmutableList.of(element("junction1", 3), element("junction_stair1", 1)));
+        register(context, ROOM, pools.getOrThrow(WALL), StructureTemplatePool.Projection.RIGID, ImmutableList.of(element("room1", 3), element("wall2", 1)));
+        register(context, WALL, pools.getOrThrow(Pools.EMPTY), StructureTemplatePool.Projection.RIGID, ImmutableList.of(element("wall1", 1), element("wall2", 1)));
     }
 
     private static Pair<Function<StructureTemplatePool.Projection, ? extends StructurePoolElement>, Integer> element(String name, int weight) {

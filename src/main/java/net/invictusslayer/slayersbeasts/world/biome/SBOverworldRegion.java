@@ -137,7 +137,7 @@ public class SBOverworldRegion extends Region {
                 .weirdness(NORMAL_WEIRDNESS, VARIANT_WEIRDNESS)
                 .build().forEach(point -> builder.add(point, SBBiomes.OLD_GROWTH_REDWOOD_GROVE));
         new ParameterPointListBuilder()
-                .temperature(Temperature.span(Temperature.NEUTRAL, Temperature.WARM))
+                .temperature(Temperature.span(Temperature.COOL, Temperature.NEUTRAL))
                 .humidity(Humidity.span(Humidity.ARID, Humidity.DRY))
                 .continentalness(Continentalness.INLAND)
                 .erosion(Erosion.FULL_RANGE)
