@@ -16,8 +16,8 @@ import net.minecraft.client.renderer.entity.layers.RenderLayer;
 import net.minecraft.resources.ResourceLocation;
 
 public class AntCargoLayer extends RenderLayer<WorkerAnt, WorkerAntModel<WorkerAnt>> {
-    private static final ResourceLocation LEAF_TEXTURE = new ResourceLocation(SlayersBeasts.MOD_ID, "textures/entity/cargo_leaf.png");
-    private static final ResourceLocation BARK_TEXTURE = new ResourceLocation(SlayersBeasts.MOD_ID, "textures/entity/cargo_bark.png");
+    private static final ResourceLocation LEAF_TEXTURE = new ResourceLocation(SlayersBeasts.MOD_ID, "textures/entity/ant/cargo/leaf.png");
+    private static final ResourceLocation BARK_TEXTURE = new ResourceLocation(SlayersBeasts.MOD_ID, "textures/entity/ant/cargo/bark.png");
     private final AntCargoModel<WorkerAnt> model;
 
     public AntCargoLayer(RenderLayerParent<WorkerAnt, WorkerAntModel<WorkerAnt>> pRenderer, EntityModelSet modelSet) {

@@ -12,11 +12,11 @@ import net.minecraft.resources.ResourceLocation;
 public class SoldierAntRenderer<Type extends SoldierAnt> extends MobRenderer<Type, SoldierAntModel<Type>> {
 
     private static final ResourceLocation WOOD_TEXTURE = new ResourceLocation(SlayersBeasts.MOD_ID,
-            "textures/entity/wood_ant_soldier.png");
+            "textures/entity/ant/wood/soldier.png");
     private static final ResourceLocation LEAFCUTTER_TEXTURE = new ResourceLocation(SlayersBeasts.MOD_ID,
-            "textures/entity/leafcutter_ant_soldier.png");
+            "textures/entity/ant/leafcutter/soldier.png");
     private static final ResourceLocation MEADOW_TEXTURE = new ResourceLocation(SlayersBeasts.MOD_ID,
-            "textures/entity/meadow_ant_soldier.png");
+            "textures/entity/ant/meadow/soldier.png");
 
     public SoldierAntRenderer(EntityRendererProvider.Context context) {
         super(context, new SoldierAntModel<>(context.bakeLayer(SoldierAntModel.LAYER_LOCATION)), 0.3f);

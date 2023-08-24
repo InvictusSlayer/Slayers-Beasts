@@ -12,11 +12,11 @@ import net.minecraft.resources.ResourceLocation;
 public class QueenAntRenderer<Type extends QueenAnt> extends MobRenderer<Type, QueenAntModel<Type>> {
 
     private static final ResourceLocation WOOD_TEXTURE = new ResourceLocation(SlayersBeasts.MOD_ID,
-            "textures/entity/wood_ant_queen.png");
+            "textures/entity/ant/wood/queen.png");
     private static final ResourceLocation LEAFCUTTER_TEXTURE = new ResourceLocation(SlayersBeasts.MOD_ID,
-            "textures/entity/leafcutter_ant_queen.png");
+            "textures/entity/ant/leafcutter/queen.png");
     private static final ResourceLocation MEADOW_TEXTURE = new ResourceLocation(SlayersBeasts.MOD_ID,
-            "textures/entity/meadow_ant_queen.png");
+            "textures/entity/ant/meadow/queen.png");
 
     public QueenAntRenderer(EntityRendererProvider.Context context) {
         super(context, new QueenAntModel<>(context.bakeLayer(QueenAntModel.LAYER_LOCATION)), 0.3f);

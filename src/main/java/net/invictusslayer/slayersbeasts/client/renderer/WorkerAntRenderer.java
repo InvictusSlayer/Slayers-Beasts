@@ -13,11 +13,11 @@ import net.minecraft.resources.ResourceLocation;
 public class WorkerAntRenderer extends MobRenderer<WorkerAnt, WorkerAntModel<WorkerAnt>> {
 
     private static final ResourceLocation WOOD_TEXTURE = new ResourceLocation(SlayersBeasts.MOD_ID,
-            "textures/entity/wood_ant_worker.png");
+            "textures/entity/ant/wood/worker.png");
     private static final ResourceLocation LEAFCUTTER_TEXTURE = new ResourceLocation(SlayersBeasts.MOD_ID,
-            "textures/entity/leafcutter_ant_worker.png");
+            "textures/entity/ant/leafcutter/worker.png");
     private static final ResourceLocation MEADOW_TEXTURE = new ResourceLocation(SlayersBeasts.MOD_ID,
-            "textures/entity/meadow_ant_worker.png");
+            "textures/entity/ant/meadow/worker.png");
 
     public WorkerAntRenderer(EntityRendererProvider.Context context) {
         super(context, new WorkerAntModel<>(context.bakeLayer(WorkerAntModel.LAYER_LOCATION)), 0.3f);
