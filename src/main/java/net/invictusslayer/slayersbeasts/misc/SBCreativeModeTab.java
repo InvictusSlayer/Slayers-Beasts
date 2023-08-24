@@ -35,7 +35,8 @@ public final class SBCreativeModeTab {
                         tab.accept(SBItems.MUD_BALL.get());
 
                         tab.accept(SBBlocks.CRYPTALITH.get());
-                        tab.accept(SBBlocks.RUNIC_CRYPTALITH.get());
+                        tab.accept(SBBlocks.INFUSED_CRYPTALITH.get());
+                        tab.accept(SBBlocks.DEPLETED_CRYPTALITH.get());
                         tab.accept(SBBlocks.JADE_BLOCK.get());
                         tab.accept(SBBlocks.EXOSKELETON_ORE.get());
                         tab.accept(SBBlocks.DEEPSLATE_EXOSKELETON_ORE.get());

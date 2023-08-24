@@ -18,12 +18,12 @@ import net.minecraft.world.level.block.state.properties.BooleanProperty;
 import net.minecraft.world.level.block.state.properties.DirectionProperty;
 import net.minecraft.world.level.pathfinder.PathComputationType;
 
-public class CryptPortalFrameBlock extends Block {
+public class InfusedCryptalithBlock extends Block {
     public static final DirectionProperty FACING = HorizontalDirectionalBlock.FACING;
     public static final BooleanProperty ACTIVE = BlockStateProperties.EYE;
     private static BlockPattern portalShape;
 
-    public CryptPortalFrameBlock(Properties pProperties) {
+    public InfusedCryptalithBlock(Properties pProperties) {
         super(pProperties);
         this.registerDefaultState(this.stateDefinition.any().setValue(FACING, Direction.NORTH).setValue(ACTIVE, false));
     }
@@ -33,20 +33,20 @@ public class CryptPortalFrameBlock extends Block {
     }
 
     public BlockState getStateForPlacement(BlockPlaceContext pContext) {
-        return this.defaultBlockState().setValue(FACING, pContext.getHorizontalDirection().getOpposite()).setValue(ACTIVE, false);
+        return defaultBlockState().setValue(FACING, pContext.getHorizontalDirection().getOpposite()).setValue(ACTIVE, false);
     }
 
     public static BlockPattern getOrCreatePortalShape() {
         if (portalShape == null) {
             portalShape = BlockPatternBuilder.start().aisle("?vv?", ">??<", ">??<", "?^^?")
                     .where('?', BlockInWorld.hasState(BlockStatePredicate.ANY))
-                    .where('^', BlockInWorld.hasState(BlockStatePredicate.forBlock(SBBlocks.RUNIC_CRYPTALITH.get())
+                    .where('^', BlockInWorld.hasState(BlockStatePredicate.forBlock(SBBlocks.INFUSED_CRYPTALITH.get())
                             .where(ACTIVE, Predicates.equalTo(true)).where(FACING, Predicates.equalTo(Direction.SOUTH))))
-                    .where('>', BlockInWorld.hasState(BlockStatePredicate.forBlock(SBBlocks.RUNIC_CRYPTALITH.get())
+                    .where('>', BlockInWorld.hasState(BlockStatePredicate.forBlock(SBBlocks.INFUSED_CRYPTALITH.get())
                             .where(ACTIVE, Predicates.equalTo(true)).where(FACING, Predicates.equalTo(Direction.WEST))))
-                    .where('v', BlockInWorld.hasState(BlockStatePredicate.forBlock(SBBlocks.RUNIC_CRYPTALITH.get())
+                    .where('v', BlockInWorld.hasState(BlockStatePredicate.forBlock(SBBlocks.INFUSED_CRYPTALITH.get())
                             .where(ACTIVE, Predicates.equalTo(true)).where(FACING, Predicates.equalTo(Direction.NORTH))))
-                    .where('<', BlockInWorld.hasState(BlockStatePredicate.forBlock(SBBlocks.RUNIC_CRYPTALITH.get())
+                    .where('<', BlockInWorld.hasState(BlockStatePredicate.forBlock(SBBlocks.INFUSED_CRYPTALITH.get())
                             .where(ACTIVE, Predicates.equalTo(true)).where(FACING, Predicates.equalTo(Direction.EAST)))).build();
         }
 

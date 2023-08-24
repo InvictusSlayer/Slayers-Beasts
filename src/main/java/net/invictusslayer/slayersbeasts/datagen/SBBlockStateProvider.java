@@ -1,6 +1,8 @@
 package net.invictusslayer.slayersbeasts.datagen;
 
 import net.invictusslayer.slayersbeasts.SlayersBeasts;
+import net.invictusslayer.slayersbeasts.block.DepletedCryptalithBlock;
+import net.invictusslayer.slayersbeasts.block.InfusedCryptalithBlock;
 import net.invictusslayer.slayersbeasts.block.SBBlocks;
 import net.minecraft.core.Direction;
 import net.minecraft.data.BlockFamily;
@@ -26,7 +28,8 @@ public class SBBlockStateProvider extends BlockStateProvider {
         verticalPortal(SBBlocks.SEPULCHRA_PORTAL.get(), "translucent");
         horizontalPortal(SBBlocks.CRYPT_PORTAL.get(), "solid");
         cubeNaturalWithItem(SBBlocks.CRYPTALITH.get());
-        runicCryptalith();
+        infusedCryptalith();
+        depletedCryptalith();
         cubeWithItem(SBBlocks.JADE_BLOCK.get());
         cubeWithItem(SBBlocks.EXOSKELETON_ORE.get());
         cubeWithItem(SBBlocks.DEEPSLATE_EXOSKELETON_ORE.get());
@@ -162,13 +165,24 @@ public class SBBlockStateProvider extends BlockStateProvider {
         });
     }
 
-    private void runicCryptalith() {
-        Block block = SBBlocks.RUNIC_CRYPTALITH.get();
+    private void infusedCryptalith() {
+        Block block = SBBlocks.INFUSED_CRYPTALITH.get();
         getVariantBuilder(block).forAllStates(state -> {
             String suffix = state.getValue(BlockStateProperties.EYE) ? "_active" : "";
-            return ConfiguredModel.builder().modelFile(models().cubeAll(name(block) + suffix, extend(blockTexture(block), suffix))).build();
+            return ConfiguredModel.builder().modelFile(models().cubeBottomTop(name(block) + suffix, extend(blockTexture(block),
+                    "_side"), blockTexture(SBBlocks.CRYPTALITH.get()), extend(blockTexture(block), "_top" + suffix)))
+                    .rotationY((int) state.getValue(InfusedCryptalithBlock.FACING).toYRot()).build();
         });
-        simpleBlockItem(block, models().withExistingParent(name(block), "minecraft:block/cube_all"));
+        simpleBlockItem(block, models().withExistingParent(name(block), "minecraft:block/cube_bottom_top"));
+    }
+
+    private void depletedCryptalith() {
+        Block block = SBBlocks.DEPLETED_CRYPTALITH.get();
+        getVariantBuilder(block).forAllStates(state ->
+                ConfiguredModel.builder().modelFile(models().cubeBottomTop(name(block), extend(blockTexture(block), "_side"),
+                        blockTexture(SBBlocks.CRYPTALITH.get()), extend(blockTexture(block), "_top")))
+                        .rotationY((int) state.getValue(DepletedCryptalithBlock.FACING).toYRot()).build());
+        simpleBlockItem(block, models().withExistingParent(name(block), "minecraft:block/cube_bottom_top"));
     }
 
     private void dripstone(Block block) {

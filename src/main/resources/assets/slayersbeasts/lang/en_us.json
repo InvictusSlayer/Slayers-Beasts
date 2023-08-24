@@ -31,7 +31,8 @@
 
   "block.slayersbeasts.crypt_portal": "Crypt Portal",
   "block.slayersbeasts.cryptalith": "Cryptalith",
-  "block.slayersbeasts.runic_cryptalith": "Runic Cryptalith",
+  "block.slayersbeasts.infused_cryptalith": "Infused Cryptalith",
+  "block.slayersbeasts.depleted_cryptalith": "Depleted Cryptalith",
 
   "block.slayersbeasts.jade_block": "Jade Block",
   "block.slayersbeasts.exoskeleton_ore": "Buried Crystal Exoskeleton",

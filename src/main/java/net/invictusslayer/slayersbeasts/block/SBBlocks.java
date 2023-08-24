@@ -26,7 +26,8 @@ public final class SBBlocks {
 
     public static final RegistryObject<Block> CRYPT_PORTAL = BLOCKS.register("crypt_portal", () -> new CryptPortalBlock(Block.Properties.copy(Blocks.END_PORTAL).mapColor(MapColor.QUARTZ).noLootTable()));
     public static final RegistryObject<Block> CRYPTALITH = registerBlock("cryptalith", () -> new Block(BlockBehaviour.Properties.copy(Blocks.DEEPSLATE)));
-    public static final RegistryObject<Block> RUNIC_CRYPTALITH = registerBlock("runic_cryptalith", () -> new CryptPortalFrameBlock(BlockBehaviour.Properties.copy(CRYPTALITH.get()).strength(55F, 3600000F)));
+    public static final RegistryObject<Block> INFUSED_CRYPTALITH = registerBlock("infused_cryptalith", () -> new InfusedCryptalithBlock(BlockBehaviour.Properties.copy(CRYPTALITH.get()).strength(55F, 3600000F).lightLevel(value -> 1)));
+    public static final RegistryObject<Block> DEPLETED_CRYPTALITH = registerBlock("depleted_cryptalith", () -> new DepletedCryptalithBlock(BlockBehaviour.Properties.copy(CRYPTALITH.get()).strength(55F, 3600000F)));
 
     public static final RegistryObject<Block> JADE_BLOCK = registerBlock("jade_block", () -> new Block(BlockBehaviour.Properties.copy(Blocks.EMERALD_BLOCK).strength(9f)));
 

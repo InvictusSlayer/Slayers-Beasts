@@ -31,12 +31,12 @@ public class SBBlockLootTables extends BlockLootSubProvider {
         super(Set.of(), FeatureFlags.REGISTRY.allFlags());
     }
 
-    @Override
     protected void generate() {
         generateBlockFamilies();
 
         dropSelf(SBBlocks.CRYPTALITH.get());
-        dropOther(SBBlocks.RUNIC_CRYPTALITH.get(), SBBlocks.CRYPTALITH.get());
+        dropOther(SBBlocks.INFUSED_CRYPTALITH.get(), SBBlocks.DEPLETED_CRYPTALITH.get());
+        dropSelf(SBBlocks.DEPLETED_CRYPTALITH.get());
         dropSelf(SBBlocks.JADE_BLOCK.get());
 
         add(SBBlocks.EXOSKELETON_ORE.get(), block -> createExoskeletonOreDrops(SBBlocks.EXOSKELETON_ORE.get()));
