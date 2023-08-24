@@ -63,6 +63,7 @@ public class AnthillBlock extends BaseEntityBlock {
         return createTickerHelper(pBlockEntityType, SBBlockEntities.ANTHILL_BLOCK_ENTITY.get(), AnthillBlockEntity::serverTick);
     }
 
+    @SuppressWarnings("deprecation")
     public RenderShape getRenderShape(BlockState pState) {
         return RenderShape.MODEL;
     }

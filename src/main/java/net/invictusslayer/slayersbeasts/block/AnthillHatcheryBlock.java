@@ -45,6 +45,7 @@ public class AnthillHatcheryBlock extends BaseEntityBlock {
         return createTickerHelper(pBlockEntityType, SBBlockEntities.ANTHILL_HATCHERY_BLOCK_ENTITY.get(), AnthillHatcheryBlockEntity::serverTick);
     }
 
+    @SuppressWarnings("deprecation")
     public RenderShape getRenderShape(BlockState pState) {
         return RenderShape.MODEL;
     }
@@ -64,8 +65,6 @@ public class AnthillHatcheryBlock extends BaseEntityBlock {
         }
     }
 
-
-    @Override
     public void playerDestroy(Level pLevel, Player pPlayer, BlockPos pPos, BlockState pState, @Nullable BlockEntity pBlockEntity, ItemStack pTool) {
         super.playerDestroy(pLevel, pPlayer, pPos, pState, pBlockEntity, pTool);
         if (!pLevel.isClientSide && pBlockEntity instanceof AnthillHatcheryBlockEntity blockEntity) {

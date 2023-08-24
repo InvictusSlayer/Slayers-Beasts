@@ -33,6 +33,7 @@ import net.minecraft.world.phys.shapes.VoxelShape;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 
+import java.util.Objects;
 import java.util.Set;
 
 public class CryptPortalBlock extends Block {
@@ -98,7 +99,7 @@ public class CryptPortalBlock extends Block {
                 } else {
                     player.teleportTo(serverLevel, spawn.getX(), spawn.getY(), spawn.getZ(), Set.of(), player.getYRot(), player.getXRot());
 
-                    emptyCrypt(server.getLevel(SBDimensions.CRYPT_KEY));
+                    emptyCrypt(Objects.requireNonNull(server.getLevel(SBDimensions.CRYPT_KEY)));
 //                    server.getLevel(SBDimensions.CRYPT_KEY).getChunkSource().clearCache();
 //                    try {
 //                        deleteCrypt(server);

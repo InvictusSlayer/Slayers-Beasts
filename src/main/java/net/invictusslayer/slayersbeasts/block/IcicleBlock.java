@@ -225,7 +225,7 @@ public class IcicleBlock extends Block implements Fallable, SimpleWaterloggedBlo
         BlockState blockState = pLevel.getBlockState(pPos.above(1));
         BlockState blockState1 = pLevel.getBlockState(pPos.above(2));
         if (canGrow(blockState, blockState1)) {
-            BlockPos blockpos = findTip(pState, pLevel, pPos, 7, false);
+            BlockPos blockpos = findTip(pState, pLevel, pPos);
             if (blockpos != null) {
                 BlockState blockState2 = pLevel.getBlockState(blockpos);
                 if (canDrip(blockState2) && canTipGrow(blockState2, pLevel, blockpos)) {
@@ -306,13 +306,13 @@ public class IcicleBlock extends Block implements Fallable, SimpleWaterloggedBlo
     }
 
     @Nullable
-    private static BlockPos findTip(BlockState pState, LevelAccessor pLevel, BlockPos pPos, int pMaxIterations, boolean pIsTipMerge) {
-        if (isTip(pState, pIsTipMerge)) {
+    private static BlockPos findTip(BlockState pState, LevelAccessor pLevel, BlockPos pPos) {
+        if (isTip(pState, false)) {
             return pPos;
         } else {
             Direction direction = pState.getValue(TIP_DIRECTION);
             BiPredicate<BlockPos, BlockState> biPredicate = (pos, state) -> state.is(SBBlocks.ICICLE.get()) && state.getValue(TIP_DIRECTION) == direction;
-            return findBlockVertical(pLevel, pPos, direction.getAxisDirection(), biPredicate, state -> isTip(state, pIsTipMerge), pMaxIterations).orElse(null);
+            return findBlockVertical(pLevel, pPos, direction.getAxisDirection(), biPredicate, state -> isTip(state, false), 7).orElse(null);
         }
     }
 
@@ -364,10 +364,10 @@ public class IcicleBlock extends Block implements Fallable, SimpleWaterloggedBlo
         }
     }
 
-    private static Optional<BlockPos> findRootBlock(Level pLevel, BlockPos pPos, BlockState pState, int pMaxIterations) {
+    private static Optional<BlockPos> findRootBlock(Level pLevel, BlockPos pPos, BlockState pState) {
         Direction direction = pState.getValue(TIP_DIRECTION);
         BiPredicate<BlockPos, BlockState> biPredicate = (pos, state) -> state.is(SBBlocks.ICICLE.get()) && state.getValue(TIP_DIRECTION) == direction;
-        return findBlockVertical(pLevel, pPos, direction.getOpposite().getAxisDirection(), biPredicate, (state) -> !state.is(SBBlocks.ICICLE.get()), pMaxIterations);
+        return findBlockVertical(pLevel, pPos, direction.getOpposite().getAxisDirection(), biPredicate, (state) -> !state.is(SBBlocks.ICICLE.get()), 11);
     }
 
     private static boolean isValidIciclePlacement(LevelReader pLevel, BlockPos pPos, Direction pDir) {
@@ -411,7 +411,7 @@ public class IcicleBlock extends Block implements Fallable, SimpleWaterloggedBlo
     }
 
     private static Optional<IcicleBlock.FluidInfo> getFluidAboveStalactite(Level pLevel, BlockPos pPos, BlockState pState) {
-        return !isStalactite(pState) ? Optional.empty() : findRootBlock(pLevel, pPos, pState, 11).map(pos -> {
+        return !isStalactite(pState) ? Optional.empty() : findRootBlock(pLevel, pPos, pState).map(pos -> {
             BlockPos blockpos = pos.above();
             BlockState blockstate = pLevel.getBlockState(blockpos);
             Fluid fluid = pLevel.getFluidState(blockpos).getType();
