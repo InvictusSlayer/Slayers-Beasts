@@ -12,6 +12,8 @@ import net.minecraft.data.worldgen.placement.PlacementUtils;
 import net.minecraft.data.worldgen.placement.VegetationPlacements;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.util.valueproviders.ClampedNormalInt;
+import net.minecraft.util.valueproviders.UniformInt;
 import net.minecraft.world.level.levelgen.VerticalAnchor;
 import net.minecraft.world.level.levelgen.feature.ConfiguredFeature;
 import net.minecraft.world.level.levelgen.heightproviders.VeryBiasedToBottomHeight;
@@ -21,7 +23,7 @@ import javax.annotation.Nullable;
 import java.util.List;
 
 public class SBPlacedFeatures {
-    //TREE
+    //Tree
     public static final ResourceKey<PlacedFeature> ASPEN_CHECKED = createKey("aspen_checked");
     public static final ResourceKey<PlacedFeature> CAJOLE_CHECKED = createKey("cajole_checked");
     public static final ResourceKey<PlacedFeature> DESERT_OAK_CHECKED = createKey("desert_oak_checked");
@@ -32,7 +34,7 @@ public class SBPlacedFeatures {
     public static final ResourceKey<PlacedFeature> COLOSSAL_REDWOOD_CHECKED = createKey("colossal_redwood_checked");
     public static final ResourceKey<PlacedFeature> GIANT_WILLOW_CHECKED = createKey("giant_willow_checked");
 
-    //VEGETATION
+    //Vegetation
     public static final ResourceKey<PlacedFeature> TREES_ASPEN = createKey("trees_aspen");
     public static final ResourceKey<PlacedFeature> TREES_BRUSH = createKey("trees_brush");
     public static final ResourceKey<PlacedFeature> TREES_WOODED_BRUSH = createKey("trees_wooded_brush");
@@ -47,7 +49,12 @@ public class SBPlacedFeatures {
     public static final ResourceKey<PlacedFeature> WHITE_MUSHROOM_COMMON = createKey("white_mushroom_common");
     public static final ResourceKey<PlacedFeature> WHITE_MUSHROOM_RARE = createKey("white_mushroom_rare");
 
-    //ORE
+    //Cave
+    public static final ResourceKey<PlacedFeature> ICICLE_CLUSTER = createKey("icicle_cluster");
+    public static final ResourceKey<PlacedFeature> LARGE_ICICLE = createKey("large_icicle");
+    public static final ResourceKey<PlacedFeature> ICICLE = createKey("icicle");
+
+    //Ore
     public static final ResourceKey<PlacedFeature> ORE_EXOSKELETON = createKey("ore_exoskeleton");
     public static final ResourceKey<PlacedFeature> ORE_EXOSKELETON_LUSH = createKey("ore_exoskeleton_lush");
     public static final ResourceKey<PlacedFeature> ORE_OBSIDIAN = createKey("ore_obsidian");
@@ -57,7 +64,7 @@ public class SBPlacedFeatures {
     public static final ResourceKey<PlacedFeature> ORE_GRANITE_VOLCANIC = createKey("ore_granite_volcanic");
     public static final ResourceKey<PlacedFeature> ORE_PEGMATITE_VOLCANIC = createKey("ore_pegmatite_volcanic");
 
-    //MISC
+    //Miscellaneous
     public static final ResourceKey<PlacedFeature> MUD_PIT_SHALLOW = createKey("mud_pit_shallow");
     public static final ResourceKey<PlacedFeature> MUD_PIT_NORMAL = createKey("mud_pit_normal");
     public static final ResourceKey<PlacedFeature> MUD_PIT_DEEP = createKey("mud_pit_deep");
@@ -90,6 +97,10 @@ public class SBPlacedFeatures {
         register(context, PATCH_TALL_DEAD_BUSH_BRUSH, configured.getOrThrow(SBConfiguredFeatures.PATCH_TALL_DEAD_BUSH), VegetationPlacements.worldSurfaceSquaredWithCount(10));
         register(context, WHITE_MUSHROOM_COMMON, configured.getOrThrow(SBConfiguredFeatures.PATCH_WHITE_MUSHROOM), mushroomPlacement(4, CountPlacement.of(3)));
         register(context, WHITE_MUSHROOM_RARE, configured.getOrThrow(SBConfiguredFeatures.PATCH_WHITE_MUSHROOM), mushroomPlacement(256, null));
+
+        register(context, ICICLE_CLUSTER, configured.getOrThrow(SBConfiguredFeatures.ICICLE_CLUSTER), CountPlacement.of(UniformInt.of(48, 96)), InSquarePlacement.spread(), PlacementUtils.RANGE_BOTTOM_TO_MAX_TERRAIN_HEIGHT, BiomeFilter.biome());
+        register(context, LARGE_ICICLE, configured.getOrThrow(SBConfiguredFeatures.LARGE_ICICLE), CountPlacement.of(UniformInt.of(10, 48)), InSquarePlacement.spread(), PlacementUtils.RANGE_BOTTOM_TO_MAX_TERRAIN_HEIGHT, BiomeFilter.biome());
+        register(context, ICICLE, configured.getOrThrow(SBConfiguredFeatures.ICICLE), CountPlacement.of(UniformInt.of(192, 256)), InSquarePlacement.spread(), PlacementUtils.RANGE_BOTTOM_TO_MAX_TERRAIN_HEIGHT, CountPlacement.of(UniformInt.of(1, 5)), RandomOffsetPlacement.of(ClampedNormalInt.of(0.0F, 3.0F, -10, 10), ClampedNormalInt.of(0.0F, 0.6F, -2, 2)), BiomeFilter.biome());
 
         register(context, ORE_EXOSKELETON, configured.getOrThrow(SBConfiguredFeatures.ORE_EXOSKELETON), rareOrePlacement(1, HeightRangePlacement.triangle(VerticalAnchor.aboveBottom(-80), VerticalAnchor.aboveBottom(80))));
         register(context, ORE_EXOSKELETON_LUSH, configured.getOrThrow(SBConfiguredFeatures.ORE_EXOSKELETON), commonOrePlacement(10, HeightRangePlacement.uniform(VerticalAnchor.bottom(), VerticalAnchor.absolute(64))));

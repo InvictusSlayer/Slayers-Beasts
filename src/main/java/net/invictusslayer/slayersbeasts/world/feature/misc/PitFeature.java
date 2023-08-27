@@ -19,11 +19,11 @@ public class PitFeature extends Feature<PitFeature.Configuration> {
     }
 
     @SuppressWarnings("deprecation")
-    public boolean place(FeaturePlaceContext<PitFeature.Configuration> pContext) {
-        BlockPos origin = pContext.origin();
-        WorldGenLevel level = pContext.level();
-        RandomSource random = pContext.random();
-        PitFeature.Configuration config = pContext.config();
+    public boolean place(FeaturePlaceContext<Configuration> context) {
+        BlockPos origin = context.origin();
+        WorldGenLevel level = context.level();
+        RandomSource random = context.random();
+        Configuration config = context.config();
 
         int x = config.x();
         int y = config.y();

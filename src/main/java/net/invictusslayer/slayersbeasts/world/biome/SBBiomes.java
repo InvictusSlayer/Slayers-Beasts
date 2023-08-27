@@ -67,6 +67,10 @@ public class SBBiomes {
         register(context, OLD_GROWTH_REDWOOD_GROVE, SBOverworldBiomes.redwoodGrove(placed, carver, true), VillagerType.TAIGA);
         register(context, VOLCANIC_PEAKS, SBOverworldBiomes.volcanicPeaks(placed, carver));
 
+        register(context, FUNGAL_DEPTHS, SBOverworldBiomes.fungalDepths(placed, carver));
+        register(context, ICE_CAVES, SBOverworldBiomes.iceCaves(placed, carver));
+        register(context, SLIME_CAVERNS, SBOverworldBiomes.slimeCaverns(placed, carver));
+
         register(context, THE_CRYPT, SBOverworldBiomes.theCrypt(placed, carver));
     }
 

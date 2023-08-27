@@ -5,6 +5,8 @@ import net.invictusslayer.slayersbeasts.block.SBBlocks;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
 import net.minecraft.tags.BlockTags;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
 import net.minecraftforge.common.data.BlockTagsProvider;
 import net.minecraftforge.common.data.ExistingFileHelper;
 import org.jetbrains.annotations.Nullable;
@@ -18,9 +20,10 @@ public class SBBlockTagsProvider extends BlockTagsProvider {
 
     @Override
     protected void addTags(HolderLookup.Provider pProvider) {
+        this.tag(SBTags.Blocks.SEPULCHRA_PORTAL_FRAME).add(SBBlocks.JADE_BLOCK.get());
         this.tag(SBTags.Blocks.ANTHILLS).add(SBBlocks.ANTHILL.get()).add(SBBlocks.ANTHILL_HATCHERY.get());
         this.tag(SBTags.Blocks.ANTHILL_REPLACEABLE).addTag(BlockTags.DIRT).addTag(BlockTags.BASE_STONE_OVERWORLD);
-        this.tag(SBTags.Blocks.SEPULCHRA_PORTAL_FRAME).add(SBBlocks.JADE_BLOCK.get());
+        this.tag(SBTags.Blocks.ICICLE_REPLACEABLE).add(Blocks.PACKED_ICE, Blocks.ICE, Blocks.BLUE_ICE).addTag(BlockTags.BASE_STONE_OVERWORLD);
         this.tag(SBTags.Blocks.ASPEN_LOGS).add(SBBlocks.ASPEN_LOG.get()).add(SBBlocks.STRIPPED_ASPEN_LOG.get()).add(SBBlocks.ASPEN_WOOD.get()).add(SBBlocks.STRIPPED_ASPEN_WOOD.get());
         this.tag(SBTags.Blocks.CAJOLE_LOGS).add(SBBlocks.CAJOLE_LOG.get()).add(SBBlocks.STRIPPED_CAJOLE_LOG.get()).add(SBBlocks.CAJOLE_WOOD.get()).add(SBBlocks.STRIPPED_CAJOLE_WOOD.get());
         this.tag(SBTags.Blocks.DESERT_OAK_LOGS).add(SBBlocks.DESERT_OAK_LOG.get()).add(SBBlocks.STRIPPED_DESERT_OAK_LOG.get()).add(SBBlocks.DESERT_OAK_WOOD.get()).add(SBBlocks.STRIPPED_DESERT_OAK_WOOD.get());

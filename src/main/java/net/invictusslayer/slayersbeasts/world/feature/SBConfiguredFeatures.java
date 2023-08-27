@@ -3,27 +3,33 @@ package net.invictusslayer.slayersbeasts.world.feature;
 import net.invictusslayer.slayersbeasts.SlayersBeasts;
 import net.invictusslayer.slayersbeasts.block.SBBlocks;
 import net.invictusslayer.slayersbeasts.world.feature.foliageplacer.*;
+import net.invictusslayer.slayersbeasts.world.feature.misc.IcicleClusterFeature;
+import net.invictusslayer.slayersbeasts.world.feature.misc.IcicleFeature;
+import net.invictusslayer.slayersbeasts.world.feature.misc.LargeIcicleFeature;
 import net.invictusslayer.slayersbeasts.world.feature.misc.PitFeature;
 import net.invictusslayer.slayersbeasts.world.feature.treedecorator.ButtressRootDecorator;
 import net.invictusslayer.slayersbeasts.world.feature.treedecorator.HangingBranchDecorator;
 import net.invictusslayer.slayersbeasts.world.feature.trunkplacer.ColossalTrunkPlacer;
 import net.invictusslayer.slayersbeasts.world.feature.trunkplacer.CrossTrunkPlacer;
+import net.minecraft.core.Direction;
 import net.minecraft.core.HolderGetter;
 import net.minecraft.core.HolderSet;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.data.worldgen.BootstapContext;
 import net.minecraft.data.worldgen.features.FeatureUtils;
-import net.minecraft.data.worldgen.features.TreeFeatures;
 import net.minecraft.data.worldgen.placement.PlacementUtils;
 import net.minecraft.data.worldgen.placement.TreePlacements;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.BlockTags;
+import net.minecraft.util.valueproviders.ClampedNormalFloat;
 import net.minecraft.util.valueproviders.ConstantInt;
+import net.minecraft.util.valueproviders.UniformFloat;
 import net.minecraft.util.valueproviders.UniformInt;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.HugeMushroomBlock;
+import net.minecraft.world.level.levelgen.blockpredicates.BlockPredicate;
 import net.minecraft.world.level.levelgen.feature.ConfiguredFeature;
 import net.minecraft.world.level.levelgen.feature.Feature;
 import net.minecraft.world.level.levelgen.feature.LakeFeature;
@@ -38,14 +44,16 @@ import net.minecraft.world.level.levelgen.feature.treedecorators.LeaveVineDecora
 import net.minecraft.world.level.levelgen.feature.treedecorators.TrunkVineDecorator;
 import net.minecraft.world.level.levelgen.feature.trunkplacers.GiantTrunkPlacer;
 import net.minecraft.world.level.levelgen.feature.trunkplacers.StraightTrunkPlacer;
+import net.minecraft.world.level.levelgen.placement.EnvironmentScanPlacement;
 import net.minecraft.world.level.levelgen.placement.PlacedFeature;
+import net.minecraft.world.level.levelgen.placement.RandomOffsetPlacement;
 import net.minecraft.world.level.levelgen.structure.templatesystem.TagMatchTest;
 import net.minecraft.world.level.material.Fluids;
 
 import java.util.List;
 
 public class SBConfiguredFeatures {
-    //TREE
+    //Tree
     public static final ResourceKey<ConfiguredFeature<?, ?>> ASPEN = createKey("aspen");
     public static final ResourceKey<ConfiguredFeature<?, ?>> CAJOLE = createKey("cajole");
     public static final ResourceKey<ConfiguredFeature<?, ?>> DESERT_OAK = createKey("desert_oak");
@@ -58,7 +66,7 @@ public class SBConfiguredFeatures {
     public static final ResourceKey<ConfiguredFeature<?, ?>> GIANT_WILLOW = createKey("giant_willow");
     public static final ResourceKey<ConfiguredFeature<?, ?>> HUGE_WHITE_MUSHROOM = createKey("huge_white_mushroom");
 
-    //VEGETATION
+    //Vegetation
     public static final ResourceKey<ConfiguredFeature<?, ?>> TREES_ASPEN = createKey("trees_aspen");
     public static final ResourceKey<ConfiguredFeature<?, ?>> TREES_BRUSH = createKey("trees_brush");
     public static final ResourceKey<ConfiguredFeature<?, ?>> TREES_EUCALYPT = createKey("trees_eucalypt");
@@ -70,13 +78,18 @@ public class SBConfiguredFeatures {
     public static final ResourceKey<ConfiguredFeature<?, ?>> PATCH_TALL_DEAD_BUSH = createKey("patch_tall_dead_bush");
     public static final ResourceKey<ConfiguredFeature<?, ?>> PATCH_WHITE_MUSHROOM = createKey("patch_white_mushroom");
 
-    //ORE
+    //Cave
+    public static final ResourceKey<ConfiguredFeature<?, ?>> ICICLE_CLUSTER = createKey("icicle_cluster");
+    public static final ResourceKey<ConfiguredFeature<?, ?>> LARGE_ICICLE = createKey("large_icicle");
+    public static final ResourceKey<ConfiguredFeature<?, ?>> ICICLE = createKey("icicle");
+
+    //Ore
     public static final ResourceKey<ConfiguredFeature<?, ?>> ORE_EXOSKELETON = createKey("ore_exoskeleton");
     public static final ResourceKey<ConfiguredFeature<?, ?>> ORE_OBSIDIAN = createKey("ore_obsidian");
     public static final ResourceKey<ConfiguredFeature<?, ?>> ORE_BASALT = createKey("ore_basalt");
     public static final ResourceKey<ConfiguredFeature<?, ?>> ORE_PEGMATITE = createKey("ore_pegmatite");
 
-    //MISC
+    //Miscellaneous
     public static final ResourceKey<ConfiguredFeature<?, ?>> MUD_PIT_SHALLOW = createKey("mud_pit_shallow");
     public static final ResourceKey<ConfiguredFeature<?, ?>> MUD_PIT_NORMAL = createKey("mud_pit_normal");
     public static final ResourceKey<ConfiguredFeature<?, ?>> MUD_PIT_DEEP = createKey("mud_pit_deep");
@@ -135,6 +148,12 @@ public class SBConfiguredFeatures {
         register(context, TREES_OLD_GROWTH_REDWOOD, Feature.RANDOM_SELECTOR, new RandomFeatureConfiguration(List.of(new WeightedPlacedFeature(placed.getOrThrow(SBPlacedFeatures.GIANT_REDWOOD_CHECKED), 0.3F), new WeightedPlacedFeature(PlacementUtils.inlinePlaced(configured.getOrThrow(HUGE_WHITE_MUSHROOM)), 0.05F)), placed.getOrThrow(SBPlacedFeatures.COLOSSAL_REDWOOD_CHECKED)));
         register(context, PATCH_TALL_DEAD_BUSH, Feature.RANDOM_PATCH, FeatureUtils.simplePatchConfiguration(Feature.SIMPLE_BLOCK, new SimpleBlockConfiguration(BlockStateProvider.simple(SBBlocks.TALL_DEAD_BUSH.get()))));
         register(context, PATCH_WHITE_MUSHROOM, Feature.RANDOM_PATCH, FeatureUtils.simplePatchConfiguration(Feature.SIMPLE_BLOCK, new SimpleBlockConfiguration(BlockStateProvider.simple(SBBlocks.WHITE_MUSHROOM.get()))));
+
+        register(context, ICICLE_CLUSTER, SBFeatures.ICICLE_CLUSTER.get(), new IcicleClusterFeature.Configuration(12, UniformInt.of(3, 6), UniformInt.of(2, 8), 1, 3, UniformInt.of(2, 4), UniformFloat.of(0.3F, 0.7F), ClampedNormalFloat.of(0.1F, 0.3F, 0.1F, 0.9F), 0.1F, 3, 8));
+        register(context, LARGE_ICICLE, SBFeatures.LARGE_ICICLE.get(), new LargeIcicleFeature.Configuration(30, UniformInt.of(3, 19), UniformFloat.of(0.4F, 2.0F), 0.33F, UniformFloat.of(0.3F, 0.9F), UniformFloat.of(0.4F, 1.0F), UniformFloat.of(0.0F, 0.3F), 4, 0.6F));
+        register(context, ICICLE, Feature.SIMPLE_RANDOM_SELECTOR, new SimpleRandomFeatureConfiguration(HolderSet.direct(
+                PlacementUtils.inlinePlaced(SBFeatures.ICICLE.get(), new IcicleFeature.Configuration(0.2F, 0.7F, 0.5F, 0.5F), EnvironmentScanPlacement.scanningFor(Direction.DOWN, BlockPredicate.solid(), BlockPredicate.ONLY_IN_AIR_OR_WATER_PREDICATE, 12), RandomOffsetPlacement.vertical(ConstantInt.of(1))),
+                PlacementUtils.inlinePlaced(SBFeatures.ICICLE.get(), new IcicleFeature.Configuration(0.2F, 0.7F, 0.5F, 0.5F), EnvironmentScanPlacement.scanningFor(Direction.UP, BlockPredicate.solid(), BlockPredicate.ONLY_IN_AIR_OR_WATER_PREDICATE, 12), RandomOffsetPlacement.vertical(ConstantInt.of(-1))))));
 
         register(context, ORE_EXOSKELETON, Feature.ORE, new OreConfiguration(List.of(
                 OreConfiguration.target(new TagMatchTest(BlockTags.STONE_ORE_REPLACEABLES), SBBlocks.EXOSKELETON_ORE.get().defaultBlockState()),

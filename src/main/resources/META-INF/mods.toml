@@ -8,13 +8,13 @@ modId="slayersbeasts"
 version="${file.jarVersion}"
 displayName="Slayer's Beasts"
 #updateJSONURL=""
-displayURL="https://legacy.curseforge.com/minecraft/mc-mods/slayersbeasts"
+displayURL="https://modrinth.com/mod/slayers-beasts"
 logoFile="slayersbeasts.png"
 authors="InvictusSlayer"
 #credits=""
 description='''
-Battle relentless mobs and uncover new bosses
-Try to survive the new biomes and structures as you traverse the world
+Explore new structures and biomes to face off against beasts and bosses on the surface,
+or in the treacherous dungeons below...
 '''
 
 [[dependencies.slayersbeasts]]

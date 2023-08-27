@@ -2,8 +2,7 @@ package net.invictusslayer.slayersbeasts.world.feature;
 
 import com.mojang.serialization.Codec;
 import net.invictusslayer.slayersbeasts.SlayersBeasts;
-import net.invictusslayer.slayersbeasts.world.feature.misc.HugeWhiteMushroomFeature;
-import net.invictusslayer.slayersbeasts.world.feature.misc.PitFeature;
+import net.invictusslayer.slayersbeasts.world.feature.misc.*;
 import net.minecraft.world.level.levelgen.feature.Feature;
 import net.minecraft.world.level.levelgen.feature.configurations.FeatureConfiguration;
 import net.minecraft.world.level.levelgen.feature.configurations.HugeMushroomFeatureConfiguration;
@@ -17,6 +16,9 @@ public abstract class SBFeatures<FC extends FeatureConfiguration> extends Featur
 
     public static final RegistryObject<HugeWhiteMushroomFeature> HUGE_WHITE_MUSHROOM = FEATURES.register("huge_white_mushroom", () -> new HugeWhiteMushroomFeature(HugeMushroomFeatureConfiguration.CODEC));
     public static final RegistryObject<PitFeature> PIT = FEATURES.register("pit", () -> new PitFeature(PitFeature.Configuration.CODEC));
+    public static final RegistryObject<IcicleClusterFeature> ICICLE_CLUSTER = FEATURES.register("icicle_cluster", () -> new IcicleClusterFeature(IcicleClusterFeature.Configuration.CODEC));
+    public static final RegistryObject<LargeIcicleFeature> LARGE_ICICLE = FEATURES.register("large_icicle", () -> new LargeIcicleFeature(LargeIcicleFeature.Configuration.CODEC));
+    public static final RegistryObject<IcicleFeature> ICICLE = FEATURES.register("icicle", () -> new IcicleFeature(IcicleFeature.Configuration.CODEC));
 
     public SBFeatures(Codec<FC> pCodec) {
         super(pCodec);

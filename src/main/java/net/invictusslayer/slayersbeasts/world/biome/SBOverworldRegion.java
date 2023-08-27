@@ -144,6 +144,30 @@ public class SBOverworldRegion extends Region {
                 .depth(Depth.FLOOR, Depth.SURFACE)
                 .weirdness(Weirdness.span(Weirdness.HIGH_SLICE_NORMAL_ASCENDING, Weirdness.HIGH_SLICE_NORMAL_DESCENDING), Weirdness.span(Weirdness.HIGH_SLICE_VARIANT_ASCENDING, Weirdness.HIGH_SLICE_VARIANT_DESCENDING))
                 .build().forEach(point -> builder.add(point, SBBiomes.VOLCANIC_PEAKS));
+        new ParameterPointListBuilder()
+                .temperature(Temperature.FULL_RANGE)
+                .humidity(Humidity.FULL_RANGE)
+                .continentalness(Continentalness.MUSHROOM_FIELDS)
+                .erosion(Erosion.FULL_RANGE)
+                .depth(Depth.UNDERGROUND)
+                .weirdness(NORMAL_WEIRDNESS, VARIANT_WEIRDNESS)
+                .build().forEach(point -> builder.add(point, SBBiomes.FUNGAL_DEPTHS));
+        new ParameterPointListBuilder()
+                .temperature(Temperature.FROZEN)
+                .humidity(Humidity.NEUTRAL)
+                .continentalness(Continentalness.INLAND)
+                .erosion(Erosion.FULL_RANGE)
+                .depth(Depth.UNDERGROUND)
+                .weirdness(NORMAL_WEIRDNESS, VARIANT_WEIRDNESS)
+                .build().forEach(point -> builder.add(point, SBBiomes.ICE_CAVES));
+        new ParameterPointListBuilder()
+                .temperature(Temperature.NEUTRAL)
+                .humidity(Humidity.span(Humidity.NEUTRAL, Humidity.WET))
+                .continentalness(Continentalness.INLAND)
+                .erosion(Erosion.FULL_RANGE)
+                .depth(Depth.UNDERGROUND)
+                .weirdness(NORMAL_WEIRDNESS, VARIANT_WEIRDNESS)
+                .build().forEach(point -> builder.add(point, SBBiomes.SLIME_CAVERNS));
 
         builder.build().forEach(mapper);
     }
