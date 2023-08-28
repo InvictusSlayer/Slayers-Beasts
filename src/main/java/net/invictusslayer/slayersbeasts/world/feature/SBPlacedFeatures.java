@@ -51,8 +51,8 @@ public class SBPlacedFeatures {
 
     //Cave
     public static final ResourceKey<PlacedFeature> ICICLE_CLUSTER = createKey("icicle_cluster");
-    public static final ResourceKey<PlacedFeature> LARGE_ICICLE = createKey("large_icicle");
-    public static final ResourceKey<PlacedFeature> ICICLE = createKey("icicle");
+    public static final ResourceKey<PlacedFeature> ICICLE_LARGE = createKey("icicle_large");
+    public static final ResourceKey<PlacedFeature> ICICLE_SMALL = createKey("icicle_small");
 
     //Ore
     public static final ResourceKey<PlacedFeature> ORE_EXOSKELETON = createKey("ore_exoskeleton");
@@ -99,8 +99,8 @@ public class SBPlacedFeatures {
         register(context, WHITE_MUSHROOM_RARE, configured.getOrThrow(SBConfiguredFeatures.PATCH_WHITE_MUSHROOM), mushroomPlacement(256, null));
 
         register(context, ICICLE_CLUSTER, configured.getOrThrow(SBConfiguredFeatures.ICICLE_CLUSTER), CountPlacement.of(UniformInt.of(48, 96)), InSquarePlacement.spread(), PlacementUtils.RANGE_BOTTOM_TO_MAX_TERRAIN_HEIGHT, BiomeFilter.biome());
-        register(context, LARGE_ICICLE, configured.getOrThrow(SBConfiguredFeatures.LARGE_ICICLE), CountPlacement.of(UniformInt.of(10, 48)), InSquarePlacement.spread(), PlacementUtils.RANGE_BOTTOM_TO_MAX_TERRAIN_HEIGHT, BiomeFilter.biome());
-        register(context, ICICLE, configured.getOrThrow(SBConfiguredFeatures.ICICLE), CountPlacement.of(UniformInt.of(192, 256)), InSquarePlacement.spread(), PlacementUtils.RANGE_BOTTOM_TO_MAX_TERRAIN_HEIGHT, CountPlacement.of(UniformInt.of(1, 5)), RandomOffsetPlacement.of(ClampedNormalInt.of(0.0F, 3.0F, -10, 10), ClampedNormalInt.of(0.0F, 0.6F, -2, 2)), BiomeFilter.biome());
+        register(context, ICICLE_LARGE, configured.getOrThrow(SBConfiguredFeatures.ICICLE_LARGE), CountPlacement.of(UniformInt.of(10, 48)), InSquarePlacement.spread(), PlacementUtils.RANGE_BOTTOM_TO_MAX_TERRAIN_HEIGHT, BiomeFilter.biome());
+        register(context, ICICLE_SMALL, configured.getOrThrow(SBConfiguredFeatures.ICICLE_SMALL), CountPlacement.of(UniformInt.of(192, 256)), InSquarePlacement.spread(), PlacementUtils.RANGE_BOTTOM_TO_MAX_TERRAIN_HEIGHT, CountPlacement.of(UniformInt.of(1, 5)), RandomOffsetPlacement.of(ClampedNormalInt.of(0.0F, 3.0F, -10, 10), ClampedNormalInt.of(0.0F, 0.6F, -2, 2)), BiomeFilter.biome());
 
         register(context, ORE_EXOSKELETON, configured.getOrThrow(SBConfiguredFeatures.ORE_EXOSKELETON), rareOrePlacement(1, HeightRangePlacement.triangle(VerticalAnchor.aboveBottom(-80), VerticalAnchor.aboveBottom(80))));
         register(context, ORE_EXOSKELETON_LUSH, configured.getOrThrow(SBConfiguredFeatures.ORE_EXOSKELETON), commonOrePlacement(10, HeightRangePlacement.uniform(VerticalAnchor.bottom(), VerticalAnchor.absolute(64))));

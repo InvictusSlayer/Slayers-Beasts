@@ -40,6 +40,8 @@ public final class SBCreativeModeTab {
                         tab.accept(SBBlocks.JADE_BLOCK.get());
                         tab.accept(SBBlocks.EXOSKELETON_ORE.get());
                         tab.accept(SBBlocks.DEEPSLATE_EXOSKELETON_ORE.get());
+                        tab.accept(SBBlocks.STYPHIUM.get());
+                        tab.accept(SBBlocks.DEEPSLATE_STYPHIUM.get());
 
                         tab.accept(SBBlocks.OOTHECA.get());
                         tab.accept(SBBlocks.ANT_SOIL.get());

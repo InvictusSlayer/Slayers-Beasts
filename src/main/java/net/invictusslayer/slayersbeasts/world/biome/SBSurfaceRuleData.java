@@ -9,63 +9,99 @@ import net.minecraft.world.level.levelgen.VerticalAnchor;
 import static net.minecraft.world.level.levelgen.SurfaceRules.*;
 
 public class SBSurfaceRuleData {
-    public static RuleSource makeRules() {
-        return sequence(
-                ifTrue(ON_FLOOR, ifTrue(isBiome(SBBiomes.INKY_MOOR), ifBetweenY(60, 63,
-                        ifTrue(noiseCondition(Noises.SWAMP, 0), setBlock(Blocks.WATER))))),
-                ifTrue(ON_FLOOR, ifTrue(waterBlockCheck(-1, 0), sequence(
-                        ifTrue(isBiome(SBBiomes.BLACK_DUNES), sequence(
-                                ifTrue(ON_CEILING, setBlock(SBBlocks.BLACK_SANDSTONE.get())),
-                                setBlock(SBBlocks.BLACK_SAND.get()))),
-                        ifTrue(isBiome(SBBiomes.EUCALYPT_WOODLAND),
-                                ifTrue(noiseCondition(Noises.SURFACE, -0.5), setBlock(Blocks.PODZOL))),
-                        ifTrue(isBiome(SBBiomes.INKY_MOOR), setBlock(Blocks.MUD)),
-                        ifTrue(isBiome(SBBiomes.OUTBACK), sequence(
-                                ifTrue(ON_CEILING, setBlock(Blocks.SANDSTONE)),
-                                ifTrue(noiseCondition(Noises.SURFACE, 0.21), setBlock(Blocks.COARSE_DIRT)),
-                                ifTrue(noiseCondition(Noises.ICE, 0.1), setBlock(Blocks.RED_SAND)),
-                                ifTrue(noiseCondition(Noises.SWAMP, 0.1), setBlock(Blocks.SAND)),
-                                setBlock(Blocks.COARSE_DIRT))),
-                        ifTrue(isBiome(SBBiomes.REDWOOD_GROVE, SBBiomes.OLD_GROWTH_REDWOOD_GROVE), sequence(
-                                ifTrue(noiseCondition(Noises.SURFACE, 0.21), setBlock(Blocks.COARSE_DIRT)),
-                                ifTrue(noiseCondition(Noises.SURFACE, -0.12), setBlock(Blocks.PODZOL)),
-                                setBlock(Blocks.MOSS_BLOCK))),
-                        ifTrue(isBiome(SBBiomes.DEAD_SANDS), sequence(
-                                ifTrue(ON_CEILING, setBlock(SBBlocks.BLACK_SANDSTONE.get())),
-                                ifTrue(noiseCondition(Noises.ICE, 0), setBlock(SBBlocks.BLACK_SAND.get())),
-                                setBlock(Blocks.RED_SAND))),
-                        ifTrue(isBiome(SBBiomes.VOLCANIC_PEAKS), sequence(
-                                ifTrue(noiseCondition(Noises.ICE, -0.05, 0.05), setBlock(Blocks.LAVA)),
-                                ifTrue(noiseCondition(Noises.ICE, -0.1, 0.1), setBlock(Blocks.MAGMA_BLOCK)),
-                                ifTrue(noiseCondition(Noises.SURFACE, 0), setBlock(Blocks.BASALT)),
-                                setBlock(Blocks.TUFF))),
-                        ifTrue(waterBlockCheck(0, 0), setBlock(Blocks.GRASS_BLOCK)),
-                        setBlock(Blocks.DIRT)
-                ))),
-                ifTrue(waterStartCheck(-6, -1), sequence(
-                        ifTrue(UNDER_FLOOR, sequence(
+    public static RuleSource overworldRules() {
+        return sequence(ifTrue(abovePreliminarySurface(), sequence( /* Overground */
+                        ifTrue(ON_FLOOR, ifTrue(isBiome(SBBiomes.INKY_MOOR), ifBetweenY(60, 63,
+                                ifTrue(noiseCondition(Noises.SWAMP, 0), setBlock(Blocks.WATER))))),
+                        ifTrue(ON_FLOOR, ifTrue(waterBlockCheck(-1, 0), sequence(
                                 ifTrue(isBiome(SBBiomes.BLACK_DUNES), sequence(
                                         ifTrue(ON_CEILING, setBlock(SBBlocks.BLACK_SANDSTONE.get())),
                                         setBlock(SBBlocks.BLACK_SAND.get()))),
-                                ifTrue(isBiome(SBBiomes.INKY_MOOR), setBlock(Blocks.MUD)),
                                 ifTrue(isBiome(SBBiomes.DEAD_SANDS), sequence(
                                         ifTrue(ON_CEILING, setBlock(SBBlocks.BLACK_SANDSTONE.get())),
                                         ifTrue(noiseCondition(Noises.ICE, 0), setBlock(SBBlocks.BLACK_SAND.get())),
                                         setBlock(Blocks.RED_SAND))),
+                                ifTrue(isBiome(SBBiomes.EUCALYPT_WOODLAND),
+                                        ifTrue(noiseCondition(Noises.SURFACE, -0.5), setBlock(Blocks.PODZOL))),
+                                ifTrue(isBiome(SBBiomes.INKY_MOOR), setBlock(Blocks.MUD)),
+                                ifTrue(isBiome(SBBiomes.OUTBACK), sequence(
+                                        ifTrue(ON_CEILING, setBlock(Blocks.SANDSTONE)),
+                                        ifTrue(noiseCondition(Noises.SURFACE, 0.21), setBlock(Blocks.COARSE_DIRT)),
+                                        ifTrue(noiseCondition(Noises.ICE, 0.1), setBlock(Blocks.RED_SAND)),
+                                        ifTrue(noiseCondition(Noises.SWAMP, 0.1), setBlock(Blocks.SAND)),
+                                        setBlock(Blocks.COARSE_DIRT))),
+                                ifTrue(isBiome(SBBiomes.REDWOOD_GROVE, SBBiomes.OLD_GROWTH_REDWOOD_GROVE), sequence(
+                                        ifTrue(noiseCondition(Noises.SURFACE, 0.21), setBlock(Blocks.COARSE_DIRT)),
+                                        ifTrue(noiseCondition(Noises.SURFACE, -0.12), setBlock(Blocks.PODZOL)),
+                                        setBlock(Blocks.MOSS_BLOCK))),
                                 ifTrue(isBiome(SBBiomes.VOLCANIC_PEAKS), sequence(
-                                        ifTrue(ON_CEILING, setBlock(Blocks.BASALT)),
+                                        ifTrue(noiseCondition(Noises.ICE, -0.05, 0.05), setBlock(Blocks.LAVA)),
+                                        ifTrue(noiseCondition(Noises.ICE, -0.1, 0.1), setBlock(Blocks.MAGMA_BLOCK)),
                                         ifTrue(noiseCondition(Noises.SURFACE, 0), setBlock(Blocks.BASALT)),
                                         setBlock(Blocks.TUFF))),
+                                ifTrue(isBiome(SBBiomes.FUNGAL_DEPTHS), setBlock(Blocks.MYCELIUM)),
+                                ifTrue(isBiome(SBBiomes.SLIME_CAVERNS), setBlock(Blocks.STONE)),
+                                ifTrue(waterBlockCheck(0, 0), setBlock(Blocks.GRASS_BLOCK)),
                                 setBlock(Blocks.DIRT)
+                        ))),
+                        ifTrue(waterStartCheck(-6, -1), sequence(
+                                ifTrue(UNDER_FLOOR, sequence(
+                                        ifTrue(isBiome(SBBiomes.BLACK_DUNES), sequence(
+                                                ifTrue(ON_CEILING, setBlock(SBBlocks.BLACK_SANDSTONE.get())),
+                                                setBlock(SBBlocks.BLACK_SAND.get()))),
+                                        ifTrue(isBiome(SBBiomes.DEAD_SANDS), sequence(
+                                                ifTrue(ON_CEILING, setBlock(SBBlocks.BLACK_SANDSTONE.get())),
+                                                ifTrue(noiseCondition(Noises.ICE, 0), setBlock(SBBlocks.BLACK_SAND.get())),
+                                                setBlock(Blocks.RED_SAND))),
+                                        ifTrue(isBiome(SBBiomes.INKY_MOOR), setBlock(Blocks.MUD)),
+                                        ifTrue(isBiome(SBBiomes.OUTBACK), sequence(
+                                                ifTrue(ON_CEILING, setBlock(Blocks.SANDSTONE)),
+                                                ifTrue(noiseCondition(Noises.SURFACE, 0.21), setBlock(Blocks.COARSE_DIRT)),
+                                                ifTrue(noiseCondition(Noises.ICE, 0.1), setBlock(Blocks.RED_SAND)),
+                                                ifTrue(noiseCondition(Noises.SWAMP, 0.1), setBlock(Blocks.SAND)),
+                                                setBlock(Blocks.COARSE_DIRT))),
+                                        ifTrue(isBiome(SBBiomes.VOLCANIC_PEAKS), sequence(
+                                                ifTrue(ON_CEILING, setBlock(Blocks.BASALT)),
+                                                ifTrue(noiseCondition(Noises.SURFACE, 0), setBlock(Blocks.BASALT)),
+                                                setBlock(Blocks.TUFF))),
+                                        ifTrue(isBiome(SBBiomes.SLIME_CAVERNS), setBlock(Blocks.STONE)),
+                                        setBlock(Blocks.DIRT)
+                                )),
+                                ifTrue(DEEP_UNDER_FLOOR, sequence(
+                                        ifTrue(isBiome(SBBiomes.BLACK_DUNES, SBBiomes.DEAD_SANDS), setBlock(SBBlocks.BLACK_SANDSTONE.get()))
+                                )),
+                                ifTrue(VERY_DEEP_UNDER_FLOOR, sequence(
+                                        ifTrue(isBiome(SBBiomes.VOLCANIC_PEAKS), setBlock(Blocks.GRANITE))
+                                ))
+                        ))
+                )), /* Underground */
+                ifTrue(ON_FLOOR, ifTrue(waterBlockCheck(-1, 0), sequence(
+                        ifTrue(isBiome(SBBiomes.FUNGAL_DEPTHS), sequence(
+                                ifBetweenY(-64, 0, setBlock(SBBlocks.DEEPSLATE_STYPHIUM.get())),
+                                setBlock(SBBlocks.STYPHIUM.get()))),
+                        ifTrue(isBiome(SBBiomes.ICE_CAVES), sequence(
+                                ifTrue(noiseCondition(Noises.SWAMP, 0), setBlock(Blocks.ICE)),
+                                setBlock(Blocks.PACKED_ICE)))
+                ))),
+                ifTrue(waterStartCheck(-6, -1), sequence(
+                        ifTrue(UNDER_FLOOR, sequence(
+                                ifTrue(isBiome(SBBiomes.ICE_CAVES),
+                                        ifTrue(noiseCondition(Noises.SWAMP, 0), setBlock(Blocks.ICE)))
                         )),
                         ifTrue(DEEP_UNDER_FLOOR, sequence(
-                                ifTrue(isBiome(SBBiomes.BLACK_DUNES, SBBiomes.DEAD_SANDS), setBlock(SBBlocks.BLACK_SANDSTONE.get()))
+                                ifTrue(isBiome(SBBiomes.ICE_CAVES),
+                                        ifTrue(noiseCondition(Noises.SWAMP, 0.1), setBlock(Blocks.PACKED_ICE)))
                         )),
                         ifTrue(VERY_DEEP_UNDER_FLOOR, sequence(
-                                ifTrue(isBiome(SBBiomes.VOLCANIC_PEAKS), setBlock(Blocks.GRANITE))
+                                ifTrue(isBiome(SBBiomes.ICE_CAVES),
+                                        ifTrue(noiseCondition(Noises.SWAMP, 0.2), setBlock(Blocks.BLUE_ICE)))
                         ))
                 ))
         );
+    }
+
+    public static RuleSource netherRules() {
+        return sequence(ifTrue(isBiome(SBBiomes.TOXIC_JUNGLE), setBlock(Blocks.NETHERRACK)));
     }
 
     private static RuleSource ifBetweenY(int bottom, int top, RuleSource run) {

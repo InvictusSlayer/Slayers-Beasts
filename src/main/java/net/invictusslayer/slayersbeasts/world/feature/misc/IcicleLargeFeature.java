@@ -21,8 +21,8 @@ import net.minecraft.world.phys.Vec3;
 import javax.annotation.Nullable;
 import java.util.Optional;
 
-public class LargeIcicleFeature extends Feature<LargeIcicleFeature.Configuration> {
-	public LargeIcicleFeature(Codec<Configuration> pCodec) {
+public class IcicleLargeFeature extends Feature<IcicleLargeFeature.Configuration> {
+	public IcicleLargeFeature(Codec<Configuration> pCodec) {
 		super(pCodec);
 	}
 
@@ -106,8 +106,8 @@ public class LargeIcicleFeature extends Feature<LargeIcicleFeature.Configuration
 			return false;
 		}
 
-		private int getHeightAtRadius(float pRadius) {
-			return (int) IcicleUtils.getIcicleHeight(pRadius, radius, scale, bluntness);
+		private int getHeightAtRadius(float radius) {
+			return (int) IcicleUtils.getIcicleHeight(radius, this.radius, scale, bluntness);
 		}
 
 		private void placeBlocks(WorldGenLevel level, RandomSource random, WindOffsetter offsetter) {

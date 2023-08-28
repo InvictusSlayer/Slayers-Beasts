@@ -33,11 +33,13 @@ public class SBBlockStateProvider extends BlockStateProvider {
         cubeWithItem(SBBlocks.JADE_BLOCK.get());
         cubeWithItem(SBBlocks.EXOSKELETON_ORE.get());
         cubeWithItem(SBBlocks.DEEPSLATE_EXOSKELETON_ORE.get());
+        simpleCubeBottomTopWithItem(SBBlocks.STYPHIUM.get());
+        simpleCubeBottomTopWithItem(SBBlocks.DEEPSLATE_STYPHIUM.get());
 
-        simpleCubeBottomTopWithItem(SBBlocks.OOTHECA.get());
         cubeWithItem(SBBlocks.ANT_SOIL.get());
         simpleCubeBottomTopWithItem(SBBlocks.ANTHILL.get());
         simpleCubeBottomTopWithItem(SBBlocks.ANTHILL_HATCHERY.get());
+        simpleCubeBottomTopWithItem(SBBlocks.OOTHECA.get());
 
         dripstone(SBBlocks.ICICLE.get());
         doubleCrossBlock(SBBlocks.TALL_DEAD_BUSH.get());
@@ -146,7 +148,6 @@ public class SBBlockStateProvider extends BlockStateProvider {
                 .face(Direction.UP).texture("#portal").end().face(Direction.DOWN).texture("#portal").end()
                 .end().renderType(renderType)).build());
     }
-
     private void verticalPortal(Block block, String renderType) {
         getVariantBuilder(block).forAllStates(state -> {
             boolean isX = state.getValue(BlockStateProperties.HORIZONTAL_AXIS) == Direction.Axis.X;
@@ -175,7 +176,6 @@ public class SBBlockStateProvider extends BlockStateProvider {
         });
         simpleBlockItem(block, models().withExistingParent(name(block), "minecraft:block/cube_bottom_top"));
     }
-
     private void depletedCryptalith() {
         Block block = SBBlocks.DEPLETED_CRYPTALITH.get();
         getVariantBuilder(block).forAllStates(state ->

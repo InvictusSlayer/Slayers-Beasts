@@ -4,8 +4,8 @@ import net.invictusslayer.slayersbeasts.SlayersBeasts;
 import net.invictusslayer.slayersbeasts.block.SBBlocks;
 import net.invictusslayer.slayersbeasts.world.feature.foliageplacer.*;
 import net.invictusslayer.slayersbeasts.world.feature.misc.IcicleClusterFeature;
-import net.invictusslayer.slayersbeasts.world.feature.misc.IcicleFeature;
-import net.invictusslayer.slayersbeasts.world.feature.misc.LargeIcicleFeature;
+import net.invictusslayer.slayersbeasts.world.feature.misc.IcicleSmallFeature;
+import net.invictusslayer.slayersbeasts.world.feature.misc.IcicleLargeFeature;
 import net.invictusslayer.slayersbeasts.world.feature.misc.PitFeature;
 import net.invictusslayer.slayersbeasts.world.feature.treedecorator.ButtressRootDecorator;
 import net.invictusslayer.slayersbeasts.world.feature.treedecorator.HangingBranchDecorator;
@@ -80,8 +80,8 @@ public class SBConfiguredFeatures {
 
     //Cave
     public static final ResourceKey<ConfiguredFeature<?, ?>> ICICLE_CLUSTER = createKey("icicle_cluster");
-    public static final ResourceKey<ConfiguredFeature<?, ?>> LARGE_ICICLE = createKey("large_icicle");
-    public static final ResourceKey<ConfiguredFeature<?, ?>> ICICLE = createKey("icicle");
+    public static final ResourceKey<ConfiguredFeature<?, ?>> ICICLE_LARGE = createKey("icicle_large");
+    public static final ResourceKey<ConfiguredFeature<?, ?>> ICICLE_SMALL = createKey("icicle_small");
 
     //Ore
     public static final ResourceKey<ConfiguredFeature<?, ?>> ORE_EXOSKELETON = createKey("ore_exoskeleton");
@@ -150,10 +150,10 @@ public class SBConfiguredFeatures {
         register(context, PATCH_WHITE_MUSHROOM, Feature.RANDOM_PATCH, FeatureUtils.simplePatchConfiguration(Feature.SIMPLE_BLOCK, new SimpleBlockConfiguration(BlockStateProvider.simple(SBBlocks.WHITE_MUSHROOM.get()))));
 
         register(context, ICICLE_CLUSTER, SBFeatures.ICICLE_CLUSTER.get(), new IcicleClusterFeature.Configuration(12, UniformInt.of(3, 6), UniformInt.of(2, 8), 1, 3, UniformInt.of(2, 4), UniformFloat.of(0.3F, 0.7F), ClampedNormalFloat.of(0.1F, 0.3F, 0.1F, 0.9F), 0.1F, 3, 8));
-        register(context, LARGE_ICICLE, SBFeatures.LARGE_ICICLE.get(), new LargeIcicleFeature.Configuration(30, UniformInt.of(3, 19), UniformFloat.of(0.4F, 2.0F), 0.33F, UniformFloat.of(0.3F, 0.9F), UniformFloat.of(0.4F, 1.0F), UniformFloat.of(0.0F, 0.3F), 4, 0.6F));
-        register(context, ICICLE, Feature.SIMPLE_RANDOM_SELECTOR, new SimpleRandomFeatureConfiguration(HolderSet.direct(
-                PlacementUtils.inlinePlaced(SBFeatures.ICICLE.get(), new IcicleFeature.Configuration(0.2F, 0.7F, 0.5F, 0.5F), EnvironmentScanPlacement.scanningFor(Direction.DOWN, BlockPredicate.solid(), BlockPredicate.ONLY_IN_AIR_OR_WATER_PREDICATE, 12), RandomOffsetPlacement.vertical(ConstantInt.of(1))),
-                PlacementUtils.inlinePlaced(SBFeatures.ICICLE.get(), new IcicleFeature.Configuration(0.2F, 0.7F, 0.5F, 0.5F), EnvironmentScanPlacement.scanningFor(Direction.UP, BlockPredicate.solid(), BlockPredicate.ONLY_IN_AIR_OR_WATER_PREDICATE, 12), RandomOffsetPlacement.vertical(ConstantInt.of(-1))))));
+        register(context, ICICLE_LARGE, SBFeatures.ICICLE_LARGE.get(), new IcicleLargeFeature.Configuration(30, UniformInt.of(3, 19), UniformFloat.of(0.4F, 2.0F), 0.33F, UniformFloat.of(0.3F, 0.9F), UniformFloat.of(0.4F, 1.0F), UniformFloat.of(0.0F, 0.3F), 4, 0.6F));
+        register(context, ICICLE_SMALL, Feature.SIMPLE_RANDOM_SELECTOR, new SimpleRandomFeatureConfiguration(HolderSet.direct(
+                PlacementUtils.inlinePlaced(SBFeatures.ICICLE_SMALL.get(), new IcicleSmallFeature.Configuration(0.2F, 0.7F, 0.5F, 0.5F), EnvironmentScanPlacement.scanningFor(Direction.DOWN, BlockPredicate.solid(), BlockPredicate.ONLY_IN_AIR_OR_WATER_PREDICATE, 12), RandomOffsetPlacement.vertical(ConstantInt.of(1))),
+                PlacementUtils.inlinePlaced(SBFeatures.ICICLE_SMALL.get(), new IcicleSmallFeature.Configuration(0.2F, 0.7F, 0.5F, 0.5F), EnvironmentScanPlacement.scanningFor(Direction.UP, BlockPredicate.solid(), BlockPredicate.ONLY_IN_AIR_OR_WATER_PREDICATE, 12), RandomOffsetPlacement.vertical(ConstantInt.of(-1))))));
 
         register(context, ORE_EXOSKELETON, Feature.ORE, new OreConfiguration(List.of(
                 OreConfiguration.target(new TagMatchTest(BlockTags.STONE_ORE_REPLACEABLES), SBBlocks.EXOSKELETON_ORE.get().defaultBlockState()),

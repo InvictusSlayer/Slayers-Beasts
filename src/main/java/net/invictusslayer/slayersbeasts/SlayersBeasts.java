@@ -5,7 +5,6 @@ import net.invictusslayer.slayersbeasts.block.entity.SBBlockEntities;
 import net.invictusslayer.slayersbeasts.datagen.tags.SBPois;
 import net.invictusslayer.slayersbeasts.effect.SBEffects;
 import net.invictusslayer.slayersbeasts.entity.SBEntities;
-import net.invictusslayer.slayersbeasts.entity.npc.SBVillagerType;
 import net.invictusslayer.slayersbeasts.item.SBItems;
 import net.invictusslayer.slayersbeasts.misc.SBBrewingRecipe;
 import net.invictusslayer.slayersbeasts.misc.SBCreativeModeTab;
@@ -67,8 +66,8 @@ public class SlayersBeasts {
 
             Regions.register(new SBOverworldRegion(new ResourceLocation(MOD_ID, "overworld"), 2));
 
-            SurfaceRuleManager.addSurfaceRules(SurfaceRuleManager.RuleCategory.OVERWORLD, MOD_ID, SBSurfaceRuleData.makeRules());
-            SurfaceRuleManager.addSurfaceRules(SurfaceRuleManager.RuleCategory.NETHER, MOD_ID, SBSurfaceRuleData.makeRules());
+            SurfaceRuleManager.addSurfaceRules(SurfaceRuleManager.RuleCategory.OVERWORLD, MOD_ID, SBSurfaceRuleData.overworldRules());
+            SurfaceRuleManager.addSurfaceRules(SurfaceRuleManager.RuleCategory.NETHER, MOD_ID, SBSurfaceRuleData.netherRules());
         });
     }
 

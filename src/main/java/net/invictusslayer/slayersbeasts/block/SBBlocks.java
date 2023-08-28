@@ -34,11 +34,14 @@ public final class SBBlocks {
     public static final RegistryObject<Block> EXOSKELETON_ORE = registerBlock("exoskeleton_ore", () -> new DropExperienceBlock(BlockBehaviour.Properties.copy(Blocks.STONE).strength(15f).requiresCorrectToolForDrops(), UniformInt.of(3, 7)));
     public static final RegistryObject<Block> DEEPSLATE_EXOSKELETON_ORE = registerBlock("deepslate_exoskeleton_ore", () -> new DropExperienceBlock(BlockBehaviour.Properties.copy(Blocks.DEEPSLATE).strength(25f).requiresCorrectToolForDrops(), UniformInt.of(3, 7)));
 
-    public static final RegistryObject<Block> OOTHECA = registerBlock("ootheca", () -> new OothecaBlock(BlockBehaviour.Properties.copy(Blocks.HAY_BLOCK).strength(1f).noLootTable()));
+    public static final RegistryObject<Block> STYPHIUM = registerBlock("styphium", () -> new Block(BlockBehaviour.Properties.copy(Blocks.STONE)));
+    public static final RegistryObject<Block> DEEPSLATE_STYPHIUM = registerBlock("deepslate_styphium", () -> new Block(BlockBehaviour.Properties.copy(Blocks.DEEPSLATE)));
 
     public static final RegistryObject<Block> ANT_SOIL = registerBlock("ant_soil", () -> new Block(BlockBehaviour.Properties.copy(Blocks.ROOTED_DIRT).strength(1f)));
     public static final RegistryObject<Block> ANTHILL = registerBlock("anthill", () -> new AnthillBlock(BlockBehaviour.Properties.copy(Blocks.ROOTED_DIRT).strength(1f)));
     public static final RegistryObject<Block> ANTHILL_HATCHERY = registerBlock("anthill_hatchery", () -> new AnthillHatcheryBlock(BlockBehaviour.Properties.copy(Blocks.ROOTED_DIRT).strength(1f)));
+
+    public static final RegistryObject<Block> OOTHECA = registerBlock("ootheca", () -> new OothecaBlock(BlockBehaviour.Properties.copy(Blocks.HAY_BLOCK).strength(1f).noLootTable()));
 
     public static final RegistryObject<Block> ICICLE = registerBlock("icicle", () -> new IcicleBlock(BlockBehaviour.Properties.copy(Blocks.POINTED_DRIPSTONE).mapColor(MapColor.ICE).sound(SoundType.GLASS)));
     public static final RegistryObject<Block> TALL_DEAD_BUSH = registerBlock("tall_dead_bush", () -> new TallDeadBushBlock(BlockBehaviour.Properties.copy(Blocks.DEAD_BUSH)));

@@ -12,8 +12,8 @@ import net.minecraft.world.level.levelgen.feature.configurations.FeatureConfigur
 
 import java.util.Optional;
 
-public class IcicleFeature extends Feature<IcicleFeature.Configuration> {
-	public IcicleFeature(Codec<Configuration> pCodec) {
+public class IcicleSmallFeature extends Feature<IcicleSmallFeature.Configuration> {
+	public IcicleSmallFeature(Codec<Configuration> pCodec) {
 		super(pCodec);
 	}
 

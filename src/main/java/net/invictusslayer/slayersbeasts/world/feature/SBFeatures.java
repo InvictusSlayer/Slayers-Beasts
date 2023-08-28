@@ -17,8 +17,8 @@ public abstract class SBFeatures<FC extends FeatureConfiguration> extends Featur
     public static final RegistryObject<HugeWhiteMushroomFeature> HUGE_WHITE_MUSHROOM = FEATURES.register("huge_white_mushroom", () -> new HugeWhiteMushroomFeature(HugeMushroomFeatureConfiguration.CODEC));
     public static final RegistryObject<PitFeature> PIT = FEATURES.register("pit", () -> new PitFeature(PitFeature.Configuration.CODEC));
     public static final RegistryObject<IcicleClusterFeature> ICICLE_CLUSTER = FEATURES.register("icicle_cluster", () -> new IcicleClusterFeature(IcicleClusterFeature.Configuration.CODEC));
-    public static final RegistryObject<LargeIcicleFeature> LARGE_ICICLE = FEATURES.register("large_icicle", () -> new LargeIcicleFeature(LargeIcicleFeature.Configuration.CODEC));
-    public static final RegistryObject<IcicleFeature> ICICLE = FEATURES.register("icicle", () -> new IcicleFeature(IcicleFeature.Configuration.CODEC));
+    public static final RegistryObject<IcicleLargeFeature> ICICLE_LARGE = FEATURES.register("icicle_large", () -> new IcicleLargeFeature(IcicleLargeFeature.Configuration.CODEC));
+    public static final RegistryObject<IcicleSmallFeature> ICICLE_SMALL = FEATURES.register("icicle_small", () -> new IcicleSmallFeature(IcicleSmallFeature.Configuration.CODEC));
 
     public SBFeatures(Codec<FC> pCodec) {
         super(pCodec);

@@ -42,6 +42,9 @@ public class SBBlockLootTables extends BlockLootSubProvider {
         add(SBBlocks.EXOSKELETON_ORE.get(), block -> createExoskeletonOreDrops(SBBlocks.EXOSKELETON_ORE.get()));
         add(SBBlocks.DEEPSLATE_EXOSKELETON_ORE.get(), block -> createExoskeletonOreDrops(SBBlocks.DEEPSLATE_EXOSKELETON_ORE.get()));
 
+        add(SBBlocks.STYPHIUM.get(), block -> createSingleItemTableWithSilkTouch(block, Blocks.COBBLESTONE));
+        add(SBBlocks.DEEPSLATE_STYPHIUM.get(), block -> createSingleItemTableWithSilkTouch(block, Blocks.COBBLED_DEEPSLATE));
+
         dropSelf(SBBlocks.ANT_SOIL.get());
         dropOther(SBBlocks.ANTHILL.get(), SBBlocks.ANT_SOIL.get());
         dropOther(SBBlocks.ANTHILL_HATCHERY.get(), SBBlocks.ANT_SOIL.get());

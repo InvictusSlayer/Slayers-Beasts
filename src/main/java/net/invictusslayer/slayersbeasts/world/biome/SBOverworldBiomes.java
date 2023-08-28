@@ -354,8 +354,8 @@ public class SBOverworldBiomes {
 
     private static void addIcicles(BiomeGenerationSettings.Builder biomeSettings) {
         biomeSettings.addFeature(GenerationStep.Decoration.UNDERGROUND_DECORATION, SBPlacedFeatures.ICICLE_CLUSTER);
-        biomeSettings.addFeature(GenerationStep.Decoration.UNDERGROUND_DECORATION, SBPlacedFeatures.LARGE_ICICLE);
-        biomeSettings.addFeature(GenerationStep.Decoration.UNDERGROUND_DECORATION, SBPlacedFeatures.ICICLE);
+        biomeSettings.addFeature(GenerationStep.Decoration.UNDERGROUND_DECORATION, SBPlacedFeatures.ICICLE_LARGE);
+        biomeSettings.addFeature(GenerationStep.Decoration.UNDERGROUND_DECORATION, SBPlacedFeatures.ICICLE_SMALL);
     }
 
     private static void addModMushrooms(BiomeGenerationSettings.Builder biomeSettings) {

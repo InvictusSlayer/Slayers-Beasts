@@ -39,7 +39,7 @@ public class IcicleClusterFeature extends Feature<IcicleClusterFeature.Configura
 		if (!IcicleUtils.isEmptyOrWater(level, origin)) return false;
 
 		int height = config.height.sample(random);
-		float w = config.wetness.sample(random);
+		float wetness = config.wetness.sample(random);
 		float density = config.density.sample(random);
 		int xRadius = config.radius.sample(random);
 		int zRadius = config.radius.sample(random);
@@ -48,7 +48,7 @@ public class IcicleClusterFeature extends Feature<IcicleClusterFeature.Configura
 			for (int z = -zRadius; z <= zRadius; ++z) {
 				BlockPos blockPos = origin.offset(x, 0, z);
 				double chance = getChanceOfIcicle(xRadius, zRadius, x, z, config);
-				placeColumn(level, random, blockPos, x, z, w, chance, height, density, config);
+				placeColumn(level, random, blockPos, x, z, wetness, chance, height, density, config);
 			}
 		}
 		return true;
@@ -63,9 +63,7 @@ public class IcicleClusterFeature extends Feature<IcicleClusterFeature.Configura
 				Column column = optional.get();
 
 				if (random.nextFloat() < wetness && floor.isPresent() && canPlacePool(level, pos.atY(floor.getAsInt()))) {
-					int i = floor.getAsInt();
-					column = column.withFloor(OptionalInt.of(i - 1));
-					level.setBlock(pos.atY(i), Blocks.SNOW.defaultBlockState(), 2);
+					level.setBlock(pos.atY(floor.getAsInt()), Blocks.ICE.defaultBlockState(), 2);
 				}
 
 				OptionalInt columnFloor = column.getFloor();
