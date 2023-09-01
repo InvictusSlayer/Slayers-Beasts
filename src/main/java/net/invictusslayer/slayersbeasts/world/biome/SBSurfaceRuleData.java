@@ -11,7 +11,7 @@ import static net.minecraft.world.level.levelgen.SurfaceRules.*;
 public class SBSurfaceRuleData {
     public static RuleSource overworldRules() {
         return sequence(ifTrue(abovePreliminarySurface(), sequence( /* Overground */
-                        ifTrue(ON_FLOOR, ifTrue(isBiome(SBBiomes.INKY_MOOR), ifBetweenY(60, 63,
+                        ifTrue(ON_FLOOR, ifTrue(isBiome(SBBiomes.INKY_MOOR), ifBetweenY(62, 63,
                                 ifTrue(noiseCondition(Noises.SWAMP, 0), setBlock(Blocks.WATER))))),
                         ifTrue(ON_FLOOR, ifTrue(waterBlockCheck(-1, 0), sequence(
                                 ifTrue(isBiome(SBBiomes.BLACK_DUNES), sequence(
@@ -32,11 +32,10 @@ public class SBSurfaceRuleData {
                                         setBlock(Blocks.COARSE_DIRT))),
                                 ifTrue(isBiome(SBBiomes.REDWOOD_GROVE, SBBiomes.OLD_GROWTH_REDWOOD_GROVE), sequence(
                                         ifTrue(noiseCondition(Noises.SURFACE, 0.21), setBlock(Blocks.COARSE_DIRT)),
-                                        ifTrue(noiseCondition(Noises.SURFACE, -0.12), setBlock(Blocks.PODZOL)),
-                                        setBlock(Blocks.MOSS_BLOCK))),
+                                        ifTrue(noiseCondition(Noises.SURFACE, -0.12), setBlock(Blocks.PODZOL)))),
                                 ifTrue(isBiome(SBBiomes.VOLCANIC_PEAKS), sequence(
-                                        ifTrue(noiseCondition(Noises.ICE, -0.05, 0.05), setBlock(Blocks.LAVA)),
-                                        ifTrue(noiseCondition(Noises.ICE, -0.1, 0.1), setBlock(Blocks.MAGMA_BLOCK)),
+                                        ifTrue(noiseCondition(Noises.ICE, -0.02, 0.02), setBlock(Blocks.OBSIDIAN)),
+                                        ifTrue(noiseCondition(Noises.ICE, -0.08, 0.08), setBlock(Blocks.MAGMA_BLOCK)),
                                         ifTrue(noiseCondition(Noises.SURFACE, 0), setBlock(Blocks.BASALT)),
                                         setBlock(Blocks.TUFF))),
                                 ifTrue(isBiome(SBBiomes.FUNGAL_DEPTHS), setBlock(Blocks.MYCELIUM)),
@@ -77,26 +76,26 @@ public class SBSurfaceRuleData {
                 )), /* Underground */
                 ifTrue(ON_FLOOR, ifTrue(waterBlockCheck(-1, 0), sequence(
                         ifTrue(isBiome(SBBiomes.FUNGAL_DEPTHS), sequence(
-                                ifBetweenY(-64, 0, setBlock(SBBlocks.DEEPSLATE_STYPHIUM.get())),
+                                ifBetweenY(-64, 3, setBlock(SBBlocks.DEEPSLATE_STYPHIUM.get())),
                                 setBlock(SBBlocks.STYPHIUM.get()))),
                         ifTrue(isBiome(SBBiomes.ICE_CAVES), sequence(
                                 ifTrue(noiseCondition(Noises.SWAMP, 0), setBlock(Blocks.ICE)),
                                 setBlock(Blocks.PACKED_ICE)))
                 ))),
-                ifTrue(waterStartCheck(-6, -1), sequence(
+                ifTrue(waterStartCheck(-6, -1), ifTrue(not(hole()), sequence(
                         ifTrue(UNDER_FLOOR, sequence(
                                 ifTrue(isBiome(SBBiomes.ICE_CAVES),
-                                        ifTrue(noiseCondition(Noises.SWAMP, 0), setBlock(Blocks.ICE)))
+                                        ifTrue(noiseCondition(Noises.AQUIFER_LAVA, 0), setBlock(Blocks.ICE)))
                         )),
                         ifTrue(DEEP_UNDER_FLOOR, sequence(
                                 ifTrue(isBiome(SBBiomes.ICE_CAVES),
-                                        ifTrue(noiseCondition(Noises.SWAMP, 0.1), setBlock(Blocks.PACKED_ICE)))
+                                        ifTrue(noiseCondition(Noises.AQUIFER_LAVA, 0.1), setBlock(Blocks.PACKED_ICE)))
                         )),
                         ifTrue(VERY_DEEP_UNDER_FLOOR, sequence(
                                 ifTrue(isBiome(SBBiomes.ICE_CAVES),
-                                        ifTrue(noiseCondition(Noises.SWAMP, 0.2), setBlock(Blocks.BLUE_ICE)))
+                                        ifTrue(noiseCondition(Noises.AQUIFER_LAVA, 0.2), setBlock(Blocks.BLUE_ICE)))
                         ))
-                ))
+                )))
         );
     }
 
@@ -104,9 +103,9 @@ public class SBSurfaceRuleData {
         return sequence(ifTrue(isBiome(SBBiomes.TOXIC_JUNGLE), setBlock(Blocks.NETHERRACK)));
     }
 
-    private static RuleSource ifBetweenY(int bottom, int top, RuleSource run) {
-        return ifTrue(yBlockCheck(VerticalAnchor.aboveBottom(bottom), 0),
-                ifTrue(yBlockCheck(VerticalAnchor.belowTop(top), 0), run));
+    private static RuleSource ifBetweenY(int bottom, int top, RuleSource rule) {
+        return ifTrue(yBlockCheck(VerticalAnchor.absolute(bottom), 0),
+                ifTrue(not(yBlockCheck(VerticalAnchor.absolute(top), 0)), rule));
     }
 
     private static RuleSource setBlock(Block pBlock) {

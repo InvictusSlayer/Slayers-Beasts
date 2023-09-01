@@ -136,6 +136,7 @@ public class SBOverworldBiomes {
         biomeSettings.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, VegetationPlacements.BROWN_MUSHROOM_OLD_GROWTH);
         BiomeDefaultFeatures.addDefaultMushrooms(biomeSettings);
         addModUndergroundVariety(biomeSettings);
+        biomeSettings.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, SBPlacedFeatures.PATCH_TALL_DEAD_BUSH);
         addModMushrooms(biomeSettings);
         biomeSettings.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, SBPlacedFeatures.TREES_EUCALYPT);
         return biome(true, 2F, 0F, mobSettings, biomeSettings, MUSIC_FOREST);
@@ -190,9 +191,10 @@ public class SBOverworldBiomes {
         BiomeDefaultFeatures.addDefaultMushrooms(biomeSettings);
         addMudPits(biomeSettings);
         addModUndergroundVariety(biomeSettings);
+        biomeSettings.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, SBPlacedFeatures.PATCH_TALL_DEAD_BUSH);
         addModMushrooms(biomeSettings);
         biomeSettings.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, SBPlacedFeatures.TREES_OUTBACK);
-        return biome(false, 2F, 0F, mobSettings, biomeSettings, MUSIC_OUTBACK); // gc-9470285 fc-10387789
+        return biome(false, 2F, 0F, mobSettings, biomeSettings, MUSIC_OUTBACK); // grass-9470285 foliage-10387789
     }
 
     public static Biome petrifiedWoods(HolderGetter<PlacedFeature> pPlacedFeatures, HolderGetter<ConfiguredWorldCarver<?>> pWorldCarvers) {
@@ -272,8 +274,12 @@ public class SBOverworldBiomes {
         BiomeDefaultFeatures.addDefaultOres(biomeSettings);
         BiomeDefaultFeatures.addDefaultSoftDisks(biomeSettings);
         BiomeDefaultFeatures.addDefaultMushrooms(biomeSettings);
+        biomeSettings.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, VegetationPlacements.BROWN_MUSHROOM_TAIGA);
+        biomeSettings.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, VegetationPlacements.RED_MUSHROOM_TAIGA);
         addModUndergroundVariety(biomeSettings);
         addModMushrooms(biomeSettings);
+        biomeSettings.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, SBPlacedFeatures.WHITE_MUSHROOM_COMMON);
+        biomeSettings.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, SBPlacedFeatures.TREES_FUNGAL);
         return biome(true, 0.8F, 0.4F, new MobSpawnSettings.Builder(), biomeSettings, MUSIC_CAVES);
     }
 
