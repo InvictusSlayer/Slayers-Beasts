@@ -75,15 +75,16 @@ public class SBSurfaceRuleData {
                         ))
                 )), /* Underground */
                 ifTrue(ON_FLOOR, ifTrue(waterBlockCheck(-1, 0), sequence(
-                        ifTrue(isBiome(SBBiomes.FUNGAL_DEPTHS), sequence(
-                                ifBetweenY(-64, 3, setBlock(SBBlocks.DEEPSLATE_STYPHIUM.get())),
-                                setBlock(SBBlocks.STYPHIUM.get()))),
                         ifTrue(isBiome(SBBiomes.ICE_CAVES), sequence(
                                 ifTrue(noiseCondition(Noises.SWAMP, 0), setBlock(Blocks.ICE)),
                                 setBlock(Blocks.PACKED_ICE)))
                 ))),
                 ifTrue(waterStartCheck(-6, -1), ifTrue(not(hole()), sequence(
                         ifTrue(UNDER_FLOOR, sequence(
+                                ifTrue(isBiome(SBBiomes.VOLCANIC_PEAKS), sequence(
+                                        ifTrue(ON_CEILING, setBlock(Blocks.BASALT)),
+                                        ifTrue(noiseCondition(Noises.SURFACE, 0), setBlock(Blocks.BASALT)),
+                                        setBlock(Blocks.TUFF))),
                                 ifTrue(isBiome(SBBiomes.ICE_CAVES),
                                         ifTrue(noiseCondition(Noises.AQUIFER_LAVA, 0), setBlock(Blocks.ICE)))
                         )),
@@ -92,8 +93,7 @@ public class SBSurfaceRuleData {
                                         ifTrue(noiseCondition(Noises.AQUIFER_LAVA, 0.1), setBlock(Blocks.PACKED_ICE)))
                         )),
                         ifTrue(VERY_DEEP_UNDER_FLOOR, sequence(
-                                ifTrue(isBiome(SBBiomes.ICE_CAVES),
-                                        ifTrue(noiseCondition(Noises.AQUIFER_LAVA, 0.2), setBlock(Blocks.BLUE_ICE)))
+                                ifTrue(isBiome(SBBiomes.VOLCANIC_PEAKS), setBlock(Blocks.GRANITE))
                         ))
                 )))
         );

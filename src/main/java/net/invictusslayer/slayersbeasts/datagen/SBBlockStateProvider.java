@@ -3,6 +3,7 @@ package net.invictusslayer.slayersbeasts.datagen;
 import net.invictusslayer.slayersbeasts.SlayersBeasts;
 import net.invictusslayer.slayersbeasts.block.DepletedCryptalithBlock;
 import net.invictusslayer.slayersbeasts.block.InfusedCryptalithBlock;
+import net.invictusslayer.slayersbeasts.block.SBBlockFamilies;
 import net.invictusslayer.slayersbeasts.block.SBBlocks;
 import net.minecraft.core.Direction;
 import net.minecraft.data.BlockFamily;

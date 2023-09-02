@@ -78,6 +78,7 @@ public class SBOverworldBiomes {
         BiomeDefaultFeatures.addDefaultOres(biomeSettings);
         BiomeDefaultFeatures.addDefaultSoftDisks(biomeSettings);
         biomeSettings.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, VegetationPlacements.PATCH_TALL_GRASS);
+        biomeSettings.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, VegetationPlacements.PATCH_GRASS_SAVANNA);
         biomeSettings.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, VegetationPlacements.PATCH_DEAD_BUSH_2);
         BiomeDefaultFeatures.addDefaultMushrooms(biomeSettings);
         addMudPits(biomeSettings);
@@ -85,7 +86,7 @@ public class SBOverworldBiomes {
         biomeSettings.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, SBPlacedFeatures.PATCH_TALL_DEAD_BUSH_BRUSH);
         addModMushrooms(biomeSettings);
         biomeSettings.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, pIsWooded ? SBPlacedFeatures.TREES_WOODED_BRUSH : SBPlacedFeatures.TREES_BRUSH);
-        return biome(false, 2F, 0F, mobSettings, biomeSettings, MUSIC_FOREST);
+        return biome(false, 2F, 0F, mobSettings, biomeSettings, MUSIC_OUTBACK);
     }
 
     public static Biome chaparral(HolderGetter<PlacedFeature> pPlacedFeatures, HolderGetter<ConfiguredWorldCarver<?>> pWorldCarvers) {
@@ -102,8 +103,8 @@ public class SBOverworldBiomes {
         addModUndergroundVariety(biomeSettings);
         biomeSettings.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, SBPlacedFeatures.PATCH_TALL_DEAD_BUSH);
         addModMushrooms(biomeSettings);
-        biomeSettings.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, SBPlacedFeatures.TREES_BRUSH);
-        return biome(true, 0.8F, 0.4F, mobSettings, biomeSettings, MUSIC_FOREST);
+        biomeSettings.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, SBPlacedFeatures.TREES_CHAPARRAL);
+        return biome(true, 0.8F, 0.4F, mobSettings, biomeSettings, MUSIC_OUTBACK);
     }
 
     public static Biome desert(HolderGetter<PlacedFeature> pPlacedFeatures, HolderGetter<ConfiguredWorldCarver<?>> pWorldCarvers) {
@@ -273,12 +274,8 @@ public class SBOverworldBiomes {
         globalOverworldGeneration(biomeSettings);
         BiomeDefaultFeatures.addDefaultOres(biomeSettings);
         BiomeDefaultFeatures.addDefaultSoftDisks(biomeSettings);
-        BiomeDefaultFeatures.addDefaultMushrooms(biomeSettings);
-        biomeSettings.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, VegetationPlacements.BROWN_MUSHROOM_TAIGA);
-        biomeSettings.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, VegetationPlacements.RED_MUSHROOM_TAIGA);
         addModUndergroundVariety(biomeSettings);
-        addModMushrooms(biomeSettings);
-        biomeSettings.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, SBPlacedFeatures.WHITE_MUSHROOM_COMMON);
+        biomeSettings.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, SBPlacedFeatures.STYPHIUM_PATCH);
         biomeSettings.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, SBPlacedFeatures.TREES_FUNGAL);
         return biome(true, 0.8F, 0.4F, new MobSpawnSettings.Builder(), biomeSettings, MUSIC_CAVES);
     }

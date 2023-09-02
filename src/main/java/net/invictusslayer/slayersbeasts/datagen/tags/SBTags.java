@@ -19,6 +19,7 @@ public class SBTags {
         public static final TagKey<Block> ANTHILLS = tag("anthills");
         public static final TagKey<Block> ANTHILL_REPLACEABLE = tag("anthill_replaceable");
         public static final TagKey<Block> ICICLE_REPLACEABLE = tag("icicle_replaceable");
+        public static final TagKey<Block> STYPHIUM_REPLACEABLE = tag("styphium_replaceable");
 
         public static final TagKey<Block> ASPEN_LOGS = tag("aspen_logs");
         public static final TagKey<Block> CAJOLE_LOGS = tag("cajole_logs");

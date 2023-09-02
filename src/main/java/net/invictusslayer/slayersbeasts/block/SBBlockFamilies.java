@@ -1,4 +1,4 @@
-package net.invictusslayer.slayersbeasts.datagen;
+package net.invictusslayer.slayersbeasts.block;
 
 import net.invictusslayer.slayersbeasts.block.SBBlocks;
 import net.minecraft.data.BlockFamily;

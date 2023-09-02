@@ -14,7 +14,6 @@ import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.valueproviders.ClampedNormalInt;
 import net.minecraft.util.valueproviders.UniformInt;
-import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.levelgen.VerticalAnchor;
 import net.minecraft.world.level.levelgen.feature.ConfiguredFeature;
 import net.minecraft.world.level.levelgen.heightproviders.VeryBiasedToBottomHeight;
@@ -39,6 +38,7 @@ public class SBPlacedFeatures {
     public static final ResourceKey<PlacedFeature> TREES_ASPEN = createKey("trees_aspen");
     public static final ResourceKey<PlacedFeature> TREES_BRUSH = createKey("trees_brush");
     public static final ResourceKey<PlacedFeature> TREES_WOODED_BRUSH = createKey("trees_wooded_brush");
+    public static final ResourceKey<PlacedFeature> TREES_CHAPARRAL = createKey("trees_chaparral");
     public static final ResourceKey<PlacedFeature> TREES_EUCALYPT = createKey("trees_eucalypt");
     public static final ResourceKey<PlacedFeature> TREES_INKY = createKey("trees_inky");
     public static final ResourceKey<PlacedFeature> TREES_OUTBACK = createKey("trees_outback");
@@ -56,6 +56,7 @@ public class SBPlacedFeatures {
     public static final ResourceKey<PlacedFeature> ICICLE_CLUSTER = createKey("icicle_cluster");
     public static final ResourceKey<PlacedFeature> ICICLE_LARGE = createKey("icicle_large");
     public static final ResourceKey<PlacedFeature> ICICLE_SMALL = createKey("icicle_small");
+    public static final ResourceKey<PlacedFeature> STYPHIUM_PATCH = createKey("styphium_patch");
 
     //Ore
     public static final ResourceKey<PlacedFeature> ORE_EXOSKELETON = createKey("ore_exoskeleton");
@@ -88,16 +89,17 @@ public class SBPlacedFeatures {
         register(context, GIANT_WILLOW_CHECKED, configured.getOrThrow(SBConfiguredFeatures.GIANT_WILLOW), PlacementUtils.filteredByBlockSurvival(SBBlocks.WILLOW_SAPLING.get()));
 
         register(context, TREES_ASPEN, configured.getOrThrow(SBConfiguredFeatures.TREES_ASPEN), VegetationPlacements.treePlacement(PlacementUtils.countExtra(10, 0.2f, 3), SBBlocks.ASPEN_SAPLING.get()));
-        register(context, TREES_BRUSH, configured.getOrThrow(SBConfiguredFeatures.TREES_BRUSH), VegetationPlacements.treePlacement(PlacementUtils.countExtra(1, 0.1f, 1)));
-        register(context, TREES_WOODED_BRUSH, configured.getOrThrow(SBConfiguredFeatures.TREES_BRUSH), VegetationPlacements.treePlacement(PlacementUtils.countExtra(10, 0.2f, 3)));
+        register(context, TREES_BRUSH, configured.getOrThrow(SBConfiguredFeatures.TREES_BRUSH), VegetationPlacements.treePlacement(PlacementUtils.countExtra(1, 0.1f, 1), SBBlocks.DESERT_OAK_SAPLING.get()));
+        register(context, TREES_WOODED_BRUSH, configured.getOrThrow(SBConfiguredFeatures.TREES_BRUSH), VegetationPlacements.treePlacement(PlacementUtils.countExtra(10, 0.2f, 3), SBBlocks.DESERT_OAK_SAPLING.get()));
+        register(context, TREES_CHAPARRAL, configured.getOrThrow(SBConfiguredFeatures.TREES_CHAPARRAL), VegetationPlacements.treePlacement(PlacementUtils.countExtra(1, 0.1f, 1), SBBlocks.DESERT_OAK_SAPLING.get()));
         register(context, TREES_EUCALYPT, configured.getOrThrow(SBConfiguredFeatures.TREES_EUCALYPT), VegetationPlacements.treePlacement(PlacementUtils.countExtra(6, 0.1f, 1), SBBlocks.EUCALYPTUS_SAPLING.get()));
         register(context, TREES_INKY, configured.getOrThrow(SBConfiguredFeatures.TREES_INKY), VegetationPlacements.treePlacement(PlacementUtils.countExtra(3, 0.1f, 1)));
-        register(context, TREES_OUTBACK, configured.getOrThrow(SBConfiguredFeatures.TREES_OUTBACK), VegetationPlacements.treePlacement(PlacementUtils.countExtra(1, 0.1f, 1)));
+        register(context, TREES_OUTBACK, configured.getOrThrow(SBConfiguredFeatures.TREES_OUTBACK), VegetationPlacements.treePlacement(PlacementUtils.countExtra(1, 0.1f, 1), SBBlocks.EUCALYPTUS_SAPLING.get()));
         register(context, TREES_RAINFOREST, configured.getOrThrow(SBConfiguredFeatures.TREES_RAINFOREST), VegetationPlacements.treePlacement(PlacementUtils.countExtra(10, 0.1f, 1)));
         register(context, TREES_REDWOOD, configured.getOrThrow(SBConfiguredFeatures.TREES_REDWOOD), VegetationPlacements.treePlacement(PlacementUtils.countExtra(10, 0.1f, 1), SBBlocks.REDWOOD_SAPLING.get()));
         register(context, TREES_OLD_GROWTH_REDWOOD, configured.getOrThrow(SBConfiguredFeatures.TREES_OLD_GROWTH_REDWOOD), VegetationPlacements.treePlacement(PlacementUtils.countExtra(10, 0.1f, 1), SBBlocks.REDWOOD_SAPLING.get()));
         register(context, TREES_RIVER, configured.getOrThrow(SBConfiguredFeatures.TREES_RIVER), VegetationPlacements.treePlacement(PlacementUtils.countExtra(0, 0.05f, 1), SBBlocks.WILLOW_SAPLING.get()));
-        register(context, TREES_FUNGAL, configured.getOrThrow(SBConfiguredFeatures.TREES_FUNGAL), VegetationPlacements.treePlacement(PlacementUtils.countExtra(10, 0.1f, 1), Blocks.BROWN_MUSHROOM));
+        register(context, TREES_FUNGAL, configured.getOrThrow(SBConfiguredFeatures.TREES_FUNGAL), InSquarePlacement.spread(), PlacementUtils.HEIGHTMAP, BiomeFilter.biome());
         register(context, PATCH_TALL_DEAD_BUSH, configured.getOrThrow(SBConfiguredFeatures.PATCH_TALL_DEAD_BUSH), RarityFilter.onAverageOnceEvery(5), InSquarePlacement.spread(), PlacementUtils.HEIGHTMAP, BiomeFilter.biome());
         register(context, PATCH_TALL_DEAD_BUSH_BRUSH, configured.getOrThrow(SBConfiguredFeatures.PATCH_TALL_DEAD_BUSH), VegetationPlacements.worldSurfaceSquaredWithCount(5));
         register(context, WHITE_MUSHROOM_COMMON, configured.getOrThrow(SBConfiguredFeatures.PATCH_WHITE_MUSHROOM), mushroomPlacement(9, CountPlacement.of(3)));
@@ -106,6 +108,7 @@ public class SBPlacedFeatures {
         register(context, ICICLE_CLUSTER, configured.getOrThrow(SBConfiguredFeatures.ICICLE_CLUSTER), CountPlacement.of(UniformInt.of(48, 96)), InSquarePlacement.spread(), PlacementUtils.RANGE_BOTTOM_TO_MAX_TERRAIN_HEIGHT, BiomeFilter.biome());
         register(context, ICICLE_LARGE, configured.getOrThrow(SBConfiguredFeatures.ICICLE_LARGE), CountPlacement.of(UniformInt.of(10, 48)), InSquarePlacement.spread(), PlacementUtils.RANGE_BOTTOM_TO_MAX_TERRAIN_HEIGHT, BiomeFilter.biome());
         register(context, ICICLE_SMALL, configured.getOrThrow(SBConfiguredFeatures.ICICLE_SMALL), CountPlacement.of(UniformInt.of(192, 256)), InSquarePlacement.spread(), PlacementUtils.RANGE_BOTTOM_TO_MAX_TERRAIN_HEIGHT, CountPlacement.of(UniformInt.of(1, 5)), RandomOffsetPlacement.of(ClampedNormalInt.of(0.0F, 3.0F, -10, 10), ClampedNormalInt.of(0.0F, 0.6F, -2, 2)), BiomeFilter.biome());
+        register(context, STYPHIUM_PATCH, configured.getOrThrow(SBConfiguredFeatures.STYPHIUM_PATCH), CountPlacement.of(256), InSquarePlacement.spread(), PlacementUtils.RANGE_BOTTOM_TO_MAX_TERRAIN_HEIGHT, BiomeFilter.biome());
 
         register(context, ORE_EXOSKELETON, configured.getOrThrow(SBConfiguredFeatures.ORE_EXOSKELETON), rareOrePlacement(1, HeightRangePlacement.triangle(VerticalAnchor.aboveBottom(-80), VerticalAnchor.aboveBottom(80))));
         register(context, ORE_EXOSKELETON_LUSH, configured.getOrThrow(SBConfiguredFeatures.ORE_EXOSKELETON), commonOrePlacement(10, HeightRangePlacement.uniform(VerticalAnchor.bottom(), VerticalAnchor.absolute(64))));

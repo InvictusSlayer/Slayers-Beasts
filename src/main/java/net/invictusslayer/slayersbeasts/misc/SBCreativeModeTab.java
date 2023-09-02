@@ -20,18 +20,18 @@ public final class SBCreativeModeTab {
             () -> CreativeModeTab.builder().icon(() -> new ItemStack(SBBlocks.REDWOOD_SAPLING.get())).title(Component.translatable("creativemodetab.slayers_beasts_tab"))
                     .displayItems(((display, tab) -> {
                         tab.accept(SBItems.JADE.get());
-                        tab.accept(SBItems.JADE_SHARD.get());
-                        tab.accept(SBItems.CRYSTALLINE_WING.get());
-                        tab.accept(SBItems.CRYSTALLINE_CLAW.get());
-                        tab.accept(SBItems.CRYSTALLINE_CARAPACE.get());
-                        tab.accept(SBItems.INSECT_WING.get());
-                        tab.accept(SBItems.INSECT_CLAW.get());
-                        tab.accept(SBItems.INSECT_EYE.get());
-                        tab.accept(SBItems.INSECT_LEG.get());
-                        tab.accept(SBItems.FRIED_INSECT_LEG.get());
-                        tab.accept(SBItems.WITHERBONE.get());
-                        tab.accept(SBItems.TIED_LEATHER.get());
-                        tab.accept(SBItems.TANNED_LEATHER.get());
+//                        tab.accept(SBItems.JADE_SHARD.get());
+//                        tab.accept(SBItems.CRYSTALLINE_WING.get());
+//                        tab.accept(SBItems.CRYSTALLINE_CLAW.get());
+//                        tab.accept(SBItems.CRYSTALLINE_CARAPACE.get());
+//                        tab.accept(SBItems.INSECT_WING.get());
+//                        tab.accept(SBItems.INSECT_CLAW.get());
+//                        tab.accept(SBItems.INSECT_EYE.get());
+//                        tab.accept(SBItems.INSECT_LEG.get());
+//                        tab.accept(SBItems.FRIED_INSECT_LEG.get());
+//                        tab.accept(SBItems.WITHERBONE.get());
+//                        tab.accept(SBItems.TIED_LEATHER.get());
+//                        tab.accept(SBItems.TANNED_LEATHER.get());
                         tab.accept(SBItems.MUD_BALL.get());
 
                         tab.accept(SBBlocks.CRYPTALITH.get());

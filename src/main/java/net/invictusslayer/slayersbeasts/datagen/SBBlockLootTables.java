@@ -1,5 +1,6 @@
 package net.invictusslayer.slayersbeasts.datagen;
 
+import net.invictusslayer.slayersbeasts.block.SBBlockFamilies;
 import net.invictusslayer.slayersbeasts.block.SBBlocks;
 import net.invictusslayer.slayersbeasts.item.SBItems;
 import net.minecraft.advancements.critereon.StatePropertiesPredicate;

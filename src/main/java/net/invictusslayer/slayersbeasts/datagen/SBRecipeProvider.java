@@ -1,6 +1,7 @@
 package net.invictusslayer.slayersbeasts.datagen;
 
 import net.invictusslayer.slayersbeasts.SlayersBeasts;
+import net.invictusslayer.slayersbeasts.block.SBBlockFamilies;
 import net.invictusslayer.slayersbeasts.block.SBBlocks;
 import net.invictusslayer.slayersbeasts.datagen.tags.SBTags;
 import net.invictusslayer.slayersbeasts.item.SBItems;

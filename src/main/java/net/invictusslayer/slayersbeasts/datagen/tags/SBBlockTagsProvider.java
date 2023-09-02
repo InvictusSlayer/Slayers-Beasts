@@ -19,16 +19,17 @@ public class SBBlockTagsProvider extends BlockTagsProvider {
 
     protected void addTags(HolderLookup.Provider pProvider) {
         tag(SBTags.Blocks.SEPULCHRA_PORTAL_FRAME).add(SBBlocks.JADE_BLOCK.get());
-        tag(SBTags.Blocks.ANTHILLS).add(SBBlocks.ANTHILL.get()).add(SBBlocks.ANTHILL_HATCHERY.get());
+        tag(SBTags.Blocks.ANTHILLS).add(SBBlocks.ANTHILL.get(), SBBlocks.ANTHILL_HATCHERY.get());
         tag(SBTags.Blocks.ANTHILL_REPLACEABLE).addTag(BlockTags.DIRT).addTag(BlockTags.BASE_STONE_OVERWORLD);
         tag(SBTags.Blocks.ICICLE_REPLACEABLE).add(Blocks.PACKED_ICE, Blocks.ICE, Blocks.BLUE_ICE).addTag(BlockTags.BASE_STONE_OVERWORLD);
-        tag(SBTags.Blocks.ASPEN_LOGS).add(SBBlocks.ASPEN_LOG.get()).add(SBBlocks.STRIPPED_ASPEN_LOG.get()).add(SBBlocks.ASPEN_WOOD.get()).add(SBBlocks.STRIPPED_ASPEN_WOOD.get());
-        tag(SBTags.Blocks.CAJOLE_LOGS).add(SBBlocks.CAJOLE_LOG.get()).add(SBBlocks.STRIPPED_CAJOLE_LOG.get()).add(SBBlocks.CAJOLE_WOOD.get()).add(SBBlocks.STRIPPED_CAJOLE_WOOD.get());
-        tag(SBTags.Blocks.DESERT_OAK_LOGS).add(SBBlocks.DESERT_OAK_LOG.get()).add(SBBlocks.STRIPPED_DESERT_OAK_LOG.get()).add(SBBlocks.DESERT_OAK_WOOD.get()).add(SBBlocks.STRIPPED_DESERT_OAK_WOOD.get());
-        tag(SBTags.Blocks.EUCALYPTUS_LOGS).add(SBBlocks.EUCALYPTUS_LOG.get()).add(SBBlocks.STRIPPED_EUCALYPTUS_LOG.get()).add(SBBlocks.EUCALYPTUS_WOOD.get()).add(SBBlocks.STRIPPED_EUCALYPTUS_WOOD.get());
-        tag(SBTags.Blocks.KAPOK_LOGS).add(SBBlocks.KAPOK_LOG.get()).add(SBBlocks.STRIPPED_KAPOK_LOG.get()).add(SBBlocks.KAPOK_WOOD.get()).add(SBBlocks.STRIPPED_KAPOK_WOOD.get());
-        tag(SBTags.Blocks.REDWOOD_LOGS).add(SBBlocks.REDWOOD_LOG.get()).add(SBBlocks.STRIPPED_REDWOOD_LOG.get()).add(SBBlocks.REDWOOD_WOOD.get()).add(SBBlocks.STRIPPED_REDWOOD_WOOD.get());
-        tag(SBTags.Blocks.WILLOW_LOGS).add(SBBlocks.WILLOW_LOG.get()).add(SBBlocks.STRIPPED_WILLOW_LOG.get()).add(SBBlocks.WILLOW_WOOD.get()).add(SBBlocks.STRIPPED_WILLOW_WOOD.get());
+        tag(SBTags.Blocks.STYPHIUM_REPLACEABLE).addTag(BlockTags.BASE_STONE_OVERWORLD).addTag(BlockTags.DIRT);
+        tag(SBTags.Blocks.ASPEN_LOGS).add(SBBlocks.ASPEN_LOG.get(), SBBlocks.STRIPPED_ASPEN_LOG.get(), SBBlocks.ASPEN_WOOD.get(), SBBlocks.STRIPPED_ASPEN_WOOD.get());
+        tag(SBTags.Blocks.CAJOLE_LOGS).add(SBBlocks.CAJOLE_LOG.get(), SBBlocks.STRIPPED_CAJOLE_LOG.get(), SBBlocks.CAJOLE_WOOD.get(), SBBlocks.STRIPPED_CAJOLE_WOOD.get());
+        tag(SBTags.Blocks.DESERT_OAK_LOGS).add(SBBlocks.DESERT_OAK_LOG.get(), SBBlocks.STRIPPED_DESERT_OAK_LOG.get(), SBBlocks.DESERT_OAK_WOOD.get(), SBBlocks.STRIPPED_DESERT_OAK_WOOD.get());
+        tag(SBTags.Blocks.EUCALYPTUS_LOGS).add(SBBlocks.EUCALYPTUS_LOG.get(), SBBlocks.STRIPPED_EUCALYPTUS_LOG.get(), SBBlocks.EUCALYPTUS_WOOD.get(), SBBlocks.STRIPPED_EUCALYPTUS_WOOD.get());
+        tag(SBTags.Blocks.KAPOK_LOGS).add(SBBlocks.KAPOK_LOG.get(), SBBlocks.STRIPPED_KAPOK_LOG.get(), SBBlocks.KAPOK_WOOD.get(), SBBlocks.STRIPPED_KAPOK_WOOD.get());
+        tag(SBTags.Blocks.REDWOOD_LOGS).add(SBBlocks.REDWOOD_LOG.get(), SBBlocks.STRIPPED_REDWOOD_LOG.get(), SBBlocks.REDWOOD_WOOD.get(), SBBlocks.STRIPPED_REDWOOD_WOOD.get());
+        tag(SBTags.Blocks.WILLOW_LOGS).add(SBBlocks.WILLOW_LOG.get(), SBBlocks.STRIPPED_WILLOW_LOG.get(), SBBlocks.WILLOW_WOOD.get(), SBBlocks.STRIPPED_WILLOW_WOOD.get());
         
         tag(BlockTags.SAND).add(SBBlocks.BLACK_SAND.get());
         tag(BlockTags.DIRT).add(SBBlocks.ANT_SOIL.get());

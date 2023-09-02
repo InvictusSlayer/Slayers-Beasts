@@ -3,10 +3,7 @@ package net.invictusslayer.slayersbeasts.world.feature;
 import net.invictusslayer.slayersbeasts.SlayersBeasts;
 import net.invictusslayer.slayersbeasts.block.SBBlocks;
 import net.invictusslayer.slayersbeasts.world.feature.foliageplacer.*;
-import net.invictusslayer.slayersbeasts.world.feature.misc.IcicleClusterFeature;
-import net.invictusslayer.slayersbeasts.world.feature.misc.IcicleLargeFeature;
-import net.invictusslayer.slayersbeasts.world.feature.misc.IcicleSmallFeature;
-import net.invictusslayer.slayersbeasts.world.feature.misc.PitFeature;
+import net.invictusslayer.slayersbeasts.world.feature.misc.*;
 import net.invictusslayer.slayersbeasts.world.feature.treedecorator.ButtressRootDecorator;
 import net.invictusslayer.slayersbeasts.world.feature.treedecorator.HangingBranchDecorator;
 import net.invictusslayer.slayersbeasts.world.feature.trunkplacer.ColossalTrunkPlacer;
@@ -70,6 +67,7 @@ public class SBConfiguredFeatures {
     //Vegetation
     public static final ResourceKey<ConfiguredFeature<?, ?>> TREES_ASPEN = createKey("trees_aspen");
     public static final ResourceKey<ConfiguredFeature<?, ?>> TREES_BRUSH = createKey("trees_brush");
+    public static final ResourceKey<ConfiguredFeature<?, ?>> TREES_CHAPARRAL = createKey("trees_chaparral");
     public static final ResourceKey<ConfiguredFeature<?, ?>> TREES_EUCALYPT = createKey("trees_eucalypt");
     public static final ResourceKey<ConfiguredFeature<?, ?>> TREES_INKY = createKey("trees_inky");
     public static final ResourceKey<ConfiguredFeature<?, ?>> TREES_OUTBACK = createKey("trees_outback");
@@ -85,6 +83,8 @@ public class SBConfiguredFeatures {
     public static final ResourceKey<ConfiguredFeature<?, ?>> ICICLE_CLUSTER = createKey("icicle_cluster");
     public static final ResourceKey<ConfiguredFeature<?, ?>> ICICLE_LARGE = createKey("icicle_large");
     public static final ResourceKey<ConfiguredFeature<?, ?>> ICICLE_SMALL = createKey("icicle_small");
+    public static final ResourceKey<ConfiguredFeature<?, ?>> STYPHIUM_PATCH = createKey("styphium_patch");
+    public static final ResourceKey<ConfiguredFeature<?, ?>> STYPHIUM_PATCH_BONEMEAL = createKey("styphium_patch_bonemeal");
 
     //Ore
     public static final ResourceKey<ConfiguredFeature<?, ?>> ORE_EXOSKELETON = createKey("ore_exoskeleton");
@@ -143,6 +143,7 @@ public class SBConfiguredFeatures {
 
         register(context, TREES_ASPEN, Feature.RANDOM_SELECTOR, new RandomFeatureConfiguration(List.of(new WeightedPlacedFeature(placed.getOrThrow(SBPlacedFeatures.ASPEN_CHECKED), 0.7F)), placed.getOrThrow(SBPlacedFeatures.ASPEN_CHECKED)));
         register(context, TREES_BRUSH, Feature.RANDOM_SELECTOR, new RandomFeatureConfiguration(List.of(new WeightedPlacedFeature(placed.getOrThrow(SBPlacedFeatures.DESERT_OAK_CHECKED), 0.5F)), placed.getOrThrow(TreePlacements.ACACIA_CHECKED)));
+        register(context, TREES_CHAPARRAL, Feature.RANDOM_SELECTOR, new RandomFeatureConfiguration(List.of(new WeightedPlacedFeature(placed.getOrThrow(SBPlacedFeatures.DESERT_OAK_CHECKED), 0.5F)), placed.getOrThrow(TreePlacements.OAK_CHECKED)));
         register(context, TREES_EUCALYPT, Feature.RANDOM_SELECTOR, new RandomFeatureConfiguration(List.of(new WeightedPlacedFeature(placed.getOrThrow(SBPlacedFeatures.EUCALYPTUS_CHECKED), 0.5F)), placed.getOrThrow(SBPlacedFeatures.EUCALYPTUS_CHECKED)));
         register(context, TREES_INKY, Feature.RANDOM_SELECTOR, new RandomFeatureConfiguration(List.of(new WeightedPlacedFeature(placed.getOrThrow(SBPlacedFeatures.CAJOLE_CHECKED), 0.5F)), placed.getOrThrow(SBPlacedFeatures.CAJOLE_CHECKED)));
         register(context, TREES_OUTBACK, Feature.RANDOM_SELECTOR, new RandomFeatureConfiguration(List.of(new WeightedPlacedFeature(placed.getOrThrow(SBPlacedFeatures.DESERT_OAK_CHECKED), 0.7F)), placed.getOrThrow(SBPlacedFeatures.EUCALYPTUS_CHECKED)));
@@ -150,7 +151,7 @@ public class SBConfiguredFeatures {
         register(context, TREES_REDWOOD, Feature.RANDOM_SELECTOR, new RandomFeatureConfiguration(List.of(new WeightedPlacedFeature(placed.getOrThrow(SBPlacedFeatures.GIANT_REDWOOD_CHECKED), 0.2F), new WeightedPlacedFeature(PlacementUtils.inlinePlaced(configured.getOrThrow(HUGE_WHITE_MUSHROOM)), 0.03F)), placed.getOrThrow(SBPlacedFeatures.REDWOOD_CHECKED)));
         register(context, TREES_OLD_GROWTH_REDWOOD, Feature.RANDOM_SELECTOR, new RandomFeatureConfiguration(List.of(new WeightedPlacedFeature(placed.getOrThrow(SBPlacedFeatures.GIANT_REDWOOD_CHECKED), 0.3F), new WeightedPlacedFeature(PlacementUtils.inlinePlaced(configured.getOrThrow(HUGE_WHITE_MUSHROOM)), 0.05F)), placed.getOrThrow(SBPlacedFeatures.COLOSSAL_REDWOOD_CHECKED)));
         register(context, TREES_RIVER, Feature.RANDOM_SELECTOR, new RandomFeatureConfiguration(List.of(new WeightedPlacedFeature(placed.getOrThrow(SBPlacedFeatures.GIANT_WILLOW_CHECKED), 0.5F)), placed.getOrThrow(SBPlacedFeatures.GIANT_WILLOW_CHECKED)));
-        register(context, TREES_FUNGAL, Feature.RANDOM_SELECTOR, new RandomFeatureConfiguration(List.of(new WeightedPlacedFeature(PlacementUtils.inlinePlaced(configured.getOrThrow(SBConfiguredFeatures.HUGE_WHITE_MUSHROOM)), 0.3F), new WeightedPlacedFeature(PlacementUtils.inlinePlaced(configured.getOrThrow(TreeFeatures.HUGE_RED_MUSHROOM)), 0.3F)), PlacementUtils.inlinePlaced(configured.getOrThrow(TreeFeatures.HUGE_BROWN_MUSHROOM))));
+        register(context, TREES_FUNGAL, Feature.RANDOM_SELECTOR, new RandomFeatureConfiguration(List.of(new WeightedPlacedFeature(PlacementUtils.inlinePlaced(configured.getOrThrow(HUGE_WHITE_MUSHROOM)), 0.33F), new WeightedPlacedFeature(PlacementUtils.inlinePlaced(configured.getOrThrow(TreeFeatures.HUGE_RED_MUSHROOM)), 0.33F)), PlacementUtils.inlinePlaced(configured.getOrThrow(TreeFeatures.HUGE_BROWN_MUSHROOM))));
         register(context, PATCH_TALL_DEAD_BUSH, Feature.RANDOM_PATCH, FeatureUtils.simplePatchConfiguration(Feature.SIMPLE_BLOCK, new SimpleBlockConfiguration(BlockStateProvider.simple(SBBlocks.TALL_DEAD_BUSH.get()))));
         register(context, PATCH_WHITE_MUSHROOM, Feature.RANDOM_PATCH, FeatureUtils.simplePatchConfiguration(Feature.SIMPLE_BLOCK, new SimpleBlockConfiguration(BlockStateProvider.simple(SBBlocks.WHITE_MUSHROOM.get()))));
 
@@ -159,6 +160,8 @@ public class SBConfiguredFeatures {
         register(context, ICICLE_SMALL, Feature.SIMPLE_RANDOM_SELECTOR, new SimpleRandomFeatureConfiguration(HolderSet.direct(
                 PlacementUtils.inlinePlaced(SBFeatures.ICICLE_SMALL.get(), new IcicleSmallFeature.Configuration(0.2F, 0.7F, 0.5F, 0.5F), EnvironmentScanPlacement.scanningFor(Direction.DOWN, BlockPredicate.solid(), BlockPredicate.ONLY_IN_AIR_OR_WATER_PREDICATE, 12), RandomOffsetPlacement.vertical(ConstantInt.of(1))),
                 PlacementUtils.inlinePlaced(SBFeatures.ICICLE_SMALL.get(), new IcicleSmallFeature.Configuration(0.2F, 0.7F, 0.5F, 0.5F), EnvironmentScanPlacement.scanningFor(Direction.UP, BlockPredicate.solid(), BlockPredicate.ONLY_IN_AIR_OR_WATER_PREDICATE, 12), RandomOffsetPlacement.vertical(ConstantInt.of(-1))))));
+        register(context, STYPHIUM_PATCH, SBFeatures.STYPHIUM_PATCH.get(), new StyphiumPatchFeature.Configuration(PlacementUtils.inlinePlaced(configured.getOrThrow(PATCH_WHITE_MUSHROOM)), 0.01F, 5, UniformInt.of(4, 7), 0.3F, true));
+        register(context, STYPHIUM_PATCH_BONEMEAL, SBFeatures.STYPHIUM_PATCH.get(), new StyphiumPatchFeature.Configuration(PlacementUtils.inlinePlaced(configured.getOrThrow(PATCH_WHITE_MUSHROOM)), 0.02F, 5, UniformInt.of(1, 2), 0.75F, false));
 
         register(context, ORE_EXOSKELETON, Feature.ORE, new OreConfiguration(List.of(
                 OreConfiguration.target(new TagMatchTest(BlockTags.STONE_ORE_REPLACEABLES), SBBlocks.EXOSKELETON_ORE.get().defaultBlockState()),

@@ -19,6 +19,7 @@ public abstract class SBFeatures<FC extends FeatureConfiguration> extends Featur
     public static final RegistryObject<IcicleClusterFeature> ICICLE_CLUSTER = FEATURES.register("icicle_cluster", () -> new IcicleClusterFeature(IcicleClusterFeature.Configuration.CODEC));
     public static final RegistryObject<IcicleLargeFeature> ICICLE_LARGE = FEATURES.register("icicle_large", () -> new IcicleLargeFeature(IcicleLargeFeature.Configuration.CODEC));
     public static final RegistryObject<IcicleSmallFeature> ICICLE_SMALL = FEATURES.register("icicle_small", () -> new IcicleSmallFeature(IcicleSmallFeature.Configuration.CODEC));
+    public static final RegistryObject<StyphiumPatchFeature> STYPHIUM_PATCH = FEATURES.register("styphium_patch", () -> new StyphiumPatchFeature(StyphiumPatchFeature.Configuration.CODEC));
 
     public SBFeatures(Codec<FC> pCodec) {
         super(pCodec);
