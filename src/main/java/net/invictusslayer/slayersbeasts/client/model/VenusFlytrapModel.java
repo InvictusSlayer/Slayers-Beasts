@@ -13,7 +13,7 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.Mth;
 
 public class VenusFlytrapModel<Type extends VenusFlytrap> extends EntityModel<Type> {
-    public static final ModelLayerLocation LAYER_LOCATION = new ModelLayerLocation(new ResourceLocation(SlayersBeasts.MOD_ID, "venus_flytrap_entity"), "main");
+    public static final ModelLayerLocation LAYER_LOCATION = new ModelLayerLocation(new ResourceLocation(SlayersBeasts.MOD_ID, "venus_flytrap_model"), "main");
     private final ModelPart base;
     private final ModelPart innerLeaf1;
     private final ModelPart innerLeaf2;

@@ -8,15 +8,12 @@ import net.minecraft.client.renderer.entity.MobRenderer;
 import net.minecraft.resources.ResourceLocation;
 
 public class MantisRenderer<Type extends Mantis> extends MobRenderer<Type, MantisModel<Type>> {
-
-    private static final ResourceLocation TEXTURE = new ResourceLocation(SlayersBeasts.MOD_ID,
-            "textures/entity/mantis.png");
+    private static final ResourceLocation TEXTURE = new ResourceLocation(SlayersBeasts.MOD_ID, "textures/entity/mantis.png");
 
     public MantisRenderer(EntityRendererProvider.Context context) {
         super(context, new MantisModel<>(context.bakeLayer(MantisModel.LAYER_LOCATION)), 0.5f);
     }
 
-    @Override
     public ResourceLocation getTextureLocation(Type pEntity) {
         return TEXTURE;
     }

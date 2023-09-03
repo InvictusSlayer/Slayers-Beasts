@@ -102,12 +102,11 @@ public class SoldierAntModel<Type extends SoldierAnt> extends EntityModel<Type> 
         return LayerDefinition.create(meshdefinition, 64, 64);
     }
 
-    @Override
     public void setupAnim(Type entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {
         float v1 = Mth.sin(ageInTicks / 6F) / 24F;
         float f1 = Mth.cos(limbSwing * 2) * limbSwingAmount;
-        double d1 = Math.pow(Mth.cos(limbSwing + Mth.PI * 0.25F), 6) * limbSwingAmount;
-        double d2 = Math.pow(Mth.sin(limbSwing + Mth.PI * 0.25F), 6) * limbSwingAmount;
+        float d1 = (float) (Math.pow(Mth.cos(limbSwing + Mth.PI * 0.25F), 6) * limbSwingAmount);
+        float d2 = (float) (Math.pow(Mth.sin(limbSwing + Mth.PI * 0.25F), 6) * limbSwingAmount);
         float a1 = Mth.PI * 0.2F;
         float a2 = Mth.PI * 0.4F;
         float a3 = Mth.PI * 0.28F;

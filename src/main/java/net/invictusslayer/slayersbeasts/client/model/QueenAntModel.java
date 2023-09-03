@@ -92,11 +92,10 @@ public class QueenAntModel<Type extends QueenAnt> extends EntityModel<Type> {
         return LayerDefinition.create(meshdefinition, 64, 64);
     }
 
-    @Override
     public void setupAnim(Type entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {
         float f1 = Mth.cos(limbSwing * 2) * limbSwingAmount;
-        double d1 = Math.pow(Mth.cos(limbSwing + Mth.PI * 0.25F), 6D) * limbSwingAmount;
-        double d2 = Math.pow(Mth.sin(limbSwing + Mth.PI * 0.25F), 6D) * limbSwingAmount;
+        float d1 = (float) (Math.pow(Mth.cos(limbSwing + Mth.PI * 0.25F), 6D) * limbSwingAmount);
+        float d2 = (float) (Math.pow(Mth.sin(limbSwing + Mth.PI * 0.25F), 6D) * limbSwingAmount);
         float a1 = Mth.PI * 0.22F;
         float a2 = Mth.PI * 0.14F;
         float a3 = Mth.PI * 0.35F;

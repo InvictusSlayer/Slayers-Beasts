@@ -12,7 +12,8 @@ import net.minecraft.client.model.geom.builders.*;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.Mth;
 
-public class TarantulaModel<Type extends Tarantula> extends EntityModel<Type> {public static final ModelLayerLocation LAYER_LOCATION = new ModelLayerLocation(new ResourceLocation(SlayersBeasts.MOD_ID, "tarantula_model"), "main");
+public class TarantulaModel<Type extends Tarantula> extends EntityModel<Type> {
+    public static final ModelLayerLocation LAYER_LOCATION = new ModelLayerLocation(new ResourceLocation(SlayersBeasts.MOD_ID, "tarantula_model"), "main");
     private final ModelPart body;
     private final ModelPart leftFang;
     private final ModelPart rightFang;

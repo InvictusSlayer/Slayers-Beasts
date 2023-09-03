@@ -8,15 +8,12 @@ import net.minecraft.client.renderer.entity.MobRenderer;
 import net.minecraft.resources.ResourceLocation;
 
 public class DamselflyRenderer<Type extends Damselfly> extends MobRenderer<Type, DamselflyModel<Type>> {
-
-    private static final ResourceLocation TEXTURE = new ResourceLocation(SlayersBeasts.MOD_ID,
-            "textures/entity/damselfly.png");
+    private static final ResourceLocation TEXTURE = new ResourceLocation(SlayersBeasts.MOD_ID, "textures/entity/damselfly.png");
 
     public DamselflyRenderer(EntityRendererProvider.Context context) {
         super(context, new DamselflyModel<>(context.bakeLayer(DamselflyModel.LAYER_LOCATION)), 0.5f);
     }
 
-    @Override
     public ResourceLocation getTextureLocation(Type pEntity) {
         return TEXTURE;
     }
