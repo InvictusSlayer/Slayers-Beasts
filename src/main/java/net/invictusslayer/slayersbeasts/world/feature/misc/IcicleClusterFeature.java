@@ -39,7 +39,7 @@ public class IcicleClusterFeature extends Feature<IcicleClusterFeature.Configura
 		if (!IcicleUtils.isEmptyOrWater(level, origin)) return false;
 
 		int height = config.height.sample(random);
-		float wetness = config.wetness.sample(random);
+		float lightChance = config.lightChance.sample(random);
 		float density = config.density.sample(random);
 		int xRadius = config.radius.sample(random);
 		int zRadius = config.radius.sample(random);
@@ -48,13 +48,13 @@ public class IcicleClusterFeature extends Feature<IcicleClusterFeature.Configura
 			for (int z = -zRadius; z <= zRadius; ++z) {
 				BlockPos blockPos = origin.offset(x, 0, z);
 				double chance = getChanceOfIcicle(xRadius, zRadius, x, z, config);
-				placeColumn(level, random, blockPos, x, z, wetness, chance, height, density, config);
+				placeColumn(level, random, blockPos, x, z, lightChance, chance, height, density, config);
 			}
 		}
 		return true;
 	}
 
-	private void placeColumn(WorldGenLevel level, RandomSource random, BlockPos pos, int x, int z, float wetness, double chance, int height, float density, Configuration config) {
+	private void placeColumn(WorldGenLevel level, RandomSource random, BlockPos pos, int x, int z, float lightChance, double chance, int height, float density, Configuration config) {
 		Optional<Column> optional = Column.scan(level, pos, config.caveHeightSearchRange, IcicleUtils::isEmptyOrWater, IcicleUtils::isNeitherEmptyNorWater);
 		if (optional.isPresent()) {
 			OptionalInt ceiling = optional.get().getCeiling();
@@ -62,8 +62,8 @@ public class IcicleClusterFeature extends Feature<IcicleClusterFeature.Configura
 			if (ceiling.isPresent() || floor.isPresent()) {
 				Column column = optional.get();
 
-				if (random.nextFloat() < wetness && floor.isPresent() && canPlacePool(level, pos.atY(floor.getAsInt()))) {
-					level.setBlock(pos.atY(floor.getAsInt()), Blocks.ICE.defaultBlockState(), 2);
+				if (random.nextFloat() < lightChance && floor.isPresent() && canPlaceLight(level, pos.atY(floor.getAsInt()))) {
+					level.setBlock(pos.atY(floor.getAsInt()), SBBlocks.GLEAMING_ICE.get().defaultBlockState(), 2);
 				}
 
 				OptionalInt columnFloor = column.getFloor();
@@ -135,7 +135,7 @@ public class IcicleClusterFeature extends Feature<IcicleClusterFeature.Configura
 		return (int) ClampedNormalFloat.sample(random, mean, config.heightDeviation, 0, (float) height);
 	}
 
-	private boolean canPlacePool(WorldGenLevel level, BlockPos pos) {
+	private boolean canPlaceLight(WorldGenLevel level, BlockPos pos) {
 		BlockState state = level.getBlockState(pos);
 		if (state.is(Blocks.WATER) || state.is(Blocks.PACKED_ICE) || state.is(SBBlocks.ICICLE.get())) return false;
 		if (level.getBlockState(pos.above()).getFluidState().is(FluidTags.WATER)) return false;
@@ -171,7 +171,7 @@ public class IcicleClusterFeature extends Feature<IcicleClusterFeature.Configura
 		return Mth.clampedMap(i, 0.0F, (float) config.maxRadiusAffectingColumnChance, config.columnChanceAtMaxRadius, 1.0F);
 	}
 
-	public record Configuration(int caveHeightSearchRange, IntProvider height, IntProvider radius, int maxHeightDifference, int heightDeviation, IntProvider layerThickness, FloatProvider density, FloatProvider wetness, float columnChanceAtMaxRadius, int maxRadiusAffectingColumnChance, int maxRadiusAffectingHeightBias) implements FeatureConfiguration {
+	public record Configuration(int caveHeightSearchRange, IntProvider height, IntProvider radius, int maxHeightDifference, int heightDeviation, IntProvider layerThickness, FloatProvider density, FloatProvider lightChance, float columnChanceAtMaxRadius, int maxRadiusAffectingColumnChance, int maxRadiusAffectingHeightBias) implements FeatureConfiguration {
 		public static final Codec<Configuration> CODEC = RecordCodecBuilder.create(instance ->
 				instance.group(Codec.intRange(1, 512).fieldOf("cave_height_search_range").forGetter(Configuration::caveHeightSearchRange),
 								IntProvider.codec(1, 128).fieldOf("height").forGetter(Configuration::height),
@@ -180,7 +180,7 @@ public class IcicleClusterFeature extends Feature<IcicleClusterFeature.Configura
 								Codec.intRange(1, 64).fieldOf("height_deviation").forGetter(Configuration::heightDeviation),
 								IntProvider.codec(0, 128).fieldOf("layer_thickness").forGetter(Configuration::layerThickness),
 								FloatProvider.codec(0.0F, 2.0F).fieldOf("density").forGetter(Configuration::density),
-								FloatProvider.codec(0.0F, 2.0F).fieldOf("wetness").forGetter(Configuration::wetness),
+								FloatProvider.codec(0.0F, 2.0F).fieldOf("light_chance").forGetter(Configuration::lightChance),
 								Codec.floatRange(0.0F, 1.0F).fieldOf("column_chance_at_max_radius").forGetter(Configuration::columnChanceAtMaxRadius),
 								Codec.intRange(1, 64).fieldOf("max_radius_affecting_column_chance").forGetter(Configuration::maxRadiusAffectingColumnChance),
 								Codec.intRange(1, 64).fieldOf("max_radius_affecting_height_bias").forGetter(Configuration::maxRadiusAffectingHeightBias))

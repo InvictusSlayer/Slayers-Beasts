@@ -7,9 +7,9 @@ import net.minecraft.world.level.storage.loot.parameters.LootContextParamSets;
 import java.util.List;
 import java.util.Set;
 
-public class SBLootTableProvider {
+public class SBLootSuperProvider {
     public static LootTableProvider create(PackOutput output) {
         return new LootTableProvider(output, Set.of(),
-                List.of(new LootTableProvider.SubProviderEntry(SBBlockLootTables::new, LootContextParamSets.BLOCK)));
+                List.of(new LootTableProvider.SubProviderEntry(SBBlockLootProvider::new, LootContextParamSets.BLOCK)));
     }
 }

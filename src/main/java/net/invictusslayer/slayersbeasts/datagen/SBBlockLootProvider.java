@@ -27,8 +27,8 @@ import net.minecraftforge.registries.RegistryObject;
 
 import java.util.Set;
 
-public class SBBlockLootTables extends BlockLootSubProvider {
-    public SBBlockLootTables() {
+public class SBBlockLootProvider extends BlockLootSubProvider {
+    public SBBlockLootProvider() {
         super(Set.of(), FeatureFlags.REGISTRY.allFlags());
     }
 
@@ -51,6 +51,7 @@ public class SBBlockLootTables extends BlockLootSubProvider {
         dropOther(SBBlocks.ANTHILL_HATCHERY.get(), SBBlocks.ANT_SOIL.get());
 
         dropWhenSilkTouch(SBBlocks.ICICLE.get());
+        dropWhenSilkTouch(SBBlocks.GLEAMING_ICE.get());
         add(SBBlocks.TALL_DEAD_BUSH.get(), block -> createTallDeadBushDrops(SBBlocks.TALL_DEAD_BUSH.get()));
         add(SBBlocks.CRACKED_MUD.get(), block -> createSingleItemTableWithSilkTouch(Blocks.PACKED_MUD, SBItems.MUD_BALL.get(), ConstantValue.exactly(4)));
         dropSelf(SBBlocks.PEAT.get());

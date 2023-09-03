@@ -29,7 +29,7 @@ public class DataGenerators {
         generator.addProvider(true, new SBPoiTagsProvider(packOutput, lookupProvider, existingFileHelper));
 
         generator.addProvider(true, new SBRecipeProvider(packOutput));
-        generator.addProvider(true, SBLootTableProvider.create(packOutput));
+        generator.addProvider(true, SBLootSuperProvider.create(packOutput));
         generator.addProvider(true, new SBBlockStateProvider(packOutput, existingFileHelper));
         generator.addProvider(true, new SBItemModelProvider(packOutput, existingFileHelper));
 
