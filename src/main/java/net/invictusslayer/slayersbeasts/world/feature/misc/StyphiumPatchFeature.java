@@ -38,7 +38,7 @@ public class StyphiumPatchFeature extends Feature<StyphiumPatchFeature.Configura
 		Predicate<BlockState> stateCheck = state -> state.is(SBTags.Blocks.STYPHIUM_REPLACEABLE);
 
 		Set<BlockPos> set = placeGround(level, config, random, origin, stateCheck);
-		placeVegetation(context, level, config, random, set);
+		if (config.isNatural) placeVegetation(context, level, config, random, set);
 		return !set.isEmpty();
 	}
 

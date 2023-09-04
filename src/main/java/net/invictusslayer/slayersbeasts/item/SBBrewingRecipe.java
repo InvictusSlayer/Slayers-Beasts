@@ -1,4 +1,4 @@
-package net.invictusslayer.slayersbeasts.misc;
+package net.invictusslayer.slayersbeasts.item;
 
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.item.Item;

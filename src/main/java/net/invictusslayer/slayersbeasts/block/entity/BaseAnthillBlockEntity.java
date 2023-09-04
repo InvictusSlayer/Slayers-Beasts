@@ -14,13 +14,11 @@ public abstract class BaseAnthillBlockEntity extends BlockEntity {
         super(pType, pPos, pBlockState);
     }
 
-    @Override
     protected void saveAdditional(CompoundTag pTag) {
         super.saveAdditional(pTag);
         pTag.put("ParentNestPos", NbtUtils.writeBlockPos(getParentNestPos()));
     }
 
-    @Override
     public void load(CompoundTag pTag) {
         super.load(pTag);
         setParentNestPos(NbtUtils.readBlockPos(pTag.getCompound("ParentNestPos")));

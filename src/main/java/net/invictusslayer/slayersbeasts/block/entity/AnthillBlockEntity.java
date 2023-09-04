@@ -38,7 +38,6 @@ public class AnthillBlockEntity extends BlockEntity {
         this.inhabitantType = 99;
     }
 
-    @Override
     protected void saveAdditional(CompoundTag pTag) {
         super.saveAdditional(pTag);
         pTag.put("Ants", this.writeAnts());
@@ -75,7 +74,6 @@ public class AnthillBlockEntity extends BlockEntity {
         return listTag;
     }
 
-    @Override
     public void load(CompoundTag pTag) {
         super.load(pTag);
         this.storedAnts.clear();

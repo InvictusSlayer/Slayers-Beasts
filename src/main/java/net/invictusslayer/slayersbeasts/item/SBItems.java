@@ -2,7 +2,6 @@ package net.invictusslayer.slayersbeasts.item;
 
 import net.invictusslayer.slayersbeasts.SlayersBeasts;
 import net.invictusslayer.slayersbeasts.entity.SBEntities;
-import net.invictusslayer.slayersbeasts.misc.SBFoods;
 import net.minecraft.world.item.Item;
 import net.minecraftforge.common.ForgeSpawnEggItem;
 import net.minecraftforge.eventbus.api.IEventBus;

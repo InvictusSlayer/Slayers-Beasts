@@ -17,22 +17,18 @@ public class FlammableRotatedPillarBlock extends RotatedPillarBlock {
         super(properties);
     }
 
-    @Override
     public boolean isFlammable(BlockState state, BlockGetter world, BlockPos pos, Direction face) {
         return true;
     }
 
-    @Override
     public int getFlammability(BlockState state, BlockGetter world, BlockPos pos, Direction face) {
         return 5;
     }
 
-    @Override
     public int getFireSpreadSpeed(BlockState state, BlockGetter world, BlockPos pos, Direction face) {
         return 5;
     }
 
-    @Override
     public @Nullable BlockState getToolModifiedState(BlockState state, UseOnContext context, ToolAction toolAction, boolean simulate) {
         if (context.getItemInHand().getItem() instanceof AxeItem) {
             if (state.is(SBBlocks.ASPEN_LOG.get())) {

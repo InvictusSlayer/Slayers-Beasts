@@ -6,9 +6,8 @@ import net.invictusslayer.slayersbeasts.datagen.tags.SBPois;
 import net.invictusslayer.slayersbeasts.effect.SBEffects;
 import net.invictusslayer.slayersbeasts.entity.SBEntities;
 import net.invictusslayer.slayersbeasts.item.SBItems;
-import net.invictusslayer.slayersbeasts.misc.SBBrewingRecipe;
 import net.invictusslayer.slayersbeasts.misc.SBCreativeModeTab;
-import net.invictusslayer.slayersbeasts.misc.SBPotions;
+import net.invictusslayer.slayersbeasts.item.SBPotions;
 import net.invictusslayer.slayersbeasts.misc.SBSounds;
 import net.invictusslayer.slayersbeasts.world.biome.SBOverworldRegion;
 import net.invictusslayer.slayersbeasts.world.biome.SBSurfaceRuleData;
@@ -18,9 +17,7 @@ import net.invictusslayer.slayersbeasts.world.feature.SBFeatures;
 import net.invictusslayer.slayersbeasts.world.feature.foliageplacer.SBFoliagePlacers;
 import net.invictusslayer.slayersbeasts.world.feature.treedecorator.SBTreeDecorators;
 import net.invictusslayer.slayersbeasts.world.feature.trunkplacer.SBTrunkPlacers;
-import net.minecraft.world.item.alchemy.Potions;
 import net.minecraftforge.common.MinecraftForge;
-import net.minecraftforge.common.brewing.BrewingRecipeRegistry;
 import net.minecraftforge.event.BuildCreativeModeTabContentsEvent;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.common.Mod;
@@ -62,8 +59,8 @@ public class SlayersBeasts {
 
     private void commonSetup(final FMLCommonSetupEvent event) {
         event.enqueueWork(() -> {
-            BrewingRecipeRegistry.addRecipe(new SBBrewingRecipe(Potions.SLOWNESS, SBItems.INSECT_EYE.get(), SBPotions.PARALYSIS_POTION.get()));
-            BrewingRecipeRegistry.addRecipe(new SBBrewingRecipe(Potions.POISON, SBItems.WITHERBONE.get(), SBPotions.WITHER_POTION.get()));
+//            BrewingRecipeRegistry.addRecipe(new SBBrewingRecipe(Potions.SLOWNESS, SBItems.INSECT_EYE.get(), SBPotions.PARALYSIS_POTION.get()));
+//            BrewingRecipeRegistry.addRecipe(new SBBrewingRecipe(Potions.POISON, SBItems.WITHERBONE.get(), SBPotions.WITHER_POTION.get()));
 
             Regions.register(new SBOverworldRegion(2));
             Regions.register(new SBUndergroundRegion(2));

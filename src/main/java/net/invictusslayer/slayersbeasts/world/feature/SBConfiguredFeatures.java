@@ -20,6 +20,7 @@ import net.minecraft.data.worldgen.placement.TreePlacements;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.BlockTags;
+import net.minecraft.util.random.SimpleWeightedRandomList;
 import net.minecraft.util.valueproviders.ClampedNormalFloat;
 import net.minecraft.util.valueproviders.ConstantInt;
 import net.minecraft.util.valueproviders.UniformFloat;
@@ -27,6 +28,7 @@ import net.minecraft.util.valueproviders.UniformInt;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.HugeMushroomBlock;
+import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.levelgen.blockpredicates.BlockPredicate;
 import net.minecraft.world.level.levelgen.feature.ConfiguredFeature;
 import net.minecraft.world.level.levelgen.feature.Feature;
@@ -38,6 +40,7 @@ import net.minecraft.world.level.levelgen.feature.foliageplacers.BlobFoliagePlac
 import net.minecraft.world.level.levelgen.feature.foliageplacers.MegaJungleFoliagePlacer;
 import net.minecraft.world.level.levelgen.feature.foliageplacers.MegaPineFoliagePlacer;
 import net.minecraft.world.level.levelgen.feature.stateproviders.BlockStateProvider;
+import net.minecraft.world.level.levelgen.feature.stateproviders.WeightedStateProvider;
 import net.minecraft.world.level.levelgen.feature.treedecorators.LeaveVineDecorator;
 import net.minecraft.world.level.levelgen.feature.treedecorators.TrunkVineDecorator;
 import net.minecraft.world.level.levelgen.feature.trunkplacers.GiantTrunkPlacer;
@@ -83,6 +86,7 @@ public class SBConfiguredFeatures {
     public static final ResourceKey<ConfiguredFeature<?, ?>> ICICLE_CLUSTER = createKey("icicle_cluster");
     public static final ResourceKey<ConfiguredFeature<?, ?>> ICICLE_LARGE = createKey("icicle_large");
     public static final ResourceKey<ConfiguredFeature<?, ?>> ICICLE_SMALL = createKey("icicle_small");
+    public static final ResourceKey<ConfiguredFeature<?, ?>> STYPHIUM_VEGETATION = createKey("styphium_vegetation");
     public static final ResourceKey<ConfiguredFeature<?, ?>> STYPHIUM_PATCH = createKey("styphium_patch");
     public static final ResourceKey<ConfiguredFeature<?, ?>> STYPHIUM_PATCH_BONEMEAL = createKey("styphium_patch_bonemeal");
 
@@ -160,8 +164,9 @@ public class SBConfiguredFeatures {
         register(context, ICICLE_SMALL, Feature.SIMPLE_RANDOM_SELECTOR, new SimpleRandomFeatureConfiguration(HolderSet.direct(
                 PlacementUtils.inlinePlaced(SBFeatures.ICICLE_SMALL.get(), new IcicleSmallFeature.Configuration(0.2F, 0.7F, 0.5F, 0.5F), EnvironmentScanPlacement.scanningFor(Direction.DOWN, BlockPredicate.solid(), BlockPredicate.ONLY_IN_AIR_OR_WATER_PREDICATE, 12), RandomOffsetPlacement.vertical(ConstantInt.of(1))),
                 PlacementUtils.inlinePlaced(SBFeatures.ICICLE_SMALL.get(), new IcicleSmallFeature.Configuration(0.2F, 0.7F, 0.5F, 0.5F), EnvironmentScanPlacement.scanningFor(Direction.UP, BlockPredicate.solid(), BlockPredicate.ONLY_IN_AIR_OR_WATER_PREDICATE, 12), RandomOffsetPlacement.vertical(ConstantInt.of(-1))))));
-        register(context, STYPHIUM_PATCH, SBFeatures.STYPHIUM_PATCH.get(), new StyphiumPatchFeature.Configuration(PlacementUtils.inlinePlaced(configured.getOrThrow(PATCH_WHITE_MUSHROOM)), 0.01F, 5, UniformInt.of(4, 7), 0.3F, true));
-        register(context, STYPHIUM_PATCH_BONEMEAL, SBFeatures.STYPHIUM_PATCH.get(), new StyphiumPatchFeature.Configuration(PlacementUtils.inlinePlaced(configured.getOrThrow(PATCH_WHITE_MUSHROOM)), 0.02F, 5, UniformInt.of(1, 2), 0.75F, false));
+        register(context, STYPHIUM_VEGETATION, Feature.SIMPLE_BLOCK, new SimpleBlockConfiguration(new WeightedStateProvider(SimpleWeightedRandomList.<BlockState>builder().add(Blocks.BROWN_MUSHROOM.defaultBlockState(), 1).add(Blocks.RED_MUSHROOM.defaultBlockState(), 1).add(SBBlocks.WHITE_MUSHROOM.get().defaultBlockState(), 1).build())));
+        register(context, STYPHIUM_PATCH, SBFeatures.STYPHIUM_PATCH.get(), new StyphiumPatchFeature.Configuration(PlacementUtils.inlinePlaced(configured.getOrThrow(STYPHIUM_VEGETATION)), 0.4F, 6, UniformInt.of(4, 7), 0.3F, true));
+        register(context, STYPHIUM_PATCH_BONEMEAL, SBFeatures.STYPHIUM_PATCH.get(), new StyphiumPatchFeature.Configuration(PlacementUtils.inlinePlaced(configured.getOrThrow(STYPHIUM_VEGETATION)), 0.2F, 4, UniformInt.of(1, 2), 0.75F, false));
 
         register(context, ORE_EXOSKELETON, Feature.ORE, new OreConfiguration(List.of(
                 OreConfiguration.target(new TagMatchTest(BlockTags.STONE_ORE_REPLACEABLES), SBBlocks.EXOSKELETON_ORE.get().defaultBlockState()),

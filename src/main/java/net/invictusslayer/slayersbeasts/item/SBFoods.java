@@ -1,4 +1,4 @@
-package net.invictusslayer.slayersbeasts.misc;
+package net.invictusslayer.slayersbeasts.item;
 
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;

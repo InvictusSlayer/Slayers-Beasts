@@ -12,14 +12,12 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.pattern.BlockPattern;
-import net.minecraft.world.level.block.state.properties.DirectionProperty;
 
 public class CryptPortalItem extends Item {
     public CryptPortalItem(Properties pProperties) {
         super(pProperties);
     }
 
-    @Override
     public InteractionResult useOn(UseOnContext pContext) {
         Level level = pContext.getLevel();
         BlockPos clickedPos = pContext.getClickedPos();

@@ -22,14 +22,6 @@ public class StyphiumBlock extends Block implements BonemealableBlock {
 		super(pProperties);
 	}
 
-	@OnlyIn(Dist.CLIENT)
-	public void animateTick(BlockState state, Level level, BlockPos pos, RandomSource random) {
-		super.animateTick(state, level, pos, random);
-		if (random.nextInt(10) == 0) {
-			level.addParticle(ParticleTypes.MYCELIUM, (double) pos.getX() + random.nextDouble(), (double) pos.getY() + 1.1D, (double)pos.getZ() + random.nextDouble(), 0.0D, 0.0D, 0.0D);
-		}
-	}
-
 	@SuppressWarnings("deprecation")
 	public void randomTick(BlockState state, ServerLevel level, BlockPos pos, RandomSource random) {
 		if (!canBeStyphium(state, level, pos)) {
@@ -39,9 +31,9 @@ public class StyphiumBlock extends Block implements BonemealableBlock {
 	}
 
 	private static boolean canBeStyphium(BlockState state, LevelReader level, BlockPos pos) {
-		BlockPos blockpos = pos.above();
-		BlockState blockstate = level.getBlockState(blockpos);
-		int i = LightEngine.getLightBlockInto(level, state, pos, blockstate, blockpos, Direction.UP, blockstate.getLightBlock(level, blockpos));
+		BlockPos above = pos.above();
+		BlockState stateAbove = level.getBlockState(above);
+		int i = LightEngine.getLightBlockInto(level, state, pos, stateAbove, above, Direction.UP, stateAbove.getLightBlock(level, above));
 		return i < level.getMaxLightLevel();
 	}
 
@@ -57,5 +49,12 @@ public class StyphiumBlock extends Block implements BonemealableBlock {
 		level.registryAccess().registry(Registries.CONFIGURED_FEATURE).flatMap(configured ->
 				configured.getHolder(SBConfiguredFeatures.STYPHIUM_PATCH_BONEMEAL)).ifPresent(holder ->
 				holder.value().place(level, level.getChunkSource().getGenerator(), random, pos.above()));
+	}
+
+	@OnlyIn(Dist.CLIENT)
+	public void animateTick(BlockState state, Level level, BlockPos pos, RandomSource random) {
+		if (random.nextInt(10) == 0) {
+			level.addParticle(ParticleTypes.MYCELIUM, (double) pos.getX() + random.nextDouble(), (double) pos.getY() + 1.1D, (double)pos.getZ() + random.nextDouble(), 0.0D, 0.0D, 0.0D);
+		}
 	}
 }

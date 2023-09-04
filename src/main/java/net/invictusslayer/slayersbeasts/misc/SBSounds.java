@@ -9,8 +9,7 @@ import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
 
 public final class SBSounds {
-    public static final DeferredRegister<SoundEvent> SOUND_EVENTS =
-            DeferredRegister.create(ForgeRegistries.SOUND_EVENTS, SlayersBeasts.MOD_ID);
+    public static final DeferredRegister<SoundEvent> SOUND_EVENTS = DeferredRegister.create(ForgeRegistries.SOUND_EVENTS, SlayersBeasts.MOD_ID);
 
     public static final RegistryObject<SoundEvent> MANTIS_AMBIENT = registerSoundEvent("mantis_ambient");
     public static final RegistryObject<SoundEvent> MANTIS_DEATH = registerSoundEvent("mantis_death");

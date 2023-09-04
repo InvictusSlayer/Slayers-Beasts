@@ -3,8 +3,11 @@ package net.invictusslayer.slayersbeasts.block;
 import com.google.common.base.Predicates;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.core.particles.ParticleTypes;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.BlockGetter;
+import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.HorizontalDirectionalBlock;
 import net.minecraft.world.level.block.state.BlockState;
@@ -17,6 +20,8 @@ import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.block.state.properties.BooleanProperty;
 import net.minecraft.world.level.block.state.properties.DirectionProperty;
 import net.minecraft.world.level.pathfinder.PathComputationType;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
 
 public class InfusedCryptalithBlock extends Block {
     public static final DirectionProperty FACING = HorizontalDirectionalBlock.FACING;
@@ -56,5 +61,13 @@ public class InfusedCryptalithBlock extends Block {
     @SuppressWarnings("deprecation")
     public boolean isPathfindable(BlockState pState, BlockGetter pLevel, BlockPos pPos, PathComputationType pType) {
         return false;
+    }
+
+    @OnlyIn(Dist.CLIENT)
+    public void animateTick(BlockState state, Level level, BlockPos pos, RandomSource random) {
+        double d0 = pos.getX() + random.nextDouble();
+        double d1 = pos.getY() + 0.8D;
+        double d2 = pos.getZ() + random.nextDouble();
+        level.addParticle(ParticleTypes.WHITE_ASH, d0, d1, d2, 0.0D, 0.0D, 0.0D);
     }
 }

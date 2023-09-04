@@ -18,7 +18,6 @@ public class SepulchraPortalLighter extends Item {
         super(new Properties().stacksTo(1).rarity(Rarity.RARE));
     }
 
-    @Override
     public InteractionResult useOn(UseOnContext context) {
         if(context.getPlayer() != null) {
             if(context.getPlayer().level().dimension() == SBDimensions.SEPULCHRA_KEY || context.getPlayer().level().dimension() == Level.OVERWORLD) {

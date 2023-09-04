@@ -17,17 +17,14 @@ public class FlammableFenceGateBlock extends FenceGateBlock {
         this.fireSpreadSpeed = fireSpreadSpeed;
     }
 
-    @Override
     public boolean isFlammable(BlockState state, BlockGetter world, BlockPos pos, Direction face) {
         return true;
     }
 
-    @Override
     public int getFlammability(BlockState state, BlockGetter world, BlockPos pos, Direction face) {
         return flammability;
     }
 
-    @Override
     public int getFireSpreadSpeed(BlockState state, BlockGetter world, BlockPos pos, Direction face) {
         return fireSpreadSpeed;
     }
