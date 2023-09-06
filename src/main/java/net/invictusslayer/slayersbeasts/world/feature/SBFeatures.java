@@ -3,6 +3,9 @@ package net.invictusslayer.slayersbeasts.world.feature;
 import com.mojang.serialization.Codec;
 import net.invictusslayer.slayersbeasts.SlayersBeasts;
 import net.invictusslayer.slayersbeasts.world.feature.misc.*;
+import net.invictusslayer.slayersbeasts.world.feature.tree.HugeBlackMushroomFeature;
+import net.invictusslayer.slayersbeasts.world.feature.tree.HugeWhiteMushroomFeature;
+import net.invictusslayer.slayersbeasts.world.feature.tree.MediumMushroomFeature;
 import net.minecraft.world.level.levelgen.feature.Feature;
 import net.minecraft.world.level.levelgen.feature.configurations.FeatureConfiguration;
 import net.minecraft.world.level.levelgen.feature.configurations.HugeMushroomFeatureConfiguration;
@@ -14,7 +17,9 @@ import net.minecraftforge.registries.RegistryObject;
 public abstract class SBFeatures<FC extends FeatureConfiguration> extends Feature<FC> {
     public static final DeferredRegister<Feature<?>> FEATURES = DeferredRegister.create(ForgeRegistries.FEATURES, SlayersBeasts.MOD_ID);
 
+    public static final RegistryObject<HugeBlackMushroomFeature> HUGE_BLACK_MUSHROOM = FEATURES.register("huge_black_mushroom", () -> new HugeBlackMushroomFeature(HugeMushroomFeatureConfiguration.CODEC));
     public static final RegistryObject<HugeWhiteMushroomFeature> HUGE_WHITE_MUSHROOM = FEATURES.register("huge_white_mushroom", () -> new HugeWhiteMushroomFeature(HugeMushroomFeatureConfiguration.CODEC));
+    public static final RegistryObject<MediumMushroomFeature> MEDIUM_MUSHROOM = FEATURES.register("large_mushroom", () -> new MediumMushroomFeature(MediumMushroomFeature.Configuration.CODEC));
     public static final RegistryObject<PitFeature> PIT = FEATURES.register("pit", () -> new PitFeature(PitFeature.Configuration.CODEC));
     public static final RegistryObject<IcicleClusterFeature> ICICLE_CLUSTER = FEATURES.register("icicle_cluster", () -> new IcicleClusterFeature(IcicleClusterFeature.Configuration.CODEC));
     public static final RegistryObject<IcicleLargeFeature> ICICLE_LARGE = FEATURES.register("icicle_large", () -> new IcicleLargeFeature(IcicleLargeFeature.Configuration.CODEC));

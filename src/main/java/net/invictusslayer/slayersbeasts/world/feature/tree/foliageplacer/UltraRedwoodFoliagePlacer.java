@@ -1,4 +1,4 @@
-package net.invictusslayer.slayersbeasts.world.feature.foliageplacer;
+package net.invictusslayer.slayersbeasts.world.feature.tree.foliageplacer;
 
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;

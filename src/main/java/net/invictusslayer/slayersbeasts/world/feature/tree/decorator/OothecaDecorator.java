@@ -1,4 +1,4 @@
-package net.invictusslayer.slayersbeasts.world.feature.treedecorator;
+package net.invictusslayer.slayersbeasts.world.feature.tree.decorator;
 
 import com.mojang.serialization.Codec;
 import net.minecraft.world.level.levelgen.feature.treedecorators.TreeDecorator;

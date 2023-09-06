@@ -1,4 +1,4 @@
-package net.invictusslayer.slayersbeasts.world.feature.trunkplacer;
+package net.invictusslayer.slayersbeasts.world.feature.tree.trunkplacer;
 
 import com.google.common.collect.Lists;
 import com.mojang.serialization.Codec;

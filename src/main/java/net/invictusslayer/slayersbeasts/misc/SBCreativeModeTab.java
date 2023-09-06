@@ -72,6 +72,8 @@ public final class SBCreativeModeTab {
                         tab.accept(SBBlocks.CUT_BLACK_SANDSTONE_SLAB.get());
                         tab.accept(SBBlocks.CHISELED_BLACK_SANDSTONE.get());
 
+                        tab.accept(SBBlocks.BLACK_MUSHROOM_BLOCK.get());
+                        tab.accept(SBBlocks.BLACK_MUSHROOM.get());
                         tab.accept(SBBlocks.WHITE_MUSHROOM_BLOCK.get());
                         tab.accept(SBBlocks.WHITE_MUSHROOM.get());
 

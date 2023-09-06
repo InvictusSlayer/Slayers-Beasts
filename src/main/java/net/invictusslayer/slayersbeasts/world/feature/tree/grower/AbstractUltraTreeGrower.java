@@ -1,4 +1,4 @@
-package net.invictusslayer.slayersbeasts.world.feature.tree;
+package net.invictusslayer.slayersbeasts.world.feature.tree.grower;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Holder;

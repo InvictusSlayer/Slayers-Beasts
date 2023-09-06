@@ -1,4 +1,4 @@
-package net.invictusslayer.slayersbeasts.world.feature.trunkplacer;
+package net.invictusslayer.slayersbeasts.world.feature.tree.trunkplacer;
 
 import net.invictusslayer.slayersbeasts.SlayersBeasts;
 import net.minecraft.core.registries.Registries;

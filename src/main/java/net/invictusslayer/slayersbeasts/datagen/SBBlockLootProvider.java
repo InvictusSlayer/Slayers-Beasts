@@ -57,6 +57,8 @@ public class SBBlockLootProvider extends BlockLootSubProvider {
         dropSelf(SBBlocks.PEAT.get());
         dropSelf(SBBlocks.BLACK_SAND.get());
 
+        dropSelf(SBBlocks.BLACK_MUSHROOM.get());
+        add(SBBlocks.BLACK_MUSHROOM_BLOCK.get(), block -> createMushroomBlockDrop(SBBlocks.BLACK_MUSHROOM_BLOCK.get(), SBBlocks.BLACK_MUSHROOM.get()));
         dropSelf(SBBlocks.WHITE_MUSHROOM.get());
         add(SBBlocks.WHITE_MUSHROOM_BLOCK.get(), block -> createMushroomBlockDrop(SBBlocks.WHITE_MUSHROOM_BLOCK.get(), SBBlocks.WHITE_MUSHROOM.get()));
 

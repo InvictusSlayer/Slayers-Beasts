@@ -18,6 +18,8 @@ import net.minecraftforge.client.model.generators.ModelFile;
 import net.minecraftforge.common.data.ExistingFileHelper;
 import net.minecraftforge.registries.ForgeRegistries;
 
+import javax.annotation.Nullable;
+
 public class SBBlockStateProvider extends BlockStateProvider {
     public SBBlockStateProvider(PackOutput output, ExistingFileHelper exFileHelper) {
         super(output, SlayersBeasts.MOD_ID, exFileHelper);
@@ -60,8 +62,10 @@ public class SBBlockStateProvider extends BlockStateProvider {
         slabWithItem((SlabBlock) SBBlocks.CUT_BLACK_SANDSTONE_SLAB.get(), blockTexture(SBBlocks.CUT_BLACK_SANDSTONE.get()), extend(blockTexture(SBBlocks.BLACK_SANDSTONE.get()), "_top"), blockTexture(SBBlocks.CUT_BLACK_SANDSTONE.get()), extend(blockTexture(SBBlocks.BLACK_SANDSTONE.get()), "_top"));
         columnWithItem(SBBlocks.CHISELED_BLACK_SANDSTONE.get(), blockTexture(SBBlocks.CHISELED_BLACK_SANDSTONE.get()), extend(blockTexture(SBBlocks.BLACK_SANDSTONE.get()), "_top"));
 
+        cross(SBBlocks.BLACK_MUSHROOM.get());
+        mushroomBlockWithItem(SBBlocks.BLACK_MUSHROOM_BLOCK.get(),"mushroom_block_dark_inside");
         cross(SBBlocks.WHITE_MUSHROOM.get());
-        mushroomBlockWithItem(SBBlocks.WHITE_MUSHROOM_BLOCK.get());
+        mushroomBlockWithItem(SBBlocks.WHITE_MUSHROOM_BLOCK.get(), null);
         
         logWithItem((RotatedPillarBlock) SBBlocks.ASPEN_LOG.get());
         logWithItem((RotatedPillarBlock) SBBlocks.STRIPPED_ASPEN_LOG.get());
@@ -194,9 +198,10 @@ public class SBBlockStateProvider extends BlockStateProvider {
         });
     }
 
-    private void mushroomBlockWithItem(Block block) {
+    private void mushroomBlockWithItem(Block block, @Nullable String inside) {
         ModelFile outsideModel = models().withExistingParent(name(block), "minecraft:block/template_single_face").texture("texture", blockTexture(block));
-        ModelFile insideModel = models().getExistingFile(new ResourceLocation("minecraft:block/mushroom_block_inside"));
+        ModelFile insideModel = inside != null ? models().withExistingParent(inside, "minecraft:block/template_single_face").texture("texture", new ResourceLocation(SlayersBeasts.MOD_ID, "block/" + inside)) :
+                models().getExistingFile(new ResourceLocation("minecraft:block/mushroom_block_inside"));
         getMultipartBuilder(block).part().modelFile(outsideModel).addModel().condition(BlockStateProperties.NORTH, true).end()
                 .part().modelFile(outsideModel).rotationY(90).uvLock(true).addModel().condition(BlockStateProperties.EAST, true).end()
                 .part().modelFile(outsideModel).rotationY(180).uvLock(true).addModel().condition(BlockStateProperties.SOUTH, true).end()

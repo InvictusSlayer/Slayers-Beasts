@@ -276,7 +276,6 @@ public class SBOverworldBiomes {
         BiomeDefaultFeatures.addDefaultSoftDisks(biomeSettings);
         addModUndergroundVariety(biomeSettings);
         biomeSettings.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, SBPlacedFeatures.STYPHIUM_PATCH);
-        biomeSettings.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, SBPlacedFeatures.TREES_FUNGAL);
         return biome(true, 0.8F, 0.4F, new MobSpawnSettings.Builder(), biomeSettings, MUSIC_CAVES);
     }
 
@@ -362,6 +361,7 @@ public class SBOverworldBiomes {
     }
 
     private static void addModMushrooms(BiomeGenerationSettings.Builder biomeSettings) {
+        biomeSettings.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, SBPlacedFeatures.BLACK_MUSHROOM_RARE);
         biomeSettings.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, SBPlacedFeatures.WHITE_MUSHROOM_RARE);
     }
 

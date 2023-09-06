@@ -4,7 +4,7 @@ import net.invictusslayer.slayersbeasts.SlayersBeasts;
 import net.invictusslayer.slayersbeasts.block.flammable.*;
 import net.invictusslayer.slayersbeasts.item.SBItems;
 import net.invictusslayer.slayersbeasts.world.feature.SBConfiguredFeatures;
-import net.invictusslayer.slayersbeasts.world.feature.tree.*;
+import net.invictusslayer.slayersbeasts.world.feature.tree.grower.*;
 import net.minecraft.util.valueproviders.UniformInt;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
@@ -69,6 +69,8 @@ public final class SBBlocks {
     public static final RegistryObject<Block> CUT_BLACK_SANDSTONE_SLAB = registerBlock("cut_black_sandstone_slab", () -> new SlabBlock(BlockBehaviour.Properties.copy(Blocks.CUT_SANDSTONE_SLAB).mapColor(MapColor.COLOR_BLACK)));
     public static final RegistryObject<Block> CHISELED_BLACK_SANDSTONE = registerBlock("chiseled_black_sandstone", () -> new Block(BlockBehaviour.Properties.copy(Blocks.CHISELED_SANDSTONE).mapColor(MapColor.COLOR_BLACK)));
 
+    public static final RegistryObject<Block> BLACK_MUSHROOM_BLOCK = registerBlock("black_mushroom_block", () -> new HugeMushroomBlock(BlockBehaviour.Properties.copy(Blocks.RED_MUSHROOM_BLOCK).mapColor(MapColor.TERRACOTTA_BLACK)));
+    public static final RegistryObject<Block> BLACK_MUSHROOM = registerBlock("black_mushroom", () -> new MushroomBlock(BlockBehaviour.Properties.copy(Blocks.RED_MUSHROOM).mapColor(MapColor.TERRACOTTA_BLACK), SBConfiguredFeatures.HUGE_BLACK_MUSHROOM));
     public static final RegistryObject<Block> WHITE_MUSHROOM_BLOCK = registerBlock("white_mushroom_block", () -> new HugeMushroomBlock(BlockBehaviour.Properties.copy(Blocks.RED_MUSHROOM_BLOCK).mapColor(MapColor.TERRACOTTA_WHITE)));
     public static final RegistryObject<Block> WHITE_MUSHROOM = registerBlock("white_mushroom", () -> new MushroomBlock(BlockBehaviour.Properties.copy(Blocks.RED_MUSHROOM).mapColor(MapColor.TERRACOTTA_WHITE), SBConfiguredFeatures.HUGE_WHITE_MUSHROOM));
 

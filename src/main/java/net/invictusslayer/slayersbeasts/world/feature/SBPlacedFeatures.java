@@ -46,9 +46,10 @@ public class SBPlacedFeatures {
     public static final ResourceKey<PlacedFeature> TREES_REDWOOD = createKey("trees_redwood");
     public static final ResourceKey<PlacedFeature> TREES_OLD_GROWTH_REDWOOD = createKey("trees_old_growth_redwood");
     public static final ResourceKey<PlacedFeature> TREES_RIVER = createKey("trees_river");
-    public static final ResourceKey<PlacedFeature> TREES_FUNGAL = createKey("trees_fungal");
     public static final ResourceKey<PlacedFeature> PATCH_TALL_DEAD_BUSH = createKey("patch_tall_dead_bush");
     public static final ResourceKey<PlacedFeature> PATCH_TALL_DEAD_BUSH_BRUSH = createKey("patch_tall_dead_bush_brush");
+    public static final ResourceKey<PlacedFeature> BLACK_MUSHROOM_COMMON = createKey("black_mushroom_common");
+    public static final ResourceKey<PlacedFeature> BLACK_MUSHROOM_RARE = createKey("black_mushroom_rare");
     public static final ResourceKey<PlacedFeature> WHITE_MUSHROOM_COMMON = createKey("white_mushroom_common");
     public static final ResourceKey<PlacedFeature> WHITE_MUSHROOM_RARE = createKey("white_mushroom_rare");
 
@@ -99,9 +100,10 @@ public class SBPlacedFeatures {
         register(context, TREES_REDWOOD, configured.getOrThrow(SBConfiguredFeatures.TREES_REDWOOD), VegetationPlacements.treePlacement(PlacementUtils.countExtra(10, 0.1f, 1), SBBlocks.REDWOOD_SAPLING.get()));
         register(context, TREES_OLD_GROWTH_REDWOOD, configured.getOrThrow(SBConfiguredFeatures.TREES_OLD_GROWTH_REDWOOD), VegetationPlacements.treePlacement(PlacementUtils.countExtra(10, 0.1f, 1), SBBlocks.REDWOOD_SAPLING.get()));
         register(context, TREES_RIVER, configured.getOrThrow(SBConfiguredFeatures.TREES_RIVER), VegetationPlacements.treePlacement(PlacementUtils.countExtra(0, 0.05f, 1), SBBlocks.WILLOW_SAPLING.get()));
-        register(context, TREES_FUNGAL, configured.getOrThrow(SBConfiguredFeatures.TREES_FUNGAL), InSquarePlacement.spread(), PlacementUtils.HEIGHTMAP, BiomeFilter.biome());
         register(context, PATCH_TALL_DEAD_BUSH, configured.getOrThrow(SBConfiguredFeatures.PATCH_TALL_DEAD_BUSH), RarityFilter.onAverageOnceEvery(5), InSquarePlacement.spread(), PlacementUtils.HEIGHTMAP, BiomeFilter.biome());
         register(context, PATCH_TALL_DEAD_BUSH_BRUSH, configured.getOrThrow(SBConfiguredFeatures.PATCH_TALL_DEAD_BUSH), VegetationPlacements.worldSurfaceSquaredWithCount(5));
+        register(context, BLACK_MUSHROOM_COMMON, configured.getOrThrow(SBConfiguredFeatures.PATCH_BLACK_MUSHROOM), mushroomPlacement(9, CountPlacement.of(3)));
+        register(context, BLACK_MUSHROOM_RARE, configured.getOrThrow(SBConfiguredFeatures.PATCH_BLACK_MUSHROOM), mushroomPlacement(256, null));
         register(context, WHITE_MUSHROOM_COMMON, configured.getOrThrow(SBConfiguredFeatures.PATCH_WHITE_MUSHROOM), mushroomPlacement(9, CountPlacement.of(3)));
         register(context, WHITE_MUSHROOM_RARE, configured.getOrThrow(SBConfiguredFeatures.PATCH_WHITE_MUSHROOM), mushroomPlacement(256, null));
 

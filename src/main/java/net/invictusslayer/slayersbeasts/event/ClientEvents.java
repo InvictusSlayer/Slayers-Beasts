@@ -20,10 +20,11 @@ public final class ClientEvents {
         event.registerLayerDefinition(SoldierAntModel.LAYER_LOCATION, SoldierAntModel::createBodyLayer);
         event.registerLayerDefinition(QueenAntModel.LAYER_LOCATION, QueenAntModel::createBodyLayer);
         event.registerLayerDefinition(AntCargoModel.LAYER_LOCATION, AntCargoModel::createCargoLayer);
-        event.registerLayerDefinition(DamselflyModel.LAYER_LOCATION, DamselflyModel::createBodyLayer);
-        event.registerLayerDefinition(VenusFlytrapModel.LAYER_LOCATION, VenusFlytrapModel::createBodyLayer);
         event.registerLayerDefinition(WitherSpiderModel.LAYER_LOCATION, WitherSpiderModel::createBodyLayer);
         event.registerLayerDefinition(TarantulaModel.LAYER_LOCATION, TarantulaModel::createBodyLayer);
+        event.registerLayerDefinition(DamselflyModel.LAYER_LOCATION, DamselflyModel::createBodyLayer);
+        event.registerLayerDefinition(EntOakModel.LAYER_LOCATION, EntOakModel::createBodyLayer);
+        event.registerLayerDefinition(VenusFlytrapModel.LAYER_LOCATION, VenusFlytrapModel::createBodyLayer);
     }
 
     @SubscribeEvent
@@ -32,9 +33,10 @@ public final class ClientEvents {
         event.registerEntityRenderer(SBEntities.WORKER_ANT.get(), WorkerAntRenderer::new);
         event.registerEntityRenderer(SBEntities.SOLDIER_ANT.get(), SoldierAntRenderer::new);
         event.registerEntityRenderer(SBEntities.QUEEN_ANT.get(), QueenAntRenderer::new);
-        event.registerEntityRenderer(SBEntities.DAMSELFLY.get(), DamselflyRenderer::new);
-        event.registerEntityRenderer(SBEntities.VENUS_FLYTRAP.get(), VenusFlytrapRenderer::new);
         event.registerEntityRenderer(SBEntities.WITHER_SPIDER.get(), WitherSpiderRenderer::new);
         event.registerEntityRenderer(SBEntities.TARANTULA.get(), TarantulaRenderer::new);
+        event.registerEntityRenderer(SBEntities.DAMSELFLY.get(), DamselflyRenderer::new);
+        event.registerEntityRenderer(SBEntities.ENT_OAK.get(), EntRenderer::new);
+        event.registerEntityRenderer(SBEntities.VENUS_FLYTRAP.get(), VenusFlytrapRenderer::new);
     }
 }

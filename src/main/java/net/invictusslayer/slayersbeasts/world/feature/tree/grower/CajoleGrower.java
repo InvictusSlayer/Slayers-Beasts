@@ -1,4 +1,4 @@
-package net.invictusslayer.slayersbeasts.world.feature.tree;
+package net.invictusslayer.slayersbeasts.world.feature.tree.grower;
 
 import net.invictusslayer.slayersbeasts.world.feature.SBConfiguredFeatures;
 import net.minecraft.resources.ResourceKey;
