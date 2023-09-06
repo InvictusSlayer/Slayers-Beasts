@@ -39,6 +39,10 @@ public final class SBEntities {
             () -> EntityType.Builder.of(Damselfly::new, MobCategory.AMBIENT).sized(0.8F,0.2F)
                     .build(new ResourceLocation(SlayersBeasts.MOD_ID, "damselfly").toString()));
 
+    public static final RegistryObject<EntityType<LargeEnt>> ENT_OAK = ENTITIES.register("ent_oak",
+            () -> EntityType.Builder.of(LargeEnt::new, MobCategory.MONSTER).sized(0.8F,0.2F)
+                    .build(new ResourceLocation(SlayersBeasts.MOD_ID, "ent_oak").toString()));
+
     public static final RegistryObject<EntityType<VenusFlytrap>> VENUS_FLYTRAP = ENTITIES.register("venus_flytrap",
             () -> EntityType.Builder.of(VenusFlytrap::new, MobCategory.MONSTER).sized(1.0F,1.8F)
                     .build(new ResourceLocation(SlayersBeasts.MOD_ID, "venus_flytrap").toString()));
