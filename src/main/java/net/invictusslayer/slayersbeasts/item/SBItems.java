@@ -38,12 +38,14 @@ public final class SBItems {
             () -> new ForgeSpawnEggItem(SBEntities.SOLDIER_ANT, 0xffffff, 0xffffff, new Item.Properties()));
     public static final RegistryObject<ForgeSpawnEggItem> QUEEN_ANT_SPAWN_EGG = ITEMS.register("queen_ant_spawn_egg",
             () -> new ForgeSpawnEggItem(SBEntities.QUEEN_ANT, 0xffffff, 0xffffff, new Item.Properties()));
-    public static final RegistryObject<ForgeSpawnEggItem> DAMSELFLY_SPAWN_EGG = ITEMS.register("damselfly_spawn_egg",
-            () -> new ForgeSpawnEggItem(SBEntities.DAMSELFLY, 0x4f1785, 0x4dcf29, new Item.Properties()));
-//    public static final RegistryObject<ForgeSpawnEggItem> VENUS_FLYTRAP_SPAWN_EGG = ITEMS.register("venus_flytrap_spawn_egg",
-//            () -> new ForgeSpawnEggItem(ModEntities.VENUS_FLYTRAP_ENTITY, 0x2f7f2f, 0xffff31, new Item.Properties()));
     public static final RegistryObject<ForgeSpawnEggItem> WITHER_SPIDER_SPAWN_EGG = ITEMS.register("wither_spider_spawn_egg",
             () -> new ForgeSpawnEggItem(SBEntities.WITHER_SPIDER, 0x3d0f0f, 0x171313, new Item.Properties()));
+    public static final RegistryObject<ForgeSpawnEggItem> DAMSELFLY_SPAWN_EGG = ITEMS.register("damselfly_spawn_egg",
+            () -> new ForgeSpawnEggItem(SBEntities.DAMSELFLY, 0x4f1785, 0x4dcf29, new Item.Properties()));
+    public static final RegistryObject<ForgeSpawnEggItem> ENT_OAK_SPAWN_EGG = ITEMS.register("ent_oak_spawn_egg",
+            () -> new ForgeSpawnEggItem(SBEntities.ENT_OAK, 0x473807, 0x199e0b, new Item.Properties()));
+//    public static final RegistryObject<ForgeSpawnEggItem> VENUS_FLYTRAP_SPAWN_EGG = ITEMS.register("venus_flytrap_spawn_egg",
+//            () -> new ForgeSpawnEggItem(ModEntities.VENUS_FLYTRAP_ENTITY, 0x2f7f2f, 0xffff31, new Item.Properties()));
 
     public static void register(IEventBus eventBus) {
         ITEMS.register(eventBus);

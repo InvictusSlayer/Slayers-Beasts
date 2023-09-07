@@ -20,7 +20,6 @@ public class WitherSpider extends Spider {
         super(entityType, level);
     }
 
-    @Override
     protected void registerGoals() {
         super.registerGoals();
         this.goalSelector.addGoal(0, new FloatGoal(this));
@@ -36,7 +35,7 @@ public class WitherSpider extends Spider {
         return Mob.createMobAttributes()
                 .add(Attributes.MOVEMENT_SPEED, 0.23F)
                 .add(Attributes.FOLLOW_RANGE, 16.0D)
-                .add(Attributes.MAX_HEALTH, 30.0D)
+                .add(Attributes.MAX_HEALTH, 15.0D)
                 .add(Attributes.ATTACK_DAMAGE, 2.0D)
                 .add(Attributes.ATTACK_SPEED, 2.0D)
                 .add(Attributes.ATTACK_KNOCKBACK, 1.0D);
@@ -57,12 +56,7 @@ public class WitherSpider extends Spider {
         }
     }
 
-    @Override
-    public MobType getMobType() {
-        return MobType.ARTHROPOD;
-    }
-
-    public boolean canBeAffected(MobEffectInstance effectInstance) {
+	public boolean canBeAffected(MobEffectInstance effectInstance) {
         return effectInstance.getEffect() != MobEffects.WITHER && super.canBeAffected(effectInstance);
     }
 }

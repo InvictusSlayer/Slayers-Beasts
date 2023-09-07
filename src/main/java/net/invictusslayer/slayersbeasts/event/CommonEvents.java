@@ -1,18 +1,10 @@
 package net.invictusslayer.slayersbeasts.event;
 
-import com.google.common.collect.ImmutableMap;
 import net.invictusslayer.slayersbeasts.SlayersBeasts;
 import net.invictusslayer.slayersbeasts.entity.*;
-import net.invictusslayer.slayersbeasts.entity.npc.SBVillagerType;
 import net.minecraft.world.entity.SpawnPlacements;
-import net.minecraft.world.entity.npc.VillagerProfession;
-import net.minecraft.world.entity.npc.VillagerTrades;
-import net.minecraft.world.entity.npc.VillagerType;
-import net.minecraft.world.item.Item;
-import net.minecraft.world.item.Items;
 import net.minecraft.world.level.levelgen.Heightmap;
 import net.minecraftforge.event.entity.EntityAttributeCreationEvent;
-import net.minecraftforge.event.village.VillagerTradesEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
@@ -41,6 +33,7 @@ public class CommonEvents {
             SpawnPlacements.register(SBEntities.SOLDIER_ANT.get(), SpawnPlacements.Type.ON_GROUND, Heightmap.Types.WORLD_SURFACE, SoldierAnt::canSpawn);
             SpawnPlacements.register(SBEntities.QUEEN_ANT.get(), SpawnPlacements.Type.ON_GROUND, Heightmap.Types.WORLD_SURFACE, QueenAnt::canSpawn);
             SpawnPlacements.register(SBEntities.DAMSELFLY.get(), SpawnPlacements.Type.ON_GROUND, Heightmap.Types.WORLD_SURFACE, Damselfly::canSpawn);
+            SpawnPlacements.register(SBEntities.ENT_OAK.get(), SpawnPlacements.Type.ON_GROUND, Heightmap.Types.WORLD_SURFACE, EntOak::canSpawn);
             SpawnPlacements.register(SBEntities.VENUS_FLYTRAP.get(), SpawnPlacements.Type.ON_GROUND, Heightmap.Types.WORLD_SURFACE, VenusFlytrap::canSpawn);
         });
     }
@@ -54,6 +47,7 @@ public class CommonEvents {
         event.put(SBEntities.WITHER_SPIDER.get(), WitherSpider.createAttributes().build());
         event.put(SBEntities.TARANTULA.get(), Tarantula.createAttributes().build());
         event.put(SBEntities.DAMSELFLY.get(), Damselfly.createAttributes().build());
+        event.put(SBEntities.ENT_OAK.get(), EntOak.createAttributes().build());
         event.put(SBEntities.VENUS_FLYTRAP.get(), VenusFlytrap.createAttributes().build());
     }
 }

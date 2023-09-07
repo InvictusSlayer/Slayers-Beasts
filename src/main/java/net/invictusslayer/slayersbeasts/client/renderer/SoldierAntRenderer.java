@@ -9,9 +9,9 @@ import net.minecraft.client.renderer.entity.MobRenderer;
 import net.minecraft.resources.ResourceLocation;
 
 public class SoldierAntRenderer<Type extends SoldierAnt> extends MobRenderer<Type, SoldierAntModel<Type>> {
-    private static final ResourceLocation WOOD_TEXTURE = new ResourceLocation(SlayersBeasts.MOD_ID, "textures/entity/ant/wood_soldier.png");
-    private static final ResourceLocation LEAFCUTTER_TEXTURE = new ResourceLocation(SlayersBeasts.MOD_ID, "textures/entity/ant/leafcutter_soldier.png");
-    private static final ResourceLocation MEADOW_TEXTURE = new ResourceLocation(SlayersBeasts.MOD_ID, "textures/entity/ant/meadow_soldier.png");
+    private static final ResourceLocation WOOD = new ResourceLocation(SlayersBeasts.MOD_ID, "textures/entity/ant/wood_soldier.png");
+    private static final ResourceLocation LEAFCUTTER = new ResourceLocation(SlayersBeasts.MOD_ID, "textures/entity/ant/leafcutter_soldier.png");
+    private static final ResourceLocation MEADOW = new ResourceLocation(SlayersBeasts.MOD_ID, "textures/entity/ant/meadow_soldier.png");
 
     public SoldierAntRenderer(EntityRendererProvider.Context context) {
         super(context, new SoldierAntModel<>(context.bakeLayer(SoldierAntModel.LAYER_LOCATION)), 0.3f);
@@ -24,9 +24,9 @@ public class SoldierAntRenderer<Type extends SoldierAnt> extends MobRenderer<Typ
 
     public ResourceLocation getTextureLocation(Type pEntity) {
         return switch (pEntity.getAntType()) {
-            case 1 -> LEAFCUTTER_TEXTURE;
-            case 2 -> MEADOW_TEXTURE;
-            default -> WOOD_TEXTURE;
+            default -> WOOD;
+            case 1 -> LEAFCUTTER;
+            case 2 -> MEADOW;
         };
     }
 }

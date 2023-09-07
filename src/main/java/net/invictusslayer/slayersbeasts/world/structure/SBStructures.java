@@ -24,6 +24,7 @@ import java.util.Map;
 
 public class SBStructures {
     public static final ResourceKey<Structure> CRYPT = createKey("crypt");
+    public static final ResourceKey<Structure> CRYPT_ENTRANCE = createKey("crypt_entrance");
 
     public static void bootstrap(BootstapContext<Structure> context) {
         HolderGetter<StructureTemplatePool> pools = context.lookup(Registries.TEMPLATE_POOL);

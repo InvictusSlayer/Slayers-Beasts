@@ -49,7 +49,6 @@ public abstract class AbstractAnt extends PathfinderMob {
         super(entityType, level);
     }
 
-    @Override
     protected void registerGoals() {
         super.registerGoals();
         this.goalSelector.addGoal(0, new FloatGoal(this));
@@ -104,21 +103,20 @@ public abstract class AbstractAnt extends PathfinderMob {
     public int getAntType() {
         return this.entityData.get(DATA_ANT_TYPE);
     }
-    public void setAntType(int pTinyAntType) {
-        this.entityData.set(DATA_ANT_TYPE, pTinyAntType);
+    public void setAntType(int type) {
+        this.entityData.set(DATA_ANT_TYPE, type);
     }
 
     public int getCargoType() {
         return this.entityData.get(DATA_CARGO_TYPE);
     }
-    public void setCargoType(int cargoType) {
-        if (cargoType != 99) {
+    public void setCargoType(int type) {
+        if (type != 99) {
             failedForagingTime = 0;
         }
-        this.entityData.set(DATA_CARGO_TYPE, cargoType);
+        this.entityData.set(DATA_CARGO_TYPE, type);
     }
 
-    @Override
     public void aiStep() {
         super.aiStep();
         if (cooldownToEnterNest > 0) {
@@ -139,12 +137,10 @@ public abstract class AbstractAnt extends PathfinderMob {
     }
 
     @SuppressWarnings("deprecation")
-    @Nullable
-    public SpawnGroupData finalizeSpawn(ServerLevelAccessor pLevel, DifficultyInstance pDifficulty, MobSpawnType pReason,
-                                        @Nullable SpawnGroupData pSpawnData, @Nullable CompoundTag pDataTag) {
+    public SpawnGroupData finalizeSpawn(ServerLevelAccessor pLevel, DifficultyInstance pDifficulty, MobSpawnType pReason, @Nullable SpawnGroupData pSpawnData, @Nullable CompoundTag pDataTag) {
         int randomAntType = this.getRandomAntType(pLevel);
         if (pSpawnData instanceof AntGroupData) {
-            randomAntType = ((AntGroupData) pSpawnData).tinyAntType;
+            randomAntType = ((AntGroupData) pSpawnData).antType;
         } else {
             pSpawnData = new AntGroupData(randomAntType);
         }
@@ -197,9 +193,9 @@ public abstract class AbstractAnt extends PathfinderMob {
     }
 
     public static class AntGroupData implements SpawnGroupData {
-        public final int tinyAntType;
-        private AntGroupData(int pAntType) {
-            this.tinyAntType = pAntType;
+        public final int antType;
+        private AntGroupData(int antType) {
+            this.antType = antType;
         }
     }
 

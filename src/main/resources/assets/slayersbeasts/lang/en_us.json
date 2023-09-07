@@ -20,6 +20,7 @@
   "item.slayersbeasts.queen_ant_spawn_egg": "Queen Ant Spawn Egg",
   "item.slayersbeasts.wither_spider_spawn_egg": "Wither Spider Spawn Egg",
   "item.slayersbeasts.damselfly_spawn_egg": "Damselfly Spawn Egg",
+  "item.slayersbeasts.ent_oak_spawn_egg": "Oak Ent Spawn Egg",
   "item.slayersbeasts.venus_flytrap_spawn_egg": "Venus Flytrap Spawn Egg",
 
   "item.minecraft.potion.effect.paralysis_potion": "Potion of Paralysis",
@@ -195,6 +196,7 @@
   "entity.slayersbeasts.queen_ant": "Queen Ant",
   "entity.slayersbeasts.wither_spider": "Wither Spider",
   "entity.slayersbeasts.damselfly": "Damselfly",
+  "entity.slayersbeasts.ent_oak": "Oak Ent",
   "entity.slayersbeasts.venus_flytrap": "Venus Flytrap",
 
   "creativemodetab.slayers_beasts_tab": "Slayer's Beasts",

@@ -36,7 +36,7 @@ public final class ClientEvents {
         event.registerEntityRenderer(SBEntities.WITHER_SPIDER.get(), WitherSpiderRenderer::new);
         event.registerEntityRenderer(SBEntities.TARANTULA.get(), TarantulaRenderer::new);
         event.registerEntityRenderer(SBEntities.DAMSELFLY.get(), DamselflyRenderer::new);
-        event.registerEntityRenderer(SBEntities.ENT_OAK.get(), EntRenderer::new);
+        event.registerEntityRenderer(SBEntities.ENT_OAK.get(), EntOakRenderer::new);
         event.registerEntityRenderer(SBEntities.VENUS_FLYTRAP.get(), VenusFlytrapRenderer::new);
     }
 }

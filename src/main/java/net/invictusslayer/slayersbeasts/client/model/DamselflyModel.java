@@ -11,8 +11,11 @@ import net.minecraft.client.model.geom.PartPose;
 import net.minecraft.client.model.geom.builders.*;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.Mth;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
 
-public class DamselflyModel<Type extends Damselfly> extends EntityModel<Type> {
+@OnlyIn(Dist.CLIENT)
+public class DamselflyModel<T extends Damselfly> extends EntityModel<T> {
     public static final ModelLayerLocation LAYER_LOCATION = new ModelLayerLocation(new ResourceLocation(SlayersBeasts.MOD_ID, "damselfly_model"), "main");
     private final ModelPart main;
     private final ModelPart leftFrontWing;
@@ -32,30 +35,25 @@ public class DamselflyModel<Type extends Damselfly> extends EntityModel<Type> {
         MeshDefinition meshdefinition = new MeshDefinition();
         PartDefinition partdefinition = meshdefinition.getRoot();
 
-        PartDefinition main = partdefinition.addOrReplaceChild("main", CubeListBuilder.create().texOffs(0, 15).addBox(-2.0F, 0.0F, -6.0F, 3.0F, 2.0F, 6.0F, new CubeDeformation(0.0F))
-                .texOffs(12, 17).addBox(-1.5F, -1.0F, -6.0F, 2.0F, 1.0F, 6.0F, new CubeDeformation(0.0F))
+        PartDefinition main = partdefinition.addOrReplaceChild("main", CubeListBuilder.create().texOffs(0, 19).addBox(-2.0F, 0.0F, -6.0F, 3.0F, 2.0F, 6.0F, new CubeDeformation(0.0F))
+                .texOffs(18, 19).addBox(-1.5F, -1.0F, -6.0F, 2.0F, 1.0F, 6.0F, new CubeDeformation(0.0F))
                 .texOffs(0, 8).addBox(-1.5F, 0.0F, -8.0F, 2.0F, 2.0F, 2.0F, new CubeDeformation(0.0F))
                 .texOffs(0, 4).addBox(-2.75F, -0.5F, -8.5F, 2.0F, 2.0F, 2.0F, new CubeDeformation(0.0F))
                 .texOffs(0, 0).addBox(-0.25F, -0.5F, -8.5F, 2.0F, 2.0F, 2.0F, new CubeDeformation(0.0F))
                 .texOffs(0, 0).addBox(-1.5F, -0.5F, 0.0F, 2.0F, 2.0F, 13.0F, new CubeDeformation(0.0F)), PartPose.offset(0.5F, 22.0F, 0.0F));
 
-        PartDefinition leftFrontWing = partdefinition.addOrReplaceChild("leftFrontWing", CubeListBuilder.create().texOffs(14, 9).addBox(0.0F, 0.0F, -1.0F, 15.0F, 0.0F, 3.0F, new CubeDeformation(0.0F))
-                .texOffs(21, 17).addBox(7.0F, 0.0F, 2.0F, 7.0F, 0.0F, 1.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(1.0F, 21.0F, -4.75F, -0.1745F, -1.0908F, -1.6581F));
+        PartDefinition leftFrontWing = partdefinition.addOrReplaceChild("leftFrontWing", CubeListBuilder.create().texOffs(0, 15).addBox(0.0F, 0.0F, -1.0F, 15.0F, 0.0F, 4.0F, new CubeDeformation(0.0F)), PartPose.offset(1.0F, 21.0F, -4.75F));
 
-        PartDefinition rightFrontWing = partdefinition.addOrReplaceChild("rightFrontWing", CubeListBuilder.create().texOffs(14, 3).addBox(-15.0F, 0.0F, -1.0F, 15.0F, 0.0F, 3.0F, new CubeDeformation(0.0F))
-                .texOffs(16, 12).addBox(-14.0F, 0.0F, 2.0F, 7.0F, 0.0F, 1.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(-1.0F, 21.0F, -4.75F, -0.1745F, 1.0908F, 1.6581F));
+        PartDefinition rightFrontWing = partdefinition.addOrReplaceChild("rightFrontWing", CubeListBuilder.create().texOffs(13, 4).addBox(-15.0F, 0.0F, -1.0F, 15.0F, 0.0F, 4.0F, new CubeDeformation(0.0F)), PartPose.offset(-1.0F, 21.0F, -4.75F));
 
-        PartDefinition leftBackWing = partdefinition.addOrReplaceChild("leftBackWing", CubeListBuilder.create().texOffs(14, 6).addBox(0.0F, 0.0F, -1.0F, 15.0F, 0.0F, 3.0F, new CubeDeformation(0.0F))
-                .texOffs(11, 16).addBox(7.0F, 0.0F, 2.0F, 7.0F, 0.0F, 1.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(1.0F, 21.5F, -2.25F, 2.9671F, -1.2217F, -1.5708F));
+        PartDefinition leftBackWing = partdefinition.addOrReplaceChild("leftBackWing", CubeListBuilder.create().texOffs(13, 8).addBox(0.0F, 0.0F, -1.0F, 15.0F, 0.0F, 4.0F, new CubeDeformation(0.0F)), PartPose.offset(1.0F, 21.5F, -2.25F));
 
-        PartDefinition rightBackWing = partdefinition.addOrReplaceChild("rightBackWing", CubeListBuilder.create().texOffs(14, 0).addBox(-15.0F, 0.0F, -1.0F, 15.0F, 0.0F, 3.0F, new CubeDeformation(0.0F))
-                .texOffs(11, 15).addBox(-14.0F, 0.0F, 2.0F, 7.0F, 0.0F, 1.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(-1.0F, 21.5F, -2.25F, 3.1416F, 1.2217F, 1.6581F));
+        PartDefinition rightBackWing = partdefinition.addOrReplaceChild("rightBackWing", CubeListBuilder.create().texOffs(13, 0).addBox(-15.0F, 0.0F, -1.0F, 15.0F, 0.0F, 4.0F, new CubeDeformation(0.0F)), PartPose.offset(-1.0F, 21.5F, -2.25F));
 
         return LayerDefinition.create(meshdefinition, 64, 64);
     }
 
-    @Override
-    public void setupAnim(Type pEntity, float pLimbSwing, float pLimbSwingAmount, float pAgeInTicks, float pNetHeadYaw, float pHeadPitch) {
+    public void setupAnim(T pEntity, float pLimbSwing, float pLimbSwingAmount, float pAgeInTicks, float pNetHeadYaw, float pHeadPitch) {
         float f1 = Mth.cos(pAgeInTicks * 3F) / 5F;
         Damselfly.DamselflyPose wingPose = pEntity.getWingPose();
         if (wingPose == Damselfly.DamselflyPose.FLYING) {
@@ -91,7 +89,6 @@ public class DamselflyModel<Type extends Damselfly> extends EntityModel<Type> {
         }
     }
 
-    @Override
     public void renderToBuffer(PoseStack poseStack, VertexConsumer vertexConsumer, int packedLight, int packedOverlay, float red, float green, float blue, float alpha) {
         main.render(poseStack, vertexConsumer, packedLight, packedOverlay, red, green, blue, alpha);
         leftFrontWing.render(poseStack, vertexConsumer, packedLight, packedOverlay, red, green, blue, alpha);
