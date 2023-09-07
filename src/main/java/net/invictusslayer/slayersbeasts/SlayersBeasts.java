@@ -63,7 +63,7 @@ public class SlayersBeasts {
 //            BrewingRecipeRegistry.addRecipe(new SBBrewingRecipe(Potions.POISON, SBItems.WITHERBONE.get(), SBPotions.WITHER_POTION.get()));
 
             Regions.register(new SBOverworldRegion(2));
-            Regions.register(new SBUndergroundRegion(2));
+            Regions.register(new SBUndergroundRegion(1));
 
             SurfaceRuleManager.addSurfaceRules(SurfaceRuleManager.RuleCategory.OVERWORLD, MOD_ID, SBSurfaceRuleData.overworldRules());
             SurfaceRuleManager.addSurfaceRules(SurfaceRuleManager.RuleCategory.NETHER, MOD_ID, SBSurfaceRuleData.netherRules());

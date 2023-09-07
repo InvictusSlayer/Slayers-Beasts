@@ -9,9 +9,9 @@ import net.minecraft.client.renderer.entity.MobRenderer;
 import net.minecraft.resources.ResourceLocation;
 
 public class QueenAntRenderer<Type extends QueenAnt> extends MobRenderer<Type, QueenAntModel<Type>> {
-    private static final ResourceLocation WOOD_TEXTURE = new ResourceLocation(SlayersBeasts.MOD_ID, "textures/entity/ant/wood_queen.png");
-    private static final ResourceLocation LEAFCUTTER_TEXTURE = new ResourceLocation(SlayersBeasts.MOD_ID, "textures/entity/ant/leafcutter_queen.png");
-    private static final ResourceLocation MEADOW_TEXTURE = new ResourceLocation(SlayersBeasts.MOD_ID, "textures/entity/ant/meadow_queen.png");
+    private static final ResourceLocation WOOD = new ResourceLocation(SlayersBeasts.MOD_ID, "textures/entity/ant/wood_queen.png");
+    private static final ResourceLocation LEAFCUTTER = new ResourceLocation(SlayersBeasts.MOD_ID, "textures/entity/ant/leafcutter_queen.png");
+    private static final ResourceLocation MEADOW = new ResourceLocation(SlayersBeasts.MOD_ID, "textures/entity/ant/meadow_queen.png");
 
     public QueenAntRenderer(EntityRendererProvider.Context context) {
         super(context, new QueenAntModel<>(context.bakeLayer(QueenAntModel.LAYER_LOCATION)), 0.3f);
@@ -24,9 +24,9 @@ public class QueenAntRenderer<Type extends QueenAnt> extends MobRenderer<Type, Q
 
     public ResourceLocation getTextureLocation(Type pEntity) {
         return switch (pEntity.getAntType()) {
-            case 1 -> LEAFCUTTER_TEXTURE;
-            case 2 -> MEADOW_TEXTURE;
-            default -> WOOD_TEXTURE;
+            default -> WOOD;
+            case 1 -> LEAFCUTTER;
+            case 2 -> MEADOW;
         };
     }
 }

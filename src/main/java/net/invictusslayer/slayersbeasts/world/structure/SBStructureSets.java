@@ -15,11 +15,13 @@ import net.minecraft.world.level.levelgen.structure.placement.StructurePlacement
 
 public class SBStructureSets {
     public static final ResourceKey<StructureSet> CRYPTS = createKey("crypts");
+    public static final ResourceKey<StructureSet> CRYPT_ENTRANCES = createKey("crypt_entrances");
 
     public static void bootstrap(BootstapContext<StructureSet> context) {
         HolderGetter<Structure> structures = context.lookup(Registries.STRUCTURE);
 
         register(context, CRYPTS, structures.getOrThrow(SBStructures.CRYPT), new RandomSpreadStructurePlacement(32, 8, RandomSpreadType.LINEAR, 987654001));
+//        register(context, CRYPT_ENTRANCES, structures.getOrThrow(SBStructures.CRYPT_ENTRANCE), new RandomSpreadStructurePlacement(32, 8, RandomSpreadType.LINEAR, 987654002));
     }
 
     private static ResourceKey<StructureSet> createKey(String name) {

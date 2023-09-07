@@ -11,8 +11,11 @@ import net.minecraft.client.model.geom.PartPose;
 import net.minecraft.client.model.geom.builders.*;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.Mth;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
 
-public class WorkerAntModel<Type extends WorkerAnt> extends EntityModel<Type> {
+@OnlyIn(Dist.CLIENT)
+public class WorkerAntModel<T extends WorkerAnt> extends EntityModel<T> {
     public static final ModelLayerLocation LAYER_LOCATION = new ModelLayerLocation(new ResourceLocation(SlayersBeasts.MOD_ID, "worker_ant_model"), "main");
     private final ModelPart body;
     private final ModelPart leftFrontLeg;
@@ -60,11 +63,10 @@ public class WorkerAntModel<Type extends WorkerAnt> extends EntityModel<Type> {
         return LayerDefinition.create(meshdefinition, 32, 32);
     }
 
-    @Override
-    public void setupAnim(Type pEntity, float pLimbSwing, float pLimbSwingAmount, float pAgeInTicks, float pNetHeadYaw, float pHeadPitch) {
+    public void setupAnim(T pEntity, float pLimbSwing, float pLimbSwingAmount, float pAgeInTicks, float pNetHeadYaw, float pHeadPitch) {
         float f1 = Mth.cos(pLimbSwing * 2) * pLimbSwingAmount;
-        double d1 = Math.pow(Mth.cos(pLimbSwing + Mth.PI * 0.25F), 6D) * pLimbSwingAmount;
-        double d2 = Math.pow(Mth.sin(pLimbSwing + Mth.PI * 0.25F), 6D) * pLimbSwingAmount;
+        float d1 = (float) Math.pow(Mth.cos(pLimbSwing + Mth.PI * 0.25F), 6D) * pLimbSwingAmount;
+        float d2 = (float) Math.pow(Mth.sin(pLimbSwing + Mth.PI * 0.25F), 6D) * pLimbSwingAmount;
         float a1 = Mth.PI * 0.08F;
         float a2 = Mth.PI * 0.11F;
         float a3 = Mth.PI * 0.21F;
@@ -102,7 +104,6 @@ public class WorkerAntModel<Type extends WorkerAnt> extends EntityModel<Type> {
         rightBackLeg.zRot += d1;
     }
 
-    @Override
     public void renderToBuffer(PoseStack poseStack, VertexConsumer buffer, int packedLight, int packedOverlay, float red, float green, float blue, float alpha) {
         body.render(poseStack, buffer, packedLight, packedOverlay);
         leftFrontLeg.render(poseStack, buffer, packedLight, packedOverlay);

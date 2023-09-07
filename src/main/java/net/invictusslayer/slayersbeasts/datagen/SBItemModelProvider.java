@@ -5,7 +5,6 @@ import net.invictusslayer.slayersbeasts.block.SBBlocks;
 import net.invictusslayer.slayersbeasts.item.SBItems;
 import net.minecraft.data.PackOutput;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.item.Item;
 import net.minecraftforge.client.model.generators.ItemModelProvider;
 import net.minecraftforge.common.ForgeSpawnEggItem;
 import net.minecraftforge.common.data.ExistingFileHelper;
@@ -16,7 +15,6 @@ public class SBItemModelProvider extends ItemModelProvider {
         super(output, SlayersBeasts.MOD_ID, existingFileHelper);
     }
 
-    @Override
     protected void registerModels() {
         simpleItem(SBItems.JADE);
         simpleItem(SBItems.JADE_SHARD);
@@ -58,8 +56,9 @@ public class SBItemModelProvider extends ItemModelProvider {
         simpleItem(SBItems.WORKER_ANT_SPAWN_EGG);
         simpleItem(SBItems.SOLDIER_ANT_SPAWN_EGG);
         simpleItem(SBItems.QUEEN_ANT_SPAWN_EGG);
-        spawnEggItem(SBItems.DAMSELFLY_SPAWN_EGG);
         spawnEggItem(SBItems.WITHER_SPIDER_SPAWN_EGG);
+        spawnEggItem(SBItems.DAMSELFLY_SPAWN_EGG);
+        spawnEggItem(SBItems.ENT_OAK_SPAWN_EGG);
     }
 
     private void blockItem(RegistryObject<?> block) {
@@ -78,11 +77,11 @@ public class SBItemModelProvider extends ItemModelProvider {
                 new ResourceLocation(SlayersBeasts.MOD_ID, "item/" + item.getId().getPath()));
     }
 
-    private void handheldItem(RegistryObject<Item> item) {
-        withExistingParent(item.getId().getPath(),
-                new ResourceLocation("item/handheld")).texture("layer0",
-                new ResourceLocation(SlayersBeasts.MOD_ID, "item/" + item.getId().getPath()));
-    }
+//    private void handheldItem(RegistryObject<Item> item) {
+//        withExistingParent(item.getId().getPath(),
+//                new ResourceLocation("item/handheld")).texture("layer0",
+//                new ResourceLocation(SlayersBeasts.MOD_ID, "item/" + item.getId().getPath()));
+//    }
 
     private void spawnEggItem(RegistryObject<ForgeSpawnEggItem> item) {
         withExistingParent(item.getId().getPath(),

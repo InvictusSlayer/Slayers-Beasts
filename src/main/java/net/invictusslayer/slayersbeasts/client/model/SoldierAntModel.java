@@ -11,8 +11,11 @@ import net.minecraft.client.model.geom.PartPose;
 import net.minecraft.client.model.geom.builders.*;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.Mth;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
 
-public class SoldierAntModel<Type extends SoldierAnt> extends EntityModel<Type> {
+@OnlyIn(Dist.CLIENT)
+public class SoldierAntModel<T extends SoldierAnt> extends EntityModel<T> {
     public static final ModelLayerLocation LAYER_LOCATION = new ModelLayerLocation(new ResourceLocation(SlayersBeasts.MOD_ID, "soldier_ant_model"), "main");
     private final ModelPart body;
     private final ModelPart leftFrontLeg;
@@ -102,7 +105,7 @@ public class SoldierAntModel<Type extends SoldierAnt> extends EntityModel<Type> 
         return LayerDefinition.create(meshdefinition, 64, 64);
     }
 
-    public void setupAnim(Type entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {
+    public void setupAnim(T entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {
         float v1 = Mth.sin(ageInTicks / 6F) / 24F;
         float f1 = Mth.cos(limbSwing * 2) * limbSwingAmount;
         float d1 = (float) (Math.pow(Mth.cos(limbSwing + Mth.PI * 0.25F), 6) * limbSwingAmount);
@@ -146,7 +149,6 @@ public class SoldierAntModel<Type extends SoldierAnt> extends EntityModel<Type> 
         rightBackLeg.zRot += d1;
     }
 
-    @Override
     public void renderToBuffer(PoseStack poseStack, VertexConsumer vertexConsumer, int packedLight, int packedOverlay, float red, float green, float blue, float alpha) {
         body.render(poseStack, vertexConsumer, packedLight, packedOverlay, red, green, blue, alpha);
         leftFrontLeg.render(poseStack, vertexConsumer, packedLight, packedOverlay, red, green, blue, alpha);

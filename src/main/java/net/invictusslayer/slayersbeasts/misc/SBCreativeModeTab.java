@@ -180,8 +180,9 @@ public final class SBCreativeModeTab {
                         tab.accept(SBItems.WORKER_ANT_SPAWN_EGG.get());
                         tab.accept(SBItems.SOLDIER_ANT_SPAWN_EGG.get());
                         tab.accept(SBItems.QUEEN_ANT_SPAWN_EGG.get());
-                        tab.accept(SBItems.DAMSELFLY_SPAWN_EGG.get());
                         tab.accept(SBItems.WITHER_SPIDER_SPAWN_EGG.get());
+                        tab.accept(SBItems.DAMSELFLY_SPAWN_EGG.get());
+                        tab.accept(SBItems.ENT_OAK_SPAWN_EGG.get());
                     })).build());
 
     public static void register(IEventBus eventBus) {
