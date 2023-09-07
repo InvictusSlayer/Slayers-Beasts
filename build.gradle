@@ -1,4 +1,5 @@
 plugins {
+    id 'idea'
     id 'eclipse'
     id 'maven-publish'
     id 'net.minecraftforge.gradle' version '5.1.+'
@@ -6,88 +7,64 @@ plugins {
     id 'org.spongepowered.mixin' version '0.7.+'
 }
 
-version = minecraft_version + '-' + mod_version
+version = "${mc_version}-${mod_version}"
 group = 'net.invictusslayer.slayersbeasts'
-archivesBaseName = 'slayersbeasts'
+archivesBaseName = "${mod_id}"
 
 java.toolchain.languageVersion = JavaLanguageVersion.of(17)
 
 println "Java: ${System.getProperty 'java.version'}, JVM: ${System.getProperty 'java.vm.version'} (${System.getProperty 'java.vendor'}), Arch: ${System.getProperty 'os.arch'}"
 minecraft {
-    mappings channel: 'parchment', version: parchment_version + '-' + minecraft_version
+    mappings channel: 'parchment', version: "${librarian_version}-${mc_version}"
     accessTransformer = file('src/main/resources/META-INF/accesstransformer.cfg')
 
     runs {
         client {
             workingDirectory project.file('run')
-            property 'forge.logging.markers', 'REGISTRIES'
-            property 'forge.logging.console.level', 'debug'
-            property 'forge.enabledGameTestNamespaces', 'slayersbeasts'
-
-            mods {
-                slayersbeasts {
-                    source sourceSets.main
-                }
-            }
+            source sourceSets.main
         }
-
         server {
             workingDirectory project.file('run')
-            property 'forge.logging.markers', 'REGISTRIES'
-            property 'forge.logging.console.level', 'debug'
-            property 'forge.enabledGameTestNamespaces', 'slayersbeasts'
-
-            mods {
-                slayersbeasts {
-                    source sourceSets.main
-                }
-            }
+            source sourceSets.main
         }
-
-        gameTestServer {
-            workingDirectory project.file('run')
-            property 'forge.logging.markers', 'REGISTRIES'
-            property 'forge.logging.console.level', 'debug'
-            property 'forge.enabledGameTestNamespaces', 'slayersbeasts'
-
-            mods {
-                slayersbeasts {
-                    source sourceSets.main
-                }
-            }
-        }
-
         data {
             workingDirectory project.file('run')
-            property 'forge.logging.markers', 'REGISTRIES'
-            property 'forge.logging.console.level', 'debug'
-            args '--mod', 'slayersbeasts', '--all', '--output', file('src/generated/resources/'), '--existing', file('src/main/resources/')
-
-            mods {
-                slayersbeasts {
-                    source sourceSets.main
-                }
-            }
+            args '--mod', "${mod_id}", '--all', '--output', file('src/generated/resources/'), '--existing', file('src/main/resources/'), '--existing', file('src/generated/resources/')
+            source sourceSets.main
         }
     }
 }
 
-sourceSets.main.resources { srcDir 'src/generated/resources' }
+sourceSets.main.java { srcDir 'src/main/java' }
+sourceSets.main.resources {
+    srcDir 'src/main/resources'
+    srcDir 'src/generated/resources'
+}
+
+repositories {
+    maven { url = 'https://maven.blamejared.com/' }
+    maven { url = 'https://modmaven.dev/' }
+}
 
 dependencies {
-    minecraft 'net.minecraftforge:forge:' + minecraft_version + '-' + forge_version
-    implementation fg.deobf('com.github.glitchfiend:TerraBlender-forge:' + minecraft_version + '-' + terrablender_version)
+    minecraft "net.minecraftforge:forge:${mc_version}-${forge_version}"
+
+    implementation fg.deobf("com.github.glitchfiend:TerraBlender-forge:${mc_version}-${tb_version}")
+
+//    compileOnly fg.deobf("mezz.jei:jei-${mc_version}-common-api:${jei_version}")
+//    compileOnly fg.deobf("mezz.jei:jei-${mc_version}-forge-api:${jei_version}")
+    runtimeOnly fg.deobf("mezz.jei:jei-${mc_version}-forge:${jei_version}")
 }
 
 jar {
     manifest {
         attributes([
-                "Specification-Title"     : "slayersbeasts",
-                "Specification-Vendor"    : "slayersbeastssareus",
-                "Specification-Version"   : "1", // We are version 1 of ourselves
+                "Specification-Title"     : "SlayersBeasts",
+                "Specification-Version"   : "${mod_version}",
+                "Specification-Vendor"    : "InvictusSlayer",
                 "Implementation-Title"    : project.name,
-                "Implementation-Version"  : project.jar.archiveVersion,
-                "Implementation-Vendor"   : "slayersbeastssareus",
+                "Implementation-Version"  : "${mod_version}",
+                "Implementation-Vendor"   : "InvictusSlayer",
                 "Implementation-Timestamp": new Date().format("yyyy-MM-dd'T'HH:mm:ssZ")
         ])
     }
