@@ -4,7 +4,6 @@ import net.invictusslayer.slayersbeasts.SlayersBeasts;
 import net.invictusslayer.slayersbeasts.entity.SBEntities;
 import net.minecraft.world.item.Item;
 import net.minecraftforge.common.ForgeSpawnEggItem;
-import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
@@ -46,8 +45,4 @@ public final class SBItems {
             () -> new ForgeSpawnEggItem(SBEntities.ENT_OAK, 0x473807, 0x199e0b, new Item.Properties()));
 //    public static final RegistryObject<ForgeSpawnEggItem> VENUS_FLYTRAP_SPAWN_EGG = ITEMS.register("venus_flytrap_spawn_egg",
 //            () -> new ForgeSpawnEggItem(ModEntities.VENUS_FLYTRAP_ENTITY, 0x2f7f2f, 0xffff31, new Item.Properties()));
-
-    public static void register(IEventBus eventBus) {
-        ITEMS.register(eventBus);
-    }
 }

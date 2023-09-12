@@ -3,6 +3,7 @@ package net.invictusslayer.slayersbeasts.world.structure;
 import net.invictusslayer.slayersbeasts.SlayersBeasts;
 import net.invictusslayer.slayersbeasts.world.biome.SBBiomes;
 import net.invictusslayer.slayersbeasts.world.structure.pools.CryptPools;
+import net.invictusslayer.slayersbeasts.world.structure.structures.CryptPortalStructure;
 import net.minecraft.core.HolderGetter;
 import net.minecraft.core.HolderSet;
 import net.minecraft.core.registries.Registries;
@@ -24,20 +25,21 @@ import java.util.Map;
 
 public class SBStructures {
     public static final ResourceKey<Structure> CRYPT = createKey("crypt");
-    public static final ResourceKey<Structure> CRYPT_ENTRANCE = createKey("crypt_entrance");
+    public static final ResourceKey<Structure> CRYPT_PORTAL = createKey("crypt_portal");
 
     public static void bootstrap(BootstapContext<Structure> context) {
         HolderGetter<StructureTemplatePool> pools = context.lookup(Registries.TEMPLATE_POOL);
         HolderGetter<Biome> biomes = context.lookup(Registries.BIOME);
 
         context.register(CRYPT, new JigsawStructure(structure(HolderSet.direct(biomes.getOrThrow(SBBiomes.THE_CRYPT)), Map.of(), GenerationStep.Decoration.UNDERGROUND_STRUCTURES, TerrainAdjustment.NONE), pools.getOrThrow(CryptPools.START), 7, ConstantHeight.of(VerticalAnchor.absolute(60)), false));
+        context.register(CRYPT_PORTAL, new CryptPortalStructure(structure(HolderSet.direct(biomes.getOrThrow(SBBiomes.DEAD_SANDS)), TerrainAdjustment.NONE)));
     }
 
     private static Structure.StructureSettings structure(HolderSet<Biome> biomes, Map<MobCategory, StructureSpawnOverride> spawns, GenerationStep.Decoration step, TerrainAdjustment terrain) {
         return new Structure.StructureSettings(biomes, spawns, step, terrain);
     }
 
-    private static Structure.StructureSettings basicStructure(HolderSet<Biome> biomes, TerrainAdjustment terrain) {
+    private static Structure.StructureSettings structure(HolderSet<Biome> biomes, TerrainAdjustment terrain) {
         return structure(biomes, Map.of(), GenerationStep.Decoration.SURFACE_STRUCTURES, terrain);
     }
 

@@ -2,7 +2,6 @@ package net.invictusslayer.slayersbeasts.world.feature.tree.decorator;
 
 import net.invictusslayer.slayersbeasts.SlayersBeasts;
 import net.minecraft.world.level.levelgen.feature.treedecorators.TreeDecoratorType;
-import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
@@ -13,8 +12,4 @@ public class SBTreeDecorators {
     public static final RegistryObject<TreeDecoratorType<?>> BUTTRESS_ROOT = TREE_DECORATORS.register("buttress_root", () -> new TreeDecoratorType<>(ButtressRootDecorator.CODEC));
     public static final RegistryObject<TreeDecoratorType<?>> OOTHECA = TREE_DECORATORS.register("ootheca", () -> new TreeDecoratorType<>(OothecaDecorator.CODEC));
     public static final RegistryObject<TreeDecoratorType<?>> HANGING_BRANCH = TREE_DECORATORS.register("hanging_branch", () -> new TreeDecoratorType<>(HangingBranchDecorator.CODEC));
-
-    public static void register(IEventBus eventBus) {
-        TREE_DECORATORS.register(eventBus);
-    }
 }

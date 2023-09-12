@@ -1,18 +1,13 @@
 package net.invictusslayer.slayersbeasts.world.structure.pools;
 
 import com.google.common.collect.ImmutableList;
-import com.mojang.datafixers.util.Either;
 import com.mojang.datafixers.util.Pair;
-import net.invictusslayer.slayersbeasts.SlayersBeasts;
-import net.invictusslayer.slayersbeasts.world.structure.SBPools;
 import net.minecraft.core.Holder;
 import net.minecraft.core.HolderGetter;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.data.worldgen.BootstapContext;
 import net.minecraft.data.worldgen.Pools;
 import net.minecraft.resources.ResourceKey;
-import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.level.levelgen.structure.pools.SinglePoolElement;
 import net.minecraft.world.level.levelgen.structure.pools.StructurePoolElement;
 import net.minecraft.world.level.levelgen.structure.pools.StructureTemplatePool;
 import net.minecraft.world.level.levelgen.structure.templatesystem.StructureProcessorList;
@@ -37,12 +32,12 @@ public class CryptPools extends SBPools {
         register(context, WALL, pools.getOrThrow(Pools.EMPTY), StructureTemplatePool.Projection.RIGID, ImmutableList.of(element("wall1", 1), element("wall2", 1)));
     }
 
-    private static Pair<Function<StructureTemplatePool.Projection, ? extends StructurePoolElement>, Integer> element(String name, int weight) {
-        return Pair.of(projection -> new SinglePoolElement(Either.left(new ResourceLocation(SlayersBeasts.MOD_ID, "crypt/" + name)), StructurePoolElement.EMPTY, projection), weight);
+    protected static Pair<Function<StructureTemplatePool.Projection, ? extends StructurePoolElement>, Integer> element(String name, int weight) {
+        return SBPools.element("crypt", name, weight);
     }
 
-    private static Pair<Function<StructureTemplatePool.Projection, ? extends StructurePoolElement>, Integer> element(String name, int weight, Holder<StructureProcessorList> processor) {
-        return Pair.of(projection -> new SinglePoolElement(Either.left(new ResourceLocation(SlayersBeasts.MOD_ID, "crypt/" + name)), processor, projection), weight);
+    protected static Pair<Function<StructureTemplatePool.Projection, ? extends StructurePoolElement>, Integer> element(String name, int weight, Holder<StructureProcessorList> processor) {
+        return SBPools.element("crypt", name, weight, processor);
     }
 
     private static ResourceKey<StructureTemplatePool> createKey(String name) {

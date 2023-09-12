@@ -30,7 +30,7 @@ public class SBBlockStateProvider extends BlockStateProvider {
 
         verticalPortal(SBBlocks.SEPULCHRA_PORTAL.get(), "translucent");
         horizontalPortal(SBBlocks.CRYPT_PORTAL.get(), "solid");
-        cubeNaturalWithItem(SBBlocks.CRYPTALITH.get());
+        cubeRandAllWithItem(SBBlocks.CRYPTALITH.get());
         infusedCryptalith();
         depletedCryptalith();
         cubeWithItem(SBBlocks.JADE_BLOCK.get());
@@ -50,7 +50,7 @@ public class SBBlockStateProvider extends BlockStateProvider {
         tiltCubeWithItem(SBBlocks.CRACKED_MUD.get());
         cubeWithItem(SBBlocks.PEAT.get());
 
-        cubeNaturalWithItem(SBBlocks.BLACK_SAND.get());
+        cubeRandTopWithItem(SBBlocks.BLACK_SAND.get());
         cubeBottomTopWithItem(SBBlocks.BLACK_SANDSTONE.get(), extend(blockTexture(SBBlocks.BLACK_SANDSTONE.get()), "_side"), extend(blockTexture(SBBlocks.BLACK_SANDSTONE.get()), "_bottom"), extend(blockTexture(SBBlocks.BLACK_SANDSTONE.get()), "_top"));
         slabWithItem((SlabBlock) SBBlocks.BLACK_SANDSTONE_SLAB.get(), blockTexture(SBBlocks.BLACK_SANDSTONE.get()), extend(blockTexture(SBBlocks.BLACK_SANDSTONE.get()), "_side"), extend(blockTexture(SBBlocks.BLACK_SANDSTONE.get()), "_bottom"), extend(blockTexture(SBBlocks.BLACK_SANDSTONE.get()), "_top"));
         stairWithItem((StairBlock) SBBlocks.BLACK_SANDSTONE_STAIRS.get(), extend(blockTexture(SBBlocks.BLACK_SANDSTONE.get()), "_side"), extend(blockTexture(SBBlocks.BLACK_SANDSTONE.get()), "_bottom"), extend(blockTexture(SBBlocks.BLACK_SANDSTONE.get()), "_top"));
@@ -270,9 +270,14 @@ public class SBBlockStateProvider extends BlockStateProvider {
         simpleBlockItem(block, models().withExistingParent(name(block), "minecraft:block/template_trapdoor_bottom").texture("texture", blockTexture(block)));
     }
 
-    private void cubeNaturalWithItem(Block block) {
+    private void cubeRandTopWithItem(Block block) {
         ModelFile model = models().cubeAll(name(block), blockTexture(block));
         getVariantBuilder(block).forAllStates(state -> ConfiguredModel.allYRotations(model, 0, false));
+        simpleBlockItem(block, models().withExistingParent(name(block), "minecraft:block/cube_all"));
+    }
+    private void cubeRandAllWithItem(Block block) {
+        ModelFile model = models().cubeAll(name(block), blockTexture(block));
+        getVariantBuilder(block).forAllStates(state -> ConfiguredModel.allRotations(model, false));
         simpleBlockItem(block, models().withExistingParent(name(block), "minecraft:block/cube_all"));
     }
     private void cubeWithItem(Block block) {

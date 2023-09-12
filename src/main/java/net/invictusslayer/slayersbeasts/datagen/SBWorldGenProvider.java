@@ -4,7 +4,7 @@ import net.invictusslayer.slayersbeasts.SlayersBeasts;
 import net.invictusslayer.slayersbeasts.world.biome.SBBiomes;
 import net.invictusslayer.slayersbeasts.world.feature.SBConfiguredFeatures;
 import net.invictusslayer.slayersbeasts.world.feature.SBPlacedFeatures;
-import net.invictusslayer.slayersbeasts.world.structure.SBPools;
+import net.invictusslayer.slayersbeasts.world.structure.pools.SBPools;
 import net.invictusslayer.slayersbeasts.world.structure.SBProcessorLists;
 import net.invictusslayer.slayersbeasts.world.structure.SBStructureSets;
 import net.invictusslayer.slayersbeasts.world.structure.SBStructures;

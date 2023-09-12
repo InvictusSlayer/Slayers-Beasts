@@ -26,9 +26,11 @@
   "item.minecraft.potion.effect.paralysis_potion": "Potion of Paralysis",
   "item.minecraft.splash_potion.effect.paralysis_potion": "Splash Potion of Paralysis",
   "item.minecraft.lingering_potion.effect.paralysis_potion": "Lingering Potion of Paralysis",
+  "item.minecraft.tipped_arrow.effect.paralysis_potion": "Arrow of Paralysis",
   "item.minecraft.potion.effect.wither_potion": "Potion of Decay",
   "item.minecraft.splash_potion.effect.wither_potion": "Splash Potion of Decay",
   "item.minecraft.lingering_potion.effect.wither_potion": "Lingering Potion of Decay",
+  "item.minecraft.tipped_arrow.effect.wither_potion": "Arrow of Decay",
 
   "block.slayersbeasts.cryptalith": "Cryptalith",
   "block.slayersbeasts.infused_cryptalith": "Infused Cryptalith",
