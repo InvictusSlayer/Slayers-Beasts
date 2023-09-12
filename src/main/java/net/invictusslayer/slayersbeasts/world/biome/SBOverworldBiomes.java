@@ -344,9 +344,9 @@ public class SBOverworldBiomes {
     }
 
     private static void addMudPits(BiomeGenerationSettings.Builder biomeSettings) {
-        biomeSettings.addFeature(GenerationStep.Decoration.LAKES, SBPlacedFeatures.MUD_PIT_SHALLOW);
-        biomeSettings.addFeature(GenerationStep.Decoration.LAKES, SBPlacedFeatures.MUD_PIT_NORMAL);
-        biomeSettings.addFeature(GenerationStep.Decoration.LAKES, SBPlacedFeatures.MUD_PIT_DEEP);
+        biomeSettings.addFeature(GenerationStep.Decoration.LOCAL_MODIFICATIONS, SBPlacedFeatures.MUD_PIT_SHALLOW);
+        biomeSettings.addFeature(GenerationStep.Decoration.LOCAL_MODIFICATIONS, SBPlacedFeatures.MUD_PIT_NORMAL);
+        biomeSettings.addFeature(GenerationStep.Decoration.LOCAL_MODIFICATIONS, SBPlacedFeatures.MUD_PIT_DEEP);
     }
 
     private static void addModUndergroundVariety(BiomeGenerationSettings.Builder biomeSettings) {

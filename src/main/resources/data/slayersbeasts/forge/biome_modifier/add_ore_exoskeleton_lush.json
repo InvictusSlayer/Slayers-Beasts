@@ -1,6 +1,0 @@
-{
-  "type": "forge:add_features",
-  "biomes": "minecraft:lush_caves",
-  "features": "slayersbeasts:ore_exoskeleton_lush",
-  "step": "underground_ores"
-}
