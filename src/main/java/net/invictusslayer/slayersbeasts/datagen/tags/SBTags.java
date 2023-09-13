@@ -55,6 +55,7 @@ public class SBTags {
 
     public static class Biomes {
         public static final TagKey<Biome> IS_BRUSHLAND = tag("is_brushland");
+        public static final TagKey<Biome> HAS_CRYPT_PORTAL = tag("has_crypt_portal");
 
         private static TagKey<Biome> tag(String name) {
             return TagKey.create(Registries.BIOME, new ResourceLocation(SlayersBeasts.MOD_ID, name));

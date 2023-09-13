@@ -1,6 +1,7 @@
 package net.invictusslayer.slayersbeasts.world.structure;
 
 import net.invictusslayer.slayersbeasts.SlayersBeasts;
+import net.invictusslayer.slayersbeasts.datagen.tags.SBTags;
 import net.invictusslayer.slayersbeasts.world.biome.SBBiomes;
 import net.invictusslayer.slayersbeasts.world.structure.pools.CryptPools;
 import net.invictusslayer.slayersbeasts.world.structure.structures.CryptPortalStructure;
@@ -32,7 +33,7 @@ public class SBStructures {
         HolderGetter<Biome> biomes = context.lookup(Registries.BIOME);
 
         context.register(CRYPT, new JigsawStructure(structure(HolderSet.direct(biomes.getOrThrow(SBBiomes.THE_CRYPT)), Map.of(), GenerationStep.Decoration.UNDERGROUND_STRUCTURES, TerrainAdjustment.NONE), pools.getOrThrow(CryptPools.START), 7, ConstantHeight.of(VerticalAnchor.absolute(60)), false));
-        context.register(CRYPT_PORTAL, new CryptPortalStructure(structure(HolderSet.direct(biomes.getOrThrow(SBBiomes.DEAD_SANDS)), TerrainAdjustment.NONE)));
+        context.register(CRYPT_PORTAL, new CryptPortalStructure(structure(biomes.getOrThrow(SBTags.Biomes.HAS_CRYPT_PORTAL), TerrainAdjustment.BEARD_THIN)));
     }
 
     private static Structure.StructureSettings structure(HolderSet<Biome> biomes, Map<MobCategory, StructureSpawnOverride> spawns, GenerationStep.Decoration step, TerrainAdjustment terrain) {

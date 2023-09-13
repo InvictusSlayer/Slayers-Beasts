@@ -1,4 +1,4 @@
-package net.invictusslayer.slayersbeasts.datagen;
+package net.invictusslayer.slayersbeasts.datagen.loot;
 
 import net.invictusslayer.slayersbeasts.block.SBBlockFamilies;
 import net.invictusslayer.slayersbeasts.block.SBBlocks;
@@ -27,8 +27,8 @@ import net.minecraftforge.registries.RegistryObject;
 
 import java.util.Set;
 
-public class SBBlockLootProvider extends BlockLootSubProvider {
-    public SBBlockLootProvider() {
+public class SBBlockLoot extends BlockLootSubProvider {
+    public SBBlockLoot() {
         super(Set.of(), FeatureFlags.REGISTRY.allFlags());
     }
 

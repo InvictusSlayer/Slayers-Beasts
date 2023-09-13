@@ -2,7 +2,7 @@ package net.invictusslayer.slayersbeasts.world.dimension;
 
 import net.invictusslayer.slayersbeasts.block.SBBlocks;
 import net.invictusslayer.slayersbeasts.block.SepulchraPortalBlock;
-import net.invictusslayer.slayersbeasts.datagen.tags.SBPois;
+import net.invictusslayer.slayersbeasts.misc.SBPois;
 import net.minecraft.BlockUtil;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;

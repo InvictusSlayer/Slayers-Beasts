@@ -2,12 +2,12 @@ package net.invictusslayer.slayersbeasts;
 
 import net.invictusslayer.slayersbeasts.block.SBBlocks;
 import net.invictusslayer.slayersbeasts.block.entity.SBBlockEntities;
-import net.invictusslayer.slayersbeasts.datagen.tags.SBPois;
 import net.invictusslayer.slayersbeasts.effect.SBEffects;
 import net.invictusslayer.slayersbeasts.entity.SBEntities;
 import net.invictusslayer.slayersbeasts.item.SBItems;
 import net.invictusslayer.slayersbeasts.item.SBPotions;
 import net.invictusslayer.slayersbeasts.misc.SBCreativeModeTab;
+import net.invictusslayer.slayersbeasts.misc.SBPois;
 import net.invictusslayer.slayersbeasts.misc.SBSounds;
 import net.invictusslayer.slayersbeasts.world.biome.SBOverworldRegion;
 import net.invictusslayer.slayersbeasts.world.biome.SBSurfaceRuleData;

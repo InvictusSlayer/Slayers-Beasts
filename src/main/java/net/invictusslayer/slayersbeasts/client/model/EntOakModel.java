@@ -10,6 +10,7 @@ import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.model.geom.PartPose;
 import net.minecraft.client.model.geom.builders.*;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.util.Mth;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 
@@ -117,6 +118,15 @@ public class EntOakModel<T extends EntOak> extends EntityModel<T> {
 	}
 
 	public void setupAnim(T entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {
+		head.yRot = netHeadYaw * Mth.PI / 180F;
+		rightArm.xRot = -1.5F * Mth.triangleWave(limbSwing, 10) * limbSwingAmount;
+		leftArm.xRot = 1.5F * Mth.triangleWave(limbSwing, 10) * limbSwingAmount;
+		rightArm.zRot = 0.03F;
+		leftArm.zRot = -0.03F;
+		rightLeg.xRot = 1.5F * Mth.triangleWave(limbSwing, 10) * limbSwingAmount;
+		leftLeg.xRot = -1.5F * Mth.triangleWave(limbSwing, 10) * limbSwingAmount;
+		rightLeg.yRot = 0.0F;
+		leftLeg.yRot = 0.0F;
 	}
 
 	public void renderToBuffer(PoseStack poseStack, VertexConsumer vertexConsumer, int packedLight, int packedOverlay, float red, float green, float blue, float alpha) {

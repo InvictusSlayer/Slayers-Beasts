@@ -1,6 +1,7 @@
 package net.invictusslayer.slayersbeasts.datagen.tags;
 
 import net.invictusslayer.slayersbeasts.SlayersBeasts;
+import net.invictusslayer.slayersbeasts.misc.SBPois;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.tags.PoiTypeTagsProvider;
