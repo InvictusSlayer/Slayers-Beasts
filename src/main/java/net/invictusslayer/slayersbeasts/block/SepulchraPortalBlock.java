@@ -35,8 +35,8 @@ import javax.annotation.Nullable;
 
 public class SepulchraPortalBlock extends Block {
     public static final EnumProperty<Direction.Axis> AXIS = BlockStateProperties.HORIZONTAL_AXIS;
-    protected static final VoxelShape X_AABB = Block.box(0, 0, 6, 16, 16, 10);
-    protected static final VoxelShape Z_AABB = Block.box(6, 0, 0, 10, 16, 16);
+    protected static final VoxelShape X_AXIS = Block.box(0, 0, 6, 16, 16, 10);
+    protected static final VoxelShape Z_AXIS = Block.box(6, 0, 0, 10, 16, 16);
 
     public SepulchraPortalBlock(Properties properties) {
         super(properties);
@@ -44,11 +44,8 @@ public class SepulchraPortalBlock extends Block {
     }
 
     @SuppressWarnings("deprecation")
-    public VoxelShape getShape(BlockState pState, BlockGetter pLevel, BlockPos pPos, CollisionContext pContext) {
-        if (pState.getValue(AXIS) == Direction.Axis.Z) {
-            return Z_AABB;
-        }
-        return X_AABB;
+    public VoxelShape getShape(BlockState state, BlockGetter level, BlockPos pos, CollisionContext context) {
+        return state.getValue(AXIS) == Direction.Axis.Z ? Z_AXIS : X_AXIS;
     }
 
     public boolean trySpawnPortal(LevelAccessor worldIn, BlockPos pos) {
@@ -72,7 +69,6 @@ public class SepulchraPortalBlock extends Block {
         }
     }
 
-    @Nullable
     public SepulchraPortalBlock.Size isPortal(LevelAccessor worldIn, BlockPos pos) {
         SepulchraPortalBlock.Size size = new Size(worldIn, pos, Direction.Axis.X);
         if (size.isValid() && size.portalBlockCount == 0) {
@@ -84,12 +80,11 @@ public class SepulchraPortalBlock extends Block {
     }
 
     @SuppressWarnings("deprecation")
-    public BlockState updateShape(BlockState stateIn, Direction facing, BlockState facingState, LevelAccessor worldIn, BlockPos currentPos, BlockPos facingPos) {
+    public BlockState updateShape(BlockState state, Direction facing, BlockState facingState, LevelAccessor worldIn, BlockPos currentPos, BlockPos facingPos) {
         Direction.Axis axis = facing.getAxis();
-        Direction.Axis axis1 = stateIn.getValue(AXIS);
+        Direction.Axis axis1 = state.getValue(AXIS);
         boolean flag = axis1 != axis && axis.isHorizontal();
-        return !flag && facingState.getBlock() != this && !(new Size(worldIn, currentPos, axis1)).validatePortal() ?
-                Blocks.AIR.defaultBlockState() : super.updateShape(stateIn, facing, facingState, worldIn, currentPos, facingPos);
+        return !flag && facingState.getBlock() != this && !new Size(worldIn, currentPos, axis1).validatePortal() ? Blocks.AIR.defaultBlockState() : super.updateShape(state, facing, facingState, worldIn, currentPos, facingPos);
     }
 
     @SuppressWarnings("deprecation")
@@ -103,7 +98,7 @@ public class SepulchraPortalBlock extends Block {
                 }
                 Level entityWorld = entity.level();
                 MinecraftServer minecraftserver = entityWorld.getServer();
-                ResourceKey<Level> destination = entity.level().dimension() == SBDimensions.SEPULCHRA_KEY ? Level.OVERWORLD : SBDimensions.SEPULCHRA_KEY;
+                ResourceKey<Level> destination = entity.level().dimension() == SBDimensions.SEPULCHRA ? Level.OVERWORLD : SBDimensions.SEPULCHRA;
                 if (minecraftserver != null) {
                     ServerLevel destinationWorld = minecraftserver.getLevel(destination);
                     if (destinationWorld != null && minecraftserver.isNetherEnabled() && !entity.isPassenger()) {
@@ -203,13 +198,13 @@ public class SepulchraPortalBlock extends Block {
         }
 
         protected int calculatePortalHeight() {
-            label56:
+            loop:
             for (this.height = 0; this.height < 21; ++this.height) {
                 for (int i = 0; i < this.width; ++i) {
                     BlockPos blockpos = this.bottomLeft.relative(this.rightDir, i).above(this.height);
                     BlockState blockstate = this.level.getBlockState(blockpos);
                     if (!this.canConnect(blockstate)) {
-                        break label56;
+                        break loop;
                     }
 
                     Block block = blockstate.getBlock();
@@ -220,12 +215,12 @@ public class SepulchraPortalBlock extends Block {
                     if (i == 0) {
                         BlockPos framePos = blockpos.relative(this.leftDir);
                         if (!(this.level.getBlockState(framePos).is(SBTags.Blocks.SEPULCHRA_PORTAL_FRAME))) {
-                            break label56;
+                            break loop;
                         }
                     } else if (i == this.width - 1) {
                         BlockPos framePos = blockpos.relative(this.rightDir);
                         if (!(this.level.getBlockState(framePos).is(SBTags.Blocks.SEPULCHRA_PORTAL_FRAME))) {
-                            break label56;
+                            break loop;
                         }
                     }
                 }

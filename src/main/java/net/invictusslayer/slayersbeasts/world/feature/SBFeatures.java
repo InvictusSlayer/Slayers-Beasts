@@ -1,19 +1,18 @@
 package net.invictusslayer.slayersbeasts.world.feature;
 
-import com.mojang.serialization.Codec;
 import net.invictusslayer.slayersbeasts.SlayersBeasts;
 import net.invictusslayer.slayersbeasts.world.feature.misc.*;
 import net.invictusslayer.slayersbeasts.world.feature.tree.HugeBlackMushroomFeature;
 import net.invictusslayer.slayersbeasts.world.feature.tree.HugeWhiteMushroomFeature;
 import net.invictusslayer.slayersbeasts.world.feature.tree.MediumMushroomFeature;
 import net.minecraft.world.level.levelgen.feature.Feature;
-import net.minecraft.world.level.levelgen.feature.configurations.FeatureConfiguration;
 import net.minecraft.world.level.levelgen.feature.configurations.HugeMushroomFeatureConfiguration;
+import net.minecraft.world.level.levelgen.feature.configurations.NoneFeatureConfiguration;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
 
-public abstract class SBFeatures<FC extends FeatureConfiguration> extends Feature<FC> {
+public abstract class SBFeatures {
     public static final DeferredRegister<Feature<?>> FEATURES = DeferredRegister.create(ForgeRegistries.FEATURES, SlayersBeasts.MOD_ID);
 
     public static final RegistryObject<HugeBlackMushroomFeature> HUGE_BLACK_MUSHROOM = FEATURES.register("huge_black_mushroom", () -> new HugeBlackMushroomFeature(HugeMushroomFeatureConfiguration.CODEC));
@@ -24,8 +23,5 @@ public abstract class SBFeatures<FC extends FeatureConfiguration> extends Featur
     public static final RegistryObject<IcicleLargeFeature> ICICLE_LARGE = FEATURES.register("icicle_large", () -> new IcicleLargeFeature(IcicleLargeFeature.Configuration.CODEC));
     public static final RegistryObject<IcicleSmallFeature> ICICLE_SMALL = FEATURES.register("icicle_small", () -> new IcicleSmallFeature(IcicleSmallFeature.Configuration.CODEC));
     public static final RegistryObject<StyphiumPatchFeature> STYPHIUM_PATCH = FEATURES.register("styphium_patch", () -> new StyphiumPatchFeature(StyphiumPatchFeature.Configuration.CODEC));
-
-    public SBFeatures(Codec<FC> pCodec) {
-        super(pCodec);
-    }
+    public static final RegistryObject<CryptFoundationFeature> CRYPT_FOUNDATION = FEATURES.register("crypt_foundation", () -> new CryptFoundationFeature(NoneFeatureConfiguration.CODEC));
 }

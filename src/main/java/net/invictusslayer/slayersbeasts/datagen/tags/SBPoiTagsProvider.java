@@ -11,12 +11,11 @@ import org.jetbrains.annotations.Nullable;
 import java.util.concurrent.CompletableFuture;
 
 public class SBPoiTagsProvider extends PoiTypeTagsProvider {
-    public SBPoiTagsProvider(PackOutput output, CompletableFuture<HolderLookup.Provider> lookupProvider, @Nullable ExistingFileHelper existingFileHelper) {
-        super(output, lookupProvider, SlayersBeasts.MOD_ID, existingFileHelper);
+    public SBPoiTagsProvider(PackOutput output, CompletableFuture<HolderLookup.Provider> provider, @Nullable ExistingFileHelper existingFileHelper) {
+        super(output, provider, SlayersBeasts.MOD_ID, existingFileHelper);
     }
 
-    @Override
     protected void addTags(HolderLookup.Provider pProvider) {
-        this.tag(SBTags.PoiTypes.ANT_HOME).add(SBPois.ANTHILL_POI.getKey());
+        tag(SBTags.PoiTypes.ANT_HOME).add(SBPois.ANTHILL_POI.getKey());
     }
 }

@@ -2,6 +2,7 @@ package net.invictusslayer.slayersbeasts.world.structure.pools;
 
 import com.google.common.collect.ImmutableList;
 import com.mojang.datafixers.util.Pair;
+import net.invictusslayer.slayersbeasts.world.structure.SBProcessorLists;
 import net.minecraft.core.Holder;
 import net.minecraft.core.HolderGetter;
 import net.minecraft.core.registries.Registries;
@@ -26,21 +27,21 @@ public class CryptPools extends SBPools {
         HolderGetter<StructureProcessorList> processors = context.lookup(Registries.PROCESSOR_LIST);
 
         register(context, START, pools.getOrThrow(Pools.EMPTY), StructureTemplatePool.Projection.RIGID, ImmutableList.of(element("entrance1", 1)));
-        register(context, CORRIDOR, pools.getOrThrow(ROOM), StructureTemplatePool.Projection.RIGID, ImmutableList.of(element("corridor1", 1)));
-        register(context, JUNCTION, pools.getOrThrow(ROOM), StructureTemplatePool.Projection.RIGID, ImmutableList.of(element("junction1", 3), element("junction_stair1", 1)));
-        register(context, ROOM, pools.getOrThrow(WALL), StructureTemplatePool.Projection.RIGID, ImmutableList.of(element("room1", 3), element("wall2", 1)));
-        register(context, WALL, pools.getOrThrow(Pools.EMPTY), StructureTemplatePool.Projection.RIGID, ImmutableList.of(element("wall1", 1), element("wall2", 1)));
+        register(context, CORRIDOR, pools.getOrThrow(ROOM), StructureTemplatePool.Projection.RIGID, ImmutableList.of(element("corridor_0", 2), element("corridor_1", 1), element("corridor_2", 2)));
+        register(context, JUNCTION, pools.getOrThrow(ROOM), StructureTemplatePool.Projection.RIGID, ImmutableList.of(element("junction_0", 2, processors.getOrThrow(SBProcessorLists.STONE_FLOOR)), element("junction_1", 1, processors.getOrThrow(SBProcessorLists.STONE_FLOOR)), element("junction1", 1), element("junction_stair1", 1)));
+        register(context, ROOM, pools.getOrThrow(WALL), StructureTemplatePool.Projection.RIGID, ImmutableList.of(element("room_chest_0", 1, processors.getOrThrow(SBProcessorLists.STONE_FLOOR)), element("room_spawner_0", 1)));
+        register(context, WALL, pools.getOrThrow(Pools.EMPTY), StructureTemplatePool.Projection.RIGID, ImmutableList.of(element("wall_0", 2), element("wall_1", 2), element("wall_2", 2), element("wall_barrels_0", 1), element("wall_barrels_1", 1), element("wall_fountain_0", 1)));
     }
 
-    protected static Pair<Function<StructureTemplatePool.Projection, ? extends StructurePoolElement>, Integer> element(String name, int weight) {
-        return SBPools.element("crypt", name, weight);
+    private static Pair<Function<StructureTemplatePool.Projection, ? extends StructurePoolElement>, Integer> element(String name, int weight) {
+        return SBPools.parentElement("crypt", name, weight);
     }
 
-    protected static Pair<Function<StructureTemplatePool.Projection, ? extends StructurePoolElement>, Integer> element(String name, int weight, Holder<StructureProcessorList> processor) {
-        return SBPools.element("crypt", name, weight, processor);
+    private static Pair<Function<StructureTemplatePool.Projection, ? extends StructurePoolElement>, Integer> element(String name, int weight, Holder<StructureProcessorList> processor) {
+        return SBPools.parentElement("crypt", name, weight, processor);
     }
 
     private static ResourceKey<StructureTemplatePool> createKey(String name) {
-        return createKey("crypt", name);
+        return createParentKey("crypt", name);
     }
 }

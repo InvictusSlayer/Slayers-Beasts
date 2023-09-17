@@ -3,7 +3,6 @@ package net.invictusslayer.slayersbeasts.world.structure.pools;
 import com.mojang.datafixers.util.Either;
 import com.mojang.datafixers.util.Pair;
 import net.invictusslayer.slayersbeasts.SlayersBeasts;
-import net.invictusslayer.slayersbeasts.world.structure.pools.CryptPools;
 import net.minecraft.core.Holder;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.data.worldgen.BootstapContext;
@@ -22,15 +21,15 @@ public class SBPools {
         CryptPools.bootstrap(context);
     }
 
-    protected static Pair<Function<StructureTemplatePool.Projection, ? extends StructurePoolElement>, Integer> element(String parent, String name, int weight) {
-        return Pair.of(projection -> new SinglePoolElement(Either.left(new ResourceLocation(SlayersBeasts.MOD_ID, parent + "/" + name)), StructurePoolElement.EMPTY, projection), weight);
+    protected static Pair<Function<StructureTemplatePool.Projection, ? extends StructurePoolElement>, Integer> parentElement(String parent, String name, int weight) {
+        return parentElement(parent, name, weight, Holder.direct(new StructureProcessorList(List.of())));
     }
 
-    protected static Pair<Function<StructureTemplatePool.Projection, ? extends StructurePoolElement>, Integer> element(String parent, String name, int weight, Holder<StructureProcessorList> processor) {
+    protected static Pair<Function<StructureTemplatePool.Projection, ? extends StructurePoolElement>, Integer> parentElement(String parent, String name, int weight, Holder<StructureProcessorList> processor) {
         return Pair.of(projection -> new SinglePoolElement(Either.left(new ResourceLocation(SlayersBeasts.MOD_ID, parent + "/" + name)), processor, projection), weight);
     }
 
-    protected static ResourceKey<StructureTemplatePool> createKey(String parent, String name) {
+    protected static ResourceKey<StructureTemplatePool> createParentKey(String parent, String name) {
         return ResourceKey.create(Registries.TEMPLATE_POOL, new ResourceLocation(SlayersBeasts.MOD_ID, parent + "/" + name));
     }
 

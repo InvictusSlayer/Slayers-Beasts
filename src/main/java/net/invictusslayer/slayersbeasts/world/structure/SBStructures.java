@@ -5,6 +5,7 @@ import net.invictusslayer.slayersbeasts.datagen.tags.SBTags;
 import net.invictusslayer.slayersbeasts.world.biome.SBBiomes;
 import net.invictusslayer.slayersbeasts.world.structure.pools.CryptPools;
 import net.invictusslayer.slayersbeasts.world.structure.structures.CryptPortalStructure;
+import net.invictusslayer.slayersbeasts.world.structure.structures.CryptStructure;
 import net.minecraft.core.HolderGetter;
 import net.minecraft.core.HolderSet;
 import net.minecraft.core.registries.Registries;
@@ -20,7 +21,6 @@ import net.minecraft.world.level.levelgen.structure.Structure;
 import net.minecraft.world.level.levelgen.structure.StructureSpawnOverride;
 import net.minecraft.world.level.levelgen.structure.TerrainAdjustment;
 import net.minecraft.world.level.levelgen.structure.pools.StructureTemplatePool;
-import net.minecraft.world.level.levelgen.structure.structures.JigsawStructure;
 
 import java.util.Map;
 
@@ -32,7 +32,7 @@ public class SBStructures {
         HolderGetter<StructureTemplatePool> pools = context.lookup(Registries.TEMPLATE_POOL);
         HolderGetter<Biome> biomes = context.lookup(Registries.BIOME);
 
-        context.register(CRYPT, new JigsawStructure(structure(HolderSet.direct(biomes.getOrThrow(SBBiomes.THE_CRYPT)), Map.of(), GenerationStep.Decoration.UNDERGROUND_STRUCTURES, TerrainAdjustment.NONE), pools.getOrThrow(CryptPools.START), 7, ConstantHeight.of(VerticalAnchor.absolute(60)), false));
+        context.register(CRYPT, new CryptStructure(structure(HolderSet.direct(biomes.getOrThrow(SBBiomes.THE_CRYPT)), Map.of(), GenerationStep.Decoration.UNDERGROUND_STRUCTURES, TerrainAdjustment.NONE), pools.getOrThrow(CryptPools.START), ConstantHeight.of(VerticalAnchor.absolute(60))));
         context.register(CRYPT_PORTAL, new CryptPortalStructure(structure(biomes.getOrThrow(SBTags.Biomes.HAS_CRYPT_PORTAL), TerrainAdjustment.BEARD_THIN)));
     }
 

@@ -55,6 +55,7 @@ public class CryptPortalPieces {
 			generateBox(level, box, 0, 1, 1, 0, 3, 2, air, air, false);
 			generateBox(level, box, 1, 1, 0, 2, 3, 0, air, air, false);
 			generateBox(level, box, 3, 1, 1, 3, 3, 2, air, air, false);
+			generateBox(level, box, 1, 1, 3, 2, 3, 3, air, air, false);
 			placeBlock(level, air, 0, 5, 0, box);
 			placeBlock(level, air, 0, 5, 3, box);
 			placeBlock(level, air, 3, 5, 3, box);

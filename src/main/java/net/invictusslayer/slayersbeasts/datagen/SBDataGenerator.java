@@ -5,6 +5,7 @@ import net.invictusslayer.slayersbeasts.datagen.loot.SBLootProvider;
 import net.invictusslayer.slayersbeasts.datagen.tags.*;
 import net.invictusslayer.slayersbeasts.world.biome.SBBiomeModifiers;
 import net.invictusslayer.slayersbeasts.world.biome.SBBiomes;
+import net.invictusslayer.slayersbeasts.world.dimension.SBDimensions;
 import net.invictusslayer.slayersbeasts.world.feature.SBConfiguredFeatures;
 import net.invictusslayer.slayersbeasts.world.feature.SBPlacedFeatures;
 import net.invictusslayer.slayersbeasts.world.structure.SBProcessorLists;
@@ -29,11 +30,12 @@ import java.util.Collections;
 import java.util.concurrent.CompletableFuture;
 
 @Mod.EventBusSubscriber(modid = SlayersBeasts.MOD_ID, bus = Mod.EventBusSubscriber.Bus.MOD)
-public class DataGenerators {
+public class SBDataGenerator {
     private static final RegistrySetBuilder BUILDER = new RegistrySetBuilder()
             .add(Registries.CONFIGURED_FEATURE, SBConfiguredFeatures::bootstrap)
             .add(Registries.PLACED_FEATURE, SBPlacedFeatures::bootstrap)
             .add(Registries.BIOME, SBBiomes::bootstrap)
+            .add(Registries.DIMENSION_TYPE, SBDimensions::bootstrap)
             .add(Registries.STRUCTURE, SBStructures::bootstrap)
             .add(Registries.STRUCTURE_SET, SBStructureSets::bootstrap)
             .add(Registries.TEMPLATE_POOL, SBPools::bootstrap)
@@ -52,7 +54,7 @@ public class DataGenerators {
 
         SBBlockTagsProvider blockTags = generator.addProvider(hasServer, new SBBlockTagsProvider(output, provider, existingFileHelper));
         generator.addProvider(hasServer, new SBItemTagsProvider(output, provider, blockTags, existingFileHelper));
-        generator.addProvider(hasServer, new SBBiomeTagsProvider(output, provider.thenApply(DataGenerators::patch), existingFileHelper));
+        generator.addProvider(hasServer, new SBBiomeTagsProvider(output, provider.thenApply(SBDataGenerator::patchRegistry), existingFileHelper));
         generator.addProvider(hasServer, new SBEntityTagsProvider(output, provider, existingFileHelper));
         generator.addProvider(hasServer, new SBPoiTagsProvider(output, provider, existingFileHelper));
 
@@ -62,7 +64,7 @@ public class DataGenerators {
         generator.addProvider(hasServer, new SBItemModelProvider(output, existingFileHelper));
     }
 
-    private static HolderLookup.Provider patch(HolderLookup.Provider provider) {
+    private static HolderLookup.Provider patchRegistry(HolderLookup.Provider provider) {
         return BUILDER.buildPatch(RegistryAccess.fromRegistryOfRegistries(BuiltInRegistries.REGISTRY), provider);
     }
 }

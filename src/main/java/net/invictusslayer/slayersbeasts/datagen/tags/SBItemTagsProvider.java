@@ -9,38 +9,36 @@ import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.world.level.block.Block;
 import net.minecraftforge.common.data.ExistingFileHelper;
-import org.jetbrains.annotations.Nullable;
 
 import java.util.concurrent.CompletableFuture;
 
 public class SBItemTagsProvider extends ItemTagsProvider {
-    public SBItemTagsProvider(PackOutput pOutput, CompletableFuture<HolderLookup.Provider> pLookupProvider, TagsProvider<Block> pBlockTags, @Nullable ExistingFileHelper existingFileHelper) {
-        super(pOutput, pLookupProvider, pBlockTags.contentsGetter(), SlayersBeasts.MOD_ID, existingFileHelper);
+    public SBItemTagsProvider(PackOutput output, CompletableFuture<HolderLookup.Provider> provider, TagsProvider<Block> blockTags, ExistingFileHelper existingFileHelper) {
+        super(output, provider, blockTags.contentsGetter(), SlayersBeasts.MOD_ID, existingFileHelper);
     }
 
-    @Override
     protected void addTags(HolderLookup.Provider pProvider) {
-        this.copy(SBTags.Blocks.ASPEN_LOGS, SBTags.Items.ASPEN_LOGS);
-        this.copy(SBTags.Blocks.CAJOLE_LOGS, SBTags.Items.CAJOLE_LOGS);
-        this.copy(SBTags.Blocks.DESERT_OAK_LOGS, SBTags.Items.DESERT_OAK_LOGS);
-        this.copy(SBTags.Blocks.EUCALYPTUS_LOGS, SBTags.Items.EUCALYPTUS_LOGS);
-        this.copy(SBTags.Blocks.KAPOK_LOGS, SBTags.Items.KAPOK_LOGS);
-        this.copy(SBTags.Blocks.REDWOOD_LOGS, SBTags.Items.REDWOOD_LOGS);
-        this.copy(SBTags.Blocks.WILLOW_LOGS, SBTags.Items.WILLOW_LOGS);
+        copy(SBTags.Blocks.ASPEN_LOGS, SBTags.Items.ASPEN_LOGS);
+        copy(SBTags.Blocks.CAJOLE_LOGS, SBTags.Items.CAJOLE_LOGS);
+        copy(SBTags.Blocks.DESERT_OAK_LOGS, SBTags.Items.DESERT_OAK_LOGS);
+        copy(SBTags.Blocks.EUCALYPTUS_LOGS, SBTags.Items.EUCALYPTUS_LOGS);
+        copy(SBTags.Blocks.KAPOK_LOGS, SBTags.Items.KAPOK_LOGS);
+        copy(SBTags.Blocks.REDWOOD_LOGS, SBTags.Items.REDWOOD_LOGS);
+        copy(SBTags.Blocks.WILLOW_LOGS, SBTags.Items.WILLOW_LOGS);
 
-        this.copy(BlockTags.PLANKS, ItemTags.PLANKS);
-        this.copy(BlockTags.WOODEN_DOORS, ItemTags.WOODEN_DOORS);
-        this.copy(BlockTags.WOODEN_STAIRS, ItemTags.WOODEN_STAIRS);
-        this.copy(BlockTags.WOODEN_SLABS, ItemTags.WOODEN_SLABS);
-        this.copy(BlockTags.WOODEN_FENCES, ItemTags.WOODEN_FENCES);
-        this.copy(BlockTags.FENCE_GATES, ItemTags.FENCE_GATES);
-        this.copy(BlockTags.WOODEN_BUTTONS, ItemTags.WOODEN_BUTTONS);
-        this.copy(BlockTags.WOODEN_PRESSURE_PLATES, ItemTags.WOODEN_PRESSURE_PLATES);
-        this.copy(BlockTags.LOGS_THAT_BURN, ItemTags.LOGS_THAT_BURN);
-        this.copy(BlockTags.SAPLINGS, ItemTags.SAPLINGS);
-        this.copy(BlockTags.SLABS, ItemTags.SLABS);
-        this.copy(BlockTags.STAIRS, ItemTags.STAIRS);
-        this.copy(BlockTags.WALLS, ItemTags.WALLS);
-        this.copy(BlockTags.SAND, ItemTags.SAND);
+        copy(BlockTags.PLANKS, ItemTags.PLANKS);
+        copy(BlockTags.WOODEN_DOORS, ItemTags.WOODEN_DOORS);
+        copy(BlockTags.WOODEN_STAIRS, ItemTags.WOODEN_STAIRS);
+        copy(BlockTags.WOODEN_SLABS, ItemTags.WOODEN_SLABS);
+        copy(BlockTags.WOODEN_FENCES, ItemTags.WOODEN_FENCES);
+        copy(BlockTags.FENCE_GATES, ItemTags.FENCE_GATES);
+        copy(BlockTags.WOODEN_BUTTONS, ItemTags.WOODEN_BUTTONS);
+        copy(BlockTags.WOODEN_PRESSURE_PLATES, ItemTags.WOODEN_PRESSURE_PLATES);
+        copy(BlockTags.LOGS_THAT_BURN, ItemTags.LOGS_THAT_BURN);
+        copy(BlockTags.SAPLINGS, ItemTags.SAPLINGS);
+        copy(BlockTags.SLABS, ItemTags.SLABS);
+        copy(BlockTags.STAIRS, ItemTags.STAIRS);
+        copy(BlockTags.WALLS, ItemTags.WALLS);
+        copy(BlockTags.SAND, ItemTags.SAND);
     }
 }

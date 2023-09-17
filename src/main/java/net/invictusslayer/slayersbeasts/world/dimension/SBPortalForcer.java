@@ -37,7 +37,7 @@ public class SBPortalForcer implements ITeleporter {
     }
 
     public PortalInfo getPortalInfo(Entity entity, ServerLevel destination, Function<ServerLevel, PortalInfo> portalInfo) {
-        if (entity.level().dimension() != SBDimensions.SEPULCHRA_KEY && destination.dimension() != SBDimensions.SEPULCHRA_KEY) return null;
+        if (entity.level().dimension() != SBDimensions.SEPULCHRA && destination.dimension() != SBDimensions.SEPULCHRA) return null;
         else {
             WorldBorder worldBorder = destination.getWorldBorder();
             double scale = DimensionType.getTeleportationScale(entity.level().dimensionType(), destination.dimensionType());

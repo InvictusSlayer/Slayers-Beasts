@@ -12,7 +12,6 @@ import net.invictusslayer.slayersbeasts.misc.SBSounds;
 import net.invictusslayer.slayersbeasts.world.biome.SBOverworldRegion;
 import net.invictusslayer.slayersbeasts.world.biome.SBSurfaceRuleData;
 import net.invictusslayer.slayersbeasts.world.biome.SBUndergroundRegion;
-import net.invictusslayer.slayersbeasts.world.dimension.SBDimensions;
 import net.invictusslayer.slayersbeasts.world.feature.SBFeatures;
 import net.invictusslayer.slayersbeasts.world.feature.tree.decorator.SBTreeDecorators;
 import net.invictusslayer.slayersbeasts.world.feature.tree.foliageplacer.SBFoliagePlacers;
@@ -52,7 +51,6 @@ public class SlayersBeasts {
         SBStructurePieces.STRUCTURE_PIECES.register(eventBus);
         SBStructureType.STRUCTURES.register(eventBus);
         SBPois.POIS.register(eventBus);
-        SBDimensions.register();
 
         eventBus.addListener(this::commonSetup);
         eventBus.addListener(this::clientSetup);
