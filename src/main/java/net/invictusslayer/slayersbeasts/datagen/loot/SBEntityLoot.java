@@ -20,7 +20,7 @@ import java.util.stream.Stream;
 public class SBEntityLoot extends EntityLootSubProvider {
 	private final Set<EntityType<?>> KNOWN_ENTITIES = new ReferenceOpenHashSet<>();
 
-	protected SBEntityLoot() {
+	public SBEntityLoot() {
 		super(FeatureFlags.REGISTRY.allFlags());
 	}
 

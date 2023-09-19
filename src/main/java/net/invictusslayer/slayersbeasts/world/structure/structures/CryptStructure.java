@@ -2,6 +2,7 @@ package net.invictusslayer.slayersbeasts.world.structure.structures;
 
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
+import net.invictusslayer.slayersbeasts.world.structure.pieces.CryptPieces;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Holder;
 import net.minecraft.world.level.ChunkPos;
@@ -9,7 +10,6 @@ import net.minecraft.world.level.levelgen.WorldGenerationContext;
 import net.minecraft.world.level.levelgen.heightproviders.HeightProvider;
 import net.minecraft.world.level.levelgen.structure.Structure;
 import net.minecraft.world.level.levelgen.structure.StructureType;
-import net.minecraft.world.level.levelgen.structure.pools.JigsawPlacement;
 import net.minecraft.world.level.levelgen.structure.pools.StructureTemplatePool;
 
 import java.util.Optional;
@@ -33,7 +33,7 @@ public class CryptStructure extends Structure {
         ChunkPos chunkPos = context.chunkPos();
         int i = startHeight.sample(context.random(), new WorldGenerationContext(context.chunkGenerator(), context.heightAccessor()));
         BlockPos pos = new BlockPos(chunkPos.getMinBlockX(), i, chunkPos.getMinBlockZ());
-        return JigsawPlacement.addPieces(context, startPool, Optional.empty(), 7, pos, false, Optional.empty(), 128);
+        return CryptPieces.addPieces(context, startPool, pos, 128);
     }
 
     public StructureType<?> type() {

@@ -1,6 +1,5 @@
 package net.invictusslayer.slayersbeasts.block;
 
-import net.invictusslayer.slayersbeasts.block.SBBlocks;
 import net.minecraft.data.BlockFamily;
 import net.minecraft.world.level.block.Block;
 import net.minecraftforge.registries.ForgeRegistries;
@@ -24,11 +23,11 @@ public class SBBlockFamilies {
     public static final BlockFamily PEGMATITE = familyBuilder(SBBlocks.PEGMATITE.get()).slab(SBBlocks.PEGMATITE_SLAB.get()).stairs(SBBlocks.PEGMATITE_STAIRS.get()).wall(SBBlocks.PEGMATITE_WALL.get()).polished(SBBlocks.POLISHED_PEGMATITE.get()).getFamily();
     public static final BlockFamily POLISHED_PEGMATITE = familyBuilder(SBBlocks.POLISHED_PEGMATITE.get()).slab(SBBlocks.POLISHED_PEGMATITE_SLAB.get()).stairs(SBBlocks.POLISHED_PEGMATITE_STAIRS.get()).getFamily();
 
-    private static BlockFamily.Builder familyBuilder(Block pBaseBlock) {
-        BlockFamily.Builder builder = new BlockFamily.Builder(pBaseBlock);
-        BlockFamily blockfamily = MAP.put(pBaseBlock, builder.getFamily());
-        if (blockfamily != null) {
-            throw new IllegalStateException("Duplicate family definition for " + ForgeRegistries.BLOCKS.getKey(pBaseBlock));
+    private static BlockFamily.Builder familyBuilder(Block baseBlock) {
+        BlockFamily.Builder builder = new BlockFamily.Builder(baseBlock);
+        BlockFamily family = MAP.put(baseBlock, builder.getFamily());
+        if (family != null) {
+            throw new IllegalStateException("Duplicate family definition for " + ForgeRegistries.BLOCKS.getKey(baseBlock));
         } else {
             return builder;
         }

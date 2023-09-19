@@ -32,6 +32,7 @@ public class SBItemModelProvider extends ItemModelProvider {
         simpleItem(SBItems.MUD_BALL);
 
         blockItem(SBBlocks.ICICLE, "_frustum_down");
+        blockItem(SBBlocks.OBSIDIAN_SPIKE, "_tip_up");
         blockItem(SBBlocks.TALL_DEAD_BUSH, "_top");
         blockItem(SBBlocks.BLACK_MUSHROOM);
         blockItem(SBBlocks.WHITE_MUSHROOM);

@@ -50,8 +50,9 @@ public class SBBlockLoot extends BlockLootSubProvider {
         dropOther(SBBlocks.ANTHILL.get(), SBBlocks.ANT_SOIL.get());
         dropOther(SBBlocks.ANTHILL_HATCHERY.get(), SBBlocks.ANT_SOIL.get());
 
-        dropWhenSilkTouch(SBBlocks.ICICLE.get());
         dropWhenSilkTouch(SBBlocks.GLEAMING_ICE.get());
+        dropWhenSilkTouch(SBBlocks.ICICLE.get());
+        dropSelf(SBBlocks.OBSIDIAN_SPIKE.get());
         add(SBBlocks.TALL_DEAD_BUSH.get(), block -> createTallDeadBushDrops(SBBlocks.TALL_DEAD_BUSH.get()));
         add(SBBlocks.CRACKED_MUD.get(), block -> createSingleItemTableWithSilkTouch(Blocks.PACKED_MUD, SBItems.MUD_BALL.get(), ConstantValue.exactly(4)));
         dropSelf(SBBlocks.PEAT.get());

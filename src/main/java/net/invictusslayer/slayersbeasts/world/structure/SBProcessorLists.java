@@ -19,7 +19,7 @@ public class SBProcessorLists {
 	public static void bootstrap(BootstapContext<StructureProcessorList> context) {
 		HolderGetter<Block> blocks = context.lookup(Registries.BLOCK);
 
-		register(context, STONE_FLOOR, rule(Blocks.STONE, 0.1F, Blocks.POLISHED_ANDESITE.defaultBlockState()), rule(Blocks.STONE, 0.1F, Blocks.STONE_BRICKS.defaultBlockState()), rule(Blocks.STONE, 0.1F, Blocks.SMOOTH_STONE.defaultBlockState()));
+		register(context, STONE_FLOOR, rule(Blocks.STONE, 0.1F, Blocks.POLISHED_ANDESITE.defaultBlockState()), rule(Blocks.STONE, 0.1F, Blocks.SMOOTH_STONE.defaultBlockState()), rule(Blocks.STONE, Blocks.STONE_BRICKS.defaultBlockState()));
 	}
 
 	private static ProcessorRule rule(Block block, float chance, BlockState blockState) {

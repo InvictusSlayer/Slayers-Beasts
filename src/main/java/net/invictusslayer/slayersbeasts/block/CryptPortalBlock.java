@@ -14,6 +14,7 @@ import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.ChunkPos;
@@ -33,6 +34,8 @@ import net.minecraft.world.phys.shapes.VoxelShape;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 import java.util.Set;
 
@@ -74,30 +77,20 @@ public class CryptPortalBlock extends Block {
     @SuppressWarnings("deprecation")
     public void entityInside(BlockState state, Level level, BlockPos pos, Entity entity) {
         if (entity instanceof ServerPlayer player && player.canChangeDimensions()) {
-            if (player.isOnPortalCooldown()) {
-                player.setPortalCooldown();
+            MinecraftServer server = level.getServer();
+            if (server == null) return;
+
+            ResourceKey<Level> destination = player.level().dimension() == SBDimensions.CRYPT ? Level.OVERWORLD : SBDimensions.CRYPT;
+            ServerLevel serverLevel = server.getLevel(destination);
+            if (serverLevel == null) return;
+
+            if (destination == SBDimensions.CRYPT) {
+                if (serverLevel.players().isEmpty()) resetCrypt(serverLevel);
+                player.teleportTo(serverLevel, 3.5, 61, 3, Set.of(), player.getYRot(), player.getXRot());
             } else {
-                if (!player.level().isClientSide && !pos.equals(player.portalEntrancePos)) {
-                    player.portalEntrancePos = pos.immutable();
-                }
-
-                MinecraftServer server = level.getServer();
-                if (server == null) return;
-
-                ResourceKey<Level> destination = player.level().dimension() == SBDimensions.CRYPT ? Level.OVERWORLD : SBDimensions.CRYPT;
-                ServerLevel serverLevel = server.getLevel(destination);
-                if (serverLevel == null) return;
-
-                if (destination == SBDimensions.CRYPT) {
-                    if (serverLevel.players().isEmpty()) resetCrypt(serverLevel);
-                    player.teleportTo(serverLevel, 0, 62, 0, Set.of(), player.getYRot(), player.getXRot());
-                } else {
-                    BlockPos spawn = player.getRespawnDimension() == destination ? player.getRespawnPosition() : level.getSharedSpawnPos();
-                    if (spawn == null) spawn = level.getSharedSpawnPos();
-                    player.teleportTo(serverLevel, spawn.getX(), spawn.getY(), spawn.getZ(), Set.of(), player.getYRot(), player.getXRot());
-                }
-
-                player.setPortalCooldown();
+                BlockPos spawn = player.getRespawnDimension() == destination ? player.getRespawnPosition() : level.getSharedSpawnPos();
+                if (spawn == null) spawn = level.getSharedSpawnPos();
+                player.teleportTo(serverLevel, spawn.getX(), spawn.getY(), spawn.getZ(), Set.of(), player.getYRot(), player.getXRot());
             }
         }
     }
@@ -115,7 +108,17 @@ public class CryptPortalBlock extends Block {
         ChunkPos chunkMax = new ChunkPos(SectionPos.blockToSectionCoord(boundingBox.maxX()), SectionPos.blockToSectionCoord(boundingBox.maxZ()));
 
         ChunkPos.rangeClosed(chunkMin, chunkMax).forEach(chunk -> start.placeInChunk(level, level.structureManager(), chunkGen, level.getRandom(), new BoundingBox(chunk.getMinBlockX(), level.getMinBuildHeight(), chunk.getMinBlockZ(), chunk.getMaxBlockX(), level.getMaxBuildHeight(), chunk.getMaxBlockZ()), chunkMin));
-    }
+
+	    Collection<Entity> entities = new ArrayList<>();
+		level.getAllEntities().forEach(entity -> {
+			if (entity instanceof ItemEntity) {
+				entities.add(entity);
+			}
+		});
+		for (Entity entity : entities) {
+			entity.kill();
+		}
+	}
 
     @OnlyIn(Dist.CLIENT)
     public void animateTick(BlockState state, Level level, BlockPos pos, RandomSource random) {

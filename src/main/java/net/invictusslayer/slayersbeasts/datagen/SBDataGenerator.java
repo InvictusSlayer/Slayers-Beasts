@@ -1,7 +1,7 @@
 package net.invictusslayer.slayersbeasts.datagen;
 
 import net.invictusslayer.slayersbeasts.SlayersBeasts;
-import net.invictusslayer.slayersbeasts.datagen.loot.SBLootProvider;
+import net.invictusslayer.slayersbeasts.datagen.loot.*;
 import net.invictusslayer.slayersbeasts.datagen.tags.*;
 import net.invictusslayer.slayersbeasts.world.biome.SBBiomeModifiers;
 import net.invictusslayer.slayersbeasts.world.biome.SBBiomes;
@@ -19,6 +19,8 @@ import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.data.PackOutput;
+import net.minecraft.data.loot.LootTableProvider;
+import net.minecraft.world.level.storage.loot.parameters.LootContextParamSets;
 import net.minecraftforge.common.data.DatapackBuiltinEntriesProvider;
 import net.minecraftforge.common.data.ExistingFileHelper;
 import net.minecraftforge.data.event.GatherDataEvent;
@@ -27,6 +29,7 @@ import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.registries.ForgeRegistries;
 
 import java.util.Collections;
+import java.util.List;
 import java.util.concurrent.CompletableFuture;
 
 @Mod.EventBusSubscriber(modid = SlayersBeasts.MOD_ID, bus = Mod.EventBusSubscriber.Bus.MOD)
@@ -59,9 +62,14 @@ public class SBDataGenerator {
         generator.addProvider(hasServer, new SBPoiTagsProvider(output, provider, existingFileHelper));
 
         generator.addProvider(hasServer, new SBRecipeProvider(output));
-        generator.addProvider(hasServer, SBLootProvider.create(output));
         generator.addProvider(hasServer, new SBBlockStateProvider(output, existingFileHelper));
         generator.addProvider(hasServer, new SBItemModelProvider(output, existingFileHelper));
+
+        generator.addProvider(hasServer, new LootTableProvider(output, SBLootTables.all(), List.of(
+                new LootTableProvider.SubProviderEntry(SBBlockLoot::new, LootContextParamSets.BLOCK),
+                new LootTableProvider.SubProviderEntry(SBEntityLoot::new, LootContextParamSets.ENTITY),
+                new LootTableProvider.SubProviderEntry(SBChestLoot::new, LootContextParamSets.CHEST)
+        )));
     }
 
     private static HolderLookup.Provider patchRegistry(HolderLookup.Provider provider) {

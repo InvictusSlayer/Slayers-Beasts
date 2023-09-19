@@ -44,8 +44,9 @@ public class SBBlockStateProvider extends BlockStateProvider {
         simpleCubeBottomTopWithItem(SBBlocks.ANTHILL_HATCHERY.get());
         simpleCubeBottomTopWithItem(SBBlocks.OOTHECA.get());
 
-        dripstone(SBBlocks.ICICLE.get());
         cubeWithItem(SBBlocks.GLEAMING_ICE.get());
+        dripstone(SBBlocks.ICICLE.get());
+        dripstone(SBBlocks.OBSIDIAN_SPIKE.get());
         doubleCrossBlock(SBBlocks.TALL_DEAD_BUSH.get());
         tiltCubeWithItem(SBBlocks.CRACKED_MUD.get());
         cubeWithItem(SBBlocks.PEAT.get());

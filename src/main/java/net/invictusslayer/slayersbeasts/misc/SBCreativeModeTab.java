@@ -46,7 +46,10 @@ public final class SBCreativeModeTab {
                         tab.accept(SBBlocks.ANT_SOIL.get());
                         tab.accept(SBBlocks.ANTHILL.get());
                         tab.accept(SBBlocks.ANTHILL_HATCHERY.get());
+
+                        tab.accept(SBBlocks.GLEAMING_ICE.get());
                         tab.accept(SBBlocks.ICICLE.get());
+                        tab.accept(SBBlocks.OBSIDIAN_SPIKE.get());
                         tab.accept(SBBlocks.TALL_DEAD_BUSH.get());
                         tab.accept(SBBlocks.CRACKED_MUD.get());
                         tab.accept(SBBlocks.PEAT.get());

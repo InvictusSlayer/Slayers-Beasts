@@ -40,5 +40,6 @@ public class SBItemTagsProvider extends ItemTagsProvider {
         copy(BlockTags.STAIRS, ItemTags.STAIRS);
         copy(BlockTags.WALLS, ItemTags.WALLS);
         copy(BlockTags.SAND, ItemTags.SAND);
+        copy(BlockTags.SMELTS_TO_GLASS, ItemTags.SMELTS_TO_GLASS);
     }
 }
