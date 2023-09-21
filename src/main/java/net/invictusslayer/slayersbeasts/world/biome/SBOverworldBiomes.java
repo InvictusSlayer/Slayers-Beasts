@@ -36,11 +36,11 @@ public class SBOverworldBiomes {
     private static final Music MUSIC_SWAMP = Musics.createGameMusic(SoundEvents.MUSIC_BIOME_SWAMP);
     private static final Music MUSIC_VOLCANIC = Musics.createGameMusic(SoundEvents.MUSIC_BIOME_BASALT_DELTAS);
 
-    public static Biome ancientGrove(HolderGetter<PlacedFeature> pPlacedFeatures, HolderGetter<ConfiguredWorldCarver<?>> pWorldCarvers) {
+    public static Biome ancientGrove(HolderGetter<PlacedFeature> placedFeatures, HolderGetter<ConfiguredWorldCarver<?>> worldCarvers) {
         MobSpawnSettings.Builder mobSettings = new MobSpawnSettings.Builder();
         BiomeDefaultFeatures.commonSpawns(mobSettings);
 
-        BiomeGenerationSettings.Builder biomeSettings = new BiomeGenerationSettings.Builder(pPlacedFeatures, pWorldCarvers);
+        BiomeGenerationSettings.Builder biomeSettings = new BiomeGenerationSettings.Builder(placedFeatures, worldCarvers);
         globalOverworldGeneration(biomeSettings);
         BiomeDefaultFeatures.addDefaultOres(biomeSettings);
         BiomeDefaultFeatures.addDefaultSoftDisks(biomeSettings);
@@ -52,11 +52,11 @@ public class SBOverworldBiomes {
         return biome(true, 0.6F, 0.6F, mobSettings, biomeSettings, MUSIC_RAINFOREST);
     }
 
-    public static Biome aspenForest(HolderGetter<PlacedFeature> pPlacedFeatures, HolderGetter<ConfiguredWorldCarver<?>> pWorldCarvers) {
+    public static Biome aspenForest(HolderGetter<PlacedFeature> placedFeatures, HolderGetter<ConfiguredWorldCarver<?>> worldCarvers) {
         MobSpawnSettings.Builder mobSettings = new MobSpawnSettings.Builder();
         BiomeDefaultFeatures.commonSpawns(mobSettings);
 
-        BiomeGenerationSettings.Builder biomeSettings = new BiomeGenerationSettings.Builder(pPlacedFeatures, pWorldCarvers);
+        BiomeGenerationSettings.Builder biomeSettings = new BiomeGenerationSettings.Builder(placedFeatures, worldCarvers);
         globalOverworldGeneration(biomeSettings);
         BiomeDefaultFeatures.addDefaultOres(biomeSettings);
         BiomeDefaultFeatures.addDefaultSoftDisks(biomeSettings);
@@ -68,13 +68,13 @@ public class SBOverworldBiomes {
         return biome(true, 0.6F, 0.6F, mobSettings, biomeSettings, MUSIC_FOREST);
     }
 
-    public static Biome brushland(HolderGetter<PlacedFeature> pPlacedFeatures, HolderGetter<ConfiguredWorldCarver<?>> pWorldCarvers, boolean pIsWooded, boolean pIsRocky) {
+    public static Biome brushland(HolderGetter<PlacedFeature> placedFeatures, HolderGetter<ConfiguredWorldCarver<?>> worldCarvers, boolean wooded, boolean rocky) {
         MobSpawnSettings.Builder mobSettings = new MobSpawnSettings.Builder();
         BiomeDefaultFeatures.commonSpawns(mobSettings);
 
-        BiomeGenerationSettings.Builder biomeSettings = new BiomeGenerationSettings.Builder(pPlacedFeatures, pWorldCarvers);
+        BiomeGenerationSettings.Builder biomeSettings = new BiomeGenerationSettings.Builder(placedFeatures, worldCarvers);
         globalOverworldGeneration(biomeSettings);
-        if (pIsRocky) biomeSettings.addFeature(GenerationStep.Decoration.LOCAL_MODIFICATIONS, MiscOverworldPlacements.FOREST_ROCK);
+        if (rocky) biomeSettings.addFeature(GenerationStep.Decoration.LOCAL_MODIFICATIONS, MiscOverworldPlacements.FOREST_ROCK);
         BiomeDefaultFeatures.addDefaultOres(biomeSettings);
         BiomeDefaultFeatures.addDefaultSoftDisks(biomeSettings);
         biomeSettings.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, VegetationPlacements.PATCH_TALL_GRASS);
@@ -85,15 +85,15 @@ public class SBOverworldBiomes {
         addModUndergroundVariety(biomeSettings);
         biomeSettings.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, SBPlacedFeatures.PATCH_TALL_DEAD_BUSH_BRUSH);
         addModMushrooms(biomeSettings);
-        biomeSettings.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, pIsWooded ? SBPlacedFeatures.TREES_WOODED_BRUSH : SBPlacedFeatures.TREES_BRUSH);
+        biomeSettings.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, wooded ? SBPlacedFeatures.TREES_WOODED_BRUSH : SBPlacedFeatures.TREES_BRUSH);
         return biome(false, 2F, 0F, mobSettings, biomeSettings, MUSIC_OUTBACK);
     }
 
-    public static Biome chaparral(HolderGetter<PlacedFeature> pPlacedFeatures, HolderGetter<ConfiguredWorldCarver<?>> pWorldCarvers) {
+    public static Biome chaparral(HolderGetter<PlacedFeature> placedFeatures, HolderGetter<ConfiguredWorldCarver<?>> worldCarvers) {
         MobSpawnSettings.Builder mobSettings = new MobSpawnSettings.Builder();
         BiomeDefaultFeatures.commonSpawns(mobSettings);
 
-        BiomeGenerationSettings.Builder biomeSettings = new BiomeGenerationSettings.Builder(pPlacedFeatures, pWorldCarvers);
+        BiomeGenerationSettings.Builder biomeSettings = new BiomeGenerationSettings.Builder(placedFeatures, worldCarvers);
         globalOverworldGeneration(biomeSettings);
         BiomeDefaultFeatures.addDefaultOres(biomeSettings);
         BiomeDefaultFeatures.addDefaultSoftDisks(biomeSettings);
@@ -107,12 +107,12 @@ public class SBOverworldBiomes {
         return biome(true, 0.8F, 0.4F, mobSettings, biomeSettings, MUSIC_OUTBACK);
     }
 
-    public static Biome desert(HolderGetter<PlacedFeature> pPlacedFeatures, HolderGetter<ConfiguredWorldCarver<?>> pWorldCarvers) {
+    public static Biome desert(HolderGetter<PlacedFeature> placedFeatures, HolderGetter<ConfiguredWorldCarver<?>> worldCarvers) {
         MobSpawnSettings.Builder mobSettings = new MobSpawnSettings.Builder();
         BiomeDefaultFeatures.commonSpawns(mobSettings);
         mobSettings.addSpawn(MobCategory.MONSTER, new MobSpawnSettings.SpawnerData(EntityType.HUSK, 80, 4, 4));
 
-        BiomeGenerationSettings.Builder biomeSettings = new BiomeGenerationSettings.Builder(pPlacedFeatures, pWorldCarvers);
+        BiomeGenerationSettings.Builder biomeSettings = new BiomeGenerationSettings.Builder(placedFeatures, worldCarvers);
         globalOverworldGeneration(biomeSettings);
         BiomeDefaultFeatures.addDefaultOres(biomeSettings);
         BiomeDefaultFeatures.addDefaultSoftDisks(biomeSettings);
@@ -124,11 +124,11 @@ public class SBOverworldBiomes {
         return biome(false, 2F, 0F, mobSettings, biomeSettings, MUSIC_DESERT);
     }
 
-    public static Biome eucalyptWoodland(HolderGetter<PlacedFeature> pPlacedFeatures, HolderGetter<ConfiguredWorldCarver<?>> pWorldCarvers) {
+    public static Biome eucalyptWoodland(HolderGetter<PlacedFeature> placedFeatures, HolderGetter<ConfiguredWorldCarver<?>> worldCarvers) {
         MobSpawnSettings.Builder mobSettings = new MobSpawnSettings.Builder();
         BiomeDefaultFeatures.commonSpawns(mobSettings);
 
-        BiomeGenerationSettings.Builder biomeSettings = new BiomeGenerationSettings.Builder(pPlacedFeatures, pWorldCarvers);
+        BiomeGenerationSettings.Builder biomeSettings = new BiomeGenerationSettings.Builder(placedFeatures, worldCarvers);
         globalOverworldGeneration(biomeSettings);
         BiomeDefaultFeatures.addDefaultOres(biomeSettings);
         BiomeDefaultFeatures.addDefaultSoftDisks(biomeSettings);
@@ -143,11 +143,11 @@ public class SBOverworldBiomes {
         return biome(true, 2F, 0F, mobSettings, biomeSettings, MUSIC_FOREST);
     }
 
-    public static Biome frozenThicket(HolderGetter<PlacedFeature> pPlacedFeatures, HolderGetter<ConfiguredWorldCarver<?>> pWorldCarvers) {
+    public static Biome frozenThicket(HolderGetter<PlacedFeature> placedFeatures, HolderGetter<ConfiguredWorldCarver<?>> worldCarvers) {
         MobSpawnSettings.Builder mobSettings = new MobSpawnSettings.Builder();
         BiomeDefaultFeatures.commonSpawns(mobSettings);
 
-        BiomeGenerationSettings.Builder biomeSettings = new BiomeGenerationSettings.Builder(pPlacedFeatures, pWorldCarvers);
+        BiomeGenerationSettings.Builder biomeSettings = new BiomeGenerationSettings.Builder(placedFeatures, worldCarvers);
         globalOverworldGeneration(biomeSettings);
         BiomeDefaultFeatures.addDefaultOres(biomeSettings);
         BiomeDefaultFeatures.addDefaultSoftDisks(biomeSettings);
@@ -157,14 +157,14 @@ public class SBOverworldBiomes {
         return biome(true, 0F, 0F, FROZEN, DEFAULT_WATER, DEFAULT_WATER_FOG, null, null, null, mobSettings, biomeSettings, MUSIC_FROZEN);
     }
 
-    public static Biome inkyMoor(HolderGetter<PlacedFeature> pPlacedFeatures, HolderGetter<ConfiguredWorldCarver<?>> pWorldCarvers) {
+    public static Biome inkyMoor(HolderGetter<PlacedFeature> placedFeatures, HolderGetter<ConfiguredWorldCarver<?>> worldCarvers) {
         MobSpawnSettings.Builder mobSettings = new MobSpawnSettings.Builder();
         BiomeDefaultFeatures.commonSpawns(mobSettings);
         mobSettings.addSpawn(MobCategory.MONSTER, new MobSpawnSettings.SpawnerData(EntityType.SLIME, 1, 1, 1));
         mobSettings.addSpawn(MobCategory.CREATURE, new MobSpawnSettings.SpawnerData(EntityType.FROG, 10, 2, 5));
         mobSettings.addSpawn(MobCategory.AMBIENT, new MobSpawnSettings.SpawnerData(SBEntities.DAMSELFLY.get(), 4, 1, 1));
 
-        BiomeGenerationSettings.Builder biomeSettings = new BiomeGenerationSettings.Builder(pPlacedFeatures, pWorldCarvers);
+        BiomeGenerationSettings.Builder biomeSettings = new BiomeGenerationSettings.Builder(placedFeatures, worldCarvers);
         globalOverworldGeneration(biomeSettings);
         BiomeDefaultFeatures.addDefaultOres(biomeSettings);
         BiomeDefaultFeatures.addMangroveSwampDisks(biomeSettings);
@@ -179,11 +179,11 @@ public class SBOverworldBiomes {
         return biome(true, 0.9F, 0.8F, NONE, 2642743, 2192174, null, 6975545, BiomeSpecialEffects.GrassColorModifier.SWAMP, mobSettings, biomeSettings, MUSIC_SWAMP);
     }
 
-    public static Biome outback(HolderGetter<PlacedFeature> pPlacedFeatures, HolderGetter<ConfiguredWorldCarver<?>> pWorldCarvers) {
+    public static Biome outback(HolderGetter<PlacedFeature> placedFeatures, HolderGetter<ConfiguredWorldCarver<?>> worldCarvers) {
         MobSpawnSettings.Builder mobSettings = new MobSpawnSettings.Builder();
         BiomeDefaultFeatures.commonSpawns(mobSettings);
 
-        BiomeGenerationSettings.Builder biomeSettings = new BiomeGenerationSettings.Builder(pPlacedFeatures, pWorldCarvers);
+        BiomeGenerationSettings.Builder biomeSettings = new BiomeGenerationSettings.Builder(placedFeatures, worldCarvers);
         globalOverworldGeneration(biomeSettings);
         BiomeDefaultFeatures.addDefaultOres(biomeSettings);
         BiomeDefaultFeatures.addDefaultSoftDisks(biomeSettings);
@@ -198,23 +198,23 @@ public class SBOverworldBiomes {
         return biome(false, 2F, 0F, mobSettings, biomeSettings, MUSIC_OUTBACK); // grass-9470285 foliage-10387789
     }
 
-    public static Biome petrifiedWoods(HolderGetter<PlacedFeature> pPlacedFeatures, HolderGetter<ConfiguredWorldCarver<?>> pWorldCarvers) {
+    public static Biome petrifiedWoods(HolderGetter<PlacedFeature> placedFeatures, HolderGetter<ConfiguredWorldCarver<?>> worldCarvers) {
         MobSpawnSettings.Builder mobSettings = new MobSpawnSettings.Builder();
         BiomeDefaultFeatures.commonSpawns(mobSettings);
 
-        BiomeGenerationSettings.Builder biomeSettings = new BiomeGenerationSettings.Builder(pPlacedFeatures, pWorldCarvers);
+        BiomeGenerationSettings.Builder biomeSettings = new BiomeGenerationSettings.Builder(placedFeatures, worldCarvers);
         globalOverworldGeneration(biomeSettings);
         BiomeDefaultFeatures.addDefaultSoftDisks(biomeSettings);
         addModUndergroundVariety(biomeSettings);
         return biome(false, 0F, 0F, Biome.TemperatureModifier.FROZEN, DEFAULT_WATER, DEFAULT_WATER_FOG, null, null, null, mobSettings, biomeSettings, MUSIC_FROZEN);
     }
 
-    public static Biome rainforest(HolderGetter<PlacedFeature> pPlacedFeatures, HolderGetter<ConfiguredWorldCarver<?>> pWorldCarvers) {
+    public static Biome rainforest(HolderGetter<PlacedFeature> placedFeatures, HolderGetter<ConfiguredWorldCarver<?>> worldCarvers) {
         MobSpawnSettings.Builder mobSettings = new MobSpawnSettings.Builder();
         BiomeDefaultFeatures.commonSpawns(mobSettings);
         mobSettings.addSpawn(MobCategory.AMBIENT, new MobSpawnSettings.SpawnerData(SBEntities.DAMSELFLY.get(), 4, 1, 1));
 
-        BiomeGenerationSettings.Builder biomeSettings = new BiomeGenerationSettings.Builder(pPlacedFeatures, pWorldCarvers);
+        BiomeGenerationSettings.Builder biomeSettings = new BiomeGenerationSettings.Builder(placedFeatures, worldCarvers);
         globalOverworldGeneration(biomeSettings);
         BiomeDefaultFeatures.addDefaultOres(biomeSettings);
         BiomeDefaultFeatures.addDefaultSoftDisks(biomeSettings);
@@ -226,11 +226,11 @@ public class SBOverworldBiomes {
         return biome(true, 2F, 0F, mobSettings, biomeSettings, MUSIC_RAINFOREST);
     }
 
-    public static Biome redwoodGrove(HolderGetter<PlacedFeature> pPlacedFeatures, HolderGetter<ConfiguredWorldCarver<?>> pWorldCarvers, boolean pIsOldGrowth) {
+    public static Biome redwoodGrove(HolderGetter<PlacedFeature> placedFeatures, HolderGetter<ConfiguredWorldCarver<?>> worldCarvers, boolean pIsOldGrowth) {
         MobSpawnSettings.Builder mobSettings = new MobSpawnSettings.Builder();
         BiomeDefaultFeatures.commonSpawns(mobSettings);
 
-        BiomeGenerationSettings.Builder biomeSettings = new BiomeGenerationSettings.Builder(pPlacedFeatures, pWorldCarvers);
+        BiomeGenerationSettings.Builder biomeSettings = new BiomeGenerationSettings.Builder(placedFeatures, worldCarvers);
         globalOverworldGeneration(biomeSettings);
         BiomeDefaultFeatures.addDefaultOres(biomeSettings);
         BiomeDefaultFeatures.addDefaultSoftDisks(biomeSettings);
@@ -245,11 +245,11 @@ public class SBOverworldBiomes {
         return biome(true, 0.25F, 0.8F, mobSettings, biomeSettings, MUSIC_REDWOOD);
     }
 
-    public static Biome volcanicPeaks(HolderGetter<PlacedFeature> pPlacedFeatures, HolderGetter<ConfiguredWorldCarver<?>> pWorldCarvers) {
+    public static Biome volcanicPeaks(HolderGetter<PlacedFeature> placedFeatures, HolderGetter<ConfiguredWorldCarver<?>> worldCarvers) {
         MobSpawnSettings.Builder mobSettings = new MobSpawnSettings.Builder();
         BiomeDefaultFeatures.commonSpawns(mobSettings);
 
-        BiomeGenerationSettings.Builder biomeSettings = new BiomeGenerationSettings.Builder(pPlacedFeatures, pWorldCarvers);
+        BiomeGenerationSettings.Builder biomeSettings = new BiomeGenerationSettings.Builder(placedFeatures, worldCarvers);
         BiomeDefaultFeatures.addDefaultCarversAndLakes(biomeSettings);
         BiomeDefaultFeatures.addDefaultCrystalFormations(biomeSettings);
         BiomeDefaultFeatures.addDefaultMonsterRoom(biomeSettings);
@@ -266,24 +266,40 @@ public class SBOverworldBiomes {
         return biome(true, 2F, 0F, NONE, DEFAULT_WATER, DEFAULT_WATER_FOG, 8230780, null, null, mobSettings, biomeSettings, MUSIC_VOLCANIC);
     }
 
-    public static Biome fungalDepths(HolderGetter<PlacedFeature> pPlacedFeatures, HolderGetter<ConfiguredWorldCarver<?>> pWorldCarvers) {
+    public static Biome dustyCaverns(HolderGetter<PlacedFeature> placedFeatures, HolderGetter<ConfiguredWorldCarver<?>> worldCarvers) {
         MobSpawnSettings.Builder mobSettings = new MobSpawnSettings.Builder();
         BiomeDefaultFeatures.commonSpawns(mobSettings);
 
-        BiomeGenerationSettings.Builder biomeSettings = new BiomeGenerationSettings.Builder(pPlacedFeatures, pWorldCarvers);
+        BiomeGenerationSettings.Builder biomeSettings = new BiomeGenerationSettings.Builder(placedFeatures, worldCarvers);
         globalOverworldGeneration(biomeSettings);
         BiomeDefaultFeatures.addDefaultOres(biomeSettings);
         BiomeDefaultFeatures.addDefaultSoftDisks(biomeSettings);
+        BiomeDefaultFeatures.addDefaultMushrooms(biomeSettings);
         addModUndergroundVariety(biomeSettings);
+        addModMushrooms(biomeSettings);
+        return biome(true, 0.8F, 0.4F, new MobSpawnSettings.Builder(), biomeSettings, MUSIC_CAVES);
+    }
+
+    public static Biome fungalDepths(HolderGetter<PlacedFeature> placedFeatures, HolderGetter<ConfiguredWorldCarver<?>> worldCarvers) {
+        MobSpawnSettings.Builder mobSettings = new MobSpawnSettings.Builder();
+        BiomeDefaultFeatures.commonSpawns(mobSettings);
+
+        BiomeGenerationSettings.Builder biomeSettings = new BiomeGenerationSettings.Builder(placedFeatures, worldCarvers);
+        globalOverworldGeneration(biomeSettings);
+        BiomeDefaultFeatures.addDefaultOres(biomeSettings);
+        BiomeDefaultFeatures.addDefaultSoftDisks(biomeSettings);
+        biomeSettings.addFeature(GenerationStep.Decoration.UNDERGROUND_ORES, SBPlacedFeatures.ORE_EXOSKELETON_LUSH);
+        biomeSettings.addFeature(GenerationStep.Decoration.UNDERGROUND_ORES, SBPlacedFeatures.ORE_PEGMATITE_UPPER);
+        biomeSettings.addFeature(GenerationStep.Decoration.UNDERGROUND_ORES, SBPlacedFeatures.ORE_PEGMATITE_LOWER);
         biomeSettings.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, SBPlacedFeatures.STYPHIUM_PATCH);
         return biome(true, 0.8F, 0.4F, new MobSpawnSettings.Builder(), biomeSettings, MUSIC_CAVES);
     }
 
-    public static Biome iceCaves(HolderGetter<PlacedFeature> pPlacedFeatures, HolderGetter<ConfiguredWorldCarver<?>> pWorldCarvers) {
+    public static Biome iceCaves(HolderGetter<PlacedFeature> placedFeatures, HolderGetter<ConfiguredWorldCarver<?>> worldCarvers) {
         MobSpawnSettings.Builder mobSettings = new MobSpawnSettings.Builder();
         BiomeDefaultFeatures.commonSpawns(mobSettings);
 
-        BiomeGenerationSettings.Builder biomeSettings = new BiomeGenerationSettings.Builder(pPlacedFeatures, pWorldCarvers);
+        BiomeGenerationSettings.Builder biomeSettings = new BiomeGenerationSettings.Builder(placedFeatures, worldCarvers);
         biomeSettings.addCarver(GenerationStep.Carving.AIR, Carvers.CAVE);
         biomeSettings.addCarver(GenerationStep.Carving.AIR, Carvers.CAVE_EXTRA_UNDERGROUND);
         biomeSettings.addCarver(GenerationStep.Carving.AIR, Carvers.CANYON);
@@ -296,11 +312,11 @@ public class SBOverworldBiomes {
         return biome(true, 0.8F, 0.4F, new MobSpawnSettings.Builder(), biomeSettings, MUSIC_CAVES);
     }
 
-    public static Biome slimeCaverns(HolderGetter<PlacedFeature> pPlacedFeatures, HolderGetter<ConfiguredWorldCarver<?>> pWorldCarvers) {
+    public static Biome slimeCaverns(HolderGetter<PlacedFeature> placedFeatures, HolderGetter<ConfiguredWorldCarver<?>> worldCarvers) {
         MobSpawnSettings.Builder mobSettings = new MobSpawnSettings.Builder();
         BiomeDefaultFeatures.commonSpawns(mobSettings);
 
-        BiomeGenerationSettings.Builder biomeSettings = new BiomeGenerationSettings.Builder(pPlacedFeatures, pWorldCarvers);
+        BiomeGenerationSettings.Builder biomeSettings = new BiomeGenerationSettings.Builder(placedFeatures, worldCarvers);
         globalOverworldGeneration(biomeSettings);
         BiomeDefaultFeatures.addDefaultOres(biomeSettings);
         BiomeDefaultFeatures.addDefaultSoftDisks(biomeSettings);
@@ -310,28 +326,21 @@ public class SBOverworldBiomes {
         return biome(true, 0.8F, 0.4F, new MobSpawnSettings.Builder(), biomeSettings, MUSIC_CAVES);
     }
 
-    public static Biome theCrypt(HolderGetter<PlacedFeature> pPlacedFeatures, HolderGetter<ConfiguredWorldCarver<?>> pWorldCarvers) {
-        BiomeGenerationSettings.Builder biomeSettings = new BiomeGenerationSettings.Builder(pPlacedFeatures, pWorldCarvers);
+    public static Biome theCrypt(HolderGetter<PlacedFeature> placedFeatures, HolderGetter<ConfiguredWorldCarver<?>> worldCarvers) {
+        BiomeGenerationSettings.Builder biomeSettings = new BiomeGenerationSettings.Builder(placedFeatures, worldCarvers);
         return biome(false, 0.5F, 0.5F, new MobSpawnSettings.Builder(), biomeSettings, null);
     }
 
-    private static Biome biome(boolean pHasPrecipitation, float pTemperature, float pDownfall, MobSpawnSettings.Builder pMobSpawnSettings, BiomeGenerationSettings.Builder pGenerationSettings, @Nullable Music pBackgroundMusic) {
-        return biome(pHasPrecipitation, pTemperature, pDownfall, NONE, DEFAULT_WATER, DEFAULT_WATER_FOG, null, null, null, pMobSpawnSettings, pGenerationSettings, pBackgroundMusic);
+    private static Biome biome(boolean precipitation, float temperature, float downfall, MobSpawnSettings.Builder mobSettings, BiomeGenerationSettings.Builder biomeSettings, @Nullable Music music) {
+        return biome(precipitation, temperature, downfall, NONE, DEFAULT_WATER, DEFAULT_WATER_FOG, null, null, null, mobSettings, biomeSettings, music);
     }
 
-    private static Biome biome(boolean pHasPrecipitation, float pTemperature, float pDownfall, Biome.TemperatureModifier pTemperatureModifier, int pWaterColor, int pWaterFogColor, @Nullable Integer pGrassColorOverride, @Nullable Integer pFoliageColorOverride, @Nullable BiomeSpecialEffects.GrassColorModifier pGrassColorModifier, MobSpawnSettings.Builder pMobSpawnSettings, BiomeGenerationSettings.Builder pGenerationSettings, @Nullable Music pBackgroundMusic) {
-        BiomeSpecialEffects.Builder biomeEffects = new BiomeSpecialEffects.Builder().waterColor(pWaterColor).waterFogColor(pWaterFogColor).fogColor(DEFAULT_FOG).skyColor(calculateSkyColor(pTemperature)).ambientMoodSound(AmbientMoodSettings.LEGACY_CAVE_SETTINGS).backgroundMusic(pBackgroundMusic);
-        if (pGrassColorOverride != null) {
-            biomeEffects.grassColorOverride(pGrassColorOverride);
-        }
-        if (pFoliageColorOverride != null) {
-            biomeEffects.foliageColorOverride(pFoliageColorOverride);
-        }
-        if (pGrassColorModifier != null) {
-            biomeEffects.grassColorModifier(pGrassColorModifier);
-        }
-
-        return new Biome.BiomeBuilder().hasPrecipitation(pHasPrecipitation).temperature(pTemperature).downfall(pDownfall).temperatureAdjustment(pTemperatureModifier).specialEffects(biomeEffects.build()).mobSpawnSettings(pMobSpawnSettings.build()).generationSettings(pGenerationSettings.build()).build();
+    private static Biome biome(boolean precipitation, float temperature, float downfall, Biome.TemperatureModifier temperatureModifier, int waterColor, int waterFogColor, @Nullable Integer grassOverride, @Nullable Integer foliageOverride, @Nullable BiomeSpecialEffects.GrassColorModifier grassModifier, MobSpawnSettings.Builder mobSettings, BiomeGenerationSettings.Builder biomeSettings, @Nullable Music music) {
+        BiomeSpecialEffects.Builder biomeEffects = new BiomeSpecialEffects.Builder().waterColor(waterColor).waterFogColor(waterFogColor).fogColor(DEFAULT_FOG).skyColor(calculateSkyColor(temperature)).ambientMoodSound(AmbientMoodSettings.LEGACY_CAVE_SETTINGS).backgroundMusic(music);
+        if (grassOverride != null) biomeEffects.grassColorOverride(grassOverride);
+        if (foliageOverride != null) biomeEffects.foliageColorOverride(foliageOverride);
+        if (grassModifier != null) biomeEffects.grassColorModifier(grassModifier);
+        return new Biome.BiomeBuilder().hasPrecipitation(precipitation).temperature(temperature).downfall(downfall).temperatureAdjustment(temperatureModifier).specialEffects(biomeEffects.build()).mobSpawnSettings(mobSettings.build()).generationSettings(biomeSettings.build()).build();
     }
 
     private static void globalOverworldGeneration(BiomeGenerationSettings.Builder biomeSettings) {
@@ -350,6 +359,7 @@ public class SBOverworldBiomes {
     }
 
     private static void addModUndergroundVariety(BiomeGenerationSettings.Builder biomeSettings) {
+        biomeSettings.addFeature(GenerationStep.Decoration.UNDERGROUND_ORES, SBPlacedFeatures.ORE_EXOSKELETON);
         biomeSettings.addFeature(GenerationStep.Decoration.UNDERGROUND_ORES, SBPlacedFeatures.ORE_PEGMATITE_UPPER);
         biomeSettings.addFeature(GenerationStep.Decoration.UNDERGROUND_ORES, SBPlacedFeatures.ORE_PEGMATITE_LOWER);
     }
@@ -365,9 +375,9 @@ public class SBOverworldBiomes {
         biomeSettings.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, SBPlacedFeatures.WHITE_MUSHROOM_RARE);
     }
 
-    private static int calculateSkyColor(float pTemperature) {
-        float $$1 = pTemperature / 3.0F;
-        $$1 = Mth.clamp($$1, -1.0F, 1.0F);
-        return Mth.hsvToRgb(0.62222224F - $$1 * 0.05F, 0.5F + $$1 * 0.1F, 1.0F);
+    static int calculateSkyColor(float pTemperature) {
+        float f = pTemperature / 3.0F;
+        f = Mth.clamp(f, -1.0F, 1.0F);
+        return Mth.hsvToRgb(0.62F - f * 0.05F, 0.5F + f * 0.1F, 1.0F);
     }
 }

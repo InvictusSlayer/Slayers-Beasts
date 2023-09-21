@@ -24,6 +24,14 @@ public class SBUndergroundRegion extends Region {
 
         new ParameterPointListBuilder()
                 .temperature(Temperature.FULL_RANGE)
+                .humidity(Humidity.ARID)
+                .continentalness(Continentalness.INLAND)
+                .erosion(Erosion.FULL_RANGE)
+                .weirdness(Weirdness.FULL_RANGE)
+                .depth(Depth.UNDERGROUND)
+                .build().forEach(point -> builder.add(point, SBBiomes.DUSTY_CAVERNS));
+        new ParameterPointListBuilder()
+                .temperature(Temperature.FULL_RANGE)
                 .humidity(Humidity.WET)
                 .continentalness(Continentalness.FULL_RANGE)
                 .erosion(Erosion.FULL_RANGE)

@@ -9,6 +9,7 @@ import net.invictusslayer.slayersbeasts.item.SBPotions;
 import net.invictusslayer.slayersbeasts.misc.SBCreativeModeTab;
 import net.invictusslayer.slayersbeasts.misc.SBPois;
 import net.invictusslayer.slayersbeasts.misc.SBSounds;
+import net.invictusslayer.slayersbeasts.world.biome.SBNetherRegion;
 import net.invictusslayer.slayersbeasts.world.biome.SBOverworldRegion;
 import net.invictusslayer.slayersbeasts.world.biome.SBSurfaceRuleData;
 import net.invictusslayer.slayersbeasts.world.biome.SBUndergroundRegion;
@@ -66,6 +67,7 @@ public class SlayersBeasts {
 
             Regions.register(new SBOverworldRegion(2));
             Regions.register(new SBUndergroundRegion(1));
+            Regions.register(new SBNetherRegion(1));
 
             SurfaceRuleManager.addSurfaceRules(SurfaceRuleManager.RuleCategory.OVERWORLD, MOD_ID, SBSurfaceRuleData.overworldRules());
             SurfaceRuleManager.addSurfaceRules(SurfaceRuleManager.RuleCategory.NETHER, MOD_ID, SBSurfaceRuleData.netherRules());

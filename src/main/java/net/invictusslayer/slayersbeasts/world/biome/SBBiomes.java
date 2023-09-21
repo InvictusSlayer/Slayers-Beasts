@@ -12,7 +12,7 @@ import net.minecraft.world.level.levelgen.carver.ConfiguredWorldCarver;
 import net.minecraft.world.level.levelgen.placement.PlacedFeature;
 
 public class SBBiomes {
-    //OVERWORLD
+    //Overworld
     public static final ResourceKey<Biome> ANCIENT_GROVE = createKey("ancient_grove");
     public static final ResourceKey<Biome> ASPEN_FOREST = createKey("aspen_forest");
     public static final ResourceKey<Biome> BLACK_DUNES = createKey("black_dunes");
@@ -31,18 +31,19 @@ public class SBBiomes {
     public static final ResourceKey<Biome> OLD_GROWTH_REDWOOD_GROVE = createKey("old_growth_redwood_grove");
     public static final ResourceKey<Biome> VOLCANIC_PEAKS = createKey("volcanic_peaks");
 
-    //UNDERGROUND
+    //Underground
+    public static final ResourceKey<Biome> DUSTY_CAVERNS = createKey("dusty_caverns");
     public static final ResourceKey<Biome> FUNGAL_DEPTHS = createKey("fungal_depths");
     public static final ResourceKey<Biome> ICE_CAVES = createKey("ice_caves");
     public static final ResourceKey<Biome> SLIME_CAVERNS = createKey("slime_caverns");
 
-    //NETHER
+    //Nether
     public static final ResourceKey<Biome> TOXIC_JUNGLE = createKey("toxic_jungle");
 
-    //END
+    //End
     public static final ResourceKey<Biome> END_SPIKES = createKey("end_spikes");
 
-    //CRYPT
+    //Crypt
     public static final ResourceKey<Biome> THE_CRYPT = createKey("the_crypt");
 
     public static void bootstrap(BootstapContext<Biome> context) {
@@ -67,9 +68,12 @@ public class SBBiomes {
         register(context, OLD_GROWTH_REDWOOD_GROVE, SBOverworldBiomes.redwoodGrove(placed, carver, true), VillagerType.TAIGA);
         register(context, VOLCANIC_PEAKS, SBOverworldBiomes.volcanicPeaks(placed, carver));
 
+        register(context, DUSTY_CAVERNS, SBOverworldBiomes.dustyCaverns(placed, carver));
         register(context, FUNGAL_DEPTHS, SBOverworldBiomes.fungalDepths(placed, carver));
         register(context, ICE_CAVES, SBOverworldBiomes.iceCaves(placed, carver));
         register(context, SLIME_CAVERNS, SBOverworldBiomes.slimeCaverns(placed, carver));
+
+        register(context, TOXIC_JUNGLE, SBNetherBiomes.toxicJungle(placed, carver));
 
         register(context, THE_CRYPT, SBOverworldBiomes.theCrypt(placed, carver));
     }

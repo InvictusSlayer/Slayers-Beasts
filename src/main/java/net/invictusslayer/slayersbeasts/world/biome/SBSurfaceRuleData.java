@@ -75,6 +75,7 @@ public class SBSurfaceRuleData {
                         ))
                 )), /* Underground */
                 ifTrue(ON_FLOOR, ifTrue(waterBlockCheck(-1, 0), sequence(
+                        ifTrue(isBiome(SBBiomes.DUSTY_CAVERNS), setBlock(Blocks.SAND)),
                         ifTrue(isBiome(SBBiomes.ICE_CAVES), sequence(
                                 ifTrue(noiseCondition(Noises.SWAMP, 0), setBlock(Blocks.ICE)),
                                 setBlock(Blocks.PACKED_ICE)))
@@ -85,6 +86,7 @@ public class SBSurfaceRuleData {
                                         ifTrue(ON_CEILING, setBlock(Blocks.BASALT)),
                                         ifTrue(noiseCondition(Noises.SURFACE, 0), setBlock(Blocks.BASALT)),
                                         setBlock(Blocks.TUFF))),
+                                ifTrue(isBiome(SBBiomes.DUSTY_CAVERNS), setBlock(Blocks.SAND)),
                                 ifTrue(isBiome(SBBiomes.ICE_CAVES),
                                         ifTrue(noiseCondition(Noises.AQUIFER_LAVA, 0), setBlock(Blocks.ICE)))
                         )),
@@ -93,6 +95,7 @@ public class SBSurfaceRuleData {
                                         ifTrue(noiseCondition(Noises.AQUIFER_LAVA, 0.1), setBlock(Blocks.PACKED_ICE)))
                         )),
                         ifTrue(VERY_DEEP_UNDER_FLOOR, sequence(
+                                ifTrue(isBiome(SBBiomes.DUSTY_CAVERNS), setBlock(Blocks.SANDSTONE)),
                                 ifTrue(isBiome(SBBiomes.VOLCANIC_PEAKS), setBlock(Blocks.GRANITE))
                         ))
                 )))
