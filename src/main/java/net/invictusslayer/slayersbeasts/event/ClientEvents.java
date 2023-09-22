@@ -8,13 +8,14 @@ import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.client.event.EntityRenderersEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 
 @Mod.EventBusSubscriber(modid = SlayersBeasts.MOD_ID, bus = Mod.EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
 public final class ClientEvents {
-    private ClientEvents() {}
+    public static void clientSetup(FMLClientSetupEvent event) {}
 
     @SubscribeEvent
-    public static void clientSetup(EntityRenderersEvent.RegisterLayerDefinitions event) {
+    public static void registerLayers(EntityRenderersEvent.RegisterLayerDefinitions event) {
         event.registerLayerDefinition(MantisModel.LAYER_LOCATION, MantisModel::createBodyLayer);
         event.registerLayerDefinition(WorkerAntModel.LAYER_LOCATION, WorkerAntModel::createBodyLayer);
         event.registerLayerDefinition(SoldierAntModel.LAYER_LOCATION, SoldierAntModel::createBodyLayer);
@@ -28,7 +29,7 @@ public final class ClientEvents {
     }
 
     @SubscribeEvent
-    public static void registerLayers(EntityRenderersEvent.RegisterRenderers event) {
+    public static void registerRenderers(EntityRenderersEvent.RegisterRenderers event) {
         event.registerEntityRenderer(SBEntities.MANTIS.get(), MantisRenderer::new);
         event.registerEntityRenderer(SBEntities.WORKER_ANT.get(), WorkerAntRenderer::new);
         event.registerEntityRenderer(SBEntities.SOLDIER_ANT.get(), SoldierAntRenderer::new);

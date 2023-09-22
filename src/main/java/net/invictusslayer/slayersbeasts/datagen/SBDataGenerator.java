@@ -1,8 +1,12 @@
 package net.invictusslayer.slayersbeasts.datagen;
 
 import net.invictusslayer.slayersbeasts.SlayersBeasts;
-import net.invictusslayer.slayersbeasts.datagen.loot.*;
+import net.invictusslayer.slayersbeasts.datagen.loot.SBBlockLoot;
+import net.invictusslayer.slayersbeasts.datagen.loot.SBChestLoot;
+import net.invictusslayer.slayersbeasts.datagen.loot.SBEntityLoot;
+import net.invictusslayer.slayersbeasts.datagen.loot.SBLootTables;
 import net.invictusslayer.slayersbeasts.datagen.tags.*;
+import net.invictusslayer.slayersbeasts.world.SBNoises;
 import net.invictusslayer.slayersbeasts.world.biome.SBBiomeModifiers;
 import net.invictusslayer.slayersbeasts.world.biome.SBBiomes;
 import net.invictusslayer.slayersbeasts.world.dimension.SBDimensions;
@@ -43,6 +47,7 @@ public class SBDataGenerator {
             .add(Registries.STRUCTURE_SET, SBStructureSets::bootstrap)
             .add(Registries.TEMPLATE_POOL, SBPools::bootstrap)
             .add(Registries.PROCESSOR_LIST, SBProcessorLists::bootstrap)
+            .add(Registries.NOISE, SBNoises::bootstrap)
             .add(ForgeRegistries.Keys.BIOME_MODIFIERS, SBBiomeModifiers::bootstrap);
 
     @SubscribeEvent

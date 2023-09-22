@@ -13,11 +13,10 @@ import net.minecraftforge.registries.RegistryObject;
 
 @Mod.EventBusSubscriber(modid = SlayersBeasts.MOD_ID, bus = Mod.EventBusSubscriber.Bus.MOD)
 public final class SBCreativeModeTab {
-    public static final DeferredRegister<CreativeModeTab> CREATIVE_MODE_TABS = DeferredRegister.create(Registries.CREATIVE_MODE_TAB, SlayersBeasts.MOD_ID);
+    public static final DeferredRegister<CreativeModeTab> CREATIVE_TABS = DeferredRegister.create(Registries.CREATIVE_MODE_TAB, SlayersBeasts.MOD_ID);
 
-    public static final RegistryObject<CreativeModeTab> SLAYERS_BEASTS_TAB = CREATIVE_MODE_TABS.register("slayers_beasts_tab",
-            () -> CreativeModeTab.builder().icon(() -> new ItemStack(SBBlocks.REDWOOD_SAPLING.get())).title(Component.translatable("creativemodetab.slayers_beasts_tab"))
-                    .displayItems(((display, tab) -> {
+    public static final RegistryObject<CreativeModeTab> SLAYERSBEASTS = CREATIVE_TABS.register("slayersbeasts", () -> CreativeModeTab.builder().icon(() ->
+                    new ItemStack(SBBlocks.REDWOOD_SAPLING.get())).title(Component.translatable("creative_tab.slayersbeasts")).displayItems(((display, tab) -> {
                         tab.accept(SBItems.JADE.get());
 //                        tab.accept(SBItems.JADE_SHARD.get());
 //                        tab.accept(SBItems.CRYSTALLINE_WING.get());

@@ -6,7 +6,6 @@ import net.minecraft.core.registries.Registries;
 import net.minecraft.data.worldgen.BootstapContext;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.entity.npc.VillagerType;
 import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.levelgen.carver.ConfiguredWorldCarver;
 import net.minecraft.world.level.levelgen.placement.PlacedFeature;
@@ -50,41 +49,37 @@ public class SBBiomes {
         HolderGetter<PlacedFeature> placed = context.lookup(Registries.PLACED_FEATURE);
         HolderGetter<ConfiguredWorldCarver<?>> carver = context.lookup(Registries.CONFIGURED_CARVER);
 
-        register(context, ANCIENT_GROVE, SBOverworldBiomes.ancientGrove(placed, carver), VillagerType.JUNGLE);
+        register(context, ANCIENT_GROVE, SBOverworldBiomes.ancientGrove(placed, carver));
         register(context, ASPEN_FOREST, SBOverworldBiomes.aspenForest(placed, carver));
-        register(context, BLACK_DUNES, SBOverworldBiomes.desert(placed, carver), VillagerType.DESERT);
-        register(context, BRUSHLAND, SBOverworldBiomes.brushland(placed, carver, false, false), VillagerType.SAVANNA);
-        register(context, ROCKY_BRUSHLAND, SBOverworldBiomes.brushland(placed, carver, false, true), VillagerType.SAVANNA);
-        register(context, WOODED_BRUSHLAND, SBOverworldBiomes.brushland(placed, carver, true, false), VillagerType.SAVANNA);
+        register(context, BLACK_DUNES, SBOverworldBiomes.desert(placed, carver));
+        register(context, BRUSHLAND, SBOverworldBiomes.brushland(placed, carver, false, false));
+        register(context, ROCKY_BRUSHLAND, SBOverworldBiomes.brushland(placed, carver, false, true));
+        register(context, WOODED_BRUSHLAND, SBOverworldBiomes.brushland(placed, carver, true, false));
         register(context, CHAPARRAL, SBOverworldBiomes.chaparral(placed, carver));
-        register(context, DEAD_SANDS, SBOverworldBiomes.desert(placed, carver), VillagerType.DESERT);
-        register(context, EUCALYPT_WOODLAND, SBOverworldBiomes.eucalyptWoodland(placed, carver), VillagerType.SAVANNA);
-        register(context, FROZEN_THICKET, SBOverworldBiomes.frozenThicket(placed, carver), VillagerType.SNOW);
-        register(context, INKY_MOOR, SBOverworldBiomes.inkyMoor(placed, carver), VillagerType.SWAMP);
-        register(context, OUTBACK, SBOverworldBiomes.outback(placed, carver), VillagerType.SAVANNA);
-        register(context, PETRIFIED_WOODS, SBOverworldBiomes.petrifiedWoods(placed, carver), VillagerType.SNOW);
-        register(context, RAINFOREST, SBOverworldBiomes.rainforest(placed, carver), VillagerType.JUNGLE);
-        register(context, REDWOOD_GROVE, SBOverworldBiomes.redwoodGrove(placed, carver, false), VillagerType.TAIGA);
-        register(context, OLD_GROWTH_REDWOOD_GROVE, SBOverworldBiomes.redwoodGrove(placed, carver, true), VillagerType.TAIGA);
+        register(context, DEAD_SANDS, SBOverworldBiomes.desert(placed, carver));
+        register(context, EUCALYPT_WOODLAND, SBOverworldBiomes.eucalyptWoodland(placed, carver));
+        register(context, FROZEN_THICKET, SBOverworldBiomes.frozenThicket(placed, carver));
+        register(context, INKY_MOOR, SBOverworldBiomes.inkyMoor(placed, carver));
+        register(context, OUTBACK, SBOverworldBiomes.outback(placed, carver));
+        register(context, PETRIFIED_WOODS, SBOverworldBiomes.petrifiedWoods(placed, carver));
+        register(context, RAINFOREST, SBOverworldBiomes.rainforest(placed, carver));
+        register(context, REDWOOD_GROVE, SBOverworldBiomes.redwoodGrove(placed, carver, false));
+        register(context, OLD_GROWTH_REDWOOD_GROVE, SBOverworldBiomes.redwoodGrove(placed, carver, true));
         register(context, VOLCANIC_PEAKS, SBOverworldBiomes.volcanicPeaks(placed, carver));
 
-        register(context, DUSTY_CAVERNS, SBOverworldBiomes.dustyCaverns(placed, carver));
-        register(context, FUNGAL_DEPTHS, SBOverworldBiomes.fungalDepths(placed, carver));
-        register(context, ICE_CAVES, SBOverworldBiomes.iceCaves(placed, carver));
-        register(context, SLIME_CAVERNS, SBOverworldBiomes.slimeCaverns(placed, carver));
+        register(context, DUSTY_CAVERNS, SBUndergroundBiomes.dustyCaverns(placed, carver));
+        register(context, FUNGAL_DEPTHS, SBUndergroundBiomes.fungalDepths(placed, carver));
+        register(context, ICE_CAVES, SBUndergroundBiomes.iceCaves(placed, carver));
+        register(context, SLIME_CAVERNS, SBUndergroundBiomes.slimeCaverns(placed, carver));
+        register(context, THE_CRYPT, SBUndergroundBiomes.theCrypt(placed, carver));
 
         register(context, TOXIC_JUNGLE, SBNetherBiomes.toxicJungle(placed, carver));
 
-        register(context, THE_CRYPT, SBOverworldBiomes.theCrypt(placed, carver));
+        register(context, END_SPIKES, SBUndergroundBiomes.theCrypt(placed, carver));
     }
 
     private static ResourceKey<Biome> createKey(String name) {
         return ResourceKey.create(Registries.BIOME, new ResourceLocation(SlayersBeasts.MOD_ID, name));
-    }
-
-    private static void register(BootstapContext<Biome> context, ResourceKey<Biome> key, Biome biome, VillagerType villagerType) {
-        register(context, key, biome);
-        VillagerType.BY_BIOME.put(key, villagerType);
     }
 
     private static void register(BootstapContext<Biome> context, ResourceKey<Biome> key, Biome biome) {

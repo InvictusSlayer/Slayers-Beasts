@@ -1,6 +1,7 @@
 package net.invictusslayer.slayersbeasts.world.biome;
 
 import net.invictusslayer.slayersbeasts.block.SBBlocks;
+import net.invictusslayer.slayersbeasts.world.SBNoises;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.levelgen.Noises;
@@ -19,7 +20,7 @@ public class SBSurfaceRuleData {
                                         setBlock(SBBlocks.BLACK_SAND.get()))),
                                 ifTrue(isBiome(SBBiomes.DEAD_SANDS), sequence(
                                         ifTrue(ON_CEILING, setBlock(SBBlocks.BLACK_SANDSTONE.get())),
-                                        ifTrue(noiseCondition(Noises.ICE, 0), setBlock(SBBlocks.BLACK_SAND.get())),
+                                        ifTrue(noiseCondition(SBNoises.SAND, 0), setBlock(SBBlocks.BLACK_SAND.get())),
                                         setBlock(Blocks.RED_SAND))),
                                 ifTrue(isBiome(SBBiomes.EUCALYPT_WOODLAND),
                                         ifTrue(noiseCondition(Noises.SURFACE, -0.5), setBlock(Blocks.PODZOL))),
@@ -50,7 +51,7 @@ public class SBSurfaceRuleData {
                                                 setBlock(SBBlocks.BLACK_SAND.get()))),
                                         ifTrue(isBiome(SBBiomes.DEAD_SANDS), sequence(
                                                 ifTrue(ON_CEILING, setBlock(SBBlocks.BLACK_SANDSTONE.get())),
-                                                ifTrue(noiseCondition(Noises.ICE, 0), setBlock(SBBlocks.BLACK_SAND.get())),
+                                                ifTrue(noiseCondition(SBNoises.SAND, 0), setBlock(SBBlocks.BLACK_SAND.get())),
                                                 setBlock(Blocks.RED_SAND))),
                                         ifTrue(isBiome(SBBiomes.INKY_MOOR), setBlock(Blocks.MUD)),
                                         ifTrue(isBiome(SBBiomes.OUTBACK), sequence(
@@ -60,7 +61,6 @@ public class SBSurfaceRuleData {
                                                 ifTrue(noiseCondition(Noises.SWAMP, 0.1), setBlock(Blocks.SAND)),
                                                 setBlock(Blocks.COARSE_DIRT))),
                                         ifTrue(isBiome(SBBiomes.VOLCANIC_PEAKS), sequence(
-                                                ifTrue(ON_CEILING, setBlock(Blocks.BASALT)),
                                                 ifTrue(noiseCondition(Noises.SURFACE, 0), setBlock(Blocks.BASALT)),
                                                 setBlock(Blocks.TUFF))),
                                         ifTrue(isBiome(SBBiomes.SLIME_CAVERNS), setBlock(Blocks.STONE)),
@@ -83,16 +83,15 @@ public class SBSurfaceRuleData {
                 ifTrue(waterStartCheck(-6, -1), ifTrue(not(hole()), sequence(
                         ifTrue(UNDER_FLOOR, sequence(
                                 ifTrue(isBiome(SBBiomes.VOLCANIC_PEAKS), sequence(
-                                        ifTrue(ON_CEILING, setBlock(Blocks.BASALT)),
                                         ifTrue(noiseCondition(Noises.SURFACE, 0), setBlock(Blocks.BASALT)),
                                         setBlock(Blocks.TUFF))),
                                 ifTrue(isBiome(SBBiomes.DUSTY_CAVERNS), setBlock(Blocks.SAND)),
                                 ifTrue(isBiome(SBBiomes.ICE_CAVES),
-                                        ifTrue(noiseCondition(Noises.AQUIFER_LAVA, 0), setBlock(Blocks.ICE)))
+                                        ifTrue(noiseCondition(SBNoises.CAVE_ICE, 0), setBlock(Blocks.ICE)))
                         )),
                         ifTrue(DEEP_UNDER_FLOOR, sequence(
                                 ifTrue(isBiome(SBBiomes.ICE_CAVES),
-                                        ifTrue(noiseCondition(Noises.AQUIFER_LAVA, 0.1), setBlock(Blocks.PACKED_ICE)))
+                                        ifTrue(noiseCondition(SBNoises.CAVE_ICE, 0.1), setBlock(Blocks.PACKED_ICE)))
                         )),
                         ifTrue(VERY_DEEP_UNDER_FLOOR, sequence(
                                 ifTrue(isBiome(SBBiomes.DUSTY_CAVERNS), setBlock(Blocks.SANDSTONE)),
