@@ -20,7 +20,7 @@ public class SBBiomeTagsProvider extends BiomeTagsProvider {
 
 	protected void addTags(HolderLookup.Provider pProvider) {
 		tag(SBTags.Biomes.IS_BRUSHLAND).add(SBBiomes.BRUSHLAND, SBBiomes.ROCKY_BRUSHLAND, SBBiomes.WOODED_BRUSHLAND);
-		tag(SBTags.Biomes.HAS_CRYPT_PORTAL).add(SBBiomes.BLACK_DUNES, SBBiomes.DEAD_SANDS);
+		tag(SBTags.Biomes.HAS_CRYPT_PORTAL).add(SBBiomes.BLACK_DUNES, SBBiomes.DEAD_SANDS, SBBiomes.VOLCANIC_PEAKS);
 		tag(SBTags.Biomes.SPAWNS_DAMSELFLY).add(Biomes.SPARSE_JUNGLE, Biomes.PLAINS, Biomes.SUNFLOWER_PLAINS, Biomes.MEADOW, Biomes.SWAMP, Biomes.MANGROVE_SWAMP, Biomes.RIVER);
 
 		tag(Tags.Biomes.IS_DESERT).add(SBBiomes.BLACK_DUNES, SBBiomes.DEAD_SANDS);
@@ -33,11 +33,12 @@ public class SBBiomeTagsProvider extends BiomeTagsProvider {
 		tag(Tags.Biomes.IS_LUSH).add(SBBiomes.RAINFOREST, SBBiomes.ANCIENT_GROVE).add(Biomes.BAMBOO_JUNGLE, Biomes.JUNGLE, Biomes.SPARSE_JUNGLE, Biomes.MANGROVE_SWAMP);
 		tag(Tags.Biomes.IS_DENSE_OVERWORLD).add(SBBiomes.RAINFOREST, SBBiomes.ANCIENT_GROVE, SBBiomes.OLD_GROWTH_REDWOOD_GROVE);
 
-//		tag(BiomeTags.IS_END).add(SBBiomes.END_SPIKES);
+		tag(BiomeTags.IS_END).add(SBBiomes.END_SPIKES);
 		tag(BiomeTags.HAS_RUINED_PORTAL_SWAMP).add(SBBiomes.INKY_MOOR);
 		tag(BiomeTags.HAS_RUINED_PORTAL_STANDARD).addTag(SBTags.Biomes.IS_BRUSHLAND);
 		tag(BiomeTags.HAS_TRAIL_RUINS).add(SBBiomes.REDWOOD_GROVE, SBBiomes.OLD_GROWTH_REDWOOD_GROVE);
-//		tag(BiomeTags.HAS_END_CITY).add(SBBiomes.END_SPIKES);
-		tag(BiomeTags.SNOW_GOLEM_MELTS).addTag(SBTags.Biomes.IS_BRUSHLAND);
+		tag(BiomeTags.HAS_END_CITY).add(SBBiomes.END_SPIKES);
+		tag(BiomeTags.SNOW_GOLEM_MELTS).add(SBBiomes.BLACK_DUNES, SBBiomes.DEAD_SANDS).addTag(SBTags.Biomes.IS_BRUSHLAND);
+		tag(BiomeTags.ALLOWS_SURFACE_SLIME_SPAWNS).add(SBBiomes.INKY_MOOR, SBBiomes.SLIME_CAVERNS);
 	}
 }
