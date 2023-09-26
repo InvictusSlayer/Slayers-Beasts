@@ -20,11 +20,10 @@ import javax.annotation.Nullable;
 import java.util.function.Consumer;
 
 public class SBRecipeProvider extends RecipeProvider implements IConditionBuilder {
-    public SBRecipeProvider(PackOutput pOutput) {
-        super(pOutput);
+    public SBRecipeProvider(PackOutput output) {
+        super(output);
     }
 
-    @Override
     protected void buildRecipes(Consumer<FinishedRecipe> consumer) {
         generateBlockFamilies(consumer);
 
@@ -86,15 +85,15 @@ public class SBRecipeProvider extends RecipeProvider implements IConditionBuilde
                 .forEach(family -> generateRecipes(consumer, family));
     }
 
-    protected static void twoByTwoPacker(Consumer<FinishedRecipe> pFinishedRecipeConsumer, RecipeCategory pCategory, ItemLike pPacked, ItemLike pUnpacked) {
-        ShapedRecipeBuilder.shaped(pCategory, pPacked, 1).define('#', pUnpacked).pattern("##").pattern("##").unlockedBy(getHasName(pUnpacked), has(pUnpacked)).save(pFinishedRecipeConsumer, new ResourceLocation(SlayersBeasts.MOD_ID, getSimpleRecipeName(pUnpacked)));
+    protected static void twoByTwoPacker(Consumer<FinishedRecipe> consumer, RecipeCategory category, ItemLike packed, ItemLike unpacked) {
+        ShapedRecipeBuilder.shaped(category, packed, 1).define('#', unpacked).pattern("##").pattern("##").unlockedBy(getHasName(unpacked), has(unpacked)).save(consumer, new ResourceLocation(SlayersBeasts.MOD_ID, getSimpleRecipeName(unpacked)));
     }
 
-    protected static void nineBlockStorageRecipes(Consumer<FinishedRecipe> pFinishedRecipeConsumer, RecipeCategory pUnpackedCategory, ItemLike pUnpacked, RecipeCategory pPackedCategory, ItemLike pPacked) {
-        nineBlockStorageRecipes(pFinishedRecipeConsumer, pUnpackedCategory, pUnpacked, pPackedCategory, pPacked, getSimpleRecipeName(pPacked), null, getSimpleRecipeName(pUnpacked), null);
+    protected static void nineBlockStorageRecipes(Consumer<FinishedRecipe> consumer, RecipeCategory unpackedCategory, ItemLike unpacked, RecipeCategory packedCategory, ItemLike packed) {
+        nineBlockStorageRecipes(consumer, unpackedCategory, unpacked, packedCategory, packed, getSimpleRecipeName(packed), null, getSimpleRecipeName(unpacked), null);
     }
-    protected static void nineBlockStorageRecipes(Consumer<FinishedRecipe> pFinishedRecipeConsumer, RecipeCategory pUnpackedCategory, ItemLike pUnpacked, RecipeCategory pPackedCategory, ItemLike pPacked, String pPackedName, @Nullable String pPackedGroup, String pUnpackedName, @Nullable String pUnpackedGroup) {
-        ShapelessRecipeBuilder.shapeless(pUnpackedCategory, pUnpacked, 9).requires(pPacked).group(pUnpackedGroup).unlockedBy(getHasName(pPacked), has(pPacked)).save(pFinishedRecipeConsumer, new ResourceLocation(SlayersBeasts.MOD_ID, pUnpackedName));
-        ShapedRecipeBuilder.shaped(pPackedCategory, pPacked).define('#', pUnpacked).pattern("###").pattern("###").pattern("###").group(pPackedGroup).unlockedBy(getHasName(pUnpacked), has(pUnpacked)).save(pFinishedRecipeConsumer, new ResourceLocation(SlayersBeasts.MOD_ID, pPackedName));
+    protected static void nineBlockStorageRecipes(Consumer<FinishedRecipe> consumer, RecipeCategory unpackedCategory, ItemLike unpacked, RecipeCategory packedCategory, ItemLike packed, String packedName, @Nullable String packedGroup, String unpackedName, @Nullable String unpackedGroup) {
+        ShapelessRecipeBuilder.shapeless(unpackedCategory, unpacked, 9).requires(packed).group(unpackedGroup).unlockedBy(getHasName(packed), has(packed)).save(consumer, new ResourceLocation(SlayersBeasts.MOD_ID, unpackedName));
+        ShapedRecipeBuilder.shaped(packedCategory, packed).define('#', unpacked).pattern("###").pattern("###").pattern("###").group(packedGroup).unlockedBy(getHasName(unpacked), has(unpacked)).save(consumer, new ResourceLocation(SlayersBeasts.MOD_ID, packedName));
     }
 }

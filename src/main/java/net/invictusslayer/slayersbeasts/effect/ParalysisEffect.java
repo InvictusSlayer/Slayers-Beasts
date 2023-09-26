@@ -9,21 +9,19 @@ public class ParalysisEffect extends MobEffect {
         super(category, color);
     }
 
-    @Override
-    public void applyEffectTick(LivingEntity pLivingEntity, int pAmplifier) {
-        if (!pLivingEntity.level().isClientSide()) {
-            double x = pLivingEntity.getX();
-            double y = pLivingEntity.getY();
-            double z = pLivingEntity.getZ();
+    public void applyEffectTick(LivingEntity entity, int amplifier) {
+        if (!entity.level().isClientSide()) {
+            double x = entity.getX();
+            double y = entity.getY();
+            double z = entity.getZ();
 
-            pLivingEntity.teleportTo(x, y, z);
-            pLivingEntity.setDeltaMovement(0, 0, 0);
+            entity.teleportTo(x, y, z);
+            entity.setDeltaMovement(0, 0, 0);
         }
-        super.applyEffectTick(pLivingEntity, pAmplifier);
+        super.applyEffectTick(entity, amplifier);
     }
 
-    @Override
-    public boolean isDurationEffectTick(int pDuration, int pAmplifier) {
+    public boolean isDurationEffectTick(int duration, int amplifier) {
         return true;
     }
 }
