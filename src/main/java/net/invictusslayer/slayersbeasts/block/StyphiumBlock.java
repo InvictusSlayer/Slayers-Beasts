@@ -37,7 +37,7 @@ public class StyphiumBlock extends Block implements BonemealableBlock {
 		return i < level.getMaxLightLevel();
 	}
 
-	public boolean isValidBonemealTarget(LevelReader level, BlockPos pos, BlockState state) {
+	public boolean isValidBonemealTarget(LevelReader level, BlockPos pos, BlockState state, boolean isClient) {
 		return level.getBlockState(pos.above()).isAir();
 	}
 

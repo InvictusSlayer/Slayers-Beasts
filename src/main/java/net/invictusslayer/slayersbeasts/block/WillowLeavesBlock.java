@@ -14,15 +14,15 @@ public class WillowLeavesBlock extends FlammableLeavesBlock implements Bonemeala
         super(properties, 60, 30);
     }
 
-    public boolean isValidBonemealTarget(LevelReader level, BlockPos pos, BlockState state) {
-        return level.getBlockState(pos.below()).isAir();
+    public boolean isValidBonemealTarget(LevelReader pLevel, BlockPos pPos, BlockState pState, boolean pIsClient) {
+        return pLevel.getBlockState(pPos.below()).isAir();
     }
 
-    public boolean isBonemealSuccess(Level level, RandomSource random, BlockPos pos, BlockState state) {
+    public boolean isBonemealSuccess(Level pLevel, RandomSource pRandom, BlockPos pPos, BlockState pState) {
         return true;
     }
 
-    public void performBonemeal(ServerLevel level, RandomSource random, BlockPos pos, BlockState state) {
-        level.setBlock(pos.below(), SBBlocks.WILLOW_BRANCH.get().defaultBlockState(), 2);
+    public void performBonemeal(ServerLevel pLevel, RandomSource pRandom, BlockPos pPos, BlockState pState) {
+        pLevel.setBlock(pPos.below(), SBBlocks.WILLOW_BRANCH.get().defaultBlockState(), 2);
     }
 }
