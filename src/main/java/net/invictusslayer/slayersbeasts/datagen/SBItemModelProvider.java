@@ -16,63 +16,63 @@ public class SBItemModelProvider extends ItemModelProvider {
     }
 
     protected void registerModels() {
-        simpleItem(SBItems.JADE);
-        simpleItem(SBItems.JADE_SHARD);
+        item(SBItems.JADE);
+        item(SBItems.JADE_SHARD);
 //        simpleItem(ModItems.CRYSTALLINE_WING);
 //        simpleItem(ModItems.CRYSTALLINE_CLAW);
 //        simpleItem(ModItems.CRYSTALLINE_CARAPACE);
 //        simpleItem(ModItems.INSECT_WING);
-        simpleItem(SBItems.INSECT_CLAW);
-        simpleItem(SBItems.INSECT_EYE);
-        simpleItem(SBItems.INSECT_LEG);
-        simpleItem(SBItems.FRIED_INSECT_LEG);
-        simpleItem(SBItems.WITHERBONE);
-        simpleItem(SBItems.TIED_LEATHER);
-        simpleItem(SBItems.TANNED_LEATHER);
-        simpleItem(SBItems.MUD_BALL);
+        item(SBItems.INSECT_CLAW);
+        item(SBItems.INSECT_EYE);
+        item(SBItems.INSECT_LEG);
+        item(SBItems.FRIED_INSECT_LEG);
+        item(SBItems.WITHERBONE);
+        item(SBItems.TIED_LEATHER);
+        item(SBItems.TANNED_LEATHER);
+        item(SBItems.MUD_BALL);
 
-        blockItem(SBBlocks.ICICLE, "_frustum_down");
-        blockItem(SBBlocks.OBSIDIAN_SPIKE, "_tip_up");
-        blockItem(SBBlocks.TALL_DEAD_BUSH, "_top");
-        blockItem(SBBlocks.BLACK_MUSHROOM);
-        blockItem(SBBlocks.WHITE_MUSHROOM);
-        simpleItem(SBBlocks.ASPEN_DOOR);
-        blockItem(SBBlocks.ASPEN_SAPLING);
-        simpleItem(SBBlocks.CAJOLE_DOOR);
-        blockItem(SBBlocks.CAJOLE_SAPLING);
-        simpleItem(SBBlocks.DESERT_OAK_DOOR);
-        blockItem(SBBlocks.DESERT_OAK_SAPLING);
-        simpleItem(SBBlocks.EUCALYPTUS_DOOR);
-        blockItem(SBBlocks.EUCALYPTUS_SAPLING);
-        simpleItem(SBBlocks.KAPOK_DOOR);
-        blockItem(SBBlocks.KAPOK_SAPLING);
-        simpleItem(SBBlocks.REDWOOD_DOOR);
-        blockItem(SBBlocks.REDWOOD_SAPLING);
-        simpleItem(SBBlocks.WILLOW_DOOR);
-        blockItem(SBBlocks.WILLOW_SAPLING);
-        blockItem(SBBlocks.WILLOW_BRANCH);
-        blockItem(SBBlocks.WILLOW_BRANCH_PLANT);
+        block(SBBlocks.ICICLE, "_frustum_down");
+        block(SBBlocks.OBSIDIAN_SPIKE, "_tip_up");
+        block(SBBlocks.TALL_DEAD_BUSH, "_top");
+        block(SBBlocks.ALGAE);
+        block(SBBlocks.BLACK_MUSHROOM);
+        block(SBBlocks.WHITE_MUSHROOM);
+        item(SBBlocks.ASPEN_DOOR);
+        block(SBBlocks.ASPEN_SAPLING);
+        item(SBBlocks.CAJOLE_DOOR);
+        block(SBBlocks.CAJOLE_SAPLING);
+        item(SBBlocks.DESERT_OAK_DOOR);
+        block(SBBlocks.DESERT_OAK_SAPLING);
+        item(SBBlocks.EUCALYPTUS_DOOR);
+        block(SBBlocks.EUCALYPTUS_SAPLING);
+        item(SBBlocks.KAPOK_DOOR);
+        block(SBBlocks.KAPOK_SAPLING);
+        item(SBBlocks.REDWOOD_DOOR);
+        block(SBBlocks.REDWOOD_SAPLING);
+        item(SBBlocks.WILLOW_DOOR);
+        block(SBBlocks.WILLOW_SAPLING);
+        block(SBBlocks.WILLOW_BRANCH);
+        block(SBBlocks.WILLOW_BRANCH_PLANT);
 
-        spawnEggItem(SBItems.MANTIS_SPAWN_EGG);
-        simpleItem(SBItems.WORKER_ANT_SPAWN_EGG);
-        simpleItem(SBItems.SOLDIER_ANT_SPAWN_EGG);
-        simpleItem(SBItems.QUEEN_ANT_SPAWN_EGG);
-        spawnEggItem(SBItems.WITHER_SPIDER_SPAWN_EGG);
-        spawnEggItem(SBItems.DAMSELFLY_SPAWN_EGG);
-        spawnEggItem(SBItems.ENT_OAK_SPAWN_EGG);
+        spawnEgg(SBItems.MANTIS_SPAWN_EGG);
+        item(SBItems.WORKER_ANT_SPAWN_EGG);
+        item(SBItems.SOLDIER_ANT_SPAWN_EGG);
+        item(SBItems.QUEEN_ANT_SPAWN_EGG);
+        spawnEgg(SBItems.WITHER_SPIDER_SPAWN_EGG);
+        spawnEgg(SBItems.DAMSELFLY_SPAWN_EGG);
+        spawnEgg(SBItems.ENT_OAK_SPAWN_EGG);
     }
 
-    private void blockItem(RegistryObject<?> block) {
-        blockItem(block, "");
+    private void block(RegistryObject<?> block) {
+        block(block, "");
     }
-
-    private void blockItem(RegistryObject<?> block, String suffix) {
+    private void block(RegistryObject<?> block, String suffix) {
         withExistingParent(block.getId().getPath(),
                 new ResourceLocation("item/generated")).texture("layer0",
                 new ResourceLocation(SlayersBeasts.MOD_ID, "block/" + block.getId().getPath() + suffix));
     }
 
-    private void simpleItem(RegistryObject<?> item) {
+    private void item(RegistryObject<?> item) {
         withExistingParent(item.getId().getPath(),
                 new ResourceLocation("item/generated")).texture("layer0",
                 new ResourceLocation(SlayersBeasts.MOD_ID, "item/" + item.getId().getPath()));
@@ -84,7 +84,7 @@ public class SBItemModelProvider extends ItemModelProvider {
 //                new ResourceLocation(SlayersBeasts.MOD_ID, "item/" + item.getId().getPath()));
 //    }
 
-    private void spawnEggItem(RegistryObject<ForgeSpawnEggItem> item) {
+    private void spawnEgg(RegistryObject<ForgeSpawnEggItem> item) {
         withExistingParent(item.getId().getPath(),
                 new ResourceLocation("item/template_spawn_egg"));
     }

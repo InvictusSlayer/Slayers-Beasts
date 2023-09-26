@@ -1,6 +1,5 @@
 package net.invictusslayer.slayersbeasts.block;
 
-import net.invictusslayer.slayersbeasts.block.flammable.FlammableLeavesBlock;
 import net.invictusslayer.slayersbeasts.entity.SBEntities;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerLevel;
@@ -9,35 +8,36 @@ import net.minecraft.world.entity.Mob;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Explosion;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.LeavesBlock;
 import net.minecraft.world.level.block.state.BlockState;
 
-public class CajoleLeavesBlock extends FlammableLeavesBlock {
+public class CajoleLeavesBlock extends LeavesBlock {
     public CajoleLeavesBlock(Properties properties) {
-        super(properties, 60, 30);
+        super(properties);
     }
 
-    private void spawnInfestation(ServerLevel pLevel, BlockPos pPos) {
+    private void spawnInfestation(ServerLevel level, BlockPos pos) {
         int randInt = RandomSource.create().nextInt(5);
-        Mob mob = SBEntities.MANTIS.get().create(pLevel);
+        Mob mob = SBEntities.MANTIS.get().create(level);
         if (randInt < 2) {
             if (randInt == 0) {
-                mob = SBEntities.WORKER_ANT.get().create(pLevel);
+                mob = SBEntities.WORKER_ANT.get().create(level);
             }
             assert mob != null;
-            mob.moveTo((double) pPos.getX() + 0.5D, pPos.getY(), (double) pPos.getZ() + 0.5D, 0.0F, 0.0F);
-            pLevel.addFreshEntity(mob);
+            mob.moveTo((double) pos.getX() + 0.5D, pos.getY(), (double) pos.getZ() + 0.5D, 0.0F, 0.0F);
+            level.addFreshEntity(mob);
             mob.spawnAnim();
         }
     }
 
     @SuppressWarnings("deprecation")
-    public void spawnAfterBreak(BlockState pState, ServerLevel pLevel, BlockPos pPos, ItemStack pStack, boolean pDropExperience) {
-        this.spawnInfestation(pLevel, pPos);
+    public void spawnAfterBreak(BlockState state, ServerLevel level, BlockPos pos, ItemStack item, boolean dropExperience) {
+        this.spawnInfestation(level, pos);
     }
 
-    public void wasExploded(Level pLevel, BlockPos pPos, Explosion pExplosion) {
-        if (pLevel instanceof ServerLevel) {
-            this.spawnInfestation((ServerLevel)pLevel, pPos);
+    public void wasExploded(Level level, BlockPos pos, Explosion explosion) {
+        if (level instanceof ServerLevel) {
+            this.spawnInfestation((ServerLevel)level, pos);
         }
     }
 }

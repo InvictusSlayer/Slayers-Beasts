@@ -41,10 +41,11 @@ public final class SBCreativeModeTab {
                         tab.accept(SBBlocks.STYPHIUM.get());
                         tab.accept(SBBlocks.DEEPSLATE_STYPHIUM.get());
 
-                        tab.accept(SBBlocks.OOTHECA.get());
-                        tab.accept(SBBlocks.ANT_SOIL.get());
+                        tab.accept(SBBlocks.RUDOSOL.get());
+                        tab.accept(SBBlocks.ARIDISOL.get());
                         tab.accept(SBBlocks.ANTHILL.get());
                         tab.accept(SBBlocks.ANTHILL_HATCHERY.get());
+                        tab.accept(SBBlocks.OOTHECA.get());
 
                         tab.accept(SBBlocks.GLEAMING_ICE.get());
                         tab.accept(SBBlocks.ICICLE.get());
@@ -52,6 +53,7 @@ public final class SBCreativeModeTab {
                         tab.accept(SBBlocks.TALL_DEAD_BUSH.get());
                         tab.accept(SBBlocks.CRACKED_MUD.get());
                         tab.accept(SBBlocks.PEAT.get());
+                        tab.accept(SBBlocks.ALGAE.get());
 
                         tab.accept(SBBlocks.PEGMATITE.get());
                         tab.accept(SBBlocks.PEGMATITE_SLAB.get());

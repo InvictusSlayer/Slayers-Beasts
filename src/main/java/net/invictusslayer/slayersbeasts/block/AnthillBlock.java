@@ -102,9 +102,9 @@ public class AnthillBlock extends BaseEntityBlock {
             } else if (handItem.is(Items.DIRT)) {
                 handItem.shrink(1);
                 if (handItem.isEmpty()) {
-                    pPlayer.setItemInHand(pHand, new ItemStack(SBBlocks.ANT_SOIL.get()));
-                } else if (!pPlayer.getInventory().add(new ItemStack(SBBlocks.ANT_SOIL.get()))) {
-                    pPlayer.drop(new ItemStack(SBBlocks.ANT_SOIL.get()), false);
+                    pPlayer.setItemInHand(pHand, new ItemStack(SBBlocks.ARIDISOL.get()));
+                } else if (!pPlayer.getInventory().add(new ItemStack(SBBlocks.ARIDISOL.get()))) {
+                    pPlayer.drop(new ItemStack(SBBlocks.ARIDISOL.get()), false);
                 }
 
                 flag = true;

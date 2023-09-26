@@ -21,8 +21,8 @@ import net.minecraftforge.registries.ForgeRegistries;
 import javax.annotation.Nullable;
 
 public class SBBlockStateProvider extends BlockStateProvider {
-    public SBBlockStateProvider(PackOutput output, ExistingFileHelper exFileHelper) {
-        super(output, SlayersBeasts.MOD_ID, exFileHelper);
+    public SBBlockStateProvider(PackOutput output, ExistingFileHelper existingFileHelper) {
+        super(output, SlayersBeasts.MOD_ID, existingFileHelper);
     }
 
     protected void registerStatesAndModels() {
@@ -39,7 +39,8 @@ public class SBBlockStateProvider extends BlockStateProvider {
         simpleCubeBottomTopWithItem(SBBlocks.STYPHIUM.get());
         simpleCubeBottomTopWithItem(SBBlocks.DEEPSLATE_STYPHIUM.get());
 
-        cubeWithItem(SBBlocks.ANT_SOIL.get());
+        cubeWithItem(SBBlocks.RUDOSOL.get());
+        cubeWithItem(SBBlocks.ARIDISOL.get());
         simpleCubeBottomTopWithItem(SBBlocks.ANTHILL.get());
         simpleCubeBottomTopWithItem(SBBlocks.ANTHILL_HATCHERY.get());
         simpleCubeBottomTopWithItem(SBBlocks.OOTHECA.get());
@@ -50,6 +51,7 @@ public class SBBlockStateProvider extends BlockStateProvider {
         doubleCrossBlock(SBBlocks.TALL_DEAD_BUSH.get());
         tiltCubeWithItem(SBBlocks.CRACKED_MUD.get());
         cubeWithItem(SBBlocks.PEAT.get());
+        flatBlock(SBBlocks.ALGAE.get());
 
         cubeRandTopWithItem(SBBlocks.BLACK_SAND.get());
         cubeBottomTopWithItem(SBBlocks.BLACK_SANDSTONE.get(), extend(blockTexture(SBBlocks.BLACK_SANDSTONE.get()), "_side"), extend(blockTexture(SBBlocks.BLACK_SANDSTONE.get()), "_bottom"), extend(blockTexture(SBBlocks.BLACK_SANDSTONE.get()), "_top"));
@@ -301,6 +303,15 @@ public class SBBlockStateProvider extends BlockStateProvider {
             return ConfiguredModel.builder().modelFile(models().cubeAll(name(block) + tilt, extend(blockTexture(block), tilt))).build();
         });
         simpleBlockItem(block, models().withExistingParent(name(block) + "_none", "minecraft:block/cube_all"));
+    }
+
+    private void flatBlock(Block block) {
+        getVariantBuilder(block).forAllStates(state -> ConfiguredModel.builder()
+                .modelFile(models().getBuilder(name(block)).ao(false)
+                        .texture("texture", blockTexture(block)).texture("particle", blockTexture(block))
+                        .element().from(0, 0.25F, 0).to(16, 0.25F, 16)
+                        .face(Direction.UP).texture("#texture").end().face(Direction.DOWN).texture("#texture").end()
+                        .end().renderType("cutout")).build());
     }
 
     private void simpleCubeBottomTopWithItem(Block block) {

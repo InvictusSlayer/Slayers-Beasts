@@ -1,6 +1,7 @@
 package net.invictusslayer.slayersbeasts.datagen.tags;
 
 import net.invictusslayer.slayersbeasts.SlayersBeasts;
+import net.invictusslayer.slayersbeasts.item.SBItems;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.tags.ItemTagsProvider;
@@ -17,7 +18,9 @@ public class SBItemTagsProvider extends ItemTagsProvider {
         super(output, provider, blockTags.contentsGetter(), SlayersBeasts.MOD_ID, existingFileHelper);
     }
 
-    protected void addTags(HolderLookup.Provider pProvider) {
+    protected void addTags(HolderLookup.Provider provider) {
+        tag(SBTags.Items.JADE_GEMS).add(SBItems.JADE.get());
+
         copy(SBTags.Blocks.ASPEN_LOGS, SBTags.Items.ASPEN_LOGS);
         copy(SBTags.Blocks.CAJOLE_LOGS, SBTags.Items.CAJOLE_LOGS);
         copy(SBTags.Blocks.DESERT_OAK_LOGS, SBTags.Items.DESERT_OAK_LOGS);
