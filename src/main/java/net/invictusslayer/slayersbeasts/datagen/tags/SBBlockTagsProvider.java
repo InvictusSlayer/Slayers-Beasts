@@ -32,7 +32,7 @@ public class SBBlockTagsProvider extends BlockTagsProvider {
         tag(SBTags.Blocks.WILLOW_LOGS).add(SBBlocks.WILLOW_LOG.get(), SBBlocks.STRIPPED_WILLOW_LOG.get(), SBBlocks.WILLOW_WOOD.get(), SBBlocks.STRIPPED_WILLOW_WOOD.get());
         
         tag(BlockTags.SAND).add(SBBlocks.BLACK_SAND.get());
-        tag(BlockTags.DIRT).add(SBBlocks.ANT_SOIL.get());
+        tag(BlockTags.DIRT).add(SBBlocks.ARIDISOL.get());
         tag(BlockTags.SAPLINGS).add(SBBlocks.ASPEN_SAPLING.get(), SBBlocks.CAJOLE_SAPLING.get(), SBBlocks.DESERT_OAK_SAPLING.get(), SBBlocks.EUCALYPTUS_SAPLING.get(), SBBlocks.KAPOK_SAPLING.get(), SBBlocks.REDWOOD_SAPLING.get(), SBBlocks.WILLOW_SAPLING.get());
         tag(BlockTags.LEAVES).add(SBBlocks.ASPEN_LEAVES.get(), SBBlocks.CAJOLE_LEAVES.get(), SBBlocks.DESERT_OAK_LEAVES.get(), SBBlocks.EUCALYPTUS_LEAVES.get(), SBBlocks.KAPOK_LEAVES.get(), SBBlocks.REDWOOD_LEAVES.get(), SBBlocks.WILLOW_LEAVES.get());
         tag(BlockTags.LOGS_THAT_BURN).addTag(SBTags.Blocks.ASPEN_LOGS).addTag(SBTags.Blocks.CAJOLE_LOGS).addTag(SBTags.Blocks.DESERT_OAK_LOGS).addTag(SBTags.Blocks.EUCALYPTUS_LOGS).addTag(SBTags.Blocks.KAPOK_LOGS).addTag(SBTags.Blocks.REDWOOD_LOGS).addTag(SBTags.Blocks.WILLOW_LOGS);
@@ -48,12 +48,12 @@ public class SBBlockTagsProvider extends BlockTagsProvider {
         tag(BlockTags.SLABS).add(SBBlocks.PEGMATITE_SLAB.get(), SBBlocks.POLISHED_PEGMATITE_SLAB.get(), SBBlocks.BLACK_SANDSTONE_SLAB.get(), SBBlocks.SMOOTH_BLACK_SANDSTONE_SLAB.get(), SBBlocks.CUT_BLACK_SANDSTONE_SLAB.get());
         tag(BlockTags.STAIRS).add(SBBlocks.PEGMATITE_STAIRS.get(), SBBlocks.POLISHED_PEGMATITE_STAIRS.get(), SBBlocks.BLACK_SANDSTONE_STAIRS.get(), SBBlocks.SMOOTH_BLACK_SANDSTONE_STAIRS.get());
         tag(BlockTags.WALLS).add(SBBlocks.BLACK_SANDSTONE_WALL.get(), SBBlocks.PEGMATITE_WALL.get());
-        tag(BlockTags.MUSHROOM_GROW_BLOCK).add(SBBlocks.ANT_SOIL.get(), SBBlocks.STYPHIUM.get(), SBBlocks.DEEPSLATE_STYPHIUM.get());
+        tag(BlockTags.MUSHROOM_GROW_BLOCK).add(SBBlocks.ARIDISOL.get(), SBBlocks.STYPHIUM.get(), SBBlocks.DEEPSLATE_STYPHIUM.get());
         tag(BlockTags.SMELTS_TO_GLASS).add(SBBlocks.BLACK_SAND.get());
         tag(BlockTags.MINEABLE_WITH_AXE).add(SBBlocks.WHITE_MUSHROOM_BLOCK.get(), SBBlocks.WHITE_MUSHROOM.get(), SBBlocks.BLACK_MUSHROOM_BLOCK.get(), SBBlocks.BLACK_MUSHROOM.get());
         tag(BlockTags.MINEABLE_WITH_HOE).add(SBBlocks.PEAT.get(), SBBlocks.OOTHECA.get()).addTag(BlockTags.LEAVES);
         tag(BlockTags.MINEABLE_WITH_PICKAXE).add(SBBlocks.OBSIDIAN_SPIKE.get(), SBBlocks.ICICLE.get(), SBBlocks.CRYPTALITH.get(), SBBlocks.INFUSED_CRYPTALITH.get(), SBBlocks.DEPLETED_CRYPTALITH.get(), SBBlocks.STYPHIUM.get(), SBBlocks.DEEPSLATE_STYPHIUM.get(), SBBlocks.PEGMATITE.get(), SBBlocks.PEGMATITE_SLAB.get(), SBBlocks.PEGMATITE_STAIRS.get(), SBBlocks.PEGMATITE_WALL.get(), SBBlocks.POLISHED_PEGMATITE.get(), SBBlocks.POLISHED_PEGMATITE_SLAB.get(), SBBlocks.POLISHED_PEGMATITE_STAIRS.get(), SBBlocks.CRACKED_MUD.get(), SBBlocks.JADE_BLOCK.get(), SBBlocks.EXOSKELETON_ORE.get(), SBBlocks.DEEPSLATE_EXOSKELETON_ORE.get(), SBBlocks.BLACK_SANDSTONE.get(), SBBlocks.BLACK_SANDSTONE_SLAB.get(), SBBlocks.BLACK_SANDSTONE_STAIRS.get(), SBBlocks.BLACK_SANDSTONE_WALL.get(), SBBlocks.SMOOTH_BLACK_SANDSTONE.get(), SBBlocks.SMOOTH_BLACK_SANDSTONE_SLAB.get(), SBBlocks.SMOOTH_BLACK_SANDSTONE_STAIRS.get(), SBBlocks.CUT_BLACK_SANDSTONE.get(), SBBlocks.CUT_BLACK_SANDSTONE_SLAB.get(), SBBlocks.CHISELED_BLACK_SANDSTONE.get());
-        tag(BlockTags.MINEABLE_WITH_SHOVEL).add(SBBlocks.BLACK_SAND.get(), SBBlocks.ANT_SOIL.get()).addTag(SBTags.Blocks.ANTHILLS);
+        tag(BlockTags.MINEABLE_WITH_SHOVEL).add(SBBlocks.BLACK_SAND.get(), SBBlocks.ARIDISOL.get()).addTag(SBTags.Blocks.ANTHILLS);
         tag(BlockTags.NEEDS_DIAMOND_TOOL).add(SBBlocks.EXOSKELETON_ORE.get(), SBBlocks.DEEPSLATE_EXOSKELETON_ORE.get(), SBBlocks.OBSIDIAN_SPIKE.get());
         tag(BlockTags.NEEDS_IRON_TOOL).add(SBBlocks.JADE_BLOCK.get());
     }

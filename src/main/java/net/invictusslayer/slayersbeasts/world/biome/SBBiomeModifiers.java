@@ -16,7 +16,6 @@ import net.minecraft.world.level.biome.Biomes;
 import net.minecraft.world.level.biome.MobSpawnSettings;
 import net.minecraft.world.level.levelgen.GenerationStep;
 import net.minecraft.world.level.levelgen.placement.PlacedFeature;
-import net.minecraftforge.common.Tags;
 import net.minecraftforge.common.world.BiomeModifier;
 import net.minecraftforge.common.world.ForgeBiomeModifiers.AddFeaturesBiomeModifier;
 import net.minecraftforge.common.world.ForgeBiomeModifiers.AddSpawnsBiomeModifier;
@@ -48,7 +47,7 @@ public record SBBiomeModifiers() {
 		register(context, ADD_ORE_EXOSKELETON, new AddFeaturesBiomeModifier(biomes.getOrThrow(BiomeTags.IS_OVERWORLD), HolderSet.direct(placed.getOrThrow(SBPlacedFeatures.ORE_EXOSKELETON)), GenerationStep.Decoration.UNDERGROUND_ORES));
 		register(context, ADD_ORE_EXOSKELETON_LUSH, new AddFeaturesBiomeModifier(HolderSet.direct(biomes.getOrThrow(Biomes.LUSH_CAVES)), HolderSet.direct(placed.getOrThrow(SBPlacedFeatures.ORE_EXOSKELETON_LUSH)), GenerationStep.Decoration.UNDERGROUND_ORES));
 
-		register(context, ADD_MANTIS, new AddSpawnsBiomeModifier(biomes.getOrThrow(Tags.Biomes.IS_LUSH), List.of(new MobSpawnSettings.SpawnerData(SBEntities.MANTIS.get(), 6, 1, 3))));
+		register(context, ADD_MANTIS, new AddSpawnsBiomeModifier(biomes.getOrThrow(SBTags.Biomes.SPAWNS_MANTIS), List.of(new MobSpawnSettings.SpawnerData(SBEntities.MANTIS.get(), 6, 1, 3))));
 		register(context, ADD_WITHER_SPIDER, new AddSpawnsBiomeModifier(HolderSet.direct(biomes.getOrThrow(Biomes.SOUL_SAND_VALLEY)), List.of(new MobSpawnSettings.SpawnerData(SBEntities.WITHER_SPIDER.get(), 4, 1, 2))));
 		register(context, ADD_DAMSELFlY, new AddSpawnsBiomeModifier(biomes.getOrThrow(SBTags.Biomes.SPAWNS_DAMSELFLY), List.of(new MobSpawnSettings.SpawnerData(SBEntities.DAMSELFLY.get(), 3, 1, 1))));
 		register(context, ADD_ENT_OAK, new AddSpawnsBiomeModifier(HolderSet.direct(biomes.getOrThrow(Biomes.FOREST), biomes.getOrThrow(Biomes.DARK_FOREST)), List.of(new MobSpawnSettings.SpawnerData(SBEntities.ENT_OAK.get(), 4, 1, 1))));

@@ -46,16 +46,19 @@ public class SBBlockLoot extends BlockLootSubProvider {
         add(SBBlocks.STYPHIUM.get(), block -> createSingleItemTableWithSilkTouch(block, Blocks.COBBLESTONE));
         add(SBBlocks.DEEPSLATE_STYPHIUM.get(), block -> createSingleItemTableWithSilkTouch(block, Blocks.COBBLED_DEEPSLATE));
 
-        dropSelf(SBBlocks.ANT_SOIL.get());
-        dropOther(SBBlocks.ANTHILL.get(), SBBlocks.ANT_SOIL.get());
-        dropOther(SBBlocks.ANTHILL_HATCHERY.get(), SBBlocks.ANT_SOIL.get());
+        dropSelf(SBBlocks.RUDOSOL.get());
+        dropSelf(SBBlocks.ARIDISOL.get());
+        dropOther(SBBlocks.ANTHILL.get(), SBBlocks.ARIDISOL.get());
+        dropOther(SBBlocks.ANTHILL_HATCHERY.get(), SBBlocks.ARIDISOL.get());
 
         dropWhenSilkTouch(SBBlocks.GLEAMING_ICE.get());
         dropWhenSilkTouch(SBBlocks.ICICLE.get());
         dropSelf(SBBlocks.OBSIDIAN_SPIKE.get());
-        add(SBBlocks.TALL_DEAD_BUSH.get(), block -> createTallDeadBushDrops(SBBlocks.TALL_DEAD_BUSH.get()));
+        add(SBBlocks.TALL_DEAD_BUSH.get(), this::createTallDeadBushDrops);
         add(SBBlocks.CRACKED_MUD.get(), block -> createSingleItemTableWithSilkTouch(Blocks.PACKED_MUD, SBItems.MUD_BALL.get(), ConstantValue.exactly(4)));
         dropSelf(SBBlocks.PEAT.get());
+        add(SBBlocks.ALGAE.get(), BlockLootSubProvider::createShearsOnlyDrop);
+
         dropSelf(SBBlocks.BLACK_SAND.get());
 
         dropSelf(SBBlocks.BLACK_MUSHROOM.get());
@@ -81,38 +84,38 @@ public class SBBlockLoot extends BlockLootSubProvider {
         dropSelf(SBBlocks.STRIPPED_DESERT_OAK_LOG.get());
         dropSelf(SBBlocks.DESERT_OAK_WOOD.get());
         dropSelf(SBBlocks.STRIPPED_DESERT_OAK_WOOD.get());
-        add(SBBlocks.DESERT_OAK_LEAVES.get(), (block) -> createLeavesDrops(SBBlocks.DESERT_OAK_LEAVES.get(), SBBlocks.DESERT_OAK_SAPLING.get(), 0.05f));
+        add(SBBlocks.DESERT_OAK_LEAVES.get(), block -> createLeavesDrops(SBBlocks.DESERT_OAK_LEAVES.get(), SBBlocks.DESERT_OAK_SAPLING.get(), 0.05f));
         dropSelf(SBBlocks.DESERT_OAK_SAPLING.get());
         
         dropSelf(SBBlocks.EUCALYPTUS_LOG.get());
         dropSelf(SBBlocks.STRIPPED_EUCALYPTUS_LOG.get());
         dropSelf(SBBlocks.EUCALYPTUS_WOOD.get());
         dropSelf(SBBlocks.STRIPPED_EUCALYPTUS_WOOD.get());
-        add(SBBlocks.EUCALYPTUS_LEAVES.get(), (block) -> createLeavesDrops(SBBlocks.EUCALYPTUS_LEAVES.get(), SBBlocks.EUCALYPTUS_SAPLING.get(), 0.05f));
+        add(SBBlocks.EUCALYPTUS_LEAVES.get(), block -> createLeavesDrops(SBBlocks.EUCALYPTUS_LEAVES.get(), SBBlocks.EUCALYPTUS_SAPLING.get(), 0.05f));
         dropSelf(SBBlocks.EUCALYPTUS_SAPLING.get());
 
         dropSelf(SBBlocks.KAPOK_LOG.get());
         dropSelf(SBBlocks.STRIPPED_KAPOK_LOG.get());
         dropSelf(SBBlocks.KAPOK_WOOD.get());
         dropSelf(SBBlocks.STRIPPED_KAPOK_WOOD.get());
-        add(SBBlocks.KAPOK_LEAVES.get(), (block) -> createLeavesDrops(SBBlocks.KAPOK_LEAVES.get(), SBBlocks.KAPOK_SAPLING.get(), 0.05f));
+        add(SBBlocks.KAPOK_LEAVES.get(), block -> createLeavesDrops(SBBlocks.KAPOK_LEAVES.get(), SBBlocks.KAPOK_SAPLING.get(), 0.05f));
         dropSelf(SBBlocks.KAPOK_SAPLING.get());
         
         dropSelf(SBBlocks.REDWOOD_LOG.get());
         dropSelf(SBBlocks.STRIPPED_REDWOOD_LOG.get());
         dropSelf(SBBlocks.REDWOOD_WOOD.get());
         dropSelf(SBBlocks.STRIPPED_REDWOOD_WOOD.get());
-        add(SBBlocks.REDWOOD_LEAVES.get(), (block) -> createLeavesDrops(SBBlocks.REDWOOD_LEAVES.get(), SBBlocks.REDWOOD_SAPLING.get(), 0.05f));
+        add(SBBlocks.REDWOOD_LEAVES.get(), block -> createLeavesDrops(SBBlocks.REDWOOD_LEAVES.get(), SBBlocks.REDWOOD_SAPLING.get(), 0.05f));
         dropSelf(SBBlocks.REDWOOD_SAPLING.get());
 
         dropSelf(SBBlocks.WILLOW_LOG.get());
         dropSelf(SBBlocks.STRIPPED_WILLOW_LOG.get());
         dropSelf(SBBlocks.WILLOW_WOOD.get());
         dropSelf(SBBlocks.STRIPPED_WILLOW_WOOD.get());
-        add(SBBlocks.WILLOW_LEAVES.get(), (block) -> createLeavesDrops(SBBlocks.WILLOW_LEAVES.get(), SBBlocks.WILLOW_SAPLING.get(), 0.05f));
+        add(SBBlocks.WILLOW_LEAVES.get(), block -> createLeavesDrops(SBBlocks.WILLOW_LEAVES.get(), SBBlocks.WILLOW_SAPLING.get(), 0.05f));
         dropSelf(SBBlocks.WILLOW_SAPLING.get());
-        add(SBBlocks.WILLOW_BRANCH.get(), (block) -> createLeavesDrops(SBBlocks.WILLOW_LEAVES.get(), SBBlocks.WILLOW_SAPLING.get(), 0.05f));
-        add(SBBlocks.WILLOW_BRANCH_PLANT.get(), (block) -> createLeavesDrops(SBBlocks.WILLOW_LEAVES.get(), SBBlocks.WILLOW_SAPLING.get(), 0.05f));
+        add(SBBlocks.WILLOW_BRANCH.get(), block -> createLeavesDrops(SBBlocks.WILLOW_LEAVES.get(), SBBlocks.WILLOW_SAPLING.get(), 0.05f));
+        add(SBBlocks.WILLOW_BRANCH_PLANT.get(), block -> createLeavesDrops(SBBlocks.WILLOW_LEAVES.get(), SBBlocks.WILLOW_SAPLING.get(), 0.05f));
     }
 
     private void generateBlockFamilies() {

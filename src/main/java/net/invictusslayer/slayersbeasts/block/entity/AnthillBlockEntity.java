@@ -1,11 +1,11 @@
 package net.invictusslayer.slayersbeasts.block.entity;
 
 import net.invictusslayer.slayersbeasts.block.AnthillBlock;
+import net.invictusslayer.slayersbeasts.block.SBBlocks;
+import net.invictusslayer.slayersbeasts.datagen.tags.SBTags;
 import net.invictusslayer.slayersbeasts.entity.AbstractAnt;
 import net.invictusslayer.slayersbeasts.entity.QueenAnt;
 import net.invictusslayer.slayersbeasts.entity.SoldierAnt;
-import net.invictusslayer.slayersbeasts.block.SBBlocks;
-import net.invictusslayer.slayersbeasts.datagen.tags.SBTags;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.ListTag;
@@ -189,14 +189,14 @@ public class AnthillBlockEntity extends BlockEntity {
     private void upgradeNest(Level level, BlockPos nestPos, BlockState blockState, int upgradeType) {
         Block block = null;
 
-        List<BlockPos> posList = scanNest(level, nestPos, SBBlocks.ANT_SOIL.get(), null);
+        List<BlockPos> posList = scanNest(level, nestPos, SBBlocks.ARIDISOL.get(), null);
         if (posList.isEmpty() || nestUpgrades.size() > 5) return;
 
         BlockPos blockPos = posList.get(level.random.nextInt(posList.size()));
         if (upgradeType == 1) {
             block = SBBlocks.ANTHILL_HATCHERY.get();
         } else if (upgradeType == 99) {
-            block = SBBlocks.ANT_SOIL.get();
+            block = SBBlocks.ARIDISOL.get();
         }
 
         if (block != null) {
@@ -215,7 +215,7 @@ public class AnthillBlockEntity extends BlockEntity {
         if (posList.isEmpty()) return;
 
         BlockPos blockPos = posList.get(level.random.nextInt(posList.size()));
-        level.setBlockAndUpdate(blockPos, SBBlocks.ANT_SOIL.get().defaultBlockState());
+        level.setBlockAndUpdate(blockPos, SBBlocks.ARIDISOL.get().defaultBlockState());
         level.setBlock(nestPos, blockState.setValue(AnthillBlock.SUPPLY_LEVEL, getSupplyLevel(blockState) - 3), 3);
         setChanged(level, nestPos, blockState);
     }

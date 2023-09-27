@@ -42,7 +42,8 @@
   "block.slayersbeasts.styphium": "Styphium",
   "block.slayersbeasts.deepslate_styphium": "Deepslate Styphium",
 
-  "block.slayersbeasts.ant_soil": "Ant Soil",
+  "block.slayersbeasts.rudosol": "Rudosol",
+  "block.slayersbeasts.aridisol": "Aridisol",
   "block.slayersbeasts.anthill": "Anthill",
   "block.slayersbeasts.anthill_hatchery": "Anthill Hatchery",
   "block.slayersbeasts.ootheca": "Ootheca",
@@ -53,6 +54,7 @@
   "block.slayersbeasts.tall_dead_bush": "Tall Dead Bush",
   "block.slayersbeasts.cracked_mud": "Cracked Mud",
   "block.slayersbeasts.peat": "Peat",
+  "block.slayersbeasts.algae": "Algae",
 
   "block.slayersbeasts.pegmatite": "Pegmatite",
   "block.slayersbeasts.pegmatite_slab": "Pegmatite Slab",

@@ -26,6 +26,7 @@ import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 @Mod(SlayersBeasts.MOD_ID)
 public class SlayersBeasts {
     public static final String MOD_ID = "slayersbeasts";
+    public static final String FORGE = "forge";
 
     public SlayersBeasts() {
         IEventBus eventBus = FMLJavaModLoadingContext.get().getModEventBus();
