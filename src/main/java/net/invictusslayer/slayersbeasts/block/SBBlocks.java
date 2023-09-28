@@ -4,15 +4,19 @@ import net.invictusslayer.slayersbeasts.SlayersBeasts;
 import net.invictusslayer.slayersbeasts.item.SBItems;
 import net.invictusslayer.slayersbeasts.world.feature.SBConfiguredFeatures;
 import net.invictusslayer.slayersbeasts.world.feature.tree.grower.*;
+import net.minecraft.core.BlockPos;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.util.valueproviders.UniformInt;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.item.PlaceOnWaterBlockItem;
+import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.properties.BlockSetType;
 import net.minecraft.world.level.material.MapColor;
 import net.minecraft.world.level.material.PushReaction;
+import net.minecraftforge.common.PlantType;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
@@ -51,7 +55,7 @@ public final class SBBlocks {
     public static final RegistryObject<Block> TALL_DEAD_BUSH = register("tall_dead_bush", () -> new TallDeadBushBlock(BlockBehaviour.Properties.copy(Blocks.DEAD_BUSH)));
     public static final RegistryObject<Block> CRACKED_MUD = register("cracked_mud", () -> new CrackedMudBlock(BlockBehaviour.Properties.copy(Blocks.PACKED_MUD)));
     public static final RegistryObject<Block> PEAT = register("peat", () -> new PeatBlock(BlockBehaviour.Properties.copy(Blocks.POWDER_SNOW).mapColor(MapColor.TERRACOTTA_BLACK).strength(1F).sound(SoundType.MUD).forceSolidOn().pushReaction(PushReaction.DESTROY)));
-    public static final RegistryObject<Block> ALGAE = register("algae", () -> new  AlgaeBlock(BlockBehaviour.Properties.copy(Blocks.LILY_PAD).noCollission()));
+    public static final RegistryObject<Block> ALGAE = registerPlaceableOnWater("algae", () -> new AlgaeBlock(BlockBehaviour.Properties.copy(Blocks.LILY_PAD).noCollission()));
 
     public static final RegistryObject<Block> PEGMATITE = register("pegmatite", () -> new Block(BlockBehaviour.Properties.copy(Blocks.STONE).mapColor(MapColor.SAND)));
     public static final RegistryObject<Block> PEGMATITE_SLAB = register("pegmatite_slab", () -> new SlabBlock(BlockBehaviour.Properties.copy(PEGMATITE.get())));
@@ -74,9 +78,9 @@ public final class SBBlocks {
     public static final RegistryObject<Block> CHISELED_BLACK_SANDSTONE = register("chiseled_black_sandstone", () -> new Block(BlockBehaviour.Properties.copy(Blocks.CHISELED_SANDSTONE).mapColor(MapColor.COLOR_BLACK)));
 
     public static final RegistryObject<Block> BLACK_MUSHROOM_BLOCK = register("black_mushroom_block", () -> new HugeMushroomBlock(BlockBehaviour.Properties.copy(Blocks.RED_MUSHROOM_BLOCK).mapColor(MapColor.TERRACOTTA_BLACK)));
-    public static final RegistryObject<Block> BLACK_MUSHROOM = register("black_mushroom", () -> new MushroomBlock(BlockBehaviour.Properties.copy(Blocks.RED_MUSHROOM).mapColor(MapColor.TERRACOTTA_BLACK), SBConfiguredFeatures.HUGE_BLACK_MUSHROOM));
+    public static final RegistryObject<Block> BLACK_MUSHROOM = register("black_mushroom", () -> new MushroomBlock(BlockBehaviour.Properties.copy(Blocks.RED_MUSHROOM).mapColor(MapColor.TERRACOTTA_BLACK), SBConfiguredFeatures.HUGE_BLACK_MUSHROOM) {public PlantType getPlantType(BlockGetter level, BlockPos pos) {return PlantType.CAVE;}});
     public static final RegistryObject<Block> WHITE_MUSHROOM_BLOCK = register("white_mushroom_block", () -> new HugeMushroomBlock(BlockBehaviour.Properties.copy(Blocks.RED_MUSHROOM_BLOCK).mapColor(MapColor.TERRACOTTA_WHITE)));
-    public static final RegistryObject<Block> WHITE_MUSHROOM = register("white_mushroom", () -> new MushroomBlock(BlockBehaviour.Properties.copy(Blocks.RED_MUSHROOM).mapColor(MapColor.TERRACOTTA_WHITE), SBConfiguredFeatures.HUGE_WHITE_MUSHROOM));
+    public static final RegistryObject<Block> WHITE_MUSHROOM = register("white_mushroom", () -> new MushroomBlock(BlockBehaviour.Properties.copy(Blocks.RED_MUSHROOM).mapColor(MapColor.TERRACOTTA_WHITE), SBConfiguredFeatures.HUGE_WHITE_MUSHROOM) {public PlantType getPlantType(BlockGetter level, BlockPos pos) {return PlantType.CAVE;}});
 
     public static final RegistryObject<Block> ASPEN_LOG = register("aspen_log", () -> new RotatedPillarBlock(BlockBehaviour.Properties.copy(Blocks.OAK_LOG)));
     public static final RegistryObject<Block> STRIPPED_ASPEN_LOG = register("stripped_aspen_log", () -> new RotatedPillarBlock(BlockBehaviour.Properties.copy(Blocks.STRIPPED_OAK_LOG)));
@@ -205,6 +209,12 @@ public final class SBBlocks {
     private static <T extends Block> RegistryObject<T> register(String name, Supplier<T> supplier) {
         RegistryObject<T> block = BLOCKS.register(name, supplier);
         SBItems.ITEMS.register(name, () -> new BlockItem(block.get(), new Item.Properties()));
+        return block;
+    }
+
+    private static <T extends Block> RegistryObject<T> registerPlaceableOnWater(String name, Supplier<T> supplier) {
+        RegistryObject<T> block = BLOCKS.register(name, supplier);
+        SBItems.ITEMS.register(name, () -> new PlaceOnWaterBlockItem(block.get(), new Item.Properties()));
         return block;
     }
 }

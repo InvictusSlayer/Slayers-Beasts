@@ -74,6 +74,7 @@ public class SBConfiguredFeatures {
 
     //Vegetation
     public static final ResourceKey<ConfiguredFeature<?, ?>> TREES_ASPEN = createKey("trees_aspen");
+    public static final ResourceKey<ConfiguredFeature<?, ?>> TREES_BAYOU = createKey("trees_bayou");
     public static final ResourceKey<ConfiguredFeature<?, ?>> TREES_BRUSH = createKey("trees_brush");
     public static final ResourceKey<ConfiguredFeature<?, ?>> TREES_CHAPARRAL = createKey("trees_chaparral");
     public static final ResourceKey<ConfiguredFeature<?, ?>> TREES_EUCALYPT = createKey("trees_eucalypt");
@@ -86,6 +87,7 @@ public class SBConfiguredFeatures {
     public static final ResourceKey<ConfiguredFeature<?, ?>> HUGE_MUSHROOMS = createKey("huge_mushrooms");
     public static final ResourceKey<ConfiguredFeature<?, ?>> MEDIUM_MUSHROOMS = createKey("medium_mushrooms");
     public static final ResourceKey<ConfiguredFeature<?, ?>> TINY_MUSHROOMS = createKey("tiny_mushrooms");
+    public static final ResourceKey<ConfiguredFeature<?, ?>> PATCH_ALGAE = createKey("patch_algae");
     public static final ResourceKey<ConfiguredFeature<?, ?>> PATCH_TALL_DEAD_BUSH = createKey("patch_tall_dead_bush");
     public static final ResourceKey<ConfiguredFeature<?, ?>> PATCH_BLACK_MUSHROOM = createKey("patch_black_mushroom");
     public static final ResourceKey<ConfiguredFeature<?, ?>> PATCH_WHITE_MUSHROOM = createKey("patch_white_mushroom");
@@ -157,6 +159,7 @@ public class SBConfiguredFeatures {
         register(context, MEDIUM_WHITE_MUSHROOM, SBFeatures.MEDIUM_MUSHROOM.get(), new MediumMushroomFeature.Configuration(UniformInt.of(1, 2), BlockStateProvider.simple(SBBlocks.BLACK_MUSHROOM_BLOCK.get()), BlockStateProvider.simple(Blocks.MUSHROOM_STEM)));
         
         register(context, TREES_ASPEN, Feature.RANDOM_SELECTOR, new RandomFeatureConfiguration(List.of(new WeightedPlacedFeature(placed.getOrThrow(SBPlacedFeatures.ASPEN_CHECKED), 0.7F)), placed.getOrThrow(SBPlacedFeatures.ASPEN_CHECKED)));
+        register(context, TREES_BAYOU, Feature.RANDOM_SELECTOR, new RandomFeatureConfiguration(List.of(new WeightedPlacedFeature(placed.getOrThrow(SBPlacedFeatures.GIANT_WILLOW_CHECKED), 0.1F), new WeightedPlacedFeature(placed.getOrThrow(TreePlacements.MANGROVE_CHECKED), 0.3F)), placed.getOrThrow(SBPlacedFeatures.CAJOLE_CHECKED)));
         register(context, TREES_BRUSH, Feature.RANDOM_SELECTOR, new RandomFeatureConfiguration(List.of(new WeightedPlacedFeature(placed.getOrThrow(SBPlacedFeatures.DESERT_OAK_CHECKED), 0.5F)), placed.getOrThrow(TreePlacements.ACACIA_CHECKED)));
         register(context, TREES_CHAPARRAL, Feature.RANDOM_SELECTOR, new RandomFeatureConfiguration(List.of(new WeightedPlacedFeature(placed.getOrThrow(SBPlacedFeatures.DESERT_OAK_CHECKED), 0.5F)), placed.getOrThrow(TreePlacements.OAK_CHECKED)));
         register(context, TREES_EUCALYPT, Feature.RANDOM_SELECTOR, new RandomFeatureConfiguration(List.of(new WeightedPlacedFeature(placed.getOrThrow(SBPlacedFeatures.EUCALYPTUS_CHECKED), 0.5F)), placed.getOrThrow(SBPlacedFeatures.EUCALYPTUS_CHECKED)));
@@ -170,6 +173,7 @@ public class SBConfiguredFeatures {
         register(context, MEDIUM_MUSHROOMS, Feature.RANDOM_SELECTOR, new RandomFeatureConfiguration(List.of(new WeightedPlacedFeature(PlacementUtils.inlinePlaced(configured.getOrThrow(MEDIUM_BLACK_MUSHROOM)), 0.25F), new WeightedPlacedFeature(PlacementUtils.inlinePlaced(configured.getOrThrow(MEDIUM_BROWN_MUSHROOM)), 0.25F), new WeightedPlacedFeature(PlacementUtils.inlinePlaced(configured.getOrThrow(MEDIUM_RED_MUSHROOM)), 0.25F)), PlacementUtils.inlinePlaced(configured.getOrThrow(MEDIUM_WHITE_MUSHROOM))));
         register(context, TINY_MUSHROOMS, Feature.SIMPLE_BLOCK, new SimpleBlockConfiguration(new WeightedStateProvider(SimpleWeightedRandomList.<BlockState>builder().add(Blocks.BROWN_MUSHROOM.defaultBlockState(), 1).add(Blocks.RED_MUSHROOM.defaultBlockState(), 1).add(SBBlocks.BLACK_MUSHROOM.get().defaultBlockState(), 1).add(SBBlocks.WHITE_MUSHROOM.get().defaultBlockState(), 1).build())));
         register(context, VEGETATION_STYPHIUM, Feature.RANDOM_SELECTOR, new RandomFeatureConfiguration(List.of(new WeightedPlacedFeature(PlacementUtils.inlinePlaced(configured.getOrThrow(HUGE_MUSHROOMS)), 0.08F), new WeightedPlacedFeature(PlacementUtils.inlinePlaced(configured.getOrThrow(MEDIUM_MUSHROOMS)), 0.1F)), PlacementUtils.inlinePlaced(configured.getOrThrow(TINY_MUSHROOMS))));
+        register(context, PATCH_ALGAE, Feature.RANDOM_PATCH, new RandomPatchConfiguration(64, 7, 3, PlacementUtils.onlyWhenEmpty(Feature.SIMPLE_BLOCK, new SimpleBlockConfiguration(BlockStateProvider.simple(SBBlocks.ALGAE.get())))));
         register(context, PATCH_TALL_DEAD_BUSH, Feature.RANDOM_PATCH, FeatureUtils.simplePatchConfiguration(Feature.SIMPLE_BLOCK, new SimpleBlockConfiguration(BlockStateProvider.simple(SBBlocks.TALL_DEAD_BUSH.get()))));
         register(context, PATCH_BLACK_MUSHROOM, Feature.RANDOM_PATCH, FeatureUtils.simplePatchConfiguration(Feature.SIMPLE_BLOCK, new SimpleBlockConfiguration(BlockStateProvider.simple(SBBlocks.BLACK_MUSHROOM.get()))));
         register(context, PATCH_WHITE_MUSHROOM, Feature.RANDOM_PATCH, FeatureUtils.simplePatchConfiguration(Feature.SIMPLE_BLOCK, new SimpleBlockConfiguration(BlockStateProvider.simple(SBBlocks.WHITE_MUSHROOM.get()))));

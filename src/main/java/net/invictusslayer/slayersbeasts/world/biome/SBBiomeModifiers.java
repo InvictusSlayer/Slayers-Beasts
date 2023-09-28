@@ -25,11 +25,14 @@ import java.util.List;
 
 public record SBBiomeModifiers() {
 	//Features
+	public static final ResourceKey<BiomeModifier> ADD_ALGAE_COMMON = createKey("add_algae_common");
+	public static final ResourceKey<BiomeModifier> ADD_ALGAE_NORMAL = createKey("add_algae_normal");
 	public static final ResourceKey<BiomeModifier> ADD_DEFAULT_MUSHROOMS = createKey("add_default_mushrooms");
 	public static final ResourceKey<BiomeModifier> ADD_MUD_PITS = createKey("add_mud_pits");
-	public static final ResourceKey<BiomeModifier> ADD_ORE_PEGMATITE = createKey("add_ore_pegmatite");
 	public static final ResourceKey<BiomeModifier> ADD_ORE_EXOSKELETON = createKey("add_ore_exoskeleton");
 	public static final ResourceKey<BiomeModifier> ADD_ORE_EXOSKELETON_LUSH = createKey("add_ore_exoskeleton_lush");
+	public static final ResourceKey<BiomeModifier> ADD_ORE_PEGMATITE = createKey("add_ore_pegmatite");
+	public static final ResourceKey<BiomeModifier> ADD_TREES_RIVER = createKey("add_trees_river");
 
 	//Spawns
 	public static final ResourceKey<BiomeModifier> ADD_MANTIS = createKey("add_mantis");
@@ -41,11 +44,14 @@ public record SBBiomeModifiers() {
 		HolderGetter<Biome> biomes = context.lookup(Registries.BIOME);
 		HolderGetter<PlacedFeature> placed = context.lookup(Registries.PLACED_FEATURE);
 
+		register(context, ADD_ALGAE_COMMON, new AddFeaturesBiomeModifier(HolderSet.direct(biomes.getOrThrow(Biomes.MANGROVE_SWAMP)), HolderSet.direct(placed.getOrThrow(SBPlacedFeatures.PATCH_ALGAE_COMMON)), GenerationStep.Decoration.VEGETAL_DECORATION));
+		register(context, ADD_ALGAE_NORMAL, new AddFeaturesBiomeModifier(HolderSet.direct(biomes.getOrThrow(Biomes.SWAMP)), HolderSet.direct(placed.getOrThrow(SBPlacedFeatures.PATCH_ALGAE_NORMAL)), GenerationStep.Decoration.VEGETAL_DECORATION));
 		register(context, ADD_DEFAULT_MUSHROOMS, new AddFeaturesBiomeModifier(biomes.getOrThrow(BiomeTags.IS_OVERWORLD), HolderSet.direct(placed.getOrThrow(SBPlacedFeatures.BLACK_MUSHROOM_RARE), placed.getOrThrow(SBPlacedFeatures.WHITE_MUSHROOM_RARE)), GenerationStep.Decoration.VEGETAL_DECORATION));
 		register(context, ADD_MUD_PITS, new AddFeaturesBiomeModifier(biomes.getOrThrow(BiomeTags.IS_BADLANDS), HolderSet.direct(placed.getOrThrow(SBPlacedFeatures.MUD_PIT_SHALLOW), placed.getOrThrow(SBPlacedFeatures.MUD_PIT_NORMAL), placed.getOrThrow(SBPlacedFeatures.MUD_PIT_DEEP)), GenerationStep.Decoration.LOCAL_MODIFICATIONS));
-		register(context, ADD_ORE_PEGMATITE, new AddFeaturesBiomeModifier(biomes.getOrThrow(BiomeTags.IS_OVERWORLD), HolderSet.direct(placed.getOrThrow(SBPlacedFeatures.ORE_PEGMATITE_UPPER), placed.getOrThrow(SBPlacedFeatures.ORE_PEGMATITE_LOWER)), GenerationStep.Decoration.UNDERGROUND_ORES));
 		register(context, ADD_ORE_EXOSKELETON, new AddFeaturesBiomeModifier(biomes.getOrThrow(BiomeTags.IS_OVERWORLD), HolderSet.direct(placed.getOrThrow(SBPlacedFeatures.ORE_EXOSKELETON)), GenerationStep.Decoration.UNDERGROUND_ORES));
 		register(context, ADD_ORE_EXOSKELETON_LUSH, new AddFeaturesBiomeModifier(HolderSet.direct(biomes.getOrThrow(Biomes.LUSH_CAVES)), HolderSet.direct(placed.getOrThrow(SBPlacedFeatures.ORE_EXOSKELETON_LUSH)), GenerationStep.Decoration.UNDERGROUND_ORES));
+		register(context, ADD_ORE_PEGMATITE, new AddFeaturesBiomeModifier(biomes.getOrThrow(BiomeTags.IS_OVERWORLD), HolderSet.direct(placed.getOrThrow(SBPlacedFeatures.ORE_PEGMATITE_UPPER), placed.getOrThrow(SBPlacedFeatures.ORE_PEGMATITE_LOWER)), GenerationStep.Decoration.UNDERGROUND_ORES));
+		register(context, ADD_TREES_RIVER, new AddFeaturesBiomeModifier(biomes.getOrThrow(BiomeTags.IS_RIVER), HolderSet.direct(placed.getOrThrow(SBPlacedFeatures.TREES_RIVER)), GenerationStep.Decoration.VEGETAL_DECORATION));
 
 		register(context, ADD_MANTIS, new AddSpawnsBiomeModifier(biomes.getOrThrow(SBTags.Biomes.SPAWNS_MANTIS), List.of(new MobSpawnSettings.SpawnerData(SBEntities.MANTIS.get(), 6, 1, 3))));
 		register(context, ADD_WITHER_SPIDER, new AddSpawnsBiomeModifier(HolderSet.direct(biomes.getOrThrow(Biomes.SOUL_SAND_VALLEY)), List.of(new MobSpawnSettings.SpawnerData(SBEntities.WITHER_SPIDER.get(), 4, 1, 2))));

@@ -22,8 +22,8 @@ public class CommonEvents {
     @SuppressWarnings("deprecation")
     public static void commonSetup(FMLCommonSetupEvent event) {
         event.enqueueWork(() -> {
-            SBFlammableBlocks.setup();
-            SBStrippableBlocks.setup();
+            SBFlammableBlocks.register();
+            SBStrippableBlocks.register();
 
 //            BrewingRecipeRegistry.addRecipe(new SBBrewingRecipe(Potions.SLOWNESS, SBItems.INSECT_EYE.get(), SBPotions.PARALYSIS_POTION.get()));
 //            BrewingRecipeRegistry.addRecipe(new SBBrewingRecipe(Potions.POISON, SBItems.WITHERBONE.get(), SBPotions.WITHER_POTION.get()));
