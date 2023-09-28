@@ -36,6 +36,7 @@ public class SBPlacedFeatures {
 
     //Vegetation
     public static final ResourceKey<PlacedFeature> TREES_ASPEN = createKey("trees_aspen");
+    public static final ResourceKey<PlacedFeature> TREES_BAYOU = createKey("trees_bayou");
     public static final ResourceKey<PlacedFeature> TREES_BRUSH = createKey("trees_brush");
     public static final ResourceKey<PlacedFeature> TREES_WOODED_BRUSH = createKey("trees_wooded_brush");
     public static final ResourceKey<PlacedFeature> TREES_CHAPARRAL = createKey("trees_chaparral");
@@ -46,6 +47,8 @@ public class SBPlacedFeatures {
     public static final ResourceKey<PlacedFeature> TREES_REDWOOD = createKey("trees_redwood");
     public static final ResourceKey<PlacedFeature> TREES_OLD_GROWTH_REDWOOD = createKey("trees_old_growth_redwood");
     public static final ResourceKey<PlacedFeature> TREES_RIVER = createKey("trees_river");
+    public static final ResourceKey<PlacedFeature> PATCH_ALGAE_COMMON = createKey("patch_algae_common");
+    public static final ResourceKey<PlacedFeature> PATCH_ALGAE_NORMAL = createKey("patch_algae_normal");
     public static final ResourceKey<PlacedFeature> PATCH_TALL_DEAD_BUSH = createKey("patch_tall_dead_bush");
     public static final ResourceKey<PlacedFeature> PATCH_TALL_DEAD_BUSH_BRUSH = createKey("patch_tall_dead_bush_brush");
     public static final ResourceKey<PlacedFeature> BLACK_MUSHROOM_COMMON = createKey("black_mushroom_common");
@@ -89,17 +92,20 @@ public class SBPlacedFeatures {
         register(context, COLOSSAL_REDWOOD_CHECKED, configured.getOrThrow(SBConfiguredFeatures.COLOSSAL_REDWOOD), PlacementUtils.filteredByBlockSurvival(SBBlocks.REDWOOD_SAPLING.get()));
         register(context, GIANT_WILLOW_CHECKED, configured.getOrThrow(SBConfiguredFeatures.GIANT_WILLOW), PlacementUtils.filteredByBlockSurvival(SBBlocks.WILLOW_SAPLING.get()));
 
-        register(context, TREES_ASPEN, configured.getOrThrow(SBConfiguredFeatures.TREES_ASPEN), VegetationPlacements.treePlacement(PlacementUtils.countExtra(10, 0.2f, 3), SBBlocks.ASPEN_SAPLING.get()));
-        register(context, TREES_BRUSH, configured.getOrThrow(SBConfiguredFeatures.TREES_BRUSH), VegetationPlacements.treePlacement(PlacementUtils.countExtra(1, 0.1f, 1), SBBlocks.DESERT_OAK_SAPLING.get()));
-        register(context, TREES_WOODED_BRUSH, configured.getOrThrow(SBConfiguredFeatures.TREES_BRUSH), VegetationPlacements.treePlacement(PlacementUtils.countExtra(10, 0.2f, 3), SBBlocks.DESERT_OAK_SAPLING.get()));
-        register(context, TREES_CHAPARRAL, configured.getOrThrow(SBConfiguredFeatures.TREES_CHAPARRAL), VegetationPlacements.treePlacement(PlacementUtils.countExtra(1, 0.1f, 1), SBBlocks.DESERT_OAK_SAPLING.get()));
-        register(context, TREES_EUCALYPT, configured.getOrThrow(SBConfiguredFeatures.TREES_EUCALYPT), VegetationPlacements.treePlacement(PlacementUtils.countExtra(6, 0.1f, 1), SBBlocks.EUCALYPTUS_SAPLING.get()));
-        register(context, TREES_INKY, configured.getOrThrow(SBConfiguredFeatures.TREES_INKY), VegetationPlacements.treePlacement(PlacementUtils.countExtra(3, 0.1f, 1)));
-        register(context, TREES_OUTBACK, configured.getOrThrow(SBConfiguredFeatures.TREES_OUTBACK), VegetationPlacements.treePlacement(PlacementUtils.countExtra(1, 0.1f, 1), SBBlocks.EUCALYPTUS_SAPLING.get()));
-        register(context, TREES_RAINFOREST, configured.getOrThrow(SBConfiguredFeatures.TREES_RAINFOREST), VegetationPlacements.treePlacement(PlacementUtils.countExtra(10, 0.1f, 1)));
-        register(context, TREES_REDWOOD, configured.getOrThrow(SBConfiguredFeatures.TREES_REDWOOD), VegetationPlacements.treePlacement(PlacementUtils.countExtra(10, 0.1f, 1), SBBlocks.REDWOOD_SAPLING.get()));
-        register(context, TREES_OLD_GROWTH_REDWOOD, configured.getOrThrow(SBConfiguredFeatures.TREES_OLD_GROWTH_REDWOOD), VegetationPlacements.treePlacement(PlacementUtils.countExtra(10, 0.1f, 1), SBBlocks.REDWOOD_SAPLING.get()));
-        register(context, TREES_RIVER, configured.getOrThrow(SBConfiguredFeatures.TREES_RIVER), VegetationPlacements.treePlacement(PlacementUtils.countExtra(0, 0.05f, 1), SBBlocks.WILLOW_SAPLING.get()));
+        register(context, TREES_ASPEN, configured.getOrThrow(SBConfiguredFeatures.TREES_ASPEN), VegetationPlacements.treePlacement(PlacementUtils.countExtra(10, 0.2F, 3), SBBlocks.ASPEN_SAPLING.get()));
+        register(context, TREES_BAYOU, configured.getOrThrow(SBConfiguredFeatures.TREES_BAYOU), VegetationPlacements.treePlacement(PlacementUtils.countExtra(10, 0.2F, 2)));
+        register(context, TREES_BRUSH, configured.getOrThrow(SBConfiguredFeatures.TREES_BRUSH), VegetationPlacements.treePlacement(PlacementUtils.countExtra(1, 0.1F, 1), SBBlocks.DESERT_OAK_SAPLING.get()));
+        register(context, TREES_WOODED_BRUSH, configured.getOrThrow(SBConfiguredFeatures.TREES_BRUSH), VegetationPlacements.treePlacement(PlacementUtils.countExtra(10, 0.2F, 3), SBBlocks.DESERT_OAK_SAPLING.get()));
+        register(context, TREES_CHAPARRAL, configured.getOrThrow(SBConfiguredFeatures.TREES_CHAPARRAL), VegetationPlacements.treePlacement(PlacementUtils.countExtra(1, 0.1F, 1), SBBlocks.DESERT_OAK_SAPLING.get()));
+        register(context, TREES_EUCALYPT, configured.getOrThrow(SBConfiguredFeatures.TREES_EUCALYPT), VegetationPlacements.treePlacement(PlacementUtils.countExtra(6, 0.1F, 1), SBBlocks.EUCALYPTUS_SAPLING.get()));
+        register(context, TREES_INKY, configured.getOrThrow(SBConfiguredFeatures.TREES_INKY), VegetationPlacements.treePlacement(PlacementUtils.countExtra(3, 0.1F, 1)));
+        register(context, TREES_OUTBACK, configured.getOrThrow(SBConfiguredFeatures.TREES_OUTBACK), VegetationPlacements.treePlacement(PlacementUtils.countExtra(1, 0.1F, 1), SBBlocks.EUCALYPTUS_SAPLING.get()));
+        register(context, TREES_RAINFOREST, configured.getOrThrow(SBConfiguredFeatures.TREES_RAINFOREST), VegetationPlacements.treePlacement(PlacementUtils.countExtra(10, 0.1F, 1)));
+        register(context, TREES_REDWOOD, configured.getOrThrow(SBConfiguredFeatures.TREES_REDWOOD), VegetationPlacements.treePlacement(PlacementUtils.countExtra(10, 0.1F, 1), SBBlocks.REDWOOD_SAPLING.get()));
+        register(context, TREES_OLD_GROWTH_REDWOOD, configured.getOrThrow(SBConfiguredFeatures.TREES_OLD_GROWTH_REDWOOD), VegetationPlacements.treePlacement(PlacementUtils.countExtra(10, 0.1F, 1), SBBlocks.REDWOOD_SAPLING.get()));
+        register(context, TREES_RIVER, configured.getOrThrow(SBConfiguredFeatures.TREES_RIVER), VegetationPlacements.treePlacement(PlacementUtils.countExtra(0, 0.05F, 1), SBBlocks.WILLOW_SAPLING.get()));
+        register(context, PATCH_ALGAE_COMMON, configured.getOrThrow(SBConfiguredFeatures.PATCH_ALGAE), VegetationPlacements.worldSurfaceSquaredWithCount(5));
+        register(context, PATCH_ALGAE_NORMAL, configured.getOrThrow(SBConfiguredFeatures.PATCH_ALGAE), VegetationPlacements.worldSurfaceSquaredWithCount(1));
         register(context, PATCH_TALL_DEAD_BUSH, configured.getOrThrow(SBConfiguredFeatures.PATCH_TALL_DEAD_BUSH), RarityFilter.onAverageOnceEvery(5), InSquarePlacement.spread(), PlacementUtils.HEIGHTMAP, BiomeFilter.biome());
         register(context, PATCH_TALL_DEAD_BUSH_BRUSH, configured.getOrThrow(SBConfiguredFeatures.PATCH_TALL_DEAD_BUSH), VegetationPlacements.worldSurfaceSquaredWithCount(5));
         register(context, BLACK_MUSHROOM_COMMON, configured.getOrThrow(SBConfiguredFeatures.PATCH_BLACK_MUSHROOM), mushroomPlacement(9, CountPlacement.of(3)));

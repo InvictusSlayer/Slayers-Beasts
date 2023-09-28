@@ -10,6 +10,7 @@ import net.minecraft.world.level.block.state.properties.DoubleBlockHalf;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import net.minecraftforge.common.IForgeShearable;
+import net.minecraftforge.common.PlantType;
 
 public class TallDeadBushBlock extends DoublePlantBlock implements IForgeShearable {
 	private static final VoxelShape UPPER = Block.box(2.0D, 0.0D, 2.0D, 14.0D, 14.0D, 14.0D);
@@ -17,6 +18,10 @@ public class TallDeadBushBlock extends DoublePlantBlock implements IForgeShearab
 
 	public TallDeadBushBlock(Properties properties) {
 		super(properties);
+	}
+
+	public PlantType getPlantType(BlockGetter level, BlockPos pos) {
+		return PlantType.DESERT;
 	}
 
 	protected boolean mayPlaceOn(BlockState state, BlockGetter level, BlockPos pos) {

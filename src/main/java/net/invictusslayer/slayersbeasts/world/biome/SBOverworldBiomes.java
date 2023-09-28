@@ -4,6 +4,7 @@ import net.invictusslayer.slayersbeasts.entity.SBEntities;
 import net.invictusslayer.slayersbeasts.world.feature.SBPlacedFeatures;
 import net.minecraft.core.HolderGetter;
 import net.minecraft.data.worldgen.BiomeDefaultFeatures;
+import net.minecraft.data.worldgen.placement.AquaticPlacements;
 import net.minecraft.data.worldgen.placement.MiscOverworldPlacements;
 import net.minecraft.data.worldgen.placement.VegetationPlacements;
 import net.minecraft.sounds.Music;
@@ -44,6 +45,7 @@ public class SBOverworldBiomes {
         BiomeDefaultFeatures.addDefaultSoftDisks(biomeSettings);
         biomeSettings.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, VegetationPlacements.PATCH_GRASS_FOREST);
         BiomeDefaultFeatures.addDefaultMushrooms(biomeSettings);
+
         addModUndergroundVariety(biomeSettings);
         addModMushrooms(biomeSettings);
         biomeSettings.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, SBPlacedFeatures.TREES_RAINFOREST);
@@ -58,12 +60,38 @@ public class SBOverworldBiomes {
         globalOverworldGeneration(biomeSettings);
         BiomeDefaultFeatures.addDefaultOres(biomeSettings);
         BiomeDefaultFeatures.addDefaultSoftDisks(biomeSettings);
+        BiomeDefaultFeatures.addDefaultFlowers(biomeSettings);
         biomeSettings.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, VegetationPlacements.PATCH_GRASS_FOREST);
         BiomeDefaultFeatures.addDefaultMushrooms(biomeSettings);
+
         addModUndergroundVariety(biomeSettings);
         addModMushrooms(biomeSettings);
         biomeSettings.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, SBPlacedFeatures.TREES_ASPEN);
         return biome(true, 0.6F, 0.6F, mobSettings, biomeSettings, MUSIC_FOREST);
+    }
+
+    public static Biome bayou(HolderGetter<PlacedFeature> features, HolderGetter<ConfiguredWorldCarver<?>> carvers) {
+        MobSpawnSettings.Builder mobSettings = new MobSpawnSettings.Builder();
+        BiomeDefaultFeatures.commonSpawns(mobSettings);
+        mobSettings.addSpawn(MobCategory.MONSTER, new MobSpawnSettings.SpawnerData(EntityType.SLIME, 1, 1, 1));
+        mobSettings.addSpawn(MobCategory.CREATURE, new MobSpawnSettings.SpawnerData(EntityType.FROG, 10, 2, 5));
+        mobSettings.addSpawn(MobCategory.AMBIENT, new MobSpawnSettings.SpawnerData(SBEntities.DAMSELFLY.get(), 4, 1, 1));
+
+        BiomeGenerationSettings.Builder biomeSettings = new BiomeGenerationSettings.Builder(features, carvers);
+        globalOverworldGeneration(biomeSettings);
+        BiomeDefaultFeatures.addDefaultOres(biomeSettings);
+        BiomeDefaultFeatures.addMangroveSwampDisks(biomeSettings);
+        biomeSettings.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, VegetationPlacements.PATCH_GRASS_NORMAL);
+        biomeSettings.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, VegetationPlacements.PATCH_DEAD_BUSH);
+        biomeSettings.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, VegetationPlacements.PATCH_WATERLILY);
+        BiomeDefaultFeatures.addDefaultMushrooms(biomeSettings);
+        biomeSettings.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, VegetationPlacements.PATCH_SUGAR_CANE_SWAMP);
+
+        addModUndergroundVariety(biomeSettings);
+        biomeSettings.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, SBPlacedFeatures.PATCH_ALGAE_COMMON);
+        addModMushrooms(biomeSettings);
+        biomeSettings.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, SBPlacedFeatures.TREES_INKY);
+        return biome(true, 0.9F, 0.8F, NONE, 2642743, 2192174, null, 6975545, BiomeSpecialEffects.GrassColorModifier.SWAMP, mobSettings, biomeSettings, MUSIC_SWAMP);
     }
 
     public static Biome brushland(HolderGetter<PlacedFeature> features, HolderGetter<ConfiguredWorldCarver<?>> carvers, boolean wooded, boolean rocky) {
@@ -79,6 +107,7 @@ public class SBOverworldBiomes {
         biomeSettings.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, VegetationPlacements.PATCH_GRASS_SAVANNA);
         biomeSettings.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, VegetationPlacements.PATCH_DEAD_BUSH_2);
         BiomeDefaultFeatures.addDefaultMushrooms(biomeSettings);
+
         addMudPits(biomeSettings);
         addModUndergroundVariety(biomeSettings);
         biomeSettings.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, SBPlacedFeatures.PATCH_TALL_DEAD_BUSH_BRUSH);
@@ -95,9 +124,11 @@ public class SBOverworldBiomes {
         globalOverworldGeneration(biomeSettings);
         BiomeDefaultFeatures.addDefaultOres(biomeSettings);
         BiomeDefaultFeatures.addDefaultSoftDisks(biomeSettings);
+        BiomeDefaultFeatures.addDefaultFlowers(biomeSettings);
         biomeSettings.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, VegetationPlacements.PATCH_GRASS_SAVANNA);
         biomeSettings.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, VegetationPlacements.PATCH_DEAD_BUSH);
         BiomeDefaultFeatures.addDefaultMushrooms(biomeSettings);
+
         addModUndergroundVariety(biomeSettings);
         biomeSettings.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, SBPlacedFeatures.PATCH_TALL_DEAD_BUSH);
         addModMushrooms(biomeSettings);
@@ -114,8 +145,10 @@ public class SBOverworldBiomes {
         globalOverworldGeneration(biomeSettings);
         BiomeDefaultFeatures.addDefaultOres(biomeSettings);
         BiomeDefaultFeatures.addDefaultSoftDisks(biomeSettings);
+        BiomeDefaultFeatures.addDefaultFlowers(biomeSettings);
         biomeSettings.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, VegetationPlacements.PATCH_DEAD_BUSH);
         BiomeDefaultFeatures.addDefaultMushrooms(biomeSettings);
+
         addMudPits(biomeSettings);
         addModUndergroundVariety(biomeSettings);
         addModMushrooms(biomeSettings);
@@ -131,9 +164,11 @@ public class SBOverworldBiomes {
         BiomeDefaultFeatures.addDefaultOres(biomeSettings);
         BiomeDefaultFeatures.addDefaultSoftDisks(biomeSettings);
         biomeSettings.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, VegetationPlacements.PATCH_LARGE_FERN);
+        BiomeDefaultFeatures.addDefaultFlowers(biomeSettings);
         biomeSettings.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, VegetationPlacements.PATCH_GRASS_TAIGA_2);
         biomeSettings.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, VegetationPlacements.BROWN_MUSHROOM_OLD_GROWTH);
         BiomeDefaultFeatures.addDefaultMushrooms(biomeSettings);
+
         addModUndergroundVariety(biomeSettings);
         biomeSettings.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, SBPlacedFeatures.PATCH_TALL_DEAD_BUSH);
         addModMushrooms(biomeSettings);
@@ -150,6 +185,7 @@ public class SBOverworldBiomes {
         BiomeDefaultFeatures.addDefaultOres(biomeSettings);
         BiomeDefaultFeatures.addDefaultSoftDisks(biomeSettings);
         BiomeDefaultFeatures.addDefaultMushrooms(biomeSettings);
+
         addModUndergroundVariety(biomeSettings);
         addModMushrooms(biomeSettings);
         return biome(true, 0F, 0.2F, FROZEN, DEFAULT_WATER, DEFAULT_WATER_FOG, null, null, null, mobSettings, biomeSettings, MUSIC_FROZEN);
@@ -170,10 +206,36 @@ public class SBOverworldBiomes {
         biomeSettings.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, VegetationPlacements.PATCH_DEAD_BUSH);
         biomeSettings.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, VegetationPlacements.PATCH_WATERLILY);
         BiomeDefaultFeatures.addDefaultMushrooms(biomeSettings);
-        biomeSettings.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, VegetationPlacements.PATCH_SUGAR_CANE_SWAMP);
+
         addModUndergroundVariety(biomeSettings);
+        biomeSettings.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, SBPlacedFeatures.PATCH_ALGAE_NORMAL);
         addModMushrooms(biomeSettings);
         biomeSettings.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, SBPlacedFeatures.TREES_INKY);
+        return biome(true, 0.9F, 0.8F, NONE, 2642743, 2192174, null, 6975545, BiomeSpecialEffects.GrassColorModifier.SWAMP, mobSettings, biomeSettings, MUSIC_SWAMP);
+    }
+
+    public static Biome murkyOcean(HolderGetter<PlacedFeature> features, HolderGetter<ConfiguredWorldCarver<?>> carvers, boolean isDeep) {
+        MobSpawnSettings.Builder mobSettings = new MobSpawnSettings.Builder();
+        BiomeDefaultFeatures.oceanSpawns(mobSettings, 10, 4, 5);
+
+        BiomeGenerationSettings.Builder biomeSettings = new BiomeGenerationSettings.Builder(features, carvers);
+        globalOverworldGeneration(biomeSettings);
+        BiomeDefaultFeatures.addDefaultOres(biomeSettings);
+        BiomeDefaultFeatures.addDefaultSoftDisks(biomeSettings);
+        BiomeDefaultFeatures.addWaterTrees(biomeSettings);
+        BiomeDefaultFeatures.addDefaultFlowers(biomeSettings);
+        BiomeDefaultFeatures.addDefaultGrass(biomeSettings);
+        BiomeDefaultFeatures.addDefaultMushrooms(biomeSettings);
+        biomeSettings.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, VegetationPlacements.PATCH_SUGAR_CANE);
+        biomeSettings.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, VegetationPlacements.PATCH_PUMPKIN);
+        biomeSettings.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, isDeep ? AquaticPlacements.SEAGRASS_DEEP_WARM : AquaticPlacements.SEAGRASS_DEEP);
+        biomeSettings.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, AquaticPlacements.SEAGRASS_SIMPLE);
+        biomeSettings.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, AquaticPlacements.KELP_COLD);
+        biomeSettings.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, AquaticPlacements.KELP_WARM);
+
+        addModUndergroundVariety(biomeSettings);
+        biomeSettings.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, SBPlacedFeatures.PATCH_ALGAE_COMMON);
+        addModMushrooms(biomeSettings);
         return biome(true, 0.9F, 0.8F, NONE, 2642743, 2192174, null, 6975545, BiomeSpecialEffects.GrassColorModifier.SWAMP, mobSettings, biomeSettings, MUSIC_SWAMP);
     }
 
@@ -188,6 +250,7 @@ public class SBOverworldBiomes {
         biomeSettings.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, VegetationPlacements.PATCH_GRASS_NORMAL);
         biomeSettings.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, VegetationPlacements.PATCH_DEAD_BUSH);
         BiomeDefaultFeatures.addDefaultMushrooms(biomeSettings);
+
         addMudPits(biomeSettings);
         addModUndergroundVariety(biomeSettings);
         biomeSettings.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, SBPlacedFeatures.PATCH_TALL_DEAD_BUSH);
@@ -218,6 +281,7 @@ public class SBOverworldBiomes {
         BiomeDefaultFeatures.addDefaultSoftDisks(biomeSettings);
         biomeSettings.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, VegetationPlacements.PATCH_GRASS_JUNGLE);
         BiomeDefaultFeatures.addDefaultMushrooms(biomeSettings);
+
         addModUndergroundVariety(biomeSettings);
         addModMushrooms(biomeSettings);
         biomeSettings.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, SBPlacedFeatures.TREES_RAINFOREST);
@@ -233,9 +297,11 @@ public class SBOverworldBiomes {
         BiomeDefaultFeatures.addDefaultOres(biomeSettings);
         BiomeDefaultFeatures.addDefaultSoftDisks(biomeSettings);
         biomeSettings.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, VegetationPlacements.PATCH_LARGE_FERN);
+        BiomeDefaultFeatures.addDefaultFlowers(biomeSettings);
         biomeSettings.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, VegetationPlacements.PATCH_GRASS_TAIGA);
         biomeSettings.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, VegetationPlacements.PATCH_DEAD_BUSH);
         BiomeDefaultFeatures.addDefaultMushrooms(biomeSettings);
+
         addModUndergroundVariety(biomeSettings);
         addModMushrooms(biomeSettings);
         biomeSettings.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, SBPlacedFeatures.WHITE_MUSHROOM_COMMON);
@@ -253,7 +319,9 @@ public class SBOverworldBiomes {
         BiomeDefaultFeatures.addDefaultMonsterRoom(biomeSettings);
         BiomeDefaultFeatures.addDefaultSprings(biomeSettings);
         BiomeDefaultFeatures.addSurfaceFreezing(biomeSettings);
+        BiomeDefaultFeatures.addDefaultFlowers(biomeSettings);
         BiomeDefaultFeatures.addDefaultMushrooms(biomeSettings);
+
         addModMushrooms(biomeSettings);
         biomeSettings.addFeature(GenerationStep.Decoration.LAKES, SBPlacedFeatures.LAKE_LAVA_VOLCANIC);
         biomeSettings.addFeature(GenerationStep.Decoration.UNDERGROUND_ORES, SBPlacedFeatures.ORE_OBSIDIAN);

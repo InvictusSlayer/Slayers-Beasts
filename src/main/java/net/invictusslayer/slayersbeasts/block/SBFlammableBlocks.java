@@ -6,7 +6,8 @@ import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.FireBlock;
 
 public class SBFlammableBlocks {
-	public static void setup() {
+	public static void register() {
+		register(SBBlocks.PEAT.get(), 5, 5);
 		register(SBBlocks.OOTHECA.get(), 20, 30);
 		register(SBBlocks.TALL_DEAD_BUSH.get(), 100, 60);
 

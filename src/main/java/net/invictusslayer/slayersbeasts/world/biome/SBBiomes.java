@@ -14,6 +14,7 @@ public class SBBiomes {
     //Overworld
     public static final ResourceKey<Biome> ANCIENT_GROVE = createKey("ancient_grove");
     public static final ResourceKey<Biome> ASPEN_FOREST = createKey("aspen_forest");
+    public static final ResourceKey<Biome> BAYOU = createKey("bayou");
     public static final ResourceKey<Biome> BLACK_DUNES = createKey("black_dunes");
     public static final ResourceKey<Biome> BRUSHLAND = createKey("brushland");
     public static final ResourceKey<Biome> ROCKY_BRUSHLAND = createKey("rocky_brushland");
@@ -23,6 +24,8 @@ public class SBBiomes {
     public static final ResourceKey<Biome> EUCALYPT_WOODLAND = createKey("eucalypt_woodland");
     public static final ResourceKey<Biome> FROZEN_THICKET = createKey("frozen_thicket");
     public static final ResourceKey<Biome> INKY_MOOR = createKey("inky_moor");
+    public static final ResourceKey<Biome> MURKY_OCEAN = createKey("murky_ocean");
+    public static final ResourceKey<Biome> DEEP_MURKY_OCEAN = createKey("deep_murky_ocean");
     public static final ResourceKey<Biome> OUTBACK = createKey("outback");
     public static final ResourceKey<Biome> PETRIFIED_WOODS = createKey("petrified_woods");
     public static final ResourceKey<Biome> RAINFOREST = createKey("rainforest");
@@ -51,6 +54,7 @@ public class SBBiomes {
 
         register(context, ANCIENT_GROVE, SBOverworldBiomes.ancientGrove(placed, carver));
         register(context, ASPEN_FOREST, SBOverworldBiomes.aspenForest(placed, carver));
+        register(context, BAYOU, SBOverworldBiomes.bayou(placed, carver));
         register(context, BLACK_DUNES, SBOverworldBiomes.desert(placed, carver));
         register(context, BRUSHLAND, SBOverworldBiomes.brushland(placed, carver, false, false));
         register(context, ROCKY_BRUSHLAND, SBOverworldBiomes.brushland(placed, carver, false, true));
@@ -60,6 +64,8 @@ public class SBBiomes {
         register(context, EUCALYPT_WOODLAND, SBOverworldBiomes.eucalyptWoodland(placed, carver));
         register(context, FROZEN_THICKET, SBOverworldBiomes.frozenThicket(placed, carver));
         register(context, INKY_MOOR, SBOverworldBiomes.inkyMoor(placed, carver));
+        register(context, MURKY_OCEAN, SBOverworldBiomes.murkyOcean(placed, carver, false));
+        register(context, DEEP_MURKY_OCEAN, SBOverworldBiomes.murkyOcean(placed, carver, true));
         register(context, OUTBACK, SBOverworldBiomes.outback(placed, carver));
         register(context, PETRIFIED_WOODS, SBOverworldBiomes.petrifiedWoods(placed, carver));
         register(context, RAINFOREST, SBOverworldBiomes.rainforest(placed, carver));

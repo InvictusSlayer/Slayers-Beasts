@@ -1,10 +1,11 @@
 package net.invictusslayer.slayersbeasts.block;
 
+import com.google.common.collect.Maps;
 import net.minecraft.world.item.AxeItem;
 import net.minecraft.world.level.block.Block;
 
 public class SBStrippableBlocks {
-	public static void setup() {
+	public static void register() {
 		register(SBBlocks.ASPEN_LOG.get(), SBBlocks.STRIPPED_ASPEN_LOG.get());
 		register(SBBlocks.ASPEN_WOOD.get(), SBBlocks.STRIPPED_ASPEN_WOOD.get());
 		register(SBBlocks.CAJOLE_LOG.get(), SBBlocks.STRIPPED_CAJOLE_LOG.get());
@@ -22,6 +23,7 @@ public class SBStrippableBlocks {
 	}
 	
 	private static void register(Block block, Block result) {
+		AxeItem.STRIPPABLES = Maps.newHashMap(AxeItem.STRIPPABLES);
 		AxeItem.STRIPPABLES.put(block, result);
 	}
 }

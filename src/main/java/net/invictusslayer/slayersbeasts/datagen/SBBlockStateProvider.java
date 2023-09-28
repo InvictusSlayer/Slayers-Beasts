@@ -30,7 +30,7 @@ public class SBBlockStateProvider extends BlockStateProvider {
 
         verticalPortal(SBBlocks.SEPULCHRA_PORTAL.get(), "translucent");
         horizontalPortal(SBBlocks.CRYPT_PORTAL.get(), "solid");
-        cubeRandAllWithItem(SBBlocks.CRYPTALITH.get());
+        cubeRandomWithItem(SBBlocks.CRYPTALITH.get(), false);
         infusedCryptalith();
         depletedCryptalith();
         cubeWithItem(SBBlocks.JADE_BLOCK.get());
@@ -39,8 +39,8 @@ public class SBBlockStateProvider extends BlockStateProvider {
         simpleCubeBottomTopWithItem(SBBlocks.STYPHIUM.get());
         simpleCubeBottomTopWithItem(SBBlocks.DEEPSLATE_STYPHIUM.get());
 
-        cubeWithItem(SBBlocks.RUDOSOL.get());
-        cubeWithItem(SBBlocks.ARIDISOL.get());
+        cubeRandomWithItem(SBBlocks.RUDOSOL.get(), true);
+        cubeRandomWithItem(SBBlocks.ARIDISOL.get(), true);
         simpleCubeBottomTopWithItem(SBBlocks.ANTHILL.get());
         simpleCubeBottomTopWithItem(SBBlocks.ANTHILL_HATCHERY.get());
         simpleCubeBottomTopWithItem(SBBlocks.OOTHECA.get());
@@ -51,9 +51,9 @@ public class SBBlockStateProvider extends BlockStateProvider {
         doubleCrossBlock(SBBlocks.TALL_DEAD_BUSH.get());
         tiltCubeWithItem(SBBlocks.CRACKED_MUD.get());
         cubeWithItem(SBBlocks.PEAT.get());
-        flatBlock(SBBlocks.ALGAE.get());
+        flatRandomBlock(SBBlocks.ALGAE.get());
 
-        cubeRandTopWithItem(SBBlocks.BLACK_SAND.get());
+        cubeRandomWithItem(SBBlocks.BLACK_SAND.get(), true);
         cubeBottomTopWithItem(SBBlocks.BLACK_SANDSTONE.get(), extend(blockTexture(SBBlocks.BLACK_SANDSTONE.get()), "_side"), extend(blockTexture(SBBlocks.BLACK_SANDSTONE.get()), "_bottom"), extend(blockTexture(SBBlocks.BLACK_SANDSTONE.get()), "_top"));
         slabWithItem((SlabBlock) SBBlocks.BLACK_SANDSTONE_SLAB.get(), blockTexture(SBBlocks.BLACK_SANDSTONE.get()), extend(blockTexture(SBBlocks.BLACK_SANDSTONE.get()), "_side"), extend(blockTexture(SBBlocks.BLACK_SANDSTONE.get()), "_bottom"), extend(blockTexture(SBBlocks.BLACK_SANDSTONE.get()), "_top"));
         stairWithItem((StairBlock) SBBlocks.BLACK_SANDSTONE_STAIRS.get(), extend(blockTexture(SBBlocks.BLACK_SANDSTONE.get()), "_side"), extend(blockTexture(SBBlocks.BLACK_SANDSTONE.get()), "_bottom"), extend(blockTexture(SBBlocks.BLACK_SANDSTONE.get()), "_top"));
@@ -273,16 +273,12 @@ public class SBBlockStateProvider extends BlockStateProvider {
         simpleBlockItem(block, models().withExistingParent(name(block), "minecraft:block/template_trapdoor_bottom").texture("texture", blockTexture(block)));
     }
 
-    private void cubeRandTopWithItem(Block block) {
+    private void cubeRandomWithItem(Block block, boolean onlyTop) {
         ModelFile model = models().cubeAll(name(block), blockTexture(block));
-        getVariantBuilder(block).forAllStates(state -> ConfiguredModel.allYRotations(model, 0, false));
+        getVariantBuilder(block).forAllStates(state -> onlyTop ? ConfiguredModel.allYRotations(model, 0, false) : ConfiguredModel.allRotations(model, false));
         simpleBlockItem(block, models().withExistingParent(name(block), "minecraft:block/cube_all"));
     }
-    private void cubeRandAllWithItem(Block block) {
-        ModelFile model = models().cubeAll(name(block), blockTexture(block));
-        getVariantBuilder(block).forAllStates(state -> ConfiguredModel.allRotations(model, false));
-        simpleBlockItem(block, models().withExistingParent(name(block), "minecraft:block/cube_all"));
-    }
+
     private void cubeWithItem(Block block) {
         cubeOtherWithItem(block, blockTexture(block));
     }
@@ -305,13 +301,13 @@ public class SBBlockStateProvider extends BlockStateProvider {
         simpleBlockItem(block, models().withExistingParent(name(block) + "_none", "minecraft:block/cube_all"));
     }
 
-    private void flatBlock(Block block) {
-        getVariantBuilder(block).forAllStates(state -> ConfiguredModel.builder()
-                .modelFile(models().getBuilder(name(block)).ao(false)
-                        .texture("texture", blockTexture(block)).texture("particle", blockTexture(block))
-                        .element().from(0, 0.25F, 0).to(16, 0.25F, 16)
-                        .face(Direction.UP).texture("#texture").end().face(Direction.DOWN).texture("#texture").end()
-                        .end().renderType("cutout")).build());
+    private void flatRandomBlock(Block block) {
+        ModelFile model = models().getBuilder(name(block)).ao(false)
+                .texture("texture", blockTexture(block)).texture("particle", blockTexture(block))
+                .element().from(0, 0.25F, 0).to(16, 0.25F, 16)
+                .face(Direction.UP).texture("#texture").end().face(Direction.DOWN).texture("#texture").end()
+                .end().renderType("cutout");
+        getVariantBuilder(block).forAllStates(state -> ConfiguredModel.allYRotations(model, 0, false));
     }
 
     private void simpleCubeBottomTopWithItem(Block block) {
