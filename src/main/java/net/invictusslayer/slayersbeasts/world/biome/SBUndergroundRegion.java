@@ -22,39 +22,15 @@ public class SBUndergroundRegion extends Region {
     public void addBiomes(Registry<Biome> registry, Consumer<Pair<Climate.ParameterPoint, ResourceKey<Biome>>> mapper) {
         VanillaParameterOverlayBuilder builder = new VanillaParameterOverlayBuilder();
 
-        new ParameterPointListBuilder()
-                .temperature(Temperature.FULL_RANGE)
-                .humidity(Humidity.ARID)
-                .continentalness(Continentalness.INLAND)
-                .erosion(Erosion.FULL_RANGE)
-                .weirdness(Weirdness.FULL_RANGE)
-                .depth(Depth.UNDERGROUND)
-                .build().forEach(point -> builder.add(point, SBBiomes.DUSTY_CAVERNS));
-        new ParameterPointListBuilder()
-                .temperature(Temperature.FULL_RANGE)
-                .humidity(Humidity.WET)
-                .continentalness(Continentalness.FULL_RANGE)
-                .erosion(Erosion.FULL_RANGE)
-                .weirdness(Weirdness.FULL_RANGE)
-                .depth(Depth.UNDERGROUND)
-                .build().forEach(point -> builder.add(point, SBBiomes.FUNGAL_DEPTHS));
-        new ParameterPointListBuilder()
-                .temperature(Temperature.FROZEN)
-                .humidity(Humidity.FULL_RANGE)
-                .continentalness(Continentalness.INLAND)
-                .erosion(Erosion.FULL_RANGE)
-                .weirdness(Weirdness.FULL_RANGE)
-                .depth(Depth.UNDERGROUND)
-                .build().forEach(point -> builder.add(point, SBBiomes.ICE_CAVES));
-        new ParameterPointListBuilder()
-                .temperature(Temperature.NEUTRAL)
-                .humidity(Humidity.NEUTRAL)
-                .continentalness(Continentalness.FULL_RANGE)
-                .erosion(Erosion.FULL_RANGE)
-                .weirdness(Weirdness.FULL_RANGE)
-                .depth(Depth.UNDERGROUND)
-                .build().forEach(point -> builder.add(point, SBBiomes.SLIME_CAVERNS));
+        biome(SBBiomes.DUSTY_CAVERNS, builder, Temperature.FULL_RANGE, Humidity.ARID, Continentalness.INLAND);
+        biome(SBBiomes.FUNGAL_DEPTHS, builder, Temperature.FULL_RANGE, Humidity.WET, Continentalness.FULL_RANGE);
+        biome(SBBiomes.ICE_CAVES, builder, Temperature.ICY, Humidity.FULL_RANGE, Continentalness.INLAND);
+        biome(SBBiomes.SLIME_CAVERNS, builder, Temperature.NEUTRAL, Humidity.NEUTRAL, Continentalness.FULL_RANGE);
 
         builder.build().forEach(mapper);
+    }
+
+    private void biome(ResourceKey<Biome> biome, VanillaParameterOverlayBuilder builder, Temperature temperature, Humidity humidity, Continentalness continentalness) {
+        new ParameterPointListBuilder().temperature(temperature).humidity(humidity).continentalness(continentalness).erosion(Erosion.FULL_RANGE).weirdness(Weirdness.FULL_RANGE).depth(Depth.UNDERGROUND).build().forEach(point -> builder.add(point, biome));
     }
 }

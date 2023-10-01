@@ -52,6 +52,8 @@ public class SBTags {
     }
 
     public static class Biomes {
+        public static final TagKey<Biome> SLAYERS_BIOMES = tag("slayers_biomes");
+
         public static final TagKey<Biome> IS_BRUSHLAND = tag("is_brushland");
 
         public static final TagKey<Biome> HAS_CRYPT_PORTAL = tag("has_crypt_portal");
