@@ -10,8 +10,13 @@ import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.levelgen.carver.ConfiguredWorldCarver;
 import net.minecraft.world.level.levelgen.placement.PlacedFeature;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class SBBiomes {
-    //Overworld
+    public static List<ResourceKey<Biome>> BIOMES = new ArrayList<>();
+
+    //Overground
     public static final ResourceKey<Biome> ANCIENT_GROVE = createKey("ancient_grove");
     public static final ResourceKey<Biome> ASPEN_FOREST = createKey("aspen_forest");
     public static final ResourceKey<Biome> BAYOU = createKey("bayou");
@@ -23,6 +28,7 @@ public class SBBiomes {
     public static final ResourceKey<Biome> DEAD_SANDS = createKey("dead_sands");
     public static final ResourceKey<Biome> EUCALYPT_WOODLAND = createKey("eucalypt_woodland");
     public static final ResourceKey<Biome> FROZEN_THICKET = createKey("frozen_thicket");
+    public static final ResourceKey<Biome> GLACIATE_SWAMP = createKey("glaciate_swamp");
     public static final ResourceKey<Biome> INKY_MOOR = createKey("inky_moor");
     public static final ResourceKey<Biome> MURKY_OCEAN = createKey("murky_ocean");
     public static final ResourceKey<Biome> DEEP_MURKY_OCEAN = createKey("deep_murky_ocean");
@@ -63,6 +69,7 @@ public class SBBiomes {
         register(context, DEAD_SANDS, SBOverworldBiomes.desert(placed, carver));
         register(context, EUCALYPT_WOODLAND, SBOverworldBiomes.eucalyptWoodland(placed, carver));
         register(context, FROZEN_THICKET, SBOverworldBiomes.frozenThicket(placed, carver));
+        register(context, GLACIATE_SWAMP, SBOverworldBiomes.bayou(placed, carver));
         register(context, INKY_MOOR, SBOverworldBiomes.inkyMoor(placed, carver));
         register(context, MURKY_OCEAN, SBOverworldBiomes.murkyOcean(placed, carver, false));
         register(context, DEEP_MURKY_OCEAN, SBOverworldBiomes.murkyOcean(placed, carver, true));
@@ -90,5 +97,6 @@ public class SBBiomes {
 
     private static void register(BootstapContext<Biome> context, ResourceKey<Biome> key, Biome biome) {
         context.register(key, biome);
+        BIOMES.add(key);
     }
 }

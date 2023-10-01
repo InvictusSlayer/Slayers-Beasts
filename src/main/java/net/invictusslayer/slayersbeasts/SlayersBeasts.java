@@ -5,8 +5,8 @@ import net.invictusslayer.slayersbeasts.block.entity.SBBlockEntities;
 import net.invictusslayer.slayersbeasts.effect.SBEffects;
 import net.invictusslayer.slayersbeasts.entity.SBEntities;
 import net.invictusslayer.slayersbeasts.entity.npc.SBVillagerType;
-import net.invictusslayer.slayersbeasts.event.ClientEvents;
-import net.invictusslayer.slayersbeasts.event.CommonEvents;
+import net.invictusslayer.slayersbeasts.event.SBClientEvents;
+import net.invictusslayer.slayersbeasts.event.SBCommonEvents;
 import net.invictusslayer.slayersbeasts.item.SBItems;
 import net.invictusslayer.slayersbeasts.item.SBPotions;
 import net.invictusslayer.slayersbeasts.misc.SBCreativeModeTab;
@@ -50,8 +50,8 @@ public class SlayersBeasts {
 
         SBVillagerType.biomeSetup();
 
-	    eventBus.addListener(CommonEvents::commonSetup);
-	    eventBus.addListener(ClientEvents::clientSetup);
+	    eventBus.addListener(SBCommonEvents::commonSetup);
+	    eventBus.addListener(SBClientEvents::clientSetup);
 
         MinecraftForge.EVENT_BUS.register(this);
     }

@@ -12,8 +12,12 @@ import static net.minecraft.world.level.levelgen.SurfaceRules.*;
 public class SBSurfaceRuleData {
     public static RuleSource overworldRules() {
         return sequence(ifTrue(abovePreliminarySurface(), sequence( /* Overground */
-                        ifTrue(ON_FLOOR, ifTrue(isBiome(SBBiomes.INKY_MOOR), ifBetweenY(62, 63,
-                                ifTrue(noiseCondition(Noises.SWAMP, 0), setBlock(Blocks.WATER))))),
+                        ifTrue(ON_FLOOR, sequence(
+                                ifTrue(isBiome(SBBiomes.BAYOU), ifBetweenY(60, 63,
+                                        ifTrue(noiseCondition(Noises.SWAMP, 0), setBlock(Blocks.WATER)))),
+                                ifTrue(isBiome(SBBiomes.INKY_MOOR), ifBetweenY(62, 63,
+                                        ifTrue(noiseCondition(Noises.SWAMP, 0), setBlock(Blocks.WATER))))
+                        )),
                         ifTrue(ON_FLOOR, ifTrue(waterBlockCheck(-1, 0), sequence(
                                 ifTrue(isBiome(SBBiomes.BLACK_DUNES), sequence(
                                         ifTrue(ON_CEILING, setBlock(SBBlocks.BLACK_SANDSTONE.get())),

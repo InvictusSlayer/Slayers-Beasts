@@ -4,10 +4,7 @@ import net.invictusslayer.slayersbeasts.SlayersBeasts;
 import net.invictusslayer.slayersbeasts.block.SBFlammableBlocks;
 import net.invictusslayer.slayersbeasts.block.SBStrippableBlocks;
 import net.invictusslayer.slayersbeasts.entity.*;
-import net.invictusslayer.slayersbeasts.world.biome.SBNetherRegion;
-import net.invictusslayer.slayersbeasts.world.biome.SBOverworldRegion;
-import net.invictusslayer.slayersbeasts.world.biome.SBSurfaceRuleData;
-import net.invictusslayer.slayersbeasts.world.biome.SBUndergroundRegion;
+import net.invictusslayer.slayersbeasts.world.biome.*;
 import net.minecraft.world.entity.SpawnPlacements;
 import net.minecraft.world.level.levelgen.Heightmap;
 import net.minecraftforge.event.entity.EntityAttributeCreationEvent;
@@ -18,7 +15,7 @@ import terrablender.api.Regions;
 import terrablender.api.SurfaceRuleManager;
 
 @Mod.EventBusSubscriber(modid = SlayersBeasts.MOD_ID, bus = Mod.EventBusSubscriber.Bus.MOD)
-public class CommonEvents {
+public class SBCommonEvents {
     @SuppressWarnings("deprecation")
     public static void commonSetup(FMLCommonSetupEvent event) {
         event.enqueueWork(() -> {
@@ -28,8 +25,9 @@ public class CommonEvents {
 //            BrewingRecipeRegistry.addRecipe(new SBBrewingRecipe(Potions.SLOWNESS, SBItems.INSECT_EYE.get(), SBPotions.PARALYSIS_POTION.get()));
 //            BrewingRecipeRegistry.addRecipe(new SBBrewingRecipe(Potions.POISON, SBItems.WITHERBONE.get(), SBPotions.WITHER_POTION.get()));
 
-            Regions.register(new SBOverworldRegion(2));
+            Regions.register(new SBOverworldRegion(4));
             Regions.register(new SBUndergroundRegion(1));
+            Regions.register(new SBOceanicRegion(4));
             Regions.register(new SBNetherRegion(1));
 
             SurfaceRuleManager.addSurfaceRules(SurfaceRuleManager.RuleCategory.OVERWORLD, SlayersBeasts.MOD_ID, SBSurfaceRuleData.overworldRules());
