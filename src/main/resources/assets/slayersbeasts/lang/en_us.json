@@ -15,12 +15,14 @@
   "item.slayersbeasts.mud_ball": "Mud Ball",
 
   "item.slayersbeasts.mantis_spawn_egg": "Mantis Spawn Egg",
-  "item.slayersbeasts.worker_ant_spawn_egg": "Worker Ant Spawn Egg",
-  "item.slayersbeasts.soldier_ant_spawn_egg": "Soldier Ant Spawn Egg",
-  "item.slayersbeasts.queen_ant_spawn_egg": "Queen Ant Spawn Egg",
+  "item.slayersbeasts.ant_worker_spawn_egg": "Worker Ant Spawn Egg",
+  "item.slayersbeasts.ant_soldier_spawn_egg": "Soldier Ant Spawn Egg",
+  "item.slayersbeasts.ant_queen_spawn_egg": "Queen Ant Spawn Egg",
   "item.slayersbeasts.wither_spider_spawn_egg": "Wither Spider Spawn Egg",
+  "item.slayersbeasts.tyrachnid_spawn_egg": "Tyrachnid Spawn Egg",
   "item.slayersbeasts.damselfly_spawn_egg": "Damselfly Spawn Egg",
   "item.slayersbeasts.ent_oak_spawn_egg": "Oak Ent Spawn Egg",
+  "item.slayersbeasts.ent_birch_spawn_egg": "Birch Ent Spawn Egg",
   "item.slayersbeasts.venus_flytrap_spawn_egg": "Venus Flytrap Spawn Egg",
 
   "item.minecraft.potion.effect.paralysis_potion": "Potion of Paralysis",
@@ -80,6 +82,7 @@
   "block.slayersbeasts.black_mushroom_block": "Black Mushroom Block",
   "block.slayersbeasts.white_mushroom": "White Mushroom",
   "block.slayersbeasts.white_mushroom_block": "White Mushroom Block",
+  "block.slayersbeasts.thin_mushroom_stem": "Thin Mushroom Stem",
 
   "block.slayersbeasts.aspen_log": "Aspen Log",
   "block.slayersbeasts.aspen_wood": "Aspen Wood",
@@ -196,12 +199,14 @@
   "block.slayersbeasts.willow_branch_plant": "Willow Branch Plant",
   
   "entity.slayersbeasts.mantis": "Mantis",
-  "entity.slayersbeasts.worker_ant": "Worker Ant",
-  "entity.slayersbeasts.soldier_ant": "Soldier Ant",
-  "entity.slayersbeasts.queen_ant": "Queen Ant",
+  "entity.slayersbeasts.ant_worker": "Worker Ant",
+  "entity.slayersbeasts.ant_soldier": "Soldier Ant",
+  "entity.slayersbeasts.ant_queen": "Queen Ant",
   "entity.slayersbeasts.wither_spider": "Wither Spider",
+  "entity.slayersbeasts.tyrachnid": "Tyrachnid",
   "entity.slayersbeasts.damselfly": "Damselfly",
   "entity.slayersbeasts.ent_oak": "Oak Ent",
+  "entity.slayersbeasts.ent_birch": "Birch Ent",
   "entity.slayersbeasts.venus_flytrap": "Venus Flytrap",
 
   "creative_tab.slayersbeasts": "Slayer's Beasts",

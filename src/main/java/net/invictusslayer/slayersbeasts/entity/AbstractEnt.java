@@ -1,5 +1,8 @@
 package net.invictusslayer.slayersbeasts.entity;
 
+import net.minecraft.sounds.SoundEvent;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.PathfinderMob;
 import net.minecraft.world.entity.ai.goal.*;
@@ -8,11 +11,11 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 
 public abstract class AbstractEnt extends PathfinderMob {
-	protected AbstractEnt(EntityType<? extends AbstractEnt> pEntityType, Level pLevel) {
-		super(pEntityType, pLevel);
+	public AbstractEnt(EntityType<? extends AbstractEnt> type, Level pLevel) {
+		super(type, pLevel);
 	}
 
-	protected void registerGoals() {
+	public void registerGoals() {
 		super.registerGoals();
 		this.goalSelector.addGoal(0, new FloatGoal(this));
 		this.goalSelector.addGoal(1, new MeleeAttackGoal(this, 1.0D, false));
@@ -20,5 +23,15 @@ public abstract class AbstractEnt extends PathfinderMob {
 		this.goalSelector.addGoal(3, new LookAtPlayerGoal(this, Player.class, 8.0F));
 		this.goalSelector.addGoal(4, new RandomLookAroundGoal(this));
 		this.targetSelector.addGoal(1, new HurtByTargetGoal(this));
+	}
+
+	protected SoundEvent getAmbientSound() {
+		return SoundEvents.GRASS_HIT;
+	}
+	protected SoundEvent getDeathSound() {
+		return SoundEvents.WOOD_FALL;
+	}
+	protected SoundEvent getHurtSound(DamageSource source) {
+		return SoundEvents.WOOD_BREAK;
 	}
 }

@@ -24,7 +24,7 @@ import net.minecraftforge.registries.ForgeRegistries;
 import java.util.List;
 
 public record SBBiomeModifiers() {
-	//Features
+	// Features
 	public static final ResourceKey<BiomeModifier> ADD_ALGAE_COMMON = createKey("add_algae_common");
 	public static final ResourceKey<BiomeModifier> ADD_ALGAE_NORMAL = createKey("add_algae_normal");
 	public static final ResourceKey<BiomeModifier> ADD_DEFAULT_MUSHROOMS = createKey("add_default_mushrooms");
@@ -34,11 +34,12 @@ public record SBBiomeModifiers() {
 	public static final ResourceKey<BiomeModifier> ADD_ORE_PEGMATITE = createKey("add_ore_pegmatite");
 	public static final ResourceKey<BiomeModifier> ADD_TREES_RIVER = createKey("add_trees_river");
 
-	//Spawns
+	// Spawns
 	public static final ResourceKey<BiomeModifier> ADD_MANTIS = createKey("add_mantis");
 	public static final ResourceKey<BiomeModifier> ADD_WITHER_SPIDER = createKey("add_wither_spider");
 	public static final ResourceKey<BiomeModifier> ADD_DAMSELFlY = createKey("add_damselfly");
 	public static final ResourceKey<BiomeModifier> ADD_ENT_OAK = createKey("add_ent_oak");
+	public static final ResourceKey<BiomeModifier> ADD_ENT_BIRCH = createKey("add_ent_birch");
 
 	public static void bootstrap(BootstapContext<BiomeModifier> context) {
 		HolderGetter<Biome> biomes = context.lookup(Registries.BIOME);
@@ -56,7 +57,8 @@ public record SBBiomeModifiers() {
 		register(context, ADD_MANTIS, new AddSpawnsBiomeModifier(biomes.getOrThrow(SBTags.Biomes.SPAWNS_MANTIS), List.of(new MobSpawnSettings.SpawnerData(SBEntities.MANTIS.get(), 6, 1, 3))));
 		register(context, ADD_WITHER_SPIDER, new AddSpawnsBiomeModifier(HolderSet.direct(biomes.getOrThrow(Biomes.SOUL_SAND_VALLEY)), List.of(new MobSpawnSettings.SpawnerData(SBEntities.WITHER_SPIDER.get(), 4, 1, 2))));
 		register(context, ADD_DAMSELFlY, new AddSpawnsBiomeModifier(biomes.getOrThrow(SBTags.Biomes.SPAWNS_DAMSELFLY), List.of(new MobSpawnSettings.SpawnerData(SBEntities.DAMSELFLY.get(), 3, 1, 1))));
-		register(context, ADD_ENT_OAK, new AddSpawnsBiomeModifier(HolderSet.direct(biomes.getOrThrow(Biomes.FOREST), biomes.getOrThrow(Biomes.DARK_FOREST)), List.of(new MobSpawnSettings.SpawnerData(SBEntities.ENT_OAK.get(), 4, 1, 1))));
+		register(context, ADD_ENT_OAK, new AddSpawnsBiomeModifier(biomes.getOrThrow(SBTags.Biomes.SPAWNS_ENT_OAK), List.of(new MobSpawnSettings.SpawnerData(SBEntities.ENT_OAK.get(), 4, 1, 1))));
+		register(context, ADD_ENT_BIRCH, new AddSpawnsBiomeModifier(biomes.getOrThrow(SBTags.Biomes.SPAWNS_ENT_BIRCH), List.of(new MobSpawnSettings.SpawnerData(SBEntities.ENT_BIRCH.get(), 4, 1, 1))));
 	}
 
 	private static ResourceKey<BiomeModifier> createKey(String name) {

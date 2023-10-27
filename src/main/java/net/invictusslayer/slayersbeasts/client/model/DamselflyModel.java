@@ -1,99 +1,55 @@
 package net.invictusslayer.slayersbeasts.client.model;
 
-import com.mojang.blaze3d.vertex.PoseStack;
-import com.mojang.blaze3d.vertex.VertexConsumer;
 import net.invictusslayer.slayersbeasts.SlayersBeasts;
+import net.invictusslayer.slayersbeasts.client.animation.DamselflyAnimation;
 import net.invictusslayer.slayersbeasts.entity.Damselfly;
-import net.minecraft.client.model.EntityModel;
+import net.minecraft.client.model.HierarchicalModel;
 import net.minecraft.client.model.geom.ModelLayerLocation;
 import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.model.geom.PartPose;
 import net.minecraft.client.model.geom.builders.*;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.util.Mth;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 
 @OnlyIn(Dist.CLIENT)
-public class DamselflyModel<T extends Damselfly> extends EntityModel<T> {
-    public static final ModelLayerLocation LAYER_LOCATION = new ModelLayerLocation(new ResourceLocation(SlayersBeasts.MOD_ID, "damselfly_model"), "main");
-    private final ModelPart main;
-    private final ModelPart leftFrontWing;
-    private final ModelPart leftBackWing;
-    private final ModelPart rightFrontWing;
-    private final ModelPart rightBackWing;
+public class DamselflyModel<T extends Damselfly> extends HierarchicalModel<T> {
+	public static final ModelLayerLocation LAYER_LOCATION = new ModelLayerLocation(new ResourceLocation(SlayersBeasts.MOD_ID, "damselfly_model"), "main");
+	private final ModelPart root;
 
-    public DamselflyModel(ModelPart root) {
-        this.main = root.getChild("main");
-        this.leftFrontWing = root.getChild("leftFrontWing");
-        this.leftBackWing = root.getChild("leftBackWing");
-        this.rightFrontWing = root.getChild("rightFrontWing");
-        this.rightBackWing = root.getChild("rightBackWing");
-    }
+	public DamselflyModel(ModelPart root) {
+		this.root = root;
+	}
 
-    public static LayerDefinition createBodyLayer() {
-        MeshDefinition meshdefinition = new MeshDefinition();
-        PartDefinition partdefinition = meshdefinition.getRoot();
+	public ModelPart root() {
+		return root;
+	}
 
-        PartDefinition main = partdefinition.addOrReplaceChild("main", CubeListBuilder.create().texOffs(0, 19).addBox(-2.0F, 0.0F, -6.0F, 3.0F, 2.0F, 6.0F, new CubeDeformation(0.0F))
-                .texOffs(18, 19).addBox(-1.5F, -1.0F, -6.0F, 2.0F, 1.0F, 6.0F, new CubeDeformation(0.0F))
-                .texOffs(0, 8).addBox(-1.5F, 0.0F, -8.0F, 2.0F, 2.0F, 2.0F, new CubeDeformation(0.0F))
-                .texOffs(0, 4).addBox(-2.75F, -0.5F, -8.5F, 2.0F, 2.0F, 2.0F, new CubeDeformation(0.0F))
-                .texOffs(0, 0).addBox(-0.25F, -0.5F, -8.5F, 2.0F, 2.0F, 2.0F, new CubeDeformation(0.0F))
-                .texOffs(0, 0).addBox(-1.5F, -0.5F, 0.0F, 2.0F, 2.0F, 13.0F, new CubeDeformation(0.0F)), PartPose.offset(0.5F, 22.0F, 0.0F));
+	public void setupAnim(T entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {
+		root.getAllParts().forEach(ModelPart::resetPose);
+		animate(Damselfly.flyAnimationState, DamselflyAnimation.FLY, ageInTicks, 10);
+		animate(Damselfly.perchAnimationState, DamselflyAnimation.PERCH, ageInTicks, 1.5F);
+	}
 
-        PartDefinition leftFrontWing = partdefinition.addOrReplaceChild("leftFrontWing", CubeListBuilder.create().texOffs(0, 15).addBox(0.0F, 0.0F, -1.0F, 15.0F, 0.0F, 4.0F, new CubeDeformation(0.0F)), PartPose.offset(1.0F, 21.0F, -4.75F));
+	public static LayerDefinition createBodyLayer() {
+		MeshDefinition meshdefinition = new MeshDefinition();
+		PartDefinition partdefinition = meshdefinition.getRoot();
 
-        PartDefinition rightFrontWing = partdefinition.addOrReplaceChild("rightFrontWing", CubeListBuilder.create().texOffs(13, 4).addBox(-15.0F, 0.0F, -1.0F, 15.0F, 0.0F, 4.0F, new CubeDeformation(0.0F)), PartPose.offset(-1.0F, 21.0F, -4.75F));
+		PartDefinition body = partdefinition.addOrReplaceChild("body", CubeListBuilder.create().texOffs(0, 19).addBox(-2.0F, 0.0F, -6.0F, 3.0F, 2.0F, 6.0F, new CubeDeformation(0.0F))
+				.texOffs(18, 19).addBox(-1.5F, -1.0F, -6.0F, 2.0F, 1.0F, 6.0F, new CubeDeformation(0.0F))
+				.texOffs(0, 8).addBox(-1.5F, 0.0F, -8.0F, 2.0F, 2.0F, 2.0F, new CubeDeformation(0.0F))
+				.texOffs(0, 4).addBox(-2.75F, -0.5F, -8.5F, 2.0F, 2.0F, 2.0F, new CubeDeformation(0.0F))
+				.texOffs(0, 0).addBox(-0.25F, -0.5F, -8.5F, 2.0F, 2.0F, 2.0F, new CubeDeformation(0.0F))
+				.texOffs(0, 0).addBox(-1.5F, -0.5F, 0.0F, 2.0F, 2.0F, 13.0F, new CubeDeformation(0.0F)), PartPose.offset(0.5F, 22.0F, -2.0F));
 
-        PartDefinition leftBackWing = partdefinition.addOrReplaceChild("leftBackWing", CubeListBuilder.create().texOffs(13, 8).addBox(0.0F, 0.0F, -1.0F, 15.0F, 0.0F, 4.0F, new CubeDeformation(0.0F)), PartPose.offset(1.0F, 21.5F, -2.25F));
+		PartDefinition wing_left_front = body.addOrReplaceChild("wing_left_front", CubeListBuilder.create().texOffs(0, 15).addBox(0.0F, 0.0F, -1.0F, 15.0F, 0.0F, 4.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(0.5F, -1.0F, -4.75F, 0.0F, 0.1745F, 0.0F));
 
-        PartDefinition rightBackWing = partdefinition.addOrReplaceChild("rightBackWing", CubeListBuilder.create().texOffs(13, 0).addBox(-15.0F, 0.0F, -1.0F, 15.0F, 0.0F, 4.0F, new CubeDeformation(0.0F)), PartPose.offset(-1.0F, 21.5F, -2.25F));
+		PartDefinition wing_left_hind = body.addOrReplaceChild("wing_left_hind", CubeListBuilder.create().texOffs(13, 8).addBox(0.0F, 0.0F, -1.0F, 15.0F, 0.0F, 4.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(0.5F, -0.5F, -2.25F, 0.0F, -0.1745F, 0.0F));
 
-        return LayerDefinition.create(meshdefinition, 64, 64);
-    }
+		PartDefinition wing_right_front = body.addOrReplaceChild("wing_right_front", CubeListBuilder.create().texOffs(13, 4).addBox(-15.0F, 0.0F, -1.0F, 15.0F, 0.0F, 4.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(-1.5F, -1.0F, -4.75F, 0.0F, -0.1745F, 0.0F));
 
-    public void setupAnim(T pEntity, float pLimbSwing, float pLimbSwingAmount, float pAgeInTicks, float pNetHeadYaw, float pHeadPitch) {
-        float f1 = Mth.cos(pAgeInTicks * 3F) / 5F;
-        Damselfly.DamselflyPose wingPose = pEntity.getWingPose();
-        if (wingPose == Damselfly.DamselflyPose.FLYING) {
-            leftFrontWing.xRot = 0;
-            rightFrontWing.xRot = 0;
-            leftBackWing.xRot = 0;
-            rightBackWing.xRot = 0;
-            leftFrontWing.yRot = Mth.PI / 18F;
-            rightFrontWing.yRot = -Mth.PI / 18F;
-            leftBackWing.yRot = -Mth.PI / 18F;
-            rightBackWing.yRot = Mth.PI / 18F;
-            leftFrontWing.zRot = 0;
-            rightFrontWing.zRot = 0;
-            leftBackWing.zRot = 0;
-            rightBackWing.zRot = 0;
-            leftFrontWing.zRot += f1;
-            rightFrontWing.zRot += -f1;
-            leftBackWing.zRot += -f1;
-            rightBackWing.zRot += f1;
-        } else if (wingPose == Damselfly.DamselflyPose.PERCHED) {
-            leftFrontWing.xRot = -Mth.PI * 0.04F;
-            rightFrontWing.xRot = -Mth.PI * 0.04F;
-            leftBackWing.xRot = Mth.PI;
-            rightBackWing.xRot = Mth.PI;
-            leftFrontWing.yRot = -Mth.PI * 0.35F;
-            rightFrontWing.yRot = Mth.PI * 0.35F;
-            leftBackWing.yRot = -Mth.PI * 0.39F;
-            rightBackWing.yRot = Mth.PI * 0.39F;
-            leftFrontWing.zRot = -Mth.PI * 0.53F;
-            rightFrontWing.zRot = Mth.PI * 0.53F;
-            leftBackWing.zRot = -Mth.PI * 0.54F;
-            rightBackWing.zRot = Mth.PI * 0.54F;
-        }
-    }
+		PartDefinition wing_right_hind = body.addOrReplaceChild("wing_right_hind", CubeListBuilder.create().texOffs(13, 0).addBox(-15.0F, 0.0F, -1.0F, 15.0F, 0.0F, 4.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(-1.5F, -0.5F, -2.25F, 0.0F, 0.1745F, 0.0F));
 
-    public void renderToBuffer(PoseStack poseStack, VertexConsumer vertexConsumer, int packedLight, int packedOverlay, float red, float green, float blue, float alpha) {
-        main.render(poseStack, vertexConsumer, packedLight, packedOverlay, red, green, blue, alpha);
-        leftFrontWing.render(poseStack, vertexConsumer, packedLight, packedOverlay, red, green, blue, alpha);
-        leftBackWing.render(poseStack, vertexConsumer, packedLight, packedOverlay, red, green, blue, alpha);
-        rightFrontWing.render(poseStack, vertexConsumer, packedLight, packedOverlay, red, green, blue, alpha);
-        rightBackWing.render(poseStack, vertexConsumer, packedLight, packedOverlay, red, green, blue, alpha);
-    }
+		return LayerDefinition.create(meshdefinition, 64, 64);
+	}
 }

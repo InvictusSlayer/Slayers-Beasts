@@ -36,313 +36,302 @@ import java.util.Optional;
 import java.util.function.Predicate;
 
 public class Damselfly extends PathfinderMob {
-    private static final EntityDataAccessor<Integer> DATA_DAMSELFLY_TYPE = SynchedEntityData.defineId(Damselfly.class, EntityDataSerializers.INT);
-    private static final EntityDataAccessor<Boolean> DATA_IS_FLYING = SynchedEntityData.defineId(Damselfly.class, EntityDataSerializers.BOOLEAN);
-    private static final EntityDataAccessor<Boolean> DATA_IS_PERCHED = SynchedEntityData.defineId(Damselfly.class, EntityDataSerializers.BOOLEAN);
-    @Nullable BlockPos savedPerchPos;
-    private int ticksUntilPerch;
+	private static final EntityDataAccessor<Integer> DATA_DAMSELFLY_TYPE = SynchedEntityData.defineId(Damselfly.class, EntityDataSerializers.INT);
+	private static final EntityDataAccessor<Boolean> DATA_IS_FLYING = SynchedEntityData.defineId(Damselfly.class, EntityDataSerializers.BOOLEAN);
+	private static final EntityDataAccessor<Boolean> DATA_IS_PERCHED = SynchedEntityData.defineId(Damselfly.class, EntityDataSerializers.BOOLEAN);
+	public static final AnimationState flyAnimationState = new AnimationState();
+	public static final AnimationState perchAnimationState = new AnimationState();
+	@Nullable BlockPos savedPerchPos;
+	private int ticksUntilPerch;
 
-    public Damselfly(EntityType<Damselfly> entityType, Level level) {
-        super(entityType, level);
-        this.moveControl = new FlyingMoveControl(this, 20, true);
-        this.navigation = this.createNavigation(level);
-        this.resetTicksUntilPerch();
-    }
+	public Damselfly(EntityType<Damselfly> type, Level level) {
+		super(type, level);
+		moveControl = new FlyingMoveControl(this, 20, true);
+		navigation = createNavigation(level);
+		resetTicksUntilPerch();
+	}
 
-    protected void registerGoals() {
-        super.registerGoals();
-        this.goalSelector.addGoal(0, new DamselflyPerchGoal(this));
-        this.goalSelector.addGoal(1, new DamselflyWanderGoal(this));
-        this.goalSelector.addGoal(2, new FloatGoal(this));
-        this.goalSelector.addGoal(3, new DamselflyHoverGoal(this));
-    }
+	protected void registerGoals() {
+		super.registerGoals();
+		goalSelector.addGoal(0, new DamselflyPerchGoal(this));
+		goalSelector.addGoal(1, new DamselflyWanderGoal(this));
+		goalSelector.addGoal(2, new FloatGoal(this));
+		goalSelector.addGoal(3, new DamselflyHoverGoal(this));
+	}
 
-    public static AttributeSupplier.Builder createAttributes() {
-        return Mob.createMobAttributes()
-                .add(Attributes.MAX_HEALTH, 8.0D)
-                .add(Attributes.MOVEMENT_SPEED, 0.25D)
-                .add(Attributes.FLYING_SPEED, 0.4D);
-    }
+	public static AttributeSupplier.Builder createAttributes() {
+		return Mob.createMobAttributes()
+				.add(Attributes.MAX_HEALTH, 8.0D)
+				.add(Attributes.MOVEMENT_SPEED, 0.25D)
+				.add(Attributes.FLYING_SPEED, 0.4D);
+	}
 
-    public MobType getMobType() {
-        return MobType.ARTHROPOD;
-    }
+	public MobType getMobType() {
+		return MobType.ARTHROPOD;
+	}
 
-    public static boolean canSpawn(EntityType<Damselfly> entity, LevelAccessor levelAccess, MobSpawnType spawnType, BlockPos pos, RandomSource random) {
-        return PathfinderMob.checkMobSpawnRules(entity, levelAccess, spawnType, pos, random);
-    }
+	public static boolean canSpawn(EntityType<Damselfly> type, LevelAccessor level, MobSpawnType spawnType, BlockPos pos, RandomSource random) {
+		return PathfinderMob.checkMobSpawnRules(type, level, spawnType, pos, random);
+	}
 
-    @SuppressWarnings("deprecation")
-    public SpawnGroupData finalizeSpawn(ServerLevelAccessor pLevel, DifficultyInstance pDifficulty, MobSpawnType pReason, @org.jetbrains.annotations.Nullable SpawnGroupData pSpawnData, @org.jetbrains.annotations.Nullable CompoundTag pDataTag) {
-        this.setDamselflyType(random.nextInt(2));
-        return new DamselflyGroupData();
-    }
+	@SuppressWarnings("deprecation")
+	public SpawnGroupData finalizeSpawn(ServerLevelAccessor level, DifficultyInstance difficulty, MobSpawnType type, @Nullable SpawnGroupData spawnData, @Nullable CompoundTag tag) {
+		setDamselflyType(random.nextInt(2));
+		return new DamselflyGroupData();
+	}
 
-    protected PathNavigation createNavigation(Level pLevel) {
-        FlyingPathNavigation navigation = new FlyingPathNavigation(this, pLevel);
-        navigation.setCanOpenDoors(false);
-        navigation.setCanFloat(false);
-        navigation.setCanPassDoors(true);
-        return navigation;
-    }
+	protected PathNavigation createNavigation(Level level) {
+		FlyingPathNavigation navigation = new FlyingPathNavigation(this, level);
+		navigation.setCanOpenDoors(false);
+		navigation.setCanFloat(false);
+		navigation.setCanPassDoors(true);
+		return navigation;
+	}
 
-    public void travel(Vec3 pTravelVector) {
-        if (this.isEffectiveAi() || this.isControlledByLocalInstance()) {
-            this.moveRelative(this.getSpeed(), pTravelVector);
-            this.move(MoverType.SELF, this.getDeltaMovement());
-            this.setDeltaMovement(this.getDeltaMovement().scale(0.5D));
-        }
-    }
+	public void travel(Vec3 vec3) {
+		if (isEffectiveAi() || isControlledByLocalInstance()) {
+			moveRelative(getSpeed(), vec3);
+			move(MoverType.SELF, getDeltaMovement());
+			setDeltaMovement(getDeltaMovement().scale(0.5D));
+		}
+	}
 
-    public void addAdditionalSaveData(CompoundTag pCompound) {
-        super.addAdditionalSaveData(pCompound);
-        if (this.savedPerchPos != null) {
-            pCompound.put("PerchPos", NbtUtils.writeBlockPos(this.savedPerchPos));
-        }
+	public void addAdditionalSaveData(CompoundTag tag) {
+		super.addAdditionalSaveData(tag);
+		if (savedPerchPos != null) {
+			tag.put("PerchPos", NbtUtils.writeBlockPos(savedPerchPos));
+		}
 
-        pCompound.putInt("TicksSincePerch", this.ticksUntilPerch);
-        pCompound.putInt("DamselflyType", this.getDamselflyType());
-    }
+		tag.putInt("TicksSincePerch", ticksUntilPerch);
+		tag.putInt("DamselflyType", getDamselflyType());
+	}
 
-    public void readAdditionalSaveData(CompoundTag pCompound) {
-        this.savedPerchPos = null;
-        if (pCompound.contains("PerchPos")) {
-            this.savedPerchPos = NbtUtils.readBlockPos(pCompound.getCompound("PerchPos"));
-        }
+	public void readAdditionalSaveData(CompoundTag tag) {
+		savedPerchPos = null;
+		if (tag.contains("PerchPos")) {
+			savedPerchPos = NbtUtils.readBlockPos(tag.getCompound("PerchPos"));
+		}
 
-        super.readAdditionalSaveData(pCompound);
-        this.ticksUntilPerch = pCompound.getInt("TicksSincePerch");
-        this.setDamselflyType(pCompound.getInt("DamselflyType"));
-    }
+		super.readAdditionalSaveData(tag);
+		ticksUntilPerch = tag.getInt("TicksSincePerch");
+		setDamselflyType(tag.getInt("DamselflyType"));
+	}
 
 
-    protected void defineSynchedData() {
-        super.defineSynchedData();
-        this.entityData.define(DATA_DAMSELFLY_TYPE, 0);
-        this.entityData.define(DATA_IS_FLYING, false);
-        this.entityData.define(DATA_IS_PERCHED, false);
-    }
+	protected void defineSynchedData() {
+		super.defineSynchedData();
+		entityData.define(DATA_DAMSELFLY_TYPE, 0);
+		entityData.define(DATA_IS_FLYING, false);
+		entityData.define(DATA_IS_PERCHED, false);
+	}
 
-    public DamselflyPose getWingPose() {
-        if (this.isFlying()) {
-            return DamselflyPose.FLYING;
-        } else if (this.isPerched()) {
-            return DamselflyPose.PERCHED;
-        } else {
-            return DamselflyPose.STILL;
-        }
-    }
+	public int getDamselflyType() {
+		return entityData.get(DATA_DAMSELFLY_TYPE);
+	}
+	public void setDamselflyType(int type) {
+		entityData.set(DATA_DAMSELFLY_TYPE, type);
+	}
 
-    public int getDamselflyType() {
-        return this.entityData.get(DATA_DAMSELFLY_TYPE);
-    }
-    public void setDamselflyType(int type) {
-        this.entityData.set(DATA_DAMSELFLY_TYPE, type);
-    }
-    
-    public boolean isFlying() {
-        return this.entityData.get(DATA_IS_FLYING);
-    }
-    public void setFlying(boolean flying) {
-        this.entityData.set(DATA_IS_FLYING, flying);
-    }
+	public boolean isFlying() {
+		return entityData.get(DATA_IS_FLYING);
+	}
+	public void setFlying(boolean flying) {
+		entityData.set(DATA_IS_FLYING, flying);
+	}
 
-    public boolean isPerched() {
-        return this.entityData.get(DATA_IS_PERCHED);
-    }
-    public void setPerched(boolean perched) {
-        this.entityData.set(DATA_IS_PERCHED, perched);
-    }
+	public boolean isPerched() {
+		return entityData.get(DATA_IS_PERCHED);
+	}
+	public void setPerched(boolean perched) {
+		entityData.set(DATA_IS_PERCHED, perched);
+	}
 
-    public boolean causeFallDamage(float pFallDistance, float pMultiplier, DamageSource pSource) {
-        return false;
-    }
-    protected void checkFallDamage(double pY, boolean pOnGround, BlockState pState, BlockPos pPos) {}
+	public boolean causeFallDamage(float fallDistance, float multiplier, DamageSource source) {
+		return false;
+	}
+	protected void checkFallDamage(double y, boolean onGround, BlockState state, BlockPos pos) {}
 
-    public void resetTicksUntilPerch() {
-        this.ticksUntilPerch = 100 + getRandom().nextInt(100);
-    }
+	public void resetTicksUntilPerch() {
+		ticksUntilPerch = 100 + getRandom().nextInt(100);
+	}
 
-    boolean isTooFarAway(Vec3 pPos) {
-        return !pPos.closerThan(this.position(), 32);
-    }
+	boolean isTooFarAway(Vec3 pos) {
+		return !pos.closerThan(position(), 32);
+	}
 
-    public void tick() {
-        super.tick();
-        if (!this.isPerched()) {
-            --this.ticksUntilPerch;
-        }
-    }
+	public void tick() {
+		super.tick();
+		if (!isPerched()) --ticksUntilPerch;
 
-    static class DamselflyPerchGoal extends Goal {
-        private final Damselfly mob;
-        private int perchTicks;
-        private Vec3 perchPos;
-        private final Predicate<BlockState> VALID_PERCH_BLOCKS = (blockState) -> {
-            if (blockState.hasProperty(BlockStateProperties.WATERLOGGED) && blockState.getValue(BlockStateProperties.WATERLOGGED)) {
-                return false;
-            } else if (blockState.is(Blocks.TALL_GRASS)) {
-                return blockState.getValue(DoublePlantBlock.HALF) == DoubleBlockHalf.UPPER;
-            } else {
-                return false;
-            }
-        };
+		if (level().isClientSide()) setupAnimationStates();
+	}
 
-        DamselflyPerchGoal(Damselfly pMob) {
-            this.setFlags(EnumSet.of(Flag.MOVE));
-            this.mob = pMob;
-        }
+	private void setupAnimationStates() {
+		flyAnimationState.animateWhen(isFlying(), tickCount);
+		perchAnimationState.animateWhen(isPerched(), tickCount);
+	}
 
-        public boolean canUse() {
-            if (this.mob.ticksUntilPerch > 0) {
-                return false;
-            } else {
-                Optional<BlockPos> optional = this.findNearbyPerch();
-                if (optional.isPresent()) {
-                    this.mob.savedPerchPos = optional.get();
-                    this.perchPos = Vec3.atBottomCenterOf(this.mob.savedPerchPos).add(0.0D, 1.0D, 0.0D);
-                    this.perchTicks = 80 + this.mob.getRandom().nextInt(50);
-                    return true;
-                } else {
-                    this.mob.resetTicksUntilPerch();
-                    return false;
-                }
-            }
-        }
+	static class DamselflyPerchGoal extends Goal {
+		private final Damselfly mob;
+		private int perchTicks;
+		private Vec3 perchPos;
+		private final Predicate<BlockState> VALID_PERCH_BLOCKS = state -> {
+			if (state.hasProperty(BlockStateProperties.WATERLOGGED) && state.getValue(BlockStateProperties.WATERLOGGED)) {
+				return false;
+			} else if (state.is(Blocks.TALL_GRASS)) {
+				return state.getValue(DoublePlantBlock.HALF) == DoubleBlockHalf.UPPER;
+			} else {
+				return false;
+			}
+		};
 
-        public boolean canContinueToUse() {
-            return this.perchTicks > 0;
-        }
+		DamselflyPerchGoal(Damselfly mob) {
+			setFlags(EnumSet.of(Flag.MOVE));
+			this.mob = mob;
+		}
 
-        public boolean requiresUpdateEveryTick() {
-            return true;
-        }
+		public boolean canUse() {
+			if (mob.ticksUntilPerch > 0) {
+				return false;
+			} else {
+				Optional<BlockPos> optional = findNearbyPerch();
+				if (optional.isPresent()) {
+					mob.savedPerchPos = optional.get();
+					perchPos = Vec3.atBottomCenterOf(mob.savedPerchPos).add(0.0D, 1.0D, 0.0D);
+					perchTicks = 120 + mob.getRandom().nextInt(80);
+					return true;
+				} else {
+					mob.resetTicksUntilPerch();
+					return false;
+				}
+			}
+		}
 
-        public void stop() {
-            this.mob.setPerched(false);
-            this.mob.setFlying(true);
-            this.mob.resetTicksUntilPerch();
-        }
+		public boolean canContinueToUse() {
+			return perchTicks > 0;
+		}
 
-        public void tick() {
-            if (this.mob.savedPerchPos == null) {
-                this.perchTicks = 0;
-            }
-            if (this.mob.position().distanceTo(this.perchPos) <= 0.1D) {
-                this.mob.setFlying(false);
-                this.mob.setPerched(true);
-                --this.perchTicks;
-            } else {
-                if (this.mob.navigation.isDone()) {
-                    if (this.mob.isTooFarAway(this.perchPos)) {
-                        this.mob.savedPerchPos = null;
-                    } else {
-                        this.mob.setFlying(true);
-                        this.mob.setPerched(false);
-                        this.mob.navigation.moveTo(this.mob.navigation.createPath(new BlockPos((int) perchPos.x, (int) perchPos.y, (int) perchPos.z), 1), 1.0D);
-                        this.setWantedPos();
-                    }
-                }
-            }
-        }
+		public boolean requiresUpdateEveryTick() {
+			return true;
+		}
 
-        private void setWantedPos() {
-            this.mob.getMoveControl().setWantedPosition(this.perchPos.x, this.perchPos.y, this.perchPos.z, 0.4D);
-        }
+		public void stop() {
+			mob.setPerched(false);
+			mob.setFlying(true);
+			mob.resetTicksUntilPerch();
+		}
 
-        private Optional<BlockPos> findNearbyPerch() {
-            return this.findNearestBlock(this.VALID_PERCH_BLOCKS);
-        }
+		public void tick() {
+			if (mob.savedPerchPos == null) {
+				perchTicks = 0;
+			}
+			if (mob.position().distanceTo(perchPos) <= 0.1D) {
+				mob.setFlying(false);
+				mob.setPerched(true);
+				--perchTicks;
+			} else {
+				if (mob.navigation.isDone()) {
+					if (mob.isTooFarAway(perchPos)) {
+						mob.savedPerchPos = null;
+					} else {
+						mob.setFlying(true);
+						mob.setPerched(false);
+						mob.navigation.moveTo(mob.navigation.createPath(new BlockPos((int) perchPos.x, (int) perchPos.y, (int) perchPos.z), 1), 1.0D);
+						setWantedPos();
+					}
+				}
+			}
+		}
 
-        private Optional<BlockPos> findNearestBlock(Predicate<BlockState> pPredicate) {
-            BlockPos blockpos = this.mob.blockPosition();
-            BlockPos.MutableBlockPos mutableBlockPos = new BlockPos.MutableBlockPos();
+		private void setWantedPos() {
+			mob.getMoveControl().setWantedPosition(perchPos.x, perchPos.y, perchPos.z, 0.4D);
+		}
 
-            for (int i = 0; (double) i <= 5.0; i = i > 0 ? -i : 1 - i) {
-                for (int j = 0; (double) j < 5.0; ++j) {
-                    for (int k = 0; k <= j; k = k > 0 ? -k : 1 - k) {
-                        for (int l = k < j && k > -j ? j : 0; l <= j; l = l > 0 ? -l : 1 - l) {
-                            mutableBlockPos.setWithOffset(blockpos, k, i - 1, l);
-                            if (blockpos.closerThan(mutableBlockPos, 5.0) &&
-                                    pPredicate.test(this.mob.level().getBlockState(mutableBlockPos))) {
-                                return Optional.of(mutableBlockPos);
-                            }
-                        }
-                    }
-                }
-            }
+		private Optional<BlockPos> findNearbyPerch() {
+			return findNearestBlock(VALID_PERCH_BLOCKS);
+		}
 
-            return Optional.empty();
-        }
-    }
+		private Optional<BlockPos> findNearestBlock(Predicate<BlockState> predicate) {
+			BlockPos blockPos = mob.blockPosition();
+			BlockPos.MutableBlockPos mutableBlockPos = new BlockPos.MutableBlockPos();
 
-    static class DamselflyHoverGoal extends Goal {
-        private final Damselfly mob;
-        private int hoverTime;
+			for (int y = 0; y <= 5; y = y > 0 ? -y : 1 - y) {
+				for (int i = 0; i < 5; ++i) {
+					for (int x = 0; x <= i; x = x > 0 ? -x : 1 - x) {
+						for (int z = x < i && x > -i ? i : 0; z <= i; z = z > 0 ? -z : 1 - z) {
+							mutableBlockPos.setWithOffset(blockPos, x, y - 1, z);
+							if (blockPos.closerThan(mutableBlockPos, 5.0) &&
+									predicate.test(mob.level().getBlockState(mutableBlockPos))) {
+								return Optional.of(mutableBlockPos);
+							}
+						}
+					}
+				}
+			}
 
-        DamselflyHoverGoal(Damselfly pMob) {
-            this.setFlags(EnumSet.of(Flag.MOVE));
-            this.mob = pMob;
-        }
+			return Optional.empty();
+		}
+	}
 
-        public boolean canUse() {
-            return this.mob.navigation.isDone();
-        }
+	static class DamselflyHoverGoal extends Goal {
+		private final Damselfly mob;
+		private int hoverTime;
 
-        public boolean canContinueToUse() {
-            return this.mob.navigation.isDone() && this.hoverTime >= 0;
-        }
+		DamselflyHoverGoal(Damselfly mob) {
+			setFlags(EnumSet.of(Flag.MOVE));
+			this.mob = mob;
+		}
 
-        public void start() {
-            this.mob.setFlying(true);
-            this.hoverTime = 20 + this.mob.getRandom().nextInt(20);
-        }
+		public boolean canUse() {
+			return mob.navigation.isDone();
+		}
 
-        public void tick() {
-            --hoverTime;
-        }
-    }
+		public boolean canContinueToUse() {
+			return mob.navigation.isDone() && hoverTime >= 0;
+		}
 
-    class DamselflyWanderGoal extends Goal {
-        private final Damselfly mob;
+		public void start() {
+			mob.setFlying(true);
+			hoverTime = 40 + mob.getRandom().nextInt(40);
+		}
 
-        DamselflyWanderGoal(Damselfly pMob) {
-            this.setFlags(EnumSet.of(Flag.MOVE));
-            this.mob = pMob;
-        }
+		public void tick() {
+			--hoverTime;
+		}
+	}
 
-        public boolean canUse() {
-            return this.mob.navigation.isDone() && mob.random.nextInt(20) == 0;
-        }
+	class DamselflyWanderGoal extends Goal {
+		private final Damselfly mob;
 
-        public boolean canContinueToUse() {
-            return this.mob.navigation.isInProgress();
-        }
+		DamselflyWanderGoal(Damselfly mob) {
+			setFlags(EnumSet.of(Flag.MOVE));
+			this.mob = mob;
+		}
 
-        public void start() {
-            this.mob.setFlying(true);
-            Vec3 vec3 = this.findPos();
-            if (vec3 != null) {
-                this.mob.navigation.moveTo(this.mob.navigation.createPath(new BlockPos((int) vec3.x, (int) vec3.y, (int) vec3.z), 1), 1.0D);
-            }
-        }
+		public boolean canUse() {
+			return mob.navigation.isDone() && mob.random.nextInt(20) == 0;
+		}
 
-        @Nullable
-        private Vec3 findPos() {
-            Vec3 vec3 = getViewVector(0.0F);
+		public boolean canContinueToUse() {
+			return mob.navigation.isInProgress();
+		}
 
-            Vec3 vec32 = HoverRandomPos.getPos(this.mob, 8, 7, vec3.x, vec3.z, Mth.PI / 2F, 3, 1);
-            return vec32 != null ? vec32 : AirAndWaterRandomPos.getPos(this.mob, 8, 4, -2, vec3.x, vec3.z, Mth.PI / 2F);
-        }
-    }
+		public void start() {
+			mob.setFlying(true);
+			Vec3 vec3 = findPos();
+			if (vec3 != null) {
+				mob.navigation.moveTo(mob.navigation.createPath(new BlockPos((int) vec3.x, (int) vec3.y, (int) vec3.z), 1), 1.0D);
+			}
+		}
 
-    public static class DamselflyGroupData implements SpawnGroupData {
-        private DamselflyGroupData() {}
-    }
+		private Vec3 findPos() {
+			Vec3 vec3 = getViewVector(0.0F);
+			Vec3 pos = HoverRandomPos.getPos(mob, 8, 7, vec3.x, vec3.z, Mth.PI / 2F, 3, 1);
+			return pos != null ? pos : AirAndWaterRandomPos.getPos(mob, 8, 4, -2, vec3.x, vec3.z, Mth.PI / 2F);
+		}
+	}
 
-    public enum DamselflyPose {
-        FLYING,
-        PERCHED,
-        STILL
-    }
+	public static class DamselflyGroupData implements SpawnGroupData {
+		private DamselflyGroupData() {}
+	}
 }
