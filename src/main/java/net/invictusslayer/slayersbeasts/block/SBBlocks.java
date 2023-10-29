@@ -81,6 +81,7 @@ public final class SBBlocks {
     public static final RegistryObject<Block> BLACK_MUSHROOM = register("black_mushroom", () -> new MushroomBlock(BlockBehaviour.Properties.copy(Blocks.RED_MUSHROOM).mapColor(MapColor.TERRACOTTA_BLACK), SBConfiguredFeatures.HUGE_BLACK_MUSHROOM) {public PlantType getPlantType(BlockGetter level, BlockPos pos) {return PlantType.CAVE;}});
     public static final RegistryObject<Block> WHITE_MUSHROOM_BLOCK = register("white_mushroom_block", () -> new HugeMushroomBlock(BlockBehaviour.Properties.copy(Blocks.RED_MUSHROOM_BLOCK).mapColor(MapColor.TERRACOTTA_WHITE)));
     public static final RegistryObject<Block> WHITE_MUSHROOM = register("white_mushroom", () -> new MushroomBlock(BlockBehaviour.Properties.copy(Blocks.RED_MUSHROOM).mapColor(MapColor.TERRACOTTA_WHITE), SBConfiguredFeatures.HUGE_WHITE_MUSHROOM) {public PlantType getPlantType(BlockGetter level, BlockPos pos) {return PlantType.CAVE;}});
+    public static final RegistryObject<Block> THIN_MUSHROOM_STEM = register("thin_mushroom_stem", () -> new ThinMushroomStemBlock(BlockBehaviour.Properties.copy(Blocks.MUSHROOM_STEM)));
 
     public static final RegistryObject<Block> ASPEN_LOG = register("aspen_log", () -> new RotatedPillarBlock(BlockBehaviour.Properties.copy(Blocks.OAK_LOG)));
     public static final RegistryObject<Block> STRIPPED_ASPEN_LOG = register("stripped_aspen_log", () -> new RotatedPillarBlock(BlockBehaviour.Properties.copy(Blocks.STRIPPED_OAK_LOG)));

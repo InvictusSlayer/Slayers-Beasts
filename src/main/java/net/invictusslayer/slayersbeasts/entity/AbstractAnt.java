@@ -11,7 +11,6 @@ import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.server.level.ServerLevel;
-import net.minecraft.tags.BiomeTags;
 import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.ai.goal.FloatGoal;
@@ -25,7 +24,6 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.ServerLevelAccessor;
 import net.minecraft.world.level.biome.Biome;
-import net.minecraft.world.level.biome.Biomes;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.pathfinder.Path;
 
@@ -37,344 +35,336 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 public abstract class AbstractAnt extends PathfinderMob {
-    private static final EntityDataAccessor<Integer> DATA_ANT_TYPE = SynchedEntityData.defineId(AbstractAnt.class, EntityDataSerializers.INT);
-    private static final EntityDataAccessor<Integer> DATA_CARGO_TYPE = SynchedEntityData.defineId(AbstractAnt.class, EntityDataSerializers.INT);
-    private int cooldownToEnterNest;
-    private int cooldownToLocateNest;
-    private int failedForagingTime;
-    BlockPos nestPos;
-    AntGoToNestGoal antGoToNestGoal;
+	private static final EntityDataAccessor<Integer> DATA_ANT_TYPE = SynchedEntityData.defineId(AbstractAnt.class, EntityDataSerializers.INT);
+	private static final EntityDataAccessor<Integer> DATA_CARGO_TYPE = SynchedEntityData.defineId(AbstractAnt.class, EntityDataSerializers.INT);
+	private int cooldownToEnterNest;
+	private int cooldownToLocateNest;
+	private int failedForagingTime;
+	BlockPos nestPos;
+	AntGoToNestGoal antGoToNestGoal;
 
-    public AbstractAnt(EntityType<? extends AbstractAnt> entityType, Level level) {
-        super(entityType, level);
-    }
+	public AbstractAnt(EntityType<? extends AbstractAnt> entityType, Level level) {
+		super(entityType, level);
+	}
 
-    protected void registerGoals() {
-        super.registerGoals();
-        this.goalSelector.addGoal(0, new FloatGoal(this));
-        this.goalSelector.addGoal(1, new AntEnterNestGoal(this));
-        this.goalSelector.addGoal(2, new AntLocateNestGoal(this));
-        this.antGoToNestGoal = new AntGoToNestGoal(this);
-        this.goalSelector.addGoal(3, this.antGoToNestGoal);
-        this.goalSelector.addGoal(4, new WaterAvoidingRandomStrollGoal(this, 0.8D));
-        this.goalSelector.addGoal(5, new RandomLookAroundGoal(this));
-        this.targetSelector.addGoal(1, new AntAttackedGoal(this).setAlertOthers());
-    }
+	protected void registerGoals() {
+		super.registerGoals();
+		goalSelector.addGoal(0, new FloatGoal(this));
+		goalSelector.addGoal(1, new AntEnterNestGoal(this));
+		goalSelector.addGoal(2, new AntLocateNestGoal(this));
+		antGoToNestGoal = new AntGoToNestGoal(this);
+		goalSelector.addGoal(3, antGoToNestGoal);
+		goalSelector.addGoal(4, new WaterAvoidingRandomStrollGoal(this, 0.8D));
+		goalSelector.addGoal(5, new RandomLookAroundGoal(this));
+		targetSelector.addGoal(1, new AntAttackedGoal(this).setAlertOthers());
+	}
 
-    public void addAdditionalSaveData(CompoundTag pCompound) {
-        super.addAdditionalSaveData(pCompound);
-        if (this.nestPos != null) {
-            pCompound.put("NestPos", NbtUtils.writeBlockPos(this.nestPos));
-        }
+	public void addAdditionalSaveData(CompoundTag tag) {
+		super.addAdditionalSaveData(tag);
+		if (nestPos != null) {
+			tag.put("NestPos", NbtUtils.writeBlockPos(nestPos));
+		}
 
-        pCompound.putInt("CooldownToEnterNest", this.cooldownToEnterNest);
-        pCompound.putInt("FailedForagingTime", this.failedForagingTime);
-        pCompound.putInt("CargoType", this.getCargoType());
-        pCompound.putInt("AntType", this.getAntType());
-    }
+		tag.putInt("CooldownToEnterNest", cooldownToEnterNest);
+		tag.putInt("FailedForagingTime", failedForagingTime);
+		tag.putInt("CargoType", getCargoType());
+		tag.putInt("AntType", getAntType());
+	}
 
-    public void readAdditionalSaveData(CompoundTag pCompound) {
-        super.readAdditionalSaveData(pCompound);
-        this.nestPos = null;
-        if (pCompound.contains("NestPos")) {
-            this.nestPos = NbtUtils.readBlockPos(pCompound.getCompound("NestPos"));
-        }
+	public void readAdditionalSaveData(CompoundTag tag) {
+		super.readAdditionalSaveData(tag);
+		nestPos = null;
+		if (tag.contains("NestPos")) {
+			nestPos = NbtUtils.readBlockPos(tag.getCompound("NestPos"));
+		}
 
-        this.setCooldownToEnterNest(pCompound.getInt("CooldownToEnterNest"));
-        this.failedForagingTime = pCompound.getInt("FailedForagingTime");
-        this.setCargoType(pCompound.getInt("CargoType"));
-        this.setAntType(pCompound.getInt("AntType"));
-    }
+		setCooldownToEnterNest(tag.getInt("CooldownToEnterNest"));
+		failedForagingTime = tag.getInt("FailedForagingTime");
+		setCargoType(tag.getInt("CargoType"));
+		setAntType(tag.getInt("AntType"));
+	}
 
-    public MobType getMobType() {
-        return MobType.ARTHROPOD;
-    }
+	public MobType getMobType() {
+		return MobType.ARTHROPOD;
+	}
 
-    protected void defineSynchedData() {
-        super.defineSynchedData();
-        this.entityData.define(DATA_ANT_TYPE, 0);
-        this.entityData.define(DATA_CARGO_TYPE, 0);
-    }
+	protected void defineSynchedData() {
+		super.defineSynchedData();
+		entityData.define(DATA_ANT_TYPE, 0);
+		entityData.define(DATA_CARGO_TYPE, 0);
+	}
 
-    public void setCooldownToEnterNest(int cooldown) {
-        this.cooldownToEnterNest = cooldown;
-    }
+	public void setCooldownToEnterNest(int cooldown) {
+		this.cooldownToEnterNest = cooldown;
+	}
 
-    public int getAntType() {
-        return this.entityData.get(DATA_ANT_TYPE);
-    }
-    public void setAntType(int type) {
-        this.entityData.set(DATA_ANT_TYPE, type);
-    }
+	public int getAntType() {
+		return this.entityData.get(DATA_ANT_TYPE);
+	}
+	public void setAntType(int type) {
+		this.entityData.set(DATA_ANT_TYPE, type);
+	}
 
-    public int getCargoType() {
-        return this.entityData.get(DATA_CARGO_TYPE);
-    }
-    public void setCargoType(int type) {
-        if (type != 99) {
-            failedForagingTime = 0;
-        }
-        this.entityData.set(DATA_CARGO_TYPE, type);
-    }
+	public int getCargoType() {
+		return this.entityData.get(DATA_CARGO_TYPE);
+	}
+	public void setCargoType(int type) {
+		if (type != 99) {
+			failedForagingTime = 0;
+		}
+		this.entityData.set(DATA_CARGO_TYPE, type);
+	}
 
-    public void aiStep() {
-        super.aiStep();
-        if (cooldownToEnterNest > 0) {
-            --cooldownToEnterNest;
-        }
+	public void aiStep() {
+		super.aiStep();
+		if (cooldownToEnterNest > 0) {
+			--cooldownToEnterNest;
+		}
 
-        if (cooldownToLocateNest > 0) {
-            --cooldownToLocateNest;
-        }
+		if (cooldownToLocateNest > 0) {
+			--cooldownToLocateNest;
+		}
 
-        if (this.getCargoType() == 99) {
-            ++failedForagingTime;
-        }
+		if (this.getCargoType() == 99) {
+			++failedForagingTime;
+		}
 
-        if (this.tickCount % 20 == 0 && !this.hasValidNest()) {
-            this.nestPos = null;
-        }
-    }
+		if (tickCount % 20 == 0 && !hasValidNest()) {
+			nestPos = null;
+		}
+	}
 
-    @SuppressWarnings("deprecation")
-    public SpawnGroupData finalizeSpawn(ServerLevelAccessor pLevel, DifficultyInstance pDifficulty, MobSpawnType pReason, @Nullable SpawnGroupData pSpawnData, @Nullable CompoundTag pDataTag) {
-        int randomAntType = this.getRandomAntType(pLevel);
-        if (pSpawnData instanceof AntGroupData) {
-            randomAntType = ((AntGroupData) pSpawnData).antType;
-        } else {
-            pSpawnData = new AntGroupData(randomAntType);
-        }
+	@SuppressWarnings("deprecation")
+	public SpawnGroupData finalizeSpawn(ServerLevelAccessor level, DifficultyInstance difficulty, MobSpawnType type, @Nullable SpawnGroupData spawnData, @Nullable CompoundTag tag) {
+		int randomAntType = getRandomAntType(level);
+		if (spawnData instanceof AntGroupData antData) {
+			randomAntType = antData.antType;
+		} else {
+			spawnData = new AntGroupData(randomAntType);
+		}
 
-        this.setAntType(randomAntType);
-        return pSpawnData;
-    }
+		this.setAntType(randomAntType);
+		return spawnData;
+	}
 
-    private int getRandomAntType(LevelAccessor pLevel) {
-        Holder<Biome> holder = pLevel.getBiome(this.blockPosition());
-        int i = pLevel.getRandom().nextInt(3);
-        if (holder.is(BiomeTags.IS_FOREST) && !holder.is(Biomes.GROVE)) {
-            return 0; // Wood Ant
-        } else if (holder.is(BiomeTags.IS_JUNGLE) || holder.is(BiomeTags.IS_SAVANNA)) {
-            return 1; // Leafcutter Ant
-        } else if (holder.is(Biomes.PLAINS) || holder.is(Biomes.MEADOW) || holder.is(Biomes.SUNFLOWER_PLAINS)) {
-            return 2; // Meadow Ant
-        } else {
-            return i;
-        }
-    }
+	private int getRandomAntType(LevelAccessor level) {
+		Holder<Biome> holder = level.getBiome(blockPosition());
+		if (holder.is(SBTags.Biomes.WOOD_ANT_HABITAT)) return 0;
+		if (holder.is(SBTags.Biomes.LEAFCUTTER_ANT_HABITAT)) return 1;
+		if (holder.is(SBTags.Biomes.MEADOW_ANT_HABITAT)) return 2;
+		return level.getRandom().nextInt(3);
+	}
 
-    boolean hasValidNest() {
-        if (this.nestPos == null) {
-            return false;
-        } else {
-            BlockEntity blockEntity = this.level().getBlockEntity(this.nestPos);
-            return blockEntity instanceof AnthillBlockEntity;
-        }
-    }
+	public static class AntGroupData implements SpawnGroupData {
+		private final int antType;
+		private AntGroupData(int antType) {
+			this.antType = antType;
+		}
+	}
 
-    private boolean nestHasSpace(BlockPos pNestPos) {
-        BlockEntity blockEntity = level().getBlockEntity(pNestPos);
-        if (blockEntity instanceof AnthillBlockEntity anthillBlockEntity) {
-            return !anthillBlockEntity.isFull() && (anthillBlockEntity.getInhabitantType() == 99 ||
-                    anthillBlockEntity.getInhabitantType() == getAntType());
-        }
-        return false;
-    }
+	boolean hasValidNest() {
+		if (nestPos == null) {
+			return false;
+		} else {
+			BlockEntity blockEntity = level().getBlockEntity(nestPos);
+			return blockEntity instanceof AnthillBlockEntity;
+		}
+	}
 
-    protected boolean wantsToEnterNest(AbstractAnt ant) {
-        if (this.cooldownToEnterNest <= 0) {
-            return failedForagingTime > 3600 || getCargoType() != 99 || level().isRaining() || ant instanceof QueenAnt;
-        }
-        return false;
-    }
+	private boolean nestHasSpace(BlockPos nestPos) {
+		BlockEntity blockEntity = level().getBlockEntity(nestPos);
+		if (blockEntity instanceof AnthillBlockEntity anthill) {
+			return !anthill.isFull() && (anthill.getInhabitantType() == 99 || anthill.getInhabitantType() == getAntType());
+		}
+		return false;
+	}
 
-    boolean closerThan(BlockPos pPos, double pDistance) {
-        return pPos.closerThan(this.blockPosition(), pDistance);
-    }
+	protected boolean wantsToEnterNest(AbstractAnt ant) {
+		if (this.cooldownToEnterNest <= 0) {
+			return failedForagingTime > 3600 || getCargoType() != 99 || level().isRaining() || ant instanceof AntQueen;
+		}
+		return false;
+	}
 
-    public static class AntGroupData implements SpawnGroupData {
-        public final int antType;
-        private AntGroupData(int antType) {
-            this.antType = antType;
-        }
-    }
+	boolean closerThan(BlockPos pos, double distance) {
+		return pos.closerThan(blockPosition(), distance);
+	}
 
-    static class AntAttackedGoal extends HurtByTargetGoal {
-        AntAttackedGoal(AbstractAnt mob) {
-            super(mob);
-        }
+	static class AntAttackedGoal extends HurtByTargetGoal {
+		AntAttackedGoal(AbstractAnt mob) {
+			super(mob);
+		}
 
-        public boolean canContinueToUse() {
-            return mob instanceof SoldierAnt ant && ant.isAngry() && super.canContinueToUse();
-        }
+		public boolean canContinueToUse() {
+			return mob instanceof AntSoldier ant && ant.isAngry() && super.canContinueToUse();
+		}
 
-        protected void alertOther(Mob pMob, LivingEntity pTarget) {
-            if (pMob instanceof SoldierAnt soldier && mob.hasLineOfSight(pTarget) &&
-                    ((AbstractAnt)mob).getAntType() == soldier.getAntType()) {
-                pMob.setTarget(pTarget);
-            }
-        }
-    }
+		protected void alertOther(Mob mob, LivingEntity target) {
+			if (mob instanceof AntSoldier soldier && this.mob.hasLineOfSight(target) && ((AbstractAnt) this.mob).getAntType() == soldier.getAntType()) {
+				mob.setTarget(target);
+			}
+		}
+	}
 
-    static class AntGoToNestGoal extends Goal {
-        int travellingTicks;
-        final List<BlockPos> blacklistedTargets = Lists.newArrayList();
-        @Nullable
-        private Path lastPath;
-        private int timeStuck;
-        private final AbstractAnt mob;
-        
-        AntGoToNestGoal(AbstractAnt pMob) {
-            this.setFlags(EnumSet.of(Flag.MOVE, Flag.JUMP));
-            this.mob = pMob;
-            this.travellingTicks = mob.level().random.nextInt(10);
-        }
+	static class AntGoToNestGoal extends Goal {
+		int travellingTicks;
+		final List<BlockPos> blacklistedTargets = Lists.newArrayList();
+		@Nullable
+		private Path lastPath;
+		private int timeStuck;
+		private final AbstractAnt mob;
 
-        public boolean canUse() {
-            return mob.nestPos != null && !mob.hasRestriction() && mob.wantsToEnterNest(mob) && mob.nestHasSpace(mob.nestPos)
-                    && !this.hasReachedTarget(mob.nestPos) && mob.level().getBlockState(mob.nestPos).is(SBTags.Blocks.ANTHILLS);
-        }
+		AntGoToNestGoal(AbstractAnt mob) {
+			this.setFlags(EnumSet.of(Flag.MOVE, Flag.JUMP));
+			this.mob = mob;
+			this.travellingTicks = this.mob.level().random.nextInt(10);
+		}
 
-        public boolean canContinueToUse() {
-            return this.canUse();
-        }
+		public boolean canUse() {
+			return mob.nestPos != null && !mob.hasRestriction() && mob.wantsToEnterNest(mob) && mob.nestHasSpace(mob.nestPos)
+					&& !this.hasReachedTarget(mob.nestPos) && mob.level().getBlockState(mob.nestPos).is(SBTags.Blocks.ANTHILLS);
+		}
 
-        public void start() {
-            this.travellingTicks = 0;
-            this.timeStuck = 0;
-        }
+		public boolean canContinueToUse() {
+			return this.canUse();
+		}
 
-        public void stop() {
-            this.travellingTicks = 0;
-            this.timeStuck = 0;
-            mob.navigation.stop();
-        }
+		public void start() {
+			travellingTicks = 0;
+			timeStuck = 0;
+		}
 
-        public void tick() {
-            if (mob.nestPos != null) {
-                ++this.travellingTicks;
-                if (this.travellingTicks > this.adjustedTickDelay(600)) {
-                    this.blacklistNest();
-                } else if (!mob.navigation.isInProgress()) {
-                    if (!mob.closerThan(mob.nestPos, 16)) {
-                        if (!mob.closerThan(mob.nestPos, 32)) {
-                            this.dropNest();
-                        } else {
-                            this.moveToNest(mob.nestPos);
-                        }
-                    } else {
-                        boolean flag = this.moveToNest(mob.nestPos);
-                        if (!flag) {
-                            this.blacklistNest();
-                        } else if (this.lastPath != null && this.lastPath.sameAs(mob.navigation.getPath())) {
-                            ++this.timeStuck;
-                            if (this.timeStuck > 60) {
-                                this.dropNest();
-                                this.timeStuck = 0;
-                            }
-                        } else {
-                            this.lastPath = mob.navigation.getPath();
-                        }
-                    }
-                }
-            }
-        }
+		public void stop() {
+			travellingTicks = 0;
+			timeStuck = 0;
+			mob.navigation.stop();
+		}
 
-        private boolean moveToNest(BlockPos pPos) {
-            mob.navigation.moveTo(mob.navigation.createPath(new BlockPos(pPos), 0), 1D);
-            return mob.navigation.getPath() != null && mob.navigation.getPath().canReach();
-        }
+		public void tick() {
+			if (mob.nestPos != null) {
+				++travellingTicks;
+				if (travellingTicks > adjustedTickDelay(600)) {
+					blacklistNest();
+				} else if (!mob.navigation.isInProgress()) {
+					if (!mob.closerThan(mob.nestPos, 16)) {
+						if (!mob.closerThan(mob.nestPos, 32)) {
+							dropNest();
+						} else {
+							moveToNest(mob.nestPos);
+						}
+					} else {
+						boolean flag = moveToNest(mob.nestPos);
+						if (!flag) {
+							blacklistNest();
+						} else if (lastPath != null && lastPath.sameAs(mob.navigation.getPath())) {
+							++timeStuck;
+							if (timeStuck > 60) {
+								dropNest();
+								timeStuck = 0;
+							}
+						} else {
+							lastPath = mob.navigation.getPath();
+						}
+					}
+				}
+			}
+		}
 
-        private boolean hasReachedTarget(BlockPos target) {
-            return mob.position().distanceToSqr(target.getX() + 0.5D, target.getY() + 1D, target.getZ() + 0.5D) <= 0.4D;
-        }
+		private boolean moveToNest(BlockPos pPos) {
+			mob.navigation.moveTo(mob.navigation.createPath(new BlockPos(pPos), 0), 1D);
+			return mob.navigation.getPath() != null && mob.navigation.getPath().canReach();
+		}
 
-        private void dropNest() {
-            mob.nestPos = null;
-            mob.cooldownToLocateNest = 200;
-        }
+		private boolean hasReachedTarget(BlockPos target) {
+			return mob.position().distanceToSqr(target.getX() + 0.5D, target.getY() + 1D, target.getZ() + 0.5D) <= 0.4D;
+		}
 
-        private void blacklistNest() {
-            if (mob.nestPos != null) {
-                this.blacklistedTargets.add(mob.nestPos);
-            }
-            while (this.blacklistedTargets.size() > 3) {
-                this.blacklistedTargets.remove(0);
-            }
-            this.dropNest();
-        }
+		private void dropNest() {
+			mob.nestPos = null;
+			mob.cooldownToLocateNest = 200;
+		}
 
-        boolean isTargetBlacklisted(BlockPos pPos) {
-            return this.blacklistedTargets.contains(pPos);
-        }
+		private void blacklistNest() {
+			if (mob.nestPos != null) {
+				blacklistedTargets.add(mob.nestPos);
+			}
+			while (blacklistedTargets.size() > 3) {
+				blacklistedTargets.remove(0);
+			}
+			this.dropNest();
+		}
 
-        void clearBlacklist() {
-            this.blacklistedTargets.clear();
-        }
-    }
-    
-    static class AntEnterNestGoal extends Goal {
-        private final AbstractAnt mob;
+		boolean isTargetBlacklisted(BlockPos pPos) {
+			return blacklistedTargets.contains(pPos);
+		}
 
-        public AntEnterNestGoal(AbstractAnt pMob) {
-            this.setFlags(EnumSet.of(Flag.MOVE));
-            this.mob = pMob;
-        }
+		void clearBlacklist() {
+			blacklistedTargets.clear();
+		}
+	}
 
-        public boolean canUse() {
-            return mob.nestPos != null && mob.wantsToEnterNest(mob) && mob.nestHasSpace(mob.nestPos) && mob.position()
-                    .distanceToSqr(mob.nestPos.getX() + 0.5D, mob.nestPos.getY() + 1D, mob.nestPos.getZ() + 0.5D) <= 0.4D;
-        }
+	static class AntEnterNestGoal extends Goal {
+		private final AbstractAnt mob;
 
-        public boolean canContinueToUse() {
-            return false;
-        }
+		public AntEnterNestGoal(AbstractAnt mob) {
+			setFlags(EnumSet.of(Flag.MOVE));
+			this.mob = mob;
+		}
 
-        public void start() {
-            BlockEntity blockEntity = mob.level().getBlockEntity(mob.nestPos);
-            if (blockEntity instanceof AnthillBlockEntity anthillBlockEntity) {
-                anthillBlockEntity.addOccupant(mob, mob.getAntType(), mob.getCargoType() != 99);
-            }
-        }
-    }
+		public boolean canUse() {
+			return mob.nestPos != null && mob.wantsToEnterNest(mob) && mob.nestHasSpace(mob.nestPos) && mob.position()
+					.distanceToSqr(mob.nestPos.getX() + 0.5D, mob.nestPos.getY() + 1D, mob.nestPos.getZ() + 0.5D) <= 0.4D;
+		}
 
-    static class AntLocateNestGoal extends Goal {
-        private final AbstractAnt mob;
+		public boolean canContinueToUse() {
+			return false;
+		}
 
-        public AntLocateNestGoal(AbstractAnt pMob) {
-            this.mob = pMob;
-        }
+		public void start() {
+			BlockEntity blockEntity = mob.level().getBlockEntity(mob.nestPos);
+			if (blockEntity instanceof AnthillBlockEntity anthillBlockEntity) {
+				anthillBlockEntity.addOccupant(mob, mob.getAntType(), mob.getCargoType() != 99);
+			}
+		}
+	}
 
-        public boolean canUse() {
-            return mob.cooldownToLocateNest == 0 && mob.nestPos == null && mob.wantsToEnterNest(mob);
-        }
+	static class AntLocateNestGoal extends Goal {
+		private final AbstractAnt mob;
 
-        public boolean canContinueToUse() {
-            return false;
-        }
+		public AntLocateNestGoal(AbstractAnt mob) {
+			this.mob = mob;
+		}
 
-        public void start() {
-            mob.cooldownToLocateNest = 200;
-            List<BlockPos> list = this.findNestWithSpace();
-            if (!list.isEmpty()) {
-                for (BlockPos blockPos : list) {
-                    if (!mob.antGoToNestGoal.isTargetBlacklisted(blockPos)) {
-                        mob.nestPos = blockPos;
-                        return;
-                    }
-                }
-                mob.antGoToNestGoal.clearBlacklist();
-                mob.nestPos = list.get(0);
-            }
-        }
+		public boolean canUse() {
+			return mob.cooldownToLocateNest == 0 && mob.nestPos == null && mob.wantsToEnterNest(mob);
+		}
 
-        private List<BlockPos> findNestWithSpace() {
-            BlockPos blockPos = mob.blockPosition();
-            PoiManager poiManager = ((ServerLevel) mob.level()).getPoiManager();
-            Stream<PoiRecord> stream = poiManager.getInRange(poiType ->
-                    poiType.is(SBTags.PoiTypes.ANT_HOME), blockPos, 20, PoiManager.Occupancy.ANY);
-            return stream.map(PoiRecord::getPos).filter(mob::nestHasSpace).sorted(Comparator.comparingDouble(key ->
-                    key.distSqr(blockPos))).collect(Collectors.toList());
-        }
-    }
+		public boolean canContinueToUse() {
+			return false;
+		}
+
+		public void start() {
+			mob.cooldownToLocateNest = 200;
+			List<BlockPos> list = findNestWithSpace();
+			if (!list.isEmpty()) {
+				for (BlockPos blockPos : list) {
+					if (!mob.antGoToNestGoal.isTargetBlacklisted(blockPos)) {
+						mob.nestPos = blockPos;
+						return;
+					}
+				}
+				mob.antGoToNestGoal.clearBlacklist();
+				mob.nestPos = list.get(0);
+			}
+		}
+
+		private List<BlockPos> findNestWithSpace() {
+			BlockPos blockPos = mob.blockPosition();
+			PoiManager poiManager = ((ServerLevel) mob.level()).getPoiManager();
+			Stream<PoiRecord> stream = poiManager.getInRange(poiType ->
+					poiType.is(SBTags.PoiTypes.ANT_HOME), blockPos, 20, PoiManager.Occupancy.ANY);
+			return stream.map(PoiRecord::getPos).filter(mob::nestHasSpace).sorted(Comparator.comparingDouble(key ->
+					key.distSqr(blockPos))).collect(Collectors.toList());
+		}
+	}
 }

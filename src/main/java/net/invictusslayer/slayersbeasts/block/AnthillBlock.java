@@ -2,7 +2,7 @@ package net.invictusslayer.slayersbeasts.block;
 
 import net.invictusslayer.slayersbeasts.block.entity.AnthillBlockEntity;
 import net.invictusslayer.slayersbeasts.block.entity.SBBlockEntities;
-import net.invictusslayer.slayersbeasts.entity.SoldierAnt;
+import net.invictusslayer.slayersbeasts.entity.AntSoldier;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.stats.Stats;
@@ -73,13 +73,13 @@ public class AnthillBlock extends BaseEntityBlock {
     }
 
     public void angerNearbyAnts(Level level, BlockPos pos) {
-        List<SoldierAnt> list = level.getEntitiesOfClass(SoldierAnt.class, (new AABB(pos)).inflate(8, 6, 8));
+        List<AntSoldier> list = level.getEntitiesOfClass(AntSoldier.class, (new AABB(pos)).inflate(8, 6, 8));
         if (!list.isEmpty()) {
             List<Player> players = level.getEntitiesOfClass(Player.class, (new AABB(pos)).inflate(8, 6, 8));
             if (players.isEmpty()) return;
             int i = players.size();
 
-            for (SoldierAnt ant : list) {
+            for (AntSoldier ant : list) {
                 if (ant.getTarget() == null) {
                     ant.setTarget(players.get(level.random.nextInt(i)));
                 }

@@ -12,32 +12,33 @@ import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 
 @Mod.EventBusSubscriber(modid = SlayersBeasts.MOD_ID, bus = Mod.EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
 public final class SBClientEvents {
-    public static void clientSetup(FMLClientSetupEvent event) {}
+	public static void clientSetup(FMLClientSetupEvent event) {}
 
-    @SubscribeEvent
-    public static void registerLayers(EntityRenderersEvent.RegisterLayerDefinitions event) {
-        event.registerLayerDefinition(MantisModel.LAYER_LOCATION, MantisModel::createBodyLayer);
-        event.registerLayerDefinition(WorkerAntModel.LAYER_LOCATION, WorkerAntModel::createBodyLayer);
-        event.registerLayerDefinition(SoldierAntModel.LAYER_LOCATION, SoldierAntModel::createBodyLayer);
-        event.registerLayerDefinition(QueenAntModel.LAYER_LOCATION, QueenAntModel::createBodyLayer);
-        event.registerLayerDefinition(AntCargoModel.LAYER_LOCATION, AntCargoModel::createCargoLayer);
-        event.registerLayerDefinition(WitherSpiderModel.LAYER_LOCATION, WitherSpiderModel::createBodyLayer);
-        event.registerLayerDefinition(TarantulaModel.LAYER_LOCATION, TarantulaModel::createBodyLayer);
-        event.registerLayerDefinition(DamselflyModel.LAYER_LOCATION, DamselflyModel::createBodyLayer);
-        event.registerLayerDefinition(EntOakModel.LAYER_LOCATION, EntOakModel::createBodyLayer);
-        event.registerLayerDefinition(VenusFlytrapModel.LAYER_LOCATION, VenusFlytrapModel::createBodyLayer);
-    }
+	@SubscribeEvent
+	public static void registerLayers(EntityRenderersEvent.RegisterLayerDefinitions event) {
+		event.registerLayerDefinition(MantisModel.LAYER_LOCATION, MantisModel::createBodyLayer);
+		event.registerLayerDefinition(AntWorkerModel.LAYER_LOCATION, AntWorkerModel::createBodyLayer);
+		event.registerLayerDefinition(AntSoldierModel.LAYER_LOCATION, AntSoldierModel::createBodyLayer);
+		event.registerLayerDefinition(AntQueenModel.LAYER_LOCATION, AntQueenModel::createBodyLayer);
+		event.registerLayerDefinition(AntCargoModel.LAYER_LOCATION, AntCargoModel::createCargoLayer);
+		event.registerLayerDefinition(WitherSpiderModel.LAYER_LOCATION, WitherSpiderModel::createBodyLayer);
+		event.registerLayerDefinition(TyrachnidModel.LAYER_LOCATION, TyrachnidModel::createBodyLayer);
+		event.registerLayerDefinition(DamselflyModel.LAYER_LOCATION, DamselflyModel::createBodyLayer);
+		event.registerLayerDefinition(EntMediumModel.LAYER_LOCATION, EntMediumModel::createBodyLayer);
+		event.registerLayerDefinition(VenusFlytrapModel.LAYER_LOCATION, VenusFlytrapModel::createBodyLayer);
+	}
 
-    @SubscribeEvent
-    public static void registerRenderers(EntityRenderersEvent.RegisterRenderers event) {
-        event.registerEntityRenderer(SBEntities.MANTIS.get(), MantisRenderer::new);
-        event.registerEntityRenderer(SBEntities.WORKER_ANT.get(), WorkerAntRenderer::new);
-        event.registerEntityRenderer(SBEntities.SOLDIER_ANT.get(), SoldierAntRenderer::new);
-        event.registerEntityRenderer(SBEntities.QUEEN_ANT.get(), QueenAntRenderer::new);
-        event.registerEntityRenderer(SBEntities.WITHER_SPIDER.get(), WitherSpiderRenderer::new);
-        event.registerEntityRenderer(SBEntities.TARANTULA.get(), TarantulaRenderer::new);
-        event.registerEntityRenderer(SBEntities.DAMSELFLY.get(), DamselflyRenderer::new);
-        event.registerEntityRenderer(SBEntities.ENT_OAK.get(), EntOakRenderer::new);
-        event.registerEntityRenderer(SBEntities.VENUS_FLYTRAP.get(), VenusFlytrapRenderer::new);
-    }
+	@SubscribeEvent
+	public static void registerRenderers(EntityRenderersEvent.RegisterRenderers event) {
+		event.registerEntityRenderer(SBEntities.MANTIS.get(), MantisRenderer::new);
+		event.registerEntityRenderer(SBEntities.ANT_WORKER.get(), AntWorkerRenderer::new);
+		event.registerEntityRenderer(SBEntities.ANT_SOLDIER.get(), AntSoldierRenderer::new);
+		event.registerEntityRenderer(SBEntities.ANT_QUEEN.get(), AntQueenRenderer::new);
+		event.registerEntityRenderer(SBEntities.WITHER_SPIDER.get(), WitherSpiderRenderer::new);
+		event.registerEntityRenderer(SBEntities.TYRACHNID.get(), TyrachnidRenderer::new);
+		event.registerEntityRenderer(SBEntities.DAMSELFLY.get(), DamselflyRenderer::new);
+		event.registerEntityRenderer(SBEntities.ENT_OAK.get(), EntMediumRenderer::new);
+		event.registerEntityRenderer(SBEntities.ENT_BIRCH.get(), EntMediumRenderer::new);
+		event.registerEntityRenderer(SBEntities.VENUS_FLYTRAP.get(), VenusFlytrapRenderer::new);
+	}
 }

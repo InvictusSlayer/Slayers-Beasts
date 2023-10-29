@@ -12,13 +12,12 @@ import org.jetbrains.annotations.Nullable;
 import java.util.concurrent.CompletableFuture;
 
 public class SBEntityTagsProvider extends EntityTypeTagsProvider {
-    public SBEntityTagsProvider(PackOutput packOutput, CompletableFuture<HolderLookup.Provider> lookupProvider, @Nullable ExistingFileHelper existingFileHelper) {
-        super(packOutput, lookupProvider, SlayersBeasts.MOD_ID, existingFileHelper);
-    }
+	public SBEntityTagsProvider(PackOutput packOutput, CompletableFuture<HolderLookup.Provider> lookupProvider, @Nullable ExistingFileHelper existingFileHelper) {
+		super(packOutput, lookupProvider, SlayersBeasts.MOD_ID, existingFileHelper);
+	}
 
-    @Override
-    protected void addTags(HolderLookup.Provider pProvider) {
-        this.tag(SBTags.EntityTypes.ANTHILL_INHABITANTS).add(SBEntities.WORKER_ANT.get(), SBEntities.SOLDIER_ANT.get(), SBEntities.QUEEN_ANT.get());
-        this.tag(SBTags.EntityTypes.PEAT_WALKABLE_MOBS).add(SBEntities.WORKER_ANT.get(), EntityType.FROG);
-    }
+	protected void addTags(HolderLookup.Provider pProvider) {
+		this.tag(SBTags.EntityTypes.ANTHILL_INHABITANTS).add(SBEntities.ANT_WORKER.get(), SBEntities.ANT_SOLDIER.get(), SBEntities.ANT_QUEEN.get());
+		this.tag(SBTags.EntityTypes.PEAT_WALKABLE_MOBS).add(SBEntities.ANT_WORKER.get(), EntityType.FROG);
+	}
 }

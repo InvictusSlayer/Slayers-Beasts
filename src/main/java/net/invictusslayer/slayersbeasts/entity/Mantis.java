@@ -9,6 +9,8 @@ import net.minecraft.sounds.SoundEvent;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.Difficulty;
 import net.minecraft.world.damagesource.DamageSource;
+import net.minecraft.world.effect.MobEffectInstance;
+import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
@@ -20,158 +22,154 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelAccessor;
 
 public class Mantis extends PathfinderMob {
-    private static final EntityDataAccessor<Boolean> DATA_IS_LEAPING = SynchedEntityData.defineId(Mantis.class, EntityDataSerializers.BOOLEAN);
-    private static final EntityDataAccessor<Boolean> DATA_IS_FLUTTERING = SynchedEntityData.defineId(Mantis.class, EntityDataSerializers.BOOLEAN);
+	private static final EntityDataAccessor<Boolean> DATA_IS_LEAPING = SynchedEntityData.defineId(Mantis.class, EntityDataSerializers.BOOLEAN);
+	private static final EntityDataAccessor<Boolean> DATA_IS_SCUTTLING = SynchedEntityData.defineId(Mantis.class, EntityDataSerializers.BOOLEAN);
+	private static final EntityDimensions SCUTTLING_DIMENSIONS = EntityDimensions.scalable(SBEntities.MANTIS.get().getWidth(), SBEntities.MANTIS.get().getHeight() - 0.8F);
+	public static final AnimationState strikeAnimationState = new AnimationState();
 
-    public Mantis(EntityType<Mantis> entityType, Level level) {
-        super(entityType, level);
-    }
+	public Mantis(EntityType<Mantis> type, Level level) {
+		super(type, level);
+	}
 
-    @Override
-    protected void registerGoals() {
-        super.registerGoals();
-        this.goalSelector.addGoal(0, new FloatGoal(this));
-        this.goalSelector.addGoal(1, new MantisLeapGoal(this, 0.4F));
-        this.goalSelector.addGoal(2, new MeleeAttackGoal(this, 1.2D, false));
-        this.goalSelector.addGoal(3, new WaterAvoidingRandomStrollGoal(this, 0.8D));
-        this.goalSelector.addGoal(4, new LookAtPlayerGoal(this, Player.class, 8.0F));
-        this.goalSelector.addGoal(5, new RandomLookAroundGoal(this));
-        this.goalSelector.addGoal(6, new FlutterWingsGoal(this));
-        this.targetSelector.addGoal(1, new HurtByTargetGoal(this));
-        this.targetSelector.addGoal(2, new NearestAttackableTargetGoal<>(this, Player.class, true));
-    }
+	protected void registerGoals() {
+		super.registerGoals();
+		goalSelector.addGoal(0, new FloatGoal(this));
+		goalSelector.addGoal(1, new MantisScuttleGoal(this, 1.5D, false));
+		goalSelector.addGoal(2, new MantisLeapGoal(this, 0.6F));
+		goalSelector.addGoal(3, new WaterAvoidingRandomStrollGoal(this, 0.8D));
+		goalSelector.addGoal(4, new LookAtPlayerGoal(this, Player.class, 8.0F));
+		goalSelector.addGoal(5, new RandomLookAroundGoal(this));
+		goalSelector.addGoal(6, new MantisFlutterGoal(this));
+		targetSelector.addGoal(1, new HurtByTargetGoal(this));
+		targetSelector.addGoal(2, new NearestAttackableTargetGoal<>(this, Player.class, true));
+	}
 
-    public static AttributeSupplier.Builder createAttributes() {
-        return Mob.createMobAttributes()
-                .add(Attributes.MOVEMENT_SPEED, 0.25F)
-                .add(Attributes.FOLLOW_RANGE, 16.0D)
-                .add(Attributes.MAX_HEALTH, 15.0D)
-                .add(Attributes.ATTACK_DAMAGE, 2.0D)
-                .add(Attributes.ATTACK_SPEED, 2.0D)
-                .add(Attributes.ATTACK_KNOCKBACK, 1.0D);
-    }
+	public static AttributeSupplier.Builder createAttributes() {
+		return Mob.createMobAttributes()
+				.add(Attributes.MOVEMENT_SPEED, 0.25F)
+				.add(Attributes.FOLLOW_RANGE, 16.0D)
+				.add(Attributes.MAX_HEALTH, 15.0D)
+				.add(Attributes.ATTACK_DAMAGE, 2.0D)
+				.add(Attributes.ATTACK_SPEED, 2.0D)
+				.add(Attributes.ATTACK_KNOCKBACK, 1.0D);
+	}
 
-    @Override
-    public boolean doHurtTarget(Entity pEntity) {
-        if (!super.doHurtTarget(pEntity)) {
-            return false;
-        } else {
-//            if (pEntity instanceof LivingEntity && random.nextBoolean()) {
-//                ((LivingEntity)pEntity).addEffect(new MobEffectInstance(ModEffects.PARALYSIS.get(), 30), this);
-//            }
-            return true;
-        }
-    }
+	public boolean doHurtTarget(Entity entity) {
+		if (!super.doHurtTarget(entity)) {
+			return false;
+		}
+		if (entity instanceof LivingEntity livingEntity && random.nextBoolean()) {
+			livingEntity.addEffect(new MobEffectInstance(MobEffects.POISON, 30), this);
+		}
+		return true;
+	}
 
-    protected SoundEvent getAmbientSound() {return SBSounds.MANTIS_AMBIENT.get();}
-    protected SoundEvent getDeathSound() {return SBSounds.MANTIS_DEATH.get();}
-    protected SoundEvent getHurtSound(DamageSource damageSource) {return SBSounds.MANTIS_HURT.get();}
+	protected SoundEvent getAmbientSound() {
+		return SBSounds.MANTIS_AMBIENT.get();
+	}
+	protected SoundEvent getDeathSound() {
+		return SBSounds.MANTIS_DEATH.get();
+	}
+	protected SoundEvent getHurtSound(DamageSource damageSource) {
+		return SBSounds.MANTIS_HURT.get();
+	}
 
-    public MobType getMobType() {
-        return MobType.ARTHROPOD;
-    }
+	public MobType getMobType() {
+		return MobType.ARTHROPOD;
+	}
 
-    public static boolean canSpawn(EntityType<Mantis> entity, LevelAccessor levelAccess, MobSpawnType spawnType, BlockPos pos, RandomSource random) {
-        return PathfinderMob.checkMobSpawnRules(entity, levelAccess, spawnType, pos, random)
-                && levelAccess instanceof final Level level && level.getDifficulty() != Difficulty.PEACEFUL;
-    }
+	public static boolean canSpawn(EntityType<Mantis> entity, LevelAccessor level, MobSpawnType spawnType, BlockPos pos, RandomSource random) {
+		return PathfinderMob.checkMobSpawnRules(entity, level, spawnType, pos, random) && level instanceof Level level1 && level1.getDifficulty() != Difficulty.PEACEFUL;
+	}
 
-    protected void defineSynchedData() {
-        super.defineSynchedData();
-        this.entityData.define(DATA_IS_LEAPING, false);
-        this.entityData.define(DATA_IS_FLUTTERING, false);
-    }
+	protected void defineSynchedData() {
+		super.defineSynchedData();
+		entityData.define(DATA_IS_LEAPING, false);
+		entityData.define(DATA_IS_SCUTTLING, false);
+	}
 
-    public boolean isLeaping() {
-        return this.entityData.get(DATA_IS_LEAPING);
-    }
-    public void setLeaping(Boolean leaping) {
-        this.entityData.set(DATA_IS_LEAPING, leaping);
-    }
+	public boolean isScuttling() {
+		return entityData.get(DATA_IS_SCUTTLING);
+	}
+	public void setScuttling(Boolean scuttling) {
+		entityData.set(DATA_IS_SCUTTLING, scuttling);
+	}
 
-    public boolean isFluttering() {
-        return this.entityData.get(DATA_IS_FLUTTERING);
-    }
-    public void setFluttering(Boolean fluttering) {
-        this.entityData.set(DATA_IS_FLUTTERING, fluttering);
-    }
+	public boolean isLeaping() {
+		return entityData.get(DATA_IS_LEAPING);
+	}
+	public void setLeaping(Boolean leaping) {
+		entityData.set(DATA_IS_LEAPING, leaping);
+	}
 
-    public MantisPose getMantisPose() {
-        if (this.isLeaping()) {
-            return MantisPose.LEAPING;
-        } else if (this.isFluttering()) {
-            return MantisPose.FLUTTERING;
-        } else {
-            return MantisPose.PASSIVE;
-        }
-    }
+	public EntityDimensions getDimensions(Pose pose) {
+		return isScuttling() ? SCUTTLING_DIMENSIONS.scale(getScale()) : super.getDimensions(pose);
+	}
 
-    @Override
-    public Pose getPose() {
-        return super.getPose();
-    }
+	static class MantisScuttleGoal extends MeleeAttackGoal {
+		private final Mantis mob;
 
-    static class FlutterWingsGoal extends Goal {
-        private final Mantis mob;
-        private int flutterTime;
+		public MantisScuttleGoal(Mantis mob, double speedModifier, boolean requiresLineOfSight) {
+			super(mob, speedModifier, requiresLineOfSight);
+			this.mob = mob;
+		}
 
-        public FlutterWingsGoal(Mantis pMob) {
-            super();
-            this.mob = pMob;
-        }
+		public void start() {
+			mob.setScuttling(true);
+			super.start();
+		}
 
-        @Override
-        public boolean canUse() {
-            return this.mob.onGround() && this.mob.getRandom().nextFloat() < 0.02F;
-        }
+		public void stop() {
+			mob.setScuttling(false);
+			super.stop();
+		}
+	}
 
-        public boolean canContinueToUse() {
-            return this.flutterTime >= 0;
-        }
+	static class MantisLeapGoal extends LeapAtTargetGoal {
+		private final Mantis mob;
 
-        public void start() {
-            this.mob.setFluttering(true);
-            this.flutterTime = 15 + this.mob.getRandom().nextInt(15);
-        }
+		public MantisLeapGoal(Mantis mob, float yd) {
+			super(mob, yd);
+			this.mob = mob;
+		}
 
-        public void stop() {
-            this.mob.setFluttering(false);
-        }
+		public void start() {
+			mob.setLeaping(true);
+			super.start();
+		}
 
-        public boolean requiresUpdateEveryTick() {
-            return true;
-        }
+		public void stop() {
+			mob.setLeaping(false);
+		}
+	}
 
-        public void tick() {
-            --this.flutterTime;
-        }
+	static class MantisFlutterGoal extends Goal {
+		private final Mantis mob;
+		private int flutterTime;
 
-    }
+		public MantisFlutterGoal(Mantis mob) {
+			super();
+			this.mob = mob;
+		}
 
-    static class MantisLeapGoal extends LeapAtTargetGoal {
-        private final Mantis mob;
+		public boolean canUse() {
+			return mob.onGround() && mob.getRandom().nextFloat() < 0.02F;
+		}
 
-        public MantisLeapGoal(Mantis pMob, float pYd) {
-            super(pMob, pYd);
-            this.mob = pMob;
-        }
+		public boolean canContinueToUse() {
+			return flutterTime >= 0;
+		}
 
-        public void start() {
-            this.mob.setLeaping(true);
-            super.start();
-        }
+		public void start() {
+			flutterTime = 15 + mob.getRandom().nextInt(15);
+		}
 
-        public void stop() {
-            this.mob.setLeaping(false);
-        }
+		public boolean requiresUpdateEveryTick() {
+			return true;
+		}
 
-    }
-
-    public enum MantisPose {
-        PASSIVE,
-        AGGRESSIVE,
-        LEAPING,
-        FLUTTERING,
-        FLYING
-    }
+		public void tick() {
+			--flutterTime;
+		}
+	}
 }

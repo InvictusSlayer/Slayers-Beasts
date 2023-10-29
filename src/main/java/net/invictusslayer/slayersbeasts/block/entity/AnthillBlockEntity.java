@@ -4,8 +4,8 @@ import net.invictusslayer.slayersbeasts.block.AnthillBlock;
 import net.invictusslayer.slayersbeasts.block.SBBlocks;
 import net.invictusslayer.slayersbeasts.datagen.tags.SBTags;
 import net.invictusslayer.slayersbeasts.entity.AbstractAnt;
-import net.invictusslayer.slayersbeasts.entity.QueenAnt;
-import net.invictusslayer.slayersbeasts.entity.SoldierAnt;
+import net.invictusslayer.slayersbeasts.entity.AntQueen;
+import net.invictusslayer.slayersbeasts.entity.AntSoldier;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.ListTag;
@@ -286,7 +286,7 @@ public class AnthillBlockEntity extends BlockEntity {
         if (!entity.getType().is(SBTags.EntityTypes.ANTHILL_INHABITANTS)) {
             return false;
         }
-        if (releaseStatus == AntReleaseStatus.PATROLLING && !(entity instanceof SoldierAnt)) {
+        if (releaseStatus == AntReleaseStatus.PATROLLING && !(entity instanceof AntSoldier)) {
             return false;
         }
 
@@ -348,7 +348,7 @@ public class AnthillBlockEntity extends BlockEntity {
     }
 
     public void storeAnt(CompoundTag data, int ticksInNest, boolean hasCargo, Entity entity) {
-        boolean isQueen = entity instanceof QueenAnt;
+        boolean isQueen = entity instanceof AntQueen;
         this.storedAnts.add(new AntData(data, ticksInNest, hasCargo ? 2400 : 600, isQueen));
     }
 

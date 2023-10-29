@@ -53,13 +53,22 @@ public class SBTags {
 
     public static class Biomes {
         public static final TagKey<Biome> SLAYERS_BIOMES = tag("slayers_biomes");
+        public static final TagKey<Biome> WOOD_ANT_HABITAT = tag("wood_ant_habitat");
+        public static final TagKey<Biome> LEAFCUTTER_ANT_HABITAT = tag("leafcutter_ant_habitat");
+        public static final TagKey<Biome> MEADOW_ANT_HABITAT = tag("meadow_ant_habitat");
 
         public static final TagKey<Biome> IS_BRUSHLAND = tag("is_brushland");
 
         public static final TagKey<Biome> HAS_CRYPT_PORTAL = tag("has_crypt_portal");
 
-        public static final TagKey<Biome> SPAWNS_DAMSELFLY = tag("spawns_damselfly");
         public static final TagKey<Biome> SPAWNS_MANTIS = tag("spawns_mantis");
+        public static final TagKey<Biome> SPAWNS_DAMSELFLY = tag("spawns_damselfly");
+        public static final TagKey<Biome> SPAWNS_ENT_OAK = tag("spawns_ent_oak");
+        public static final TagKey<Biome> SPAWNS_ENT_BIRCH = tag("spawns_ent_birch");
+        public static final TagKey<Biome> SPAWNS_ENT_SPRUCE = tag("spawns_ent_spruce");
+        public static final TagKey<Biome> SPAWNS_ENT_DARK_OAK = tag("spawns_ent_dark_oak");
+        public static final TagKey<Biome> SPAWNS_ENT_ACACIA = tag("spawns_ent_acacia");
+        public static final TagKey<Biome> SPAWNS_ENT_JUNGLE = tag("spawns_ent_jungle");
 
         private static TagKey<Biome> tag(String name) {
             return TagKey.create(Registries.BIOME, new ResourceLocation(SlayersBeasts.MOD_ID, name));
