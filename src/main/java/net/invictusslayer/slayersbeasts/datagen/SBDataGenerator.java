@@ -66,6 +66,7 @@ public class SBDataGenerator {
         generator.addProvider(hasServer, new SBEntityTagsProvider(output, provider, existingFileHelper));
         generator.addProvider(hasServer, new SBPoiTagsProvider(output, provider, existingFileHelper));
 
+        generator.addProvider(hasServer, new SBLanguageProvider(output));
         generator.addProvider(hasServer, new SBRecipeProvider(output));
         generator.addProvider(hasServer, new SBBlockStateProvider(output, existingFileHelper));
         generator.addProvider(hasServer, new SBItemModelProvider(output, existingFileHelper));

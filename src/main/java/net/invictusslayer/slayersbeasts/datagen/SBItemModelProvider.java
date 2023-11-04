@@ -31,29 +31,6 @@ public class SBItemModelProvider extends ItemModelProvider {
 		item(SBItems.TANNED_LEATHER);
 		item(SBItems.MUD_BALL);
 
-		block(SBBlocks.ICICLE, "_frustum_down");
-		block(SBBlocks.OBSIDIAN_SPIKE, "_tip_up");
-		block(SBBlocks.TALL_DEAD_BUSH, "_top");
-		block(SBBlocks.ALGAE);
-		block(SBBlocks.BLACK_MUSHROOM);
-		block(SBBlocks.WHITE_MUSHROOM);
-		item(SBBlocks.ASPEN_DOOR);
-		block(SBBlocks.ASPEN_SAPLING);
-		item(SBBlocks.CAJOLE_DOOR);
-		block(SBBlocks.CAJOLE_SAPLING);
-		item(SBBlocks.DESERT_OAK_DOOR);
-		block(SBBlocks.DESERT_OAK_SAPLING);
-		item(SBBlocks.EUCALYPTUS_DOOR);
-		block(SBBlocks.EUCALYPTUS_SAPLING);
-		item(SBBlocks.KAPOK_DOOR);
-		block(SBBlocks.KAPOK_SAPLING);
-		item(SBBlocks.REDWOOD_DOOR);
-		block(SBBlocks.REDWOOD_SAPLING);
-		item(SBBlocks.WILLOW_DOOR);
-		block(SBBlocks.WILLOW_SAPLING);
-		block(SBBlocks.WILLOW_BRANCH);
-		block(SBBlocks.WILLOW_BRANCH_PLANT);
-
 		spawnEgg(SBItems.MANTIS_SPAWN_EGG);
 		item(SBItems.ANT_WORKER_SPAWN_EGG);
 		item(SBItems.ANT_SOLDIER_SPAWN_EGG);
@@ -63,6 +40,62 @@ public class SBItemModelProvider extends ItemModelProvider {
 		spawnEgg(SBItems.DAMSELFLY_SPAWN_EGG);
 		spawnEgg(SBItems.ENT_OAK_SPAWN_EGG);
 		spawnEgg(SBItems.ENT_BIRCH_SPAWN_EGG);
+		spawnEgg(SBItems.SPORETRAP_SPAWN_EGG);
+
+		block(SBBlocks.ICICLE, "_frustum_down");
+		block(SBBlocks.OBSIDIAN_SPIKE, "_tip_up");
+		block(SBBlocks.TALL_DEAD_BUSH, "_top");
+		block(SBBlocks.ALGAE);
+		block(SBBlocks.BLACK_MUSHROOM);
+		block(SBBlocks.WHITE_MUSHROOM);
+
+		/* Wood Types */
+		block(SBBlocks.ASPEN_SAPLING);
+		item(SBBlocks.ASPEN_DOOR);
+		item(SBItems.ASPEN_SIGN);
+		item(SBItems.ASPEN_HANGING_SIGN);
+		item(SBItems.ASPEN_BOAT);
+		item(SBItems.ASPEN_CHEST_BOAT);
+
+		block(SBBlocks.CAJOLE_SAPLING);
+		item(SBBlocks.CAJOLE_DOOR);
+
+		block(SBBlocks.DESERT_OAK_SAPLING);
+		item(SBBlocks.DESERT_OAK_DOOR);
+		item(SBItems.DESERT_OAK_SIGN);
+		item(SBItems.DESERT_OAK_HANGING_SIGN);
+		item(SBItems.DESERT_OAK_BOAT);
+		item(SBItems.DESERT_OAK_CHEST_BOAT);
+
+		block(SBBlocks.EUCALYPTUS_SAPLING);
+		item(SBBlocks.EUCALYPTUS_DOOR);
+		item(SBItems.EUCALYPTUS_SIGN);
+		item(SBItems.EUCALYPTUS_HANGING_SIGN);
+		item(SBItems.EUCALYPTUS_BOAT);
+		item(SBItems.EUCALYPTUS_CHEST_BOAT);
+
+		block(SBBlocks.KAPOK_SAPLING);
+		item(SBBlocks.KAPOK_DOOR);
+		item(SBItems.KAPOK_SIGN);
+		item(SBItems.KAPOK_HANGING_SIGN);
+		item(SBItems.KAPOK_BOAT);
+		item(SBItems.KAPOK_CHEST_BOAT);
+
+		block(SBBlocks.REDWOOD_SAPLING);
+		item(SBBlocks.REDWOOD_DOOR);
+		item(SBItems.REDWOOD_SIGN);
+		item(SBItems.REDWOOD_HANGING_SIGN);
+		item(SBItems.REDWOOD_BOAT);
+		item(SBItems.REDWOOD_CHEST_BOAT);
+
+		block(SBBlocks.WILLOW_SAPLING);
+		item(SBBlocks.WILLOW_DOOR);
+		item(SBItems.WILLOW_SIGN);
+		item(SBItems.WILLOW_HANGING_SIGN);
+		item(SBItems.WILLOW_BOAT);
+		item(SBItems.WILLOW_CHEST_BOAT);
+		block(SBBlocks.WILLOW_BRANCH);
+		block(SBBlocks.WILLOW_BRANCH_PLANT);
 	}
 
 	private void block(RegistryObject<?> block) {

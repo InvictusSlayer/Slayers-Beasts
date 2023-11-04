@@ -34,7 +34,7 @@ public class SBEntityLoot extends EntityLootSubProvider {
 		add(SBEntities.DAMSELFLY.get(), LootTable.lootTable());
 		add(SBEntities.ENT_OAK.get(), LootTable.lootTable());
 		add(SBEntities.ENT_BIRCH.get(), LootTable.lootTable());
-		add(SBEntities.VENUS_FLYTRAP.get(), LootTable.lootTable());
+		add(SBEntities.SPORETRAP.get(), LootTable.lootTable());
 	}
 
 	protected void add(EntityType<?> entity, LootTable.Builder builder) {

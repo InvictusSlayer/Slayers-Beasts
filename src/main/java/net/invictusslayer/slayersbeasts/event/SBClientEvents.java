@@ -1,9 +1,16 @@
 package net.invictusslayer.slayersbeasts.event;
 
 import net.invictusslayer.slayersbeasts.SlayersBeasts;
+import net.invictusslayer.slayersbeasts.block.SBWoodType;
+import net.invictusslayer.slayersbeasts.block.entity.SBBlockEntities;
 import net.invictusslayer.slayersbeasts.client.model.*;
 import net.invictusslayer.slayersbeasts.client.renderer.*;
 import net.invictusslayer.slayersbeasts.entity.SBEntities;
+import net.minecraft.client.model.BoatModel;
+import net.minecraft.client.model.ChestBoatModel;
+import net.minecraft.client.renderer.Sheets;
+import net.minecraft.client.renderer.blockentity.HangingSignRenderer;
+import net.minecraft.client.renderer.blockentity.SignRenderer;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.client.event.EntityRenderersEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -12,7 +19,9 @@ import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 
 @Mod.EventBusSubscriber(modid = SlayersBeasts.MOD_ID, bus = Mod.EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
 public final class SBClientEvents {
-	public static void clientSetup(FMLClientSetupEvent event) {}
+	public static void clientSetup(FMLClientSetupEvent event) {
+		event.enqueueWork(() -> SBWoodType.values().forEach(Sheets::addWoodType));
+	}
 
 	@SubscribeEvent
 	public static void registerLayers(EntityRenderersEvent.RegisterLayerDefinitions event) {
@@ -25,7 +34,10 @@ public final class SBClientEvents {
 		event.registerLayerDefinition(TyrachnidModel.LAYER_LOCATION, TyrachnidModel::createBodyLayer);
 		event.registerLayerDefinition(DamselflyModel.LAYER_LOCATION, DamselflyModel::createBodyLayer);
 		event.registerLayerDefinition(EntMediumModel.LAYER_LOCATION, EntMediumModel::createBodyLayer);
-		event.registerLayerDefinition(VenusFlytrapModel.LAYER_LOCATION, VenusFlytrapModel::createBodyLayer);
+		event.registerLayerDefinition(SporetrapModel.LAYER_LOCATION, SporetrapModel::createBodyLayer);
+
+		SBBoatRenderer.boatLayers().forEach(location -> event.registerLayerDefinition(location, BoatModel::createBodyModel));
+		SBBoatRenderer.chestBoatLayers().forEach(location -> event.registerLayerDefinition(location, ChestBoatModel::createBodyModel));
 	}
 
 	@SubscribeEvent
@@ -39,6 +51,12 @@ public final class SBClientEvents {
 		event.registerEntityRenderer(SBEntities.DAMSELFLY.get(), DamselflyRenderer::new);
 		event.registerEntityRenderer(SBEntities.ENT_OAK.get(), EntMediumRenderer::new);
 		event.registerEntityRenderer(SBEntities.ENT_BIRCH.get(), EntMediumRenderer::new);
-		event.registerEntityRenderer(SBEntities.VENUS_FLYTRAP.get(), VenusFlytrapRenderer::new);
+		event.registerEntityRenderer(SBEntities.SPORETRAP.get(), SporetrapRenderer::new);
+
+		event.registerEntityRenderer(SBEntities.SB_BOAT.get(), context -> new SBBoatRenderer(context, false));
+		event.registerEntityRenderer(SBEntities.SB_CHEST_BOAT.get(), context -> new SBBoatRenderer(context, true));
+
+		event.registerBlockEntityRenderer(SBBlockEntities.SIGN.get(), SignRenderer::new);
+		event.registerBlockEntityRenderer(SBBlockEntities.HANGING_SIGN.get(), HangingSignRenderer::new);
 	}
 }
