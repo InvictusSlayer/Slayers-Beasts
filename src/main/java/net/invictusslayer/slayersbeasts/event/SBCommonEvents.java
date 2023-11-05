@@ -2,11 +2,11 @@ package net.invictusslayer.slayersbeasts.event;
 
 import net.invictusslayer.slayersbeasts.SlayersBeasts;
 import net.invictusslayer.slayersbeasts.block.SBFlammableBlocks;
+import net.invictusslayer.slayersbeasts.block.SBPottedPlants;
 import net.invictusslayer.slayersbeasts.block.SBStrippableBlocks;
 import net.invictusslayer.slayersbeasts.entity.*;
 import net.invictusslayer.slayersbeasts.world.biome.SBSurfaceRuleData;
 import net.invictusslayer.slayersbeasts.world.biome.region.SBNetherRegion;
-import net.invictusslayer.slayersbeasts.world.biome.region.SBOverworldRegion;
 import net.invictusslayer.slayersbeasts.world.biome.region.SBUndergroundRegion;
 import net.minecraft.world.entity.SpawnPlacements;
 import net.minecraft.world.level.levelgen.Heightmap;
@@ -24,11 +24,12 @@ public class SBCommonEvents {
 		event.enqueueWork(() -> {
 			SBFlammableBlocks.register();
 			SBStrippableBlocks.register();
+			SBPottedPlants.register();
 
 //			BrewingRecipeRegistry.addRecipe(new SBBrewingRecipe(Potions.SLOWNESS, SBItems.INSECT_EYE.get(), SBPotions.PARALYSIS_POTION.get()));
 //			BrewingRecipeRegistry.addRecipe(new SBBrewingRecipe(Potions.POISON, SBItems.WITHERBONE.get(), SBPotions.WITHER_POTION.get()));
 
-			Regions.register(new SBOverworldRegion(4));
+//			Regions.register(new SBOverworldRegion(4));
 			Regions.register(new SBUndergroundRegion(1));
 //			Regions.register(new SBOceanicRegion(4));
 			Regions.register(new SBNetherRegion(1));
@@ -43,7 +44,7 @@ public class SBCommonEvents {
 			SpawnPlacements.register(SBEntities.DAMSELFLY.get(), SpawnPlacements.Type.ON_GROUND, Heightmap.Types.WORLD_SURFACE, Damselfly::canSpawn);
 			SpawnPlacements.register(SBEntities.ENT_OAK.get(), SpawnPlacements.Type.ON_GROUND, Heightmap.Types.WORLD_SURFACE, EntMedium::canSpawn);
 			SpawnPlacements.register(SBEntities.ENT_BIRCH.get(), SpawnPlacements.Type.ON_GROUND, Heightmap.Types.WORLD_SURFACE, EntMedium::canSpawn);
-			SpawnPlacements.register(SBEntities.VENUS_FLYTRAP.get(), SpawnPlacements.Type.ON_GROUND, Heightmap.Types.WORLD_SURFACE, VenusFlytrap::canSpawn);
+			SpawnPlacements.register(SBEntities.SPORETRAP.get(), SpawnPlacements.Type.ON_GROUND, Heightmap.Types.WORLD_SURFACE, Sporetrap::canSpawn);
 		});
 	}
 
@@ -72,6 +73,6 @@ public class SBCommonEvents {
 		event.put(SBEntities.DAMSELFLY.get(), Damselfly.createAttributes().build());
 		event.put(SBEntities.ENT_OAK.get(), EntMedium.createAttributes().build());
 		event.put(SBEntities.ENT_BIRCH.get(), EntMedium.createAttributes().build());
-		event.put(SBEntities.VENUS_FLYTRAP.get(), VenusFlytrap.createAttributes().build());
+		event.put(SBEntities.SPORETRAP.get(), Sporetrap.createAttributes().build());
 	}
 }

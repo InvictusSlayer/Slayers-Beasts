@@ -15,8 +15,8 @@ import net.minecraftforge.registries.RegistryObject;
 public final class SBCreativeModeTab {
 	public static final DeferredRegister<CreativeModeTab> CREATIVE_TABS = DeferredRegister.create(Registries.CREATIVE_MODE_TAB, SlayersBeasts.MOD_ID);
 
-	public static final RegistryObject<CreativeModeTab> SLAYERSBEASTS = CREATIVE_TABS.register("slayersbeasts", () ->
-			CreativeModeTab.builder().icon(() -> new ItemStack(SBBlocks.WILLOW_SAPLING.get())).title(Component.translatable("creative_tab.slayersbeasts")).displayItems(((display, tab) -> {
+	public static final RegistryObject<CreativeModeTab> SB_TAB = CREATIVE_TABS.register("sb_tab", () ->
+			CreativeModeTab.builder().icon(() -> new ItemStack(SBBlocks.WILLOW_SAPLING.get())).title(Component.translatable("creative_tab.sb_tab")).displayItems(((display, tab) -> {
 				tab.accept(SBItems.JADE.get());
 //				tab.accept(SBItems.JADE_SHARD.get());
 //				tab.accept(SBItems.CRYSTALLINE_WING.get());
@@ -53,7 +53,7 @@ public final class SBCreativeModeTab {
 				tab.accept(SBBlocks.TALL_DEAD_BUSH.get());
 				tab.accept(SBBlocks.CRACKED_MUD.get());
 				tab.accept(SBBlocks.PEAT.get());
-				tab.accept(SBBlocks.ALGAE.get());
+				tab.accept(SBItems.ALGAE.get());
 
 				tab.accept(SBBlocks.PEGMATITE.get());
 				tab.accept(SBBlocks.PEGMATITE_SLAB.get());
@@ -96,6 +96,10 @@ public final class SBCreativeModeTab {
 				tab.accept(SBBlocks.ASPEN_TRAPDOOR.get());
 				tab.accept(SBBlocks.ASPEN_PRESSURE_PLATE.get());
 				tab.accept(SBBlocks.ASPEN_BUTTON.get());
+				tab.accept(SBItems.ASPEN_SIGN.get());
+				tab.accept(SBItems.ASPEN_HANGING_SIGN.get());
+				tab.accept(SBItems.ASPEN_BOAT.get());
+				tab.accept(SBItems.ASPEN_CHEST_BOAT.get());
 
 //				tab.accept(SBBlocks.CAJOLE_LOG.get());
 //				tab.accept(SBBlocks.CAJOLE_WOOD.get());
@@ -126,6 +130,10 @@ public final class SBCreativeModeTab {
 				tab.accept(SBBlocks.DESERT_OAK_TRAPDOOR.get());
 				tab.accept(SBBlocks.DESERT_OAK_PRESSURE_PLATE.get());
 				tab.accept(SBBlocks.DESERT_OAK_BUTTON.get());
+				tab.accept(SBItems.DESERT_OAK_SIGN.get());
+				tab.accept(SBItems.DESERT_OAK_HANGING_SIGN.get());
+				tab.accept(SBItems.DESERT_OAK_BOAT.get());
+				tab.accept(SBItems.DESERT_OAK_CHEST_BOAT.get());
 
 				tab.accept(SBBlocks.EUCALYPTUS_LOG.get());
 				tab.accept(SBBlocks.EUCALYPTUS_WOOD.get());
@@ -142,6 +150,10 @@ public final class SBCreativeModeTab {
 				tab.accept(SBBlocks.EUCALYPTUS_TRAPDOOR.get());
 				tab.accept(SBBlocks.EUCALYPTUS_PRESSURE_PLATE.get());
 				tab.accept(SBBlocks.EUCALYPTUS_BUTTON.get());
+				tab.accept(SBItems.EUCALYPTUS_SIGN.get());
+				tab.accept(SBItems.EUCALYPTUS_HANGING_SIGN.get());
+				tab.accept(SBItems.EUCALYPTUS_BOAT.get());
+				tab.accept(SBItems.EUCALYPTUS_CHEST_BOAT.get());
 
 				tab.accept(SBBlocks.KAPOK_LOG.get());
 				tab.accept(SBBlocks.KAPOK_WOOD.get());
@@ -158,6 +170,10 @@ public final class SBCreativeModeTab {
 				tab.accept(SBBlocks.KAPOK_TRAPDOOR.get());
 				tab.accept(SBBlocks.KAPOK_PRESSURE_PLATE.get());
 				tab.accept(SBBlocks.KAPOK_BUTTON.get());
+				tab.accept(SBItems.KAPOK_SIGN.get());
+				tab.accept(SBItems.KAPOK_HANGING_SIGN.get());
+				tab.accept(SBItems.KAPOK_BOAT.get());
+				tab.accept(SBItems.KAPOK_CHEST_BOAT.get());
 
 				tab.accept(SBBlocks.REDWOOD_LOG.get());
 				tab.accept(SBBlocks.REDWOOD_WOOD.get());
@@ -174,6 +190,10 @@ public final class SBCreativeModeTab {
 				tab.accept(SBBlocks.REDWOOD_TRAPDOOR.get());
 				tab.accept(SBBlocks.REDWOOD_PRESSURE_PLATE.get());
 				tab.accept(SBBlocks.REDWOOD_BUTTON.get());
+				tab.accept(SBItems.REDWOOD_SIGN.get());
+				tab.accept(SBItems.REDWOOD_HANGING_SIGN.get());
+				tab.accept(SBItems.REDWOOD_BOAT.get());
+				tab.accept(SBItems.REDWOOD_CHEST_BOAT.get());
 
 				tab.accept(SBBlocks.WILLOW_LOG.get());
 				tab.accept(SBBlocks.WILLOW_WOOD.get());
@@ -191,6 +211,10 @@ public final class SBCreativeModeTab {
 				tab.accept(SBBlocks.WILLOW_TRAPDOOR.get());
 				tab.accept(SBBlocks.WILLOW_PRESSURE_PLATE.get());
 				tab.accept(SBBlocks.WILLOW_BUTTON.get());
+				tab.accept(SBItems.WILLOW_SIGN.get());
+				tab.accept(SBItems.WILLOW_HANGING_SIGN.get());
+				tab.accept(SBItems.WILLOW_BOAT.get());
+				tab.accept(SBItems.WILLOW_CHEST_BOAT.get());
 
 				tab.accept(SBItems.MANTIS_SPAWN_EGG.get());
 				tab.accept(SBItems.ANT_WORKER_SPAWN_EGG.get());
