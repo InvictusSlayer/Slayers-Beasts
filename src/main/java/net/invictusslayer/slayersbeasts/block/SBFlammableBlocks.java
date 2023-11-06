@@ -1,77 +1,37 @@
 package net.invictusslayer.slayersbeasts.block;
 
-import net.minecraft.data.BlockFamily;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.FireBlock;
+import net.minecraftforge.registries.RegistryObject;
 
 public class SBFlammableBlocks {
 	public static void register() {
-		register(SBBlocks.PEAT.get(), 5, 5);
-		register(SBBlocks.OOTHECA.get(), 20, 30);
-		register(SBBlocks.TALL_DEAD_BUSH.get(), 100, 60);
+		registerWoodFamilies();
 
-		register(SBBlocks.ASPEN_LOG.get(), 5, 5);
-		register(SBBlocks.ASPEN_WOOD.get(), 5, 5);
-		register(SBBlocks.STRIPPED_ASPEN_LOG.get(), 5, 5);
-		register(SBBlocks.STRIPPED_ASPEN_WOOD.get(), 5, 5);
-		register(SBBlocks.ASPEN_LEAVES.get(), 60, 30);
-		registerFamily(SBBlockFamily.ASPEN);
-
-		register(SBBlocks.CAJOLE_LOG.get(), 5, 5);
-		register(SBBlocks.CAJOLE_WOOD.get(), 5, 5);
-		register(SBBlocks.STRIPPED_CAJOLE_LOG.get(), 5, 5);
-		register(SBBlocks.STRIPPED_CAJOLE_WOOD.get(), 5, 5);
-		register(SBBlocks.CAJOLE_LEAVES.get(), 60, 30);
-		registerFamily(SBBlockFamily.CAJOLE);
-
-		register(SBBlocks.DESERT_OAK_LOG.get(), 5, 5);
-		register(SBBlocks.DESERT_OAK_WOOD.get(), 5, 5);
-		register(SBBlocks.STRIPPED_DESERT_OAK_LOG.get(), 5, 5);
-		register(SBBlocks.STRIPPED_DESERT_OAK_WOOD.get(), 5, 5);
-		register(SBBlocks.DESERT_OAK_LEAVES.get(), 60, 30);
-		registerFamily(SBBlockFamily.DESERT_OAK);
-
-		register(SBBlocks.EUCALYPTUS_LOG.get(), 5, 5);
-		register(SBBlocks.EUCALYPTUS_WOOD.get(), 5, 5);
-		register(SBBlocks.STRIPPED_EUCALYPTUS_LOG.get(), 5, 5);
-		register(SBBlocks.STRIPPED_EUCALYPTUS_WOOD.get(), 5, 5);
-		register(SBBlocks.EUCALYPTUS_LEAVES.get(), 60, 30);
-		registerFamily(SBBlockFamily.EUCALYPTUS);
-
-		register(SBBlocks.KAPOK_LOG.get(), 5, 5);
-		register(SBBlocks.KAPOK_WOOD.get(), 5, 5);
-		register(SBBlocks.STRIPPED_KAPOK_LOG.get(), 5, 5);
-		register(SBBlocks.STRIPPED_KAPOK_WOOD.get(), 5, 5);
-		register(SBBlocks.KAPOK_LEAVES.get(), 60, 30);
-		registerFamily(SBBlockFamily.KAPOK);
-
-		register(SBBlocks.REDWOOD_LOG.get(), 5, 5);
-		register(SBBlocks.REDWOOD_WOOD.get(), 5, 5);
-		register(SBBlocks.STRIPPED_REDWOOD_LOG.get(), 5, 5);
-		register(SBBlocks.STRIPPED_REDWOOD_WOOD.get(), 5, 5);
-		register(SBBlocks.REDWOOD_LEAVES.get(), 60, 30);
-		registerFamily(SBBlockFamily.REDWOOD);
-
-		register(SBBlocks.WILLOW_LOG.get(), 5, 5);
-		register(SBBlocks.WILLOW_WOOD.get(), 5, 5);
-		register(SBBlocks.STRIPPED_WILLOW_LOG.get(), 5, 5);
-		register(SBBlocks.STRIPPED_WILLOW_WOOD.get(), 5, 5);
-		register(SBBlocks.WILLOW_LEAVES.get(), 60, 30);
-		registerFamily(SBBlockFamily.WILLOW);
-		register(SBBlocks.WILLOW_BRANCH.get(), 60, 15);
-		register(SBBlocks.WILLOW_BRANCH_PLANT.get(), 60, 15);
+		register(SBBlocks.PEAT, 5, 5);
+		register(SBBlocks.OOTHECA, 20, 30);
+		register(SBBlocks.TALL_DEAD_BUSH, 100, 60);
+		register(SBBlocks.WILLOW_BRANCH, 60, 15);
+		register(SBBlocks.WILLOW_BRANCH_PLANT, 60, 15);
 	}
 	
-	private static void registerFamily(BlockFamily family) {
-		register(family.getBaseBlock(), 20, 5);
-		register(family.get(BlockFamily.Variant.STAIRS), 20, 5);
-		register(family.get(BlockFamily.Variant.SLAB), 20, 5);
-		register(family.get(BlockFamily.Variant.FENCE), 20, 5);
-		register(family.get(BlockFamily.Variant.FENCE_GATE), 20, 5);
+	private static void registerWoodFamilies() {
+		WoodFamily.getAllFamilies().filter(WoodFamily::isFlammable).forEach(family -> {
+			register(family.get(WoodFamily.Variant.LOG), 5, 5);
+			register(family.get(WoodFamily.Variant.WOOD), 5, 5);
+			register(family.get(WoodFamily.Variant.STRIPPED_LOG), 5, 5);
+			register(family.get(WoodFamily.Variant.STRIPPED_WOOD), 5, 5);
+			register(family.get(WoodFamily.Variant.LEAVES), 60, 30);
+			register(family.get(WoodFamily.Variant.PLANKS), 20, 5);
+			register(family.get(WoodFamily.Variant.STAIRS), 20, 5);
+			register(family.get(WoodFamily.Variant.SLAB), 20, 5);
+			register(family.get(WoodFamily.Variant.FENCE), 20, 5);
+			register(family.get(WoodFamily.Variant.FENCE_GATE), 20, 5);
+		});
 	}
 	
-	private static void register(Block block, int flammability, int encouragement) {
-		((FireBlock) Blocks.FIRE).setFlammable(block, encouragement, flammability);
+	private static void register(RegistryObject<?> block, int flammability, int encouragement) {
+		((FireBlock) Blocks.FIRE).setFlammable((Block) block.get(), encouragement, flammability);
 	}
 }

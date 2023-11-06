@@ -3,16 +3,18 @@ package net.invictusslayer.slayersbeasts.datagen;
 import net.invictusslayer.slayersbeasts.SlayersBeasts;
 import net.invictusslayer.slayersbeasts.block.SBBlockFamily;
 import net.invictusslayer.slayersbeasts.block.SBBlocks;
-import net.invictusslayer.slayersbeasts.datagen.tags.SBTags;
+import net.invictusslayer.slayersbeasts.block.WoodFamily;
 import net.invictusslayer.slayersbeasts.item.SBItems;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.recipes.*;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.flag.FeatureFlagSet;
 import net.minecraft.world.flag.FeatureFlags;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.ItemLike;
+import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 
 public class SBRecipeProvider extends RecipeProvider {
@@ -22,6 +24,7 @@ public class SBRecipeProvider extends RecipeProvider {
 
 	protected void buildRecipes(RecipeOutput output) {
 		generateBlockFamilies(output);
+		generateWoodFamilies(output);
 
 		SimpleCookingRecipeBuilder.smoking(Ingredient.of(SBItems.TIED_LEATHER.get()), RecipeCategory.MISC, SBItems.TANNED_LEATHER.get(), 0.5F, 200).unlockedBy("has_tied_leather", has(SBItems.TIED_LEATHER.get())).save(output);
 		ShapedRecipeBuilder.shaped(RecipeCategory.MISC, SBItems.TIED_LEATHER.get()).define('S', Items.STRING).define('L', Items.LEATHER).define('M', SBItems.MUD_BALL.get())
@@ -57,50 +60,54 @@ public class SBRecipeProvider extends RecipeProvider {
 		stonecutterResultFromBase(output, RecipeCategory.BUILDING_BLOCKS, SBBlocks.POLISHED_PEGMATITE_SLAB.get(), SBBlocks.POLISHED_PEGMATITE.get(), 2);
 		stonecutterResultFromBase(output, RecipeCategory.BUILDING_BLOCKS, SBBlocks.POLISHED_PEGMATITE_STAIRS.get(), SBBlocks.PEGMATITE.get());
 		stonecutterResultFromBase(output, RecipeCategory.BUILDING_BLOCKS, SBBlocks.POLISHED_PEGMATITE_STAIRS.get(), SBBlocks.POLISHED_PEGMATITE.get());
+	}
 
-		/* Wood Types */
-		planksFromLog(output, SBBlocks.ASPEN_PLANKS.get(), SBTags.Items.ASPEN_LOGS, 4);
-		woodFromLogs(output, SBBlocks.ASPEN_WOOD.get(), SBBlocks.ASPEN_LOG.get());
-		woodFromLogs(output, SBBlocks.STRIPPED_ASPEN_WOOD.get(), SBBlocks.STRIPPED_ASPEN_LOG.get());
-		hangingSign(output, SBItems.ASPEN_HANGING_SIGN.get(), SBBlocks.STRIPPED_ASPEN_LOG.get());
-		woodenBoat(output, SBItems.ASPEN_BOAT.get(), SBBlocks.ASPEN_PLANKS.get());
-		chestBoat(output, SBItems.ASPEN_CHEST_BOAT.get(), SBItems.ASPEN_BOAT.get());
+	private void generateWoodFamilies(RecipeOutput output) {
+		WoodFamily.getAllFamilies().forEach(family -> {
+			Block planks = (Block) family.get(WoodFamily.Variant.PLANKS).get();
+			Block stripped = (Block) family.get(WoodFamily.Variant.STRIPPED_LOG).get();
 
-		planksFromLog(output, SBBlocks.CAJOLE_PLANKS.get(), SBTags.Items.CAJOLE_LOGS, 4);
-		woodFromLogs(output, SBBlocks.CAJOLE_WOOD.get(), SBBlocks.CAJOLE_LOG.get());
-		woodFromLogs(output, SBBlocks.STRIPPED_CAJOLE_WOOD.get(), SBBlocks.STRIPPED_CAJOLE_LOG.get());
+			family.getVariants().forEach((variant, object) -> {
+				if (object.isPresent()) {
+					if (object.get() instanceof Block block) {
+						if (variant.equals(WoodFamily.Variant.BUTTON))
+							woodenRecipe(output, buttonBuilder(block, Ingredient.of(planks)), planks, "button");
+						else if (variant.equals(WoodFamily.Variant.DOOR))
+							woodenRecipe(output, doorBuilder((Block) family.get(WoodFamily.Variant.DOOR).get(), Ingredient.of(planks)), planks, "door");
+						else if (variant.equals(WoodFamily.Variant.FENCE))
+							woodenRecipe(output, fenceBuilder((Block) family.get(WoodFamily.Variant.FENCE).get(), Ingredient.of(planks)), planks, "fence");
+						else if (variant.equals(WoodFamily.Variant.FENCE_GATE))
+							woodenRecipe(output, fenceGateBuilder((Block) family.get(WoodFamily.Variant.FENCE_GATE).get(), Ingredient.of(planks)), planks, "fence_gate");
+						else if (variant.equals(WoodFamily.Variant.SIGN))
+							woodenRecipe(output, signBuilder((Block) family.get(WoodFamily.Variant.SIGN).get(), Ingredient.of(planks)), planks, "sign");
+						else if (variant.equals(WoodFamily.Variant.SLAB))
+							woodenRecipe(output, slabBuilder(RecipeCategory.BUILDING_BLOCKS, (Block) family.get(WoodFamily.Variant.SLAB).get(), Ingredient.of(planks)), planks, "slab");
+						else if (variant.equals(WoodFamily.Variant.STAIRS))
+							woodenRecipe(output, stairBuilder((Block) family.get(WoodFamily.Variant.STAIRS).get(), Ingredient.of(planks)), planks, "stairs");
+						else if (variant.equals(WoodFamily.Variant.STRIPPED_WOOD))
+							woodFromLogs(output, (Block) family.get(WoodFamily.Variant.STRIPPED_WOOD).get(), stripped);
+						else if (variant.equals(WoodFamily.Variant.PLANKS))
+							planksFromLog(output, planks, family.getLogItems(), 4);
+						else if (variant.equals(WoodFamily.Variant.PRESSURE_PLATE))
+							woodenRecipe(output, pressurePlateBuilder(RecipeCategory.REDSTONE, (Block) family.get(WoodFamily.Variant.PRESSURE_PLATE).get(), Ingredient.of(planks)), planks, "pressure_plate");
+						else if (variant.equals(WoodFamily.Variant.TRAPDOOR))
+							woodenRecipe(output, trapdoorBuilder((Block) family.get(WoodFamily.Variant.TRAPDOOR).get(), Ingredient.of(planks)), planks, "trapdoor");
+						else if (variant.equals(WoodFamily.Variant.WOOD))
+							woodFromLogs(output, (Block) family.get(WoodFamily.Variant.WOOD).get(), (Block) family.get(WoodFamily.Variant.LOG).get());
+					} else if (object.get() instanceof Item item) {
+						if (variant.equals(WoodFamily.Variant.BOAT)) woodenBoat(output, item, planks);
+						else if (variant.equals(WoodFamily.Variant.CHEST_BOAT))
+							chestBoat(output, item, (Item) family.get(WoodFamily.Variant.BOAT).get());
+						else if (variant.equals(WoodFamily.Variant.HANGING_SIGN_ITEM))
+							hangingSign(output, item, stripped);
+					}
+				}
+			});
+		});
+	}
 
-		planksFromLog(output, SBBlocks.DESERT_OAK_PLANKS.get(), SBTags.Items.DESERT_OAK_LOGS, 4);
-		woodFromLogs(output, SBBlocks.DESERT_OAK_WOOD.get(), SBBlocks.DESERT_OAK_LOG.get());
-		woodFromLogs(output, SBBlocks.STRIPPED_DESERT_OAK_WOOD.get(), SBBlocks.STRIPPED_DESERT_OAK_LOG.get());
-		hangingSign(output, SBItems.DESERT_OAK_HANGING_SIGN.get(), SBBlocks.STRIPPED_DESERT_OAK_LOG.get());
-		woodenBoat(output, SBItems.DESERT_OAK_BOAT.get(), SBBlocks.DESERT_OAK_PLANKS.get());
-		chestBoat(output, SBItems.DESERT_OAK_CHEST_BOAT.get(), SBItems.DESERT_OAK_BOAT.get());
-		
-		planksFromLog(output, SBBlocks.EUCALYPTUS_PLANKS.get(), SBTags.Items.EUCALYPTUS_LOGS, 4);
-		woodFromLogs(output, SBBlocks.EUCALYPTUS_WOOD.get(), SBBlocks.EUCALYPTUS_LOG.get());
-		woodFromLogs(output, SBBlocks.STRIPPED_EUCALYPTUS_WOOD.get(), SBBlocks.STRIPPED_EUCALYPTUS_LOG.get());
-		woodenBoat(output, SBItems.EUCALYPTUS_BOAT.get(), SBBlocks.EUCALYPTUS_PLANKS.get());
-		chestBoat(output, SBItems.EUCALYPTUS_CHEST_BOAT.get(), SBItems.EUCALYPTUS_BOAT.get());
-
-		planksFromLog(output, SBBlocks.KAPOK_PLANKS.get(), SBTags.Items.KAPOK_LOGS, 4);
-		woodFromLogs(output, SBBlocks.KAPOK_WOOD.get(), SBBlocks.KAPOK_LOG.get());
-		woodFromLogs(output, SBBlocks.STRIPPED_KAPOK_WOOD.get(), SBBlocks.STRIPPED_KAPOK_LOG.get());
-		hangingSign(output, SBItems.KAPOK_HANGING_SIGN.get(), SBBlocks.STRIPPED_KAPOK_LOG.get());
-		woodenBoat(output, SBItems.KAPOK_BOAT.get(), SBBlocks.KAPOK_PLANKS.get());
-		chestBoat(output, SBItems.KAPOK_CHEST_BOAT.get(), SBItems.KAPOK_BOAT.get());
-		
-		planksFromLog(output, SBBlocks.REDWOOD_PLANKS.get(), SBTags.Items.REDWOOD_LOGS, 4);
-		woodFromLogs(output, SBBlocks.REDWOOD_WOOD.get(), SBBlocks.REDWOOD_LOG.get());
-		woodFromLogs(output, SBBlocks.STRIPPED_REDWOOD_WOOD.get(), SBBlocks.STRIPPED_REDWOOD_LOG.get());
-		woodenBoat(output, SBItems.REDWOOD_BOAT.get(), SBBlocks.REDWOOD_PLANKS.get());
-		chestBoat(output, SBItems.REDWOOD_CHEST_BOAT.get(), SBItems.REDWOOD_BOAT.get());
-
-		planksFromLog(output, SBBlocks.WILLOW_PLANKS.get(), SBTags.Items.WILLOW_LOGS, 4);
-		woodFromLogs(output, SBBlocks.WILLOW_WOOD.get(), SBBlocks.WILLOW_LOG.get());
-		woodFromLogs(output, SBBlocks.STRIPPED_WILLOW_WOOD.get(), SBBlocks.STRIPPED_WILLOW_LOG.get());
-		woodenBoat(output, SBItems.WILLOW_BOAT.get(), SBBlocks.WILLOW_PLANKS.get());
-		chestBoat(output, SBItems.WILLOW_CHEST_BOAT.get(), SBItems.WILLOW_BOAT.get());
+	private static void woodenRecipe(RecipeOutput output, RecipeBuilder builder, Block planks, String group) {
+		builder.unlockedBy("has_planks", has(planks)).group("wooden_" + group).save(output);
 	}
 
 	private void generateBlockFamilies(RecipeOutput output) {

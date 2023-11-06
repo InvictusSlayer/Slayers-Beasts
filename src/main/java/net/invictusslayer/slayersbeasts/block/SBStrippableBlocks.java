@@ -3,27 +3,22 @@ package net.invictusslayer.slayersbeasts.block;
 import com.google.common.collect.Maps;
 import net.minecraft.world.item.AxeItem;
 import net.minecraft.world.level.block.Block;
+import net.minecraftforge.registries.RegistryObject;
 
 public class SBStrippableBlocks {
 	public static void register() {
-		register(SBBlocks.ASPEN_LOG.get(), SBBlocks.STRIPPED_ASPEN_LOG.get());
-		register(SBBlocks.ASPEN_WOOD.get(), SBBlocks.STRIPPED_ASPEN_WOOD.get());
-		register(SBBlocks.CAJOLE_LOG.get(), SBBlocks.STRIPPED_CAJOLE_LOG.get());
-		register(SBBlocks.CAJOLE_WOOD.get(), SBBlocks.STRIPPED_CAJOLE_WOOD.get());
-		register(SBBlocks.DESERT_OAK_LOG.get(), SBBlocks.STRIPPED_DESERT_OAK_LOG.get());
-		register(SBBlocks.DESERT_OAK_WOOD.get(), SBBlocks.STRIPPED_DESERT_OAK_WOOD.get());
-		register(SBBlocks.EUCALYPTUS_LOG.get(), SBBlocks.STRIPPED_EUCALYPTUS_LOG.get());
-		register(SBBlocks.EUCALYPTUS_WOOD.get(), SBBlocks.STRIPPED_EUCALYPTUS_WOOD.get());
-		register(SBBlocks.KAPOK_LOG.get(), SBBlocks.STRIPPED_KAPOK_LOG.get());
-		register(SBBlocks.KAPOK_WOOD.get(), SBBlocks.STRIPPED_KAPOK_WOOD.get());
-		register(SBBlocks.REDWOOD_LOG.get(), SBBlocks.STRIPPED_REDWOOD_LOG.get());
-		register(SBBlocks.REDWOOD_WOOD.get(), SBBlocks.STRIPPED_REDWOOD_WOOD.get());
-		register(SBBlocks.WILLOW_LOG.get(), SBBlocks.STRIPPED_WILLOW_LOG.get());
-		register(SBBlocks.WILLOW_WOOD.get(), SBBlocks.STRIPPED_WILLOW_WOOD.get());
+		registerWoodFamilies();
+	}
+
+	private static void registerWoodFamilies() {
+		WoodFamily.getAllFamilies().forEach(family -> {
+			register(family.get(WoodFamily.Variant.LOG), family.get(WoodFamily.Variant.STRIPPED_LOG));
+			register(family.get(WoodFamily.Variant.WOOD), family.get(WoodFamily.Variant.STRIPPED_WOOD));
+		});
 	}
 	
-	private static void register(Block block, Block result) {
+	private static void register(RegistryObject<?> block, RegistryObject<?> result) {
 		AxeItem.STRIPPABLES = Maps.newHashMap(AxeItem.STRIPPABLES);
-		AxeItem.STRIPPABLES.put(block, result);
+		AxeItem.STRIPPABLES.put((Block) block.get(), (Block) result.get());
 	}
 }
