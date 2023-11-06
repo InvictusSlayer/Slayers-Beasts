@@ -3,10 +3,13 @@ package net.invictusslayer.slayersbeasts.datagen;
 import net.invictusslayer.slayersbeasts.SlayersBeasts;
 import net.invictusslayer.slayersbeasts.block.SBBlockFamily;
 import net.invictusslayer.slayersbeasts.block.SBBlocks;
+import net.invictusslayer.slayersbeasts.block.WoodFamily;
 import net.invictusslayer.slayersbeasts.entity.SBEntities;
 import net.invictusslayer.slayersbeasts.item.SBItems;
 import net.minecraft.data.BlockFamily;
 import net.minecraft.data.PackOutput;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.level.block.Block;
 import net.minecraftforge.common.data.LanguageProvider;
 
 import java.util.Objects;
@@ -61,6 +64,7 @@ public class SBLanguageProvider extends LanguageProvider {
 		addBlock(SBBlocks.STYPHIUM, "Styphium");
 		addBlock(SBBlocks.DEEPSLATE_STYPHIUM, "Deepslate Styphium");
 
+		addBlock(SBBlocks.BLACK_SAND, "Black Sand");
 		addBlockFamily(SBBlockFamily.BLACK_SANDSTONE, "Black Sandstone");
 		addBlockFamily(SBBlockFamily.SMOOTH_BLACK_SANDSTONE, "Smooth Black Sandstone");
 		addBlockFamily(SBBlockFamily.CUT_BLACK_SANDSTONE, "Cut Black Sandstone");
@@ -87,80 +91,14 @@ public class SBLanguageProvider extends LanguageProvider {
 		addBlock(SBBlocks.WHITE_MUSHROOM, "White Mushroom");
 		addBlock(SBBlocks.WHITE_MUSHROOM_BLOCK, "White Mushroom Block");
 		addBlock(SBBlocks.THIN_MUSHROOM_STEM, "Thin Mushroom Stem");
-		
-		addBlock(SBBlocks.ASPEN_LOG, "Aspen Log");
-		addBlock(SBBlocks.ASPEN_WOOD, "Aspen Wood");
-		addBlock(SBBlocks.STRIPPED_ASPEN_LOG, "Stripped Aspen Log");
-		addBlock(SBBlocks.STRIPPED_ASPEN_WOOD, "Stripped Aspen Wood");
-		addBlock(SBBlocks.ASPEN_LEAVES, "Aspen Leaves");
-		addBlock(SBBlocks.ASPEN_SAPLING, "Aspen Sapling");
-		addBlockFamily(SBBlockFamily.ASPEN, "Aspen");
-		addBlock(SBBlocks.ASPEN_HANGING_SIGN, "Aspen Hanging Sign");
-		addItem(SBItems.ASPEN_BOAT, "Aspen Boat");
-		addItem(SBItems.ASPEN_CHEST_BOAT, "Aspen Boat with Chest");
 
-		addBlock(SBBlocks.CAJOLE_LOG, "Cajole Log");
-		addBlock(SBBlocks.CAJOLE_WOOD, "Cajole Wood");
-		addBlock(SBBlocks.STRIPPED_CAJOLE_LOG, "Stripped Cajole Log");
-		addBlock(SBBlocks.STRIPPED_CAJOLE_WOOD, "Stripped Cajole Wood");
-		addBlock(SBBlocks.CAJOLE_LEAVES, "Cajole Leaves");
-		addBlock(SBBlocks.CAJOLE_SAPLING, "Cajole Sapling");
-		addBlockFamily(SBBlockFamily.CAJOLE, "Cajole");
-		
-		addBlock(SBBlocks.DESERT_OAK_LOG, "Desert Oak Log");
-		addBlock(SBBlocks.DESERT_OAK_WOOD, "Desert Oak Wood");
-		addBlock(SBBlocks.STRIPPED_DESERT_OAK_LOG, "Stripped Desert Oak Log");
-		addBlock(SBBlocks.STRIPPED_DESERT_OAK_WOOD, "Stripped Desert Oak Wood");
-		addBlock(SBBlocks.DESERT_OAK_LEAVES, "Desert Oak Leaves");
-		addBlock(SBBlocks.DESERT_OAK_SAPLING, "Desert Oak Sapling");
-		addBlockFamily(SBBlockFamily.DESERT_OAK, "Desert Oak");
-		addBlock(SBBlocks.DESERT_OAK_HANGING_SIGN, "Desert Oak Hanging Sign");
-		addItem(SBItems.DESERT_OAK_BOAT, "Desert Oak Boat");
-		addItem(SBItems.DESERT_OAK_CHEST_BOAT, "Desert Oak Boat with Chest");
-
-		addBlock(SBBlocks.EUCALYPTUS_LOG, "Eucalyptus Log");
-		addBlock(SBBlocks.EUCALYPTUS_WOOD, "Eucalyptus Wood");
-		addBlock(SBBlocks.STRIPPED_EUCALYPTUS_LOG, "Stripped Eucalyptus Log");
-		addBlock(SBBlocks.STRIPPED_EUCALYPTUS_WOOD, "Stripped Eucalyptus Wood");
-		addBlock(SBBlocks.EUCALYPTUS_LEAVES, "Eucalyptus Leaves");
-		addBlock(SBBlocks.EUCALYPTUS_SAPLING, "Eucalyptus Sapling");
-		addBlockFamily(SBBlockFamily.EUCALYPTUS, "Eucalyptus");
-		addBlock(SBBlocks.EUCALYPTUS_HANGING_SIGN, "Eucalyptus Hanging Sign");
-		addItem(SBItems.EUCALYPTUS_BOAT, "Eucalyptus Boat");
-		addItem(SBItems.EUCALYPTUS_CHEST_BOAT, "Eucalyptus Boat with Chest");
-
-		addBlock(SBBlocks.KAPOK_LOG, "Kapok Log");
-		addBlock(SBBlocks.KAPOK_WOOD, "Kapok Wood");
-		addBlock(SBBlocks.STRIPPED_KAPOK_LOG, "Stripped Kapok Log");
-		addBlock(SBBlocks.STRIPPED_KAPOK_WOOD, "Stripped Kapok Wood");
-		addBlock(SBBlocks.KAPOK_LEAVES, "Kapok Leaves");
-		addBlock(SBBlocks.KAPOK_SAPLING, "Kapok Sapling");
-		addBlockFamily(SBBlockFamily.KAPOK, "Kapok");
-		addBlock(SBBlocks.KAPOK_HANGING_SIGN, "Kapok Hanging Sign");
-		addItem(SBItems.KAPOK_BOAT, "Kapok Boat");
-		addItem(SBItems.KAPOK_CHEST_BOAT, "Kapok Boat with Chest");
-
-		addBlock(SBBlocks.REDWOOD_LOG, "Redwood Log");
-		addBlock(SBBlocks.REDWOOD_WOOD, "Redwood Wood");
-		addBlock(SBBlocks.STRIPPED_REDWOOD_LOG, "Stripped Redwood Log");
-		addBlock(SBBlocks.STRIPPED_REDWOOD_WOOD, "Stripped Redwood Wood");
-		addBlock(SBBlocks.REDWOOD_LEAVES, "Redwood Leaves");
-		addBlock(SBBlocks.REDWOOD_SAPLING, "Redwood Sapling");
-		addBlockFamily(SBBlockFamily.REDWOOD, "Redwood");
-		addBlock(SBBlocks.REDWOOD_HANGING_SIGN, "Redwood Hanging Sign");
-		addItem(SBItems.REDWOOD_BOAT, "Redwood Boat");
-		addItem(SBItems.REDWOOD_CHEST_BOAT, "Redwood Boat with Chest");
-
-		addBlock(SBBlocks.WILLOW_LOG, "Willow Log");
-		addBlock(SBBlocks.WILLOW_WOOD, "Willow Wood");
-		addBlock(SBBlocks.STRIPPED_WILLOW_LOG, "Stripped Willow Log");
-		addBlock(SBBlocks.STRIPPED_WILLOW_WOOD, "Stripped Willow Wood");
-		addBlock(SBBlocks.WILLOW_LEAVES, "Willow Leaves");
-		addBlock(SBBlocks.WILLOW_SAPLING, "Willow Sapling");
-		addBlockFamily(SBBlockFamily.WILLOW, "Willow");
-		addBlock(SBBlocks.WILLOW_HANGING_SIGN, "Willow Hanging Sign");
-		addItem(SBItems.WILLOW_BOAT, "Willow Boat");
-		addItem(SBItems.WILLOW_CHEST_BOAT, "Willow Boat with Chest");
+		addWoodFamily(WoodFamily.ASPEN, "Aspen");
+		addWoodFamily(WoodFamily.CAJOLE, "Cajole");
+		addWoodFamily(WoodFamily.DESERT_OAK, "Desert Oak");
+		addWoodFamily(WoodFamily.EUCALYPTUS, "Eucalyptus");
+		addWoodFamily(WoodFamily.KAPOK, "Kapok");
+		addWoodFamily(WoodFamily.REDWOOD, "Redwood");
+		addWoodFamily(WoodFamily.WILLOW, "Willow");
 		addBlock(SBBlocks.WILLOW_BRANCH, "Willow Branch");
 		addBlock(SBBlocks.WILLOW_BRANCH_PLANT, "Willow Branch Plant");
 		
@@ -175,6 +113,9 @@ public class SBLanguageProvider extends LanguageProvider {
 		addEntityType(SBEntities.ENT_BIRCH, "Birch Ent");
 		addEntityType(SBEntities.SPORETRAP, "Sporetrap");
 		
+		addEntityType(SBEntities.SB_BOAT, "Boat");
+		addEntityType(SBEntities.SB_CHEST_BOAT, "Boat with Chest");
+		
 		add("creative_tab.sb_tab", "Slayer's Beasts");
 
 		add("effect.slayersbeasts.paralysis", "Paralysis");
@@ -182,6 +123,19 @@ public class SBLanguageProvider extends LanguageProvider {
 		add("sounds.slayersbeasts.mantis_ambient", "Mantis chirps");
 		add("sounds.slayersbeasts.mantis_death", "Mantis dies");
 		add("sounds.slayersbeasts.mantis_hurt", "Mantis hurts");
+	}
+
+	private void addWoodFamily(WoodFamily family, String prefix) {
+		family.getVariants().forEach((variant, object) -> {
+			if (variant.getName() != null && object.isPresent()) {
+				String name = prefix + " " + variant.getName();
+				if (object.get() instanceof Block block) {
+					addBlock(() -> block, name);
+				} else if (object.get() instanceof Item item) {
+					addItem(() -> item, name);
+				}
+			}
+		});
 	}
 	
 	private void addBlockFamily(BlockFamily family, String name) {

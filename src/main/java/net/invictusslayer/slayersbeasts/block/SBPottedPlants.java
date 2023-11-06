@@ -5,22 +5,24 @@ import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.FlowerPotBlock;
 import net.minecraftforge.registries.RegistryObject;
 
-import java.util.function.Supplier;
-
 public class SBPottedPlants {
 	public static void register() {
 		register(SBBlocks.BLACK_MUSHROOM, SBBlocks.POTTED_BLACK_MUSHROOM);
 		register(SBBlocks.WHITE_MUSHROOM, SBBlocks.POTTED_WHITE_MUSHROOM);
 
-		register(SBBlocks.ASPEN_SAPLING, SBBlocks.POTTED_ASPEN_SAPLING);
-		register(SBBlocks.DESERT_OAK_SAPLING, SBBlocks.POTTED_DESERT_OAK_SAPLING);
-		register(SBBlocks.EUCALYPTUS_SAPLING, SBBlocks.POTTED_EUCALYPTUS_SAPLING);
-		register(SBBlocks.KAPOK_SAPLING, SBBlocks.POTTED_KAPOK_SAPLING);
-		register(SBBlocks.REDWOOD_SAPLING, SBBlocks.POTTED_REDWOOD_SAPLING);
-		register(SBBlocks.WILLOW_SAPLING, SBBlocks.POTTED_WILLOW_SAPLING);
+		registerWoodFamily(WoodFamily.ASPEN);
+		registerWoodFamily(WoodFamily.DESERT_OAK);
+		registerWoodFamily(WoodFamily.EUCALYPTUS);
+		registerWoodFamily(WoodFamily.KAPOK);
+		registerWoodFamily(WoodFamily.REDWOOD);
+		registerWoodFamily(WoodFamily.WILLOW);
+	}
+
+	private static void registerWoodFamily(WoodFamily family) {
+		register(family.get(WoodFamily.Variant.SAPLING), family.get(WoodFamily.Variant.POTTED_SAPLING));
 	}
 	
-	private static void register(RegistryObject<Block> plant, Supplier<? extends Block> potted) {
-		((FlowerPotBlock) Blocks.FLOWER_POT).addPlant(plant.getId(), potted);
+	private static void register(RegistryObject<?> plant, RegistryObject<?> potted) {
+		((FlowerPotBlock) Blocks.FLOWER_POT).addPlant(plant.getId(), () -> (Block) potted.get());
 	}
 }

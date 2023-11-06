@@ -2,6 +2,7 @@ package net.invictusslayer.slayersbeasts.datagen;
 
 import net.invictusslayer.slayersbeasts.SlayersBeasts;
 import net.invictusslayer.slayersbeasts.block.SBBlocks;
+import net.invictusslayer.slayersbeasts.block.WoodFamily;
 import net.invictusslayer.slayersbeasts.item.SBItems;
 import net.minecraft.data.PackOutput;
 import net.minecraft.resources.ResourceLocation;
@@ -16,6 +17,8 @@ public class SBItemModelProvider extends ItemModelProvider {
 	}
 
 	protected void registerModels() {
+		generateWoodFamilies();
+
 		item(SBItems.JADE);
 		item(SBItems.JADE_SHARD);
 //		simpleItem(ModItems.CRYSTALLINE_WING);
@@ -48,54 +51,19 @@ public class SBItemModelProvider extends ItemModelProvider {
 		block(SBBlocks.ALGAE);
 		block(SBBlocks.BLACK_MUSHROOM);
 		block(SBBlocks.WHITE_MUSHROOM);
-
-		/* Wood Types */
-		block(SBBlocks.ASPEN_SAPLING);
-		item(SBBlocks.ASPEN_DOOR);
-		item(SBItems.ASPEN_SIGN);
-		item(SBItems.ASPEN_HANGING_SIGN);
-		item(SBItems.ASPEN_BOAT);
-		item(SBItems.ASPEN_CHEST_BOAT);
-
-		block(SBBlocks.CAJOLE_SAPLING);
-		item(SBBlocks.CAJOLE_DOOR);
-
-		block(SBBlocks.DESERT_OAK_SAPLING);
-		item(SBBlocks.DESERT_OAK_DOOR);
-		item(SBItems.DESERT_OAK_SIGN);
-		item(SBItems.DESERT_OAK_HANGING_SIGN);
-		item(SBItems.DESERT_OAK_BOAT);
-		item(SBItems.DESERT_OAK_CHEST_BOAT);
-
-		block(SBBlocks.EUCALYPTUS_SAPLING);
-		item(SBBlocks.EUCALYPTUS_DOOR);
-		item(SBItems.EUCALYPTUS_SIGN);
-		item(SBItems.EUCALYPTUS_HANGING_SIGN);
-		item(SBItems.EUCALYPTUS_BOAT);
-		item(SBItems.EUCALYPTUS_CHEST_BOAT);
-
-		block(SBBlocks.KAPOK_SAPLING);
-		item(SBBlocks.KAPOK_DOOR);
-		item(SBItems.KAPOK_SIGN);
-		item(SBItems.KAPOK_HANGING_SIGN);
-		item(SBItems.KAPOK_BOAT);
-		item(SBItems.KAPOK_CHEST_BOAT);
-
-		block(SBBlocks.REDWOOD_SAPLING);
-		item(SBBlocks.REDWOOD_DOOR);
-		item(SBItems.REDWOOD_SIGN);
-		item(SBItems.REDWOOD_HANGING_SIGN);
-		item(SBItems.REDWOOD_BOAT);
-		item(SBItems.REDWOOD_CHEST_BOAT);
-
-		block(SBBlocks.WILLOW_SAPLING);
-		item(SBBlocks.WILLOW_DOOR);
-		item(SBItems.WILLOW_SIGN);
-		item(SBItems.WILLOW_HANGING_SIGN);
-		item(SBItems.WILLOW_BOAT);
-		item(SBItems.WILLOW_CHEST_BOAT);
 		block(SBBlocks.WILLOW_BRANCH);
 		block(SBBlocks.WILLOW_BRANCH_PLANT);
+	}
+
+	private void generateWoodFamilies() {
+		WoodFamily.getAllFamilies().forEach(family -> {
+			if (family.get(WoodFamily.Variant.DOOR) != null) item(family.get(WoodFamily.Variant.DOOR));
+			if (family.get(WoodFamily.Variant.BOAT) != null) item(family.get(WoodFamily.Variant.BOAT));
+			if (family.get(WoodFamily.Variant.CHEST_BOAT) != null) item(family.get(WoodFamily.Variant.CHEST_BOAT));
+			if (family.get(WoodFamily.Variant.HANGING_SIGN_ITEM) != null) item(family.get(WoodFamily.Variant.HANGING_SIGN_ITEM));
+			if (family.get(WoodFamily.Variant.SAPLING) != null) block(family.get(WoodFamily.Variant.SAPLING));
+			if (family.get(WoodFamily.Variant.SIGN_ITEM) != null) item(family.get(WoodFamily.Variant.SIGN_ITEM));
+		});
 	}
 
 	private void block(RegistryObject<?> block) {

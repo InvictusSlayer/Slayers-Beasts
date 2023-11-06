@@ -1,10 +1,7 @@
 package net.invictusslayer.slayersbeasts.datagen;
 
 import net.invictusslayer.slayersbeasts.SlayersBeasts;
-import net.invictusslayer.slayersbeasts.block.DepletedCryptalithBlock;
-import net.invictusslayer.slayersbeasts.block.InfusedCryptalithBlock;
-import net.invictusslayer.slayersbeasts.block.SBBlockFamily;
-import net.invictusslayer.slayersbeasts.block.SBBlocks;
+import net.invictusslayer.slayersbeasts.block.*;
 import net.minecraft.core.Direction;
 import net.minecraft.data.BlockFamily;
 import net.minecraft.data.PackOutput;
@@ -28,6 +25,7 @@ public class SBBlockStateProvider extends BlockStateProvider {
 
 	protected void registerStatesAndModels() {
 		generateBlockFamilies();
+		generateWoodFamilies();
 
 		verticalPortal(SBBlocks.SEPULCHRA_PORTAL.get());
 		horizontalPortal(SBBlocks.CRYPT_PORTAL.get());
@@ -66,69 +64,54 @@ public class SBBlockStateProvider extends BlockStateProvider {
 		slabWithItem(SBBlocks.CUT_BLACK_SANDSTONE_SLAB.get(), blockTexture(SBBlocks.CUT_BLACK_SANDSTONE.get()), extend(blockTexture(SBBlocks.BLACK_SANDSTONE.get()), "_top"), blockTexture(SBBlocks.CUT_BLACK_SANDSTONE.get()), extend(blockTexture(SBBlocks.BLACK_SANDSTONE.get()), "_top"));
 		columnWithItem(SBBlocks.CHISELED_BLACK_SANDSTONE.get(), blockTexture(SBBlocks.CHISELED_BLACK_SANDSTONE.get()), extend(blockTexture(SBBlocks.BLACK_SANDSTONE.get()), "_top"));
 
-		plantWithPotted(SBBlocks.BLACK_MUSHROOM.get(), SBBlocks.POTTED_BLACK_MUSHROOM.get());
+		cross(SBBlocks.BLACK_MUSHROOM.get());
+		pottedPlant(SBBlocks.POTTED_BLACK_MUSHROOM.get(), SBBlocks.BLACK_MUSHROOM.get());
 		mushroomBlockWithItem(SBBlocks.BLACK_MUSHROOM_BLOCK.get(),"mushroom_block_dark_inside");
-		plantWithPotted(SBBlocks.WHITE_MUSHROOM.get(), SBBlocks.POTTED_WHITE_MUSHROOM.get());
+		cross(SBBlocks.WHITE_MUSHROOM.get());
+		pottedPlant(SBBlocks.POTTED_WHITE_MUSHROOM.get(), SBBlocks.WHITE_MUSHROOM.get());
 		mushroomBlockWithItem(SBBlocks.WHITE_MUSHROOM_BLOCK.get(), null);
 		thinMushroomStemWithItem(SBBlocks.THIN_MUSHROOM_STEM.get(), new ResourceLocation("minecraft:block/mushroom_block_inside"), new ResourceLocation("minecraft:block/mushroom_stem"));
 
-		/* Wood Types */
-		logWithItem(SBBlocks.ASPEN_LOG.get());
-		logWithItem(SBBlocks.STRIPPED_ASPEN_LOG.get());
-		woodWithItem(SBBlocks.ASPEN_WOOD.get(), blockTexture(SBBlocks.ASPEN_LOG.get()));
-		woodWithItem(SBBlocks.STRIPPED_ASPEN_WOOD.get(), blockTexture(SBBlocks.STRIPPED_ASPEN_LOG.get()));
-		simpleCubeWithItem(SBBlocks.ASPEN_LEAVES.get());
-		plantWithPotted(SBBlocks.ASPEN_SAPLING.get(), SBBlocks.POTTED_ASPEN_SAPLING.get());
-		hangingSign(SBBlocks.ASPEN_HANGING_SIGN.get(), SBBlocks.ASPEN_WALL_HANGING_SIGN.get(), blockTexture(SBBlocks.STRIPPED_ASPEN_LOG.get()));
-
-		logWithItem(SBBlocks.CAJOLE_LOG.get());
-		logWithItem(SBBlocks.STRIPPED_CAJOLE_LOG.get());
-		woodWithItem(SBBlocks.CAJOLE_WOOD.get(), blockTexture(SBBlocks.CAJOLE_LOG.get()));
-		woodWithItem(SBBlocks.STRIPPED_CAJOLE_WOOD.get(), blockTexture(SBBlocks.STRIPPED_CAJOLE_LOG.get()));
-		simpleCubeWithItem(SBBlocks.CAJOLE_LEAVES.get());
-		cross(SBBlocks.CAJOLE_SAPLING.get());
-
-		logWithItem(SBBlocks.DESERT_OAK_LOG.get());
-		logWithItem(SBBlocks.STRIPPED_DESERT_OAK_LOG.get());
-		woodWithItem(SBBlocks.DESERT_OAK_WOOD.get(), blockTexture(SBBlocks.DESERT_OAK_LOG.get()));
-		woodWithItem(SBBlocks.STRIPPED_DESERT_OAK_WOOD.get(), blockTexture(SBBlocks.STRIPPED_DESERT_OAK_LOG.get()));
-		simpleCubeWithItem(SBBlocks.DESERT_OAK_LEAVES.get());
-		plantWithPotted(SBBlocks.DESERT_OAK_SAPLING.get(), SBBlocks.POTTED_DESERT_OAK_SAPLING.get());
-		hangingSign(SBBlocks.DESERT_OAK_HANGING_SIGN.get(), SBBlocks.DESERT_OAK_WALL_HANGING_SIGN.get(), blockTexture(SBBlocks.STRIPPED_DESERT_OAK_LOG.get()));
-
-		logWithItem(SBBlocks.EUCALYPTUS_LOG.get());
-		logWithItem(SBBlocks.STRIPPED_EUCALYPTUS_LOG.get());
-		woodWithItem(SBBlocks.EUCALYPTUS_WOOD.get(), blockTexture(SBBlocks.EUCALYPTUS_LOG.get()));
-		woodWithItem(SBBlocks.STRIPPED_EUCALYPTUS_WOOD.get(), blockTexture(SBBlocks.STRIPPED_EUCALYPTUS_LOG.get()));
-		simpleCubeWithItem(SBBlocks.EUCALYPTUS_LEAVES.get());
-		plantWithPotted(SBBlocks.EUCALYPTUS_SAPLING.get(), SBBlocks.POTTED_EUCALYPTUS_SAPLING.get());
-		hangingSign(SBBlocks.EUCALYPTUS_HANGING_SIGN.get(), SBBlocks.EUCALYPTUS_WALL_HANGING_SIGN.get(), blockTexture(SBBlocks.STRIPPED_EUCALYPTUS_LOG.get()));
-
-		logWithItem(SBBlocks.KAPOK_LOG.get());
-		logWithItem(SBBlocks.STRIPPED_KAPOK_LOG.get());
-		woodWithItem(SBBlocks.KAPOK_WOOD.get(), blockTexture(SBBlocks.KAPOK_LOG.get()));
-		woodWithItem(SBBlocks.STRIPPED_KAPOK_WOOD.get(), blockTexture(SBBlocks.STRIPPED_KAPOK_LOG.get()));
-		simpleCubeWithItem(SBBlocks.KAPOK_LEAVES.get());
-		plantWithPotted(SBBlocks.KAPOK_SAPLING.get(), SBBlocks.POTTED_KAPOK_SAPLING.get());
-		hangingSign(SBBlocks.KAPOK_HANGING_SIGN.get(), SBBlocks.KAPOK_WALL_HANGING_SIGN.get(), blockTexture(SBBlocks.STRIPPED_KAPOK_LOG.get()));
-
-		logWithItem(SBBlocks.REDWOOD_LOG.get());
-		logWithItem(SBBlocks.STRIPPED_REDWOOD_LOG.get());
-		woodWithItem(SBBlocks.REDWOOD_WOOD.get(), blockTexture(SBBlocks.REDWOOD_LOG.get()));
-		woodWithItem(SBBlocks.STRIPPED_REDWOOD_WOOD.get(), blockTexture(SBBlocks.STRIPPED_REDWOOD_LOG.get()));
-		simpleCubeWithItem(SBBlocks.REDWOOD_LEAVES.get());
-		plantWithPotted(SBBlocks.REDWOOD_SAPLING.get(), SBBlocks.POTTED_REDWOOD_SAPLING.get());
-		hangingSign(SBBlocks.REDWOOD_HANGING_SIGN.get(), SBBlocks.REDWOOD_WALL_HANGING_SIGN.get(), blockTexture(SBBlocks.STRIPPED_REDWOOD_LOG.get()));
-
-		logWithItem(SBBlocks.WILLOW_LOG.get());
-		logWithItem(SBBlocks.STRIPPED_WILLOW_LOG.get());
-		woodWithItem(SBBlocks.WILLOW_WOOD.get(), blockTexture(SBBlocks.WILLOW_LOG.get()));
-		woodWithItem(SBBlocks.STRIPPED_WILLOW_WOOD.get(), blockTexture(SBBlocks.STRIPPED_WILLOW_LOG.get()));
-		simpleCubeWithItem(SBBlocks.WILLOW_LEAVES.get());
-		plantWithPotted(SBBlocks.WILLOW_SAPLING.get(), SBBlocks.POTTED_WILLOW_SAPLING.get());
-		hangingSign(SBBlocks.WILLOW_HANGING_SIGN.get(), SBBlocks.WILLOW_WALL_HANGING_SIGN.get(), blockTexture(SBBlocks.STRIPPED_WILLOW_LOG.get()));
 		cross(SBBlocks.WILLOW_BRANCH.get());
 		cross(SBBlocks.WILLOW_BRANCH_PLANT.get());
+	}
+
+	private void generateWoodFamilies() {
+		WoodFamily.getAllFamilies().forEach(family -> {
+			Block planks = (Block) family.get(WoodFamily.Variant.PLANKS).get();
+			Block stripped = (Block) family.get(WoodFamily.Variant.STRIPPED_LOG).get();
+
+			simpleCubeWithItem(planks);
+			family.getVariants().forEach((variant, object) -> {
+				if (object.isPresent()) {
+					if (object.get() instanceof Block block) {
+						if (variant.equals(WoodFamily.Variant.BUTTON)) buttonWithItem(block, planks);
+						else if (variant.equals(WoodFamily.Variant.DOOR))
+							doorBlockWithRenderType((DoorBlock) block, extend(blockTexture(block), "_bottom"), extend(blockTexture(block), "_top"), "cutout");
+						else if (variant.equals(WoodFamily.Variant.FENCE)) fenceWithItem(block, planks);
+						else if (variant.equals(WoodFamily.Variant.FENCE_GATE)) fenceGateWithItem(block, planks);
+						else if (variant.equals(WoodFamily.Variant.HANGING_SIGN))
+							hangingSign(block, (Block) family.get(WoodFamily.Variant.WALL_HANGING_SIGN).get(), blockTexture(stripped));
+						else if (variant.equals(WoodFamily.Variant.LEAVES)) simpleCubeWithItem(block);
+						else if (variant.equals(WoodFamily.Variant.LOG)) logWithItem(block);
+						else if (variant.equals(WoodFamily.Variant.SAPLING)) cross(block);
+						else if (variant.equals(WoodFamily.Variant.SIGN))
+							signBlock((StandingSignBlock) block, (WallSignBlock) family.get(WoodFamily.Variant.WALL_SIGN).get(), blockTexture(planks));
+						else if (variant.equals(WoodFamily.Variant.SLAB)) simpleSlabWithItem(block, planks);
+						else if (variant.equals(WoodFamily.Variant.STAIRS)) simpleStairWithItem(block, planks);
+						else if (variant.equals(WoodFamily.Variant.STRIPPED_LOG)) logWithItem(stripped);
+						else if (variant.equals(WoodFamily.Variant.STRIPPED_WOOD)) woodWithItem(block, stripped);
+						else if (variant.equals(WoodFamily.Variant.POTTED_SAPLING))
+							pottedPlant(block, (Block) family.get(WoodFamily.Variant.SAPLING).get());
+						else if (variant.equals(WoodFamily.Variant.PRESSURE_PLATE))
+							pressurePlateWithItem(block, planks);
+						else if (variant.equals(WoodFamily.Variant.TRAPDOOR)) trapdoorWithItem(block);
+						else if (variant.equals(WoodFamily.Variant.WOOD))
+							woodWithItem(block, (Block) family.get(WoodFamily.Variant.LOG).get());
+					}
+				}
+			});
+		});
 	}
 
 	private void generateBlockFamilies() {
@@ -136,26 +119,24 @@ public class SBBlockStateProvider extends BlockStateProvider {
 			Block base = family.getBaseBlock();
 			simpleCubeWithItem(base);
 			family.getVariants().forEach((variant, block) -> {
-				if (variant == BlockFamily.Variant.SLAB) {
-					simpleSlabWithItem(block, blockTexture(base), blockTexture(base));
-				} else if (variant == BlockFamily.Variant.STAIRS) {
-					simpleStairWithItem(block, blockTexture(base));
-				} else if (variant == BlockFamily.Variant.FENCE) {
-					fenceWithItem(block, blockTexture(base));
-				} else if (variant == BlockFamily.Variant.FENCE_GATE) {
-					fenceGateWithItem(block, blockTexture(base));
-				} else if (variant == BlockFamily.Variant.BUTTON) {
-					buttonWithItem(block, blockTexture(base));
-				} else if (variant == BlockFamily.Variant.PRESSURE_PLATE) {
-					pressurePlateWithItem(block, blockTexture(base));
-				} else if (variant == BlockFamily.Variant.DOOR) {
+				if (variant.equals(BlockFamily.Variant.SLAB)) {
+					simpleSlabWithItem(block, base);
+				} else if (variant.equals(BlockFamily.Variant.STAIRS)) {
+					simpleStairWithItem(block, base);
+				} else if (variant.equals(BlockFamily.Variant.FENCE)) {
+					fenceWithItem(block, base);
+				} else if (variant.equals(BlockFamily.Variant.FENCE_GATE)) {
+					fenceGateWithItem(block, base);
+				} else if (variant.equals(BlockFamily.Variant.BUTTON)) {
+					buttonWithItem(block, base);
+				} else if (variant.equals(BlockFamily.Variant.PRESSURE_PLATE)) {
+					pressurePlateWithItem(block, base);
+				} else if (variant.equals(BlockFamily.Variant.DOOR)) {
 					doorBlockWithRenderType((DoorBlock) block, extend(blockTexture(block), "_bottom"), extend(blockTexture(block), "_top"), "cutout");
-				} else if (variant == BlockFamily.Variant.TRAPDOOR) {
+				} else if (variant.equals(BlockFamily.Variant.TRAPDOOR)) {
 					trapdoorWithItem(block);
-				} else if (variant == BlockFamily.Variant.WALL) {
+				} else if (variant.equals(BlockFamily.Variant.WALL)) {
 					wallWithItem(block, blockTexture(base));
-				} else if (variant == BlockFamily.Variant.SIGN) {
-					signBlock((StandingSignBlock) block, (WallSignBlock) family.get(BlockFamily.Variant.WALL_SIGN), blockTexture(base));
 				}
 			});
 		});
@@ -219,8 +200,7 @@ public class SBBlockStateProvider extends BlockStateProvider {
 		simpleBlockItem(block, model);
 	}
 
-	private void plantWithPotted(Block plant, Block potted) {
-		cross(plant);
+	private void pottedPlant(Block potted, Block plant) {
 		simpleBlock(potted, models().singleTexture(name(potted), new ResourceLocation("flower_pot_cross"), "plant", blockTexture(plant)).renderType("cutout"));
 	}
 
@@ -247,47 +227,47 @@ public class SBBlockStateProvider extends BlockStateProvider {
 		logBlock((RotatedPillarBlock) block);
 		simpleBlockItem(block, models().withExistingParent(name(block), "minecraft:block/cube_column"));
 	}
-	private void woodWithItem(Block block, ResourceLocation texture) {
-		axisBlock((RotatedPillarBlock) block, texture, texture);
+	private void woodWithItem(Block block, Block texture) {
+		axisBlock((RotatedPillarBlock) block, blockTexture(texture), blockTexture(texture));
 		simpleBlockItem(block, models().withExistingParent(name(block), "minecraft:block/cube_column"));
 	}
 	private void cross(Block block) {
 		simpleBlock(block, models().cross(name(block), blockTexture(block)).renderType("cutout"));
 	}
-	private void simpleSlabWithItem(Block block, ResourceLocation full, ResourceLocation texture) {
-		slabBlock((SlabBlock) block, full, texture);
+	private void simpleSlabWithItem(Block block, Block texture) {
+		slabBlock((SlabBlock) block, blockTexture(texture), blockTexture(texture));
 		simpleBlockItem(block, models().withExistingParent(name(block), "minecraft:block/slab"));
 	}
 	private void slabWithItem(Block block, ResourceLocation full, ResourceLocation side, ResourceLocation bottom, ResourceLocation top) {
 		slabBlock((SlabBlock) block, full, side, bottom, top);
 		simpleBlockItem(block, models().withExistingParent(name(block), "minecraft:block/slab"));
 	}
-	private void simpleStairWithItem(Block block, ResourceLocation texture) {
-		stairsBlock((StairBlock) block, texture);
+	private void simpleStairWithItem(Block block, Block texture) {
+		stairsBlock((StairBlock) block, blockTexture(texture));
 		simpleBlockItem(block, models().withExistingParent(name(block), "minecraft:block/stairs"));
 	}
 	private void stairWithItem(Block block, ResourceLocation side, ResourceLocation bottom, ResourceLocation top) {
 		stairsBlock((StairBlock) block, side, bottom, top);
 		simpleBlockItem(block, models().withExistingParent(name(block), "minecraft:block/stairs"));
 	}
-	private void fenceWithItem(Block block, ResourceLocation texture) {
-		fenceBlock((FenceBlock) block, texture);
-		simpleBlockItem(block, models().withExistingParent(name(block), "minecraft:block/fence_inventory").texture("texture", texture));
+	private void fenceWithItem(Block block, Block texture) {
+		fenceBlock((FenceBlock) block, blockTexture(texture));
+		simpleBlockItem(block, models().withExistingParent(name(block), "minecraft:block/fence_inventory").texture("texture", blockTexture(texture)));
 	}
-	private void fenceGateWithItem(Block block, ResourceLocation texture) {
-		fenceGateBlock((FenceGateBlock) block, texture);
+	private void fenceGateWithItem(Block block, Block texture) {
+		fenceGateBlock((FenceGateBlock) block, blockTexture(texture));
 		simpleBlockItem(block, models().withExistingParent(name(block), "minecraft:block/template_fence_gate"));
 	}
 	private void wallWithItem(Block block, ResourceLocation texture) {
 		wallBlock((WallBlock) block, texture);
 		simpleBlockItem(block, models().withExistingParent(name(block), "minecraft:block/wall_inventory").texture("wall", texture));
 	}
-	private void buttonWithItem(Block block, ResourceLocation texture) {
-		buttonBlock((ButtonBlock) block, texture);
+	private void buttonWithItem(Block block, Block texture) {
+		buttonBlock((ButtonBlock) block, blockTexture(texture));
 		simpleBlockItem(block, models().withExistingParent(name(block), "minecraft:block/button_inventory"));
 	}
-	private void pressurePlateWithItem(Block block, ResourceLocation texture) {
-		pressurePlateBlock((PressurePlateBlock) block, texture);
+	private void pressurePlateWithItem(Block block, Block texture) {
+		pressurePlateBlock((PressurePlateBlock) block, blockTexture(texture));
 		simpleBlockItem(block, models().withExistingParent(name(block), "minecraft:block/pressure_plate_up"));
 	}
 	private void trapdoorWithItem(Block block) {

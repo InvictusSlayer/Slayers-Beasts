@@ -2,6 +2,7 @@ package net.invictusslayer.slayersbeasts.datagen.loot;
 
 import net.invictusslayer.slayersbeasts.block.SBBlockFamily;
 import net.invictusslayer.slayersbeasts.block.SBBlocks;
+import net.invictusslayer.slayersbeasts.block.WoodFamily;
 import net.invictusslayer.slayersbeasts.item.SBItems;
 import net.minecraft.advancements.critereon.StatePropertiesPredicate;
 import net.minecraft.data.BlockFamily;
@@ -69,80 +70,39 @@ public class SBBlockLoot extends BlockLootSubProvider {
 		add(SBBlocks.WHITE_MUSHROOM_BLOCK.get(), block -> createMushroomBlockDrop(SBBlocks.WHITE_MUSHROOM_BLOCK.get(), SBBlocks.WHITE_MUSHROOM.get()));
 		add(SBBlocks.THIN_MUSHROOM_STEM.get(), BlockLootSubProvider::createSilkTouchOnlyTable);
 
-		dropSelf(SBBlocks.ASPEN_LOG.get());
-		dropSelf(SBBlocks.ASPEN_WOOD.get());
-		dropSelf(SBBlocks.STRIPPED_ASPEN_LOG.get());
-		dropSelf(SBBlocks.STRIPPED_ASPEN_WOOD.get());
-		add(SBBlocks.ASPEN_LEAVES.get(), block -> createLeavesDrops(SBBlocks.ASPEN_LEAVES.get(), SBBlocks.ASPEN_SAPLING.get(), 0.05f));
-		dropSelf(SBBlocks.ASPEN_SAPLING.get());
-		add(SBBlocks.POTTED_ASPEN_SAPLING.get(), createPotFlowerItemTable(SBBlocks.ASPEN_SAPLING.get()));
-		dropSelf(SBBlocks.ASPEN_HANGING_SIGN.get());
-		dropOther(SBBlocks.ASPEN_WALL_HANGING_SIGN.get(), SBBlocks.ASPEN_HANGING_SIGN.get());
+		generateWoodFamilies();
+		add(SBBlocks.WILLOW_BRANCH.get(), block -> createLeavesDrops(block, SBBlocks.WILLOW_SAPLING.get(), 0.05F));
+		add(SBBlocks.WILLOW_BRANCH_PLANT.get(), block -> createLeavesDrops(block, SBBlocks.WILLOW_SAPLING.get(), 0.05F));
+	}
 
-		dropSelf(SBBlocks.CAJOLE_LOG.get());
-		dropSelf(SBBlocks.CAJOLE_WOOD.get());
-		dropSelf(SBBlocks.STRIPPED_CAJOLE_LOG.get());
-		dropSelf(SBBlocks.STRIPPED_CAJOLE_WOOD.get());
-		add(SBBlocks.CAJOLE_LEAVES.get(), block -> createLeavesDrops(SBBlocks.CAJOLE_LEAVES.get(), SBBlocks.CAJOLE_SAPLING.get(), 0.025f));
-		dropSelf(SBBlocks.CAJOLE_SAPLING.get());
-
-		dropSelf(SBBlocks.DESERT_OAK_LOG.get());
-		dropSelf(SBBlocks.DESERT_OAK_WOOD.get());
-		dropSelf(SBBlocks.STRIPPED_DESERT_OAK_LOG.get());
-		dropSelf(SBBlocks.STRIPPED_DESERT_OAK_WOOD.get());
-		add(SBBlocks.DESERT_OAK_LEAVES.get(), block -> createLeavesDrops(SBBlocks.DESERT_OAK_LEAVES.get(), SBBlocks.DESERT_OAK_SAPLING.get(), 0.05f));
-		dropSelf(SBBlocks.DESERT_OAK_SAPLING.get());
-		add(SBBlocks.POTTED_DESERT_OAK_SAPLING.get(), createPotFlowerItemTable(SBBlocks.DESERT_OAK_SAPLING.get()));
-		dropSelf(SBBlocks.DESERT_OAK_HANGING_SIGN.get());
-		dropOther(SBBlocks.DESERT_OAK_WALL_HANGING_SIGN.get(), SBBlocks.DESERT_OAK_HANGING_SIGN.get());
-
-		dropSelf(SBBlocks.EUCALYPTUS_LOG.get());
-		dropSelf(SBBlocks.EUCALYPTUS_WOOD.get());
-		dropSelf(SBBlocks.STRIPPED_EUCALYPTUS_LOG.get());
-		dropSelf(SBBlocks.STRIPPED_EUCALYPTUS_WOOD.get());
-		add(SBBlocks.EUCALYPTUS_LEAVES.get(), block -> createLeavesDrops(SBBlocks.EUCALYPTUS_LEAVES.get(), SBBlocks.EUCALYPTUS_SAPLING.get(), 0.05f));
-		dropSelf(SBBlocks.EUCALYPTUS_SAPLING.get());
-		add(SBBlocks.POTTED_EUCALYPTUS_SAPLING.get(), createPotFlowerItemTable(SBBlocks.EUCALYPTUS_SAPLING.get()));
-		dropSelf(SBBlocks.EUCALYPTUS_HANGING_SIGN.get());
-		dropOther(SBBlocks.EUCALYPTUS_WALL_HANGING_SIGN.get(), SBBlocks.EUCALYPTUS_HANGING_SIGN.get());
-
-		dropSelf(SBBlocks.KAPOK_LOG.get());
-		dropSelf(SBBlocks.KAPOK_WOOD.get());
-		dropSelf(SBBlocks.STRIPPED_KAPOK_LOG.get());
-		dropSelf(SBBlocks.STRIPPED_KAPOK_WOOD.get());
-		add(SBBlocks.KAPOK_LEAVES.get(), block -> createLeavesDrops(SBBlocks.KAPOK_LEAVES.get(), SBBlocks.KAPOK_SAPLING.get(), 0.05f));
-		dropSelf(SBBlocks.KAPOK_SAPLING.get());
-		add(SBBlocks.POTTED_KAPOK_SAPLING.get(), createPotFlowerItemTable(SBBlocks.KAPOK_SAPLING.get()));
-		dropSelf(SBBlocks.KAPOK_HANGING_SIGN.get());
-		dropOther(SBBlocks.KAPOK_WALL_HANGING_SIGN.get(), SBBlocks.KAPOK_HANGING_SIGN.get());
-
-		dropSelf(SBBlocks.REDWOOD_LOG.get());
-		dropSelf(SBBlocks.REDWOOD_WOOD.get());
-		dropSelf(SBBlocks.STRIPPED_REDWOOD_LOG.get());
-		dropSelf(SBBlocks.STRIPPED_REDWOOD_WOOD.get());
-		add(SBBlocks.REDWOOD_LEAVES.get(), block -> createLeavesDrops(SBBlocks.REDWOOD_LEAVES.get(), SBBlocks.REDWOOD_SAPLING.get(), 0.05f));
-		dropSelf(SBBlocks.REDWOOD_SAPLING.get());
-		add(SBBlocks.POTTED_REDWOOD_SAPLING.get(), createPotFlowerItemTable(SBBlocks.REDWOOD_SAPLING.get()));
-		dropSelf(SBBlocks.REDWOOD_HANGING_SIGN.get());
-		dropOther(SBBlocks.REDWOOD_WALL_HANGING_SIGN.get(), SBBlocks.REDWOOD_HANGING_SIGN.get());
-
-		dropSelf(SBBlocks.WILLOW_LOG.get());
-		dropSelf(SBBlocks.WILLOW_WOOD.get());
-		dropSelf(SBBlocks.STRIPPED_WILLOW_LOG.get());
-		dropSelf(SBBlocks.STRIPPED_WILLOW_WOOD.get());
-		add(SBBlocks.WILLOW_LEAVES.get(), block -> createLeavesDrops(SBBlocks.WILLOW_LEAVES.get(), SBBlocks.WILLOW_SAPLING.get(), 0.05f));
-		dropSelf(SBBlocks.WILLOW_SAPLING.get());
-		add(SBBlocks.POTTED_WILLOW_SAPLING.get(), createPotFlowerItemTable(SBBlocks.WILLOW_SAPLING.get()));
-		dropSelf(SBBlocks.WILLOW_HANGING_SIGN.get());
-		dropOther(SBBlocks.WILLOW_WALL_HANGING_SIGN.get(), SBBlocks.WILLOW_HANGING_SIGN.get());
-		add(SBBlocks.WILLOW_BRANCH.get(), block -> createLeavesDrops(SBBlocks.WILLOW_LEAVES.get(), SBBlocks.WILLOW_SAPLING.get(), 0.05f));
-		add(SBBlocks.WILLOW_BRANCH_PLANT.get(), block -> createLeavesDrops(SBBlocks.WILLOW_LEAVES.get(), SBBlocks.WILLOW_SAPLING.get(), 0.05f));
+	private void generateWoodFamilies() {
+		WoodFamily.getAllFamilies().forEach(family -> {
+			family.getVariants().forEach((variant, object) -> {
+				if (object.get() instanceof Block block) {
+					if (variant.equals(WoodFamily.Variant.DOOR)) {
+						add(block, this::createDoorTable);
+					} else if (variant.equals(WoodFamily.Variant.LEAVES)) {
+						add(block, createLeavesDrops(block, (Block) family.get(WoodFamily.Variant.SAPLING).get(), 0.05F));
+					} else if (variant.equals(WoodFamily.Variant.POTTED_SAPLING)) {
+						add(block, createPotFlowerItemTable((Block) family.get(WoodFamily.Variant.SAPLING).get()));
+					} else if (variant.equals(WoodFamily.Variant.SLAB)){
+						add(block, this::createSlabItemTable);
+					} else if (variant.equals(WoodFamily.Variant.WALL_HANGING_SIGN)) {
+						dropOther(block, (Block) family.get(WoodFamily.Variant.HANGING_SIGN).get());
+					} else if (variant.equals(WoodFamily.Variant.WALL_SIGN)) {
+						dropOther(block, (Block) family.get(WoodFamily.Variant.SIGN).get());
+					} else {
+						dropSelf(block);
+					}
+				}
+			});
+		});
 	}
 
 	private void generateBlockFamilies() {
 		SBBlockFamily.getAllFamilies().forEach(family -> {
 			dropSelf(family.getBaseBlock());
-			family.getVariants().forEach(((variant, block) -> {
+			family.getVariants().forEach((variant, block) -> {
 				if (variant.equals(BlockFamily.Variant.SLAB)) {
 					add(block, this::createSlabItemTable);
 				} else if (variant.equals(BlockFamily.Variant.DOOR)) {
@@ -152,7 +112,7 @@ public class SBBlockLoot extends BlockLootSubProvider {
 				} else {
 					dropSelf(block);
 				}
-			}));
+			});
 		});
 	}
 
