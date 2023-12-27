@@ -12,8 +12,6 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
 import net.minecraftforge.common.data.LanguageProvider;
 
-import java.util.Objects;
-
 public class SBLanguageProvider extends LanguageProvider {
 	public SBLanguageProvider(PackOutput output) {
 		super(output, SlayersBeasts.MOD_ID, "en_us");
@@ -43,6 +41,7 @@ public class SBLanguageProvider extends LanguageProvider {
 		addItem(SBItems.DAMSELFLY_SPAWN_EGG, "Damselfly Spawn Egg");
 		addItem(SBItems.ENT_OAK_SPAWN_EGG, "Oak Ent Spawn Egg");
 		addItem(SBItems.ENT_BIRCH_SPAWN_EGG, "Birch Ent Spawn Egg");
+		addItem(SBItems.WUDU_OAK_SPAWN_EGG, "Oak Wudu Spawn Egg");
 		addItem(SBItems.SPORETRAP_SPAWN_EGG, "Sporetrap Spawn Egg");
 		
 		add("item.minecraft.potion.effect.paralysis_potion", "Potion of Paralysis");
@@ -111,12 +110,11 @@ public class SBLanguageProvider extends LanguageProvider {
 		addEntityType(SBEntities.DAMSELFLY, "Damselfly");
 		addEntityType(SBEntities.ENT_OAK, "Oak Ent");
 		addEntityType(SBEntities.ENT_BIRCH, "Birch Ent");
+		addEntityType(SBEntities.WUDU_OAK, "Oak Wudu");
 		addEntityType(SBEntities.SPORETRAP, "Sporetrap");
+		addEntityType(SBEntities.IRK, "Irk");
 		
-		addEntityType(SBEntities.SB_BOAT, "Boat");
-		addEntityType(SBEntities.SB_CHEST_BOAT, "Boat with Chest");
-		
-		add("creative_tab.sb_tab", "Slayer's Beasts");
+		add("creative_tab.slayers_tab", "Slayer's Beasts");
 
 		add("effect.slayersbeasts.paralysis", "Paralysis");
 		
@@ -139,8 +137,7 @@ public class SBLanguageProvider extends LanguageProvider {
 	}
 	
 	private void addBlockFamily(BlockFamily family, String name) {
-		String suffix = Objects.equals(family.getRecipeGroupPrefix().toString(), "wooden") ? " Planks" : "";
-		addBlock(family::getBaseBlock, name + suffix);
+		addBlock(family::getBaseBlock, name);
 		family.getVariants().forEach(((variant, block) -> {
 			if (variant.equals(BlockFamily.Variant.BUTTON)) {
 				addBlock(() -> block, name + " Button");

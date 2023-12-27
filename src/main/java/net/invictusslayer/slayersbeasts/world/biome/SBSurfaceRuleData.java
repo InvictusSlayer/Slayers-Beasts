@@ -5,6 +5,7 @@ import net.invictusslayer.slayersbeasts.world.SBNoises;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.levelgen.Noises;
+import net.minecraft.world.level.levelgen.SurfaceRules;
 import net.minecraft.world.level.levelgen.VerticalAnchor;
 
 import static net.minecraft.world.level.levelgen.SurfaceRules.*;
@@ -13,7 +14,7 @@ public class SBSurfaceRuleData {
     public static RuleSource overworldRules() {
         return sequence(ifTrue(abovePreliminarySurface(), sequence( /* Overground */
                         ifTrue(ON_FLOOR, sequence(
-                                ifTrue(isBiome(SBBiomes.BAYOU), ifBetweenY(60, 63,
+                                ifTrue(SurfaceRules.isBiome(SBBiomes.BAYOU), ifBetweenY(60, 63,
                                         ifTrue(noiseCondition(Noises.SWAMP, 0), setBlock(Blocks.WATER)))),
                                 ifTrue(isBiome(SBBiomes.INKY_MOOR), ifBetweenY(62, 63,
                                         ifTrue(noiseCondition(Noises.SWAMP, 0), setBlock(Blocks.WATER))))
@@ -107,6 +108,10 @@ public class SBSurfaceRuleData {
 
     public static RuleSource netherRules() {
         return sequence(ifTrue(isBiome(SBBiomes.TOXIC_JUNGLE), setBlock(Blocks.NETHERRACK)));
+    }
+
+    public static RuleSource endRules() {
+        return sequence(ifTrue(isBiome(SBBiomes.END_SPIKES), setBlock(Blocks.OBSIDIAN)));
     }
 
     private static RuleSource ifBetweenY(int bottom, int top, RuleSource rule) {

@@ -18,10 +18,10 @@ import net.minecraft.world.level.levelgen.carver.ConfiguredWorldCarver;
 import net.minecraft.world.level.levelgen.placement.PlacedFeature;
 
 public class SBNetherBiomes {
-	public static Biome toxicJungle(HolderGetter<PlacedFeature> placedFeatures, HolderGetter<ConfiguredWorldCarver<?>> worldCarvers) {
+	public static Biome toxicJungle(HolderGetter<PlacedFeature> features, HolderGetter<ConfiguredWorldCarver<?>> carvers) {
 		MobSpawnSettings.Builder mobSettings = new MobSpawnSettings.Builder();
 
-		BiomeGenerationSettings.Builder biomeSettings = new BiomeGenerationSettings.Builder(placedFeatures, worldCarvers);
+		BiomeGenerationSettings.Builder biomeSettings = new BiomeGenerationSettings.Builder(features, carvers);
 		globalNetherGeneration(biomeSettings);
 		BiomeDefaultFeatures.addNetherDefaultOres(biomeSettings);
 		return biome(4694878, ParticleTypes.FALLING_SPORE_BLOSSOM, 0.025F, mobSettings, biomeSettings, SoundEvents.AMBIENT_WARPED_FOREST_LOOP, SoundEvents.AMBIENT_WARPED_FOREST_MOOD, SoundEvents.AMBIENT_WARPED_FOREST_ADDITIONS, SoundEvents.MUSIC_BIOME_WARPED_FOREST);

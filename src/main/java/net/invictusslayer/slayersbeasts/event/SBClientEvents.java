@@ -6,8 +6,6 @@ import net.invictusslayer.slayersbeasts.block.entity.SBBlockEntities;
 import net.invictusslayer.slayersbeasts.client.model.*;
 import net.invictusslayer.slayersbeasts.client.renderer.*;
 import net.invictusslayer.slayersbeasts.entity.SBEntities;
-import net.minecraft.client.model.BoatModel;
-import net.minecraft.client.model.ChestBoatModel;
 import net.minecraft.client.renderer.Sheets;
 import net.minecraft.client.renderer.blockentity.HangingSignRenderer;
 import net.minecraft.client.renderer.blockentity.SignRenderer;
@@ -34,10 +32,9 @@ public final class SBClientEvents {
 		event.registerLayerDefinition(TyrachnidModel.LAYER_LOCATION, TyrachnidModel::createBodyLayer);
 		event.registerLayerDefinition(DamselflyModel.LAYER_LOCATION, DamselflyModel::createBodyLayer);
 		event.registerLayerDefinition(EntMediumModel.LAYER_LOCATION, EntMediumModel::createBodyLayer);
+		event.registerLayerDefinition(WuduModel.LAYER_LOCATION, WuduModel::createBodyLayer);
 		event.registerLayerDefinition(SporetrapModel.LAYER_LOCATION, SporetrapModel::createBodyLayer);
-
-		SBBoatRenderer.boatLayers().forEach(location -> event.registerLayerDefinition(location, BoatModel::createBodyModel));
-		SBBoatRenderer.chestBoatLayers().forEach(location -> event.registerLayerDefinition(location, ChestBoatModel::createBodyModel));
+		event.registerLayerDefinition(IrkModel.LAYER_LOCATION, IrkModel::createBodyLayer);
 	}
 
 	@SubscribeEvent
@@ -51,10 +48,9 @@ public final class SBClientEvents {
 		event.registerEntityRenderer(SBEntities.DAMSELFLY.get(), DamselflyRenderer::new);
 		event.registerEntityRenderer(SBEntities.ENT_OAK.get(), EntMediumRenderer::new);
 		event.registerEntityRenderer(SBEntities.ENT_BIRCH.get(), EntMediumRenderer::new);
+		event.registerEntityRenderer(SBEntities.WUDU_OAK.get(), WuduRenderer::new);
 		event.registerEntityRenderer(SBEntities.SPORETRAP.get(), SporetrapRenderer::new);
-
-		event.registerEntityRenderer(SBEntities.SB_BOAT.get(), context -> new SBBoatRenderer(context, false));
-		event.registerEntityRenderer(SBEntities.SB_CHEST_BOAT.get(), context -> new SBBoatRenderer(context, true));
+		event.registerEntityRenderer(SBEntities.IRK.get(), IrkRenderer::new);
 
 		event.registerBlockEntityRenderer(SBBlockEntities.SIGN.get(), SignRenderer::new);
 		event.registerBlockEntityRenderer(SBBlockEntities.HANGING_SIGN.get(), HangingSignRenderer::new);

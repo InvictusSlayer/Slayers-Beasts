@@ -5,10 +5,15 @@ import net.invictusslayer.slayersbeasts.block.SBFlammableBlocks;
 import net.invictusslayer.slayersbeasts.block.SBPottedPlants;
 import net.invictusslayer.slayersbeasts.block.SBStrippableBlocks;
 import net.invictusslayer.slayersbeasts.entity.*;
+import net.invictusslayer.slayersbeasts.item.SBDispenserItems;
+import net.invictusslayer.slayersbeasts.misc.SBConfig;
 import net.invictusslayer.slayersbeasts.world.biome.SBSurfaceRuleData;
 import net.invictusslayer.slayersbeasts.world.biome.region.SBNetherRegion;
+import net.invictusslayer.slayersbeasts.world.biome.region.SBOverworldRegion;
 import net.invictusslayer.slayersbeasts.world.biome.region.SBUndergroundRegion;
 import net.minecraft.world.entity.SpawnPlacements;
+import net.minecraft.world.entity.animal.MushroomCow;
+import net.minecraft.world.entity.vehicle.Boat;
 import net.minecraft.world.level.levelgen.Heightmap;
 import net.minecraftforge.event.entity.EntityAttributeCreationEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -17,25 +22,35 @@ import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import terrablender.api.Regions;
 import terrablender.api.SurfaceRuleManager;
 
+import java.util.Arrays;
+
 @Mod.EventBusSubscriber(modid = SlayersBeasts.MOD_ID, bus = Mod.EventBusSubscriber.Bus.MOD)
 public class SBCommonEvents {
 	@SuppressWarnings("deprecation")
 	public static void commonSetup(FMLCommonSetupEvent event) {
+		SlayersBeasts.LOGGER.info(String.format("Extended MushroomCow$Type values: %s", Arrays.toString(MushroomCow.MushroomType.values())));
+		SlayersBeasts.LOGGER.info(String.format("Extended Boat$Type values: %s", Arrays.toString(Boat.Type.values())));
+
 		event.enqueueWork(() -> {
 			SBFlammableBlocks.register();
 			SBStrippableBlocks.register();
 			SBPottedPlants.register();
+			SBDispenserItems.register();
 
 //			BrewingRecipeRegistry.addRecipe(new SBBrewingRecipe(Potions.SLOWNESS, SBItems.INSECT_EYE.get(), SBPotions.PARALYSIS_POTION.get()));
 //			BrewingRecipeRegistry.addRecipe(new SBBrewingRecipe(Potions.POISON, SBItems.WITHERBONE.get(), SBPotions.WITHER_POTION.get()));
 
-//			Regions.register(new SBOverworldRegion(4));
-			Regions.register(new SBUndergroundRegion(1));
-//			Regions.register(new SBOceanicRegion(4));
-			Regions.register(new SBNetherRegion(1));
+			if (SBConfig.Common.overworldBiomes.get()) {
+			    Regions.register(new SBOverworldRegion(4));
+				Regions.register(new SBUndergroundRegion(1));
+//			    Regions.register(new SBOceanicRegion(4));
+			}
+			if (SBConfig.Common.netherBiomes.get()) Regions.register(new SBNetherRegion(1));
+//			if (SBConfig.Common.endBiomes.get()) Regions.register(new SBEndRegion(1));
 
 			SurfaceRuleManager.addSurfaceRules(SurfaceRuleManager.RuleCategory.OVERWORLD, SlayersBeasts.MOD_ID, SBSurfaceRuleData.overworldRules());
 			SurfaceRuleManager.addSurfaceRules(SurfaceRuleManager.RuleCategory.NETHER, SlayersBeasts.MOD_ID, SBSurfaceRuleData.netherRules());
+//			SurfaceRuleManager.addSurfaceRules(EBRuleCategory.END, SlayersBeasts.MOD_ID, SBSurfaceRuleData.endRules());
 
 			SpawnPlacements.register(SBEntities.MANTIS.get(), SpawnPlacements.Type.ON_GROUND, Heightmap.Types.WORLD_SURFACE, Mantis::canSpawn);
 			SpawnPlacements.register(SBEntities.ANT_WORKER.get(), SpawnPlacements.Type.ON_GROUND, Heightmap.Types.WORLD_SURFACE, AntWorker::canSpawn);
@@ -73,6 +88,8 @@ public class SBCommonEvents {
 		event.put(SBEntities.DAMSELFLY.get(), Damselfly.createAttributes().build());
 		event.put(SBEntities.ENT_OAK.get(), EntMedium.createAttributes().build());
 		event.put(SBEntities.ENT_BIRCH.get(), EntMedium.createAttributes().build());
+		event.put(SBEntities.WUDU_OAK.get(), Wudu.createAttributes().build());
 		event.put(SBEntities.SPORETRAP.get(), Sporetrap.createAttributes().build());
+		event.put(SBEntities.IRK.get(), Irk.createAttributes().build());
 	}
 }

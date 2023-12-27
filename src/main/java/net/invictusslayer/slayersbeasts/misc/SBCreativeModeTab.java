@@ -15,8 +15,8 @@ import net.minecraftforge.registries.RegistryObject;
 public final class SBCreativeModeTab {
 	public static final DeferredRegister<CreativeModeTab> CREATIVE_TABS = DeferredRegister.create(Registries.CREATIVE_MODE_TAB, SlayersBeasts.MOD_ID);
 
-	public static final RegistryObject<CreativeModeTab> SB_TAB = CREATIVE_TABS.register("sb_tab", () ->
-			CreativeModeTab.builder().icon(() -> new ItemStack(SBBlocks.WILLOW_SAPLING.get())).title(Component.translatable("creative_tab.sb_tab")).displayItems(((display, tab) -> {
+	public static final RegistryObject<CreativeModeTab> SLAYERS_TAB = CREATIVE_TABS.register("slayers_tab", () ->
+			CreativeModeTab.builder().icon(() -> new ItemStack(SBBlocks.WILLOW_SAPLING.get())).title(Component.translatable("creative_tab.slayers_tab")).displayItems(((display, tab) -> {
 				tab.accept(SBItems.JADE.get());
 //				tab.accept(SBItems.JADE_SHARD.get());
 //				tab.accept(SBItems.CRYSTALLINE_WING.get());
@@ -100,20 +100,6 @@ public final class SBCreativeModeTab {
 				tab.accept(SBItems.ASPEN_HANGING_SIGN.get());
 				tab.accept(SBItems.ASPEN_BOAT.get());
 				tab.accept(SBItems.ASPEN_CHEST_BOAT.get());
-
-//				tab.accept(SBBlocks.CAJOLE_LOG.get());
-//				tab.accept(SBBlocks.CAJOLE_WOOD.get());
-//				tab.accept(SBBlocks.STRIPPED_CAJOLE_LOG.get());
-//				tab.accept(SBBlocks.STRIPPED_CAJOLE_WOOD.get());
-//				tab.accept(SBBlocks.CAJOLE_LEAVES.get());
-//				tab.accept(SBBlocks.CAJOLE_SAPLING.get());
-//				tab.accept(SBBlocks.CAJOLE_PLANKS.get());
-//				tab.accept(SBBlocks.CAJOLE_STAIRS.get());
-//				tab.accept(SBBlocks.CAJOLE_SLAB.get());
-//				tab.accept(SBBlocks.CAJOLE_FENCE.get());
-//				tab.accept(SBBlocks.CAJOLE_FENCE_GATE.get());
-//				tab.accept(SBBlocks.CAJOLE_DOOR.get());
-//				tab.accept(SBBlocks.CAJOLE_TRAPDOOR.get());
 
 				tab.accept(SBBlocks.DESERT_OAK_LOG.get());
 				tab.accept(SBBlocks.DESERT_OAK_WOOD.get());
@@ -225,5 +211,6 @@ public final class SBCreativeModeTab {
 				tab.accept(SBItems.DAMSELFLY_SPAWN_EGG.get());
 				tab.accept(SBItems.ENT_OAK_SPAWN_EGG.get());
 				tab.accept(SBItems.ENT_BIRCH_SPAWN_EGG.get());
+				tab.accept(SBItems.WUDU_OAK_SPAWN_EGG.get());
 			})).build());
 }

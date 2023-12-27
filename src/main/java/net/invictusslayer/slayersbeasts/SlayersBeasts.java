@@ -9,9 +9,11 @@ import net.invictusslayer.slayersbeasts.event.SBClientEvents;
 import net.invictusslayer.slayersbeasts.event.SBCommonEvents;
 import net.invictusslayer.slayersbeasts.item.SBItems;
 import net.invictusslayer.slayersbeasts.item.SBPotions;
+import net.invictusslayer.slayersbeasts.misc.SBConfig;
 import net.invictusslayer.slayersbeasts.misc.SBCreativeModeTab;
 import net.invictusslayer.slayersbeasts.misc.SBPois;
 import net.invictusslayer.slayersbeasts.misc.SBSounds;
+import net.invictusslayer.slayersbeasts.world.biome.SBBiomeModifiers;
 import net.invictusslayer.slayersbeasts.world.feature.SBFeatures;
 import net.invictusslayer.slayersbeasts.world.feature.tree.decorator.SBTreeDecorators;
 import net.invictusslayer.slayersbeasts.world.feature.tree.foliage.SBFoliagePlacers;
@@ -20,13 +22,17 @@ import net.invictusslayer.slayersbeasts.world.structure.pieces.SBStructurePieces
 import net.invictusslayer.slayersbeasts.world.structure.structures.SBStructureType;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.eventbus.api.IEventBus;
+import net.minecraftforge.fml.ModLoadingContext;
 import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.fml.config.ModConfig;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 @Mod(SlayersBeasts.MOD_ID)
 public class SlayersBeasts {
 	public static final String MOD_ID = "slayersbeasts";
-	public static final String FORGE = "forge";
+	public static final Logger LOGGER = LogManager.getLogger(MOD_ID);
 
 	public SlayersBeasts() {
 		IEventBus eventBus = FMLJavaModLoadingContext.get().getModEventBus();
@@ -44,6 +50,7 @@ public class SlayersBeasts {
 		SBFoliagePlacers.FOLIAGE_PLACERS.register(eventBus);
 		SBTrunkPlacers.TRUNK_PLACERS.register(eventBus);
 		SBFeatures.FEATURES.register(eventBus);
+		SBBiomeModifiers.BIOME_MODIFIERS.register(eventBus);
 		SBStructurePieces.STRUCTURE_PIECES.register(eventBus);
 		SBStructureType.STRUCTURE_TYPES.register(eventBus);
 		SBPois.POIS.register(eventBus);
@@ -54,5 +61,7 @@ public class SlayersBeasts {
 		eventBus.addListener(SBClientEvents::clientSetup);
 
 		MinecraftForge.EVENT_BUS.register(this);
+
+		ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, SBConfig.COMMON_SPEC);
 	}
 }
