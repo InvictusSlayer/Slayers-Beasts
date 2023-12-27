@@ -82,4 +82,21 @@ public class AntSoldierAnimation {
 									AnimationChannel.Interpolations.LINEAR),
 							new Keyframe(3f, KeyframeAnimations.degreeVec(0f, 0f, 0f),
 									AnimationChannel.Interpolations.LINEAR))).build();
+	public static final AnimationDefinition AMBIENT = AnimationDefinition.Builder.withLength(3f).looping()
+			.addAnimation("antenna_left",
+					new AnimationChannel(AnimationChannel.Targets.ROTATION,
+							new Keyframe(0f, KeyframeAnimations.degreeVec(10f, 0f, 0f),
+									AnimationChannel.Interpolations.LINEAR),
+							new Keyframe(1.5f, KeyframeAnimations.degreeVec(0f, 0f, 0f),
+									AnimationChannel.Interpolations.LINEAR),
+							new Keyframe(3f, KeyframeAnimations.degreeVec(10f, 0f, 0f),
+									AnimationChannel.Interpolations.LINEAR)))
+			.addAnimation("antenna_right",
+					new AnimationChannel(AnimationChannel.Targets.ROTATION,
+							new Keyframe(0f, KeyframeAnimations.degreeVec(0f, 0f, 0f),
+									AnimationChannel.Interpolations.LINEAR),
+							new Keyframe(1.5f, KeyframeAnimations.degreeVec(10f, 0f, 0f),
+									AnimationChannel.Interpolations.LINEAR),
+							new Keyframe(3f, KeyframeAnimations.degreeVec(0f, 0f, 0f),
+									AnimationChannel.Interpolations.LINEAR))).build();
 }

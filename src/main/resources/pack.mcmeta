@@ -1,6 +1,8 @@
 {
     "pack": {
-        "description": "Slayer's Beasts Resources",
-        "pack_format": 9
+        "description": {
+            "text": "${mod_name} Resources"
+        },
+        "pack_format": 18
     }
 }

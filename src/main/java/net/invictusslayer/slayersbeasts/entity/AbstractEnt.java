@@ -11,8 +11,8 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 
 public abstract class AbstractEnt extends PathfinderMob {
-	public AbstractEnt(EntityType<? extends AbstractEnt> type, Level pLevel) {
-		super(type, pLevel);
+	public AbstractEnt(EntityType<? extends AbstractEnt> type, Level level) {
+		super(type, level);
 	}
 
 	public void registerGoals() {
@@ -34,4 +34,13 @@ public abstract class AbstractEnt extends PathfinderMob {
 	protected SoundEvent getHurtSound(DamageSource source) {
 		return SoundEvents.WOOD_BREAK;
 	}
+
+	public void tick() {
+		super.tick();
+		if (level().isClientSide()) {
+			setupAnimationStates();
+		}
+	}
+
+	protected abstract void setupAnimationStates();
 }

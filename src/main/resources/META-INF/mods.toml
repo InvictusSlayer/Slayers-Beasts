@@ -1,5 +1,5 @@
 modLoader="javafml"
-loaderVersion="${project.forge_range}"
+loaderVersion="${loader_version_range}"
 license="${mod_license}"
 issueTrackerURL="https://github.com/InvictusSlayer/Slayers-Beasts/issues"
 showAsResourcePack=false
@@ -14,23 +14,23 @@ logoFile="slayersbeasts.png"
 authors="${mod_authors}"
 credits="InkCxp for help building the structures"
 displayTest="MATCH_VERSION" # MATCH_VERSION/IGNORE_SERVER_VERSION/IGNORE_ALL_VERSION/NONE
-description='''${project.mod_desc}'''
+description='''${mod_description}'''
 
-[[dependencies.slayersbeasts]]
+[[dependencies.${mod_id}]]
     modId="minecraft"
     mandatory=true
-    versionRange="${project.mc_range}"
+    versionRange="${minecraft_version_range}"
     ordering="NONE" # BEFORE/AFTER/NONE
     side="BOTH" # CLIENT/SERVER/BOTH
 
-[[dependencies.slayersbeasts]]
+[[dependencies.${mod_id}]]
     modId="forge"
     mandatory=true
-    versionRange="${project.forge_range}"
+    versionRange="${forge_version_range}"
     ordering="NONE"
     side="BOTH"
 
-[[dependencies.slayersbeasts]]
+[[dependencies.${mod_id}]]
     modId="terrablender"
     mandatory=true
     versionRange="[${project.tb_version},)"

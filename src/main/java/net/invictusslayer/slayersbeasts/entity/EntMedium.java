@@ -16,10 +16,6 @@ public class EntMedium extends AbstractEnt {
 		super(type, level);
 	}
 
-	public void registerGoals() {
-		super.registerGoals();
-	}
-
 	public static AttributeSupplier.Builder createAttributes() {
 		return Mob.createMobAttributes()
 				.add(Attributes.MOVEMENT_SPEED, 0.21F)
@@ -34,13 +30,7 @@ public class EntMedium extends AbstractEnt {
 		return PathfinderMob.checkMobSpawnRules(entity, level, type, pos, random);
 	}
 
-	public void tick() {
-		super.tick();
-		if (level().isClientSide()) {
-			setupAnimationStates();
-		}
-	}
+	protected void setupAnimationStates() {
 
-	private void setupAnimationStates() {
 	}
 }

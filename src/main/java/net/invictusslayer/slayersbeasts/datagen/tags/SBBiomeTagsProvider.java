@@ -5,9 +5,7 @@ import net.invictusslayer.slayersbeasts.world.biome.SBBiomes;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.tags.BiomeTagsProvider;
-import net.minecraft.resources.ResourceKey;
 import net.minecraft.tags.BiomeTags;
-import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.biome.Biomes;
 import net.minecraftforge.common.Tags;
 import net.minecraftforge.common.data.ExistingFileHelper;
@@ -20,7 +18,7 @@ public class SBBiomeTagsProvider extends BiomeTagsProvider {
 	}
 
 	protected void addTags(HolderLookup.Provider provider) {
-		for (ResourceKey<Biome> biome : SBBiomes.BIOMES) tag(SBTags.Biomes.SLAYERS_BIOMES).add(biome);
+		SBBiomes.BIOMES.forEach(tag(SBTags.Biomes.SLAYERS_BIOMES)::add);
 		tag(SBTags.Biomes.WOOD_ANT_HABITAT).add(SBBiomes.REDWOOD_GROVE, SBBiomes.OLD_GROWTH_REDWOOD_GROVE).addTag(BiomeTags.IS_FOREST).addTag(BiomeTags.IS_TAIGA);
 		tag(SBTags.Biomes.LEAFCUTTER_ANT_HABITAT).add(SBBiomes.EUCALYPT_WOODLAND).addTag(SBTags.Biomes.IS_BRUSHLAND).addTag(BiomeTags.IS_JUNGLE).addTag(BiomeTags.IS_SAVANNA);
 		tag(SBTags.Biomes.MEADOW_ANT_HABITAT).add(SBBiomes.ASPEN_FOREST, SBBiomes.CHAPARRAL).addTag(Tags.Biomes.IS_PLAINS);
@@ -46,11 +44,13 @@ public class SBBiomeTagsProvider extends BiomeTagsProvider {
 		tag(Tags.Biomes.IS_HOT_OVERWORLD).add(SBBiomes.RAINFOREST, SBBiomes.BLACK_DUNES, SBBiomes.DEAD_SANDS, SBBiomes.DUSTY_CAVERNS, SBBiomes.OUTBACK, SBBiomes.EUCALYPT_WOODLAND, SBBiomes.VOLCANIC_PEAKS).addTag(SBTags.Biomes.IS_BRUSHLAND);
 		tag(Tags.Biomes.IS_HOT_NETHER).add(SBBiomes.TOXIC_JUNGLE);
 		tag(Tags.Biomes.IS_COLD_OVERWORLD).add(SBBiomes.FROZEN_THICKET, SBBiomes.PETRIFIED_WOODS, SBBiomes.ASPEN_FOREST, SBBiomes.ICE_CAVES);
+		tag(Tags.Biomes.IS_COLD_END).add(SBBiomes.END_SPIKES);
 		tag(Tags.Biomes.IS_SPARSE_OVERWORLD).add(SBBiomes.OUTBACK, SBBiomes.BRUSHLAND, SBBiomes.ROCKY_BRUSHLAND);
 		tag(Tags.Biomes.IS_DENSE_OVERWORLD).add(SBBiomes.RAINFOREST, SBBiomes.ANCIENT_GROVE, SBBiomes.OLD_GROWTH_REDWOOD_GROVE, SBBiomes.BAYOU);
 		tag(Tags.Biomes.IS_DENSE_NETHER).add(SBBiomes.TOXIC_JUNGLE);
 		tag(Tags.Biomes.IS_WET_OVERWORLD).add(SBBiomes.INKY_MOOR, SBBiomes.RAINFOREST, SBBiomes.BAYOU);
 		tag(Tags.Biomes.IS_DRY_OVERWORLD).add(SBBiomes.BLACK_DUNES, SBBiomes.DEAD_SANDS, SBBiomes.DUSTY_CAVERNS, SBBiomes.OUTBACK).addTag(SBTags.Biomes.IS_BRUSHLAND);
+		tag(Tags.Biomes.IS_DRY_END).add(SBBiomes.END_SPIKES);
 
 		tag(BiomeTags.IS_DEEP_OCEAN).add(SBBiomes.DEEP_MURKY_OCEAN);
 		tag(BiomeTags.IS_OCEAN).add(SBBiomes.MURKY_OCEAN);

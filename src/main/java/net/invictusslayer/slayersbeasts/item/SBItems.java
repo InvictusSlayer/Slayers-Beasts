@@ -2,12 +2,9 @@ package net.invictusslayer.slayersbeasts.item;
 
 import net.invictusslayer.slayersbeasts.SlayersBeasts;
 import net.invictusslayer.slayersbeasts.block.SBBlocks;
-import net.invictusslayer.slayersbeasts.entity.SBBoat;
 import net.invictusslayer.slayersbeasts.entity.SBEntities;
-import net.minecraft.world.item.HangingSignItem;
-import net.minecraft.world.item.Item;
-import net.minecraft.world.item.PlaceOnWaterBlockItem;
-import net.minecraft.world.item.SignItem;
+import net.invictusslayer.slayersbeasts.misc.SBBoatType;
+import net.minecraft.world.item.*;
 import net.minecraftforge.common.ForgeSpawnEggItem;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
@@ -41,39 +38,40 @@ public final class SBItems {
 	public static final RegistryObject<ForgeSpawnEggItem> WITHER_SPIDER_SPAWN_EGG = ITEMS.register("wither_spider_spawn_egg", () -> new ForgeSpawnEggItem(SBEntities.WITHER_SPIDER, 0x3d0f0f, 0x171313, new Item.Properties()));
 	public static final RegistryObject<ForgeSpawnEggItem> TYRACHNID_SPAWN_EGG = ITEMS.register("tyrachnid_spawn_egg", () -> new ForgeSpawnEggItem(SBEntities.TYRACHNID, 0x3d0f0f, 0xb34b05, new Item.Properties()));
 	public static final RegistryObject<ForgeSpawnEggItem> DAMSELFLY_SPAWN_EGG = ITEMS.register("damselfly_spawn_egg", () -> new ForgeSpawnEggItem(SBEntities.DAMSELFLY, 0x4f1785, 0x4dcf29, new Item.Properties()));
-	public static final RegistryObject<ForgeSpawnEggItem> ENT_OAK_SPAWN_EGG = ITEMS.register("ent_oak_spawn_egg", () -> new ForgeSpawnEggItem(SBEntities.ENT_OAK, 0x6b3b1a, 0x126122, new Item.Properties()));
-	public static final RegistryObject<ForgeSpawnEggItem> ENT_BIRCH_SPAWN_EGG = ITEMS.register("ent_birch_spawn_egg", () -> new ForgeSpawnEggItem(SBEntities.ENT_BIRCH, 0xbdc4b7, 0x1e7046, new Item.Properties()));
+	public static final RegistryObject<ForgeSpawnEggItem> ENT_OAK_SPAWN_EGG = ITEMS.register("ent_oak_spawn_egg", () -> new ForgeSpawnEggItem(SBEntities.ENT_OAK, 0x917142, 0x4bb749, new Item.Properties()));
+	public static final RegistryObject<ForgeSpawnEggItem> ENT_BIRCH_SPAWN_EGG = ITEMS.register("ent_birch_spawn_egg", () -> new ForgeSpawnEggItem(SBEntities.ENT_BIRCH, 0xffffff, 0x71aa71, new Item.Properties()));
+	public static final RegistryObject<ForgeSpawnEggItem> WUDU_OAK_SPAWN_EGG = ITEMS.register("wudu_oak_spawn_egg", () -> new ForgeSpawnEggItem(SBEntities.WUDU_OAK, 0x917142, 0x4bb749, new Item.Properties()));
 	public static final RegistryObject<ForgeSpawnEggItem> SPORETRAP_SPAWN_EGG = ITEMS.register("sporetrap_spawn_egg", () -> new ForgeSpawnEggItem(SBEntities.SPORETRAP, 0x2f7f2f, 0xffff31, new Item.Properties()));
 
 	public static final RegistryObject<Item> ALGAE = ITEMS.register("algae", () -> new PlaceOnWaterBlockItem(SBBlocks.ALGAE.get(), new Item.Properties()));
 
 	public static final RegistryObject<Item> ASPEN_SIGN = ITEMS.register("aspen_sign", () -> new SignItem(new Item.Properties().stacksTo(16), SBBlocks.ASPEN_SIGN.get(), SBBlocks.ASPEN_WALL_SIGN.get()));
 	public static final RegistryObject<Item> ASPEN_HANGING_SIGN = ITEMS.register("aspen_hanging_sign", () -> new HangingSignItem(SBBlocks.ASPEN_HANGING_SIGN.get(), SBBlocks.ASPEN_WALL_HANGING_SIGN.get(), new Item.Properties().stacksTo(16)));
-	public static final RegistryObject<Item> ASPEN_BOAT = ITEMS.register("aspen_boat", () -> new SBBoatItem(false, SBBoat.Type.ASPEN, new Item.Properties()));
-	public static final RegistryObject<Item> ASPEN_CHEST_BOAT = ITEMS.register("aspen_chest_boat", () -> new SBBoatItem(true, SBBoat.Type.ASPEN, new Item.Properties()));
+	public static final RegistryObject<Item> ASPEN_BOAT = ITEMS.register("aspen_boat", () -> new BoatItem(false, SBBoatType.ASPEN, new Item.Properties()));
+	public static final RegistryObject<Item> ASPEN_CHEST_BOAT = ITEMS.register("aspen_chest_boat", () -> new BoatItem(true, SBBoatType.ASPEN, new Item.Properties()));
 
 	public static final RegistryObject<Item> DESERT_OAK_SIGN = ITEMS.register("desert_oak_sign", () -> new SignItem(new Item.Properties().stacksTo(16), SBBlocks.DESERT_OAK_SIGN.get(), SBBlocks.DESERT_OAK_WALL_SIGN.get()));
 	public static final RegistryObject<Item> DESERT_OAK_HANGING_SIGN = ITEMS.register("desert_oak_hanging_sign", () -> new HangingSignItem(SBBlocks.DESERT_OAK_HANGING_SIGN.get(), SBBlocks.DESERT_OAK_WALL_HANGING_SIGN.get(), new Item.Properties().stacksTo(16)));
-	public static final RegistryObject<Item> DESERT_OAK_BOAT = ITEMS.register("desert_oak_boat", () -> new SBBoatItem(false, SBBoat.Type.DESERT_OAK, new Item.Properties()));
-	public static final RegistryObject<Item> DESERT_OAK_CHEST_BOAT = ITEMS.register("desert_oak_chest_boat", () -> new SBBoatItem(true, SBBoat.Type.DESERT_OAK, new Item.Properties()));
+	public static final RegistryObject<Item> DESERT_OAK_BOAT = ITEMS.register("desert_oak_boat", () -> new BoatItem(false, SBBoatType.DESERT_OAK, new Item.Properties()));
+	public static final RegistryObject<Item> DESERT_OAK_CHEST_BOAT = ITEMS.register("desert_oak_chest_boat", () -> new BoatItem(true, SBBoatType.DESERT_OAK, new Item.Properties()));
 
 	public static final RegistryObject<Item> EUCALYPTUS_SIGN = ITEMS.register("eucalyptus_sign", () -> new SignItem(new Item.Properties().stacksTo(16), SBBlocks.EUCALYPTUS_SIGN.get(), SBBlocks.EUCALYPTUS_WALL_SIGN.get()));
 	public static final RegistryObject<Item> EUCALYPTUS_HANGING_SIGN = ITEMS.register("eucalyptus_hanging_sign", () -> new HangingSignItem(SBBlocks.EUCALYPTUS_HANGING_SIGN.get(), SBBlocks.EUCALYPTUS_WALL_HANGING_SIGN.get(), new Item.Properties().stacksTo(16)));
-	public static final RegistryObject<Item> EUCALYPTUS_BOAT = ITEMS.register("eucalyptus_boat", () -> new SBBoatItem(false, SBBoat.Type.EUCALYPTUS, new Item.Properties()));
-	public static final RegistryObject<Item> EUCALYPTUS_CHEST_BOAT = ITEMS.register("eucalyptus_chest_boat", () -> new SBBoatItem(true, SBBoat.Type.EUCALYPTUS, new Item.Properties()));
+	public static final RegistryObject<Item> EUCALYPTUS_BOAT = ITEMS.register("eucalyptus_boat", () -> new BoatItem(false, SBBoatType.EUCALYPTUS, new Item.Properties()));
+	public static final RegistryObject<Item> EUCALYPTUS_CHEST_BOAT = ITEMS.register("eucalyptus_chest_boat", () -> new BoatItem(true, SBBoatType.EUCALYPTUS, new Item.Properties()));
 
 	public static final RegistryObject<Item> KAPOK_SIGN = ITEMS.register("kapok_sign", () -> new SignItem(new Item.Properties().stacksTo(16), SBBlocks.KAPOK_SIGN.get(), SBBlocks.KAPOK_WALL_SIGN.get()));
 	public static final RegistryObject<Item> KAPOK_HANGING_SIGN = ITEMS.register("kapok_hanging_sign", () -> new HangingSignItem(SBBlocks.KAPOK_HANGING_SIGN.get(), SBBlocks.KAPOK_WALL_HANGING_SIGN.get(), new Item.Properties().stacksTo(16)));
-	public static final RegistryObject<Item> KAPOK_BOAT = ITEMS.register("kapok_boat", () -> new SBBoatItem(false, SBBoat.Type.KAPOK, new Item.Properties()));
-	public static final RegistryObject<Item> KAPOK_CHEST_BOAT = ITEMS.register("kapok_chest_boat", () -> new SBBoatItem(true, SBBoat.Type.KAPOK, new Item.Properties()));
+	public static final RegistryObject<Item> KAPOK_BOAT = ITEMS.register("kapok_boat", () -> new BoatItem(false, SBBoatType.KAPOK, new Item.Properties()));
+	public static final RegistryObject<Item> KAPOK_CHEST_BOAT = ITEMS.register("kapok_chest_boat", () -> new BoatItem(true, SBBoatType.KAPOK, new Item.Properties()));
 
 	public static final RegistryObject<Item> REDWOOD_SIGN = ITEMS.register("redwood_sign", () -> new SignItem(new Item.Properties().stacksTo(16), SBBlocks.REDWOOD_SIGN.get(), SBBlocks.REDWOOD_WALL_SIGN.get()));
 	public static final RegistryObject<Item> REDWOOD_HANGING_SIGN = ITEMS.register("redwood_hanging_sign", () -> new HangingSignItem(SBBlocks.REDWOOD_HANGING_SIGN.get(), SBBlocks.REDWOOD_WALL_HANGING_SIGN.get(), new Item.Properties().stacksTo(16)));
-	public static final RegistryObject<Item> REDWOOD_BOAT = ITEMS.register("redwood_boat", () -> new SBBoatItem(false, SBBoat.Type.REDWOOD, new Item.Properties()));
-	public static final RegistryObject<Item> REDWOOD_CHEST_BOAT = ITEMS.register("redwood_chest_boat", () -> new SBBoatItem(true, SBBoat.Type.REDWOOD, new Item.Properties()));
+	public static final RegistryObject<Item> REDWOOD_BOAT = ITEMS.register("redwood_boat", () -> new BoatItem(false, SBBoatType.REDWOOD, new Item.Properties()));
+	public static final RegistryObject<Item> REDWOOD_CHEST_BOAT = ITEMS.register("redwood_chest_boat", () -> new BoatItem(true, SBBoatType.REDWOOD, new Item.Properties()));
 
 	public static final RegistryObject<Item> WILLOW_SIGN = ITEMS.register("willow_sign", () -> new SignItem(new Item.Properties().stacksTo(16), SBBlocks.WILLOW_SIGN.get(), SBBlocks.WILLOW_WALL_SIGN.get()));
 	public static final RegistryObject<Item> WILLOW_HANGING_SIGN = ITEMS.register("willow_hanging_sign", () -> new HangingSignItem(SBBlocks.WILLOW_HANGING_SIGN.get(), SBBlocks.WILLOW_WALL_HANGING_SIGN.get(), new Item.Properties().stacksTo(16)));
-	public static final RegistryObject<Item> WILLOW_BOAT = ITEMS.register("willow_boat", () -> new SBBoatItem(false, SBBoat.Type.WILLOW, new Item.Properties()));
-	public static final RegistryObject<Item> WILLOW_CHEST_BOAT = ITEMS.register("willow_chest_boat", () -> new SBBoatItem(true, SBBoat.Type.WILLOW, new Item.Properties()));
+	public static final RegistryObject<Item> WILLOW_BOAT = ITEMS.register("willow_boat", () -> new BoatItem(false, SBBoatType.WILLOW, new Item.Properties()));
+	public static final RegistryObject<Item> WILLOW_CHEST_BOAT = ITEMS.register("willow_chest_boat", () -> new BoatItem(true, SBBoatType.WILLOW, new Item.Properties()));
 }

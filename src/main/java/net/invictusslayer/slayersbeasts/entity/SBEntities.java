@@ -17,16 +17,15 @@ public final class SBEntities {
 	public static final RegistryObject<EntityType<AntQueen>> ANT_QUEEN = ENTITIES.register("ant_queen", () -> EntityType.Builder.of(AntQueen::new, MobCategory.CREATURE).sized(2.2F,1.2F).build("ant_queen"));
 
 	public static final RegistryObject<EntityType<WitherSpider>> WITHER_SPIDER = ENTITIES.register("wither_spider", () -> EntityType.Builder.of(WitherSpider::new, MobCategory.MONSTER).sized(1.8F,0.7F).build("wither_spider"));
-
 	public static final RegistryObject<EntityType<Tyrachnid>> TYRACHNID = ENTITIES.register("tyrachnid", () -> EntityType.Builder.of(Tyrachnid::new, MobCategory.MONSTER).sized(3.5F,2F).build("tyrachnid"));
 
 	public static final RegistryObject<EntityType<Damselfly>> DAMSELFLY = ENTITIES.register("damselfly", () -> EntityType.Builder.of(Damselfly::new, MobCategory.AMBIENT).sized(0.8F,0.2F).build("damselfly"));
 
 	public static final RegistryObject<EntityType<EntMedium>> ENT_OAK = ENTITIES.register("ent_oak", () -> EntityType.Builder.of(EntMedium::new, MobCategory.MONSTER).sized(1.3F,5.4F).build("ent_oak"));
 	public static final RegistryObject<EntityType<EntMedium>> ENT_BIRCH = ENTITIES.register("ent_birch", () -> EntityType.Builder.of(EntMedium::new, MobCategory.MONSTER).sized(1.3F,5.4F).build("ent_birch"));
+	public static final RegistryObject<EntityType<Wudu>> WUDU_OAK = ENTITIES.register("wudu_oak", () -> EntityType.Builder.of(Wudu::new, MobCategory.MONSTER).sized(1.0F,1.0F).build("wudu_oak"));
 
 	public static final RegistryObject<EntityType<Sporetrap>> SPORETRAP = ENTITIES.register("sporetrap", () -> EntityType.Builder.of(Sporetrap::new, MobCategory.MONSTER).sized(0.8F,1.8F).build("sporetrap"));
 
-	public static final RegistryObject<EntityType<SBBoat>> SB_BOAT = ENTITIES.register("sb_boat", () -> EntityType.Builder.<SBBoat>of(SBBoat::new, MobCategory.MISC).sized(1.375F,0.5625F).build("sb_boat"));
-	public static final RegistryObject<EntityType<SBChestBoat>> SB_CHEST_BOAT = ENTITIES.register("sb_chest_boat", () -> EntityType.Builder.<SBChestBoat>of(SBChestBoat::new, MobCategory.MISC).sized(1.375F,0.5625F).build("sb_chest_boat"));
+	public static final RegistryObject<EntityType<Irk>> IRK = ENTITIES.register("irk", () -> EntityType.Builder.of(Irk::new, MobCategory.MONSTER).sized(0.7F,0.8F).build("irk"));
 }
