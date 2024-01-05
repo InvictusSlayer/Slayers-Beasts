@@ -22,7 +22,7 @@ public class SBItemTagsProvider extends ItemTagsProvider {
 	protected void addTags(HolderLookup.Provider provider) {
 		tag(SBTags.Items.JADE_GEMS).add(SBItems.JADE.get());
 
-		WoodFamily.getAllFamilies().forEach(family -> copy(family.getLogs(), family.getLogItems()));
+		WoodFamily.getAllFamilies().forEach(family -> copy(family.getLogBlocks(), family.getLogItems()));
 		copy(BlockTags.LOGS_THAT_BURN, ItemTags.LOGS_THAT_BURN);
 
 		copy(BlockTags.WOODEN_BUTTONS, ItemTags.WOODEN_BUTTONS);

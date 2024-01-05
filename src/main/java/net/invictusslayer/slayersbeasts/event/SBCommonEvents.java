@@ -1,19 +1,18 @@
 package net.invictusslayer.slayersbeasts.event;
 
 import net.invictusslayer.slayersbeasts.SlayersBeasts;
-import net.invictusslayer.slayersbeasts.block.SBFlammableBlocks;
-import net.invictusslayer.slayersbeasts.block.SBPottedPlants;
-import net.invictusslayer.slayersbeasts.block.SBStrippableBlocks;
+import net.invictusslayer.slayersbeasts.block.*;
 import net.invictusslayer.slayersbeasts.entity.*;
 import net.invictusslayer.slayersbeasts.item.SBDispenserItems;
 import net.invictusslayer.slayersbeasts.misc.SBConfig;
 import net.invictusslayer.slayersbeasts.world.biome.SBSurfaceRuleData;
 import net.invictusslayer.slayersbeasts.world.biome.region.SBNetherRegion;
 import net.invictusslayer.slayersbeasts.world.biome.region.SBOverworldRegion;
-import net.invictusslayer.slayersbeasts.world.biome.region.SBUndergroundRegion;
+import net.invictusslayer.slayersbeasts.world.feature.SBConfiguredFeatures;
 import net.minecraft.world.entity.SpawnPlacements;
 import net.minecraft.world.entity.animal.MushroomCow;
 import net.minecraft.world.entity.vehicle.Boat;
+import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.levelgen.Heightmap;
 import net.minecraftforge.event.entity.EntityAttributeCreationEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -37,16 +36,17 @@ public class SBCommonEvents {
 			SBPottedPlants.register();
 			SBDispenserItems.register();
 
+			((IExtendedMushroomBlock) SBBlocks.BLACK_MUSHROOM.get()).setMightyMushroom(SBConfiguredFeatures.MIGHTY_BLACK_MUSHROOM);
+			((IExtendedMushroomBlock) Blocks.BROWN_MUSHROOM).setMightyMushroom(SBConfiguredFeatures.MIGHTY_BROWN_MUSHROOM);
+			((IExtendedMushroomBlock) Blocks.RED_MUSHROOM).setMightyMushroom(SBConfiguredFeatures.MIGHTY_RED_MUSHROOM);
+			((IExtendedMushroomBlock) SBBlocks.WHITE_MUSHROOM.get()).setMightyMushroom(SBConfiguredFeatures.MIGHTY_WHITE_MUSHROOM);
+
 //			BrewingRecipeRegistry.addRecipe(new SBBrewingRecipe(Potions.SLOWNESS, SBItems.INSECT_EYE.get(), SBPotions.PARALYSIS_POTION.get()));
 //			BrewingRecipeRegistry.addRecipe(new SBBrewingRecipe(Potions.POISON, SBItems.WITHERBONE.get(), SBPotions.WITHER_POTION.get()));
 
-			if (SBConfig.Common.overworldBiomes.get()) {
-			    Regions.register(new SBOverworldRegion(4));
-				Regions.register(new SBUndergroundRegion(1));
-//			    Regions.register(new SBOceanicRegion(4));
-			}
-			if (SBConfig.Common.netherBiomes.get()) Regions.register(new SBNetherRegion(1));
-//			if (SBConfig.Common.endBiomes.get()) Regions.register(new SBEndRegion(1));
+			if (SBConfig.Common.overworldBiomes.get()) Regions.register(new SBOverworldRegion(SBConfig.Common.overworldRegionWeight.get()));
+			if (SBConfig.Common.netherBiomes.get()) Regions.register(new SBNetherRegion(SBConfig.Common.netherRegionWeight.get()));
+//			if (SBConfig.Common.endBiomes.get()) Regions.register(new SBEndRegion(SBConfig.Common.endRegionWeight.get()));
 
 			SurfaceRuleManager.addSurfaceRules(SurfaceRuleManager.RuleCategory.OVERWORLD, SlayersBeasts.MOD_ID, SBSurfaceRuleData.overworldRules());
 			SurfaceRuleManager.addSurfaceRules(SurfaceRuleManager.RuleCategory.NETHER, SlayersBeasts.MOD_ID, SBSurfaceRuleData.netherRules());

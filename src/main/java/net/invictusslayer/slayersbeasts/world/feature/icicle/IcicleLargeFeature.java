@@ -1,4 +1,4 @@
-package net.invictusslayer.slayersbeasts.world.feature.misc;
+package net.invictusslayer.slayersbeasts.world.feature.icicle;
 
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
@@ -22,8 +22,8 @@ import javax.annotation.Nullable;
 import java.util.Optional;
 
 public class IcicleLargeFeature extends Feature<IcicleLargeFeature.Configuration> {
-	public IcicleLargeFeature(Codec<Configuration> pCodec) {
-		super(pCodec);
+	public IcicleLargeFeature(Codec<Configuration> codec) {
+		super(codec);
 	}
 
 	public boolean place(FeaturePlaceContext<Configuration> context) {
@@ -176,16 +176,16 @@ public class IcicleLargeFeature extends Feature<IcicleLargeFeature.Configuration
 	}
 
 	public record Configuration(int caveHeightSearchRange, IntProvider columnRadius, FloatProvider heightScale, float maxRadiusHeightRatio, FloatProvider topBluntness, FloatProvider bottomBluntness, FloatProvider windSpeed, int minWindRadius, float minWindBluntness) implements FeatureConfiguration {
-		public static final Codec<Configuration> CODEC = RecordCodecBuilder.create(instance -> 
-				instance.group(Codec.intRange(1, 512).fieldOf("cave_height_search_range").forGetter(Configuration::caveHeightSearchRange),
-								IntProvider.codec(1, 60).fieldOf("column_radius").forGetter(Configuration::columnRadius), 
-								FloatProvider.codec(0.0F, 20.0F).fieldOf("height_scale").forGetter(Configuration::heightScale), 
-								Codec.floatRange(0.1F, 1.0F).fieldOf("max_radius_height_ratio").forGetter(Configuration::maxRadiusHeightRatio), 
-								FloatProvider.codec(0.1F, 10.0F).fieldOf("top_bluntness").forGetter(Configuration::topBluntness), 
-								FloatProvider.codec(0.1F, 10.0F).fieldOf("bottom_bluntness").forGetter(Configuration::bottomBluntness), 
-								FloatProvider.codec(0.0F, 2.0F).fieldOf("wind_speed").forGetter(Configuration::windSpeed), 
-								Codec.intRange(0, 100).fieldOf("min_wind_radius").forGetter(Configuration::minWindRadius), 
-								Codec.floatRange(0.0F, 5.0F).fieldOf("min_wind_bluntness").forGetter(Configuration::minWindBluntness))
-						.apply(instance, Configuration::new));
+		public static final Codec<Configuration> CODEC = RecordCodecBuilder.create(instance -> instance.group(
+				Codec.intRange(1, 512).fieldOf("cave_height_search_range").forGetter(Configuration::caveHeightSearchRange),
+				IntProvider.codec(1, 60).fieldOf("column_radius").forGetter(Configuration::columnRadius),
+				FloatProvider.codec(0.0F, 20.0F).fieldOf("height_scale").forGetter(Configuration::heightScale),
+				Codec.floatRange(0.1F, 1.0F).fieldOf("max_radius_height_ratio").forGetter(Configuration::maxRadiusHeightRatio),
+				FloatProvider.codec(0.1F, 10.0F).fieldOf("top_bluntness").forGetter(Configuration::topBluntness),
+				FloatProvider.codec(0.1F, 10.0F).fieldOf("bottom_bluntness").forGetter(Configuration::bottomBluntness),
+				FloatProvider.codec(0.0F, 2.0F).fieldOf("wind_speed").forGetter(Configuration::windSpeed),
+				Codec.intRange(0, 100).fieldOf("min_wind_radius").forGetter(Configuration::minWindRadius),
+				Codec.floatRange(0.0F, 5.0F).fieldOf("min_wind_bluntness").forGetter(Configuration::minWindBluntness)
+		).apply(instance, Configuration::new));
 	}
 }

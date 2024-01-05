@@ -32,7 +32,7 @@ public record SBBiomeModifiers() {
 	// Features
 	public static final ResourceKey<BiomeModifier> ADD_ALGAE_COMMON = createKey("add_algae_common");
 	public static final ResourceKey<BiomeModifier> ADD_ALGAE_NORMAL = createKey("add_algae_normal");
-//	public static final ResourceKey<BiomeModifier> ADD_DEFAULT_MUSHROOMS = createKey("add_default_mushrooms");
+	public static final ResourceKey<BiomeModifier> ADD_DEFAULT_MUSHROOMS = createKey("add_default_mushrooms");
 	public static final ResourceKey<BiomeModifier> ADD_MUD_PITS = createKey("add_mud_pits");
 	public static final ResourceKey<BiomeModifier> ADD_ORE_EXOSKELETON = createKey("add_ore_exoskeleton");
 	public static final ResourceKey<BiomeModifier> ADD_ORE_EXOSKELETON_LUSH = createKey("add_ore_exoskeleton_lush");
@@ -52,7 +52,7 @@ public record SBBiomeModifiers() {
 
 		context.register(ADD_ALGAE_COMMON, new AddFeaturesBiomeModifier(HolderSet.direct(biomes.getOrThrow(Biomes.MANGROVE_SWAMP)), HolderSet.direct(placed.getOrThrow(SBPlacedFeatures.PATCH_ALGAE_COMMON)), GenerationStep.Decoration.VEGETAL_DECORATION));
 		context.register(ADD_ALGAE_NORMAL, new AddFeaturesBiomeModifier(HolderSet.direct(biomes.getOrThrow(Biomes.SWAMP)), HolderSet.direct(placed.getOrThrow(SBPlacedFeatures.PATCH_ALGAE_NORMAL)), GenerationStep.Decoration.VEGETAL_DECORATION));
-//		context.register(ADD_DEFAULT_MUSHROOMS, new AddFeaturesBiomeModifier(biomes.getOrThrow(BiomeTags.IS_OVERWORLD), HolderSet.direct(placed.getOrThrow(SBPlacedFeatures.BLACK_MUSHROOM_RARE), placed.getOrThrow(SBPlacedFeatures.WHITE_MUSHROOM_RARE)), GenerationStep.Decoration.VEGETAL_DECORATION));
+		context.register(ADD_DEFAULT_MUSHROOMS, new AddFeaturesBiomeModifier(biomes.getOrThrow(BiomeTags.IS_OVERWORLD), HolderSet.direct(placed.getOrThrow(SBPlacedFeatures.BLACK_MUSHROOM_RARE), placed.getOrThrow(SBPlacedFeatures.WHITE_MUSHROOM_RARE)), GenerationStep.Decoration.VEGETAL_DECORATION));
 		context.register(ADD_MUD_PITS, new AddFeaturesBiomeModifier(biomes.getOrThrow(BiomeTags.IS_BADLANDS), HolderSet.direct(placed.getOrThrow(SBPlacedFeatures.MUD_PIT_SHALLOW), placed.getOrThrow(SBPlacedFeatures.MUD_PIT_NORMAL), placed.getOrThrow(SBPlacedFeatures.MUD_PIT_DEEP)), GenerationStep.Decoration.LOCAL_MODIFICATIONS));
 		context.register(ADD_ORE_EXOSKELETON, new AddFeaturesBiomeModifier(biomes.getOrThrow(BiomeTags.IS_OVERWORLD), HolderSet.direct(placed.getOrThrow(SBPlacedFeatures.ORE_EXOSKELETON)), GenerationStep.Decoration.UNDERGROUND_ORES));
 		context.register(ADD_ORE_EXOSKELETON_LUSH, new AddFeaturesBiomeModifier(HolderSet.direct(biomes.getOrThrow(Biomes.LUSH_CAVES)), HolderSet.direct(placed.getOrThrow(SBPlacedFeatures.ORE_EXOSKELETON_LUSH)), GenerationStep.Decoration.UNDERGROUND_ORES));

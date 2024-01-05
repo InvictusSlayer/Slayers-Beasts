@@ -44,7 +44,7 @@ public class SBBlockTagsProvider extends BlockTagsProvider {
 
 	private void generateWoodFamilies() {
 		WoodFamily.getAllFamilies().forEach(family -> {
-			if (family.isFlammable()) tag(BlockTags.LOGS_THAT_BURN).addTag(family.getLogs());
+			if (family.isFlammable()) tag(BlockTags.LOGS_THAT_BURN).addTag(family.getLogBlocks());
 
 			family.getVariants().forEach((variant, object) -> {
 				if (object.isPresent()) {
@@ -57,13 +57,13 @@ public class SBBlockTagsProvider extends BlockTagsProvider {
 						else if (variant.equals(WoodFamily.Variant.HANGING_SIGN))
 							tag(BlockTags.CEILING_HANGING_SIGNS).add(block);
 						else if (variant.equals(WoodFamily.Variant.LEAVES)) tag(BlockTags.LEAVES).add(block);
-						else if (variant.equals(WoodFamily.Variant.LOG)) tag(family.getLogs()).add(block);
+						else if (variant.equals(WoodFamily.Variant.LOG)) tag(family.getLogBlocks()).add(block);
 						else if (variant.equals(WoodFamily.Variant.SAPLING)) tag(BlockTags.SAPLINGS).add(block);
 						else if (variant.equals(WoodFamily.Variant.SIGN)) tag(BlockTags.STANDING_SIGNS).add(block);
 						else if (variant.equals(WoodFamily.Variant.SLAB)) tag(BlockTags.WOODEN_SLABS).add(block);
 						else if (variant.equals(WoodFamily.Variant.STAIRS)) tag(BlockTags.WOODEN_STAIRS).add(block);
-						else if (variant.equals(WoodFamily.Variant.STRIPPED_LOG)) tag(family.getLogs()).add(block);
-						else if (variant.equals(WoodFamily.Variant.STRIPPED_WOOD)) tag(family.getLogs()).add(block);
+						else if (variant.equals(WoodFamily.Variant.STRIPPED_LOG)) tag(family.getLogBlocks()).add(block);
+						else if (variant.equals(WoodFamily.Variant.STRIPPED_WOOD)) tag(family.getLogBlocks()).add(block);
 						else if (variant.equals(WoodFamily.Variant.PLANKS)) tag(BlockTags.PLANKS).add(block);
 						else if (variant.equals(WoodFamily.Variant.PRESSURE_PLATE))
 							tag(BlockTags.WOODEN_PRESSURE_PLATES).add(block);
@@ -72,7 +72,7 @@ public class SBBlockTagsProvider extends BlockTagsProvider {
 						else if (variant.equals(WoodFamily.Variant.WALL_HANGING_SIGN))
 							tag(BlockTags.WALL_HANGING_SIGNS).add(block);
 						else if (variant.equals(WoodFamily.Variant.WALL_SIGN)) tag(BlockTags.WALL_SIGNS).add(block);
-						else if (variant.equals(WoodFamily.Variant.WOOD)) tag(family.getLogs()).add(block);
+						else if (variant.equals(WoodFamily.Variant.WOOD)) tag(family.getLogBlocks()).add(block);
 					}
 				}
 			});

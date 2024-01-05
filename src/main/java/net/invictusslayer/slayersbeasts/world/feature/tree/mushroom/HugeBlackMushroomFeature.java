@@ -1,8 +1,7 @@
-package net.invictusslayer.slayersbeasts.world.feature.tree;
+package net.invictusslayer.slayersbeasts.world.feature.tree.mushroom;
 
 import com.mojang.serialization.Codec;
 import net.minecraft.core.BlockPos;
-import net.minecraft.core.Direction;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.block.HugeMushroomBlock;
@@ -15,15 +14,6 @@ public class HugeBlackMushroomFeature extends AbstractHugeMushroomFeature {
 		super(codec);
 	}
 
-	protected void placeTrunk(LevelAccessor level, RandomSource random, BlockPos pos, HugeMushroomFeatureConfiguration config, int maxHeight, BlockPos.MutableBlockPos mutableBlockPos) {
-		for (int i = 0; i < maxHeight - 1; ++i) {
-			mutableBlockPos.set(pos).move(Direction.UP, i);
-			if (!level.getBlockState(mutableBlockPos).isSolidRender(level, mutableBlockPos)) {
-				setBlock(level, mutableBlockPos, config.stemProvider.getState(random, pos).setValue(HugeMushroomBlock.UP, false).setValue(HugeMushroomBlock.DOWN, false));
-			}
-		}
-	}
-
 	protected void makeCap(LevelAccessor level, RandomSource random, BlockPos pos, int height, BlockPos.MutableBlockPos mutableBlockPos, HugeMushroomFeatureConfiguration config) {
 		for (int y = height - 6; y <= height; ++y) {
 			int stage = height - y;
@@ -33,15 +23,13 @@ public class HugeBlackMushroomFeature extends AbstractHugeMushroomFeature {
 				for (int z = -radius; z <= radius; ++z) {
 					if (isBlock(x, z, stage, random)) {
 						mutableBlockPos.setWithOffset(pos, x, y, z);
-
 						if (!level.getBlockState(mutableBlockPos).isSolidRender(level, mutableBlockPos)) {
-							boolean flag = stage < 2;
-							boolean north = flag || z < 0;
-							boolean south = flag || z > 0;
-							boolean east = flag || x > 0;
-							boolean west = flag || x < 0;
+							boolean north = z <= 0;
+							boolean south = z >= 0;
+							boolean east = x >= 0;
+							boolean west = x <= 0;
 
-							BlockState state = config.capProvider.getState(random, pos).setValue(HugeMushroomBlock.DOWN, y == height).setValue(HugeMushroomBlock.WEST, west).setValue(HugeMushroomBlock.EAST, east).setValue(HugeMushroomBlock.NORTH, north).setValue(HugeMushroomBlock.SOUTH, south);
+							BlockState state = config.capProvider.getState(random, pos).setValue(HugeMushroomBlock.DOWN, false).setValue(HugeMushroomBlock.WEST, west).setValue(HugeMushroomBlock.EAST, east).setValue(HugeMushroomBlock.NORTH, north).setValue(HugeMushroomBlock.SOUTH, south);
 							setBlock(level, mutableBlockPos, state);
 						}
 					}
@@ -58,11 +46,6 @@ public class HugeBlackMushroomFeature extends AbstractHugeMushroomFeature {
 		if (stage == 0) return sum < 2;
 		if (stage == 1 || stage == 2) return xRad < 2 && zRad < 2;
 		if (stage == 3 || (stage == 4 && random.nextInt(4) == 0)) return (xRad == 2) != (zRad == 2) && sum < 4;
-
-//		if (stage == 0) return sum < 2;
-//		if (stage == 1) return xRad < 2 && zRad < 2;
-//		if (stage == 2 || stage == 3) return (xRad == 2) != (zRad == 2) && sum < 4;
-//		if (stage == 4 || (stage == 5 && random.nextInt(4) == 0)) return ((xRad == 3) != (zRad == 3) && sum < 5) || (sum == 4 && xRad * zRad == 4);
 
 		return false;
 	}

@@ -1,4 +1,4 @@
-package net.invictusslayer.slayersbeasts.world.feature.misc;
+package net.invictusslayer.slayersbeasts.world.feature.icicle;
 
 import net.invictusslayer.slayersbeasts.block.IcicleBlock;
 import net.invictusslayer.slayersbeasts.block.SBBlocks;

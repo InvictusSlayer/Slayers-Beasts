@@ -1,4 +1,4 @@
-package net.invictusslayer.slayersbeasts.world.feature.misc;
+package net.invictusslayer.slayersbeasts.world.feature.icicle;
 
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
@@ -26,8 +26,8 @@ import java.util.Optional;
 import java.util.OptionalInt;
 
 public class IcicleClusterFeature extends Feature<IcicleClusterFeature.Configuration> {
-	public IcicleClusterFeature(Codec<Configuration> pCodec) {
-		super(pCodec);
+	public IcicleClusterFeature(Codec<Configuration> codec) {
+		super(codec);
 	}
 
 	public boolean place(FeaturePlaceContext<Configuration> context) {
@@ -172,19 +172,18 @@ public class IcicleClusterFeature extends Feature<IcicleClusterFeature.Configura
 	}
 
 	public record Configuration(int caveHeightSearchRange, IntProvider height, IntProvider radius, int maxHeightDifference, int heightDeviation, IntProvider layerThickness, FloatProvider density, FloatProvider lightChance, float columnChanceAtMaxRadius, int maxRadiusAffectingColumnChance, int maxRadiusAffectingHeightBias) implements FeatureConfiguration {
-		public static final Codec<Configuration> CODEC = RecordCodecBuilder.create(instance ->
-				instance.group(Codec.intRange(1, 512).fieldOf("cave_height_search_range").forGetter(Configuration::caveHeightSearchRange),
-								IntProvider.codec(1, 128).fieldOf("height").forGetter(Configuration::height),
-								IntProvider.codec(1, 128).fieldOf("radius").forGetter(Configuration::radius),
-								Codec.intRange(0, 64).fieldOf("max_height_difference").forGetter(Configuration::maxHeightDifference),
-								Codec.intRange(1, 64).fieldOf("height_deviation").forGetter(Configuration::heightDeviation),
-								IntProvider.codec(0, 128).fieldOf("layer_thickness").forGetter(Configuration::layerThickness),
-								FloatProvider.codec(0.0F, 2.0F).fieldOf("density").forGetter(Configuration::density),
-								FloatProvider.codec(0.0F, 2.0F).fieldOf("light_chance").forGetter(Configuration::lightChance),
-								Codec.floatRange(0.0F, 1.0F).fieldOf("column_chance_at_max_radius").forGetter(Configuration::columnChanceAtMaxRadius),
-								Codec.intRange(1, 64).fieldOf("max_radius_affecting_column_chance").forGetter(Configuration::maxRadiusAffectingColumnChance),
-								Codec.intRange(1, 64).fieldOf("max_radius_affecting_height_bias").forGetter(Configuration::maxRadiusAffectingHeightBias))
-						.apply(instance, Configuration::new)
-		);
+		public static final Codec<Configuration> CODEC = RecordCodecBuilder.create(instance -> instance.group(
+				Codec.intRange(1, 512).fieldOf("cave_height_search_range").forGetter(Configuration::caveHeightSearchRange),
+				IntProvider.codec(1, 128).fieldOf("height").forGetter(Configuration::height),
+				IntProvider.codec(1, 128).fieldOf("radius").forGetter(Configuration::radius),
+				Codec.intRange(0, 64).fieldOf("max_height_difference").forGetter(Configuration::maxHeightDifference),
+				Codec.intRange(1, 64).fieldOf("height_deviation").forGetter(Configuration::heightDeviation),
+				IntProvider.codec(0, 128).fieldOf("layer_thickness").forGetter(Configuration::layerThickness),
+				FloatProvider.codec(0.0F, 2.0F).fieldOf("density").forGetter(Configuration::density),
+				FloatProvider.codec(0.0F, 2.0F).fieldOf("light_chance").forGetter(Configuration::lightChance),
+				Codec.floatRange(0.0F, 1.0F).fieldOf("column_chance_at_max_radius").forGetter(Configuration::columnChanceAtMaxRadius),
+				Codec.intRange(1, 64).fieldOf("max_radius_affecting_column_chance").forGetter(Configuration::maxRadiusAffectingColumnChance),
+				Codec.intRange(1, 64).fieldOf("max_radius_affecting_height_bias").forGetter(Configuration::maxRadiusAffectingHeightBias)
+		).apply(instance, Configuration::new));
 	}
 }
