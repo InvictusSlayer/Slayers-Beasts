@@ -4,6 +4,7 @@
 		"common.BoatMixin",
 		"common.BoatTypeMixin",
 		"common.ChestBoatMixin",
+		"common.MushroomBlockMixin",
 		"common.MushroomCowMixin",
 		"common.MushroomCowTypeMixin"
 	],

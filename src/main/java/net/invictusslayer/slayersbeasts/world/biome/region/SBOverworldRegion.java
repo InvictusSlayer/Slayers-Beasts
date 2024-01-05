@@ -12,7 +12,6 @@ import net.minecraft.world.level.biome.Climate;
 import terrablender.api.ParameterUtils.*;
 import terrablender.api.Region;
 import terrablender.api.RegionType;
-import terrablender.api.VanillaParameterOverlayBuilder;
 
 import java.util.function.Consumer;
 
@@ -136,31 +135,53 @@ public class SBOverworldRegion extends Region {
 		return variant ? MIDDLE_WINDSWEPT[h][t] : MIDDLE_NORMAL[h][t];
 	}
 
+	private final ResourceKey<Biome>[][] OCEANS = new ResourceKey[][] {
+			{Biomes.FROZEN_OCEAN, SBBiomes.MURKY_OCEAN, SBBiomes.MURKY_OCEAN, SBBiomes.MURKY_OCEAN, Biomes.WARM_OCEAN},
+			{Biomes.DEEP_FROZEN_OCEAN, SBBiomes.DEEP_MURKY_OCEAN, SBBiomes.DEEP_MURKY_OCEAN, SBBiomes.DEEP_MURKY_OCEAN, Biomes.WARM_OCEAN}
+	};
+
+	private final ResourceKey<Biome>[][] ISLANDS = new ResourceKey[][] {
+			{SBBiomes.MUSHROOM_FOREST, SBBiomes.MUSHROOM_FOREST, SBBiomes.MUSHROOM_FOREST, SBBiomes.MUSHROOM_FOREST, SBBiomes.MUSHROOM_FOREST},
+			{SBBiomes.MUSHROOM_FOREST, SBBiomes.MUSHROOM_FOREST, SBBiomes.MUSHROOM_FOREST, SBBiomes.MUSHROOM_FOREST, SBBiomes.MUSHROOM_FOREST},
+			{SBBiomes.MUSHROOM_FOREST, SBBiomes.MUSHROOM_FOREST, SBBiomes.MUSHROOM_FOREST, SBBiomes.MUSHROOM_FOREST, SBBiomes.MUSHROOM_FOREST},
+			{SBBiomes.MUSHROOM_FOREST, SBBiomes.MUSHROOM_FOREST, SBBiomes.MUSHROOM_FOREST, SBBiomes.MUSHROOM_FOREST, SBBiomes.MUSHROOM_FOREST},
+			{SBBiomes.MUSHROOM_FOREST, SBBiomes.MUSHROOM_FOREST, SBBiomes.MUSHROOM_FOREST, SBBiomes.MUSHROOM_FOREST, SBBiomes.MUSHROOM_FOREST}
+	};
+
 	public SBOverworldRegion(int weight) {
 		super(new ResourceLocation(SlayersBeasts.MOD_ID, "overworld"), RegionType.OVERWORLD, weight);
 	}
 
 	public void addBiomes(Registry<Biome> registry, Consumer<Pair<Climate.ParameterPoint, ResourceKey<Biome>>> mapper) {
-		VanillaParameterOverlayBuilder builder = new VanillaParameterOverlayBuilder();
+		for (int t = 0; t < TEMPERATURE.length; t++) {
+			surfaceBiome(mapper, OCEANS[0][t], TEMPERATURE[t], Humidity.FULL_RANGE, Continentalness.OCEAN, Erosion.FULL_RANGE, Weirdness.FULL_RANGE);
+			surfaceBiome(mapper, OCEANS[1][t], TEMPERATURE[t], Humidity.FULL_RANGE, Continentalness.DEEP_OCEAN, Erosion.FULL_RANGE, Weirdness.FULL_RANGE);
+			for (int h = 0 ; h < HUMIDITY.length; h++) {
+				surfaceBiome(mapper, ISLANDS[h][t], TEMPERATURE[t], HUMIDITY[h], Continentalness.MUSHROOM_FIELDS, Erosion.FULL_RANGE, Weirdness.FULL_RANGE);
+			}
+		}
 
-		addMidSlice(builder, Weirdness.MID_SLICE_NORMAL_ASCENDING, false);
-		addHighSlice(builder, Weirdness.HIGH_SLICE_NORMAL_ASCENDING, false);
-		addPeaks(builder, Weirdness.PEAK_NORMAL, false);
-		addHighSlice(builder, Weirdness.HIGH_SLICE_NORMAL_DESCENDING, false);
-		addMidSlice(builder, Weirdness.MID_SLICE_NORMAL_DESCENDING, false);
-		addLowSlice(builder, Weirdness.LOW_SLICE_NORMAL_DESCENDING, false);
-		addValleys(builder);
-		addLowSlice(builder, Weirdness.LOW_SLICE_VARIANT_ASCENDING, true);
-		addMidSlice(builder, Weirdness.MID_SLICE_VARIANT_ASCENDING, true);
-		addHighSlice(builder, Weirdness.HIGH_SLICE_VARIANT_ASCENDING, true);
-		addPeaks(builder, Weirdness.PEAK_VARIANT, true);
-		addHighSlice(builder, Weirdness.HIGH_SLICE_VARIANT_DESCENDING, true);
-		addMidSlice(builder, Weirdness.MID_SLICE_VARIANT_DESCENDING, true);
+		addMidSlice(mapper, Weirdness.MID_SLICE_NORMAL_ASCENDING, false);
+		addHighSlice(mapper, Weirdness.HIGH_SLICE_NORMAL_ASCENDING, false);
+		addPeaks(mapper, Weirdness.PEAK_NORMAL, false);
+		addHighSlice(mapper, Weirdness.HIGH_SLICE_NORMAL_DESCENDING, false);
+		addMidSlice(mapper, Weirdness.MID_SLICE_NORMAL_DESCENDING, false);
+		addLowSlice(mapper, Weirdness.LOW_SLICE_NORMAL_DESCENDING, false);
+		addValleys(mapper);
+		addLowSlice(mapper, Weirdness.LOW_SLICE_VARIANT_ASCENDING, true);
+		addMidSlice(mapper, Weirdness.MID_SLICE_VARIANT_ASCENDING, true);
+		addHighSlice(mapper, Weirdness.HIGH_SLICE_VARIANT_ASCENDING, true);
+		addPeaks(mapper, Weirdness.PEAK_VARIANT, true);
+		addHighSlice(mapper, Weirdness.HIGH_SLICE_VARIANT_DESCENDING, true);
+		addMidSlice(mapper, Weirdness.MID_SLICE_VARIANT_DESCENDING, true);
 
-		builder.build().forEach(mapper);
+		caveBiome(mapper, SBBiomes.DUSTY_CAVERNS, Temperature.FULL_RANGE, Humidity.ARID, Continentalness.INLAND);
+		caveBiome(mapper, SBBiomes.FUNGAL_DEPTHS, Temperature.FULL_RANGE, Humidity.WET, Continentalness.FULL_RANGE);
+		caveBiome(mapper, SBBiomes.ICE_CAVES, Temperature.ICY, Humidity.FULL_RANGE, Continentalness.INLAND);
+		caveBiome(mapper, SBBiomes.SLIME_CAVERNS, Temperature.NEUTRAL, Humidity.NEUTRAL, Continentalness.FULL_RANGE);
 	}
 
-	private void addPeaks(VanillaParameterOverlayBuilder builder, Weirdness weirdness, boolean variant) {
+	private void addPeaks(Consumer<Pair<Climate.ParameterPoint, ResourceKey<Biome>>> mapper, Weirdness weirdness, boolean variant) {
 		for (int t = 0; t < TEMPERATURE.length; t++) {
 			Temperature temperature = TEMPERATURE[t];
 			for (int h = 0; h < HUMIDITY.length; h++) {
@@ -168,160 +189,164 @@ public class SBOverworldRegion extends Region {
 
 				/* Coast/Near-inland */
 				for (int c = 0; c < 2; c++) {
-					biome(getPeaks(h, t, variant), builder, temperature, humidity, INLANDNESS[c], Erosion.EROSION_0, weirdness);
-					biome(t == 0 ? SLOPES[h] : getMiddlePlateau(h, t, variant), builder, Temperature.ICY, HUMIDITY[h], INLANDNESS[c], Erosion.EROSION_1, weirdness);
-					for (int e = 2; e < 5; e++) biome(getMiddle(h, t, variant), builder, temperature, humidity, INLANDNESS[c], EROSION[e], weirdness);
-					biome(variant ? SHATTERED_WINDSWEPT[h][t] : SHATTERED_NORMAL[h][t], builder, temperature, humidity, INLANDNESS[c], Erosion.EROSION_5, weirdness);
+					surfaceBiome(mapper, getPeaks(h, t, variant), temperature, humidity, INLANDNESS[c], Erosion.EROSION_0, weirdness);
+					surfaceBiome(mapper, t == 0 ? SLOPES[h] : getMiddlePlateau(h, t, variant), Temperature.ICY, HUMIDITY[h], INLANDNESS[c], Erosion.EROSION_1, weirdness);
+					for (int e = 2; e < 5; e++) surfaceBiome(mapper, getMiddle(h, t, variant), temperature, humidity, INLANDNESS[c], EROSION[e], weirdness);
+					surfaceBiome(mapper, variant ? SHATTERED_WINDSWEPT[h][t] : SHATTERED_NORMAL[h][t], temperature, humidity, INLANDNESS[c], Erosion.EROSION_5, weirdness);
 				}
-				for (Continentalness continentalness : INLANDNESS) biome(getMiddle(h, t, variant), builder, temperature, humidity, continentalness, Erosion.EROSION_6, weirdness);
+				for (Continentalness continentalness : INLANDNESS) surfaceBiome(mapper, getMiddle(h, t, variant), temperature, humidity, continentalness, Erosion.EROSION_6, weirdness);
 				/* Mid/Far-inland */
 				for (int c = 2; c < INLANDNESS.length; c++) {
-					biome(getPeaks(h, t, variant), builder, temperature, humidity, INLANDNESS[c], Erosion.EROSION_0, weirdness);
-					biome(getPeaks(h, t, variant), builder, temperature, humidity, INLANDNESS[c], Erosion.EROSION_1, weirdness);
-					biome(getMiddle(h, t, variant), builder, temperature, humidity, INLANDNESS[c], Erosion.EROSION_4, weirdness);
-					biome(getShattered(h, t, variant), builder, temperature, humidity, INLANDNESS[c], Erosion.EROSION_5, weirdness);
+					surfaceBiome(mapper, getPeaks(h, t, variant), temperature, humidity, INLANDNESS[c], Erosion.EROSION_0, weirdness);
+					surfaceBiome(mapper, getPeaks(h, t, variant), temperature, humidity, INLANDNESS[c], Erosion.EROSION_1, weirdness);
+					surfaceBiome(mapper, getMiddle(h, t, variant), temperature, humidity, INLANDNESS[c], Erosion.EROSION_4, weirdness);
+					surfaceBiome(mapper, getShattered(h, t, variant), temperature, humidity, INLANDNESS[c], Erosion.EROSION_5, weirdness);
 				}
-				biome(getPlateau(h, t, variant), builder, temperature, humidity, Continentalness.MID_INLAND, Erosion.EROSION_2, weirdness);
-				biome(getMiddlePlateau(h, t, variant), builder, temperature, humidity, Continentalness.MID_INLAND, Erosion.EROSION_3, weirdness);
+				surfaceBiome(mapper, getPlateau(h, t, variant), temperature, humidity, Continentalness.MID_INLAND, Erosion.EROSION_2, weirdness);
+				surfaceBiome(mapper, getMiddlePlateau(h, t, variant), temperature, humidity, Continentalness.MID_INLAND, Erosion.EROSION_3, weirdness);
 
-				biome(getPlateau(h, t, variant), builder, temperature, humidity, Continentalness.FAR_INLAND, Erosion.EROSION_2, weirdness);
-				biome(getPlateau(h, t, variant), builder, temperature, humidity, Continentalness.FAR_INLAND, Erosion.EROSION_3, weirdness);
+				surfaceBiome(mapper, getPlateau(h, t, variant), temperature, humidity, Continentalness.FAR_INLAND, Erosion.EROSION_2, weirdness);
+				surfaceBiome(mapper, getPlateau(h, t, variant), temperature, humidity, Continentalness.FAR_INLAND, Erosion.EROSION_3, weirdness);
 			}
 		}
 	}
 
-	private void addHighSlice(VanillaParameterOverlayBuilder builder, Weirdness weirdness, boolean variant) {
+	private void addHighSlice(Consumer<Pair<Climate.ParameterPoint, ResourceKey<Biome>>> mapper, Weirdness weirdness, boolean variant) {
 		for (int t = 0; t < TEMPERATURE.length; t++) {
 			Temperature temperature = TEMPERATURE[t];
 			for (int h = 0; h < HUMIDITY.length; h++) {
 				Humidity humidity = HUMIDITY[h];
 
 				/* Coast */
-				for (int e = 0; e < 5; e++) biome(getMiddle(h, t, variant), builder, temperature, humidity, Continentalness.COAST, EROSION[e], weirdness);
-				biome(getWindswept(h, t, variant), builder, temperature, humidity, Continentalness.NEAR_INLAND, Erosion.EROSION_5, weirdness);
-				for (Continentalness continentalness : INLANDNESS) biome(getMiddle(h, t, variant), builder, temperature, humidity, continentalness, Erosion.EROSION_6, weirdness);
+				for (int e = 0; e < 5; e++) surfaceBiome(mapper, getMiddle(h, t, variant), temperature, humidity, Continentalness.COAST, EROSION[e], weirdness);
+				surfaceBiome(mapper, getWindswept(h, t, variant), temperature, humidity, Continentalness.NEAR_INLAND, Erosion.EROSION_5, weirdness);
+				for (Continentalness continentalness : INLANDNESS) surfaceBiome(mapper, getMiddle(h, t, variant), temperature, humidity, continentalness, Erosion.EROSION_6, weirdness);
 				/* Near-inland */
-				biome(t < 3 ? SLOPES[h] : getPlateau(h, t, variant), builder, temperature, humidity, Continentalness.NEAR_INLAND, Erosion.EROSION_0, weirdness);
-				biome(t == 0 ? SLOPES[h] : getMiddlePlateau(h, t, variant), builder, Temperature.ICY, HUMIDITY[h], Continentalness.NEAR_INLAND, Erosion.EROSION_1, weirdness);
-				for (int e = 2; e < 5; e++) biome(getMiddle(h, t, variant), builder, temperature, humidity, Continentalness.NEAR_INLAND, EROSION[e], weirdness);
-				biome(getWindswept(h, t, variant), builder, temperature, humidity, Continentalness.NEAR_INLAND, Erosion.EROSION_5, weirdness);
+				surfaceBiome(mapper, t < 3 ? SLOPES[h] : getPlateau(h, t, variant), temperature, humidity, Continentalness.NEAR_INLAND, Erosion.EROSION_0, weirdness);
+				surfaceBiome(mapper, t == 0 ? SLOPES[h] : getMiddlePlateau(h, t, variant), Temperature.ICY, HUMIDITY[h], Continentalness.NEAR_INLAND, Erosion.EROSION_1, weirdness);
+				for (int e = 2; e < 5; e++) surfaceBiome(mapper, getMiddle(h, t, variant), temperature, humidity, Continentalness.NEAR_INLAND, EROSION[e], weirdness);
+				surfaceBiome(mapper, getWindswept(h, t, variant), temperature, humidity, Continentalness.NEAR_INLAND, Erosion.EROSION_5, weirdness);
 				/* Mid/Far-inland */
 				for (int c = 2; c < INLANDNESS.length; c++) {
-					biome(getPeaks(h, t, variant), builder, temperature, humidity, INLANDNESS[c], Erosion.EROSION_0, weirdness);
-					biome(t < 3 ? SLOPES[h] : getPlateau(h, t, variant), builder, temperature, humidity, INLANDNESS[c], Erosion.EROSION_1, weirdness);
-					biome(getMiddle(h, t, variant), builder, temperature, humidity, INLANDNESS[c], Erosion.EROSION_4, weirdness);
-					biome(getShattered(h, t, variant), builder, temperature, humidity, INLANDNESS[c], Erosion.EROSION_5, weirdness);
+					surfaceBiome(mapper, getPeaks(h, t, variant), temperature, humidity, INLANDNESS[c], Erosion.EROSION_0, weirdness);
+					surfaceBiome(mapper, t < 3 ? SLOPES[h] : getPlateau(h, t, variant), temperature, humidity, INLANDNESS[c], Erosion.EROSION_1, weirdness);
+					surfaceBiome(mapper, getMiddle(h, t, variant), temperature, humidity, INLANDNESS[c], Erosion.EROSION_4, weirdness);
+					surfaceBiome(mapper, getShattered(h, t, variant), temperature, humidity, INLANDNESS[c], Erosion.EROSION_5, weirdness);
 				}
-				biome(getPlateau(h, t, variant), builder, temperature, humidity, Continentalness.MID_INLAND, Erosion.EROSION_2, weirdness);
-				biome(getMiddlePlateau(h, t, variant), builder, temperature, humidity, Continentalness.MID_INLAND, Erosion.EROSION_3, weirdness);
+				surfaceBiome(mapper, getPlateau(h, t, variant), temperature, humidity, Continentalness.MID_INLAND, Erosion.EROSION_2, weirdness);
+				surfaceBiome(mapper, getMiddlePlateau(h, t, variant), temperature, humidity, Continentalness.MID_INLAND, Erosion.EROSION_3, weirdness);
 
-				biome(getPlateau(h, t, variant), builder, temperature, humidity, Continentalness.FAR_INLAND, Erosion.EROSION_2, weirdness);
-				biome(getPlateau(h, t, variant), builder, temperature, humidity, Continentalness.FAR_INLAND, Erosion.EROSION_3, weirdness);
+				surfaceBiome(mapper, getPlateau(h, t, variant), temperature, humidity, Continentalness.FAR_INLAND, Erosion.EROSION_2, weirdness);
+				surfaceBiome(mapper, getPlateau(h, t, variant), temperature, humidity, Continentalness.FAR_INLAND, Erosion.EROSION_3, weirdness);
 			}
 		}
 	}
 
-	private void addMidSlice(VanillaParameterOverlayBuilder builder, Weirdness weirdness, boolean variant) {
+	private void addMidSlice(Consumer<Pair<Climate.ParameterPoint, ResourceKey<Biome>>> mapper, Weirdness weirdness, boolean variant) {
 		for (int t = 0; t < TEMPERATURE.length; t++) {
 			Temperature temperature = TEMPERATURE[t];
 			for (int h = 0; h < HUMIDITY.length; h++) {
 				Humidity humidity = HUMIDITY[h];
 
 				/* Coast */
-				for (int e = 0; e < 3; e++) biome(Biomes.STONY_SHORE, builder, temperature, humidity, Continentalness.COAST, EROSION[e], weirdness);
-				biome(getMiddle(h, t, variant), builder, temperature, humidity, Continentalness.COAST, Erosion.EROSION_3, weirdness);
+				for (int e = 0; e < 3; e++) surfaceBiome(mapper, Biomes.STONY_SHORE, temperature, humidity, Continentalness.COAST, EROSION[e], weirdness);
+				surfaceBiome(mapper, getMiddle(h, t, variant), temperature, humidity, Continentalness.COAST, Erosion.EROSION_3, weirdness);
 				if (variant) {
-					biome(MIDDLE_VARIANT[h][t], builder, temperature, humidity, Continentalness.COAST, Erosion.EROSION_4, weirdness);
-					biome(MIDDLE_WINDSWEPT[h][t], builder, temperature, humidity, Continentalness.COAST, Erosion.EROSION_5, weirdness);
-					biome(MIDDLE_VARIANT[h][t], builder, temperature, humidity, Continentalness.COAST, Erosion.EROSION_6, weirdness);
+					surfaceBiome(mapper, MIDDLE_VARIANT[h][t], temperature, humidity, Continentalness.COAST, Erosion.EROSION_4, weirdness);
+					surfaceBiome(mapper, MIDDLE_WINDSWEPT[h][t], temperature, humidity, Continentalness.COAST, Erosion.EROSION_5, weirdness);
+					surfaceBiome(mapper, MIDDLE_VARIANT[h][t], temperature, humidity, Continentalness.COAST, Erosion.EROSION_6, weirdness);
 				} else {
-					for (int e = 4; e < EROSION.length; e++) biome(BEACHES[t], builder, temperature, humidity, Continentalness.COAST, EROSION[e], weirdness);
+					for (int e = 4; e < EROSION.length; e++) surfaceBiome(mapper, BEACHES[t], temperature, humidity, Continentalness.COAST, EROSION[e], weirdness);
 				}
 				/* Near-inland */
 				for (int c = 1; c < INLANDNESS.length; c++) {
-					biome(t < 3 ? SLOPES[h] : getPlateau(h, t, variant), builder, temperature, humidity, INLANDNESS[c], Erosion.EROSION_0, weirdness);
-					if (t == 0) biome(SLOPES[h], builder, Temperature.ICY, HUMIDITY[h], INLANDNESS[c], Erosion.EROSION_1, weirdness);
+					surfaceBiome(mapper, t < 3 ? SLOPES[h] : getPlateau(h, t, variant), temperature, humidity, INLANDNESS[c], Erosion.EROSION_0, weirdness);
+					if (t == 0) surfaceBiome(mapper, SLOPES[h], Temperature.ICY, HUMIDITY[h], INLANDNESS[c], Erosion.EROSION_1, weirdness);
 				}
 				if (t > 0) {
-					biome(getMiddlePlateau(h, t, variant), builder, temperature, humidity, Continentalness.NEAR_INLAND, Erosion.EROSION_1, weirdness);
-					biome(getMiddlePlateau(h, t, variant), builder, temperature, humidity, Continentalness.MID_INLAND, Erosion.EROSION_1, weirdness);
-					biome(getPlateau(h, t, variant), builder, temperature, humidity, Continentalness.FAR_INLAND, Erosion.EROSION_1, weirdness);
+					surfaceBiome(mapper, getMiddlePlateau(h, t, variant), temperature, humidity, Continentalness.NEAR_INLAND, Erosion.EROSION_1, weirdness);
+					surfaceBiome(mapper, getMiddlePlateau(h, t, variant), temperature, humidity, Continentalness.MID_INLAND, Erosion.EROSION_1, weirdness);
+					surfaceBiome(mapper, getPlateau(h, t, variant), temperature, humidity, Continentalness.FAR_INLAND, Erosion.EROSION_1, weirdness);
 				}
-				for (int e = 2; e < 5; e++) biome(getMiddle(h, t, variant), builder, temperature, humidity, Continentalness.NEAR_INLAND, EROSION[e], weirdness);
-				biome(getWindswept(h, t, variant), builder, temperature, humidity, Continentalness.NEAR_INLAND, Erosion.EROSION_5, weirdness);
+				for (int e = 2; e < 5; e++) surfaceBiome(mapper, getMiddle(h, t, variant), temperature, humidity, Continentalness.NEAR_INLAND, EROSION[e], weirdness);
+				surfaceBiome(mapper, getWindswept(h, t, variant), temperature, humidity, Continentalness.NEAR_INLAND, Erosion.EROSION_5, weirdness);
 				/* Swamp */
-				for (int c = 1; c < INLANDNESS.length; c++) biome(SWAMPS[t], builder, temperature, humidity, INLANDNESS[c], Erosion.EROSION_6, weirdness);
+				for (int c = 1; c < INLANDNESS.length; c++) surfaceBiome(mapper, SWAMPS[t], temperature, humidity, INLANDNESS[c], Erosion.EROSION_6, weirdness);
 				/* Mid-inland */
-				biome(getMiddlePlateau(h, t, variant), builder, temperature, humidity, Continentalness.MID_INLAND, Erosion.EROSION_2, weirdness);
-				biome(getMiddlePlateau(h, t, variant), builder, temperature, humidity, Continentalness.MID_INLAND, Erosion.EROSION_3, weirdness);
-				biome(getMiddle(h, t, variant), builder, temperature, humidity, Continentalness.MID_INLAND, Erosion.EROSION_4, weirdness);
-				biome(getShattered(h, t, variant), builder, temperature, humidity, Continentalness.MID_INLAND, Erosion.EROSION_5, weirdness);
+				surfaceBiome(mapper, getMiddlePlateau(h, t, variant), temperature, humidity, Continentalness.MID_INLAND, Erosion.EROSION_2, weirdness);
+				surfaceBiome(mapper, getMiddlePlateau(h, t, variant), temperature, humidity, Continentalness.MID_INLAND, Erosion.EROSION_3, weirdness);
+				surfaceBiome(mapper, getMiddle(h, t, variant), temperature, humidity, Continentalness.MID_INLAND, Erosion.EROSION_4, weirdness);
+				surfaceBiome(mapper, getShattered(h, t, variant), temperature, humidity, Continentalness.MID_INLAND, Erosion.EROSION_5, weirdness);
 				/* Far-inland */
-				biome(getPlateau(h, t, variant), builder, temperature, humidity, Continentalness.FAR_INLAND, Erosion.EROSION_2, weirdness);
-				biome(getMiddlePlateau(h, t, variant), builder, temperature, humidity, Continentalness.MID_INLAND, Erosion.EROSION_3, weirdness);
-				biome(getMiddle(h, t, variant), builder, temperature, humidity, Continentalness.FAR_INLAND, Erosion.EROSION_4, weirdness);
-				biome(getShattered(h, t, variant), builder, temperature, humidity, Continentalness.FAR_INLAND, Erosion.EROSION_5, weirdness);
+				surfaceBiome(mapper, getPlateau(h, t, variant), temperature, humidity, Continentalness.FAR_INLAND, Erosion.EROSION_2, weirdness);
+				surfaceBiome(mapper, getMiddlePlateau(h, t, variant), temperature, humidity, Continentalness.MID_INLAND, Erosion.EROSION_3, weirdness);
+				surfaceBiome(mapper, getMiddle(h, t, variant), temperature, humidity, Continentalness.FAR_INLAND, Erosion.EROSION_4, weirdness);
+				surfaceBiome(mapper, getShattered(h, t, variant), temperature, humidity, Continentalness.FAR_INLAND, Erosion.EROSION_5, weirdness);
 			}
 		}
 	}
 
-	private void addLowSlice(VanillaParameterOverlayBuilder builder, Weirdness weirdness, boolean variant) {
+	private void addLowSlice(Consumer<Pair<Climate.ParameterPoint, ResourceKey<Biome>>> mapper, Weirdness weirdness, boolean variant) {
 		for (int t = 0; t < TEMPERATURE.length; t++) {
 			Temperature temperature = TEMPERATURE[t];
 			for (int h = 0; h < HUMIDITY.length; h++) {
 				Humidity humidity = HUMIDITY[h];
 
 				/* Coast */
-				for (int e = 0; e < 3; e++) biome(Biomes.STONY_SHORE, builder, temperature, humidity, Continentalness.COAST, EROSION[e], weirdness);
-				for (int e = 3; e < 5; e++) biome(BEACHES[t], builder, temperature, humidity, Continentalness.COAST, EROSION[e], weirdness);
-				biome(variant ? MIDDLE_WINDSWEPT[h][t] : BEACHES[t], builder, temperature, humidity, Continentalness.COAST, Erosion.EROSION_5, weirdness);
-				biome(BEACHES[t], builder, temperature, humidity, Continentalness.COAST, Erosion.EROSION_6, weirdness);
+				for (int e = 0; e < 3; e++) surfaceBiome(mapper, Biomes.STONY_SHORE, temperature, humidity, Continentalness.COAST, EROSION[e], weirdness);
+				for (int e = 3; e < 5; e++) surfaceBiome(mapper, BEACHES[t], temperature, humidity, Continentalness.COAST, EROSION[e], weirdness);
+				surfaceBiome(mapper, variant ? MIDDLE_WINDSWEPT[h][t] : BEACHES[t], temperature, humidity, Continentalness.COAST, Erosion.EROSION_5, weirdness);
+				surfaceBiome(mapper, BEACHES[t], temperature, humidity, Continentalness.COAST, Erosion.EROSION_6, weirdness);
 				/* Near-inland */
-				biome(getWindswept(h, t, variant), builder, temperature, humidity, Continentalness.NEAR_INLAND, Erosion.EROSION_5, weirdness);
-				for (int e = 0; e < 2; e++) biome(getMiddlePlateau(h, t, variant), builder, temperature, humidity, Continentalness.NEAR_INLAND, EROSION[e], weirdness);
-				for (int e = 2; e < 5; e++) biome(getMiddle(h, t, variant), builder, temperature, humidity, Continentalness.NEAR_INLAND, EROSION[e], weirdness);
+				surfaceBiome(mapper, getWindswept(h, t, variant), temperature, humidity, Continentalness.NEAR_INLAND, Erosion.EROSION_5, weirdness);
+				for (int e = 0; e < 2; e++) surfaceBiome(mapper, getMiddlePlateau(h, t, variant), temperature, humidity, Continentalness.NEAR_INLAND, EROSION[e], weirdness);
+				for (int e = 2; e < 5; e++) surfaceBiome(mapper, getMiddle(h, t, variant), temperature, humidity, Continentalness.NEAR_INLAND, EROSION[e], weirdness);
 				/* Swamp */
-				for (int c = 1; c < INLANDNESS.length; c++) biome(SWAMPS[t], builder, temperature, humidity, INLANDNESS[c], Erosion.EROSION_6, weirdness);
+				for (int c = 1; c < INLANDNESS.length; c++) surfaceBiome(mapper, SWAMPS[t], temperature, humidity, INLANDNESS[c], Erosion.EROSION_6, weirdness);
 				/* Mid/Far-inland */
 				for (int e = 0; e < 4; e++) {
-					biome(getMiddlePlateau(h, t, variant), builder, temperature, humidity, Continentalness.MID_INLAND, EROSION[e], weirdness);
-					biome(getMiddlePlateau(h, t, variant), builder, temperature, humidity, Continentalness.FAR_INLAND, EROSION[e], weirdness);
+					surfaceBiome(mapper, getMiddlePlateau(h, t, variant), temperature, humidity, Continentalness.MID_INLAND, EROSION[e], weirdness);
+					surfaceBiome(mapper, getMiddlePlateau(h, t, variant), temperature, humidity, Continentalness.FAR_INLAND, EROSION[e], weirdness);
 				}
 				for (int e = 4; e < 6; e++) {
-					biome(getMiddle(h, t, variant), builder, temperature, humidity, Continentalness.MID_INLAND, EROSION[e], weirdness);
-					biome(getMiddle(h, t, variant), builder, temperature, humidity, Continentalness.FAR_INLAND, EROSION[e], weirdness);
+					surfaceBiome(mapper, getMiddle(h, t, variant), temperature, humidity, Continentalness.MID_INLAND, EROSION[e], weirdness);
+					surfaceBiome(mapper, getMiddle(h, t, variant), temperature, humidity, Continentalness.FAR_INLAND, EROSION[e], weirdness);
 				}
 			}
 		}
 	}
 
-	private void addValleys(VanillaParameterOverlayBuilder builder) {
+	private void addValleys(Consumer<Pair<Climate.ParameterPoint, ResourceKey<Biome>>> mapper) {
 		for (int t = 0; t < TEMPERATURE.length; t++) {
 			Temperature temperature = TEMPERATURE[t];
 			for (int h = 0; h < HUMIDITY.length; h++) {
 				Humidity humidity = HUMIDITY[h];
 
 				/* Coast */
-				for (Erosion erosion : EROSION) biome(RIVERS[t], builder, temperature, humidity, Continentalness.COAST, erosion, Weirdness.VALLEY);
+				for (Erosion erosion : EROSION) surfaceBiome(mapper, RIVERS[t], temperature, humidity, Continentalness.COAST, erosion, Weirdness.VALLEY);
 				/* Near-inland */
-				for (int e = 0; e < 6; e++) biome(RIVERS[t], builder, temperature, humidity, Continentalness.NEAR_INLAND, EROSION[e], Weirdness.VALLEY);
+				for (int e = 0; e < 6; e++) surfaceBiome(mapper, RIVERS[t], temperature, humidity, Continentalness.NEAR_INLAND, EROSION[e], Weirdness.VALLEY);
 				/* Swamp */
-				for (int c = 1; c < INLANDNESS.length; c++) biome(SWAMPS[t], builder, temperature, humidity, INLANDNESS[c], Erosion.EROSION_6, Weirdness.VALLEY);
+				for (int c = 1; c < INLANDNESS.length; c++) surfaceBiome(mapper, SWAMPS[t], temperature, humidity, INLANDNESS[c], Erosion.EROSION_6, Weirdness.VALLEY);
 				/* Mid/Far-inland */
 				for (int e = 2; e < 6; e++) {
-					biome(RIVERS[t], builder, temperature, humidity, Continentalness.MID_INLAND, EROSION[e], Weirdness.VALLEY);
-					biome(RIVERS[t], builder, temperature, humidity, Continentalness.FAR_INLAND, EROSION[e], Weirdness.VALLEY);
+					surfaceBiome(mapper, RIVERS[t], temperature, humidity, Continentalness.MID_INLAND, EROSION[e], Weirdness.VALLEY);
+					surfaceBiome(mapper, RIVERS[t], temperature, humidity, Continentalness.FAR_INLAND, EROSION[e], Weirdness.VALLEY);
 				}
 				for (int e = 0; e < 2; e++) {
-					biome(MIDDLE_PLATEAU_NORMAL[h][t], builder, temperature, humidity, Continentalness.MID_INLAND, EROSION[e], Weirdness.VALLEY);
-					biome(MIDDLE_PLATEAU_NORMAL[h][t], builder, temperature, humidity, Continentalness.FAR_INLAND, EROSION[e], Weirdness.VALLEY);
+					surfaceBiome(mapper, MIDDLE_PLATEAU_NORMAL[h][t], temperature, humidity, Continentalness.MID_INLAND, EROSION[e], Weirdness.VALLEY);
+					surfaceBiome(mapper, MIDDLE_PLATEAU_NORMAL[h][t], temperature, humidity, Continentalness.FAR_INLAND, EROSION[e], Weirdness.VALLEY);
 				}
 			}
 		}
 	}
 
-	private void biome(ResourceKey<Biome> biome, VanillaParameterOverlayBuilder builder, Temperature temperature, Humidity humidity, Continentalness continentalness, Erosion erosion, Weirdness weirdness) {
-		new ParameterPointListBuilder().temperature(temperature).humidity(humidity).continentalness(continentalness).erosion(erosion).weirdness(weirdness).depth(Depth.FLOOR).build().forEach(point -> builder.add(point, biome));
-		new ParameterPointListBuilder().temperature(temperature).humidity(humidity).continentalness(continentalness).erosion(erosion).weirdness(weirdness).depth(Depth.SURFACE).build().forEach(point -> builder.add(point, biome));
+	private void surfaceBiome(Consumer<Pair<Climate.ParameterPoint, ResourceKey<Biome>>> mapper, ResourceKey<Biome> biome, Temperature temperature, Humidity humidity, Continentalness continentalness, Erosion erosion, Weirdness weirdness) {
+		mapper.accept(Pair.of(Climate.parameters(temperature.parameter(), humidity.parameter(), continentalness.parameter(), erosion.parameter(), Depth.FLOOR.parameter(), weirdness.parameter(), 0F), biome));
+		mapper.accept(Pair.of(Climate.parameters(temperature.parameter(), humidity.parameter(), continentalness.parameter(), erosion.parameter(), Depth.SURFACE.parameter(), weirdness.parameter(), 0F), biome));
+	}
+
+	private void caveBiome(Consumer<Pair<Climate.ParameterPoint, ResourceKey<Biome>>> mapper, ResourceKey<Biome> biome, Temperature temperature, Humidity humidity, Continentalness continentalness) {
+		mapper.accept(Pair.of(Climate.parameters(temperature.parameter(), humidity.parameter(), continentalness.parameter(), Erosion.FULL_RANGE.parameter(), Depth.UNDERGROUND.parameter(), Weirdness.FULL_RANGE.parameter(), 0F), biome));
 	}
 }

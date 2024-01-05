@@ -24,17 +24,17 @@ import java.util.List;
 
 public class SBPlacedFeatures {
 	// Tree
-	public static final ResourceKey<PlacedFeature> ASPEN_CHECKED = createKey("aspen_checked");
-	public static final ResourceKey<PlacedFeature> SUPER_ASPEN_CHECKED = createKey("super_aspen_checked");
-	public static final ResourceKey<PlacedFeature> CAJOLE_CHECKED = createKey("cajole_checked");
-	public static final ResourceKey<PlacedFeature> DESERT_OAK_CHECKED = createKey("desert_oak_checked");
-	public static final ResourceKey<PlacedFeature> SUPER_DESERT_OAK_CHECKED = createKey("super_desert_oak_checked");
-	public static final ResourceKey<PlacedFeature> EUCALYPTUS_CHECKED = createKey("eucalyptus_checked");
-	public static final ResourceKey<PlacedFeature> GIANT_KAPOK_CHECKED = createKey("giant_kapok_checked");
-	public static final ResourceKey<PlacedFeature> REDWOOD_CHECKED = createKey("redwood_checked");
-	public static final ResourceKey<PlacedFeature> GIANT_REDWOOD_CHECKED = createKey("giant_redwood_checked");
-	public static final ResourceKey<PlacedFeature> COLOSSAL_REDWOOD_CHECKED = createKey("colossal_redwood_checked");
-	public static final ResourceKey<PlacedFeature> GIANT_WILLOW_CHECKED = createKey("giant_willow_checked");
+	public static final ResourceKey<PlacedFeature> ASPEN = createKey("aspen");
+	public static final ResourceKey<PlacedFeature> SUPER_ASPEN = createKey("super_aspen");
+	public static final ResourceKey<PlacedFeature> CAJOLE = createKey("cajole");
+	public static final ResourceKey<PlacedFeature> DESERT_OAK = createKey("desert_oak");
+	public static final ResourceKey<PlacedFeature> SUPER_DESERT_OAK = createKey("super_desert_oak");
+	public static final ResourceKey<PlacedFeature> EUCALYPTUS = createKey("eucalyptus");
+	public static final ResourceKey<PlacedFeature> GIANT_KAPOK = createKey("giant_kapok");
+	public static final ResourceKey<PlacedFeature> REDWOOD = createKey("redwood");
+	public static final ResourceKey<PlacedFeature> GIANT_REDWOOD = createKey("giant_redwood");
+	public static final ResourceKey<PlacedFeature> COLOSSAL_REDWOOD = createKey("colossal_redwood");
+	public static final ResourceKey<PlacedFeature> GIANT_WILLOW = createKey("giant_willow");
 
 	// Vegetation
 	public static final ResourceKey<PlacedFeature> TREES_ASPEN = createKey("trees_aspen");
@@ -44,6 +44,7 @@ public class SBPlacedFeatures {
 	public static final ResourceKey<PlacedFeature> TREES_CHAPARRAL = createKey("trees_chaparral");
 	public static final ResourceKey<PlacedFeature> TREES_EUCALYPT = createKey("trees_eucalypt");
 	public static final ResourceKey<PlacedFeature> TREES_INKY = createKey("trees_inky");
+	public static final ResourceKey<PlacedFeature> TREES_MUSHROOM = createKey("trees_mushroom");
 	public static final ResourceKey<PlacedFeature> TREES_OUTBACK = createKey("trees_outback");
 	public static final ResourceKey<PlacedFeature> TREES_RAINFOREST = createKey("trees_rainforest");
 	public static final ResourceKey<PlacedFeature> TREES_REDWOOD = createKey("trees_redwood");
@@ -75,6 +76,8 @@ public class SBPlacedFeatures {
 	public static final ResourceKey<PlacedFeature> ORE_PEGMATITE_VOLCANIC = createKey("ore_pegmatite_volcanic");
 
 	// Miscellaneous
+	public static final ResourceKey<PlacedFeature> ANT_MOUND_MUD = createKey("and_mound_mud");
+	public static final ResourceKey<PlacedFeature> ANT_MOUND_RUDOSOL = createKey("and_mound_rudosol");
 	public static final ResourceKey<PlacedFeature> MUD_PIT_SHALLOW = createKey("mud_pit_shallow");
 	public static final ResourceKey<PlacedFeature> MUD_PIT_NORMAL = createKey("mud_pit_normal");
 	public static final ResourceKey<PlacedFeature> MUD_PIT_DEEP = createKey("mud_pit_deep");
@@ -84,17 +87,17 @@ public class SBPlacedFeatures {
 	public static void bootstrap(BootstapContext<PlacedFeature> context) {
 		HolderGetter<ConfiguredFeature<?, ?>> configured = context.lookup(Registries.CONFIGURED_FEATURE);
 
-		register(context, ASPEN_CHECKED, configured.getOrThrow(SBConfiguredFeatures.ASPEN), PlacementUtils.filteredByBlockSurvival(SBBlocks.ASPEN_SAPLING.get()));
-		register(context, SUPER_ASPEN_CHECKED, configured.getOrThrow(SBConfiguredFeatures.SUPER_ASPEN), PlacementUtils.filteredByBlockSurvival(SBBlocks.ASPEN_SAPLING.get()));
-		register(context, CAJOLE_CHECKED, configured.getOrThrow(SBConfiguredFeatures.CAJOLE), PlacementUtils.filteredByBlockSurvival(SBBlocks.CAJOLE_SAPLING.get()));
-		register(context, DESERT_OAK_CHECKED, configured.getOrThrow(SBConfiguredFeatures.DESERT_OAK), PlacementUtils.filteredByBlockSurvival(SBBlocks.DESERT_OAK_SAPLING.get()));
-		register(context, SUPER_DESERT_OAK_CHECKED, configured.getOrThrow(SBConfiguredFeatures.SUPER_DESERT_OAK), PlacementUtils.filteredByBlockSurvival(SBBlocks.DESERT_OAK_SAPLING.get()));
-		register(context, EUCALYPTUS_CHECKED, configured.getOrThrow(SBConfiguredFeatures.EUCALYPTUS), PlacementUtils.filteredByBlockSurvival(SBBlocks.EUCALYPTUS_SAPLING.get()));
-		register(context, GIANT_KAPOK_CHECKED, configured.getOrThrow(SBConfiguredFeatures.GIANT_KAPOK), PlacementUtils.filteredByBlockSurvival(SBBlocks.KAPOK_SAPLING.get()));
-		register(context, REDWOOD_CHECKED, configured.getOrThrow(SBConfiguredFeatures.REDWOOD), PlacementUtils.filteredByBlockSurvival(SBBlocks.REDWOOD_SAPLING.get()));
-		register(context, GIANT_REDWOOD_CHECKED, configured.getOrThrow(SBConfiguredFeatures.GIANT_REDWOOD), PlacementUtils.filteredByBlockSurvival(SBBlocks.REDWOOD_SAPLING.get()));
-		register(context, COLOSSAL_REDWOOD_CHECKED, configured.getOrThrow(SBConfiguredFeatures.COLOSSAL_REDWOOD), PlacementUtils.filteredByBlockSurvival(SBBlocks.REDWOOD_SAPLING.get()));
-		register(context, GIANT_WILLOW_CHECKED, configured.getOrThrow(SBConfiguredFeatures.GIANT_WILLOW), PlacementUtils.filteredByBlockSurvival(SBBlocks.WILLOW_SAPLING.get()));
+		register(context, ASPEN, configured.getOrThrow(SBConfiguredFeatures.ASPEN), PlacementUtils.filteredByBlockSurvival(SBBlocks.ASPEN_SAPLING.get()));
+		register(context, SUPER_ASPEN, configured.getOrThrow(SBConfiguredFeatures.SUPER_ASPEN), PlacementUtils.filteredByBlockSurvival(SBBlocks.ASPEN_SAPLING.get()));
+		register(context, CAJOLE, configured.getOrThrow(SBConfiguredFeatures.CAJOLE), PlacementUtils.filteredByBlockSurvival(SBBlocks.CAJOLE_SAPLING.get()));
+		register(context, DESERT_OAK, configured.getOrThrow(SBConfiguredFeatures.DESERT_OAK), PlacementUtils.filteredByBlockSurvival(SBBlocks.DESERT_OAK_SAPLING.get()));
+		register(context, SUPER_DESERT_OAK, configured.getOrThrow(SBConfiguredFeatures.SUPER_DESERT_OAK), PlacementUtils.filteredByBlockSurvival(SBBlocks.DESERT_OAK_SAPLING.get()));
+		register(context, EUCALYPTUS, configured.getOrThrow(SBConfiguredFeatures.EUCALYPTUS), PlacementUtils.filteredByBlockSurvival(SBBlocks.EUCALYPTUS_SAPLING.get()));
+		register(context, GIANT_KAPOK, configured.getOrThrow(SBConfiguredFeatures.GIANT_KAPOK), PlacementUtils.filteredByBlockSurvival(SBBlocks.KAPOK_SAPLING.get()));
+		register(context, REDWOOD, configured.getOrThrow(SBConfiguredFeatures.REDWOOD), PlacementUtils.filteredByBlockSurvival(SBBlocks.REDWOOD_SAPLING.get()));
+		register(context, GIANT_REDWOOD, configured.getOrThrow(SBConfiguredFeatures.GIANT_REDWOOD), PlacementUtils.filteredByBlockSurvival(SBBlocks.REDWOOD_SAPLING.get()));
+		register(context, COLOSSAL_REDWOOD, configured.getOrThrow(SBConfiguredFeatures.COLOSSAL_REDWOOD), PlacementUtils.filteredByBlockSurvival(SBBlocks.REDWOOD_SAPLING.get()));
+		register(context, GIANT_WILLOW, configured.getOrThrow(SBConfiguredFeatures.GIANT_WILLOW), PlacementUtils.filteredByBlockSurvival(SBBlocks.WILLOW_SAPLING.get()));
 
 		register(context, TREES_ASPEN, configured.getOrThrow(SBConfiguredFeatures.TREES_ASPEN), VegetationPlacements.treePlacement(PlacementUtils.countExtra(10, 0.2F, 3), SBBlocks.ASPEN_SAPLING.get()));
 		register(context, TREES_BAYOU, configured.getOrThrow(SBConfiguredFeatures.TREES_BAYOU), VegetationPlacements.treePlacement(PlacementUtils.countExtra(10, 0.2F, 2)));
@@ -103,6 +106,7 @@ public class SBPlacedFeatures {
 		register(context, TREES_CHAPARRAL, configured.getOrThrow(SBConfiguredFeatures.TREES_CHAPARRAL), VegetationPlacements.treePlacement(PlacementUtils.countExtra(1, 0.1F, 1), SBBlocks.DESERT_OAK_SAPLING.get()));
 		register(context, TREES_EUCALYPT, configured.getOrThrow(SBConfiguredFeatures.TREES_EUCALYPT), VegetationPlacements.treePlacement(PlacementUtils.countExtra(6, 0.1F, 1), SBBlocks.EUCALYPTUS_SAPLING.get()));
 		register(context, TREES_INKY, configured.getOrThrow(SBConfiguredFeatures.TREES_INKY), VegetationPlacements.treePlacement(PlacementUtils.countExtra(3, 0.1F, 1)));
+		register(context, TREES_MUSHROOM, configured.getOrThrow(SBConfiguredFeatures.TREES_MUSHROOM), CountPlacement.of(16), InSquarePlacement.spread(), PlacementUtils.HEIGHTMAP, BiomeFilter.biome());
 		register(context, TREES_OUTBACK, configured.getOrThrow(SBConfiguredFeatures.TREES_OUTBACK), VegetationPlacements.treePlacement(PlacementUtils.countExtra(1, 0.1F, 1), SBBlocks.EUCALYPTUS_SAPLING.get()));
 		register(context, TREES_RAINFOREST, configured.getOrThrow(SBConfiguredFeatures.TREES_RAINFOREST), VegetationPlacements.treePlacement(PlacementUtils.countExtra(10, 0.1F, 1)));
 		register(context, TREES_REDWOOD, configured.getOrThrow(SBConfiguredFeatures.TREES_REDWOOD), VegetationPlacements.treePlacement(PlacementUtils.countExtra(10, 0.1F, 1), SBBlocks.REDWOOD_SAPLING.get()));
@@ -131,6 +135,8 @@ public class SBPlacedFeatures {
 		register(context, ORE_GRANITE_VOLCANIC, configured.getOrThrow(OreFeatures.ORE_GRANITE), commonOrePlacement(4, HeightRangePlacement.uniform(VerticalAnchor.absolute(0), VerticalAnchor.absolute(160))));
 		register(context, ORE_PEGMATITE_VOLCANIC, configured.getOrThrow(SBConfiguredFeatures.ORE_PEGMATITE), commonOrePlacement(4, HeightRangePlacement.uniform(VerticalAnchor.absolute(0), VerticalAnchor.absolute(160))));
 
+		register(context, ANT_MOUND_MUD, configured.getOrThrow(SBConfiguredFeatures.ANT_MOUND_MUD), RarityFilter.onAverageOnceEvery(6), InSquarePlacement.spread(), PlacementUtils.HEIGHTMAP_WORLD_SURFACE, BiomeFilter.biome());
+		register(context, ANT_MOUND_RUDOSOL, configured.getOrThrow(SBConfiguredFeatures.ANT_MOUND_RUDOSOL), RarityFilter.onAverageOnceEvery(6), InSquarePlacement.spread(), PlacementUtils.HEIGHTMAP_WORLD_SURFACE, BiomeFilter.biome());
 		register(context, MUD_PIT_SHALLOW, configured.getOrThrow(SBConfiguredFeatures.MUD_PIT_SHALLOW), RarityFilter.onAverageOnceEvery(4), InSquarePlacement.spread(), PlacementUtils.HEIGHTMAP_WORLD_SURFACE, BiomeFilter.biome());
 		register(context, MUD_PIT_NORMAL, configured.getOrThrow(SBConfiguredFeatures.MUD_PIT_NORMAL), RarityFilter.onAverageOnceEvery(6), InSquarePlacement.spread(), PlacementUtils.HEIGHTMAP_WORLD_SURFACE, BiomeFilter.biome());
 		register(context, MUD_PIT_DEEP, configured.getOrThrow(SBConfiguredFeatures.MUD_PIT_DEEP), RarityFilter.onAverageOnceEvery(9), InSquarePlacement.spread(), PlacementUtils.HEIGHTMAP_WORLD_SURFACE, BiomeFilter.biome());
@@ -140,12 +146,9 @@ public class SBPlacedFeatures {
 
 	private static List<PlacementModifier> mushroomPlacement(int rarity, @Nullable PlacementModifier modifier) {
 		ImmutableList.Builder<PlacementModifier> builder = ImmutableList.builder();
-		if (modifier != null) {
-			builder.add(modifier);
-		}
-		if (rarity != 0) {
-			builder.add(RarityFilter.onAverageOnceEvery(rarity));
-		}
+		if (modifier != null) builder.add(modifier);
+		if (rarity != 0) builder.add(RarityFilter.onAverageOnceEvery(rarity));
+
 		builder.add(InSquarePlacement.spread(), PlacementUtils.HEIGHTMAP, BiomeFilter.biome());
 		return builder.build();
 	}

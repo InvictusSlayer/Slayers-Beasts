@@ -1,4 +1,4 @@
-package net.invictusslayer.slayersbeasts.world.feature.misc;
+package net.invictusslayer.slayersbeasts.world.feature.icicle;
 
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
@@ -13,8 +13,8 @@ import net.minecraft.world.level.levelgen.feature.configurations.FeatureConfigur
 import java.util.Optional;
 
 public class IcicleSmallFeature extends Feature<IcicleSmallFeature.Configuration> {
-	public IcicleSmallFeature(Codec<Configuration> pCodec) {
-		super(pCodec);
+	public IcicleSmallFeature(Codec<Configuration> codec) {
+		super(codec);
 	}
 
 	public boolean place(FeaturePlaceContext<Configuration> context) {
@@ -69,11 +69,11 @@ public class IcicleSmallFeature extends Feature<IcicleSmallFeature.Configuration
 	}
 
 	public record Configuration(float tallerIcicleChance, float radialSpreadChance, float radialSpreadChance2, float radialSpreadChance3) implements FeatureConfiguration {
-		public static final Codec<Configuration> CODEC = RecordCodecBuilder.create(instance ->
-				instance.group(Codec.floatRange(0.0F, 1.0F).fieldOf("taller_icicle_chance").forGetter(Configuration::tallerIcicleChance),
-								Codec.floatRange(0.0F, 1.0F).fieldOf("radial_spread_chance").forGetter(Configuration::radialSpreadChance),
-								Codec.floatRange(0.0F, 1.0F).fieldOf("radial_spread_chance2").forGetter(Configuration::radialSpreadChance2),
-								Codec.floatRange(0.0F, 1.0F).fieldOf("radial_spread_chance3").forGetter(Configuration::radialSpreadChance3))
-						.apply(instance, Configuration::new));
+		public static final Codec<Configuration> CODEC = RecordCodecBuilder.create(instance -> instance.group(
+				Codec.floatRange(0.0F, 1.0F).fieldOf("taller_icicle_chance").forGetter(Configuration::tallerIcicleChance),
+				Codec.floatRange(0.0F, 1.0F).fieldOf("radial_spread_chance").forGetter(Configuration::radialSpreadChance),
+				Codec.floatRange(0.0F, 1.0F).fieldOf("radial_spread_chance2").forGetter(Configuration::radialSpreadChance2),
+				Codec.floatRange(0.0F, 1.0F).fieldOf("radial_spread_chance3").forGetter(Configuration::radialSpreadChance3)
+		).apply(instance, Configuration::new));
 	}
 }

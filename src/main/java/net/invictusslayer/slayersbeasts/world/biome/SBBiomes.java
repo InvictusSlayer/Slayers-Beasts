@@ -32,6 +32,7 @@ public class SBBiomes {
 	public static final ResourceKey<Biome> INKY_MOOR = createKey("inky_moor");
 	public static final ResourceKey<Biome> MURKY_OCEAN = createKey("murky_ocean");
 	public static final ResourceKey<Biome> DEEP_MURKY_OCEAN = createKey("deep_murky_ocean");
+	public static final ResourceKey<Biome> MUSHROOM_FOREST = createKey("mushroom_forest");
 	public static final ResourceKey<Biome> OUTBACK = createKey("outback");
 	public static final ResourceKey<Biome> PETRIFIED_WOODS = createKey("petrified_woods");
 	public static final ResourceKey<Biome> RAINFOREST = createKey("rainforest");
@@ -73,6 +74,7 @@ public class SBBiomes {
 		register(context, INKY_MOOR, SBOverworldBiomes.inkyMoor(placed, carver));
 		register(context, MURKY_OCEAN, SBOverworldBiomes.murkyOcean(placed, carver, false));
 		register(context, DEEP_MURKY_OCEAN, SBOverworldBiomes.murkyOcean(placed, carver, true));
+		register(context, MUSHROOM_FOREST, SBOverworldBiomes.mushroomForest(placed, carver));
 		register(context, OUTBACK, SBOverworldBiomes.outback(placed, carver));
 		register(context, PETRIFIED_WOODS, SBOverworldBiomes.petrifiedWoods(placed, carver));
 		register(context, RAINFOREST, SBOverworldBiomes.rainforest(placed, carver));
@@ -80,11 +82,11 @@ public class SBBiomes {
 		register(context, OLD_GROWTH_REDWOOD_GROVE, SBOverworldBiomes.redwoodGrove(placed, carver, true));
 		register(context, VOLCANIC_PEAKS, SBOverworldBiomes.volcanicPeaks(placed, carver));
 
-		register(context, DUSTY_CAVERNS, SBUndergroundBiomes.dustyCaverns(placed, carver));
-		register(context, FUNGAL_DEPTHS, SBUndergroundBiomes.fungalDepths(placed, carver));
-		register(context, ICE_CAVES, SBUndergroundBiomes.iceCaves(placed, carver));
-		register(context, SLIME_CAVERNS, SBUndergroundBiomes.slimeCaverns(placed, carver));
-		register(context, THE_CRYPT, SBUndergroundBiomes.theCrypt(placed, carver));
+		register(context, DUSTY_CAVERNS, SBOverworldBiomes.dustyCaverns(placed, carver));
+		register(context, FUNGAL_DEPTHS, SBOverworldBiomes.fungalDepths(placed, carver));
+		register(context, ICE_CAVES, SBOverworldBiomes.iceCaves(placed, carver));
+		register(context, SLIME_CAVERNS, SBOverworldBiomes.slimeCaverns(placed, carver));
+		register(context, THE_CRYPT, SBOverworldBiomes.theCrypt(placed, carver));
 
 		register(context, TOXIC_JUNGLE, SBNetherBiomes.toxicJungle(placed, carver));
 
