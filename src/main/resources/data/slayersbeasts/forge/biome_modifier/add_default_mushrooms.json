@@ -1,0 +1,9 @@
+{
+  "type": "forge:add_features",
+  "biomes": "#minecraft:is_overworld",
+  "features": [
+    "slayersbeasts:black_mushroom_rare",
+    "slayersbeasts:white_mushroom_rare"
+  ],
+  "step": "vegetal_decoration"
+}

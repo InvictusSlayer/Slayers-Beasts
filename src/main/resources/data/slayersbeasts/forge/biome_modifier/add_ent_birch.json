@@ -1,0 +1,10 @@
+{
+  "type": "forge:add_spawns",
+  "biomes": "#slayersbeasts:spawns_ent_birch",
+  "spawners": {
+    "type": "slayersbeasts:ent_birch",
+    "maxCount": 1,
+    "minCount": 1,
+    "weight": 4
+  }
+}

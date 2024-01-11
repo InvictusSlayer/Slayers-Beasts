@@ -1,0 +1,20 @@
+{
+  "type": "slayersbeasts:styphium_patch",
+  "config": {
+    "edge_column_chance": 0.3,
+    "isNatural": true,
+    "vegetation": {
+      "feature": "slayersbeasts:styphium_vegetation",
+      "placement": []
+    },
+    "vegetation_chance": 0.08,
+    "vertical_range": 6,
+    "xz_radius": {
+      "type": "minecraft:uniform",
+      "value": {
+        "max_inclusive": 7,
+        "min_inclusive": 4
+      }
+    }
+  }
+}

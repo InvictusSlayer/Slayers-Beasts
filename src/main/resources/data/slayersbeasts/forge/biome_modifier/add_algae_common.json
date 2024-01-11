@@ -1,0 +1,6 @@
+{
+  "type": "forge:add_features",
+  "biomes": "minecraft:mangrove_swamp",
+  "features": "slayersbeasts:patch_algae_common",
+  "step": "vegetal_decoration"
+}

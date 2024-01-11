@@ -1,0 +1,7 @@
+{
+  "type": "slayersbeasts:crypt_portal",
+  "biomes": "#slayersbeasts:has_crypt_portal",
+  "spawn_overrides": {},
+  "step": "surface_structures",
+  "terrain_adaptation": "beard_thin"
+}

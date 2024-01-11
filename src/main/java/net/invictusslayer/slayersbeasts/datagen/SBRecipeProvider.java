@@ -5,6 +5,7 @@ import net.invictusslayer.slayersbeasts.block.SBBlockFamily;
 import net.invictusslayer.slayersbeasts.block.SBBlocks;
 import net.invictusslayer.slayersbeasts.block.WoodFamily;
 import net.invictusslayer.slayersbeasts.item.SBItems;
+import net.minecraft.data.BlockFamily;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.recipes.*;
 import net.minecraft.resources.ResourceLocation;
@@ -111,7 +112,7 @@ public class SBRecipeProvider extends RecipeProvider {
 	}
 
 	private void generateBlockFamilies(RecipeOutput output) {
-		SBBlockFamily.getAllFamilies().filter(family -> family.shouldGenerateRecipe(FeatureFlagSet.of(FeatureFlags.VANILLA))).forEach(family -> generateRecipes(output, family));
+		SBBlockFamily.getAllFamilies().filter(BlockFamily::shouldGenerateRecipe).forEach(family -> generateRecipes(output, family, FeatureFlagSet.of(FeatureFlags.VANILLA)));
 	}
 
 	protected static void twoByTwoPacker(RecipeOutput output, RecipeCategory category, ItemLike pPacked, ItemLike pUnpacked) {

@@ -9,6 +9,8 @@ import net.invictusslayer.slayersbeasts.world.biome.SBSurfaceRuleData;
 import net.invictusslayer.slayersbeasts.world.biome.region.SBNetherRegion;
 import net.invictusslayer.slayersbeasts.world.biome.region.SBOverworldRegion;
 import net.invictusslayer.slayersbeasts.world.feature.SBConfiguredFeatures;
+import net.invictusslayer.slayersbeasts.world.feature.tree.IExtendedTreeGrower;
+import net.invictusslayer.slayersbeasts.world.feature.tree.SBTreeGrowers;
 import net.minecraft.world.entity.SpawnPlacements;
 import net.minecraft.world.entity.animal.MushroomCow;
 import net.minecraft.world.entity.vehicle.Boat;
@@ -35,6 +37,8 @@ public class SBCommonEvents {
 			SBStrippableBlocks.register();
 			SBPottedPlants.register();
 			SBDispenserItems.register();
+
+			((IExtendedTreeGrower) (Object) SBTreeGrowers.REDWOOD).setGigaTree(SBConfiguredFeatures.COLOSSAL_REDWOOD);
 
 			((IExtendedMushroomBlock) SBBlocks.BLACK_MUSHROOM.get()).setMightyMushroom(SBConfiguredFeatures.MIGHTY_BLACK_MUSHROOM);
 			((IExtendedMushroomBlock) Blocks.BROWN_MUSHROOM).setMightyMushroom(SBConfiguredFeatures.MIGHTY_BROWN_MUSHROOM);

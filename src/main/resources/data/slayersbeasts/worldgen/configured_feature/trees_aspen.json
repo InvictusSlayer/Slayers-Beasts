@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:random_selector",
+  "config": {
+    "default": "slayersbeasts:aspen",
+    "features": [
+      {
+        "chance": 0.2,
+        "feature": "slayersbeasts:super_aspen"
+      }
+    ]
+  }
+}

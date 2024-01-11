@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:random_selector",
+  "config": {
+    "default": {
+      "feature": "slayersbeasts:huge_mushrooms",
+      "placement": []
+    },
+    "features": [
+      {
+        "chance": 0.6,
+        "feature": {
+          "feature": "slayersbeasts:mighty_mushrooms",
+          "placement": []
+        }
+      }
+    ]
+  }
+}

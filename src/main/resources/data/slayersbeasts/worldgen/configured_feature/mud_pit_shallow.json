@@ -1,0 +1,23 @@
+{
+  "type": "slayersbeasts:pit",
+  "config": {
+    "ceiling_provider": {
+      "type": "minecraft:simple_state_provider",
+      "state": {
+        "Name": "slayersbeasts:cracked_mud",
+        "Properties": {
+          "tilt": "none"
+        }
+      }
+    },
+    "wall_provider": {
+      "type": "minecraft:simple_state_provider",
+      "state": {
+        "Name": "minecraft:packed_mud"
+      }
+    },
+    "x": 8,
+    "y": 6,
+    "z": 8
+  }
+}

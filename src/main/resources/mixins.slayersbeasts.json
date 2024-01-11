@@ -6,7 +6,8 @@
 		"common.ChestBoatMixin",
 		"common.MushroomBlockMixin",
 		"common.MushroomCowMixin",
-		"common.MushroomCowTypeMixin"
+		"common.MushroomCowTypeMixin",
+		"common.TreeGrowerMixin"
 	],
 	"client": [
 		"client.MushroomCowRendererMixin"

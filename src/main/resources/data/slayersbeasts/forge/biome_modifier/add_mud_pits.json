@@ -1,0 +1,10 @@
+{
+  "type": "forge:add_features",
+  "biomes": "#minecraft:is_badlands",
+  "features": [
+    "slayersbeasts:mud_pit_shallow",
+    "slayersbeasts:mud_pit_normal",
+    "slayersbeasts:mud_pit_deep"
+  ],
+  "step": "local_modifications"
+}

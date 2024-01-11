@@ -1,5 +1,6 @@
 package net.invictusslayer.slayersbeasts.block;
 
+import com.mojang.serialization.MapCodec;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.util.RandomSource;
@@ -24,10 +25,15 @@ import java.util.Collections;
 import java.util.List;
 
 public class AlgaeBlock extends BushBlock implements BonemealableBlock {
+	public static final MapCodec<AlgaeBlock> CODEC = simpleCodec(AlgaeBlock::new);
 	private static final VoxelShape SHAPE = Block.box(0.0D, 0.0D, 0.0D, 16.0D, 1.5D, 16.0D);
 
 	public AlgaeBlock(Properties properties) {
 		super(properties);
+	}
+
+	protected MapCodec<? extends BushBlock> codec() {
+		return CODEC;
 	}
 
 	public PlantType getPlantType(BlockGetter level, BlockPos pos) {

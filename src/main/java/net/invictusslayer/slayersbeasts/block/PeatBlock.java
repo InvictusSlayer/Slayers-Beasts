@@ -1,5 +1,6 @@
 package net.invictusslayer.slayersbeasts.block;
 
+import com.mojang.serialization.MapCodec;
 import net.invictusslayer.slayersbeasts.datagen.tags.SBTags;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -21,8 +22,14 @@ import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
 
 public class PeatBlock extends FallingBlock {
+    public static final MapCodec<PeatBlock> CODEC = simpleCodec(PeatBlock::new);
+
     public PeatBlock(Properties pProperties) {
         super(pProperties);
+    }
+
+    protected MapCodec<? extends FallingBlock> codec() {
+        return CODEC;
     }
 
     @SuppressWarnings("deprecation")

@@ -1,0 +1,10 @@
+{
+  "type": "forge:add_spawns",
+  "biomes": "#slayersbeasts:spawns_mantis",
+  "spawners": {
+    "type": "slayersbeasts:mantis",
+    "maxCount": 3,
+    "minCount": 1,
+    "weight": 6
+  }
+}
