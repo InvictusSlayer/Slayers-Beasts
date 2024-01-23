@@ -32,6 +32,7 @@ import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 
 import java.util.List;
+import java.util.Set;
 import java.util.concurrent.CompletableFuture;
 
 @Mod.EventBusSubscriber(modid = SlayersBeasts.MOD_ID, bus = Mod.EventBusSubscriber.Bus.MOD)
@@ -56,7 +57,7 @@ public class SBDataGenerator {
 		ExistingFileHelper helper = event.getExistingFileHelper();
 		boolean hasServer = event.includeServer();
 
-//		gen.addProvider(hasServer, new DatapackBuiltinEntriesProvider(output, provider, BUILDER, Set.of(SlayersBeasts.MOD_ID))); TODO: Add Datapack Provider
+		gen.addProvider(hasServer, new DatapackBuiltinEntriesProvider(output, provider, BUILDER, Set.of(SlayersBeasts.MOD_ID))); //TODO: Add Datapack Provider
 
 		SBBlockTagsProvider blockTags = gen.addProvider(hasServer, new SBBlockTagsProvider(output, provider, helper));
 		gen.addProvider(hasServer, new SBItemTagsProvider(output, provider, blockTags, helper));
@@ -79,6 +80,7 @@ public class SBDataGenerator {
 	private static HolderLookup.Provider patchRegistry(HolderLookup.Provider provider) {
 		Cloner.Factory factory = new Cloner.Factory();
 		RegistryDataLoader.WORLDGEN_REGISTRIES.forEach(data -> data.runWithArguments(factory::addCodec));
+//		factory.addCodec(ForgeRegistries.Keys.BIOME_MODIFIERS, BiomeModifier.DIRECT_CODEC);
 		return BUILDER.buildPatch(RegistryAccess.fromRegistryOfRegistries(BuiltInRegistries.REGISTRY), provider, factory).full();
 	}
 }
