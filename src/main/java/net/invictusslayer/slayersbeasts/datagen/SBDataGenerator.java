@@ -26,6 +26,7 @@ import net.minecraft.data.PackOutput;
 import net.minecraft.data.loot.LootTableProvider;
 import net.minecraft.resources.RegistryDataLoader;
 import net.minecraft.world.level.storage.loot.parameters.LootContextParamSets;
+import net.minecraftforge.common.data.DatapackBuiltinEntriesProvider;
 import net.minecraftforge.common.data.ExistingFileHelper;
 import net.minecraftforge.data.event.GatherDataEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -57,7 +58,7 @@ public class SBDataGenerator {
 		ExistingFileHelper helper = event.getExistingFileHelper();
 		boolean hasServer = event.includeServer();
 
-		gen.addProvider(hasServer, new DatapackBuiltinEntriesProvider(output, provider, BUILDER, Set.of(SlayersBeasts.MOD_ID))); //TODO: Add Datapack Provider
+		gen.addProvider(hasServer, new DatapackBuiltinEntriesProvider(output, provider, BUILDER, Set.of(SlayersBeasts.MOD_ID)));
 
 		SBBlockTagsProvider blockTags = gen.addProvider(hasServer, new SBBlockTagsProvider(output, provider, helper));
 		gen.addProvider(hasServer, new SBItemTagsProvider(output, provider, blockTags, helper));
