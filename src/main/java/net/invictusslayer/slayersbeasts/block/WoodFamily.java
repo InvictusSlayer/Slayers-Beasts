@@ -1,8 +1,8 @@
 package net.invictusslayer.slayersbeasts.block;
 
-import net.invictusslayer.slayersbeasts.datagen.tags.SBTags;
+import net.invictusslayer.slayersbeasts.datagen.tag.SBTags;
+import net.invictusslayer.slayersbeasts.entity.vehicle.SBBoatType;
 import net.invictusslayer.slayersbeasts.item.SBItems;
-import net.invictusslayer.slayersbeasts.misc.SBBoatType;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.entity.vehicle.Boat;
 import net.minecraft.world.item.Item;

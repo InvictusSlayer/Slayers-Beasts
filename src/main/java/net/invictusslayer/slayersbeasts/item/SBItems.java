@@ -3,7 +3,8 @@ package net.invictusslayer.slayersbeasts.item;
 import net.invictusslayer.slayersbeasts.SlayersBeasts;
 import net.invictusslayer.slayersbeasts.block.SBBlocks;
 import net.invictusslayer.slayersbeasts.entity.SBEntities;
-import net.invictusslayer.slayersbeasts.misc.SBBoatType;
+import net.invictusslayer.slayersbeasts.entity.vehicle.SBBoatType;
+import net.invictusslayer.slayersbeasts.sound.SBSounds;
 import net.minecraft.world.item.*;
 import net.minecraftforge.common.ForgeSpawnEggItem;
 import net.minecraftforge.registries.DeferredRegister;
@@ -12,6 +13,8 @@ import net.minecraftforge.registries.RegistryObject;
 
 public final class SBItems {
 	public static final DeferredRegister<Item> ITEMS = DeferredRegister.create(ForgeRegistries.ITEMS, SlayersBeasts.MOD_ID);
+
+	public static final RegistryObject<Item> MUSIC_DISC_INKISH = ITEMS.register("music_disc_inkish", () -> new RecordItem(1, SBSounds.MUSIC_DISC_INKISH, new Item.Properties().stacksTo(1).rarity(Rarity.RARE), 4400));
 
 	public static final RegistryObject<Item> JADE = ITEMS.register("jade", () -> new CryptPortalItem(new Item.Properties()));
 	public static final RegistryObject<Item> JADE_SHARD = ITEMS.register("jade_shard", () -> new Item(new Item.Properties()));

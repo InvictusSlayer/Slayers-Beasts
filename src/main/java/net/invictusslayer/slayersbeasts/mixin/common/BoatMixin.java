@@ -1,8 +1,8 @@
 package net.invictusslayer.slayersbeasts.mixin.common;
 
 import net.invictusslayer.slayersbeasts.block.SBBlocks;
+import net.invictusslayer.slayersbeasts.entity.vehicle.SBBoatType;
 import net.invictusslayer.slayersbeasts.item.SBItems;
-import net.invictusslayer.slayersbeasts.misc.SBBoatType;
 import net.minecraft.world.entity.vehicle.Boat;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.ItemLike;

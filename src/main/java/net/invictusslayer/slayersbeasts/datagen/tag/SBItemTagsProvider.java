@@ -1,4 +1,4 @@
-package net.invictusslayer.slayersbeasts.datagen.tags;
+package net.invictusslayer.slayersbeasts.datagen.tag;
 
 import net.invictusslayer.slayersbeasts.SlayersBeasts;
 import net.invictusslayer.slayersbeasts.block.WoodFamily;
@@ -15,12 +15,14 @@ import net.minecraftforge.common.data.ExistingFileHelper;
 import java.util.concurrent.CompletableFuture;
 
 public class SBItemTagsProvider extends ItemTagsProvider {
-	public SBItemTagsProvider(PackOutput output, CompletableFuture<HolderLookup.Provider> provider, TagsProvider<Block> blockTags, ExistingFileHelper existingFileHelper) {
-		super(output, provider, blockTags.contentsGetter(), SlayersBeasts.MOD_ID, existingFileHelper);
+	public SBItemTagsProvider(PackOutput output, CompletableFuture<HolderLookup.Provider> provider, TagsProvider<Block> blockTags, ExistingFileHelper helper) {
+		super(output, provider, blockTags.contentsGetter(), SlayersBeasts.MOD_ID, helper);
 	}
 
 	protected void addTags(HolderLookup.Provider provider) {
 		tag(SBTags.Items.JADE_GEMS).add(SBItems.JADE.get());
+
+		tag(ItemTags.MUSIC_DISCS).add(SBItems.MUSIC_DISC_INKISH.get());
 
 		WoodFamily.getAllFamilies().forEach(family -> copy(family.getLogBlocks(), family.getLogItems()));
 		copy(BlockTags.LOGS_THAT_BURN, ItemTags.LOGS_THAT_BURN);
