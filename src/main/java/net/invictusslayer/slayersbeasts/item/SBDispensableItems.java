@@ -6,7 +6,7 @@ import net.minecraft.world.entity.vehicle.Boat;
 import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.block.DispenserBlock;
 
-public class SBDispenserItems {
+public class SBDispensableItems {
 	public static void register() {
 		registerWoodFamilies();
 	}

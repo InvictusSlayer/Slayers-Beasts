@@ -1,11 +1,12 @@
 package net.invictusslayer.slayersbeasts.datagen;
 
 import net.invictusslayer.slayersbeasts.SlayersBeasts;
+import net.invictusslayer.slayersbeasts.datagen.lang.EnUsLanguageProvider;
 import net.invictusslayer.slayersbeasts.datagen.loot.SBBlockLoot;
 import net.invictusslayer.slayersbeasts.datagen.loot.SBChestLoot;
 import net.invictusslayer.slayersbeasts.datagen.loot.SBEntityLoot;
 import net.invictusslayer.slayersbeasts.datagen.loot.SBLootTables;
-import net.invictusslayer.slayersbeasts.datagen.tags.*;
+import net.invictusslayer.slayersbeasts.datagen.tag.*;
 import net.invictusslayer.slayersbeasts.world.SBNoises;
 import net.invictusslayer.slayersbeasts.world.biome.SBBiomes;
 import net.invictusslayer.slayersbeasts.world.dimension.SBDimensions;
@@ -66,10 +67,11 @@ public class SBDataGenerator {
 		gen.addProvider(hasServer, new SBEntityTagsProvider(output, provider, helper));
 		gen.addProvider(hasServer, new SBPoiTagsProvider(output, provider, helper));
 
-		gen.addProvider(hasServer, new SBLanguageProvider(output));
+		gen.addProvider(hasServer, new EnUsLanguageProvider(output));
 		gen.addProvider(hasServer, new SBRecipeProvider(output));
 		gen.addProvider(hasServer, new SBBlockStateProvider(output, helper));
 		gen.addProvider(hasServer, new SBItemModelProvider(output, helper));
+		gen.addProvider(hasServer, new SBSoundDefinitionsProvider(output, helper));
 
 		gen.addProvider(hasServer, new LootTableProvider(output, SBLootTables.all(), List.of(
 				new LootTableProvider.SubProviderEntry(SBBlockLoot::new, LootContextParamSets.BLOCK),

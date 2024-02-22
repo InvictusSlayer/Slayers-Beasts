@@ -1,4 +1,4 @@
-package net.invictusslayer.slayersbeasts.datagen.tags;
+package net.invictusslayer.slayersbeasts.datagen.tag;
 
 import net.invictusslayer.slayersbeasts.SlayersBeasts;
 import net.minecraft.core.registries.Registries;

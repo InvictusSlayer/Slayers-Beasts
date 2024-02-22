@@ -1,7 +1,7 @@
 package net.invictusslayer.slayersbeasts.mixin.common;
 
 import net.invictusslayer.slayersbeasts.block.SBBlocks;
-import net.invictusslayer.slayersbeasts.misc.SBMushroomCowType;
+import net.invictusslayer.slayersbeasts.entity.SBMushroomCowType;
 import net.minecraft.world.entity.animal.MushroomCow;
 import net.minecraft.world.level.block.state.BlockState;
 import org.objectweb.asm.Opcodes;

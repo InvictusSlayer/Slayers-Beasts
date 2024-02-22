@@ -12,12 +12,14 @@ import net.minecraftforge.common.data.ExistingFileHelper;
 import net.minecraftforge.registries.RegistryObject;
 
 public class SBItemModelProvider extends ItemModelProvider {
-	public SBItemModelProvider(PackOutput output, ExistingFileHelper existingFileHelper) {
-		super(output, SlayersBeasts.MOD_ID, existingFileHelper);
+	public SBItemModelProvider(PackOutput output, ExistingFileHelper helper) {
+		super(output, SlayersBeasts.MOD_ID, helper);
 	}
 
 	protected void registerModels() {
 		generateWoodFamilies();
+
+		item(SBItems.MUSIC_DISC_INKISH);
 
 		item(SBItems.JADE);
 		item(SBItems.JADE_SHARD);

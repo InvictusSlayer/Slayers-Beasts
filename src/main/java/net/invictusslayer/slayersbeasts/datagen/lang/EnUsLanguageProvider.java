@@ -1,23 +1,31 @@
-package net.invictusslayer.slayersbeasts.datagen;
+package net.invictusslayer.slayersbeasts.datagen.lang;
 
 import net.invictusslayer.slayersbeasts.SlayersBeasts;
 import net.invictusslayer.slayersbeasts.block.SBBlockFamily;
 import net.invictusslayer.slayersbeasts.block.SBBlocks;
 import net.invictusslayer.slayersbeasts.block.WoodFamily;
+import net.invictusslayer.slayersbeasts.effect.SBEffects;
 import net.invictusslayer.slayersbeasts.entity.SBEntities;
 import net.invictusslayer.slayersbeasts.item.SBItems;
+import net.invictusslayer.slayersbeasts.sound.SBSounds;
 import net.minecraft.data.BlockFamily;
 import net.minecraft.data.PackOutput;
+import net.minecraft.sounds.SoundEvent;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
 import net.minecraftforge.common.data.LanguageProvider;
 
-public class SBLanguageProvider extends LanguageProvider {
-	public SBLanguageProvider(PackOutput output) {
+import java.util.function.Supplier;
+
+public class EnUsLanguageProvider extends LanguageProvider {
+	public EnUsLanguageProvider(PackOutput output) {
 		super(output, SlayersBeasts.MOD_ID, "en_us");
 	}
 
 	protected void addTranslations() {
+		addItem(SBItems.MUSIC_DISC_INKISH, "Music Disc");
+		addItemDesc(SBItems.MUSIC_DISC_INKISH, "Sam Newham - inkish");
+
 		addItem(SBItems.JADE, "Jade");
 		addItem(SBItems.JADE_SHARD, "Jade Shard");
 		addItem(SBItems.CRYSTALLINE_WING, "Crystalline Wing");
@@ -116,11 +124,11 @@ public class SBLanguageProvider extends LanguageProvider {
 		
 		add("creative_tab.slayers_tab", "Slayer's Beasts");
 
-		add("effect.slayersbeasts.paralysis", "Paralysis");
-		
-		add("sounds.slayersbeasts.mantis_ambient", "Mantis chirps");
-		add("sounds.slayersbeasts.mantis_death", "Mantis dies");
-		add("sounds.slayersbeasts.mantis_hurt", "Mantis hurts");
+		addEffect(SBEffects.PARALYSIS, "Paralysis");
+
+		addSound(SBSounds.MANTIS_AMBIENT, "Mantis chirps");
+		addSound(SBSounds.MANTIS_DEATH, "Mantis dies");
+		addSound(SBSounds.MANTIS_HURT, "Mantis hurts");
 	}
 
 	private void addWoodFamily(WoodFamily family, String prefix) {
@@ -163,5 +171,13 @@ public class SBLanguageProvider extends LanguageProvider {
 				addBlock(() -> block, name + " Wall");
 			}
 		}));
+	}
+
+	private void addSound(Supplier<? extends SoundEvent> sound, String name) {
+		add(sound.get().getLocation().toLanguageKey("subtitles"), name);
+	}
+
+	private void addItemDesc(Supplier<? extends Item> item, String name) {
+		add(item.get().getDescriptionId() + ".desc", name);
 	}
 }

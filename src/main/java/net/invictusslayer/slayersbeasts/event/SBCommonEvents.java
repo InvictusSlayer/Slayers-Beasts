@@ -2,9 +2,9 @@ package net.invictusslayer.slayersbeasts.event;
 
 import net.invictusslayer.slayersbeasts.SlayersBeasts;
 import net.invictusslayer.slayersbeasts.block.*;
+import net.invictusslayer.slayersbeasts.config.SBConfig;
 import net.invictusslayer.slayersbeasts.entity.*;
-import net.invictusslayer.slayersbeasts.item.SBDispenserItems;
-import net.invictusslayer.slayersbeasts.misc.SBConfig;
+import net.invictusslayer.slayersbeasts.item.SBDispensableItems;
 import net.invictusslayer.slayersbeasts.world.biome.SBSurfaceRuleData;
 import net.invictusslayer.slayersbeasts.world.biome.region.SBNetherRegion;
 import net.invictusslayer.slayersbeasts.world.biome.region.SBOverworldRegion;
@@ -35,8 +35,8 @@ public class SBCommonEvents {
 		event.enqueueWork(() -> {
 			SBFlammableBlocks.register();
 			SBStrippableBlocks.register();
-			SBPottedPlants.register();
-			SBDispenserItems.register();
+			SBPottedBlocks.register();
+			SBDispensableItems.register();
 
 			((IExtendedTreeGrower) (Object) SBTreeGrowers.REDWOOD).setGigaTree(SBConfiguredFeatures.COLOSSAL_REDWOOD);
 

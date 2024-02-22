@@ -1,8 +1,7 @@
-package net.invictusslayer.slayersbeasts.misc;
+package net.invictusslayer.slayersbeasts.item;
 
 import net.invictusslayer.slayersbeasts.SlayersBeasts;
 import net.invictusslayer.slayersbeasts.block.SBBlocks;
-import net.invictusslayer.slayersbeasts.item.SBItems;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.CreativeModeTab;
@@ -201,6 +200,8 @@ public final class SBCreativeModeTab {
 				tab.accept(SBItems.WILLOW_HANGING_SIGN.get());
 				tab.accept(SBItems.WILLOW_BOAT.get());
 				tab.accept(SBItems.WILLOW_CHEST_BOAT.get());
+
+				tab.accept(SBItems.MUSIC_DISC_INKISH.get());
 
 				tab.accept(SBItems.MANTIS_SPAWN_EGG.get());
 				tab.accept(SBItems.ANT_WORKER_SPAWN_EGG.get());

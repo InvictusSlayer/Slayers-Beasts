@@ -1,4 +1,4 @@
-package net.invictusslayer.slayersbeasts.misc;
+package net.invictusslayer.slayersbeasts.entity.vehicle;
 
 import net.minecraft.world.entity.vehicle.Boat;
 

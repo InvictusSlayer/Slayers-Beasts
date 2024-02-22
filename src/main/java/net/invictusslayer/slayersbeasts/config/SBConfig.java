@@ -1,4 +1,4 @@
-package net.invictusslayer.slayersbeasts.misc;
+package net.invictusslayer.slayersbeasts.config;
 
 import net.minecraftforge.common.ForgeConfigSpec;
 

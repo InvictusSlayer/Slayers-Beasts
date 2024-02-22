@@ -5,7 +5,7 @@ import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.FlowerPotBlock;
 import net.minecraftforge.registries.RegistryObject;
 
-public class SBPottedPlants {
+public class SBPottedBlocks {
 	public static void register() {
 		register(SBBlocks.BLACK_MUSHROOM, SBBlocks.POTTED_BLACK_MUSHROOM);
 		register(SBBlocks.WHITE_MUSHROOM, SBBlocks.POTTED_WHITE_MUSHROOM);
