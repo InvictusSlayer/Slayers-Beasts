@@ -1,4 +1,4 @@
-package net.invictusslayer.slayersbeasts.datagen.tags;
+package net.invictusslayer.slayersbeasts.datagen.tag;
 
 import net.invictusslayer.slayersbeasts.SlayersBeasts;
 import net.invictusslayer.slayersbeasts.entity.SBEntities;
@@ -7,13 +7,12 @@ import net.minecraft.data.PackOutput;
 import net.minecraft.data.tags.EntityTypeTagsProvider;
 import net.minecraft.world.entity.EntityType;
 import net.minecraftforge.common.data.ExistingFileHelper;
-import org.jetbrains.annotations.Nullable;
 
 import java.util.concurrent.CompletableFuture;
 
 public class SBEntityTagsProvider extends EntityTypeTagsProvider {
-	public SBEntityTagsProvider(PackOutput packOutput, CompletableFuture<HolderLookup.Provider> lookupProvider, @Nullable ExistingFileHelper existingFileHelper) {
-		super(packOutput, lookupProvider, SlayersBeasts.MOD_ID, existingFileHelper);
+	public SBEntityTagsProvider(PackOutput output, CompletableFuture<HolderLookup.Provider> provider, ExistingFileHelper helper) {
+		super(output, provider, SlayersBeasts.MOD_ID, helper);
 	}
 
 	protected void addTags(HolderLookup.Provider pProvider) {

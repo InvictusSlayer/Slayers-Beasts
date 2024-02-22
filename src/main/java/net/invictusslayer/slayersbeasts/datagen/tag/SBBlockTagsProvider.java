@@ -1,4 +1,4 @@
-package net.invictusslayer.slayersbeasts.datagen.tags;
+package net.invictusslayer.slayersbeasts.datagen.tag;
 
 import net.invictusslayer.slayersbeasts.SlayersBeasts;
 import net.invictusslayer.slayersbeasts.block.SBBlocks;
@@ -14,8 +14,8 @@ import net.minecraftforge.common.data.ExistingFileHelper;
 import java.util.concurrent.CompletableFuture;
 
 public class SBBlockTagsProvider extends BlockTagsProvider {
-	public SBBlockTagsProvider(PackOutput output, CompletableFuture<HolderLookup.Provider> lookupProvider, ExistingFileHelper existingFileHelper) {
-		super(output, lookupProvider, SlayersBeasts.MOD_ID, existingFileHelper);
+	public SBBlockTagsProvider(PackOutput output, CompletableFuture<HolderLookup.Provider> provider, ExistingFileHelper helper) {
+		super(output, provider, SlayersBeasts.MOD_ID, helper);
 	}
 
 	protected void addTags(HolderLookup.Provider provider) {

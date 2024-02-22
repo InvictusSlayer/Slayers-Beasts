@@ -1,18 +1,18 @@
 package net.invictusslayer.slayersbeasts;
 
 import net.invictusslayer.slayersbeasts.block.SBBlocks;
+import net.invictusslayer.slayersbeasts.block.SBPois;
 import net.invictusslayer.slayersbeasts.block.entity.SBBlockEntities;
+import net.invictusslayer.slayersbeasts.config.SBConfig;
 import net.invictusslayer.slayersbeasts.effect.SBEffects;
 import net.invictusslayer.slayersbeasts.entity.SBEntities;
 import net.invictusslayer.slayersbeasts.entity.npc.SBVillagerType;
 import net.invictusslayer.slayersbeasts.event.SBClientEvents;
 import net.invictusslayer.slayersbeasts.event.SBCommonEvents;
+import net.invictusslayer.slayersbeasts.item.SBCreativeModeTab;
 import net.invictusslayer.slayersbeasts.item.SBItems;
 import net.invictusslayer.slayersbeasts.item.SBPotions;
-import net.invictusslayer.slayersbeasts.misc.SBConfig;
-import net.invictusslayer.slayersbeasts.misc.SBCreativeModeTab;
-import net.invictusslayer.slayersbeasts.misc.SBPois;
-import net.invictusslayer.slayersbeasts.misc.SBSounds;
+import net.invictusslayer.slayersbeasts.sound.SBSounds;
 import net.invictusslayer.slayersbeasts.world.biome.SBBiomeModifiers;
 import net.invictusslayer.slayersbeasts.world.feature.SBFeatures;
 import net.invictusslayer.slayersbeasts.world.feature.tree.decorator.SBTreeDecorators;

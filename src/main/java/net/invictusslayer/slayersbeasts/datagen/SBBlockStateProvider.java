@@ -19,8 +19,8 @@ import javax.annotation.Nullable;
 import java.util.Objects;
 
 public class SBBlockStateProvider extends BlockStateProvider {
-	public SBBlockStateProvider(PackOutput output, ExistingFileHelper existingFileHelper) {
-		super(output, SlayersBeasts.MOD_ID, existingFileHelper);
+	public SBBlockStateProvider(PackOutput output, ExistingFileHelper helper) {
+		super(output, SlayersBeasts.MOD_ID, helper);
 	}
 
 	protected void registerStatesAndModels() {
@@ -65,10 +65,10 @@ public class SBBlockStateProvider extends BlockStateProvider {
 		columnWithItem(SBBlocks.CHISELED_BLACK_SANDSTONE.get(), blockTexture(SBBlocks.CHISELED_BLACK_SANDSTONE.get()), extend(blockTexture(SBBlocks.BLACK_SANDSTONE.get()), "_top"));
 
 		cross(SBBlocks.BLACK_MUSHROOM.get());
-		pottedPlant(SBBlocks.POTTED_BLACK_MUSHROOM.get(), SBBlocks.BLACK_MUSHROOM.get());
+		pottedCross(SBBlocks.POTTED_BLACK_MUSHROOM.get(), SBBlocks.BLACK_MUSHROOM.get());
 		mushroomBlockWithItem(SBBlocks.BLACK_MUSHROOM_BLOCK.get(),"mushroom_block_dark_inside");
 		cross(SBBlocks.WHITE_MUSHROOM.get());
-		pottedPlant(SBBlocks.POTTED_WHITE_MUSHROOM.get(), SBBlocks.WHITE_MUSHROOM.get());
+		pottedCross(SBBlocks.POTTED_WHITE_MUSHROOM.get(), SBBlocks.WHITE_MUSHROOM.get());
 		mushroomBlockWithItem(SBBlocks.WHITE_MUSHROOM_BLOCK.get(), null);
 		thinMushroomStemWithItem(SBBlocks.THIN_MUSHROOM_STEM.get(), new ResourceLocation("minecraft:block/mushroom_block_inside"), new ResourceLocation("minecraft:block/mushroom_stem"));
 
@@ -102,7 +102,7 @@ public class SBBlockStateProvider extends BlockStateProvider {
 						else if (variant.equals(WoodFamily.Variant.STRIPPED_LOG)) logWithItem(stripped);
 						else if (variant.equals(WoodFamily.Variant.STRIPPED_WOOD)) woodWithItem(block, stripped);
 						else if (variant.equals(WoodFamily.Variant.POTTED_SAPLING))
-							pottedPlant(block, (Block) family.get(WoodFamily.Variant.SAPLING).get());
+							pottedCross(block, (Block) family.get(WoodFamily.Variant.SAPLING).get());
 						else if (variant.equals(WoodFamily.Variant.PRESSURE_PLATE))
 							pressurePlateWithItem(block, planks);
 						else if (variant.equals(WoodFamily.Variant.TRAPDOOR)) trapdoorWithItem(block);
@@ -119,25 +119,15 @@ public class SBBlockStateProvider extends BlockStateProvider {
 			Block base = family.getBaseBlock();
 			simpleCubeWithItem(base);
 			family.getVariants().forEach((variant, block) -> {
-				if (variant.equals(BlockFamily.Variant.SLAB)) {
-					simpleSlabWithItem(block, base);
-				} else if (variant.equals(BlockFamily.Variant.STAIRS)) {
-					simpleStairWithItem(block, base);
-				} else if (variant.equals(BlockFamily.Variant.FENCE)) {
-					fenceWithItem(block, base);
-				} else if (variant.equals(BlockFamily.Variant.FENCE_GATE)) {
-					fenceGateWithItem(block, base);
-				} else if (variant.equals(BlockFamily.Variant.BUTTON)) {
-					buttonWithItem(block, base);
-				} else if (variant.equals(BlockFamily.Variant.PRESSURE_PLATE)) {
-					pressurePlateWithItem(block, base);
-				} else if (variant.equals(BlockFamily.Variant.DOOR)) {
-					doorBlockWithRenderType((DoorBlock) block, extend(blockTexture(block), "_bottom"), extend(blockTexture(block), "_top"), "cutout");
-				} else if (variant.equals(BlockFamily.Variant.TRAPDOOR)) {
-					trapdoorWithItem(block);
-				} else if (variant.equals(BlockFamily.Variant.WALL)) {
-					wallWithItem(block, blockTexture(base));
-				}
+				if (variant.equals(BlockFamily.Variant.SLAB)) simpleSlabWithItem(block, base);
+				else if (variant.equals(BlockFamily.Variant.STAIRS)) simpleStairWithItem(block, base);
+				else if (variant.equals(BlockFamily.Variant.FENCE)) fenceWithItem(block, base);
+				else if (variant.equals(BlockFamily.Variant.FENCE_GATE)) fenceGateWithItem(block, base);
+				else if (variant.equals(BlockFamily.Variant.BUTTON)) buttonWithItem(block, base);
+				else if (variant.equals(BlockFamily.Variant.PRESSURE_PLATE)) pressurePlateWithItem(block, base);
+				else if (variant.equals(BlockFamily.Variant.DOOR)) doorBlockWithRenderType((DoorBlock) block, extend(blockTexture(block), "_bottom"), extend(blockTexture(block), "_top"), "cutout");
+				else if (variant.equals(BlockFamily.Variant.TRAPDOOR)) trapdoorWithItem(block);
+				else if (variant.equals(BlockFamily.Variant.WALL)) wallWithItem(block, blockTexture(base));
 			});
 		});
 	}
@@ -200,7 +190,7 @@ public class SBBlockStateProvider extends BlockStateProvider {
 		simpleBlockItem(block, model);
 	}
 
-	private void pottedPlant(Block potted, Block plant) {
+	private void pottedCross(Block potted, Block plant) {
 		simpleBlock(potted, models().singleTexture(name(potted), new ResourceLocation("flower_pot_cross"), "plant", blockTexture(plant)).renderType("cutout"));
 	}
 

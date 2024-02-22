@@ -1,4 +1,4 @@
-package net.invictusslayer.slayersbeasts.datagen.tags;
+package net.invictusslayer.slayersbeasts.datagen.tag;
 
 import net.invictusslayer.slayersbeasts.SlayersBeasts;
 import net.invictusslayer.slayersbeasts.world.biome.SBBiomes;
@@ -13,8 +13,8 @@ import net.minecraftforge.common.data.ExistingFileHelper;
 import java.util.concurrent.CompletableFuture;
 
 public class SBBiomeTagsProvider extends BiomeTagsProvider {
-	public SBBiomeTagsProvider(PackOutput output, CompletableFuture<HolderLookup.Provider> provider, ExistingFileHelper existingFileHelper) {
-		super(output, provider, SlayersBeasts.MOD_ID, existingFileHelper);
+	public SBBiomeTagsProvider(PackOutput output, CompletableFuture<HolderLookup.Provider> provider, ExistingFileHelper helper) {
+		super(output, provider, SlayersBeasts.MOD_ID, helper);
 	}
 
 	protected void addTags(HolderLookup.Provider provider) {

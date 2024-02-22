@@ -3,7 +3,7 @@ package net.invictusslayer.slayersbeasts.world.feature.icicle;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.invictusslayer.slayersbeasts.block.SBBlocks;
-import net.invictusslayer.slayersbeasts.datagen.tags.SBTags;
+import net.invictusslayer.slayersbeasts.datagen.tag.SBTags;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.tags.FluidTags;
