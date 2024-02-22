@@ -71,6 +71,7 @@ public class SBDataGenerator {
 		gen.addProvider(hasServer, new SBRecipeProvider(output));
 		gen.addProvider(hasServer, new SBBlockStateProvider(output, helper));
 		gen.addProvider(hasServer, new SBItemModelProvider(output, helper));
+		gen.addProvider(hasServer, new SBSoundDefinitionsProvider(output, helper));
 
 		gen.addProvider(hasServer, new LootTableProvider(output, SBLootTables.all(), List.of(
 				new LootTableProvider.SubProviderEntry(SBBlockLoot::new, LootContextParamSets.BLOCK),
