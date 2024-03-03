@@ -1,0 +1,71 @@
+plugins {
+    id 'fabric-loom' version '1.5-SNAPSHOT'
+}
+
+base.archivesName = "${mod_id}-fabric"
+
+loom {
+    splitEnvironmentSourceSets()
+
+    mixin {
+        defaultRefmapName = "mixins.${mod_id}.refmap.json"
+    }
+
+    mods {
+        "${mod_id}" {
+            sourceSet sourceSets.main
+            sourceSet sourceSets.client
+        }
+    }
+}
+
+fabricApi {
+    configureDataGeneration()
+}
+
+processResources {
+    inputs.property "version", project.version
+
+    filesMatching("fabric.mod.json") {
+        expand "version": project.version
+    }
+
+    from project(":common").sourceSets.main.resources
+}
+
+repositories {
+    maven { url = 'https://maven.parchmentmc.org' }
+}
+
+dependencies {
+    compileOnly project(":common")
+
+    minecraft "com.mojang:minecraft:${mc_version}"
+    modImplementation "net.fabricmc:fabric-loader:${fabric_version}"
+    mappings loom.layered() {
+        officialMojangMappings()
+        parchment "org.parchmentmc.data:parchment-${mc_version}:${pchmt_date}@zip"
+    }
+    modImplementation "net.fabricmc.fabric-api:fabric-api:${fabric_api_version}"
+}
+
+tasks.withType(JavaCompile).configureEach {
+    source(project(":common").sourceSets.main.allSource)
+}
+
+jar {
+    from("LICENSE") {
+        rename { "${it}_${project.base.archivesName.get()}"}
+    }
+}
+
+publishing {
+    publications {
+        mavenJava(MavenPublication) {
+            from components.java
+        }
+    }
+    repositories {
+
+    }
+}
