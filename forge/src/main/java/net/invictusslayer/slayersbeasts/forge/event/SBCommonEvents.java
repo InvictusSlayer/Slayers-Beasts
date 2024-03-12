@@ -1,14 +1,19 @@
 package net.invictusslayer.slayersbeasts.forge.event;
 
-import net.invictusslayer.slayersbeasts.block.*;
 import net.invictusslayer.slayersbeasts.common.SlayersBeasts;
-import net.invictusslayer.slayersbeasts.entity.*;
+import net.invictusslayer.slayersbeasts.common.block.IExtendedMushroomBlock;
+import net.invictusslayer.slayersbeasts.common.block.SBFlammableBlocks;
+import net.invictusslayer.slayersbeasts.common.block.SBPottedBlocks;
+import net.invictusslayer.slayersbeasts.common.block.SBStrippableBlocks;
+import net.invictusslayer.slayersbeasts.common.entity.*;
+import net.invictusslayer.slayersbeasts.common.init.SBBlocks;
+import net.invictusslayer.slayersbeasts.common.init.SBEntities;
+import net.invictusslayer.slayersbeasts.common.item.SBDispensableItems;
+import net.invictusslayer.slayersbeasts.common.world.biome.SBSurfaceRuleData;
+import net.invictusslayer.slayersbeasts.common.world.biome.region.SBNetherRegion;
+import net.invictusslayer.slayersbeasts.common.world.biome.region.SBOverworldRegion;
+import net.invictusslayer.slayersbeasts.common.world.feature.SBConfiguredFeatures;
 import net.invictusslayer.slayersbeasts.forge.config.SBConfig;
-import net.invictusslayer.slayersbeasts.item.SBDispensableItems;
-import net.invictusslayer.slayersbeasts.world.biome.SBSurfaceRuleData;
-import net.invictusslayer.slayersbeasts.world.biome.region.SBNetherRegion;
-import net.invictusslayer.slayersbeasts.world.biome.region.SBOverworldRegion;
-import net.invictusslayer.slayersbeasts.world.feature.SBConfiguredFeatures;
 import net.minecraft.world.entity.SpawnPlacements;
 import net.minecraft.world.entity.animal.MushroomCow;
 import net.minecraft.world.entity.vehicle.Boat;
@@ -27,8 +32,8 @@ import java.util.Arrays;
 public class SBCommonEvents {
 	@SuppressWarnings("deprecation")
 	public static void commonSetup(FMLCommonSetupEvent event) {
-		SlayersBeasts.LOGGER.info(String.format("Extended MushroomCow$Type values: %s", Arrays.toString(MushroomCow.MushroomType.values())));
-		SlayersBeasts.LOGGER.info(String.format("Extended Boat$Type values: %s", Arrays.toString(Boat.Type.values())));
+		SlayersBeasts.LOGGER.info("Extended MushroomCow$Type values: " + Arrays.toString(MushroomCow.MushroomType.values()));
+		SlayersBeasts.LOGGER.info("Extended Boat$Type values: " + Arrays.toString(Boat.Type.values()));
 
 		event.enqueueWork(() -> {
 			SBFlammableBlocks.register();

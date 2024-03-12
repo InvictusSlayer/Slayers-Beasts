@@ -1,71 +1,52 @@
 plugins {
-    id 'fabric-loom' version '1.5-SNAPSHOT'
+    id "com.github.johnrengelman.shadow" version "8.1.1"
 }
 
-base.archivesName = "${mod_id}-fabric"
-
-loom {
-    splitEnvironmentSourceSets()
-
-    mixin {
-        defaultRefmapName = "mixins.${mod_id}.refmap.json"
-    }
-
-    mods {
-        "${mod_id}" {
-            sourceSet sourceSets.main
-            sourceSet sourceSets.client
-        }
-    }
+architectury {
+    platformSetupLoomIde()
+    fabric()
 }
 
-fabricApi {
-    configureDataGeneration()
-}
-
-processResources {
-    inputs.property "version", project.version
-
-    filesMatching("fabric.mod.json") {
-        expand "version": project.version
-    }
-
-    from project(":common").sourceSets.main.resources
-}
-
-repositories {
-    maven { url = 'https://maven.parchmentmc.org' }
+configurations {
+    common
+    shadowCommon
+    compileClasspath.extendsFrom common
+    runtimeClasspath.extendsFrom common
+    developmentFabric.extendsFrom common
 }
 
 dependencies {
-    compileOnly project(":common")
-
-    minecraft "com.mojang:minecraft:${mc_version}"
     modImplementation "net.fabricmc:fabric-loader:${fabric_version}"
-    mappings loom.layered() {
-        officialMojangMappings()
-        parchment "org.parchmentmc.data:parchment-${mc_version}:${pchmt_date}@zip"
-    }
-    modImplementation "net.fabricmc.fabric-api:fabric-api:${fabric_api_version}"
+    modApi "net.fabricmc.fabric-api:fabric-api:${fabric_api}+${mc_version}"
+    modApi "dev.architectury:architectury-fabric:${arch_version}"
+
+    modRuntimeOnly "mezz.jei:jei-${mc_version}-fabric:${jei_version}"
+
+    common(project(path: ":common", configuration: "namedElements")) { transitive false }
+    shadowCommon(project(path: ":common", configuration: "transformProductionFabric")) { transitive false }
 }
 
-tasks.withType(JavaCompile).configureEach {
-    source(project(":common").sourceSets.main.allSource)
+shadowJar {
+    exclude "architectury.common.json"
+
+    configurations = [project.configurations.shadowCommon]
+    archiveClassifier = "dev-shadow"
 }
 
-jar {
-    from("LICENSE") {
-        rename { "${it}_${project.base.archivesName.get()}"}
-    }
+remapJar {
+    injectAccessWidener = true
+    input.set shadowJar.archiveFile
+    dependsOn shadowJar
 }
 
-publishing {
-    publications {
-        mavenJava(MavenPublication) {
-            from components.java
-        }
-    }
-    repositories {
+sourcesJar {
+    def commonSources = project(":common").sourcesJar
+    dependsOn commonSources
+    from commonSources.archiveFile.map { zipTree(it) }
+}
 
+components.java {
+    withVariantsFromConfiguration(project.configurations.shadowRuntimeElements) {
+        skip()
     }
 }

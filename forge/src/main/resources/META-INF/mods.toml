@@ -1,38 +1,45 @@
 modLoader="javafml"
-loaderVersion="${loader_version_range}"
+loaderVersion="${forge_range}"
 license="${mod_license}"
-issueTrackerURL="https://github.com/InvictusSlayer/Slayers-Beasts/issues"
+issueTrackerURL="${issue_url}"
 showAsResourcePack=false
 
 [[mods]]
 modId="slayersbeasts"
 version="${mod_version}"
 displayName="${mod_name}"
-#updateJSONURL=""
-displayURL="https://modrinth.com/mod/slayers-beasts"
-logoFile="slayersbeasts.png"
 authors="${mod_authors}"
 credits="InkCxp for help building the structures"
-displayTest="MATCH_VERSION" # MATCH_VERSION/IGNORE_SERVER_VERSION/IGNORE_ALL_VERSION/NONE
 description='''${mod_description}'''
+logoFile="assets/${mod_id}.png"
+displayURL="${homepage_url}"
+#updateJSONURL=""
+#displayTest="MATCH_VERSION"
 
-[[dependencies.${mod_id}]]
-    modId="minecraft"
-    mandatory=true
-    versionRange="${minecraft_version_range}"
-    ordering="NONE" # BEFORE/AFTER/NONE
-    side="BOTH" # CLIENT/SERVER/BOTH
+[[dependencies.slayersbeasts]]
+modId="minecraft"
+mandatory=true
+versionRange="${mc_range}"
+ordering="NONE"
+side="BOTH"
 
-[[dependencies.${mod_id}]]
-    modId="forge"
-    mandatory=true
-    versionRange="${forge_version_range}"
-    ordering="NONE"
-    side="BOTH"
+[[dependencies.slayersbeasts]]
+modId="forge"
+mandatory=true
+versionRange="${forge_range}"
+ordering="NONE"
+side="BOTH"
 
-[[dependencies.${mod_id}]]
-    modId="terrablender"
-    mandatory=true
-    versionRange="[${project.tb_version},)"
-    ordering="NONE"
-    side="BOTH"
+[[dependencies.slayersbeasts]]
+modId = "architectury"
+mandatory = true
+versionRange = "[${arch_version},)"
+ordering = "AFTER"
+side = "BOTH"
+
+[[dependencies.slayersbeasts]]
+modId="terrablender"
+mandatory=true
+versionRange="[${tb_version},)"
+ordering="NONE"
+side="BOTH"
