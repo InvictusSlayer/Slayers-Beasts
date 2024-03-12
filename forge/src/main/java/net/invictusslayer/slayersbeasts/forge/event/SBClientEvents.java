@@ -1,14 +1,11 @@
 package net.invictusslayer.slayersbeasts.forge.event;
 
-import net.invictusslayer.slayersbeasts.block.SBWoodType;
-import net.invictusslayer.slayersbeasts.block.entity.SBBlockEntities;
-import net.invictusslayer.slayersbeasts.client.model.*;
-import net.invictusslayer.slayersbeasts.client.renderer.*;
 import net.invictusslayer.slayersbeasts.common.SlayersBeasts;
-import net.invictusslayer.slayersbeasts.entity.SBEntities;
+import net.invictusslayer.slayersbeasts.common.block.SBWoodType;
+import net.invictusslayer.slayersbeasts.common.client.model.*;
+import net.invictusslayer.slayersbeasts.common.client.renderer.*;
+import net.invictusslayer.slayersbeasts.common.init.SBEntities;
 import net.minecraft.client.renderer.Sheets;
-import net.minecraft.client.renderer.blockentity.HangingSignRenderer;
-import net.minecraft.client.renderer.blockentity.SignRenderer;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.client.event.EntityRenderersEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -52,7 +49,7 @@ public final class SBClientEvents {
 		event.registerEntityRenderer(SBEntities.SPORETRAP.get(), SporetrapRenderer::new);
 		event.registerEntityRenderer(SBEntities.IRK.get(), IrkRenderer::new);
 
-		event.registerBlockEntityRenderer(SBBlockEntities.SIGN.get(), SignRenderer::new);
-		event.registerBlockEntityRenderer(SBBlockEntities.HANGING_SIGN.get(), HangingSignRenderer::new);
+//		event.registerBlockEntityRenderer(SBBlockEntities.SIGN.get(), SignRenderer::new);
+//		event.registerBlockEntityRenderer(SBBlockEntities.HANGING_SIGN.get(), HangingSignRenderer::new);
 	}
 }
