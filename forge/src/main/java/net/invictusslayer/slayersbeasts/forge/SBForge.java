@@ -1,26 +1,13 @@
 package net.invictusslayer.slayersbeasts.forge;
 
-import net.invictusslayer.slayersbeasts.block.SBBlocks;
-import net.invictusslayer.slayersbeasts.block.SBPois;
-import net.invictusslayer.slayersbeasts.block.entity.SBBlockEntities;
+import dev.architectury.platform.forge.EventBuses;
 import net.invictusslayer.slayersbeasts.common.SlayersBeasts;
-import net.invictusslayer.slayersbeasts.effect.SBEffects;
-import net.invictusslayer.slayersbeasts.entity.SBEntities;
-import net.invictusslayer.slayersbeasts.entity.npc.SBVillagerType;
 import net.invictusslayer.slayersbeasts.forge.config.SBConfig;
 import net.invictusslayer.slayersbeasts.forge.event.SBClientEvents;
 import net.invictusslayer.slayersbeasts.forge.event.SBCommonEvents;
-import net.invictusslayer.slayersbeasts.item.SBCreativeModeTab;
-import net.invictusslayer.slayersbeasts.item.SBItems;
-import net.invictusslayer.slayersbeasts.item.SBPotions;
-import net.invictusslayer.slayersbeasts.sound.SBSounds;
-import net.invictusslayer.slayersbeasts.world.biome.SBBiomeModifiers;
-import net.invictusslayer.slayersbeasts.world.feature.SBFeatures;
-import net.invictusslayer.slayersbeasts.world.feature.tree.decorator.SBTreeDecorators;
-import net.invictusslayer.slayersbeasts.world.feature.tree.foliage.SBFoliagePlacers;
-import net.invictusslayer.slayersbeasts.world.feature.tree.trunk.SBTrunkPlacers;
-import net.invictusslayer.slayersbeasts.world.structure.pieces.SBStructurePieces;
-import net.invictusslayer.slayersbeasts.world.structure.structures.SBStructureType;
+import net.invictusslayer.slayersbeasts.forge.init.SBForgeBlocks;
+import net.invictusslayer.slayersbeasts.forge.init.SBForgePois;
+import net.invictusslayer.slayersbeasts.forge.world.SBBiomeModifiers;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.ModLoadingContext;
@@ -33,25 +20,12 @@ public class SBForge {
 	public SBForge() {
 		IEventBus eventBus = FMLJavaModLoadingContext.get().getModEventBus();
 
-		SBCreativeModeTab.CREATIVE_TABS.register(eventBus);
-		SBItems.ITEMS.register(eventBus);
-		SBBlocks.BLOCKS.register(eventBus);
-		SBBlockEntities.BLOCK_ENTITIES.register(eventBus);
-		SBEntities.ENTITIES.register(eventBus);
-		SBVillagerType.VILLAGER_TYPES.register(eventBus);
-		SBEffects.EFFECTS.register(eventBus);
-		SBPotions.POTIONS.register(eventBus);
-		SBSounds.SOUNDS.register(eventBus);
-		SBTreeDecorators.TREE_DECORATORS.register(eventBus);
-		SBFoliagePlacers.FOLIAGE_PLACERS.register(eventBus);
-		SBTrunkPlacers.TRUNK_PLACERS.register(eventBus);
-		SBFeatures.FEATURES.register(eventBus);
-		SBBiomeModifiers.BIOME_MODIFIERS.register(eventBus);
-		SBStructurePieces.STRUCTURE_PIECES.register(eventBus);
-		SBStructureType.STRUCTURE_TYPES.register(eventBus);
-		SBPois.POIS.register(eventBus);
+		EventBuses.registerModEventBus(SlayersBeasts.MOD_ID, eventBus);
+		SlayersBeasts.init();
 
-		SBVillagerType.biomeSetup();
+		SBForgeBlocks.BLOCKS.register(eventBus);
+		SBForgePois.POIS.register(eventBus);
+		SBBiomeModifiers.BIOME_MODIFIERS.register(eventBus);
 
 		eventBus.addListener(SBCommonEvents::commonSetup);
 		eventBus.addListener(SBClientEvents::clientSetup);
