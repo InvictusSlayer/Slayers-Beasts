@@ -47,34 +47,25 @@ public class SBBlockTagsProvider extends BlockTagsProvider {
 		WoodFamily.getAllFamilies().forEach(family -> {
 			if (family.isFlammable()) tag(BlockTags.LOGS_THAT_BURN).addTag(family.getLogBlocks());
 
-			family.getVariants().forEach((variant, object) -> {
-				if (object.isPresent()) {
-					if (object.get() instanceof Block block) {
-						if (variant.equals(WoodFamily.Variant.BUTTON)) tag(BlockTags.WOODEN_BUTTONS).add(block);
-						else if (variant.equals(WoodFamily.Variant.DOOR)) tag(BlockTags.WOODEN_DOORS).add(block);
-						else if (variant.equals(WoodFamily.Variant.FENCE)) tag(BlockTags.WOODEN_FENCES).add(block);
-						else if (variant.equals(WoodFamily.Variant.FENCE_GATE))
-							tag(BlockTags.FENCE_GATES).add(block);
-						else if (variant.equals(WoodFamily.Variant.HANGING_SIGN))
-							tag(BlockTags.CEILING_HANGING_SIGNS).add(block);
-						else if (variant.equals(WoodFamily.Variant.LEAVES)) tag(BlockTags.LEAVES).add(block);
-						else if (variant.equals(WoodFamily.Variant.LOG)) tag(family.getLogBlocks()).add(block);
-						else if (variant.equals(WoodFamily.Variant.SAPLING)) tag(BlockTags.SAPLINGS).add(block);
-						else if (variant.equals(WoodFamily.Variant.SIGN)) tag(BlockTags.STANDING_SIGNS).add(block);
-						else if (variant.equals(WoodFamily.Variant.SLAB)) tag(BlockTags.WOODEN_SLABS).add(block);
-						else if (variant.equals(WoodFamily.Variant.STAIRS)) tag(BlockTags.WOODEN_STAIRS).add(block);
-						else if (variant.equals(WoodFamily.Variant.STRIPPED_LOG)) tag(family.getLogBlocks()).add(block);
-						else if (variant.equals(WoodFamily.Variant.STRIPPED_WOOD)) tag(family.getLogBlocks()).add(block);
-						else if (variant.equals(WoodFamily.Variant.PLANKS)) tag(BlockTags.PLANKS).add(block);
-						else if (variant.equals(WoodFamily.Variant.PRESSURE_PLATE))
-							tag(BlockTags.WOODEN_PRESSURE_PLATES).add(block);
-						else if (variant.equals(WoodFamily.Variant.TRAPDOOR))
-							tag(BlockTags.WOODEN_TRAPDOORS).add(block);
-						else if (variant.equals(WoodFamily.Variant.WALL_HANGING_SIGN))
-							tag(BlockTags.WALL_HANGING_SIGNS).add(block);
-						else if (variant.equals(WoodFamily.Variant.WALL_SIGN)) tag(BlockTags.WALL_SIGNS).add(block);
-						else if (variant.equals(WoodFamily.Variant.WOOD)) tag(family.getLogBlocks()).add(block);
-					}
+			family.getVariants().forEach((variant, supplier) -> {
+				if (!(supplier.get() instanceof Block block)) return;
+				switch (variant) {
+					case BUTTON -> tag(BlockTags.WOODEN_BUTTONS).add(block);
+					case DOOR -> tag(BlockTags.WOODEN_DOORS).add(block);
+					case FENCE -> tag(BlockTags.WOODEN_FENCES).add(block);
+					case FENCE_GATE -> tag(BlockTags.FENCE_GATES).add(block);
+					case HANGING_SIGN -> tag(BlockTags.CEILING_HANGING_SIGNS).add(block);
+					case LEAVES -> tag(BlockTags.LEAVES).add(block);
+					case LOG, STRIPPED_LOG, STRIPPED_WOOD, WOOD -> tag(family.getLogBlocks()).add(block);
+					case SAPLING -> tag(BlockTags.SAPLINGS).add(block);
+					case SIGN -> tag(BlockTags.STANDING_SIGNS).add(block);
+					case SLAB -> tag(BlockTags.WOODEN_SLABS).add(block);
+					case STAIRS -> tag(BlockTags.WOODEN_STAIRS).add(block);
+					case PLANKS -> tag(BlockTags.PLANKS).add(block);
+					case PRESSURE_PLATE -> tag(BlockTags.WOODEN_PRESSURE_PLATES).add(block);
+					case TRAPDOOR -> tag(BlockTags.WOODEN_TRAPDOORS).add(block);
+					case WALL_HANGING_SIGN -> tag(BlockTags.WALL_HANGING_SIGNS).add(block);
+					case WALL_SIGN -> tag(BlockTags.WALL_SIGNS).add(block);
 				}
 			});
 		});
