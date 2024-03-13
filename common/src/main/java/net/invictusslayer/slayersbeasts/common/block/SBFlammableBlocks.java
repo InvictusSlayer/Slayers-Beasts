@@ -18,18 +18,13 @@ public class SBFlammableBlocks {
 	}
 	
 	private static void registerWoodFamilies() {
-		WoodFamily.getAllFamilies().filter(WoodFamily::isFlammable).forEach(family -> {
-			register(family.get(WoodFamily.Variant.LOG), 5, 5);
-			register(family.get(WoodFamily.Variant.WOOD), 5, 5);
-			register(family.get(WoodFamily.Variant.STRIPPED_LOG), 5, 5);
-			register(family.get(WoodFamily.Variant.STRIPPED_WOOD), 5, 5);
-			register(family.get(WoodFamily.Variant.LEAVES), 60, 30);
-			register(family.get(WoodFamily.Variant.PLANKS), 20, 5);
-			register(family.get(WoodFamily.Variant.STAIRS), 20, 5);
-			register(family.get(WoodFamily.Variant.SLAB), 20, 5);
-			register(family.get(WoodFamily.Variant.FENCE), 20, 5);
-			register(family.get(WoodFamily.Variant.FENCE_GATE), 20, 5);
-		});
+		WoodFamily.getAllFamilies().filter(WoodFamily::isFlammable).forEach(family -> family.getVariants().forEach((variant, supplier) -> {
+			switch (variant) {
+				case LOG, WOOD, STRIPPED_LOG, STRIPPED_WOOD -> register(supplier, 5, 5);
+				case LEAVES -> register(supplier, 60, 30);
+				case PLANKS, STAIRS, SLAB, FENCE, FENCE_GATE -> register(supplier, 20, 5);
+			}
+		}));
 	}
 	
 	private static void register(RegistrySupplier<?> block, int flammability, int encouragement) {

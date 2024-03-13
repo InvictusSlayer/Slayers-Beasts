@@ -59,19 +59,18 @@ public class SBItemModelProvider extends ItemModelProvider {
 	}
 
 	private void generateWoodFamilies() {
-		WoodFamily.getAllFamilies().forEach(family -> {
-			if (family.get(WoodFamily.Variant.DOOR) != null) item(family.get(WoodFamily.Variant.DOOR));
-			if (family.get(WoodFamily.Variant.BOAT) != null) item(family.get(WoodFamily.Variant.BOAT));
-			if (family.get(WoodFamily.Variant.CHEST_BOAT) != null) item(family.get(WoodFamily.Variant.CHEST_BOAT));
-			if (family.get(WoodFamily.Variant.HANGING_SIGN_ITEM) != null) item(family.get(WoodFamily.Variant.HANGING_SIGN_ITEM));
-			if (family.get(WoodFamily.Variant.SAPLING) != null) block(family.get(WoodFamily.Variant.SAPLING));
-			if (family.get(WoodFamily.Variant.SIGN_ITEM) != null) item(family.get(WoodFamily.Variant.SIGN_ITEM));
-		});
+		WoodFamily.getAllFamilies().forEach(family -> family.getVariants().forEach((variant, supplier) -> {
+			switch (variant) {
+				case DOOR, BOAT, CHEST_BOAT, HANGING_SIGN_ITEM, SIGN_ITEM -> item(supplier);
+				case SAPLING -> block(supplier);
+			}
+		}));
 	}
 
 	private void block(RegistrySupplier<?> block) {
 		block(block, "");
 	}
+
 	private void block(RegistrySupplier<?> block, String suffix) {
 		withExistingParent(block.getId().getPath(),
 				new ResourceLocation("item/generated")).texture("layer0",

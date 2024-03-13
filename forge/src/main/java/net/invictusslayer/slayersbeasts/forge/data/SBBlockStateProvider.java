@@ -85,34 +85,26 @@ public class SBBlockStateProvider extends BlockStateProvider {
 			Block planks = (Block) family.get(WoodFamily.Variant.PLANKS).get();
 			Block stripped = (Block) family.get(WoodFamily.Variant.STRIPPED_LOG).get();
 
-			simpleCubeWithItem(planks);
-			family.getVariants().forEach((variant, object) -> {
-				if (object.isPresent()) {
-					if (object.get() instanceof Block block) {
-						if (variant.equals(WoodFamily.Variant.BUTTON)) buttonWithItem(block, planks);
-						else if (variant.equals(WoodFamily.Variant.DOOR))
-							doorBlockWithRenderType((DoorBlock) block, extend(blockTexture(block), "_bottom"), extend(blockTexture(block), "_top"), "cutout");
-						else if (variant.equals(WoodFamily.Variant.FENCE)) fenceWithItem(block, planks);
-						else if (variant.equals(WoodFamily.Variant.FENCE_GATE)) fenceGateWithItem(block, planks);
-						else if (variant.equals(WoodFamily.Variant.HANGING_SIGN))
-							hangingSign(block, (Block) family.get(WoodFamily.Variant.WALL_HANGING_SIGN).get(), blockTexture(stripped));
-						else if (variant.equals(WoodFamily.Variant.LEAVES)) simpleCubeWithItem(block);
-						else if (variant.equals(WoodFamily.Variant.LOG)) logWithItem(block);
-						else if (variant.equals(WoodFamily.Variant.SAPLING)) cross(block);
-						else if (variant.equals(WoodFamily.Variant.SIGN))
-							signBlock((StandingSignBlock) block, (WallSignBlock) family.get(WoodFamily.Variant.WALL_SIGN).get(), blockTexture(planks));
-						else if (variant.equals(WoodFamily.Variant.SLAB)) simpleSlabWithItem(block, planks);
-						else if (variant.equals(WoodFamily.Variant.STAIRS)) simpleStairWithItem(block, planks);
-						else if (variant.equals(WoodFamily.Variant.STRIPPED_LOG)) logWithItem(stripped);
-						else if (variant.equals(WoodFamily.Variant.STRIPPED_WOOD)) woodWithItem(block, stripped);
-						else if (variant.equals(WoodFamily.Variant.POTTED_SAPLING))
-							pottedCross(block, (Block) family.get(WoodFamily.Variant.SAPLING).get());
-						else if (variant.equals(WoodFamily.Variant.PRESSURE_PLATE))
-							pressurePlateWithItem(block, planks);
-						else if (variant.equals(WoodFamily.Variant.TRAPDOOR)) trapdoorWithItem(block);
-						else if (variant.equals(WoodFamily.Variant.WOOD))
-							woodWithItem(block, (Block) family.get(WoodFamily.Variant.LOG).get());
-					}
+			family.getVariants().forEach((variant, supplier) -> {
+				if (!(supplier.get() instanceof Block block)) return;
+				switch (variant) {
+					case BUTTON -> buttonWithItem(block, planks);
+					case DOOR -> doorBlockWithRenderType((DoorBlock) block, extend(blockTexture(block), "_bottom"), extend(blockTexture(block), "_top"), "cutout");
+					case FENCE -> fenceWithItem(block, planks);
+					case FENCE_GATE -> fenceGateWithItem(block, planks);
+					case HANGING_SIGN -> hangingSign(block, (Block) family.get(WoodFamily.Variant.WALL_HANGING_SIGN).get(), blockTexture(stripped));
+					case LEAVES, PLANKS -> simpleCubeWithItem(block);
+					case LOG -> logWithItem(block);
+					case SAPLING -> cross(block);
+					case SIGN -> signBlock((StandingSignBlock) block, (WallSignBlock) family.get(WoodFamily.Variant.WALL_SIGN).get(), blockTexture(planks));
+					case SLAB -> simpleSlabWithItem(block, planks);
+					case STAIRS -> simpleStairWithItem(block, planks);
+					case STRIPPED_LOG -> logWithItem(stripped);
+					case STRIPPED_WOOD -> woodWithItem(block, stripped);
+					case POTTED_SAPLING -> pottedCross(block, (Block) family.get(WoodFamily.Variant.SAPLING).get());
+					case PRESSURE_PLATE -> pressurePlateWithItem(block, planks);
+					case TRAPDOOR -> trapdoorWithItem(block);
+					case WOOD -> woodWithItem(block, (Block) family.get(WoodFamily.Variant.LOG).get());
 				}
 			});
 		});
@@ -123,15 +115,17 @@ public class SBBlockStateProvider extends BlockStateProvider {
 			Block base = family.getBaseBlock();
 			simpleCubeWithItem(base);
 			family.getVariants().forEach((variant, block) -> {
-				if (variant.equals(BlockFamily.Variant.SLAB)) simpleSlabWithItem(block, base);
-				else if (variant.equals(BlockFamily.Variant.STAIRS)) simpleStairWithItem(block, base);
-				else if (variant.equals(BlockFamily.Variant.FENCE)) fenceWithItem(block, base);
-				else if (variant.equals(BlockFamily.Variant.FENCE_GATE)) fenceGateWithItem(block, base);
-				else if (variant.equals(BlockFamily.Variant.BUTTON)) buttonWithItem(block, base);
-				else if (variant.equals(BlockFamily.Variant.PRESSURE_PLATE)) pressurePlateWithItem(block, base);
-				else if (variant.equals(BlockFamily.Variant.DOOR)) doorBlockWithRenderType((DoorBlock) block, extend(blockTexture(block), "_bottom"), extend(blockTexture(block), "_top"), "cutout");
-				else if (variant.equals(BlockFamily.Variant.TRAPDOOR)) trapdoorWithItem(block);
-				else if (variant.equals(BlockFamily.Variant.WALL)) wallWithItem(block, blockTexture(base));
+				switch (variant) {
+					case SLAB -> simpleSlabWithItem(block, base);
+					case STAIRS -> simpleStairWithItem(block, base);
+					case FENCE -> fenceWithItem(block, base);
+					case FENCE_GATE -> fenceGateWithItem(block, base);
+					case BUTTON -> buttonWithItem(block, base);
+					case PRESSURE_PLATE -> pressurePlateWithItem(block, base);
+					case DOOR -> doorBlockWithRenderType((DoorBlock) block, extend(blockTexture(block), "_bottom"), extend(blockTexture(block), "_top"), "cutout");
+					case TRAPDOOR -> trapdoorWithItem(block);
+					case WALL -> wallWithItem(block, blockTexture(base));
+				}
 			});
 		});
 	}

@@ -1,12 +1,15 @@
 package net.invictusslayer.slayersbeasts.common.data.loot;
 
+import net.invictusslayer.slayersbeasts.common.SlayersBeasts;
 import net.invictusslayer.slayersbeasts.common.block.SBBlockFamily;
 import net.invictusslayer.slayersbeasts.common.block.WoodFamily;
 import net.invictusslayer.slayersbeasts.common.init.SBBlocks;
 import net.invictusslayer.slayersbeasts.common.init.SBItems;
 import net.minecraft.advancements.critereon.StatePropertiesPredicate;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.data.BlockFamily;
 import net.minecraft.data.loot.BlockLootSubProvider;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.flag.FeatureFlags;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.enchantment.Enchantments;
@@ -14,6 +17,7 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.block.state.properties.DoubleBlockHalf;
+import net.minecraft.world.level.storage.loot.BuiltInLootTables;
 import net.minecraft.world.level.storage.loot.LootContext;
 import net.minecraft.world.level.storage.loot.LootPool;
 import net.minecraft.world.level.storage.loot.LootTable;
@@ -25,7 +29,10 @@ import net.minecraft.world.level.storage.loot.predicates.LootItemEntityPropertyC
 import net.minecraft.world.level.storage.loot.providers.number.ConstantValue;
 import net.minecraft.world.level.storage.loot.providers.number.UniformGenerator;
 
+import java.util.HashSet;
+import java.util.Locale;
 import java.util.Set;
+import java.util.function.BiConsumer;
 
 public class SBBlockLoot extends BlockLootSubProvider {
 	public SBBlockLoot() {
@@ -74,42 +81,48 @@ public class SBBlockLoot extends BlockLootSubProvider {
 		add(SBBlocks.WILLOW_BRANCH_PLANT.get(), block -> createLeavesDrops(block, SBBlocks.WILLOW_SAPLING.get(), 0.05F));
 	}
 
+	public void generate(BiConsumer<ResourceLocation, LootTable.Builder> biConsumer) {
+		generate();
+		HashSet<ResourceLocation> set = new HashSet<>();
+		for (Block block : BuiltInRegistries.BLOCK) {
+			if (!block.getLootTable().getNamespace().equals(SlayersBeasts.MOD_ID)) continue;
+			ResourceLocation location;
+			if (!block.isEnabled(enabledFeatures) || (location = block.getLootTable()) == BuiltInLootTables.EMPTY || !set.add(location)) continue;
+			LootTable.Builder builder = map.remove(location);
+			if (builder == null) {
+				throw new IllegalStateException(String.format(Locale.ROOT, "Missing loottable '%s' for '%s'", location, BuiltInRegistries.BLOCK.getKey(block)));
+			}
+			biConsumer.accept(location, builder);
+		}
+		if (!map.isEmpty()) {
+			throw new IllegalStateException("Created block loot tables for non-blocks: " + map.keySet());
+		}
+	}
+
 	private void generateWoodFamilies() {
-		WoodFamily.getAllFamilies().forEach(family -> {
-			family.getVariants().forEach((variant, object) -> {
-				if (object.get() instanceof Block block) {
-					if (variant.equals(WoodFamily.Variant.DOOR)) {
-						add(block, this::createDoorTable);
-					} else if (variant.equals(WoodFamily.Variant.LEAVES)) {
-						add(block, createLeavesDrops(block, (Block) family.get(WoodFamily.Variant.SAPLING).get(), 0.05F));
-					} else if (variant.equals(WoodFamily.Variant.POTTED_SAPLING)) {
-						add(block, createPotFlowerItemTable((Block) family.get(WoodFamily.Variant.SAPLING).get()));
-					} else if (variant.equals(WoodFamily.Variant.SLAB)){
-						add(block, this::createSlabItemTable);
-					} else if (variant.equals(WoodFamily.Variant.WALL_HANGING_SIGN)) {
-						dropOther(block, (Block) family.get(WoodFamily.Variant.HANGING_SIGN).get());
-					} else if (variant.equals(WoodFamily.Variant.WALL_SIGN)) {
-						dropOther(block, (Block) family.get(WoodFamily.Variant.SIGN).get());
-					} else {
-						dropSelf(block);
-					}
-				}
-			});
-		});
+		WoodFamily.getAllFamilies().forEach(family -> family.getVariants().forEach((variant, supplier) -> {
+			if (!(supplier.get() instanceof Block block)) return;
+			switch (variant) {
+				default -> dropSelf(block);
+				case DOOR -> add(block, this::createDoorTable);
+				case LEAVES -> add(block, createLeavesDrops(block, (Block) family.get(WoodFamily.Variant.SAPLING).get(), 0.05F));
+				case POTTED_SAPLING -> add(block, createPotFlowerItemTable((Block) family.get(WoodFamily.Variant.SAPLING).get()));
+				case SLAB -> add(block, this::createSlabItemTable);
+				case WALL_HANGING_SIGN -> dropOther(block, (Block) family.get(WoodFamily.Variant.HANGING_SIGN).get());
+				case WALL_SIGN -> dropOther(block, (Block) family.get(WoodFamily.Variant.SIGN).get());
+			}
+		}));
 	}
 
 	private void generateBlockFamilies() {
 		SBBlockFamily.getAllFamilies().forEach(family -> {
 			dropSelf(family.getBaseBlock());
 			family.getVariants().forEach((variant, block) -> {
-				if (variant.equals(BlockFamily.Variant.SLAB)) {
-					add(block, this::createSlabItemTable);
-				} else if (variant.equals(BlockFamily.Variant.DOOR)) {
-					add(block, this::createDoorTable);
-				} else if (variant.equals(BlockFamily.Variant.WALL_SIGN)) {
-					dropOther(block, family.get(BlockFamily.Variant.SIGN));
-				} else {
-					dropSelf(block);
+				switch (variant) {
+					default -> dropSelf(block);
+					case SLAB -> add(block, this::createSlabItemTable);
+					case DOOR -> add(block, this::createDoorTable);
+					case WALL_SIGN -> dropOther(block, family.get(BlockFamily.Variant.SIGN));
 				}
 			});
 		});

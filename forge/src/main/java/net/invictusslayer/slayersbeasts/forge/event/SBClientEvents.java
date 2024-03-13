@@ -1,11 +1,9 @@
 package net.invictusslayer.slayersbeasts.forge.event;
 
 import net.invictusslayer.slayersbeasts.common.SlayersBeasts;
-import net.invictusslayer.slayersbeasts.common.block.SBWoodType;
 import net.invictusslayer.slayersbeasts.common.client.model.*;
 import net.invictusslayer.slayersbeasts.common.client.renderer.*;
 import net.invictusslayer.slayersbeasts.common.init.SBEntities;
-import net.minecraft.client.renderer.Sheets;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.client.event.EntityRenderersEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -15,7 +13,7 @@ import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 @Mod.EventBusSubscriber(modid = SlayersBeasts.MOD_ID, bus = Mod.EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
 public final class SBClientEvents {
 	public static void clientSetup(FMLClientSetupEvent event) {
-		event.enqueueWork(() -> SBWoodType.values().forEach(Sheets::addWoodType));
+		event.enqueueWork(SlayersBeasts::clientSetup);
 	}
 
 	@SubscribeEvent
@@ -48,8 +46,5 @@ public final class SBClientEvents {
 		event.registerEntityRenderer(SBEntities.WUDU_OAK.get(), WuduRenderer::new);
 		event.registerEntityRenderer(SBEntities.SPORETRAP.get(), SporetrapRenderer::new);
 		event.registerEntityRenderer(SBEntities.IRK.get(), IrkRenderer::new);
-
-//		event.registerBlockEntityRenderer(SBBlockEntities.SIGN.get(), SignRenderer::new);
-//		event.registerBlockEntityRenderer(SBBlockEntities.HANGING_SIGN.get(), HangingSignRenderer::new);
 	}
 }

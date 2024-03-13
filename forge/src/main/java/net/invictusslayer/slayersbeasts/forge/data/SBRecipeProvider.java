@@ -66,42 +66,27 @@ public class SBRecipeProvider extends RecipeProvider {
 	private void generateWoodFamilies(RecipeOutput output) {
 		WoodFamily.getAllFamilies().forEach(family -> {
 			Block planks = (Block) family.get(WoodFamily.Variant.PLANKS).get();
-			Block stripped = (Block) family.get(WoodFamily.Variant.STRIPPED_LOG).get();
+			Ingredient ingredient = Ingredient.of(planks);
 
-			family.getVariants().forEach((variant, object) -> {
-				if (object.isPresent()) {
-					if (object.get() instanceof Block block) {
-						if (variant.equals(WoodFamily.Variant.BUTTON))
-							woodenRecipe(output, buttonBuilder(block, Ingredient.of(planks)), planks, "button");
-						else if (variant.equals(WoodFamily.Variant.DOOR))
-							woodenRecipe(output, doorBuilder((Block) family.get(WoodFamily.Variant.DOOR).get(), Ingredient.of(planks)), planks, "door");
-						else if (variant.equals(WoodFamily.Variant.FENCE))
-							woodenRecipe(output, fenceBuilder((Block) family.get(WoodFamily.Variant.FENCE).get(), Ingredient.of(planks)), planks, "fence");
-						else if (variant.equals(WoodFamily.Variant.FENCE_GATE))
-							woodenRecipe(output, fenceGateBuilder((Block) family.get(WoodFamily.Variant.FENCE_GATE).get(), Ingredient.of(planks)), planks, "fence_gate");
-						else if (variant.equals(WoodFamily.Variant.SIGN))
-							woodenRecipe(output, signBuilder((Block) family.get(WoodFamily.Variant.SIGN).get(), Ingredient.of(planks)), planks, "sign");
-						else if (variant.equals(WoodFamily.Variant.SLAB))
-							woodenRecipe(output, slabBuilder(RecipeCategory.BUILDING_BLOCKS, (Block) family.get(WoodFamily.Variant.SLAB).get(), Ingredient.of(planks)), planks, "slab");
-						else if (variant.equals(WoodFamily.Variant.STAIRS))
-							woodenRecipe(output, stairBuilder((Block) family.get(WoodFamily.Variant.STAIRS).get(), Ingredient.of(planks)), planks, "stairs");
-						else if (variant.equals(WoodFamily.Variant.STRIPPED_WOOD))
-							woodFromLogs(output, (Block) family.get(WoodFamily.Variant.STRIPPED_WOOD).get(), stripped);
-						else if (variant.equals(WoodFamily.Variant.PLANKS))
-							planksFromLog(output, planks, family.getLogItems(), 4);
-						else if (variant.equals(WoodFamily.Variant.PRESSURE_PLATE))
-							woodenRecipe(output, pressurePlateBuilder(RecipeCategory.REDSTONE, (Block) family.get(WoodFamily.Variant.PRESSURE_PLATE).get(), Ingredient.of(planks)), planks, "pressure_plate");
-						else if (variant.equals(WoodFamily.Variant.TRAPDOOR))
-							woodenRecipe(output, trapdoorBuilder((Block) family.get(WoodFamily.Variant.TRAPDOOR).get(), Ingredient.of(planks)), planks, "trapdoor");
-						else if (variant.equals(WoodFamily.Variant.WOOD))
-							woodFromLogs(output, (Block) family.get(WoodFamily.Variant.WOOD).get(), (Block) family.get(WoodFamily.Variant.LOG).get());
-					} else if (object.get() instanceof Item item) {
-						if (variant.equals(WoodFamily.Variant.BOAT)) woodenBoat(output, item, planks);
-						else if (variant.equals(WoodFamily.Variant.CHEST_BOAT))
-							chestBoat(output, item, (Item) family.get(WoodFamily.Variant.BOAT).get());
-						else if (variant.equals(WoodFamily.Variant.HANGING_SIGN_ITEM))
-							hangingSign(output, item, stripped);
-					}
+			family.getVariants().forEach((variant, supplier) -> {
+				if (!(supplier.isPresent())) return;
+				ItemLike item = (ItemLike) supplier.get();
+				switch (variant) {
+					case BOAT -> woodenBoat(output, item, planks);
+					case BUTTON -> woodenRecipe(output, buttonBuilder(item, ingredient), planks, "button");
+					case CHEST_BOAT -> chestBoat(output, item, (Item) family.get(WoodFamily.Variant.BOAT).get());
+					case DOOR -> woodenRecipe(output, doorBuilder(item, ingredient), planks, "door");
+					case FENCE -> woodenRecipe(output, fenceBuilder(item, ingredient), planks, "fence");
+					case FENCE_GATE -> woodenRecipe(output, fenceGateBuilder(item, ingredient), planks, "fence_gate");
+					case HANGING_SIGN_ITEM -> hangingSign(output, item, (Block) family.get(WoodFamily.Variant.STRIPPED_LOG).get());
+					case PLANKS -> planksFromLog(output, item, family.getLogItems(), 4);
+					case PRESSURE_PLATE -> woodenRecipe(output, pressurePlateBuilder(RecipeCategory.REDSTONE, item, ingredient), planks, "pressure_plate");
+					case SIGN_ITEM -> woodenRecipe(output, signBuilder(item, ingredient), planks, "sign");
+					case SLAB -> woodenRecipe(output, slabBuilder(RecipeCategory.BUILDING_BLOCKS, item, ingredient), planks, "slab");
+					case STAIRS -> woodenRecipe(output, stairBuilder(item, ingredient), planks, "stairs");
+					case STRIPPED_WOOD -> woodFromLogs(output, item, (Block) family.get(WoodFamily.Variant.STRIPPED_LOG).get());
+					case TRAPDOOR -> woodenRecipe(output, trapdoorBuilder(item, ingredient), planks, "trapdoor");
+					case WOOD -> woodFromLogs(output, item, (Block) family.get(WoodFamily.Variant.LOG).get());
 				}
 			});
 		});
@@ -122,6 +107,7 @@ public class SBRecipeProvider extends RecipeProvider {
 	protected static void nineBlockStorageRecipes(RecipeOutput output, RecipeCategory unpackedCategory, ItemLike unpacked, RecipeCategory packedCategory, ItemLike packed) {
 		nineBlockStorageRecipes(output, unpackedCategory, unpacked, packedCategory, packed, getSimpleRecipeName(packed), getSimpleRecipeName(unpacked));
 	}
+
 	protected static void nineBlockStorageRecipes(RecipeOutput output, RecipeCategory unpackedCategory, ItemLike unpacked, RecipeCategory packedCategory, ItemLike packed, String packedName, String unpackedName) {
 		ShapelessRecipeBuilder.shapeless(unpackedCategory, unpacked, 9).requires(packed).group(null).unlockedBy(getHasName(packed), has(packed)).save(output, new ResourceLocation(SlayersBeasts.MOD_ID, unpackedName));
 		ShapedRecipeBuilder.shaped(packedCategory, packed).define('#', unpacked).pattern("###").pattern("###").pattern("###").group(null).unlockedBy(getHasName(unpacked), has(unpacked)).save(output, new ResourceLocation(SlayersBeasts.MOD_ID, packedName));

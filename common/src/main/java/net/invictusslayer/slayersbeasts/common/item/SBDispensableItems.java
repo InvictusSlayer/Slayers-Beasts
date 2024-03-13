@@ -14,10 +14,9 @@ public class SBDispensableItems {
 	private static void registerWoodFamilies() {
 		WoodFamily.getAllFamilies().forEach(family -> {
 			Boat.Type type = family.getBoatType();
-			if (type != null) {
-				DispenserBlock.registerBehavior((ItemLike) family.get(WoodFamily.Variant.BOAT).get(), new BoatDispenseItemBehavior(type));
-				DispenserBlock.registerBehavior((ItemLike) family.get(WoodFamily.Variant.CHEST_BOAT).get(), new BoatDispenseItemBehavior(type, true));
-			}
+			if (type == null) return;
+			DispenserBlock.registerBehavior((ItemLike) family.get(WoodFamily.Variant.BOAT).get(), new BoatDispenseItemBehavior(type));
+			DispenserBlock.registerBehavior((ItemLike) family.get(WoodFamily.Variant.CHEST_BOAT).get(), new BoatDispenseItemBehavior(type, true));
 		});
 	}
 }
