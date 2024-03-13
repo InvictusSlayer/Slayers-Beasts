@@ -2,6 +2,7 @@ package net.invictusslayer.slayersbeasts.forge.data;
 
 import net.invictusslayer.slayersbeasts.common.SlayersBeasts;
 import net.invictusslayer.slayersbeasts.common.data.lang.EnUsLanguageProvider;
+import net.invictusslayer.slayersbeasts.common.data.loot.SBBlockLoot;
 import net.invictusslayer.slayersbeasts.common.data.loot.SBChestLoot;
 import net.invictusslayer.slayersbeasts.common.data.loot.SBEntityLoot;
 import net.invictusslayer.slayersbeasts.common.data.loot.SBLootTables;
@@ -73,7 +74,7 @@ public class SBForgeDataGenerator {
 		gen.addProvider(hasServer, new SBSoundDefinitionsProvider(output, helper));
 
 		gen.addProvider(hasServer, new LootTableProvider(output, SBLootTables.all(), List.of(
-//				new LootTableProvider.SubProviderEntry(SBBlockLoot::new, LootContextParamSets.BLOCK),
+				new LootTableProvider.SubProviderEntry(SBBlockLoot::new, LootContextParamSets.BLOCK),
 				new LootTableProvider.SubProviderEntry(SBEntityLoot::new, LootContextParamSets.ENTITY),
 				new LootTableProvider.SubProviderEntry(SBChestLoot::new, LootContextParamSets.CHEST)
 		)));

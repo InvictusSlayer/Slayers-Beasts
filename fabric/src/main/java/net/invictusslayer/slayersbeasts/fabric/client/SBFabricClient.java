@@ -6,23 +6,19 @@ import net.fabricmc.api.Environment;
 import net.fabricmc.fabric.api.blockrenderlayer.v1.BlockRenderLayerMap;
 import net.fabricmc.fabric.api.client.rendering.v1.EntityModelLayerRegistry;
 import net.fabricmc.fabric.api.client.rendering.v1.EntityRendererRegistry;
-import net.invictusslayer.slayersbeasts.common.block.SBWoodType;
+import net.invictusslayer.slayersbeasts.common.SlayersBeasts;
 import net.invictusslayer.slayersbeasts.common.block.WoodFamily;
 import net.invictusslayer.slayersbeasts.common.client.model.*;
 import net.invictusslayer.slayersbeasts.common.client.renderer.*;
 import net.invictusslayer.slayersbeasts.common.init.SBBlocks;
 import net.invictusslayer.slayersbeasts.common.init.SBEntities;
 import net.minecraft.client.renderer.RenderType;
-import net.minecraft.client.renderer.Sheets;
 import net.minecraft.world.level.block.Block;
 
 @Environment(EnvType.CLIENT)
 public class SBFabricClient implements ClientModInitializer {
 	public void onInitializeClient() {
-		SBWoodType.values().forEach(type -> {
-			Sheets.SIGN_MATERIALS.put(type, Sheets.createSignMaterial(type));
-			Sheets.HANGING_SIGN_MATERIALS.put(type, Sheets.createHangingSignMaterial(type));
-		});
+		SlayersBeasts.clientSetup();
 
 		renderWoodFamilies();
 		BlockRenderLayerMap.INSTANCE.putBlocks(RenderType.cutout(),
@@ -57,14 +53,11 @@ public class SBFabricClient implements ClientModInitializer {
 		EntityRendererRegistry.register(SBEntities.WUDU_OAK.get(), WuduRenderer::new);
 		EntityRendererRegistry.register(SBEntities.SPORETRAP.get(), SporetrapRenderer::new);
 		EntityRendererRegistry.register(SBEntities.IRK.get(), IrkRenderer::new);
-
-//		BlockEntityRendererRegistry.register(SBBlockEntities.SIGN.get(), SignRenderer::new);
-//		BlockEntityRendererRegistry.register(SBBlockEntities.HANGING_SIGN.get(), HangingSignRenderer::new);
 	}
 
 	private void renderWoodFamilies() {
-		WoodFamily.getAllFamilies().forEach(family -> family.getVariants().forEach((variant, object) -> {
-			if (variant.isCutout()) BlockRenderLayerMap.INSTANCE.putBlock((Block) object.get(), RenderType.cutout());
+		WoodFamily.getAllFamilies().forEach(family -> family.getVariants().forEach((variant, supplier) -> {
+			if (variant.isCutout()) BlockRenderLayerMap.INSTANCE.putBlock((Block) supplier.get(), RenderType.cutout());
 		}));
 	}
 }
