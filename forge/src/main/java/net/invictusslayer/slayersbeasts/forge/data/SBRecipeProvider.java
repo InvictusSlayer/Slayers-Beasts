@@ -22,7 +22,7 @@ public class SBRecipeProvider extends RecipeProvider {
 		super(output);
 	}
 
-	protected void buildRecipes(RecipeOutput output) {
+	public void buildRecipes(RecipeOutput output) {
 		generateBlockFamilies(output);
 		generateWoodFamilies(output);
 

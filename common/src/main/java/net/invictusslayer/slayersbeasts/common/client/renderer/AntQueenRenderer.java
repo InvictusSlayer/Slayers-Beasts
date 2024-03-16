@@ -23,10 +23,10 @@ public class AntQueenRenderer<T extends AntQueen> extends MobRenderer<T, AntQuee
 	}
 
 	public ResourceLocation getTextureLocation(T entity) {
-		return switch (entity.getAntType()) {
-			default -> WOOD;
-			case 1 -> LEAFCUTTER;
-			case 2 -> MEADOW;
+		return switch (entity.getVariant()) {
+			case WOOD -> WOOD;
+			case LEAFCUTTER -> LEAFCUTTER;
+			case MEADOW -> MEADOW;
 		};
 	}
 }

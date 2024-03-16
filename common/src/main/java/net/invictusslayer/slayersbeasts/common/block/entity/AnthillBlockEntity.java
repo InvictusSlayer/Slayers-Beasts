@@ -30,24 +30,24 @@ public class AnthillBlockEntity extends BlockEntity {
 			"CooldownToEnterNest", "CooldownToLocateNest", "FailedForagingTime", "NestPos", "Passengers", "Leash", "UUID");
 	private final List<AntData> storedAnts = new ArrayList<>();
 	private final Map<BlockPos, UpgradeData> nestUpgrades = new HashMap<>();
-	private int inhabitantType;
+	private AbstractAnt.Variant inhabitantVariant;
 	private boolean hasQueen;
 
 	public AnthillBlockEntity(BlockPos pos, BlockState state) {
 		super(SBBlockEntities.ANTHILL.get(), pos, state);
-		inhabitantType = 99;
+		inhabitantVariant = null;
 	}
 
-	protected void saveAdditional(CompoundTag pTag) {
-		super.saveAdditional(pTag);
-		pTag.put("Ants", writeAnts());
-		pTag.put("Upgrades", writeUpgrades());
-		pTag.putInt("InhabitantType", getInhabitantType());
-		pTag.putBoolean("HasQueen", hasQueen);
+	protected void saveAdditional(CompoundTag tag) {
+		super.saveAdditional(tag);
+		tag.put("Ants", writeAnts());
+		tag.put("Upgrades", writeUpgrades());
+		if (getInhabitantVariant() != null) tag.putInt("InhabitantType", getInhabitantVariant().getId());
+		tag.putBoolean("HasQueen", hasQueen);
 	}
 
 	public ListTag writeAnts() {
-		ListTag listTag = new ListTag();
+		ListTag tags = new ListTag();
 
 		for (AntData data : storedAnts) {
 			CompoundTag dataTag = data.entityData.copy();
@@ -57,9 +57,9 @@ public class AnthillBlockEntity extends BlockEntity {
 			tag.putInt("TicksInNest", data.ticksInNest);
 			tag.putInt("MinOccupationTicks", data.minOccupationTicks);
 			tag.putBoolean("IsQueen", data.isQueen);
-			listTag.add(tag);
+			tags.add(tag);
 		}
-		return listTag;
+		return tags;
 	}
 
 	public ListTag writeUpgrades() {
@@ -82,9 +82,8 @@ public class AnthillBlockEntity extends BlockEntity {
 		ListTag upgradeList = tag.getList("Upgrades", 10);
 
 		for (int i = 0; i < antList.size(); ++i) {
-			CompoundTag tag1 = antList.getCompound(i);
-			AntData data = new AntData(tag1.getCompound("EntityData"), tag1.getInt("TicksInNest"),
-					tag1.getInt("MinOccupationTicks"), tag1.getBoolean("IsQueen"));
+			CompoundTag antTag = antList.getCompound(i);
+			AntData data = new AntData(antTag.getCompound("EntityData"), antTag.getInt("TicksInNest"), antTag.getInt("MinOccupationTicks"), antTag.getBoolean("IsQueen"));
 			storedAnts.add(data);
 		}
 
@@ -95,7 +94,7 @@ public class AnthillBlockEntity extends BlockEntity {
 			nestUpgrades.put(pos, data);
 		}
 
-		setInhabitantType(tag.getInt("InhabitantType"));
+		setInhabitantVariant(tag.contains("InhabitantType") ? AbstractAnt.Variant.byId(tag.getInt("InhabitantType")) : null);
 		hasQueen = tag.getBoolean("HasQueen");
 	}
 
@@ -113,11 +112,12 @@ public class AnthillBlockEntity extends BlockEntity {
 		return storedAnts.size() == 10;
 	}
 
-	public int getInhabitantType() {
-		return inhabitantType;
+	public AbstractAnt.Variant getInhabitantVariant() {
+		return inhabitantVariant;
 	}
-	public void setInhabitantType(int type) {
-		inhabitantType = type;
+
+	public void setInhabitantVariant(AbstractAnt.Variant variant) {
+		inhabitantVariant = variant;
 	}
 
 	public static void serverTick(Level level, BlockPos pos, BlockState blockState, AnthillBlockEntity entity) {
@@ -177,26 +177,19 @@ public class AnthillBlockEntity extends BlockEntity {
 	}
 
 	private void upgradeNest(Level level, BlockPos nestPos, BlockState blockState, int upgradeType) {
-		Block block = null;
-
 		List<BlockPos> posList = scanNest(level, nestPos, SBBlocks.ARIDISOL.get(), null);
 		if (posList.isEmpty() || nestUpgrades.size() > 5) return;
 
 		BlockPos blockPos = posList.get(level.random.nextInt(posList.size()));
-		if (upgradeType == 1) {
-			block = SBBlocks.ANTHILL_HATCHERY.get();
-		} else if (upgradeType == 99) {
-			block = SBBlocks.ARIDISOL.get();
-		}
 
-		if (block != null) {
-			this.nestUpgrades.put(blockPos, new UpgradeData(upgradeType, blockPos));
-			level.setBlock(nestPos, blockState.setValue(AnthillBlock.SUPPLY_LEVEL, getSupplyLevel(blockState) - 5), 3);
-			level.setBlockAndUpdate(blockPos, block.defaultBlockState());
-			setChanged(level, nestPos, blockState);
-			if (level.getBlockEntity(blockPos) instanceof BaseAnthillBlockEntity blockEntity) {
-				blockEntity.setParentNestPos(nestPos);
-			}
+		Block block = upgradeType == 1 ? SBBlocks.ANTHILL_HATCHERY.get() : SBBlocks.ARIDISOL.get();
+
+		nestUpgrades.put(blockPos, new UpgradeData(upgradeType, blockPos));
+		level.setBlock(nestPos, blockState.setValue(AnthillBlock.SUPPLY_LEVEL, getSupplyLevel(blockState) - 5), 3);
+		level.setBlockAndUpdate(blockPos, block.defaultBlockState());
+		setChanged(level, nestPos, blockState);
+		if (level.getBlockEntity(blockPos) instanceof BaseAnthillBlockEntity blockEntity) {
+			blockEntity.setParentNestPos(nestPos);
 		}
 	}
 
@@ -219,7 +212,7 @@ public class AnthillBlockEntity extends BlockEntity {
 			for (int x = -radius; x <= radius; x++) {
 				for (int z = -radius; z <= radius; z++) {
 					BlockPos tempBlockPos = getBlockPos().offset(x, y, z);
-					if ((x ^ 2) + (z ^ 2) <= (radius ^ 2) && !nestPos.equals(tempBlockPos)) {
+					if ((x * x) + (z * z) <= (radius * radius) && !nestPos.equals(tempBlockPos)) {
 						if (level.getBlockState(tempBlockPos).is(block) || level.getBlockState(tempBlockPos).is(blocks)) {
 							posList.add(tempBlockPos);
 						}
@@ -231,23 +224,17 @@ public class AnthillBlockEntity extends BlockEntity {
 	}
 
 	public void emptyAntsFromNest(Player player, BlockState blockState, AntReleaseStatus releaseStatus) {
-		List<Entity> list = this.releaseAllOccupants(blockState, releaseStatus);
+		List<Entity> entities = releaseAllOccupants(blockState, releaseStatus);
 		if (player != null) {
-			for (Entity entity : list) {
-				if (entity instanceof AbstractAnt ant) {
-					ant.setCooldownToEnterNest(400);
-				}
-			}
+			for (Entity entity : entities) if (entity instanceof AbstractAnt ant) ant.setCooldownToEnterNest(400);
 		}
-		if (this.isEmpty()) {
-			setInhabitantType(99);
-		}
+		if (isEmpty()) setInhabitantVariant(null);
 	}
 
 	private List<Entity> releaseAllOccupants(BlockState state, AntReleaseStatus releaseStatus) {
 		List<Entity> list = new ArrayList<>();
 		if (level != null) {
-			this.storedAnts.removeIf((data) -> releaseOccupant(level, worldPosition, state, data, list, releaseStatus));
+			storedAnts.removeIf(data -> releaseOccupant(level, worldPosition, state, data, list, releaseStatus));
 		}
 		if (!list.isEmpty()) {
 			super.setChanged();
@@ -257,28 +244,19 @@ public class AnthillBlockEntity extends BlockEntity {
 	}
 
 	private static boolean releaseOccupant(Level level, BlockPos pos, BlockState state, AntData data, List<Entity> storedInNest, AntReleaseStatus releaseStatus) {
-		if (level.isRaining() && releaseStatus != AntReleaseStatus.EMERGENCY) {
-			return false;
-		}
+		if (level.isRaining() && releaseStatus != AntReleaseStatus.EMERGENCY) return false;
+
 		BlockPos above = pos.above();
 		boolean flag = level.getBlockState(above).getCollisionShape(level, above).isEmpty();
-		if (!flag && releaseStatus != AntReleaseStatus.EMERGENCY) {
-			return false;
-		}
+		if (!flag && releaseStatus != AntReleaseStatus.EMERGENCY) return false;
 
 		CompoundTag compoundTag = data.entityData.copy();
 		removeIgnoredAntTags(compoundTag);
 		compoundTag.put("NestPos", NbtUtils.writeBlockPos(pos));
 		Entity entity = EntityType.loadEntityRecursive(compoundTag, level, entity1 -> entity1);
-		if (entity == null) {
-			return false;
-		}
-		if (!entity.getType().is(SBTags.EntityTypes.ANTHILL_INHABITANTS)) {
-			return false;
-		}
-		if (releaseStatus == AntReleaseStatus.PATROLLING && !(entity instanceof AntSoldier)) {
-			return false;
-		}
+		if (entity == null) return false;
+		if (!entity.getType().is(SBTags.EntityTypes.ANTHILL_INHABITANTS)) return false;
+		if (releaseStatus == AntReleaseStatus.PATROLLING && !(entity instanceof AntSoldier)) return false;
 
 		if (entity instanceof AbstractAnt ant) {
 			if (releaseStatus == AntReleaseStatus.CARGO_DELIVERED) {
@@ -305,36 +283,30 @@ public class AnthillBlockEntity extends BlockEntity {
 				storedInNest.add(ant);
 			}
 
-			double w = flag ? 0 : 0.55D + ant.getBbWidth() * 0.5D;
-			double d0 = (double) pos.getX() + 0.5D + w;
-			double d1 = (double) pos.getY() + 1D;
-			double d2 = (double) pos.getZ() + 0.5D + w;
-			ant.moveTo(d0, d1, d2, ant.getYRot(), ant.getXRot());
+			double width = flag ? 0 : 0.55D + ant.getBbWidth() * 0.5D;
+			ant.moveTo(pos.getX() + 0.5D + width, pos.getY() + 1D, pos.getZ() + 0.5D + width, ant.getYRot(), ant.getXRot());
 		}
 
 		level.gameEvent(GameEvent.BLOCK_CHANGE, pos, GameEvent.Context.of(entity, level.getBlockState(pos)));
 		return level.addFreshEntity(entity);
 	}
 
-	public void addOccupant(Entity entity, int antType, boolean hasCargo) {
-		setInhabitantType(antType);
+	public void addOccupant(Entity entity, AbstractAnt.Variant variant, boolean hasCargo) {
+		setInhabitantVariant(variant);
 		addOccupantWithPresetTicks(entity, hasCargo, 0);
 	}
 
 	public void addOccupantWithPresetTicks(Entity entity, boolean hasCargo, int timeInNest) {
-		if (storedAnts.size() < 10) {
-			entity.stopRiding();
-			entity.ejectPassengers();
-			CompoundTag compoundTag = new CompoundTag();
-			entity.save(compoundTag);
-			storeAnt(compoundTag, timeInNest, hasCargo, entity);
-			if (level != null) {
-				level.gameEvent(GameEvent.BLOCK_CHANGE, getBlockPos(), GameEvent.Context.of(entity, getBlockState()));
-			}
+		if (storedAnts.size() >= 10) return;
+		entity.stopRiding();
+		entity.ejectPassengers();
+		CompoundTag tag = new CompoundTag();
+		entity.save(tag);
+		storeAnt(tag, timeInNest, hasCargo, entity);
+		if (level != null) level.gameEvent(GameEvent.BLOCK_CHANGE, getBlockPos(), GameEvent.Context.of(entity, getBlockState()));
 
-			entity.discard();
-			super.setChanged();
-		}
+		entity.discard();
+		super.setChanged();
 	}
 
 	public void storeAnt(CompoundTag data, int ticksInNest, boolean hasCargo, Entity entity) {
@@ -352,17 +324,16 @@ public class AnthillBlockEntity extends BlockEntity {
 		final int minOccupationTicks;
 		final boolean isQueen;
 
-		AntData(CompoundTag data, int ticksInNest, int minOccupationTicks, boolean isQueen) {
-			removeIgnoredAntTags(data);
-			this.entityData = data;
+		AntData(CompoundTag entityData, int ticksInNest, int minOccupationTicks, boolean isQueen) {
+			removeIgnoredAntTags(entityData);
+			this.entityData = entityData;
 			this.ticksInNest = ticksInNest;
 			this.minOccupationTicks = minOccupationTicks;
 			this.isQueen = isQueen;
 		}
 	}
 
-	record UpgradeData(int upgradeType, BlockPos pos) {
-	}
+	record UpgradeData(int upgradeType, BlockPos pos) { }
 
 	public enum AntReleaseStatus {
 		CARGO_DELIVERED,

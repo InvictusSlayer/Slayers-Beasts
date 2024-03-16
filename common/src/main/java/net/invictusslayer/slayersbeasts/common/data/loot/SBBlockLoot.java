@@ -39,7 +39,7 @@ public class SBBlockLoot extends BlockLootSubProvider {
 		super(Set.of(), FeatureFlags.REGISTRY.allFlags());
 	}
 
-	protected void generate() {
+	public void generate() {
 		generateBlockFamilies();
 
 		dropSelf(SBBlocks.CRYPTALITH.get());

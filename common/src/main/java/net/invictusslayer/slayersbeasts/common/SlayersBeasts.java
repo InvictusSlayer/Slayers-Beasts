@@ -4,6 +4,7 @@ import net.invictusslayer.slayersbeasts.SBExpectPlatform;
 import net.invictusslayer.slayersbeasts.common.block.*;
 import net.invictusslayer.slayersbeasts.common.init.*;
 import net.invictusslayer.slayersbeasts.common.item.SBDispensableItems;
+import net.invictusslayer.slayersbeasts.common.world.biome.SBBiomeModifications;
 import net.invictusslayer.slayersbeasts.common.world.biome.SBSurfaceRuleData;
 import net.invictusslayer.slayersbeasts.common.world.feature.SBConfiguredFeatures;
 import net.minecraft.client.renderer.Sheets;
@@ -39,15 +40,9 @@ public class SlayersBeasts {
 		SBStructureTypes.STRUCTURE_TYPES.register();
 
 		SBVillagerType.biomeSetup();
+		SBEntities.registerAttributes();
 
 		LOGGER.info(SBExpectPlatform.getConfigDirectory().toAbsolutePath().normalize().toString());
-	}
-
-	public static void clientSetup() {
-		SBWoodType.values().forEach(type -> {
-			Sheets.SIGN_MATERIALS.put(type, Sheets.createSignMaterial(type));
-			Sheets.HANGING_SIGN_MATERIALS.put(type, Sheets.createHangingSignMaterial(type));
-		});
 	}
 
 	public static void commonSetup() {
@@ -58,6 +53,8 @@ public class SlayersBeasts {
 		SBStrippableBlocks.register();
 		SBPottedBlocks.register();
 		SBDispensableItems.register();
+		SBBiomeModifications.register();
+		SBEntities.registerSpawns();
 
 		((IExtendedMushroomBlock) SBBlocks.BLACK_MUSHROOM.get()).setMightyMushroom(SBConfiguredFeatures.MIGHTY_BLACK_MUSHROOM);
 		((IExtendedMushroomBlock) Blocks.BROWN_MUSHROOM).setMightyMushroom(SBConfiguredFeatures.MIGHTY_BROWN_MUSHROOM);
@@ -67,5 +64,12 @@ public class SlayersBeasts {
 		SurfaceRuleManager.addSurfaceRules(SurfaceRuleManager.RuleCategory.OVERWORLD, SlayersBeasts.MOD_ID, SBSurfaceRuleData.overworldRules());
 		SurfaceRuleManager.addSurfaceRules(SurfaceRuleManager.RuleCategory.NETHER, SlayersBeasts.MOD_ID, SBSurfaceRuleData.netherRules());
 //		SurfaceRuleManager.addSurfaceRules(EBRuleCategory.END, SlayersBeasts.MOD_ID, SBSurfaceRuleData.endRules());
+	}
+
+	public static void clientSetup() {
+		SBWoodType.values().forEach(type -> {
+			Sheets.SIGN_MATERIALS.put(type, Sheets.createSignMaterial(type));
+			Sheets.HANGING_SIGN_MATERIALS.put(type, Sheets.createHangingSignMaterial(type));
+		});
 	}
 }

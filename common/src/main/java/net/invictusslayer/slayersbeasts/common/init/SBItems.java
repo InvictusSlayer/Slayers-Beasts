@@ -41,9 +41,8 @@ public class SBItems {
 	public static final RegistrySupplier<Item> WITHER_SPIDER_SPAWN_EGG = ITEMS.register("wither_spider_spawn_egg", () -> new ArchitecturySpawnEggItem(SBEntities.WITHER_SPIDER, 0x3d0f0f, 0x171313, new Item.Properties()));
 	public static final RegistrySupplier<Item> TYRACHNID_SPAWN_EGG = ITEMS.register("tyrachnid_spawn_egg", () -> new ArchitecturySpawnEggItem(SBEntities.TYRACHNID, 0x3d0f0f, 0xb34b05, new Item.Properties()));
 	public static final RegistrySupplier<Item> DAMSELFLY_SPAWN_EGG = ITEMS.register("damselfly_spawn_egg", () -> new ArchitecturySpawnEggItem(SBEntities.DAMSELFLY, 0x4f1785, 0x4dcf29, new Item.Properties()));
-	public static final RegistrySupplier<Item> ENT_OAK_SPAWN_EGG = ITEMS.register("ent_oak_spawn_egg", () -> new ArchitecturySpawnEggItem(SBEntities.ENT_OAK, 0x917142, 0x4bb749, new Item.Properties()));
-	public static final RegistrySupplier<Item> ENT_BIRCH_SPAWN_EGG = ITEMS.register("ent_birch_spawn_egg", () -> new ArchitecturySpawnEggItem(SBEntities.ENT_BIRCH, 0xffffff, 0x71aa71, new Item.Properties()));
-	public static final RegistrySupplier<Item> WUDU_OAK_SPAWN_EGG = ITEMS.register("wudu_oak_spawn_egg", () -> new ArchitecturySpawnEggItem(SBEntities.WUDU_OAK, 0x917142, 0x4bb749, new Item.Properties()));
+	public static final RegistrySupplier<Item> ENT_SPAWN_EGG = ITEMS.register("ent_spawn_egg", () -> new ArchitecturySpawnEggItem(SBEntities.ENT_MEDIUM, 0xffffff, 0x71aa71, new Item.Properties()));
+	public static final RegistrySupplier<Item> WUDU_SPAWN_EGG = ITEMS.register("wudu_spawn_egg", () -> new ArchitecturySpawnEggItem(SBEntities.WUDU, 0x917142, 0x4bb749, new Item.Properties()));
 	public static final RegistrySupplier<Item> SPORETRAP_SPAWN_EGG = ITEMS.register("sporetrap_spawn_egg", () -> new ArchitecturySpawnEggItem(SBEntities.SPORETRAP, 0x2f7f2f, 0xffff31, new Item.Properties()));
 
 	public static final RegistrySupplier<Item> ALGAE = ITEMS.register("algae", () -> new PlaceOnWaterBlockItem(SBBlocks.ALGAE.get(), new Item.Properties()));
