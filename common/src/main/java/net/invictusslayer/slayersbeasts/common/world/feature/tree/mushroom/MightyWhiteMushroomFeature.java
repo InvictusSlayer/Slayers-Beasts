@@ -35,7 +35,7 @@ public class MightyWhiteMushroomFeature extends AbstractMightyMushroomFeature {
 
 		for (int y = height - 8; y <= height; ++y) {
 			int stage = height - y;
-			int radius = stage < 6 ? 1 : stage == 6 ? 2 : 3;
+			int radius = stage < 6 ? 1 : 3;
 
 			for (int x = -radius; x <= radius + 1; ++x) {
 				for (int z = -radius; z <= radius + 1; ++z) {
@@ -78,12 +78,10 @@ public class MightyWhiteMushroomFeature extends AbstractMightyMushroomFeature {
 		int zRad = Math.min(Math.abs(z), Math.abs(z - 1));
 		int sum = xRad + zRad;
 
-		if (stage == 2) return sum < 1;
-		if (stage == 3 || stage == 4) return sum < 2;
-		if (stage == 5) return sum < 3;
-		if (stage == 6) return sum < 4;
+		if (stage == 2 || stage == 3) return sum < 1;
+		if (stage == 4 || stage == 5) return sum < 2;
+		if (stage == 6) return sum == 2;
 		if (stage == 7) return sum == 3 || (xRad == 2 && zRad == 2);
-		if (stage == 8) return (sum == 4 && xRad * zRad != 4) || xRad * zRad == 6;
 
 		return false;
 	}

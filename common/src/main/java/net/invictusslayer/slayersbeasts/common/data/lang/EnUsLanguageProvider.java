@@ -35,9 +35,8 @@ public class EnUsLanguageProvider extends SBLanguageProvider {
 		addItem(SBItems.WITHER_SPIDER_SPAWN_EGG, "Wither Spider Spawn Egg");
 		addItem(SBItems.TYRACHNID_SPAWN_EGG, "Tyrachnid Spawn Egg");
 		addItem(SBItems.DAMSELFLY_SPAWN_EGG, "Damselfly Spawn Egg");
-		addItem(SBItems.ENT_OAK_SPAWN_EGG, "Oak Ent Spawn Egg");
-		addItem(SBItems.ENT_BIRCH_SPAWN_EGG, "Birch Ent Spawn Egg");
-		addItem(SBItems.WUDU_OAK_SPAWN_EGG, "Oak Wudu Spawn Egg");
+		addItem(SBItems.ENT_SPAWN_EGG, "Ent Spawn Egg");
+		addItem(SBItems.WUDU_SPAWN_EGG, "Wudu Spawn Egg");
 		addItem(SBItems.SPORETRAP_SPAWN_EGG, "Sporetrap Spawn Egg");
 		
 		add("item.minecraft.potion.effect.paralysis_potion", "Potion of Paralysis");
@@ -104,9 +103,8 @@ public class EnUsLanguageProvider extends SBLanguageProvider {
 		addEntityType(SBEntities.WITHER_SPIDER, "Wither Spider");
 		addEntityType(SBEntities.TYRACHNID, "Tyrachnid");
 		addEntityType(SBEntities.DAMSELFLY, "Damselfly");
-		addEntityType(SBEntities.ENT_OAK, "Oak Ent");
-		addEntityType(SBEntities.ENT_BIRCH, "Birch Ent");
-		addEntityType(SBEntities.WUDU_OAK, "Oak Wudu");
+		addEntityType(SBEntities.ENT_MEDIUM, "Ent");
+		addEntityType(SBEntities.WUDU, "Wudu");
 		addEntityType(SBEntities.SPORETRAP, "Sporetrap");
 		addEntityType(SBEntities.IRK, "Irk");
 		

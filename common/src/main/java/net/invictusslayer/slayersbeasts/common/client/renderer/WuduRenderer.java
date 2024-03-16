@@ -18,7 +18,7 @@ public class WuduRenderer<T extends Wudu> extends MobRenderer<T, WuduModel<T>> {
 
 	public ResourceLocation getTextureLocation(T entity) {
 		return switch (entity.getVariant()) {
-			default -> OAK;
+			case OAK -> OAK;
 			case BIRCH -> BIRCH;
 			case JUNGLE -> JUNGLE;
 		};

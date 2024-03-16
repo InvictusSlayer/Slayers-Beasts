@@ -24,7 +24,7 @@ public class SBRecipeProvider extends RecipeProvider {
 		super(output);
 	}
 
-	protected void buildRecipes(Consumer<FinishedRecipe> output) {
+	public void buildRecipes(Consumer<FinishedRecipe> output) {
 		generateBlockFamilies(output);
 		generateWoodFamilies(output);
 
@@ -101,11 +101,11 @@ public class SBRecipeProvider extends RecipeProvider {
 		SBBlockFamily.getAllFamilies().filter(family -> family.shouldGenerateRecipe(FeatureFlagSet.of(FeatureFlags.VANILLA))).forEach(family -> generateRecipes(output, family));
 	}
 
-	protected static void twoByTwoPacker(Consumer<FinishedRecipe> output, RecipeCategory category, ItemLike pPacked, ItemLike pUnpacked) {
+	public static void twoByTwoPacker(Consumer<FinishedRecipe> output, RecipeCategory category, ItemLike pPacked, ItemLike pUnpacked) {
 		ShapedRecipeBuilder.shaped(category, pPacked, 1).define('#', pUnpacked).pattern("##").pattern("##").unlockedBy(getHasName(pUnpacked), has(pUnpacked)).save(output, new ResourceLocation(SlayersBeasts.MOD_ID, getSimpleRecipeName(pUnpacked)));
 	}
 
-	protected static void nineBlockStorageRecipes(Consumer<FinishedRecipe> output, RecipeCategory unpackedCategory, ItemLike unpacked, RecipeCategory packedCategory, ItemLike packed) {
+	public static void nineBlockStorageRecipes(Consumer<FinishedRecipe> output, RecipeCategory unpackedCategory, ItemLike unpacked, RecipeCategory packedCategory, ItemLike packed) {
 		nineBlockStorageRecipes(output, unpackedCategory, unpacked, packedCategory, packed, getSimpleRecipeName(packed), getSimpleRecipeName(unpacked));
 	}
 

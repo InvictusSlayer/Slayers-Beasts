@@ -32,12 +32,12 @@ public class CajoleLeavesBlock extends LeavesBlock {
 
 	@SuppressWarnings("deprecation")
 	public void spawnAfterBreak(BlockState state, ServerLevel level, BlockPos pos, ItemStack item, boolean dropExperience) {
-		this.spawnInfestation(level, pos);
+//		spawnInfestation(level, pos);
 	}
 
 	public void wasExploded(Level level, BlockPos pos, Explosion explosion) {
 		if (level instanceof ServerLevel) {
-			this.spawnInfestation((ServerLevel)level, pos);
+//			spawnInfestation((ServerLevel)level, pos);
 		}
 	}
 }
