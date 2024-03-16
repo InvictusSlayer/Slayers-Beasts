@@ -1,5 +1,7 @@
 package net.invictusslayer.slayersbeasts.common.entity;
 
+import net.invictusslayer.slayersbeasts.common.data.tag.SBTags;
+import net.minecraft.core.Holder;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
@@ -8,13 +10,19 @@ import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.util.ByIdMap;
 import net.minecraft.util.StringRepresentable;
+import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.MobSpawnType;
 import net.minecraft.world.entity.PathfinderMob;
+import net.minecraft.world.entity.SpawnGroupData;
 import net.minecraft.world.entity.ai.goal.*;
 import net.minecraft.world.entity.ai.goal.target.HurtByTargetGoal;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.LevelAccessor;
+import net.minecraft.world.level.ServerLevelAccessor;
+import net.minecraft.world.level.biome.Biome;
 
 import java.util.function.IntFunction;
 
@@ -52,7 +60,7 @@ public abstract class AbstractEnt extends PathfinderMob {
 
 	public void addAdditionalSaveData(CompoundTag tag) {
 		super.addAdditionalSaveData(tag);
-		tag.putInt("Variant", getVariant().id);
+		tag.putInt("Variant", getVariant().getId());
 	}
 
 	public void readAdditionalSaveData(CompoundTag tag) {
@@ -68,6 +76,29 @@ public abstract class AbstractEnt extends PathfinderMob {
 	}
 
 	protected abstract void setupAnimationStates();
+
+	public SpawnGroupData finalizeSpawn(ServerLevelAccessor level, DifficultyInstance difficulty, MobSpawnType type, SpawnGroupData spawnData, CompoundTag tag) {
+		Variant variant = getRandomAntType(level);
+		if (spawnData instanceof AntGroupData antData) variant = antData.variant;
+		else spawnData = new AntGroupData(variant);
+
+		setVariant(variant);
+		return spawnData;
+	}
+
+	private Variant getRandomAntType(LevelAccessor level) {
+		Holder<Biome> holder = level.getBiome(blockPosition());
+		if (holder.is(SBTags.Biomes.SPAWNS_ENT_OAK)) return Variant.OAK;
+		if (holder.is(SBTags.Biomes.SPAWNS_ENT_BIRCH)) return Variant.BIRCH;
+		return Variant.byId(level.getRandom().nextInt(Variant.values().length));
+	}
+
+	public static class AntGroupData implements SpawnGroupData {
+		private final Variant variant;
+		private AntGroupData(Variant variant) {
+			this.variant = variant;
+		}
+	}
 
 	public Variant getVariant() {
 		return Variant.byId(entityData.get(DATA_VARIANT));

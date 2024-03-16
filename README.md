@@ -10,7 +10,8 @@ complete stage, configs will be added and I may migrate some of the more worldge
 - [CurseForge](https://www.curseforge.com/minecraft/mc-mods/slayersbeasts)
 
 ## Dependencies
-- [Forge](https://files.minecraftforge.net/net/minecraftforge/forge/ "REQUIRED")
-- [TerraBlender](https://modrinth.com/mod/terrablender/versions?l=forge "REQUIRED") (*Should* be compatible with TerraBlender biome mods)
+- [Forge](https://files.minecraftforge.net/net/minecraftforge/forge) / [Fabric](https://modrinth.com/mod/fabric-api/versions)
+- [Architectury](https://modrinth.com/mod/architectury-api/versions)
+- [TerraBlender](https://modrinth.com/mod/terrablender/versions) (*Should* be compatible with TerraBlender biome mods)
 
 The project is actively updated with new features and bug fixes. Please report any bugs or idea suggestions to the [issue tracker](https://github.com/InvictusSlayer/Slayers-Beasts/issues).

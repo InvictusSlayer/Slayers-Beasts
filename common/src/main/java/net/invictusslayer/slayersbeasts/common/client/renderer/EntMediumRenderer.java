@@ -24,7 +24,7 @@ public class EntMediumRenderer<T extends EntMedium> extends MobRenderer<T, EntMe
 
 	public ResourceLocation getTextureLocation(T entity) {
 		return switch (entity.getVariant()) {
-			default -> OAK;
+			case OAK -> OAK;
 			case BIRCH -> BIRCH;
 			case JUNGLE -> JUNGLE;
 		};

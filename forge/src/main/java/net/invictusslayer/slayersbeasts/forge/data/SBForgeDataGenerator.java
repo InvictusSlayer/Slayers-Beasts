@@ -16,7 +16,6 @@ import net.invictusslayer.slayersbeasts.common.world.structure.SBStructureSets;
 import net.invictusslayer.slayersbeasts.common.world.structure.SBStructures;
 import net.invictusslayer.slayersbeasts.common.world.structure.pools.SBPools;
 import net.invictusslayer.slayersbeasts.forge.data.tag.*;
-import net.invictusslayer.slayersbeasts.forge.world.SBBiomeModifiers;
 import net.minecraft.core.Cloner;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.RegistryAccess;
@@ -30,14 +29,12 @@ import net.minecraft.resources.RegistryDataLoader;
 import net.minecraft.world.level.storage.loot.parameters.LootContextParamSets;
 import net.minecraftforge.common.data.DatapackBuiltinEntriesProvider;
 import net.minecraftforge.common.data.ExistingFileHelper;
-import net.minecraftforge.common.world.BiomeModifier;
 import net.minecraftforge.data.event.GatherDataEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.registries.ForgeRegistries;
 
+import java.util.Collections;
 import java.util.List;
-import java.util.Set;
 import java.util.concurrent.CompletableFuture;
 
 @Mod.EventBusSubscriber(modid = SlayersBeasts.MOD_ID, bus = Mod.EventBusSubscriber.Bus.MOD)
@@ -51,8 +48,7 @@ public class SBForgeDataGenerator {
 			.add(Registries.STRUCTURE_SET, SBStructureSets::bootstrap)
 			.add(Registries.TEMPLATE_POOL, SBPools::bootstrap)
 			.add(Registries.PROCESSOR_LIST, SBProcessorLists::bootstrap)
-			.add(Registries.NOISE, SBNoises::bootstrap)
-			.add(ForgeRegistries.Keys.BIOME_MODIFIERS, SBBiomeModifiers::bootstrap);
+			.add(Registries.NOISE, SBNoises::bootstrap);
 
 	@SubscribeEvent
 	public static void gatherData(GatherDataEvent event) {
@@ -62,7 +58,7 @@ public class SBForgeDataGenerator {
 		ExistingFileHelper helper = event.getExistingFileHelper();
 		boolean hasServer = event.includeServer();
 
-		gen.addProvider(hasServer, new DatapackBuiltinEntriesProvider(output, provider, BUILDER, Set.of(SlayersBeasts.MOD_ID)));
+		gen.addProvider(hasServer, new DatapackBuiltinEntriesProvider(output, provider, BUILDER, Collections.singleton(SlayersBeasts.MOD_ID)));
 
 		SBBlockTagsProvider blockTags = gen.addProvider(hasServer, new SBBlockTagsProvider(output, provider, helper));
 		gen.addProvider(hasServer, new SBItemTagsProvider(output, provider, blockTags, helper));
@@ -86,7 +82,6 @@ public class SBForgeDataGenerator {
 	private static HolderLookup.Provider patchRegistry(HolderLookup.Provider provider) {
 		Cloner.Factory factory = new Cloner.Factory();
 		RegistryDataLoader.WORLDGEN_REGISTRIES.forEach(data -> data.runWithArguments(factory::addCodec));
-		factory.addCodec(ForgeRegistries.Keys.BIOME_MODIFIERS, BiomeModifier.DIRECT_CODEC);
 		return BUILDER.buildPatch(RegistryAccess.fromRegistryOfRegistries(BuiltInRegistries.REGISTRY), provider, factory).full();
 	}
 }

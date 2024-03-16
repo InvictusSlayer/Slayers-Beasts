@@ -130,8 +130,8 @@ public class SBOverworldBiomes {
 		BiomeDefaultFeatures.addDefaultOres(biomeSettings);
 		BiomeDefaultFeatures.addDefaultSoftDisks(biomeSettings);
 		BiomeDefaultFeatures.addDefaultFlowers(biomeSettings);
-		biomeSettings.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, VegetationPlacements.PATCH_GRASS_SAVANNA);
 		biomeSettings.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, VegetationPlacements.PATCH_DEAD_BUSH);
+		biomeSettings.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, VegetationPlacements.PATCH_GRASS_SAVANNA);
 		BiomeDefaultFeatures.addDefaultMushrooms(biomeSettings);
 		BiomeDefaultFeatures.addDefaultExtraVegetation(biomeSettings);
 

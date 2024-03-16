@@ -43,9 +43,8 @@ public class SBItemModelProvider extends ItemModelProvider {
 		spawnEgg(SBItems.WITHER_SPIDER_SPAWN_EGG);
 		spawnEgg(SBItems.TYRACHNID_SPAWN_EGG);
 		spawnEgg(SBItems.DAMSELFLY_SPAWN_EGG);
-		spawnEgg(SBItems.ENT_OAK_SPAWN_EGG);
-		spawnEgg(SBItems.ENT_BIRCH_SPAWN_EGG);
-		spawnEgg(SBItems.WUDU_OAK_SPAWN_EGG);
+		spawnEgg(SBItems.ENT_SPAWN_EGG);
+		spawnEgg(SBItems.WUDU_SPAWN_EGG);
 		spawnEgg(SBItems.SPORETRAP_SPAWN_EGG);
 
 		block(SBBlocks.ICICLE, "_frustum_down");
