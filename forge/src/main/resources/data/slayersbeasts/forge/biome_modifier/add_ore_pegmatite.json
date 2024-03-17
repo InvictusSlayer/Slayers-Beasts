@@ -1,9 +1,0 @@
-{
-  "type": "forge:add_features",
-  "biomes": "#minecraft:is_overworld",
-  "features": [
-    "slayersbeasts:ore_pegmatite_upper",
-    "slayersbeasts:ore_pegmatite_lower"
-  ],
-  "step": "underground_ores"
-}

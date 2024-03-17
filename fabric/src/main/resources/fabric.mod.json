@@ -1,6 +1,6 @@
 {
 	"schemaVersion": 1,
-	"id": "${mod_id}",
+	"id": "slayersbeasts",
 	"version": "${mod_version}",
 	"name": "${mod_name}",
 	"description": "${mod_description}",
@@ -8,33 +8,35 @@
 		"${mod_authors}"
 	],
 	"contact": {
-		"homepage": "https://modrinth.com/mod/slayers-beasts",
-		"sources": "https://github.com/InvictusSlayer/Slayers-Beasts"
+		"homepage": "${homepage_url}",
+		"sources": "${source_url}"
 	},
 	"license": "${mod_license}",
-	"icon": "${mod_id}.png",
+	"icon": "assets/slayersbeasts.png",
 	"environment": "*",
 	"entrypoints": {
 		"main": [
 			"net.invictusslayer.slayersbeasts.fabric.SBFabric"
 		],
 		"client": [
-			"net.invictusslayer.slayersbeasts.fabric.client.SBClient"
+			"net.invictusslayer.slayersbeasts.fabric.client.SBFabricClient"
 		],
 		"fabric-datagen": [
-			"net.invictusslayer.slayersbeasts.fabric.datagen.SBFabricDataGenerator"
+			"net.invictusslayer.slayersbeasts.fabric.data.SBFabricDataGenerator"
+		],
+		"terrablender": [
+			"net.invictusslayer.slayersbeasts.fabric.world.SBTerraBlenderSetup"
 		]
 	},
 	"mixins": [
-		"${mod_id}-fabric.mixins.json"
+		"slayersbeasts.mixins.json",
+		"slayersbeasts-fabric.mixins.json"
 	],
 	"depends": {
-		"fabricloader": ">=${fabric_version}",
-		"minecraft": "~${minecraft_version}",
 		"java": ">=17",
-		"fabric-api": "*"
-	},
-	"suggests": {
-		"another-mod": "*"
+		"minecraft": "${mc_version}",
+		"fabric": ">=${fabric_version}",
+		"architectury": ">=${arch_version}",
+		"terrablender": ">=${tb_version}"
 	}
 }
