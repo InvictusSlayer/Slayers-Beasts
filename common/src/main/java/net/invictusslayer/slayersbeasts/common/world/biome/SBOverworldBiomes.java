@@ -107,9 +107,9 @@ public class SBOverworldBiomes {
 		if (rocky) biomeSettings.addFeature(GenerationStep.Decoration.LOCAL_MODIFICATIONS, MiscOverworldPlacements.FOREST_ROCK);
 		BiomeDefaultFeatures.addDefaultOres(biomeSettings);
 		BiomeDefaultFeatures.addDefaultSoftDisks(biomeSettings);
+		biomeSettings.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, VegetationPlacements.PATCH_DEAD_BUSH_2);
 		biomeSettings.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, VegetationPlacements.PATCH_TALL_GRASS);
 		biomeSettings.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, VegetationPlacements.PATCH_GRASS_SAVANNA);
-		biomeSettings.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, VegetationPlacements.PATCH_DEAD_BUSH_2);
 		BiomeDefaultFeatures.addDefaultMushrooms(biomeSettings);
 		BiomeDefaultFeatures.addDefaultExtraVegetation(biomeSettings);
 
