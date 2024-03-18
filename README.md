@@ -6,12 +6,13 @@ while attempting to integrate these features seamlessly with the vanilla game. W
 complete stage, configs will be added and I may migrate some of the more worldgen-based features to a separate mod.
 
 ## Downloads
-- [Modrinth](https://modrinth.com/mod/slayers-beasts)
-- [CurseForge](https://www.curseforge.com/minecraft/mc-mods/slayersbeasts)
+- [**Modrinth**](https://modrinth.com/mod/slayers-beasts)
+- [**CurseForge**](https://www.curseforge.com/minecraft/mc-mods/slayersbeasts)
 
 ## Dependencies
-- [Forge](https://files.minecraftforge.net/net/minecraftforge/forge) / [Fabric](https://modrinth.com/mod/fabric-api/versions)
-- [Architectury](https://modrinth.com/mod/architectury-api/versions)
-- [TerraBlender](https://modrinth.com/mod/terrablender/versions) (*Should* be compatible with TerraBlender biome mods)
+- [**Forge**](https://files.minecraftforge.net/net/minecraftforge/forge) / [**Fabric**](https://modrinth.com/mod/fabric-api/versions)
+- [**Architectury**](https://modrinth.com/mod/architectury-api/versions)
+- [**TerraBlender**](https://modrinth.com/mod/terrablender/versions) (*Should* be compatible with TerraBlender biome mods)
 
-The project is actively updated with new features and bug fixes. Please report any bugs or idea suggestions to the [issue tracker](https://github.com/InvictusSlayer/Slayers-Beasts/issues).
+The project is actively updated with new features and bug fixes. Please report any bugs or idea suggestions to the
+[issue tracker](https://github.com/InvictusSlayer/Slayers-Beasts/issues). 
