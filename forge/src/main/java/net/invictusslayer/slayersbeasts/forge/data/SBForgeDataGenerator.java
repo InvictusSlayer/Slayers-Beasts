@@ -1,7 +1,7 @@
 package net.invictusslayer.slayersbeasts.forge.data;
 
 import net.invictusslayer.slayersbeasts.common.SlayersBeasts;
-import net.invictusslayer.slayersbeasts.common.data.lang.EnUsLanguageProvider;
+import net.invictusslayer.slayersbeasts.common.data.lang.EnUsLangProvider;
 import net.invictusslayer.slayersbeasts.common.data.loot.SBBlockLoot;
 import net.invictusslayer.slayersbeasts.common.data.loot.SBChestLoot;
 import net.invictusslayer.slayersbeasts.common.data.loot.SBEntityLoot;
@@ -64,7 +64,7 @@ public class SBForgeDataGenerator {
 		gen.addProvider(hasServer, new SBEntityTagsProvider(output, provider, helper));
 		gen.addProvider(hasServer, new SBPoiTagsProvider(output, provider, helper));
 
-		gen.addProvider(hasServer, new EnUsLanguageProvider(output));
+		gen.addProvider(hasServer, new EnUsLangProvider(output));
 		gen.addProvider(hasServer, new SBRecipeProvider(output));
 		gen.addProvider(hasServer, new SBBlockStateProvider(output, helper));
 		gen.addProvider(hasServer, new SBItemModelProvider(output, helper));
