@@ -5,8 +5,8 @@ import net.invictusslayer.slayersbeasts.common.block.WoodFamily;
 import net.invictusslayer.slayersbeasts.common.init.*;
 import net.minecraft.data.PackOutput;
 
-public class EnUsLanguageProvider extends SBLanguageProvider {
-	public EnUsLanguageProvider(PackOutput output) {
+public class EnUsLangProvider extends SBLangProvider {
+	public EnUsLangProvider(PackOutput output) {
 		super(output, "en_us");
 	}
 

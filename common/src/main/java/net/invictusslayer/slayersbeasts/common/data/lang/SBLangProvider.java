@@ -21,12 +21,12 @@ import java.util.TreeMap;
 import java.util.concurrent.CompletableFuture;
 import java.util.function.Supplier;
 
-public abstract class SBLanguageProvider implements DataProvider {
+public abstract class SBLangProvider implements DataProvider {
 	private final Map<String, String> data = new TreeMap<>();
 	private final PackOutput output;
 	private final String locale;
 
-	public SBLanguageProvider(PackOutput output, String locale) {
+	public SBLangProvider(PackOutput output, String locale) {
 		this.output = output;
 		this.locale = locale;
 	}
