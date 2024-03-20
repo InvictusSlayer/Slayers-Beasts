@@ -112,6 +112,31 @@ public abstract class SBLangProvider implements DataProvider {
 		add(key.get().getDescriptionId() + ".desc", name);
 	}
 
+	protected void addConfig(String key, String name) {
+		add("text.autoconfig." + SlayersBeasts.MOD_ID + "." + key, name);
+	}
+
+	protected void addConfigTitle(String name) {
+		addConfig("title", name);
+	}
+
+	protected void addConfigCategory(String key, String name) {
+		addConfig("category." + key, name);
+	}
+
+	protected void addConfigOption(String key, String name) {
+		addConfig("option." + key, name);
+	}
+
+	protected void addConfigOptionPrefix(String key, String name, String prefix) {
+		addConfigOption(key, name);
+		addConfigOption(key + ".@PrefixText", prefix);
+	}
+
+	protected void addConfigEnumTooltip(String key, int ordinal, String name) {
+		addConfig(key + ".@Tooltip[" + ordinal + "]", name);
+	}
+
 	protected void addWoodFamily(WoodFamily family, String prefix) {
 		family.getVariants().forEach((variant, object) -> {
 			if (variant.getName() != null && object.isPresent()) {
