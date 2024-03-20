@@ -24,8 +24,11 @@
 		"fabric-datagen": [
 			"net.invictusslayer.slayersbeasts.fabric.data.SBFabricDataGenerator"
 		],
+		"modmenu": [
+			"net.invictusslayer.slayersbeasts.fabric.integration.SBModMenu"
+		],
 		"terrablender": [
-			"net.invictusslayer.slayersbeasts.fabric.world.SBTerraBlenderSetup"
+			"net.invictusslayer.slayersbeasts.fabric.integration.SBTerraBlender"
 		]
 	},
 	"mixins": [

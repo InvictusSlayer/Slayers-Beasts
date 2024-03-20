@@ -23,6 +23,7 @@ subprojects {
 
     repositories {
         maven { url = "https://maven.parchmentmc.org/" }
+        maven { url = "https://maven.shedaniel.me/" }
 
         // JEI
         maven { url = "https://dvs1.progwml6.com/files/maven/" } // Required for 1.18.2 - 1.20.2

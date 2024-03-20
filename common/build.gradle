@@ -1,8 +1,7 @@
-architectury {
-    common "fabric", "forge"
-}
+architectury.common "fabric", "forge"
 
 dependencies {
     modImplementation "net.fabricmc:fabric-loader:${fabric_version}"
     modApi "dev.architectury:architectury:${arch_version}"
+    modApi("me.shedaniel.cloth:cloth-config-fabric:${cloth_version}").exclude(group: "net.fabricmc.fabric-api")
 }

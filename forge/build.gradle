@@ -39,6 +39,7 @@ configurations {
 dependencies {
     forge "net.minecraftforge:forge:${mc_version}-${forge_version}"
     modApi "dev.architectury:architectury-forge:${arch_version}"
+    modApi "me.shedaniel.cloth:cloth-config-forge:${cloth_version}"
 
     modRuntimeOnly "mezz.jei:jei-${mc_version}-forge:${jei_version}"
 
