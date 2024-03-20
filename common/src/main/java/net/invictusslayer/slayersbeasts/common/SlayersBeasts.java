@@ -1,11 +1,16 @@
 package net.invictusslayer.slayersbeasts.common;
 
+import me.shedaniel.autoconfig.AutoConfig;
+import me.shedaniel.autoconfig.serializer.Toml4jConfigSerializer;
 import net.invictusslayer.slayersbeasts.SBExpectPlatform;
 import net.invictusslayer.slayersbeasts.common.block.*;
+import net.invictusslayer.slayersbeasts.common.config.SBConfig;
 import net.invictusslayer.slayersbeasts.common.init.*;
 import net.invictusslayer.slayersbeasts.common.item.SBDispensableItems;
 import net.invictusslayer.slayersbeasts.common.world.biome.SBBiomeModifications;
 import net.invictusslayer.slayersbeasts.common.world.biome.SBSurfaceRuleData;
+import net.invictusslayer.slayersbeasts.common.world.biome.region.SBNetherRegion;
+import net.invictusslayer.slayersbeasts.common.world.biome.region.SBOverworldRegion;
 import net.invictusslayer.slayersbeasts.common.world.feature.SBConfiguredFeatures;
 import net.minecraft.client.renderer.Sheets;
 import net.minecraft.world.entity.animal.MushroomCow;
@@ -13,6 +18,7 @@ import net.minecraft.world.entity.vehicle.Boat;
 import net.minecraft.world.level.block.Blocks;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import terrablender.api.Regions;
 import terrablender.api.SurfaceRuleManager;
 
 import java.util.Arrays;
@@ -20,8 +26,12 @@ import java.util.Arrays;
 public class SlayersBeasts {
 	public static final String MOD_ID = "slayersbeasts";
 	public static final Logger LOGGER = LogManager.getLogger(MOD_ID);
+	public static SBConfig CONFIG;
 
 	public static void init() {
+		AutoConfig.register(SBConfig.class, Toml4jConfigSerializer::new);
+		CONFIG = AutoConfig.getConfigHolder(SBConfig.class).getConfig();
+
 		SBCreativeModeTabs.CREATIVE_TABS.register();
 		SBBlocks.BLOCKS.register();
 		SBItems.ITEMS.register();
@@ -71,5 +81,11 @@ public class SlayersBeasts {
 			Sheets.SIGN_MATERIALS.put(type, Sheets.createSignMaterial(type));
 			Sheets.HANGING_SIGN_MATERIALS.put(type, Sheets.createHangingSignMaterial(type));
 		});
+	}
+
+	public static void registerRegions() {
+		if (CONFIG.worldgen.overworld_biomes) Regions.register(new SBOverworldRegion(CONFIG.worldgen.overworld_region_weight));
+		if (CONFIG.worldgen.nether_biomes) Regions.register(new SBNetherRegion(CONFIG.worldgen.nether_region_weight));
+//		if (CONFIG.worldgen.end_biomes) Regions.register(new SBEndRegion(CONFIG.worldgen.end_region_weight));
 	}
 }

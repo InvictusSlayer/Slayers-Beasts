@@ -115,5 +115,14 @@ public class EnUsLangProvider extends SBLangProvider {
 		addSound(SBSounds.MANTIS_AMBIENT, "Mantis chirps");
 		addSound(SBSounds.MANTIS_DEATH, "Mantis dies");
 		addSound(SBSounds.MANTIS_HURT, "Mantis hurts");
+
+		addConfigTitle("Slayer's Beasts Config");
+		addConfigOption("worldgen", "World Generation Settings");
+		addConfigOptionPrefix("worldgen.overworld_biomes", "Overworld Biomes", "Biomes in the Overworld are enabled.");
+		addConfigOptionPrefix("worldgen.overworld_region_weight", "Overworld Region Weight", "The weighting of biome regions in the Overworld.");
+		addConfigOptionPrefix("worldgen.nether_biomes", "Nether Biomes", "Biomes in the Nether are enabled.");
+		addConfigOptionPrefix("worldgen.nether_region_weight", "Nether Region Weight", "The weighting of biome regions in the Nether.");
+		addConfigOptionPrefix("worldgen.end_biomes", "End Biomes", "Biomes in the End are enabled.");
+		addConfigOptionPrefix("worldgen.end_region_weight", "End Region Weight", "The weighting of biome regions in the End.");
 	}
 }
