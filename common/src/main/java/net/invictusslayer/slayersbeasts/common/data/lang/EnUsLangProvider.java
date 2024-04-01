@@ -124,5 +124,34 @@ public class EnUsLangProvider extends SBLangProvider {
 		addConfigOptionPrefix("worldgen.nether_region_weight", "Nether Region Weight", "The weighting of biome regions in the Nether.");
 		addConfigOptionPrefix("worldgen.end_biomes", "End Biomes", "Biomes in the End are enabled.");
 		addConfigOptionPrefix("worldgen.end_region_weight", "End Region Weight", "The weighting of biome regions in the End.");
+		addConfigOption("worldgen.enabled_biomes", "Enabled Biomes");
+		addConfigOptionPrefix("worldgen.enabled_biomes.ancient_grove", "Ancient Grove", "Overworld Biomes:");
+		addConfigOption("worldgen.enabled_biomes.aspen_forest", "Aspen Forest");
+		addConfigOption("worldgen.enabled_biomes.bayou", "Bayou");
+		addConfigOption("worldgen.enabled_biomes.black_dunes", "Black Dunes");
+		addConfigOption("worldgen.enabled_biomes.brushland", "Brushland");
+		addConfigOption("worldgen.enabled_biomes.rocky_brushland", "Rocky Brushland");
+		addConfigOption("worldgen.enabled_biomes.wooded_brushland", "Wooded Brushland");
+		addConfigOption("worldgen.enabled_biomes.chaparral", "Chaparral");
+		addConfigOption("worldgen.enabled_biomes.dead_sands", "Dead Sands");
+		addConfigOption("worldgen.enabled_biomes.eucalypt_woodland", "Eucalypt Woodland");
+		addConfigOption("worldgen.enabled_biomes.frozen_thicket", "Frozen Thicket");
+		addConfigOption("worldgen.enabled_biomes.glaciate_swamp", "Glaciate Swamp");
+		addConfigOption("worldgen.enabled_biomes.inky_moor", "Inky Moor");
+		addConfigOption("worldgen.enabled_biomes.murky_ocean", "Murky Ocean");
+		addConfigOption("worldgen.enabled_biomes.deep_murky_ocean", "Deep Murky Ocean");
+		addConfigOption("worldgen.enabled_biomes.mushroom_forest", "Mushroom Forest");
+		addConfigOption("worldgen.enabled_biomes.outback", "Outback");
+		addConfigOption("worldgen.enabled_biomes.petrified_woods", "Petrified Woods");
+		addConfigOption("worldgen.enabled_biomes.rainforest", "Rainforest");
+		addConfigOption("worldgen.enabled_biomes.redwood_grove", "Redwood Grove");
+		addConfigOption("worldgen.enabled_biomes.old_growth_redwood_grove", "Old Growth Redwood Grove");
+		addConfigOption("worldgen.enabled_biomes.volcanic_peaks", "Volcanic Peaks");
+		addConfigOptionPrefix("worldgen.enabled_biomes.dusty_caverns", "Dusty Caverns", "Underground Biomes:");
+		addConfigOption("worldgen.enabled_biomes.fungal_depths", "Fungal Depths");
+		addConfigOption("worldgen.enabled_biomes.ice_caves", "Ice Caves");
+		addConfigOption("worldgen.enabled_biomes.slime_caverns", "Slime Caverns");
+		addConfigOptionPrefix("worldgen.enabled_biomes.toxic_jungle", "Toxic Jungle", "Nether Biomes:");
+		addConfigOptionPrefix("worldgen.enabled_biomes.end_spikes", "End Spikes", "End Biomes:");
 	}
 }

@@ -2,8 +2,11 @@ package net.invictusslayer.slayersbeasts.common;
 
 import me.shedaniel.autoconfig.AutoConfig;
 import me.shedaniel.autoconfig.serializer.Toml4jConfigSerializer;
-import net.invictusslayer.slayersbeasts.SBExpectPlatform;
-import net.invictusslayer.slayersbeasts.common.block.*;
+import net.invictusslayer.slayersbeasts.SBPlatform;
+import net.invictusslayer.slayersbeasts.common.block.IExtendedMushroomBlock;
+import net.invictusslayer.slayersbeasts.common.block.SBFlammableBlocks;
+import net.invictusslayer.slayersbeasts.common.block.SBStrippableBlocks;
+import net.invictusslayer.slayersbeasts.common.block.SBWoodType;
 import net.invictusslayer.slayersbeasts.common.config.SBConfig;
 import net.invictusslayer.slayersbeasts.common.init.*;
 import net.invictusslayer.slayersbeasts.common.item.SBDispensableItems;
@@ -52,7 +55,7 @@ public class SlayersBeasts {
 		SBVillagerType.biomeSetup();
 		SBEntities.registerAttributes();
 
-		LOGGER.info(SBExpectPlatform.getConfigDirectory().toAbsolutePath().normalize().toString());
+		LOGGER.info(SBPlatform.getConfigDirectory().toAbsolutePath().normalize().toString());
 	}
 
 	public static void commonSetup() {
@@ -61,7 +64,6 @@ public class SlayersBeasts {
 
 		SBFlammableBlocks.register();
 		SBStrippableBlocks.register();
-		SBPottedBlocks.register();
 		SBDispensableItems.register();
 		SBBiomeModifications.register();
 		SBEntities.registerSpawns();
