@@ -26,12 +26,12 @@ public class SBConfig implements ConfigData {
 		@ConfigEntry.Gui.PrefixText
 		public int end_region_weight = 2;
 
-//		@ConfigEntry.Gui.PrefixText
 //		@ConfigEntry.Gui.CollapsibleObject
 //		public EnabledBiomes enabled_biomes = new EnabledBiomes();
 	}
 
 	public static class EnabledBiomes {
+		@ConfigEntry.Gui.PrefixText
 		public boolean ancient_grove = true;
 		public boolean aspen_forest = true;
 		public boolean bayou = true;
@@ -54,5 +54,17 @@ public class SBConfig implements ConfigData {
 		public boolean redwood_grove = true;
 		public boolean old_growth_redwood_grove = true;
 		public boolean volcanic_peaks = true;
+
+		@ConfigEntry.Gui.PrefixText
+		public boolean dusty_caverns = true;
+		public boolean fungal_depths = true;
+		public boolean ice_caves = true;
+		public boolean slime_caverns = true;
+
+		@ConfigEntry.Gui.PrefixText
+		public boolean toxic_jungle = true;
+
+		@ConfigEntry.Gui.PrefixText
+		public boolean end_spikes = true;
 	}
 }
