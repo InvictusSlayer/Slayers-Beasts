@@ -4,7 +4,7 @@ import dev.architectury.injectables.annotations.ExpectPlatform;
 
 import java.nio.file.Path;
 
-public class SBExpectPlatform {
+public class SBPlatform {
 	@ExpectPlatform
 	public static Path getConfigDirectory() {
 		throw new AssertionError();

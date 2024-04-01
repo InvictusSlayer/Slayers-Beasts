@@ -38,6 +38,7 @@ subprojects {
             parchment "org.parchmentmc.data:parchment-${mc_version}:${parch_version}@zip"
         }
 
+        modRuntimeOnly "mezz.jei:jei-${mc_version}-${project.name}:${jei_version}"
         modImplementation "com.github.glitchfiend:TerraBlender-${project.name}:${mc_version}-${tb_version}"
     }
 
@@ -45,12 +46,12 @@ subprojects {
 
     tasks.named("processResources", ProcessResources).configure {
         var replaceProperties = [
-                mc_version: mc_version, mc_range: mc_range,
-                fabric_version: fabric_version, forge_version: forge_version, forge_range: forge_range,
-                arch_version: arch_version, tb_version: tb_version,
-                mod_id: mod_id, mod_group: mod_group, mod_name: mod_name, mod_version: mod_version,
-                mod_authors: mod_authors, mod_license: mod_license, mod_description: mod_description,
-                homepage_url: homepage_url, source_url: source_url, issue_url: issue_url
+                mc_version   : mc_version,    mc_range     : mc_range,    fabric_loader: fabric_loader,
+                forge_version: forge_version, forge_range  : forge_range, arch_version : arch_version,
+                tb_version   : tb_version,    mod_id       : mod_id,      mod_group    : mod_group,
+                mod_name     : mod_name,      mod_version  : mod_version, mod_authors  : mod_authors,
+                mod_license  : mod_license,   mod_description: mod_description,
+                homepage_url : homepage_url,  source_url   : source_url,  issue_url: issue_url
         ]
         inputs.properties replaceProperties
         filesMatching(["pack.mcmeta", "fabric.mod.json", "META-INF/mods.toml"]) {

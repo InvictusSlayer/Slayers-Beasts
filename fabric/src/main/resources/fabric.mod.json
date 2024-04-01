@@ -38,7 +38,7 @@
 	"depends": {
 		"java": ">=17",
 		"minecraft": "${mc_version}",
-		"fabric": ">=${fabric_version}",
+		"fabric": ">=${fabric_loader}",
 		"architectury": ">=${arch_version}",
 		"terrablender": ">=${tb_version}"
 	}

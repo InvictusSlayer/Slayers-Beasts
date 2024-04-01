@@ -4,7 +4,7 @@ import net.minecraftforge.fml.loading.FMLPaths;
 
 import java.nio.file.Path;
 
-public class SBExpectPlatformImpl {
+public class SBPlatformImpl {
 	public static Path getConfigDirectory() {
 		return FMLPaths.CONFIGDIR.get();
 	}
