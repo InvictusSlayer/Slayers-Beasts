@@ -10,7 +10,7 @@ public class ParalysisEffect extends MobEffect {
 	}
 
 	public void applyEffectTick(LivingEntity entity, int amplifier) {
-		if (!entity.level().isClientSide()) {
+		if (!entity.level.isClientSide()) {
 			double x = entity.getX();
 			double y = entity.getY();
 			double z = entity.getZ();

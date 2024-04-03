@@ -25,11 +25,8 @@ public class SBOverworldBiomes {
 	private static final int DEFAULT_FOG = 12638463;
 	private static final Biome.TemperatureModifier FROZEN = Biome.TemperatureModifier.FROZEN;
 	private static final Biome.TemperatureModifier NONE = Biome.TemperatureModifier.NONE;
-	private static final Music MUSIC_DESERT = Musics.createGameMusic(SoundEvents.MUSIC_BIOME_DESERT);
-	private static final Music MUSIC_FOREST = Musics.createGameMusic(SoundEvents.MUSIC_BIOME_FOREST);
+	private static final Music MUSIC_FOREST = Musics.createGameMusic(SoundEvents.MUSIC_BIOME_JUNGLE_AND_FOREST);
 	private static final Music MUSIC_FROZEN = Musics.createGameMusic(SoundEvents.MUSIC_BIOME_FROZEN_PEAKS);
-	private static final Music MUSIC_OUTBACK = Musics.createGameMusic(SoundEvents.MUSIC_BIOME_BADLANDS);
-	private static final Music MUSIC_RAINFOREST = Musics.createGameMusic(SoundEvents.MUSIC_BIOME_JUNGLE);
 	private static final Music MUSIC_REDWOOD = Musics.createGameMusic(SoundEvents.MUSIC_BIOME_OLD_GROWTH_TAIGA);
 	private static final Music MUSIC_SWAMP = Musics.createGameMusic(SoundEvents.MUSIC_BIOME_SWAMP);
 	private static final Music MUSIC_VOLCANIC = Musics.createGameMusic(SoundEvents.MUSIC_BIOME_BASALT_DELTAS);
@@ -52,7 +49,7 @@ public class SBOverworldBiomes {
 		addModUndergroundVariety(biomeSettings);
 		addModMushrooms(biomeSettings);
 		biomeSettings.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, SBPlacedFeatures.TREES_RAINFOREST);
-		return biome(true, 0.6F, 0.6F, mobSettings, biomeSettings, MUSIC_RAINFOREST);
+		return biome(true, 0.6F, 0.6F, mobSettings, biomeSettings, MUSIC_FOREST);
 	}
 
 	public static Biome aspenForest(HolderGetter<PlacedFeature> features, HolderGetter<ConfiguredWorldCarver<?>> carvers) {
@@ -118,7 +115,7 @@ public class SBOverworldBiomes {
 		biomeSettings.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, SBPlacedFeatures.PATCH_TALL_DEAD_BUSH_BRUSH);
 		addModMushrooms(biomeSettings);
 		biomeSettings.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, wooded ? SBPlacedFeatures.TREES_WOODED_BRUSH : SBPlacedFeatures.TREES_BRUSH);
-		return biome(false, 2F, 0F, mobSettings, biomeSettings, MUSIC_OUTBACK);
+		return biome(false, 2F, 0F, mobSettings, biomeSettings, null);
 	}
 
 	public static Biome chaparral(HolderGetter<PlacedFeature> features, HolderGetter<ConfiguredWorldCarver<?>> carvers) {
@@ -139,7 +136,7 @@ public class SBOverworldBiomes {
 		biomeSettings.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, SBPlacedFeatures.PATCH_TALL_DEAD_BUSH);
 		addModMushrooms(biomeSettings);
 		biomeSettings.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, SBPlacedFeatures.TREES_CHAPARRAL);
-		return biome(true, 0.8F, 0.4F, mobSettings, biomeSettings, MUSIC_OUTBACK);
+		return biome(true, 0.8F, 0.4F, mobSettings, biomeSettings, null);
 	}
 
 	public static Biome desert(HolderGetter<PlacedFeature> features, HolderGetter<ConfiguredWorldCarver<?>> carvers) {
@@ -158,7 +155,7 @@ public class SBOverworldBiomes {
 		addMudPits(biomeSettings);
 		addModUndergroundVariety(biomeSettings);
 		addModMushrooms(biomeSettings);
-		return biome(false, 2F, 0F, mobSettings, biomeSettings, MUSIC_DESERT);
+		return biome(false, 2F, 0F, mobSettings, biomeSettings, null);
 	}
 
 	public static Biome eucalyptWoodland(HolderGetter<PlacedFeature> features, HolderGetter<ConfiguredWorldCarver<?>> carvers) {
@@ -284,7 +281,7 @@ public class SBOverworldBiomes {
 		biomeSettings.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, SBPlacedFeatures.PATCH_TALL_DEAD_BUSH);
 		addModMushrooms(biomeSettings);
 		biomeSettings.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, SBPlacedFeatures.TREES_OUTBACK);
-		return biome(false, 2F, 0F, mobSettings, biomeSettings, MUSIC_OUTBACK); // grass-9470285 foliage-10387789
+		return biome(false, 2F, 0F, mobSettings, biomeSettings, null); // grass-9470285 foliage-10387789
 	}
 
 	public static Biome petrifiedWoods(HolderGetter<PlacedFeature> features, HolderGetter<ConfiguredWorldCarver<?>> carvers) {
@@ -317,7 +314,7 @@ public class SBOverworldBiomes {
 		addModUndergroundVariety(biomeSettings);
 		addModMushrooms(biomeSettings);
 		biomeSettings.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, SBPlacedFeatures.TREES_RAINFOREST);
-		return biome(true, 2F, 0F, mobSettings, biomeSettings, MUSIC_RAINFOREST);
+		return biome(true, 2F, 0F, mobSettings, biomeSettings, null);
 	}
 
 	public static Biome redwoodGrove(HolderGetter<PlacedFeature> features, HolderGetter<ConfiguredWorldCarver<?>> carvers, boolean oldGrowth) {

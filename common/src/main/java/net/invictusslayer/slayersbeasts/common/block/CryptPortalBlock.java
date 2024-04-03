@@ -78,7 +78,7 @@ public class CryptPortalBlock extends Block {
 			MinecraftServer server = level.getServer();
 			if (server == null) return;
 
-			ResourceKey<Level> destination = player.level().dimension() == SBDimensions.CRYPT ? Level.OVERWORLD : SBDimensions.CRYPT;
+			ResourceKey<Level> destination = player.level.dimension() == SBDimensions.CRYPT ? Level.OVERWORLD : SBDimensions.CRYPT;
 			ServerLevel serverLevel = server.getLevel(destination);
 			if (serverLevel == null) return;
 

@@ -58,7 +58,6 @@ public class SBBiomeTagsProvider extends BiomeTagsProvider {
 		tag(BiomeTags.IS_END).add(SBBiomes.END_SPIKES);
 		tag(BiomeTags.HAS_RUINED_PORTAL_SWAMP).add(SBBiomes.INKY_MOOR).add(SBBiomes.BAYOU);
 		tag(BiomeTags.HAS_RUINED_PORTAL_STANDARD).addTag(SBTags.Biomes.IS_BRUSHLAND);
-		tag(BiomeTags.HAS_TRAIL_RUINS).add(SBBiomes.REDWOOD_GROVE, SBBiomes.OLD_GROWTH_REDWOOD_GROVE, SBBiomes.CHAPARRAL);
 		tag(BiomeTags.HAS_END_CITY).add(SBBiomes.END_SPIKES);
 		tag(BiomeTags.SNOW_GOLEM_MELTS).add(SBBiomes.BLACK_DUNES, SBBiomes.DEAD_SANDS, SBBiomes.OUTBACK).addTag(SBTags.Biomes.IS_BRUSHLAND);
 		tag(BiomeTags.ALLOWS_SURFACE_SLIME_SPAWNS).add(SBBiomes.BAYOU, SBBiomes.SLIME_CAVERNS);

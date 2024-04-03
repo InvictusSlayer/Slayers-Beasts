@@ -13,8 +13,8 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.properties.BlockSetType;
-import net.minecraft.world.level.material.MapColor;
-import net.minecraft.world.level.material.PushReaction;
+import net.minecraft.world.level.material.Material;
+import net.minecraft.world.level.material.MaterialColor;
 
 import java.util.function.Supplier;
 
@@ -23,7 +23,7 @@ public class SBBlocks {
 	
 //	public static final RegistrySupplier<Block> SEPULCHRA_PORTAL = BLOCKS.register("sepulchra_portal", () -> new SepulchraPortalBlock(Block.Properties.copy(Blocks.NETHER_PORTAL).noLootTable()));
 
-	public static final RegistrySupplier<Block> CRYPT_PORTAL = BLOCKS.register("crypt_portal", () -> new CryptPortalBlock(Block.Properties.copy(Blocks.END_PORTAL).mapColor(MapColor.QUARTZ).noLootTable()));
+	public static final RegistrySupplier<Block> CRYPT_PORTAL = BLOCKS.register("crypt_portal", () -> new CryptPortalBlock(Block.Properties.copy(Blocks.END_PORTAL).color(MaterialColor.QUARTZ).noLootTable()));
 	public static final RegistrySupplier<Block> CRYPTALITH = register("cryptalith", () -> new Block(BlockBehaviour.Properties.copy(Blocks.DEEPSLATE)));
 	public static final RegistrySupplier<Block> INFUSED_CRYPTALITH = register("infused_cryptalith", () -> new InfusedCryptalithBlock(BlockBehaviour.Properties.copy(CRYPTALITH.get()).strength(55F, 3600000F).lightLevel(state -> 1)));
 	public static final RegistrySupplier<Block> DEPLETED_CRYPTALITH = register("depleted_cryptalith", () -> new DepletedCryptalithBlock(BlockBehaviour.Properties.copy(CRYPTALITH.get()).strength(55F, 3600000F)));
@@ -44,39 +44,39 @@ public class SBBlocks {
 	public static final RegistrySupplier<Block> OOTHECA = register("ootheca", () -> new OothecaBlock(BlockBehaviour.Properties.copy(Blocks.HAY_BLOCK).strength(1f).noLootTable()));
 
 	public static final RegistrySupplier<Block> GLEAMING_ICE = register("gleaming_ice", () -> new Block(BlockBehaviour.Properties.copy(Blocks.PACKED_ICE).lightLevel(state -> 7)));
-	public static final RegistrySupplier<Block> ICICLE = register("icicle", () -> new IcicleBlock(BlockBehaviour.Properties.copy(Blocks.POINTED_DRIPSTONE).mapColor(MapColor.ICE).sound(SoundType.GLASS)));
-	public static final RegistrySupplier<Block> OBSIDIAN_SPIKE = register("obsidian_spike", () -> new ObsidianSpikeBlock(BlockBehaviour.Properties.copy(Blocks.POINTED_DRIPSTONE).mapColor(MapColor.COLOR_BLACK).strength(50.0F, 1200.0F)));
+	public static final RegistrySupplier<Block> ICICLE = register("icicle", () -> new IcicleBlock(BlockBehaviour.Properties.copy(Blocks.POINTED_DRIPSTONE).color(MaterialColor.ICE).sound(SoundType.GLASS)));
+	public static final RegistrySupplier<Block> OBSIDIAN_SPIKE = register("obsidian_spike", () -> new ObsidianSpikeBlock(BlockBehaviour.Properties.copy(Blocks.POINTED_DRIPSTONE).color(MaterialColor.COLOR_BLACK).strength(50.0F, 1200.0F)));
 
 	public static final RegistrySupplier<Block> TALL_DEAD_BUSH = register("tall_dead_bush", () -> new TallDeadBushBlock(BlockBehaviour.Properties.copy(Blocks.DEAD_BUSH)));
 	public static final RegistrySupplier<Block> CRACKED_MUD = register("cracked_mud", () -> new CrackedMudBlock(BlockBehaviour.Properties.copy(Blocks.PACKED_MUD)));
-	public static final RegistrySupplier<Block> PEAT = register("peat", () -> new PeatBlock(BlockBehaviour.Properties.copy(Blocks.POWDER_SNOW).mapColor(MapColor.TERRACOTTA_BLACK).strength(1F).sound(SoundType.MUD).forceSolidOn().pushReaction(PushReaction.DESTROY)));
+	public static final RegistrySupplier<Block> PEAT = register("peat", () -> new PeatBlock(BlockBehaviour.Properties.copy(Blocks.POWDER_SNOW).color(MaterialColor.TERRACOTTA_BLACK).strength(1F).sound(SoundType.MUD)));
 	public static final RegistrySupplier<Block> ALGAE = BLOCKS.register("algae", () -> new AlgaeBlock(BlockBehaviour.Properties.copy(Blocks.LILY_PAD).noCollission()));
 
-	public static final RegistrySupplier<Block> PEGMATITE = register("pegmatite", () -> new Block(BlockBehaviour.Properties.copy(Blocks.STONE).mapColor(MapColor.SAND)));
+	public static final RegistrySupplier<Block> PEGMATITE = register("pegmatite", () -> new Block(BlockBehaviour.Properties.copy(Blocks.STONE).color(MaterialColor.SAND)));
 	public static final RegistrySupplier<Block> PEGMATITE_SLAB = register("pegmatite_slab", () -> new SlabBlock(BlockBehaviour.Properties.copy(PEGMATITE.get())));
 	public static final RegistrySupplier<Block> PEGMATITE_STAIRS = register("pegmatite_stairs", () -> new StairBlock(PEGMATITE.get().defaultBlockState(), BlockBehaviour.Properties.copy(PEGMATITE.get())));
-	public static final RegistrySupplier<Block> PEGMATITE_WALL = register("pegmatite_wall", () -> new WallBlock(BlockBehaviour.Properties.copy(PEGMATITE.get()).forceSolidOn()));
-	public static final RegistrySupplier<Block> POLISHED_PEGMATITE = register("polished_pegmatite", () -> new Block(BlockBehaviour.Properties.copy(Blocks.STONE).mapColor(MapColor.SAND)));
+	public static final RegistrySupplier<Block> PEGMATITE_WALL = register("pegmatite_wall", () -> new WallBlock(BlockBehaviour.Properties.copy(PEGMATITE.get())));
+	public static final RegistrySupplier<Block> POLISHED_PEGMATITE = register("polished_pegmatite", () -> new Block(BlockBehaviour.Properties.copy(Blocks.STONE).color(MaterialColor.SAND)));
 	public static final RegistrySupplier<Block> POLISHED_PEGMATITE_SLAB = register("polished_pegmatite_slab", () -> new SlabBlock(BlockBehaviour.Properties.copy(POLISHED_PEGMATITE.get())));
 	public static final RegistrySupplier<Block> POLISHED_PEGMATITE_STAIRS = register("polished_pegmatite_stairs", () -> new StairBlock(POLISHED_PEGMATITE.get().defaultBlockState(), BlockBehaviour.Properties.copy(POLISHED_PEGMATITE.get())));
 
-	public static final RegistrySupplier<Block> BLACK_SAND = register("black_sand", () -> new SandBlock(3748886, BlockBehaviour.Properties.copy(Blocks.SAND).mapColor(MapColor.COLOR_BLACK)));
-	public static final RegistrySupplier<Block> BLACK_SANDSTONE = register("black_sandstone", () -> new Block(BlockBehaviour.Properties.copy(Blocks.SANDSTONE).mapColor(MapColor.COLOR_BLACK)));
-	public static final RegistrySupplier<Block> BLACK_SANDSTONE_SLAB = register("black_sandstone_slab", () -> new SlabBlock(BlockBehaviour.Properties.copy(Blocks.SANDSTONE_SLAB).mapColor(MapColor.COLOR_BLACK)));
-	public static final RegistrySupplier<Block> BLACK_SANDSTONE_STAIRS = register("black_sandstone_stairs", () -> new StairBlock(BLACK_SANDSTONE.get().defaultBlockState(), BlockBehaviour.Properties.copy(Blocks.SANDSTONE_STAIRS).mapColor(MapColor.COLOR_BLACK)));
-	public static final RegistrySupplier<Block> BLACK_SANDSTONE_WALL = register("black_sandstone_wall", () -> new WallBlock(BlockBehaviour.Properties.copy(Blocks.SANDSTONE_WALL).mapColor(MapColor.COLOR_BLACK)));
-	public static final RegistrySupplier<Block> SMOOTH_BLACK_SANDSTONE = register("smooth_black_sandstone", () -> new Block(BlockBehaviour.Properties.copy(Blocks.CUT_SANDSTONE).mapColor(MapColor.COLOR_BLACK)));
-	public static final RegistrySupplier<Block> SMOOTH_BLACK_SANDSTONE_SLAB = register("smooth_black_sandstone_slab", () -> new SlabBlock(BlockBehaviour.Properties.copy(Blocks.SMOOTH_SANDSTONE_SLAB).mapColor(MapColor.COLOR_BLACK)));
-	public static final RegistrySupplier<Block> SMOOTH_BLACK_SANDSTONE_STAIRS = register("smooth_black_sandstone_stairs", () -> new StairBlock(SMOOTH_BLACK_SANDSTONE.get().defaultBlockState(), BlockBehaviour.Properties.copy(Blocks.SMOOTH_SANDSTONE_STAIRS).mapColor(MapColor.COLOR_BLACK)));
-	public static final RegistrySupplier<Block> CUT_BLACK_SANDSTONE = register("cut_black_sandstone", () -> new Block(BlockBehaviour.Properties.copy(Blocks.CUT_SANDSTONE).mapColor(MapColor.COLOR_BLACK)));
-	public static final RegistrySupplier<Block> CUT_BLACK_SANDSTONE_SLAB = register("cut_black_sandstone_slab", () -> new SlabBlock(BlockBehaviour.Properties.copy(Blocks.CUT_SANDSTONE_SLAB).mapColor(MapColor.COLOR_BLACK)));
-	public static final RegistrySupplier<Block> CHISELED_BLACK_SANDSTONE = register("chiseled_black_sandstone", () -> new Block(BlockBehaviour.Properties.copy(Blocks.CHISELED_SANDSTONE).mapColor(MapColor.COLOR_BLACK)));
+	public static final RegistrySupplier<Block> BLACK_SAND = register("black_sand", () -> new SandBlock(3748886, BlockBehaviour.Properties.copy(Blocks.SAND).color(MaterialColor.COLOR_BLACK)));
+	public static final RegistrySupplier<Block> BLACK_SANDSTONE = register("black_sandstone", () -> new Block(BlockBehaviour.Properties.copy(Blocks.SANDSTONE).color(MaterialColor.COLOR_BLACK)));
+	public static final RegistrySupplier<Block> BLACK_SANDSTONE_SLAB = register("black_sandstone_slab", () -> new SlabBlock(BlockBehaviour.Properties.copy(Blocks.SANDSTONE_SLAB).color(MaterialColor.COLOR_BLACK)));
+	public static final RegistrySupplier<Block> BLACK_SANDSTONE_STAIRS = register("black_sandstone_stairs", () -> new StairBlock(BLACK_SANDSTONE.get().defaultBlockState(), BlockBehaviour.Properties.copy(Blocks.SANDSTONE_STAIRS).color(MaterialColor.COLOR_BLACK)));
+	public static final RegistrySupplier<Block> BLACK_SANDSTONE_WALL = register("black_sandstone_wall", () -> new WallBlock(BlockBehaviour.Properties.copy(Blocks.SANDSTONE_WALL).color(MaterialColor.COLOR_BLACK)));
+	public static final RegistrySupplier<Block> SMOOTH_BLACK_SANDSTONE = register("smooth_black_sandstone", () -> new Block(BlockBehaviour.Properties.copy(Blocks.CUT_SANDSTONE).color(MaterialColor.COLOR_BLACK)));
+	public static final RegistrySupplier<Block> SMOOTH_BLACK_SANDSTONE_SLAB = register("smooth_black_sandstone_slab", () -> new SlabBlock(BlockBehaviour.Properties.copy(Blocks.SMOOTH_SANDSTONE_SLAB).color(MaterialColor.COLOR_BLACK)));
+	public static final RegistrySupplier<Block> SMOOTH_BLACK_SANDSTONE_STAIRS = register("smooth_black_sandstone_stairs", () -> new StairBlock(SMOOTH_BLACK_SANDSTONE.get().defaultBlockState(), BlockBehaviour.Properties.copy(Blocks.SMOOTH_SANDSTONE_STAIRS).color(MaterialColor.COLOR_BLACK)));
+	public static final RegistrySupplier<Block> CUT_BLACK_SANDSTONE = register("cut_black_sandstone", () -> new Block(BlockBehaviour.Properties.copy(Blocks.CUT_SANDSTONE).color(MaterialColor.COLOR_BLACK)));
+	public static final RegistrySupplier<Block> CUT_BLACK_SANDSTONE_SLAB = register("cut_black_sandstone_slab", () -> new SlabBlock(BlockBehaviour.Properties.copy(Blocks.CUT_SANDSTONE_SLAB).color(MaterialColor.COLOR_BLACK)));
+	public static final RegistrySupplier<Block> CHISELED_BLACK_SANDSTONE = register("chiseled_black_sandstone", () -> new Block(BlockBehaviour.Properties.copy(Blocks.CHISELED_SANDSTONE).color(MaterialColor.COLOR_BLACK)));
 
-	public static final RegistrySupplier<Block> BLACK_MUSHROOM_BLOCK = register("black_mushroom_block", () -> new HugeMushroomBlock(BlockBehaviour.Properties.copy(Blocks.RED_MUSHROOM_BLOCK).mapColor(MapColor.TERRACOTTA_BLACK)));
-	public static final RegistrySupplier<Block> BLACK_MUSHROOM = register("black_mushroom", () -> new MushroomBlock(BlockBehaviour.Properties.of().mapColor(MapColor.TERRACOTTA_BLACK).noCollission().randomTicks().instabreak().sound(SoundType.GRASS).hasPostProcess((state, level, pos) -> true).pushReaction(PushReaction.DESTROY), SBConfiguredFeatures.HUGE_BLACK_MUSHROOM));
+	public static final RegistrySupplier<Block> BLACK_MUSHROOM_BLOCK = register("black_mushroom_block", () -> new HugeMushroomBlock(BlockBehaviour.Properties.copy(Blocks.RED_MUSHROOM_BLOCK).color(MaterialColor.TERRACOTTA_BLACK)));
+	public static final RegistrySupplier<Block> BLACK_MUSHROOM = register("black_mushroom", () -> new MushroomBlock(BlockBehaviour.Properties.of(Material.PLANT, MaterialColor.TERRACOTTA_BLACK).noCollission().randomTicks().instabreak().sound(SoundType.GRASS).hasPostProcess((state, level, pos) -> true), SBConfiguredFeatures.HUGE_BLACK_MUSHROOM));
 	public static final RegistrySupplier<Block> POTTED_BLACK_MUSHROOM = BLOCKS.register("potted_black_mushroom", () -> new FlowerPotBlock(BLACK_MUSHROOM.get(), BlockBehaviour.Properties.copy(Blocks.POTTED_RED_MUSHROOM)));
-	public static final RegistrySupplier<Block> WHITE_MUSHROOM_BLOCK = register("white_mushroom_block", () -> new HugeMushroomBlock(BlockBehaviour.Properties.copy(Blocks.RED_MUSHROOM_BLOCK).mapColor(MapColor.TERRACOTTA_WHITE)));
-	public static final RegistrySupplier<Block> WHITE_MUSHROOM = register("white_mushroom", () -> new MushroomBlock(BlockBehaviour.Properties.of().mapColor(MapColor.TERRACOTTA_WHITE).noCollission().randomTicks().instabreak().sound(SoundType.GRASS).hasPostProcess((state, level, pos) -> true).pushReaction(PushReaction.DESTROY), SBConfiguredFeatures.HUGE_WHITE_MUSHROOM));
+	public static final RegistrySupplier<Block> WHITE_MUSHROOM_BLOCK = register("white_mushroom_block", () -> new HugeMushroomBlock(BlockBehaviour.Properties.copy(Blocks.RED_MUSHROOM_BLOCK).color(MaterialColor.TERRACOTTA_WHITE)));
+	public static final RegistrySupplier<Block> WHITE_MUSHROOM = register("white_mushroom", () -> new MushroomBlock(BlockBehaviour.Properties.of(Material.PLANT, MaterialColor.TERRACOTTA_WHITE).noCollission().randomTicks().instabreak().sound(SoundType.GRASS).hasPostProcess((state, level, pos) -> true), SBConfiguredFeatures.HUGE_WHITE_MUSHROOM));
 	public static final RegistrySupplier<Block> POTTED_WHITE_MUSHROOM = BLOCKS.register("potted_white_mushroom", () -> new FlowerPotBlock(WHITE_MUSHROOM.get(), BlockBehaviour.Properties.copy(Blocks.POTTED_RED_MUSHROOM)));
 	public static final RegistrySupplier<Block> THIN_MUSHROOM_STEM = register("thin_mushroom_stem", () -> new ThinMushroomStemBlock(BlockBehaviour.Properties.copy(Blocks.MUSHROOM_STEM)));
 
@@ -221,8 +221,8 @@ public class SBBlocks {
 	public static final RegistrySupplier<Block> WILLOW_WALL_SIGN = BLOCKS.register("willow_wall_sign", () -> new WallSignBlock(BlockBehaviour.Properties.copy(Blocks.OAK_WALL_SIGN), SBWoodType.WILLOW));
 	public static final RegistrySupplier<Block> WILLOW_HANGING_SIGN = BLOCKS.register("willow_hanging_sign", () -> new CeilingHangingSignBlock(BlockBehaviour.Properties.copy(Blocks.OAK_HANGING_SIGN), SBWoodType.WILLOW));
 	public static final RegistrySupplier<Block> WILLOW_WALL_HANGING_SIGN = BLOCKS.register("willow_wall_hanging_sign", () -> new WallHangingSignBlock(BlockBehaviour.Properties.copy(Blocks.OAK_WALL_HANGING_SIGN), SBWoodType.WILLOW));
-	public static final RegistrySupplier<Block> WILLOW_BRANCH = register("willow_branch", () -> new WillowBranchBlock(BlockBehaviour.Properties.of().mapColor(MapColor.PLANT).randomTicks().noCollission().strength(0.2F).sound(SoundType.GRASS).ignitedByLava().pushReaction(PushReaction.DESTROY)));
-	public static final RegistrySupplier<Block> WILLOW_BRANCH_PLANT = register("willow_branch_plant", () -> new WillowBranchPlantBlock(BlockBehaviour.Properties.of().mapColor(MapColor.PLANT).noCollission().strength(0.2F).sound(SoundType.GRASS).ignitedByLava().pushReaction(PushReaction.DESTROY)));
+	public static final RegistrySupplier<Block> WILLOW_BRANCH = register("willow_branch", () -> new WillowBranchBlock(BlockBehaviour.Properties.of(Material.PLANT).randomTicks().noCollission().strength(0.2F).sound(SoundType.GRASS)));
+	public static final RegistrySupplier<Block> WILLOW_BRANCH_PLANT = register("willow_branch_plant", () -> new WillowBranchPlantBlock(BlockBehaviour.Properties.of(Material.PLANT).noCollission().strength(0.2F).sound(SoundType.GRASS)));
 
 	private static Block woodenButton(BlockBehaviour.Properties properties, BlockSetType blockSetType) {
 		return new ButtonBlock(properties, blockSetType, 15, true);

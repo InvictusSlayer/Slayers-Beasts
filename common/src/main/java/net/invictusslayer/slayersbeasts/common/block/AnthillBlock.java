@@ -31,7 +31,7 @@ import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.IntegerProperty;
-import net.minecraft.world.level.storage.loot.LootParams;
+import net.minecraft.world.level.storage.loot.LootContext;
 import net.minecraft.world.level.storage.loot.parameters.LootContextParams;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.BlockHitResult;
@@ -182,7 +182,7 @@ public class AnthillBlock extends BaseEntityBlock {
     }
 
     @SuppressWarnings("deprecation")
-    public List<ItemStack> getDrops(BlockState state, LootParams.Builder builder) {
+    public List<ItemStack> getDrops(BlockState state, LootContext.Builder builder) {
 	    Entity entity = builder.getOptionalParameter(LootContextParams.THIS_ENTITY);
 		if (entity instanceof PrimedTnt || entity instanceof Creeper || entity instanceof WitherSkull ||
                 entity instanceof WitherBoss || entity instanceof MinecartTNT) {

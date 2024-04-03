@@ -70,7 +70,7 @@ public abstract class AbstractEnt extends PathfinderMob {
 
 	public void tick() {
 		super.tick();
-		if (level().isClientSide()) {
+		if (level.isClientSide()) {
 			setupAnimationStates();
 		}
 	}

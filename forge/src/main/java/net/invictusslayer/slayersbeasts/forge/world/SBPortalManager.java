@@ -39,17 +39,17 @@ public class SBPortalManager implements ITeleporter {
 	}
 
 	public PortalInfo getPortalInfo(Entity entity, ServerLevel destination, Function<ServerLevel, PortalInfo> portalInfo) {
-		if (entity.level().dimension() != SBDimensions.SEPULCHRA && destination.dimension() != SBDimensions.SEPULCHRA) return null;
+		if (entity.level.dimension() != SBDimensions.SEPULCHRA && destination.dimension() != SBDimensions.SEPULCHRA) return null;
 		WorldBorder worldBorder = destination.getWorldBorder();
-		double scale = DimensionType.getTeleportationScale(entity.level().dimensionType(), destination.dimensionType());
+		double scale = DimensionType.getTeleportationScale(entity.level.dimensionType(), destination.dimensionType());
 		BlockPos blockPos = worldBorder.clampToBounds(entity.getX() * scale, entity.getY(), entity.getZ() * scale);
 		return this.getPortal(entity, blockPos, worldBorder).map(result -> {
-			BlockState state = entity.level().getBlockState(entity.portalEntrancePos);
+			BlockState state = entity.level.getBlockState(entity.portalEntrancePos);
 			Direction.Axis axis;
 			Vec3 vec3;
 			if (state.hasProperty(BlockStateProperties.HORIZONTAL_AXIS)) {
 				axis = state.getValue(BlockStateProperties.HORIZONTAL_AXIS);
-				BlockUtil.FoundRectangle rectangle = BlockUtil.getLargestRectangleAround(entity.portalEntrancePos, axis, 21, Direction.Axis.Y, 21, pos -> entity.level().getBlockState(pos) == state);
+				BlockUtil.FoundRectangle rectangle = BlockUtil.getLargestRectangleAround(entity.portalEntrancePos, axis, 21, Direction.Axis.Y, 21, pos -> entity.level.getBlockState(pos) == state);
 				vec3 = PortalShape.getRelativePosition(rectangle, axis, entity.position(), entity.getDimensions(entity.getPose()));
 			} else {
 				axis = Direction.Axis.X;
@@ -177,14 +177,13 @@ public class SBPortalManager implements ITeleporter {
 		return Optional.of(new BlockUtil.FoundRectangle(pos1.immutable(), 2, 3));
 	}
 
-	@SuppressWarnings("deprecation")
 	private boolean checkRegionForPlacement(BlockPos originalPos, BlockPos.MutableBlockPos offsetPos, Direction directionIn, int offsetScale) {
 		Direction dir = directionIn.getClockWise();
 
 		for (int i = -1; i < 3; ++i) {
 			for (int j = -1; j < 4; ++j) {
 				offsetPos.setWithOffset(originalPos, directionIn.getStepX() * i + dir.getStepX() * offsetScale, j, directionIn.getStepZ() * i + dir.getStepZ() * offsetScale);
-				if (j < 0 && !level.getBlockState(offsetPos).isSolid()) return false;
+				if (j < 0 && !level.getBlockState(offsetPos).getMaterial().isSolid()) return false;
 				if (j >= 0 && !level.isEmptyBlock(offsetPos)) return false;
 			}
 		}

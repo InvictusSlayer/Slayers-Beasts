@@ -35,7 +35,6 @@ public class SlayersBeasts {
 		AutoConfig.register(SBConfig.class, Toml4jConfigSerializer::new);
 		CONFIG = AutoConfig.getConfigHolder(SBConfig.class).getConfig();
 
-		SBCreativeModeTabs.CREATIVE_TABS.register();
 		SBBlocks.BLOCKS.register();
 		SBItems.ITEMS.register();
 		SBBlockEntities.BLOCK_ENTITIES.register();
@@ -52,6 +51,7 @@ public class SlayersBeasts {
 		SBStructurePieces.STRUCTURE_PIECES.register();
 		SBStructureTypes.STRUCTURE_TYPES.register();
 
+		SBCreativeModeTabs.setup();
 		SBVillagerType.biomeSetup();
 		SBEntities.registerAttributes();
 

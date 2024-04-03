@@ -161,7 +161,7 @@ public class Damselfly extends PathfinderMob {
 		super.tick();
 		if (!isPerched()) --ticksUntilPerch;
 
-		if (level().isClientSide()) setupAnimationStates();
+		if (level.isClientSide()) setupAnimationStates();
 	}
 
 	private void setupAnimationStates() {
@@ -259,7 +259,7 @@ public class Damselfly extends PathfinderMob {
 						for (int z = x < i && x > -i ? i : 0; z <= i; z = z > 0 ? -z : 1 - z) {
 							mutableBlockPos.setWithOffset(blockPos, x, y - 1, z);
 							if (blockPos.closerThan(mutableBlockPos, 5.0) &&
-									predicate.test(mob.level().getBlockState(mutableBlockPos))) {
+									predicate.test(mob.level.getBlockState(mutableBlockPos))) {
 								return Optional.of(mutableBlockPos);
 							}
 						}

@@ -18,7 +18,6 @@ public class PitFeature extends Feature<PitFeature.Configuration> {
 		super(pCodec);
 	}
 
-	@SuppressWarnings("deprecation")
 	public boolean place(FeaturePlaceContext<Configuration> context) {
 		BlockPos origin = context.origin();
 		WorldGenLevel level = context.level();
@@ -71,8 +70,8 @@ public class PitFeature extends Feature<PitFeature.Configuration> {
 							|| y1 < yMax - 1 && booleans[boolId + 1] || y1 > 0 && booleans[boolId - 1]);
 					if (flag) {
 						BlockState state = level.getBlockState(origin.offset(x1, y1, z1));
-						if (state.liquid()) return false;
-						if (y1 < y && !state.isSolid() && level.getBlockState(origin.offset(x1, y1, z1)) != Blocks.CAVE_AIR.defaultBlockState()) {
+						if (state.getMaterial().isLiquid()) return false;
+						if (y1 < y && !state.getMaterial().isSolid() && level.getBlockState(origin.offset(x1, y1, z1)) != Blocks.CAVE_AIR.defaultBlockState()) {
 							return false;
 						}
 					}

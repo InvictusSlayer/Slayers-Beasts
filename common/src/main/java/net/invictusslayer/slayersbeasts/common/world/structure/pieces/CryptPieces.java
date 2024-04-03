@@ -108,8 +108,8 @@ public class CryptPieces {
 
 			loop:
 			for (StructureTemplate.StructureBlockInfo info : element.getShuffledJigsawBlocks(this.manager, pos, rotation, this.random)) {
-				Direction direction = JigsawBlock.getFrontFacing(info.state());
-				BlockPos blockPos = info.pos();
+				Direction direction = JigsawBlock.getFrontFacing(info.state);
+				BlockPos blockPos = info.pos;
 				BlockPos blockPos1 = blockPos.relative(direction);
 				int j = blockPos.getY() - y;
 				int k = -1;
@@ -156,14 +156,14 @@ public class CryptPieces {
 
 						for (StructureTemplate.StructureBlockInfo info1 : list1) {
 							if (JigsawBlock.canAttach(info, info1)) {
-								BlockPos blockPos2 = info1.pos();
+								BlockPos blockPos2 = info1.pos;
 								BlockPos blockPos3 = blockPos1.subtract(blockPos2);
 								BoundingBox boundingBox = poolElement.getBoundingBox(this.manager, blockPos3, rotation1);
 								int i1 = boundingBox.minY();
 								StructureTemplatePool.Projection projection = poolElement.getProjection();
 								boolean flag2 = projection == StructureTemplatePool.Projection.RIGID;
 								int j1 = blockPos2.getY();
-								int k1 = j - j1 + JigsawBlock.getFrontFacing(info.state()).getStepY();
+								int k1 = j - j1 + JigsawBlock.getFrontFacing(info.state).getStepY();
 								int l1;
 								if (flag && flag2) {
 									l1 = y + k1;
@@ -219,8 +219,7 @@ public class CryptPieces {
 		}
 
 		private static ResourceKey<StructureTemplatePool> readPoolName(StructureTemplate.StructureBlockInfo info) {
-			assert info.nbt() != null;
-			return ResourceKey.create(Registries.TEMPLATE_POOL, new ResourceLocation(info.nbt().getString("pool")));
+			return ResourceKey.create(Registries.TEMPLATE_POOL, new ResourceLocation(info.nbt.getString("pool")));
 		}
 	}
 }

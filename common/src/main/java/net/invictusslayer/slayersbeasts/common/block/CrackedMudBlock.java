@@ -42,10 +42,9 @@ public class CrackedMudBlock extends Block {
 		}
 	}
 
-	@SuppressWarnings("deprecation")
 	public void stepOn(Level level, BlockPos pos, BlockState state, Entity entity) {
 		if (!level.isClientSide) {
-			if (!entity.isSteppingCarefully() && entity instanceof LivingEntity && !level.getBlockState(pos.below()).isSolid()) {
+			if (!entity.isSteppingCarefully() && entity instanceof LivingEntity && !level.getBlockState(pos.below()).getMaterial().isSolid()) {
 				Tilt tilt = state.getValue(TILT);
 				if (tilt == Tilt.NONE) {
 					this.setTiltAndScheduleTick(state, level, pos, Tilt.UNSTABLE, SoundEvents.PACKED_MUD_FALL);
@@ -63,9 +62,8 @@ public class CrackedMudBlock extends Block {
 		super.stepOn(level, pos, state, entity);
 	}
 
-	@SuppressWarnings("deprecation")
 	public void fallOn(Level level, BlockState state, BlockPos pos, Entity entity, float fallDistance) {
-		if (fallDistance > 4 && entity instanceof LivingEntity && !level.getBlockState(pos.below()).isSolid()) {
+		if (fallDistance > 4 && entity instanceof LivingEntity && !level.getBlockState(pos.below()).getMaterial().isSolid()) {
 			level.removeBlock(pos, false);
 			playTiltSound(level, pos, SoundEvents.PACKED_MUD_BREAK);
 		}

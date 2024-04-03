@@ -3,6 +3,8 @@ accessible  method  net/minecraft/client/renderer/Sheets createSignMaterial (Lne
 accessible  method  net/minecraft/client/renderer/Sheets createHangingSignMaterial (Lnet/minecraft/world/level/block/state/properties/WoodType;)Lnet/minecraft/client/resources/model/Material;
 accessible  method  net/minecraft/data/loot/BlockLootSubProvider createPotFlowerItemTable (Lnet/minecraft/world/level/ItemLike;)Lnet/minecraft/world/level/storage/loot/LootTable$Builder;
 accessible  method  net/minecraft/data/loot/BlockLootSubProvider createSilkTouchOnlyTable (Lnet/minecraft/world/level/ItemLike;)Lnet/minecraft/world/level/storage/loot/LootTable$Builder;
+accessible  field   net/minecraft/data/loot/BlockLootSubProvider enabledFeatures Lnet/minecraft/world/flag/FeatureFlagSet;
+accessible  field   net/minecraft/data/loot/BlockLootSubProvider map Ljava/util/Map;
 accessible  field   net/minecraft/world/entity/Entity portalEntrancePos Lnet/minecraft/core/BlockPos;
 accessible  field   net/minecraft/world/entity/npc/VillagerType BY_BIOME Ljava/util/Map;
 accessible  field   net/minecraft/world/item/AxeItem STRIPPABLES Ljava/util/Map;

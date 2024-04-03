@@ -154,7 +154,7 @@ public class Mantis extends PathfinderMob {
 		}
 
 		public boolean canUse() {
-			return mob.onGround() && mob.getRandom().nextFloat() < 0.02F;
+			return mob.onGround && mob.getRandom().nextFloat() < 0.02F;
 		}
 
 		public boolean canContinueToUse() {

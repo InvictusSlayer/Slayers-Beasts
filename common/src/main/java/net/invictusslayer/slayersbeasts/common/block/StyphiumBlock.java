@@ -14,7 +14,7 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.BonemealableBlock;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.lighting.LightEngine;
+import net.minecraft.world.level.lighting.LayerLightEngine;
 
 public class StyphiumBlock extends Block implements BonemealableBlock {
 	public StyphiumBlock(Properties properties) {
@@ -32,7 +32,7 @@ public class StyphiumBlock extends Block implements BonemealableBlock {
 	private static boolean canBeStyphium(BlockState state, LevelReader level, BlockPos pos) {
 		BlockPos above = pos.above();
 		BlockState stateAbove = level.getBlockState(above);
-		int i = LightEngine.getLightBlockInto(level, state, pos, stateAbove, above, Direction.UP, stateAbove.getLightBlock(level, above));
+		int i = LayerLightEngine.getLightBlockInto(level, state, pos, stateAbove, above, Direction.UP, stateAbove.getLightBlock(level, above));
 		return i < level.getMaxLightLevel();
 	}
 

@@ -1,213 +1,118 @@
 package net.invictusslayer.slayersbeasts.common.init;
 
-import dev.architectury.registry.registries.DeferredRegister;
-import dev.architectury.registry.registries.RegistrySupplier;
+import dev.architectury.registry.CreativeTabRegistry;
 import net.invictusslayer.slayersbeasts.common.SlayersBeasts;
-import net.minecraft.core.registries.Registries;
-import net.minecraft.network.chat.Component;
-import net.minecraft.world.item.CreativeModeTab;
+import net.invictusslayer.slayersbeasts.common.block.WoodFamily;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.ItemLike;
+
+import java.util.stream.Stream;
 
 public class SBCreativeModeTabs {
-	public static final DeferredRegister<CreativeModeTab> CREATIVE_TABS = DeferredRegister.create(SlayersBeasts.MOD_ID, Registries.CREATIVE_MODE_TAB);
+	public static final CreativeTabRegistry.TabSupplier SLAYERS_TAB = CreativeTabRegistry.create(new ResourceLocation(SlayersBeasts.MOD_ID, "slayers_tab"), () -> new ItemStack(SBBlocks.WILLOW_SAPLING.get()));
 
-	public static final RegistrySupplier<CreativeModeTab> SLAYERS_TAB = CREATIVE_TABS.register("slayers_tab", () -> CreativeModeTab.builder(CreativeModeTab.Row.TOP, 0)
-					.icon(() -> new ItemStack(SBBlocks.WILLOW_SAPLING.get())).title(Component.translatable("creative_tab.slayers_tab")).displayItems(((display, tab) -> {
-				tab.accept(SBItems.JADE.get());
-//				tab.accept(SBItems.JADE_SHARD.get());
-//				tab.accept(SBItems.CRYSTALLINE_WING.get());
-//				tab.accept(SBItems.CRYSTALLINE_CLAW.get());
-//				tab.accept(SBItems.CRYSTALLINE_CARAPACE.get());
-//				tab.accept(SBItems.INSECT_WING.get());
-//				tab.accept(SBItems.INSECT_CLAW.get());
-//				tab.accept(SBItems.INSECT_EYE.get());
-//				tab.accept(SBItems.INSECT_LEG.get());
-//				tab.accept(SBItems.FRIED_INSECT_LEG.get());
-//				tab.accept(SBItems.WITHERBONE.get());
-//				tab.accept(SBItems.TIED_LEATHER.get());
-//				tab.accept(SBItems.TANNED_LEATHER.get());
-//				tab.accept(SBItems.MUD_BALL.get());
+	public static void setup() {
+		CreativeTabRegistry.append(SLAYERS_TAB,
+				SBItems.JADE
+//				SBItems.JADE_SHARD,
+//				SBItems.CRYSTALLINE_WING,
+//				SBItems.CRYSTALLINE_CLAW,
+//				SBItems.CRYSTALLINE_CARAPACE,
+//				SBItems.INSECT_WING,
+//				SBItems.INSECT_CLAW,
+//				SBItems.INSECT_EYE,
+//				SBItems.INSECT_LEG,
+//				SBItems.FRIED_INSECT_LEG,
+//				SBItems.WITHERBONE,
+//				SBItems.TIED_LEATHER,
+//				SBItems.TANNED_LEATHER,
+//				SBItems.MUD_BALL,
+		);
+		CreativeTabRegistry.append(SLAYERS_TAB,
+				SBBlocks.CRYPTALITH,
+				SBBlocks.INFUSED_CRYPTALITH,
+				SBBlocks.DEPLETED_CRYPTALITH,
+				SBBlocks.JADE_BLOCK,
+				SBBlocks.EXOSKELETON_ORE,
+				SBBlocks.DEEPSLATE_EXOSKELETON_ORE,
+				SBBlocks.STYPHIUM,
+				SBBlocks.DEEPSLATE_STYPHIUM,
 
-				tab.accept(SBBlocks.CRYPTALITH.get());
-				tab.accept(SBBlocks.INFUSED_CRYPTALITH.get());
-				tab.accept(SBBlocks.DEPLETED_CRYPTALITH.get());
-				tab.accept(SBBlocks.JADE_BLOCK.get());
-				tab.accept(SBBlocks.EXOSKELETON_ORE.get());
-				tab.accept(SBBlocks.DEEPSLATE_EXOSKELETON_ORE.get());
-				tab.accept(SBBlocks.STYPHIUM.get());
-				tab.accept(SBBlocks.DEEPSLATE_STYPHIUM.get());
+//				SBBlocks.RUDOSOL,
+				SBBlocks.ARIDISOL,
+				SBBlocks.ANTHILL,
+				SBBlocks.ANTHILL_HATCHERY,
+				SBBlocks.OOTHECA,
 
-//				tab.accept(SBBlocks.RUDOSOL.get());
-				tab.accept(SBBlocks.ARIDISOL.get());
-				tab.accept(SBBlocks.ANTHILL.get());
-				tab.accept(SBBlocks.ANTHILL_HATCHERY.get());
-				tab.accept(SBBlocks.OOTHECA.get());
+				SBBlocks.GLEAMING_ICE,
+				SBBlocks.ICICLE,
+				SBBlocks.OBSIDIAN_SPIKE,
+				SBBlocks.TALL_DEAD_BUSH,
+				SBBlocks.CRACKED_MUD,
+				SBBlocks.PEAT,
+				SBBlocks.ALGAE,
 
-				tab.accept(SBBlocks.GLEAMING_ICE.get());
-				tab.accept(SBBlocks.ICICLE.get());
-				tab.accept(SBBlocks.OBSIDIAN_SPIKE.get());
-				tab.accept(SBBlocks.TALL_DEAD_BUSH.get());
-				tab.accept(SBBlocks.CRACKED_MUD.get());
-				tab.accept(SBBlocks.PEAT.get());
-				tab.accept(SBItems.ALGAE.get());
+				SBBlocks.PEGMATITE,
+				SBBlocks.PEGMATITE_SLAB,
+				SBBlocks.PEGMATITE_STAIRS,
+				SBBlocks.PEGMATITE_WALL,
+				SBBlocks.POLISHED_PEGMATITE,
+				SBBlocks.POLISHED_PEGMATITE_SLAB,
+				SBBlocks.POLISHED_PEGMATITE_STAIRS,
 
-				tab.accept(SBBlocks.PEGMATITE.get());
-				tab.accept(SBBlocks.PEGMATITE_SLAB.get());
-				tab.accept(SBBlocks.PEGMATITE_STAIRS.get());
-				tab.accept(SBBlocks.PEGMATITE_WALL.get());
-				tab.accept(SBBlocks.POLISHED_PEGMATITE.get());
-				tab.accept(SBBlocks.POLISHED_PEGMATITE_SLAB.get());
-				tab.accept(SBBlocks.POLISHED_PEGMATITE_STAIRS.get());
+				SBBlocks.BLACK_SAND,
+				SBBlocks.BLACK_SANDSTONE,
+				SBBlocks.BLACK_SANDSTONE_SLAB,
+				SBBlocks.BLACK_SANDSTONE_STAIRS,
+				SBBlocks.BLACK_SANDSTONE_WALL,
+				SBBlocks.SMOOTH_BLACK_SANDSTONE,
+				SBBlocks.SMOOTH_BLACK_SANDSTONE_SLAB,
+				SBBlocks.SMOOTH_BLACK_SANDSTONE_STAIRS,
+				SBBlocks.CUT_BLACK_SANDSTONE,
+				SBBlocks.CUT_BLACK_SANDSTONE_SLAB,
+				SBBlocks.CHISELED_BLACK_SANDSTONE,
 
-				tab.accept(SBBlocks.BLACK_SAND.get());
-				tab.accept(SBBlocks.BLACK_SANDSTONE.get());
-				tab.accept(SBBlocks.BLACK_SANDSTONE_SLAB.get());
-				tab.accept(SBBlocks.BLACK_SANDSTONE_STAIRS.get());
-				tab.accept(SBBlocks.BLACK_SANDSTONE_WALL.get());
-				tab.accept(SBBlocks.SMOOTH_BLACK_SANDSTONE.get());
-				tab.accept(SBBlocks.SMOOTH_BLACK_SANDSTONE_SLAB.get());
-				tab.accept(SBBlocks.SMOOTH_BLACK_SANDSTONE_STAIRS.get());
-				tab.accept(SBBlocks.CUT_BLACK_SANDSTONE.get());
-				tab.accept(SBBlocks.CUT_BLACK_SANDSTONE_SLAB.get());
-				tab.accept(SBBlocks.CHISELED_BLACK_SANDSTONE.get());
+				SBBlocks.BLACK_MUSHROOM_BLOCK,
+				SBBlocks.BLACK_MUSHROOM,
+				SBBlocks.WHITE_MUSHROOM_BLOCK,
+				SBBlocks.WHITE_MUSHROOM
+//				SBBlocks.THIN_MUSHROOM_STEM,
+		);
 
-				tab.accept(SBBlocks.BLACK_MUSHROOM_BLOCK.get());
-				tab.accept(SBBlocks.BLACK_MUSHROOM.get());
-				tab.accept(SBBlocks.WHITE_MUSHROOM_BLOCK.get());
-				tab.accept(SBBlocks.WHITE_MUSHROOM.get());
-//				tab.accept(SBBlocks.THIN_MUSHROOM_STEM.get());
+		addWoodFamily(SLAYERS_TAB, WoodFamily.ASPEN);
+		addWoodFamily(SLAYERS_TAB, WoodFamily.DESERT_OAK);
+		addWoodFamily(SLAYERS_TAB, WoodFamily.EUCALYPTUS);
+		addWoodFamily(SLAYERS_TAB, WoodFamily.KAPOK);
+		addWoodFamily(SLAYERS_TAB, WoodFamily.REDWOOD);
+		addWoodFamily(SLAYERS_TAB, WoodFamily.WILLOW);
 
-				tab.accept(SBBlocks.ASPEN_LOG.get());
-				tab.accept(SBBlocks.ASPEN_WOOD.get());
-				tab.accept(SBBlocks.STRIPPED_ASPEN_LOG.get());
-				tab.accept(SBBlocks.STRIPPED_ASPEN_WOOD.get());
-				tab.accept(SBBlocks.ASPEN_LEAVES.get());
-				tab.accept(SBBlocks.ASPEN_SAPLING.get());
-				tab.accept(SBBlocks.ASPEN_PLANKS.get());
-				tab.accept(SBBlocks.ASPEN_STAIRS.get());
-				tab.accept(SBBlocks.ASPEN_SLAB.get());
-				tab.accept(SBBlocks.ASPEN_FENCE.get());
-				tab.accept(SBBlocks.ASPEN_FENCE_GATE.get());
-				tab.accept(SBBlocks.ASPEN_DOOR.get());
-				tab.accept(SBBlocks.ASPEN_TRAPDOOR.get());
-				tab.accept(SBBlocks.ASPEN_PRESSURE_PLATE.get());
-				tab.accept(SBBlocks.ASPEN_BUTTON.get());
-				tab.accept(SBItems.ASPEN_SIGN.get());
-				tab.accept(SBItems.ASPEN_HANGING_SIGN.get());
-				tab.accept(SBItems.ASPEN_BOAT.get());
-				tab.accept(SBItems.ASPEN_CHEST_BOAT.get());
+		CreativeTabRegistry.append(SLAYERS_TAB,
+				SBItems.MUSIC_DISC_INKISH,
 
-				tab.accept(SBBlocks.DESERT_OAK_LOG.get());
-				tab.accept(SBBlocks.DESERT_OAK_WOOD.get());
-				tab.accept(SBBlocks.STRIPPED_DESERT_OAK_LOG.get());
-				tab.accept(SBBlocks.STRIPPED_DESERT_OAK_WOOD.get());
-				tab.accept(SBBlocks.DESERT_OAK_LEAVES.get());
-				tab.accept(SBBlocks.DESERT_OAK_SAPLING.get());
-				tab.accept(SBBlocks.DESERT_OAK_PLANKS.get());
-				tab.accept(SBBlocks.DESERT_OAK_STAIRS.get());
-				tab.accept(SBBlocks.DESERT_OAK_SLAB.get());
-				tab.accept(SBBlocks.DESERT_OAK_FENCE.get());
-				tab.accept(SBBlocks.DESERT_OAK_FENCE_GATE.get());
-				tab.accept(SBBlocks.DESERT_OAK_DOOR.get());
-				tab.accept(SBBlocks.DESERT_OAK_TRAPDOOR.get());
-				tab.accept(SBBlocks.DESERT_OAK_PRESSURE_PLATE.get());
-				tab.accept(SBBlocks.DESERT_OAK_BUTTON.get());
-				tab.accept(SBItems.DESERT_OAK_SIGN.get());
-				tab.accept(SBItems.DESERT_OAK_HANGING_SIGN.get());
-				tab.accept(SBItems.DESERT_OAK_BOAT.get());
-				tab.accept(SBItems.DESERT_OAK_CHEST_BOAT.get());
+				SBItems.MANTIS_SPAWN_EGG,
+				SBItems.ANT_WORKER_SPAWN_EGG,
+				SBItems.ANT_SOLDIER_SPAWN_EGG,
+				SBItems.ANT_QUEEN_SPAWN_EGG,
+				SBItems.WITHER_SPIDER_SPAWN_EGG,
+				SBItems.TYRACHNID_SPAWN_EGG,
+				SBItems.DAMSELFLY_SPAWN_EGG,
+				SBItems.ENT_SPAWN_EGG,
+				SBItems.WUDU_SPAWN_EGG
+		);
+	}
 
-				tab.accept(SBBlocks.EUCALYPTUS_LOG.get());
-				tab.accept(SBBlocks.EUCALYPTUS_WOOD.get());
-				tab.accept(SBBlocks.STRIPPED_EUCALYPTUS_LOG.get());
-				tab.accept(SBBlocks.STRIPPED_EUCALYPTUS_WOOD.get());
-				tab.accept(SBBlocks.EUCALYPTUS_LEAVES.get());
-				tab.accept(SBBlocks.EUCALYPTUS_SAPLING.get());
-				tab.accept(SBBlocks.EUCALYPTUS_PLANKS.get());
-				tab.accept(SBBlocks.EUCALYPTUS_STAIRS.get());
-				tab.accept(SBBlocks.EUCALYPTUS_SLAB.get());
-				tab.accept(SBBlocks.EUCALYPTUS_FENCE.get());
-				tab.accept(SBBlocks.EUCALYPTUS_FENCE_GATE.get());
-				tab.accept(SBBlocks.EUCALYPTUS_DOOR.get());
-				tab.accept(SBBlocks.EUCALYPTUS_TRAPDOOR.get());
-				tab.accept(SBBlocks.EUCALYPTUS_PRESSURE_PLATE.get());
-				tab.accept(SBBlocks.EUCALYPTUS_BUTTON.get());
-				tab.accept(SBItems.EUCALYPTUS_SIGN.get());
-				tab.accept(SBItems.EUCALYPTUS_HANGING_SIGN.get());
-				tab.accept(SBItems.EUCALYPTUS_BOAT.get());
-				tab.accept(SBItems.EUCALYPTUS_CHEST_BOAT.get());
-
-				tab.accept(SBBlocks.KAPOK_LOG.get());
-				tab.accept(SBBlocks.KAPOK_WOOD.get());
-				tab.accept(SBBlocks.STRIPPED_KAPOK_LOG.get());
-				tab.accept(SBBlocks.STRIPPED_KAPOK_WOOD.get());
-				tab.accept(SBBlocks.KAPOK_LEAVES.get());
-				tab.accept(SBBlocks.KAPOK_SAPLING.get());
-				tab.accept(SBBlocks.KAPOK_PLANKS.get());
-				tab.accept(SBBlocks.KAPOK_STAIRS.get());
-				tab.accept(SBBlocks.KAPOK_SLAB.get());
-				tab.accept(SBBlocks.KAPOK_FENCE.get());
-				tab.accept(SBBlocks.KAPOK_FENCE_GATE.get());
-				tab.accept(SBBlocks.KAPOK_DOOR.get());
-				tab.accept(SBBlocks.KAPOK_TRAPDOOR.get());
-				tab.accept(SBBlocks.KAPOK_PRESSURE_PLATE.get());
-				tab.accept(SBBlocks.KAPOK_BUTTON.get());
-				tab.accept(SBItems.KAPOK_SIGN.get());
-				tab.accept(SBItems.KAPOK_HANGING_SIGN.get());
-				tab.accept(SBItems.KAPOK_BOAT.get());
-				tab.accept(SBItems.KAPOK_CHEST_BOAT.get());
-
-				tab.accept(SBBlocks.REDWOOD_LOG.get());
-				tab.accept(SBBlocks.REDWOOD_WOOD.get());
-				tab.accept(SBBlocks.STRIPPED_REDWOOD_LOG.get());
-				tab.accept(SBBlocks.STRIPPED_REDWOOD_WOOD.get());
-				tab.accept(SBBlocks.REDWOOD_LEAVES.get());
-				tab.accept(SBBlocks.REDWOOD_SAPLING.get());
-				tab.accept(SBBlocks.REDWOOD_PLANKS.get());
-				tab.accept(SBBlocks.REDWOOD_STAIRS.get());
-				tab.accept(SBBlocks.REDWOOD_SLAB.get());
-				tab.accept(SBBlocks.REDWOOD_FENCE.get());
-				tab.accept(SBBlocks.REDWOOD_FENCE_GATE.get());
-				tab.accept(SBBlocks.REDWOOD_DOOR.get());
-				tab.accept(SBBlocks.REDWOOD_TRAPDOOR.get());
-				tab.accept(SBBlocks.REDWOOD_PRESSURE_PLATE.get());
-				tab.accept(SBBlocks.REDWOOD_BUTTON.get());
-				tab.accept(SBItems.REDWOOD_SIGN.get());
-				tab.accept(SBItems.REDWOOD_HANGING_SIGN.get());
-				tab.accept(SBItems.REDWOOD_BOAT.get());
-				tab.accept(SBItems.REDWOOD_CHEST_BOAT.get());
-
-				tab.accept(SBBlocks.WILLOW_LOG.get());
-				tab.accept(SBBlocks.WILLOW_WOOD.get());
-				tab.accept(SBBlocks.STRIPPED_WILLOW_LOG.get());
-				tab.accept(SBBlocks.STRIPPED_WILLOW_WOOD.get());
-				tab.accept(SBBlocks.WILLOW_LEAVES.get());
-				tab.accept(SBBlocks.WILLOW_BRANCH.get());
-				tab.accept(SBBlocks.WILLOW_SAPLING.get());
-				tab.accept(SBBlocks.WILLOW_PLANKS.get());
-				tab.accept(SBBlocks.WILLOW_STAIRS.get());
-				tab.accept(SBBlocks.WILLOW_SLAB.get());
-				tab.accept(SBBlocks.WILLOW_FENCE.get());
-				tab.accept(SBBlocks.WILLOW_FENCE_GATE.get());
-				tab.accept(SBBlocks.WILLOW_DOOR.get());
-				tab.accept(SBBlocks.WILLOW_TRAPDOOR.get());
-				tab.accept(SBBlocks.WILLOW_PRESSURE_PLATE.get());
-				tab.accept(SBBlocks.WILLOW_BUTTON.get());
-				tab.accept(SBItems.WILLOW_SIGN.get());
-				tab.accept(SBItems.WILLOW_HANGING_SIGN.get());
-				tab.accept(SBItems.WILLOW_BOAT.get());
-				tab.accept(SBItems.WILLOW_CHEST_BOAT.get());
-
-				tab.accept(SBItems.MUSIC_DISC_INKISH.get());
-
-				tab.accept(SBItems.MANTIS_SPAWN_EGG.get());
-				tab.accept(SBItems.ANT_WORKER_SPAWN_EGG.get());
-				tab.accept(SBItems.ANT_SOLDIER_SPAWN_EGG.get());
-				tab.accept(SBItems.ANT_QUEEN_SPAWN_EGG.get());
-				tab.accept(SBItems.WITHER_SPIDER_SPAWN_EGG.get());
-				tab.accept(SBItems.TYRACHNID_SPAWN_EGG.get());
-				tab.accept(SBItems.DAMSELFLY_SPAWN_EGG.get());
-				tab.accept(SBItems.ENT_SPAWN_EGG.get());
-				tab.accept(SBItems.WUDU_SPAWN_EGG.get());
-			})).build());
+	private static void addWoodFamily(CreativeTabRegistry.TabSupplier tab, WoodFamily family) {
+		Stream.of(WoodFamily.Variant.LOG, WoodFamily.Variant.WOOD,
+						WoodFamily.Variant.STRIPPED_LOG, WoodFamily.Variant.STRIPPED_WOOD,
+						WoodFamily.Variant.LEAVES, WoodFamily.Variant.PLANKS,
+						WoodFamily.Variant.STAIRS, WoodFamily.Variant.SLAB,
+						WoodFamily.Variant.FENCE, WoodFamily.Variant.FENCE_GATE,
+						WoodFamily.Variant.DOOR, WoodFamily.Variant.TRAPDOOR,
+						WoodFamily.Variant.PRESSURE_PLATE, WoodFamily.Variant.BUTTON,
+						WoodFamily.Variant.SIGN, WoodFamily.Variant.HANGING_SIGN,
+						WoodFamily.Variant.BOAT, WoodFamily.Variant.CHEST_BOAT)
+				.distinct().filter(variant -> family.get(variant).isPresent())
+				.forEach(variant -> CreativeTabRegistry.append(tab, (ItemLike) family.get(variant).get()));
+	}
 }

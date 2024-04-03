@@ -108,7 +108,7 @@ public class EnUsLangProvider extends SBLangProvider {
 		addEntityType(SBEntities.SPORETRAP, "Sporetrap");
 		addEntityType(SBEntities.IRK, "Irk");
 		
-		add("creative_tab.slayers_tab", "Slayer's Beasts");
+		add("itemGroup.slayersbeasts.slayers_tab", "Slayer's Beasts");
 
 		addEffect(SBEffects.PARALYSIS, "Paralysis");
 
