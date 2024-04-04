@@ -11,8 +11,7 @@ import net.minecraft.world.item.ItemStack;
 public class SBCreativeModeTabs {
 	public static final DeferredRegister<CreativeModeTab> CREATIVE_TABS = DeferredRegister.create(SlayersBeasts.MOD_ID, Registries.CREATIVE_MODE_TAB);
 
-	public static final RegistrySupplier<CreativeModeTab> SLAYERS_TAB = CREATIVE_TABS.register("slayers_tab", () -> CreativeModeTab.builder(CreativeModeTab.Row.TOP, 0)
-					.icon(() -> new ItemStack(SBBlocks.WILLOW_SAPLING.get())).title(Component.translatable("creative_tab.slayers_tab")).displayItems(((display, tab) -> {
+	public static final RegistrySupplier<CreativeModeTab> SLAYERS_TAB = CREATIVE_TABS.register("slayers_tab", () -> CreativeModeTab.builder(CreativeModeTab.Row.TOP, 0).icon(() -> new ItemStack(SBBlocks.WILLOW_SAPLING.get())).title(Component.translatable("itemGroup.slayersbeasts.slayers_tab")).displayItems(((display, tab) -> {
 				tab.accept(SBItems.JADE.get());
 //				tab.accept(SBItems.JADE_SHARD.get());
 //				tab.accept(SBItems.CRYSTALLINE_WING.get());
@@ -49,7 +48,7 @@ public class SBCreativeModeTabs {
 				tab.accept(SBBlocks.TALL_DEAD_BUSH.get());
 				tab.accept(SBBlocks.CRACKED_MUD.get());
 				tab.accept(SBBlocks.PEAT.get());
-				tab.accept(SBItems.ALGAE.get());
+				tab.accept(SBBlocks.ALGAE.get());
 
 				tab.accept(SBBlocks.PEGMATITE.get());
 				tab.accept(SBBlocks.PEGMATITE_SLAB.get());

@@ -1,4 +1,4 @@
-package net.invictusslayer.slayersbeasts.forge.data;
+package net.invictusslayer.slayersbeasts.common.data;
 
 import net.invictusslayer.slayersbeasts.common.SlayersBeasts;
 import net.invictusslayer.slayersbeasts.common.block.SBBlockFamily;
