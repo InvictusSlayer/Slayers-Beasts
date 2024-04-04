@@ -1,6 +1,7 @@
 package net.invictusslayer.slayersbeasts.forge.data;
 
 import net.invictusslayer.slayersbeasts.common.SlayersBeasts;
+import net.invictusslayer.slayersbeasts.common.data.SBRecipeProvider;
 import net.invictusslayer.slayersbeasts.common.data.lang.EnUsLangProvider;
 import net.invictusslayer.slayersbeasts.common.data.loot.SBBlockLoot;
 import net.invictusslayer.slayersbeasts.common.data.loot.SBChestLoot;
@@ -36,7 +37,7 @@ import java.util.List;
 import java.util.concurrent.CompletableFuture;
 
 @Mod.EventBusSubscriber(modid = SlayersBeasts.MOD_ID, bus = Mod.EventBusSubscriber.Bus.MOD)
-public class SBForgeDataGenerator {
+public class SBDataGenerator {
 	private static final RegistrySetBuilder BUILDER = new RegistrySetBuilder()
 			.add(Registries.CONFIGURED_FEATURE, SBConfiguredFeatures::bootstrap)
 			.add(Registries.PLACED_FEATURE, SBPlacedFeatures::bootstrap)
@@ -60,7 +61,7 @@ public class SBForgeDataGenerator {
 
 		SBBlockTagsProvider blockTags = gen.addProvider(hasServer, new SBBlockTagsProvider(output, provider, helper));
 		gen.addProvider(hasServer, new SBItemTagsProvider(output, provider, blockTags, helper));
-		gen.addProvider(hasServer, new SBBiomeTagsProvider(output, provider.thenApply(SBForgeDataGenerator::patchRegistry), helper));
+		gen.addProvider(hasServer, new SBBiomeTagsProvider(output, provider.thenApply(SBDataGenerator::patchRegistry), helper));
 		gen.addProvider(hasServer, new SBEntityTagsProvider(output, provider, helper));
 		gen.addProvider(hasServer, new SBPoiTagsProvider(output, provider, helper));
 

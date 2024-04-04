@@ -10,5 +10,5 @@ import net.minecraft.world.entity.ai.village.poi.PoiType;
 public class SBPois {
 	public static final DeferredRegister<PoiType> POIS = DeferredRegister.create(SlayersBeasts.MOD_ID, Registries.POINT_OF_INTEREST_TYPE);
 
-	public static final RegistrySupplier<PoiType> ANTHILL_POI = POIS.register("anthill_poi", () -> new PoiType(ImmutableSet.copyOf(SBBlocks.ANTHILL.get().getStateDefinition().getPossibleStates()), 0, 1));
+	public static final RegistrySupplier<PoiType> ANTHILL = POIS.register("anthill", () -> new PoiType(ImmutableSet.copyOf(SBBlocks.ANTHILL.get().getStateDefinition().getPossibleStates()), 0, 1));
 }
