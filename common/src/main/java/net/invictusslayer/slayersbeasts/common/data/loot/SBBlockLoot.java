@@ -133,8 +133,7 @@ public class SBBlockLoot extends BlockLootSubProvider {
 				.add(LootItem.lootTableItem(block).when(HAS_SHEARS)
 						.otherwise(applyExplosionDecay(block, LootItem.lootTableItem(Items.STICK)
 								.when(LootItemBlockStatePropertyCondition.hasBlockStateProperties(block)
-										.setProperties(StatePropertiesPredicate.Builder.properties()
-												.hasProperty(BlockStateProperties.DOUBLE_BLOCK_HALF, DoubleBlockHalf.LOWER)))
+										.setProperties(StatePropertiesPredicate.Builder.properties().hasProperty(BlockStateProperties.DOUBLE_BLOCK_HALF, DoubleBlockHalf.LOWER)))
 								.when(LootItemEntityPropertyCondition.entityPresent(LootContext.EntityTarget.THIS))
 								.apply(SetItemCountFunction.setCount(UniformGenerator.between(1.0F, 4.0F)))))));
 	}

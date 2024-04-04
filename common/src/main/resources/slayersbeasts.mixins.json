@@ -8,6 +8,7 @@
 		"common.BoatMixin",
 		"common.BoatTypeMixin",
 		"common.ChestBoatMixin",
+		"common.MinecraftServerMixin",
 		"common.MushroomBlockMixin",
 		"common.MushroomCowMixin",
 		"common.MushroomCowTypeMixin"

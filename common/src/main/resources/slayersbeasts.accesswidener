@@ -5,6 +5,12 @@ accessible  method  net/minecraft/data/loot/BlockLootSubProvider createPotFlower
 accessible  method  net/minecraft/data/loot/BlockLootSubProvider createSilkTouchOnlyTable (Lnet/minecraft/world/level/ItemLike;)Lnet/minecraft/world/level/storage/loot/LootTable$Builder;
 accessible  field   net/minecraft/data/loot/BlockLootSubProvider enabledFeatures Lnet/minecraft/world/flag/FeatureFlagSet;
 accessible  field   net/minecraft/data/loot/BlockLootSubProvider map Ljava/util/Map;
+accessible  method  net/minecraft/data/recipes/RecipeProvider buttonBuilder (Lnet/minecraft/world/level/ItemLike;Lnet/minecraft/world/item/crafting/Ingredient;)Lnet/minecraft/data/recipes/RecipeBuilder;
+accessible  method  net/minecraft/data/recipes/RecipeProvider fenceBuilder (Lnet/minecraft/world/level/ItemLike;Lnet/minecraft/world/item/crafting/Ingredient;)Lnet/minecraft/data/recipes/RecipeBuilder;
+accessible  method  net/minecraft/data/recipes/RecipeProvider fenceGateBuilder (Lnet/minecraft/world/level/ItemLike;Lnet/minecraft/world/item/crafting/Ingredient;)Lnet/minecraft/data/recipes/RecipeBuilder;
+accessible  method  net/minecraft/data/recipes/RecipeProvider pressurePlateBuilder (Lnet/minecraft/data/recipes/RecipeCategory;Lnet/minecraft/world/level/ItemLike;Lnet/minecraft/world/item/crafting/Ingredient;)Lnet/minecraft/data/recipes/RecipeBuilder;
+accessible  method  net/minecraft/data/recipes/RecipeProvider signBuilder (Lnet/minecraft/world/level/ItemLike;Lnet/minecraft/world/item/crafting/Ingredient;)Lnet/minecraft/data/recipes/RecipeBuilder;
+accessible  method  net/minecraft/data/recipes/RecipeProvider trapdoorBuilder (Lnet/minecraft/world/level/ItemLike;Lnet/minecraft/world/item/crafting/Ingredient;)Lnet/minecraft/data/recipes/RecipeBuilder;
 accessible  field   net/minecraft/world/entity/Entity portalEntrancePos Lnet/minecraft/core/BlockPos;
 accessible  field   net/minecraft/world/entity/npc/VillagerType BY_BIOME Ljava/util/Map;
 accessible  field   net/minecraft/world/item/AxeItem STRIPPABLES Ljava/util/Map;
