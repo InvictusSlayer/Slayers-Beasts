@@ -21,9 +21,6 @@
 		"client": [
 			"net.invictusslayer.slayersbeasts.fabric.client.SBFabricClient"
 		],
-		"fabric-datagen": [
-			"net.invictusslayer.slayersbeasts.fabric.data.SBFabricDataGenerator"
-		],
 		"modmenu": [
 			"net.invictusslayer.slayersbeasts.fabric.integration.SBModMenu"
 		],

@@ -16,6 +16,6 @@ public class SBPoiTagsProvider extends PoiTypeTagsProvider {
 	}
 
 	protected void addTags(HolderLookup.Provider pProvider) {
-		tag(SBTags.PoiTypes.ANT_HOME).add(SBPois.ANTHILL_POI.getKey());
+		tag(SBTags.PoiTypes.ANT_HOME).add(SBPois.ANTHILL.getKey());
 	}
 }
