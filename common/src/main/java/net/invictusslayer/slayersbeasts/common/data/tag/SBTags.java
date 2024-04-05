@@ -41,13 +41,8 @@ public class SBTags {
 		public static final TagKey<Item> REDWOOD_LOGS = tag("redwood_logs");
 		public static final TagKey<Item> WILLOW_LOGS = tag("willow_logs");
 
-		public static final TagKey<Item> JADE_GEMS = forgeTag("gems/jade");
-
 		private static TagKey<Item> tag(String name) {
 			return TagKey.create(Registries.ITEM, new ResourceLocation(SlayersBeasts.MOD_ID, name));
-		}
-		private static TagKey<Item> forgeTag(String name) {
-			return TagKey.create(Registries.ITEM, new ResourceLocation("forge", name));
 		}
 	}
 
@@ -59,16 +54,32 @@ public class SBTags {
 
 		public static final TagKey<Biome> IS_BRUSHLAND = tag("is_brushland");
 
-		public static final TagKey<Biome> HAS_CRYPT_PORTAL = tag("has_crypt_portal");
+		public static final TagKey<Biome> HAS_CRYPT_PORTAL = structureTag("crypt_portal");
 
-		public static final TagKey<Biome> SPAWNS_MANTIS = tag("spawns_mantis");
-		public static final TagKey<Biome> SPAWNS_DAMSELFLY = tag("spawns_damselfly");
-		public static final TagKey<Biome> SPAWNS_ENT_OAK = tag("spawns_ent_oak");
-		public static final TagKey<Biome> SPAWNS_ENT_BIRCH = tag("spawns_ent_birch");
-		public static final TagKey<Biome> SPAWNS_ENT_SPRUCE = tag("spawns_ent_spruce");
-		public static final TagKey<Biome> SPAWNS_ENT_DARK_OAK = tag("spawns_ent_dark_oak");
-		public static final TagKey<Biome> SPAWNS_ENT_ACACIA = tag("spawns_ent_acacia");
-		public static final TagKey<Biome> SPAWNS_ENT_JUNGLE = tag("spawns_ent_jungle");
+		public static final TagKey<Biome> PLACES_ALGAE_COMMON = featureTag("algae_common");
+		public static final TagKey<Biome> PLACES_ALGAE_NORMAL = featureTag("algae_normal");
+		public static final TagKey<Biome> PLACES_EXOSKELETON_LUSH = featureTag("exoskeleton_lush");
+
+		public static final TagKey<Biome> SPAWNS_MANTIS = spawnsTag("mantis");
+		public static final TagKey<Biome> SPAWNS_DAMSELFLY = spawnsTag("damselfly");
+		public static final TagKey<Biome> SPAWNS_ENT_OAK = spawnsTag("ent_oak");
+		public static final TagKey<Biome> SPAWNS_ENT_BIRCH = spawnsTag("ent_birch");
+		public static final TagKey<Biome> SPAWNS_ENT_SPRUCE = spawnsTag("ent_spruce");
+		public static final TagKey<Biome> SPAWNS_ENT_DARK_OAK = spawnsTag("ent_dark_oak");
+		public static final TagKey<Biome> SPAWNS_ENT_ACACIA = spawnsTag("ent_acacia");
+		public static final TagKey<Biome> SPAWNS_ENT_JUNGLE = spawnsTag("ent_jungle");
+
+		private static TagKey<Biome> structureTag(String name) {
+			return tag("has_structure/" + name);
+		}
+
+		private static TagKey<Biome> featureTag(String name) {
+			return tag("has_feature/" + name);
+		}
+
+		private static TagKey<Biome> spawnsTag(String name) {
+			return tag("spawns_entity/" + name);
+		}
 
 		private static TagKey<Biome> tag(String name) {
 			return TagKey.create(Registries.BIOME, new ResourceLocation(SlayersBeasts.MOD_ID, name));

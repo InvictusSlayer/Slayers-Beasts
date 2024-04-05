@@ -17,6 +17,7 @@ import net.invictusslayer.slayersbeasts.common.world.structure.SBStructureSets;
 import net.invictusslayer.slayersbeasts.common.world.structure.SBStructures;
 import net.invictusslayer.slayersbeasts.common.world.structure.pools.SBPools;
 import net.invictusslayer.slayersbeasts.forge.data.tag.*;
+import net.invictusslayer.slayersbeasts.forge.world.SBBiomeModifiers;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.RegistryAccess;
 import net.minecraft.core.RegistrySetBuilder;
@@ -31,6 +32,7 @@ import net.minecraftforge.common.data.ExistingFileHelper;
 import net.minecraftforge.data.event.GatherDataEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.registries.ForgeRegistries;
 
 import java.util.Collections;
 import java.util.List;
@@ -47,7 +49,8 @@ public class SBDataGenerator {
 			.add(Registries.STRUCTURE_SET, SBStructureSets::bootstrap)
 			.add(Registries.TEMPLATE_POOL, SBPools::bootstrap)
 			.add(Registries.PROCESSOR_LIST, SBProcessorLists::bootstrap)
-			.add(Registries.NOISE, SBNoises::bootstrap);
+			.add(Registries.NOISE, SBNoises::bootstrap)
+			.add(ForgeRegistries.Keys.BIOME_MODIFIERS, SBBiomeModifiers::bootstrap);
 
 	@SubscribeEvent
 	public static void gatherData(GatherDataEvent event) {
