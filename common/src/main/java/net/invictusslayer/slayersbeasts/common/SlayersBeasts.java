@@ -53,6 +53,7 @@ public class SlayersBeasts {
 
 		SBCreativeModeTabs.setup();
 		SBVillagerType.biomeSetup();
+		SBBiomeModifications.registerFeatures();
 		SBEntities.registerAttributes();
 
 		LOGGER.info(SBPlatform.getConfigDirectory().toAbsolutePath().normalize().toString());
@@ -65,7 +66,7 @@ public class SlayersBeasts {
 		SBFlammableBlocks.register();
 		SBStrippableBlocks.register();
 		SBDispensableItems.register();
-		SBBiomeModifications.register();
+		SBBiomeModifications.registerSpawns();
 		SBEntities.registerSpawns();
 
 		((IExtendedMushroomBlock) SBBlocks.BLACK_MUSHROOM.get()).setMightyMushroom(SBConfiguredFeatures.MIGHTY_BLACK_MUSHROOM);

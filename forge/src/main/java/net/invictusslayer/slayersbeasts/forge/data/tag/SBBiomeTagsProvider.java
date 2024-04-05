@@ -25,6 +25,9 @@ public class SBBiomeTagsProvider extends BiomeTagsProvider {
 		tag(SBTags.Biomes.MEADOW_ANT_HABITAT).add(SBBiomes.ASPEN_FOREST, SBBiomes.CHAPARRAL, Biomes.PLAINS, Biomes.MEADOW, Biomes.SUNFLOWER_PLAINS);
 		tag(SBTags.Biomes.IS_BRUSHLAND).add(SBBiomes.BRUSHLAND, SBBiomes.ROCKY_BRUSHLAND, SBBiomes.WOODED_BRUSHLAND);
 		tag(SBTags.Biomes.HAS_CRYPT_PORTAL).add(SBBiomes.BLACK_DUNES, SBBiomes.DEAD_SANDS, SBBiomes.VOLCANIC_PEAKS);
+		tag(SBTags.Biomes.PLACES_ALGAE_COMMON).add(Biomes.MANGROVE_SWAMP);
+		tag(SBTags.Biomes.PLACES_ALGAE_NORMAL).add(Biomes.SWAMP);
+		tag(SBTags.Biomes.PLACES_EXOSKELETON_LUSH).add(Biomes.LUSH_CAVES);
 		tag(SBTags.Biomes.SPAWNS_MANTIS).add(Biomes.LUSH_CAVES, Biomes.MANGROVE_SWAMP, Biomes.SPARSE_JUNGLE, Biomes.JUNGLE, Biomes.BAMBOO_JUNGLE);
 		tag(SBTags.Biomes.SPAWNS_DAMSELFLY).add(Biomes.SPARSE_JUNGLE, Biomes.PLAINS, Biomes.SUNFLOWER_PLAINS, Biomes.MEADOW, Biomes.SWAMP, Biomes.MANGROVE_SWAMP, Biomes.RIVER);
 		tag(SBTags.Biomes.SPAWNS_ENT_OAK).add(Biomes.FOREST, Biomes.DARK_FOREST, Biomes.SWAMP);
@@ -38,9 +41,9 @@ public class SBBiomeTagsProvider extends BiomeTagsProvider {
 		tag(Tags.Biomes.IS_CAVE).add(SBBiomes.DUSTY_CAVERNS, SBBiomes.FUNGAL_DEPTHS, SBBiomes.ICE_CAVES, SBBiomes.SLIME_CAVERNS);
 		tag(Tags.Biomes.IS_PEAK).add(SBBiomes.VOLCANIC_PEAKS);
 		tag(Tags.Biomes.IS_SLOPE).add(SBBiomes.BLACK_DUNES, SBBiomes.CHAPARRAL, SBBiomes.ASPEN_FOREST);
-		tag(Tags.Biomes.IS_DEAD).add(SBBiomes.PETRIFIED_WOODS);
+		tag(Tags.Biomes.IS_DEAD).add(SBBiomes.PETRIFIED_WOODS, SBBiomes.DEAD_SANDS);
 		tag(Tags.Biomes.IS_SPOOKY).add(SBBiomes.PETRIFIED_WOODS, SBBiomes.INKY_MOOR);
-		tag(Tags.Biomes.IS_MUSHROOM).add(SBBiomes.FUNGAL_DEPTHS);
+		tag(Tags.Biomes.IS_MUSHROOM).add(SBBiomes.FUNGAL_DEPTHS, SBBiomes.MUSHROOM_FOREST);
 		tag(Tags.Biomes.IS_CONIFEROUS).add(SBBiomes.REDWOOD_GROVE, SBBiomes.OLD_GROWTH_REDWOOD_GROVE);
 		tag(Tags.Biomes.IS_HOT_OVERWORLD).add(SBBiomes.RAINFOREST, SBBiomes.BLACK_DUNES, SBBiomes.DEAD_SANDS, SBBiomes.DUSTY_CAVERNS, SBBiomes.OUTBACK, SBBiomes.EUCALYPT_WOODLAND, SBBiomes.VOLCANIC_PEAKS).addTag(SBTags.Biomes.IS_BRUSHLAND);
 		tag(Tags.Biomes.IS_HOT_NETHER).add(SBBiomes.TOXIC_JUNGLE);

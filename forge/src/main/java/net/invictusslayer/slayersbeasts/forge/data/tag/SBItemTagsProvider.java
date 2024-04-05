@@ -2,7 +2,6 @@ package net.invictusslayer.slayersbeasts.forge.data.tag;
 
 import net.invictusslayer.slayersbeasts.common.SlayersBeasts;
 import net.invictusslayer.slayersbeasts.common.block.WoodFamily;
-import net.invictusslayer.slayersbeasts.common.data.tag.SBTags;
 import net.invictusslayer.slayersbeasts.common.init.SBItems;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
@@ -21,8 +20,6 @@ public class SBItemTagsProvider extends ItemTagsProvider {
 	}
 
 	protected void addTags(HolderLookup.Provider provider) {
-		tag(SBTags.Items.JADE_GEMS).add(SBItems.JADE.get());
-
 		tag(ItemTags.MUSIC_DISCS).add(SBItems.MUSIC_DISC_INKISH.get());
 
 		WoodFamily.getAllFamilies().forEach(family -> copy(family.getLogBlocks(), family.getLogItems()));
