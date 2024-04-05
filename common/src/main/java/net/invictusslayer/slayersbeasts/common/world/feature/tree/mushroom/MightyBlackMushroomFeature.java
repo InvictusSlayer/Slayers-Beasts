@@ -43,11 +43,10 @@ public class MightyBlackMushroomFeature extends AbstractMightyMushroomFeature {
 		int sum = xRad + zRad;
 
 		if (stage == 0) return sum < 1;
-		if (stage == 1) return sum < 2;
-		if (stage == 2 || stage == 3) return sum < 3;
-//		if (stage == 4) return (xRad == 2) != (zRad == 2);
-		if (stage == 4) return sum == 3 || (xRad == 2 && zRad == 2);
-		if (stage == 5 || (random.nextInt(4) == 0 && stage == 6)) return (sum == 4 && xRad * zRad != 4) || xRad * zRad == 6;
+		if (stage == 1 || stage == 2) return sum < 2;
+		if (stage == 3) return sum < 3;
+		if (stage == 4) return sum == 3;
+		if (stage == 5 || (random.nextInt(4) == 0 && stage == 6)) return sum == 4 || xRad * zRad == 6;
 
 		return false;
 	}
