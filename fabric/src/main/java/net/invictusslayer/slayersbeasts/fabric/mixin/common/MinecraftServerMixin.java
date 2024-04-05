@@ -1,7 +1,7 @@
-package net.invictusslayer.slayersbeasts.common.mixin.common;
+package net.invictusslayer.slayersbeasts.fabric.mixin.common;
 
 import com.mojang.datafixers.DataFixer;
-import net.invictusslayer.slayersbeasts.common.world.biome.SBBiomeModifications;
+import net.invictusslayer.slayersbeasts.fabric.SBPlatformImpl;
 import net.minecraft.core.RegistryAccess;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.server.MinecraftServer;
@@ -25,6 +25,6 @@ public abstract class MinecraftServerMixin {
 
 	@Inject(method = "<init>", at = @At("TAIL"))
 	private void onInit(Thread serverThread, LevelStorageSource.LevelStorageAccess storageSource, PackRepository packRepository, WorldStem worldStem, Proxy proxy, DataFixer fixerUpper, Services services, ChunkProgressListenerFactory progressListenerFactory, CallbackInfo ci) {
-		SBBiomeModifications.placedFeatures = registryAccess().lookupOrThrow(Registries.PLACED_FEATURE);
+		SBPlatformImpl.placedFeatures = registryAccess().lookupOrThrow(Registries.PLACED_FEATURE);
 	}
 }
