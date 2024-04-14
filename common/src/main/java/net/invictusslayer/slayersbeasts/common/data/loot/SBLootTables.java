@@ -13,6 +13,8 @@ public class SBLootTables {
 
 	public static final ResourceLocation CRYPT_COMMON = register("chests/crypt_common");
 	public static final ResourceLocation CRYPT_RARE = register("chests/crypt_rare");
+	public static final ResourceLocation REDWOOD_LOGS = register("chests/redwood_logs");
+	public static final ResourceLocation REDWOOD_TOOLS = register("chests/redwood_tools");
 
 	private static ResourceLocation register(String path) {
 		ResourceLocation id = new ResourceLocation(SlayersBeasts.MOD_ID, path);

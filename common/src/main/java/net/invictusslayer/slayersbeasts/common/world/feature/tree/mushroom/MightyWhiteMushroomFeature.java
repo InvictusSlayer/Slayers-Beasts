@@ -2,7 +2,6 @@ package net.invictusslayer.slayersbeasts.common.world.feature.tree.mushroom;
 
 import com.mojang.serialization.Codec;
 import net.minecraft.core.BlockPos;
-import net.minecraft.core.Direction;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.block.HugeMushroomBlock;
@@ -12,18 +11,6 @@ import net.minecraft.world.level.levelgen.feature.configurations.HugeMushroomFea
 public class MightyWhiteMushroomFeature extends AbstractMightyMushroomFeature {
 	public MightyWhiteMushroomFeature(Codec<HugeMushroomFeatureConfiguration> codec) {
 		super(codec);
-	}
-
-	protected void placeStem(LevelAccessor level, RandomSource random, BlockPos pos, HugeMushroomFeatureConfiguration config, int maxHeight, BlockPos.MutableBlockPos mutableBlockPos) {
-		for (int i = 0; i < maxHeight - 2; ++i) {
-			mutableBlockPos.set(pos).move(Direction.UP, i);
-			if (!level.getBlockState(mutableBlockPos).isSolidRender(level, mutableBlockPos)) {
-				setBlock(level, mutableBlockPos, config.stemProvider.getState(random, pos));
-				setBlock(level, mutableBlockPos.south(), config.stemProvider.getState(random, pos));
-				setBlock(level, mutableBlockPos.east(), config.stemProvider.getState(random, pos));
-				setBlock(level, mutableBlockPos.south().east(), config.stemProvider.getState(random, pos));
-			}
-		}
 	}
 
 	protected void placeCap(LevelAccessor level, RandomSource random, BlockPos origin, HugeMushroomFeatureConfiguration config, int height, BlockPos.MutableBlockPos mutableBlockPos) {
