@@ -30,6 +30,8 @@ public class SBBlockTagsProvider extends BlockTagsProvider {
 
 		tag(BlockTags.SAND).add(SBBlocks.BLACK_SAND.get());
 		tag(BlockTags.DIRT).add(SBBlocks.ARIDISOL.get());
+		tag(BlockTags.LEAVES).add(SBBlocks.ALBINO_REDWOOD_LEAVES.get());
+		tag(BlockTags.SAPLINGS).add(SBBlocks.ALBINO_REDWOOD_SAPLING.get());
 		tag(BlockTags.SLABS).add(SBBlocks.PEGMATITE_SLAB.get(), SBBlocks.POLISHED_PEGMATITE_SLAB.get(), SBBlocks.BLACK_SANDSTONE_SLAB.get(), SBBlocks.SMOOTH_BLACK_SANDSTONE_SLAB.get(), SBBlocks.CUT_BLACK_SANDSTONE_SLAB.get());
 		tag(BlockTags.STAIRS).add(SBBlocks.PEGMATITE_STAIRS.get(), SBBlocks.POLISHED_PEGMATITE_STAIRS.get(), SBBlocks.BLACK_SANDSTONE_STAIRS.get(), SBBlocks.SMOOTH_BLACK_SANDSTONE_STAIRS.get());
 		tag(BlockTags.WALLS).add(SBBlocks.BLACK_SANDSTONE_WALL.get(), SBBlocks.PEGMATITE_WALL.get());

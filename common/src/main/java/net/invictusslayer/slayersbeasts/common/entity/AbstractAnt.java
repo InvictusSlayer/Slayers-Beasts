@@ -123,9 +123,9 @@ public abstract class AbstractAnt extends PathfinderMob {
 
 	private Variant getRandomAntType(LevelAccessor level) {
 		Holder<Biome> holder = level.getBiome(blockPosition());
-		if (holder.is(SBTags.Biomes.WOOD_ANT_HABITAT)) return Variant.WOOD;
-		if (holder.is(SBTags.Biomes.LEAFCUTTER_ANT_HABITAT)) return Variant.LEAFCUTTER;
-		if (holder.is(SBTags.Biomes.MEADOW_ANT_HABITAT)) return Variant.MEADOW;
+		if (holder.is(SBTags.Biomes.SPAWNS_WOOD_ANTS)) return Variant.WOOD;
+		if (holder.is(SBTags.Biomes.SPAWNS_LEAFCUTTER_ANTS)) return Variant.LEAFCUTTER;
+		if (holder.is(SBTags.Biomes.SPAWNS_MEADOW_ANTS)) return Variant.MEADOW;
 		return Variant.byId(level.getRandom().nextInt(Variant.values().length));
 	}
 

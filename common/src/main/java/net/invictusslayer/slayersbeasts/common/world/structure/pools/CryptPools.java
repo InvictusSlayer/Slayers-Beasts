@@ -34,11 +34,11 @@ public class CryptPools extends SBPools {
 	}
 
 	private static Pair<Function<StructureTemplatePool.Projection, ? extends StructurePoolElement>, Integer> element(String name, int weight) {
-		return SBPools.parentElement("crypt", name, weight);
+		return parentElement("crypt", name, weight);
 	}
 
 	private static Pair<Function<StructureTemplatePool.Projection, ? extends StructurePoolElement>, Integer> element(String name, int weight, Holder<StructureProcessorList> processor) {
-		return SBPools.parentElement("crypt", name, weight, processor);
+		return parentElement("crypt", name, weight, processor);
 	}
 
 	private static ResourceKey<StructureTemplatePool> createKey(String name) {

@@ -92,6 +92,8 @@ public class EnUsLangProvider extends SBLangProvider {
 		addWoodFamily(WoodFamily.EUCALYPTUS, "Eucalyptus");
 		addWoodFamily(WoodFamily.KAPOK, "Kapok");
 		addWoodFamily(WoodFamily.REDWOOD, "Redwood");
+		addBlock(SBBlocks.ALBINO_REDWOOD_LEAVES, "Albino Redwood Leaves");
+		addBlock(SBBlocks.ALBINO_REDWOOD_SAPLING, "Albino Redwood Sapling");
 		addWoodFamily(WoodFamily.WILLOW, "Willow");
 		addBlock(SBBlocks.WILLOW_BRANCH, "Willow Branch");
 		addBlock(SBBlocks.WILLOW_BRANCH_PLANT, "Willow Branch Plant");

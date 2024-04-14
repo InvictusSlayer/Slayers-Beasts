@@ -70,6 +70,8 @@ public class SBConfiguredFeatures {
 	public static final ResourceKey<ConfiguredFeature<?, ?>> REDWOOD = createKey("redwood");
 	public static final ResourceKey<ConfiguredFeature<?, ?>> GIANT_REDWOOD = createKey("giant_redwood");
 	public static final ResourceKey<ConfiguredFeature<?, ?>> COLOSSAL_REDWOOD = createKey("colossal_redwood");
+	public static final ResourceKey<ConfiguredFeature<?, ?>> ALBINO_REDWOOD = createKey("albino_redwood");
+	public static final ResourceKey<ConfiguredFeature<?, ?>> GIANT_ALBINO_REDWOOD = createKey("giant_albino_redwood");
 	public static final ResourceKey<ConfiguredFeature<?, ?>> PETRIFIED_TREE = createKey("petrified_tree");
 	public static final ResourceKey<ConfiguredFeature<?, ?>> GIANT_WILLOW = createKey("giant_willow");
 	public static final ResourceKey<ConfiguredFeature<?, ?>> BIG_BLACK_MUSHROOM = createKey("big_black_mushroom");
@@ -165,6 +167,12 @@ public class SBConfiguredFeatures {
 		register(context, COLOSSAL_REDWOOD, Feature.TREE, new TreeConfiguration.TreeConfigurationBuilder(
 				BlockStateProvider.simple(SBBlocks.REDWOOD_LOG.get()), new ColossalTrunkPlacer(50, 12, 12),
 				BlockStateProvider.simple(SBBlocks.REDWOOD_LEAVES.get()), new RedwoodFoliagePlacer(ConstantInt.of(0), ConstantInt.of(0), UniformInt.of(5, 8), 3), new TwoLayersFeatureSize(1, 0, 2)).build());
+		register(context, ALBINO_REDWOOD, Feature.TREE, new TreeConfiguration.TreeConfigurationBuilder(
+				BlockStateProvider.simple(SBBlocks.REDWOOD_LOG.get()), new StraightTrunkPlacer(18, 5, 5),
+				BlockStateProvider.simple(SBBlocks.ALBINO_REDWOOD_LEAVES.get()), new RedwoodFoliagePlacer(ConstantInt.of(0), ConstantInt.of(0), UniformInt.of(2, 3), 1), new TwoLayersFeatureSize(1, 0, 2)).build());
+		register(context, GIANT_ALBINO_REDWOOD, Feature.TREE, new TreeConfiguration.TreeConfigurationBuilder(
+				BlockStateProvider.simple(SBBlocks.REDWOOD_LOG.get()), new GiantTrunkPlacer(28, 8, 2),
+				BlockStateProvider.simple(SBBlocks.ALBINO_REDWOOD_LEAVES.get()), new RedwoodFoliagePlacer(ConstantInt.of(0), ConstantInt.of(0), UniformInt.of(3, 7), 2), new TwoLayersFeatureSize(1, 0, 2)).build());
 		register(context, PETRIFIED_TREE, Feature.TREE, new TreeConfiguration.TreeConfigurationBuilder(
 				BlockStateProvider.simple(Blocks.STONE), new StraightTrunkPlacer(5, 2, 2),
 				BlockStateProvider.simple(Blocks.TUFF), new BlobFoliagePlacer(ConstantInt.of(2), ConstantInt.of(0), 3), new TwoLayersFeatureSize(1, 0, 2)).build());
@@ -192,8 +200,8 @@ public class SBConfiguredFeatures {
 		register(context, TREES_MUSHROOM, Feature.RANDOM_SELECTOR, new RandomFeatureConfiguration(List.of(new WeightedPlacedFeature(PlacementUtils.inlinePlaced(configured.getOrThrow(MIGHTY_MUSHROOMS)), 0.6F)), PlacementUtils.inlinePlaced(configured.getOrThrow(HUGE_MUSHROOMS))));
 		register(context, TREES_OUTBACK, Feature.RANDOM_SELECTOR, new RandomFeatureConfiguration(List.of(new WeightedPlacedFeature(placed.getOrThrow(SBPlacedFeatures.EUCALYPTUS), 0.2F), new WeightedPlacedFeature(placed.getOrThrow(SBPlacedFeatures.SUPER_DESERT_OAK), 0.3F)), placed.getOrThrow(SBPlacedFeatures.DESERT_OAK)));
 		register(context, TREES_RAINFOREST, Feature.RANDOM_SELECTOR, new RandomFeatureConfiguration(List.of(new WeightedPlacedFeature(placed.getOrThrow(SBPlacedFeatures.GIANT_KAPOK), 0.2F)), placed.getOrThrow(SBPlacedFeatures.CAJOLE)));
-		register(context, TREES_REDWOOD, Feature.RANDOM_SELECTOR, new RandomFeatureConfiguration(List.of(new WeightedPlacedFeature(placed.getOrThrow(SBPlacedFeatures.GIANT_REDWOOD), 0.2F), new WeightedPlacedFeature(PlacementUtils.inlinePlaced(configured.getOrThrow(HUGE_WHITE_MUSHROOM)), 0.03F)), placed.getOrThrow(SBPlacedFeatures.REDWOOD)));
-		register(context, TREES_OLD_GROWTH_REDWOOD, Feature.RANDOM_SELECTOR, new RandomFeatureConfiguration(List.of(new WeightedPlacedFeature(placed.getOrThrow(SBPlacedFeatures.GIANT_REDWOOD), 0.3F), new WeightedPlacedFeature(PlacementUtils.inlinePlaced(configured.getOrThrow(HUGE_WHITE_MUSHROOM)), 0.05F)), placed.getOrThrow(SBPlacedFeatures.COLOSSAL_REDWOOD)));
+		register(context, TREES_REDWOOD, Feature.RANDOM_SELECTOR, new RandomFeatureConfiguration(List.of(new WeightedPlacedFeature(placed.getOrThrow(SBPlacedFeatures.GIANT_REDWOOD), 0.2F), new WeightedPlacedFeature(PlacementUtils.inlinePlaced(configured.getOrThrow(HUGE_WHITE_MUSHROOM)), 0.03F), new WeightedPlacedFeature(placed.getOrThrow(SBPlacedFeatures.ALBINO_REDWOOD), 0.001F)), placed.getOrThrow(SBPlacedFeatures.REDWOOD)));
+		register(context, TREES_OLD_GROWTH_REDWOOD, Feature.RANDOM_SELECTOR, new RandomFeatureConfiguration(List.of(new WeightedPlacedFeature(placed.getOrThrow(SBPlacedFeatures.GIANT_REDWOOD), 0.3F), new WeightedPlacedFeature(PlacementUtils.inlinePlaced(configured.getOrThrow(HUGE_WHITE_MUSHROOM)), 0.05F), new WeightedPlacedFeature(placed.getOrThrow(SBPlacedFeatures.GIANT_ALBINO_REDWOOD), 0.001F)), placed.getOrThrow(SBPlacedFeatures.COLOSSAL_REDWOOD)));
 		register(context, TREES_RIVER, Feature.RANDOM_SELECTOR, new RandomFeatureConfiguration(List.of(new WeightedPlacedFeature(placed.getOrThrow(SBPlacedFeatures.GIANT_WILLOW), 0.5F)), placed.getOrThrow(SBPlacedFeatures.GIANT_WILLOW)));
 		register(context, MIGHTY_MUSHROOMS, Feature.RANDOM_SELECTOR, new RandomFeatureConfiguration(List.of(new WeightedPlacedFeature(PlacementUtils.inlinePlaced(configured.getOrThrow(MIGHTY_BLACK_MUSHROOM)), 0.25F), new WeightedPlacedFeature(PlacementUtils.inlinePlaced(configured.getOrThrow(MIGHTY_BROWN_MUSHROOM)), 0.25F), new WeightedPlacedFeature(PlacementUtils.inlinePlaced(configured.getOrThrow(MIGHTY_RED_MUSHROOM)), 0.25F)), PlacementUtils.inlinePlaced(configured.getOrThrow(MIGHTY_WHITE_MUSHROOM))));
 		register(context, HUGE_MUSHROOMS, Feature.RANDOM_SELECTOR, new RandomFeatureConfiguration(List.of(new WeightedPlacedFeature(PlacementUtils.inlinePlaced(configured.getOrThrow(HUGE_BLACK_MUSHROOM)), 0.25F), new WeightedPlacedFeature(PlacementUtils.inlinePlaced(configured.getOrThrow(TreeFeatures.HUGE_BROWN_MUSHROOM)), 0.25F), new WeightedPlacedFeature(PlacementUtils.inlinePlaced(configured.getOrThrow(TreeFeatures.HUGE_RED_MUSHROOM)), 0.25F)), PlacementUtils.inlinePlaced(configured.getOrThrow(HUGE_WHITE_MUSHROOM))));

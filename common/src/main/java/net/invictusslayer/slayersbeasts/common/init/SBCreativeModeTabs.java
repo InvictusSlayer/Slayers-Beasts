@@ -85,7 +85,9 @@ public class SBCreativeModeTabs {
 		addWoodFamily(SLAYERS_TAB, WoodFamily.EUCALYPTUS);
 		addWoodFamily(SLAYERS_TAB, WoodFamily.KAPOK);
 		addWoodFamily(SLAYERS_TAB, WoodFamily.REDWOOD);
+		CreativeTabRegistry.append(SLAYERS_TAB, SBBlocks.ALBINO_REDWOOD_LEAVES, SBBlocks.ALBINO_REDWOOD_SAPLING);
 		addWoodFamily(SLAYERS_TAB, WoodFamily.WILLOW);
+		CreativeTabRegistry.append(SLAYERS_TAB, SBBlocks.WILLOW_BRANCH);
 
 		CreativeTabRegistry.append(SLAYERS_TAB,
 				SBItems.MUSIC_DISC_INKISH,
