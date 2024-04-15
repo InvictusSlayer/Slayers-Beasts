@@ -33,6 +33,8 @@ public class SBPlacedFeatures {
 	public static final ResourceKey<PlacedFeature> REDWOOD = createKey("redwood");
 	public static final ResourceKey<PlacedFeature> GIANT_REDWOOD = createKey("giant_redwood");
 	public static final ResourceKey<PlacedFeature> COLOSSAL_REDWOOD = createKey("colossal_redwood");
+	public static final ResourceKey<PlacedFeature> ALBINO_REDWOOD = createKey("albino_redwood");
+	public static final ResourceKey<PlacedFeature> GIANT_ALBINO_REDWOOD = createKey("giant_albino_redwood");
 	public static final ResourceKey<PlacedFeature> GIANT_WILLOW = createKey("giant_willow");
 
 	// Vegetation
@@ -96,6 +98,8 @@ public class SBPlacedFeatures {
 		register(context, REDWOOD, configured.getOrThrow(SBConfiguredFeatures.REDWOOD), PlacementUtils.filteredByBlockSurvival(SBBlocks.REDWOOD_SAPLING.get()));
 		register(context, GIANT_REDWOOD, configured.getOrThrow(SBConfiguredFeatures.GIANT_REDWOOD), PlacementUtils.filteredByBlockSurvival(SBBlocks.REDWOOD_SAPLING.get()));
 		register(context, COLOSSAL_REDWOOD, configured.getOrThrow(SBConfiguredFeatures.COLOSSAL_REDWOOD), PlacementUtils.filteredByBlockSurvival(SBBlocks.REDWOOD_SAPLING.get()));
+		register(context, ALBINO_REDWOOD, configured.getOrThrow(SBConfiguredFeatures.ALBINO_REDWOOD), PlacementUtils.filteredByBlockSurvival(SBBlocks.ALBINO_REDWOOD_SAPLING.get()));
+		register(context, GIANT_ALBINO_REDWOOD, configured.getOrThrow(SBConfiguredFeatures.GIANT_ALBINO_REDWOOD), PlacementUtils.filteredByBlockSurvival(SBBlocks.ALBINO_REDWOOD_SAPLING.get()));
 		register(context, GIANT_WILLOW, configured.getOrThrow(SBConfiguredFeatures.GIANT_WILLOW), PlacementUtils.filteredByBlockSurvival(SBBlocks.WILLOW_SAPLING.get()));
 
 		register(context, TREES_ASPEN, configured.getOrThrow(SBConfiguredFeatures.TREES_ASPEN), VegetationPlacements.treePlacement(PlacementUtils.countExtra(10, 0.2F, 3), SBBlocks.ASPEN_SAPLING.get()));

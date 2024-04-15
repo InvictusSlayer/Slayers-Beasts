@@ -124,6 +124,8 @@ public class SBOverworldBiomes {
 	public static Biome chaparral(HolderGetter<PlacedFeature> features, HolderGetter<ConfiguredWorldCarver<?>> carvers) {
 		MobSpawnSettings.Builder mobSettings = new MobSpawnSettings.Builder();
 		BiomeDefaultFeatures.commonSpawns(mobSettings);
+		mobSettings.addSpawn(MobCategory.CREATURE, new MobSpawnSettings.SpawnerData(EntityType.RABBIT, 4, 2, 3));
+		mobSettings.addSpawn(MobCategory.CREATURE, new MobSpawnSettings.SpawnerData(EntityType.FOX, 8, 2, 4));
 
 		BiomeGenerationSettings.Builder biomeSettings = new BiomeGenerationSettings.Builder(features, carvers);
 		globalOverworldGeneration(biomeSettings);
@@ -323,6 +325,7 @@ public class SBOverworldBiomes {
 	public static Biome redwoodGrove(HolderGetter<PlacedFeature> features, HolderGetter<ConfiguredWorldCarver<?>> carvers, boolean oldGrowth) {
 		MobSpawnSettings.Builder mobSettings = new MobSpawnSettings.Builder();
 		BiomeDefaultFeatures.commonSpawns(mobSettings);
+		mobSettings.addSpawn(MobCategory.CREATURE, new MobSpawnSettings.SpawnerData(EntityType.FOX, 8, 2, 4));
 
 		BiomeGenerationSettings.Builder biomeSettings = new BiomeGenerationSettings.Builder(features, carvers);
 		globalOverworldGeneration(biomeSettings);

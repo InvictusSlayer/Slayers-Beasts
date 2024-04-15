@@ -53,6 +53,7 @@ public class SBItemModelProvider extends ItemModelProvider {
 		block(SBBlocks.ALGAE);
 		block(SBBlocks.BLACK_MUSHROOM);
 		block(SBBlocks.WHITE_MUSHROOM);
+		block(SBBlocks.ALBINO_REDWOOD_SAPLING);
 		block(SBBlocks.WILLOW_BRANCH);
 		block(SBBlocks.WILLOW_BRANCH_PLANT);
 	}

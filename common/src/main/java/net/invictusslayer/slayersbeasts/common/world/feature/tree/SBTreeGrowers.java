@@ -12,5 +12,6 @@ public class SBTreeGrowers {
 	public static final TreeGrower EUCALYPTUS = new TreeGrower("eucalyptus", Optional.empty(), Optional.of(SBConfiguredFeatures.EUCALYPTUS), Optional.empty());
 	public static final TreeGrower KAPOK = new TreeGrower("kapok", Optional.of(SBConfiguredFeatures.GIANT_KAPOK), Optional.empty(), Optional.empty());
 	public static final TreeGrower REDWOOD = new TreeGrower("redwood", Optional.of(SBConfiguredFeatures.GIANT_REDWOOD), Optional.of(SBConfiguredFeatures.REDWOOD), Optional.empty());
+	public static final TreeGrower ALBINO_REDWOOD = new TreeGrower("albino_redwood", Optional.of(SBConfiguredFeatures.GIANT_ALBINO_REDWOOD), Optional.of(SBConfiguredFeatures.ALBINO_REDWOOD), Optional.empty());
 	public static final TreeGrower WILLOW = new TreeGrower("willow", Optional.of(SBConfiguredFeatures.GIANT_WILLOW), Optional.empty(), Optional.empty());
 }

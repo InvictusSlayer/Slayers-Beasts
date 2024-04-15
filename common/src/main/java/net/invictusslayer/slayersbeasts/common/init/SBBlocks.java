@@ -201,6 +201,9 @@ public class SBBlocks {
 	public static final RegistrySupplier<Block> REDWOOD_WALL_SIGN = BLOCKS.register("redwood_wall_sign", () -> new WallSignBlock(SBWoodType.REDWOOD, BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_WALL_SIGN)));
 	public static final RegistrySupplier<Block> REDWOOD_HANGING_SIGN = BLOCKS.register("redwood_hanging_sign", () -> new CeilingHangingSignBlock(SBWoodType.REDWOOD, BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_HANGING_SIGN)));
 	public static final RegistrySupplier<Block> REDWOOD_WALL_HANGING_SIGN = BLOCKS.register("redwood_wall_hanging_sign", () -> new WallHangingSignBlock(SBWoodType.REDWOOD, BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_WALL_HANGING_SIGN)));
+	public static final RegistrySupplier<Block> ALBINO_REDWOOD_LEAVES = register("albino_redwood_leaves", () -> new LeavesBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_LEAVES)));
+	public static final RegistrySupplier<Block> ALBINO_REDWOOD_SAPLING = register("albino_redwood_sapling", () -> new SaplingBlock(SBTreeGrowers.ALBINO_REDWOOD, BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_SAPLING)));
+	public static final RegistrySupplier<Block> POTTED_ALBINO_REDWOOD_SAPLING = BLOCKS.register("potted_albino_redwood_sapling", () -> new FlowerPotBlock(ALBINO_REDWOOD_SAPLING.get(), BlockBehaviour.Properties.ofFullCopy(Blocks.POTTED_OAK_SAPLING)));
 
 	public static final RegistrySupplier<Block> WILLOW_LOG = register("willow_log", () -> new RotatedPillarBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_LOG)));
 	public static final RegistrySupplier<Block> WILLOW_WOOD = register("willow_wood", () -> new RotatedPillarBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_WOOD)));

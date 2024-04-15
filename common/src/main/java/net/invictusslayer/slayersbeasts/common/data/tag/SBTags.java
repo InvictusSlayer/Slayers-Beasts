@@ -48,26 +48,29 @@ public class SBTags {
 
 	public static class Biomes {
 		public static final TagKey<Biome> SLAYERS_BIOMES = tag("slayers_biomes");
-		public static final TagKey<Biome> WOOD_ANT_HABITAT = tag("wood_ant_habitat");
-		public static final TagKey<Biome> LEAFCUTTER_ANT_HABITAT = tag("leafcutter_ant_habitat");
-		public static final TagKey<Biome> MEADOW_ANT_HABITAT = tag("meadow_ant_habitat");
 
 		public static final TagKey<Biome> IS_BRUSHLAND = tag("is_brushland");
 
 		public static final TagKey<Biome> HAS_CRYPT_PORTAL = structureTag("crypt_portal");
+		public static final TagKey<Biome> HAS_REDWOOD_LODGE = structureTag("redwood_lodge");
 
 		public static final TagKey<Biome> PLACES_ALGAE_COMMON = featureTag("algae_common");
 		public static final TagKey<Biome> PLACES_ALGAE_NORMAL = featureTag("algae_normal");
 		public static final TagKey<Biome> PLACES_EXOSKELETON_LUSH = featureTag("exoskeleton_lush");
 
+		public static final TagKey<Biome> SPAWNS_WOOD_ANTS = spawnsTag("wood_ants");
+		public static final TagKey<Biome> SPAWNS_LEAFCUTTER_ANTS = spawnsTag("leafcutter_ants");
+		public static final TagKey<Biome> SPAWNS_MEADOW_ANTS = spawnsTag("meadow_ants");
+		public static final TagKey<Biome> SPAWNS_OAK_ENTS = spawnsTag("oak_ents");
+		public static final TagKey<Biome> SPAWNS_BIRCH_ENTS = spawnsTag("birch_ents");
+		public static final TagKey<Biome> SPAWNS_SPRUCE_ENTS = spawnsTag("spruce_ents");
+		public static final TagKey<Biome> SPAWNS_DARK_OAK_ENTS = spawnsTag("dark_oak_ents");
+		public static final TagKey<Biome> SPAWNS_ACACIA_ENTS = spawnsTag("acacia_ents");
+		public static final TagKey<Biome> SPAWNS_JUNGLE_ENTS = spawnsTag("jungle_ents");
+		public static final TagKey<Biome> SPAWNS_GREY_FOXES = spawnsTag("grey_foxes");
+
 		public static final TagKey<Biome> SPAWNS_MANTIS = spawnsTag("mantis");
 		public static final TagKey<Biome> SPAWNS_DAMSELFLY = spawnsTag("damselfly");
-		public static final TagKey<Biome> SPAWNS_ENT_OAK = spawnsTag("ent_oak");
-		public static final TagKey<Biome> SPAWNS_ENT_BIRCH = spawnsTag("ent_birch");
-		public static final TagKey<Biome> SPAWNS_ENT_SPRUCE = spawnsTag("ent_spruce");
-		public static final TagKey<Biome> SPAWNS_ENT_DARK_OAK = spawnsTag("ent_dark_oak");
-		public static final TagKey<Biome> SPAWNS_ENT_ACACIA = spawnsTag("ent_acacia");
-		public static final TagKey<Biome> SPAWNS_ENT_JUNGLE = spawnsTag("ent_jungle");
 
 		private static TagKey<Biome> structureTag(String name) {
 			return tag("has_structure/" + name);
@@ -78,7 +81,7 @@ public class SBTags {
 		}
 
 		private static TagKey<Biome> spawnsTag(String name) {
-			return tag("spawns_entity/" + name);
+			return tag("spawns/" + name);
 		}
 
 		private static TagKey<Biome> tag(String name) {

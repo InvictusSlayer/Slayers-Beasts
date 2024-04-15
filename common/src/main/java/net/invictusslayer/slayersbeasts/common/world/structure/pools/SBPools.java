@@ -19,6 +19,7 @@ import java.util.function.Function;
 public class SBPools {
 	public static void bootstrap(BootstapContext<StructureTemplatePool> context) {
 		CryptPools.bootstrap(context);
+		RedwoodLodgePools.bootstrap(context);
 	}
 
 	protected static Pair<Function<StructureTemplatePool.Projection, ? extends StructurePoolElement>, Integer> parentElement(String parent, String name, int weight) {
