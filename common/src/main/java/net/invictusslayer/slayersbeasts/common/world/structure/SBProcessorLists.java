@@ -2,6 +2,7 @@ package net.invictusslayer.slayersbeasts.common.world.structure;
 
 import com.google.common.collect.ImmutableList;
 import net.invictusslayer.slayersbeasts.common.SlayersBeasts;
+import net.invictusslayer.slayersbeasts.common.init.SBBlocks;
 import net.minecraft.core.HolderGetter;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.data.worldgen.BootstapContext;
@@ -14,11 +15,13 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.levelgen.structure.templatesystem.*;
 
 public class SBProcessorLists {
+	public static final ResourceKey<StructureProcessorList> REDWOOD_PATH = createKey("redwood_path");
 	public static final ResourceKey<StructureProcessorList> STONE_FLOOR = createKey("stone_floor");
 
 	public static void bootstrap(BootstapContext<StructureProcessorList> context) {
 		HolderGetter<Block> blocks = context.lookup(Registries.BLOCK);
 
+		register(context, REDWOOD_PATH, rule(Blocks.GRAVEL, 0.4F, Blocks.COARSE_DIRT.defaultBlockState()), rule(Blocks.GRAVEL, 0.7F, Blocks.DIRT_PATH.defaultBlockState()), rule(Blocks.GRAVEL, 0.5F, SBBlocks.REDWOOD_PLANKS.get().defaultBlockState()));
 		register(context, STONE_FLOOR, rule(Blocks.STONE, 0.1F, Blocks.POLISHED_ANDESITE.defaultBlockState()), rule(Blocks.STONE, 0.1F, Blocks.SMOOTH_STONE.defaultBlockState()), rule(Blocks.STONE, Blocks.STONE_BRICKS.defaultBlockState()));
 	}
 

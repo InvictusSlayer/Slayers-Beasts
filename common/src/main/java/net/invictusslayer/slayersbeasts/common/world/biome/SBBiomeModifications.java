@@ -31,7 +31,7 @@ public class SBBiomeModifications {
 		addSpawn(SBTags.Biomes.SPAWNS_MANTIS, SBEntities.MANTIS.get(), 6, 1, 2, MobCategory.MONSTER);
 		addSpawn(Biomes.SOUL_SAND_VALLEY, SBEntities.WITHER_SPIDER.get(), 4, 1, 1, MobCategory.MONSTER);
 		addSpawn(SBTags.Biomes.SPAWNS_DAMSELFLY, SBEntities.DAMSELFLY.get(), 3, 1, 3, MobCategory.AMBIENT);
-		addSpawn(SBTags.Biomes.SPAWNS_ENT_OAK, SBEntities.ENT_MEDIUM.get(), 4, 1, 1, MobCategory.MONSTER);
+		addSpawn(SBTags.Biomes.SPAWNS_OAK_ENTS, SBEntities.ENT_MEDIUM.get(), 4, 1, 1, MobCategory.MONSTER);
 	}
 
 	public static void addSpawn(ResourceKey<Biome> biome, EntityType<?> entity, int weight, int min, int max, MobCategory category) {

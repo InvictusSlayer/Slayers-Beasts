@@ -78,24 +78,24 @@ public abstract class AbstractEnt extends PathfinderMob {
 	protected abstract void setupAnimationStates();
 
 	public SpawnGroupData finalizeSpawn(ServerLevelAccessor level, DifficultyInstance difficulty, MobSpawnType type, SpawnGroupData spawnData, CompoundTag tag) {
-		Variant variant = getRandomAntType(level);
-		if (spawnData instanceof AntGroupData antData) variant = antData.variant;
-		else spawnData = new AntGroupData(variant);
+		Variant variant = getRandomEntType(level);
+		if (spawnData instanceof EntGroupData antData) variant = antData.variant;
+		else spawnData = new EntGroupData(variant);
 
 		setVariant(variant);
 		return spawnData;
 	}
 
-	private Variant getRandomAntType(LevelAccessor level) {
+	private Variant getRandomEntType(LevelAccessor level) {
 		Holder<Biome> holder = level.getBiome(blockPosition());
-		if (holder.is(SBTags.Biomes.SPAWNS_ENT_OAK)) return Variant.OAK;
-		if (holder.is(SBTags.Biomes.SPAWNS_ENT_BIRCH)) return Variant.BIRCH;
+		if (holder.is(SBTags.Biomes.SPAWNS_OAK_ENTS)) return Variant.OAK;
+		if (holder.is(SBTags.Biomes.SPAWNS_BIRCH_ENTS)) return Variant.BIRCH;
 		return Variant.byId(level.getRandom().nextInt(Variant.values().length));
 	}
 
-	public static class AntGroupData implements SpawnGroupData {
+	public static class EntGroupData implements SpawnGroupData {
 		private final Variant variant;
-		private AntGroupData(Variant variant) {
+		private EntGroupData(Variant variant) {
 			this.variant = variant;
 		}
 	}

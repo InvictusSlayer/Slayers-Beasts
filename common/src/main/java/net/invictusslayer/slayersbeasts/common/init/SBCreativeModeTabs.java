@@ -175,13 +175,14 @@ public class SBCreativeModeTabs {
 				tab.accept(SBItems.REDWOOD_HANGING_SIGN.get());
 				tab.accept(SBItems.REDWOOD_BOAT.get());
 				tab.accept(SBItems.REDWOOD_CHEST_BOAT.get());
+				tab.accept(SBBlocks.ALBINO_REDWOOD_LEAVES.get());
+				tab.accept(SBBlocks.ALBINO_REDWOOD_SAPLING.get());
 
 				tab.accept(SBBlocks.WILLOW_LOG.get());
 				tab.accept(SBBlocks.WILLOW_WOOD.get());
 				tab.accept(SBBlocks.STRIPPED_WILLOW_LOG.get());
 				tab.accept(SBBlocks.STRIPPED_WILLOW_WOOD.get());
 				tab.accept(SBBlocks.WILLOW_LEAVES.get());
-				tab.accept(SBBlocks.WILLOW_BRANCH.get());
 				tab.accept(SBBlocks.WILLOW_SAPLING.get());
 				tab.accept(SBBlocks.WILLOW_PLANKS.get());
 				tab.accept(SBBlocks.WILLOW_STAIRS.get());
@@ -196,6 +197,7 @@ public class SBCreativeModeTabs {
 				tab.accept(SBItems.WILLOW_HANGING_SIGN.get());
 				tab.accept(SBItems.WILLOW_BOAT.get());
 				tab.accept(SBItems.WILLOW_CHEST_BOAT.get());
+				tab.accept(SBBlocks.WILLOW_BRANCH.get());
 
 				tab.accept(SBItems.MUSIC_DISC_INKISH.get());
 

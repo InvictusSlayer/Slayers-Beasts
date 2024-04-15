@@ -8,12 +8,14 @@
 		"common.BoatMixin",
 		"common.BoatTypeMixin",
 		"common.ChestBoatMixin",
+		"common.FoxTypeMixin",
 		"common.MushroomBlockMixin",
 		"common.MushroomCowMixin",
 		"common.MushroomCowTypeMixin"
 	],
 	"client": [
 		"client.BoatRendererMixin",
+		"client.FoxRendererMixin",
 		"client.MushroomCowRendererMixin"
 	],
 	"injectors": {

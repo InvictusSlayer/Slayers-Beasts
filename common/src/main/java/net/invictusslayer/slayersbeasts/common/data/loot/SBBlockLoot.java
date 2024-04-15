@@ -77,6 +77,9 @@ public class SBBlockLoot extends BlockLootSubProvider {
 		add(SBBlocks.THIN_MUSHROOM_STEM.get(), BlockLootSubProvider::createSilkTouchOnlyTable);
 
 		generateWoodFamilies();
+		add(SBBlocks.ALBINO_REDWOOD_LEAVES.get(), block -> createLeavesDrops(block, SBBlocks.ALBINO_REDWOOD_SAPLING.get(), 0.0033F));
+		dropSelf(SBBlocks.ALBINO_REDWOOD_SAPLING.get());
+		add(SBBlocks.POTTED_ALBINO_REDWOOD_SAPLING.get(), createPotFlowerItemTable(SBBlocks.ALBINO_REDWOOD_SAPLING.get()));
 		add(SBBlocks.WILLOW_BRANCH.get(), block -> createLeavesDrops(block, SBBlocks.WILLOW_SAPLING.get(), 0.05F));
 		add(SBBlocks.WILLOW_BRANCH_PLANT.get(), block -> createLeavesDrops(block, SBBlocks.WILLOW_SAPLING.get(), 0.05F));
 	}
