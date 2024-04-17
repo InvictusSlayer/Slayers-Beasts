@@ -51,8 +51,12 @@ public class SBItemModelProvider extends ItemModelProvider {
 		block(SBBlocks.OBSIDIAN_SPIKE, "_tip_up");
 		block(SBBlocks.TALL_DEAD_BUSH, "_top");
 		block(SBBlocks.ALGAE);
+		block(SBBlocks.TALL_BROWN_MUSHROOM, "_top");
+		block(SBBlocks.TALL_RED_MUSHROOM, "_top");
 		block(SBBlocks.BLACK_MUSHROOM);
+		block(SBBlocks.TALL_BLACK_MUSHROOM, "_top");
 		block(SBBlocks.WHITE_MUSHROOM);
+		block(SBBlocks.TALL_WHITE_MUSHROOM, "_top");
 		block(SBBlocks.ALBINO_REDWOOD_SAPLING);
 		block(SBBlocks.WILLOW_BRANCH);
 		block(SBBlocks.WILLOW_BRANCH_PLANT);

@@ -20,8 +20,9 @@ public class SBFabricClient implements ClientModInitializer {
 		renderWoodFamilies();
 		BlockRenderLayerMap.INSTANCE.putBlocks(RenderType.cutout(),
 				SBBlocks.ALGAE.get(), SBBlocks.TALL_DEAD_BUSH.get(),
-				SBBlocks.BLACK_MUSHROOM.get(), SBBlocks.POTTED_BLACK_MUSHROOM.get(),
-				SBBlocks.WHITE_MUSHROOM.get(), SBBlocks.POTTED_WHITE_MUSHROOM.get(),
+				SBBlocks.TALL_BROWN_MUSHROOM.get(), SBBlocks.TALL_RED_MUSHROOM.get(),
+				SBBlocks.BLACK_MUSHROOM.get(), SBBlocks.POTTED_BLACK_MUSHROOM.get(), SBBlocks.TALL_BLACK_MUSHROOM.get(),
+				SBBlocks.WHITE_MUSHROOM.get(), SBBlocks.POTTED_WHITE_MUSHROOM.get(), SBBlocks.TALL_WHITE_MUSHROOM.get(),
 				SBBlocks.WILLOW_BRANCH.get(), SBBlocks.WILLOW_BRANCH_PLANT.get(),
 				SBBlocks.ICICLE.get(), SBBlocks.OBSIDIAN_SPIKE.get());
 	}
