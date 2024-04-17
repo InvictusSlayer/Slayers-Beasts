@@ -1,4 +1,4 @@
-package net.invictusslayer.slayersbeasts.common.world.feature.tree.mushroom;
+package net.invictusslayer.slayersbeasts.common.world.feature.mushroom;
 
 import com.mojang.serialization.Codec;
 import net.minecraft.core.BlockPos;
@@ -73,8 +73,7 @@ public class MightyWhiteMushroomFeature extends AbstractMightyMushroomFeature {
 		return false;
 	}
 
-	protected int getTreeRadiusForHeight(int i, int height, int radius, int y) {
-		if (y <= height && y >= height - 8) return radius;
-		return 0;
+	protected int getTreeRadiusForHeight(int radius, int height) {
+		return height < 8 ? radius : 0;
 	}
 }

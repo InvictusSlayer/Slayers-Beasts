@@ -15,6 +15,7 @@ import net.minecraft.world.item.Items;
 import net.minecraft.world.item.enchantment.Enchantments;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.DoublePlantBlock;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.block.state.properties.DoubleBlockHalf;
 import net.minecraft.world.level.storage.loot.BuiltInLootTables;
@@ -68,12 +69,16 @@ public class SBBlockLoot extends BlockLootSubProvider {
 
 		dropSelf(SBBlocks.BLACK_SAND.get());
 
+		add(SBBlocks.TALL_BROWN_MUSHROOM.get(), block -> createSinglePropConditionTable(block, DoublePlantBlock.HALF, DoubleBlockHalf.LOWER));
+		add(SBBlocks.TALL_RED_MUSHROOM.get(), block -> createSinglePropConditionTable(block, DoublePlantBlock.HALF, DoubleBlockHalf.LOWER));
+		add(SBBlocks.BLACK_MUSHROOM_BLOCK.get(), block -> createMushroomBlockDrop(SBBlocks.BLACK_MUSHROOM_BLOCK.get(), SBBlocks.BLACK_MUSHROOM.get()));
 		dropSelf(SBBlocks.BLACK_MUSHROOM.get());
 		add(SBBlocks.POTTED_BLACK_MUSHROOM.get(), createPotFlowerItemTable(SBBlocks.BLACK_MUSHROOM.get()));
-		add(SBBlocks.BLACK_MUSHROOM_BLOCK.get(), block -> createMushroomBlockDrop(SBBlocks.BLACK_MUSHROOM_BLOCK.get(), SBBlocks.BLACK_MUSHROOM.get()));
+		add(SBBlocks.TALL_BLACK_MUSHROOM.get(), block -> createSinglePropConditionTable(block, DoublePlantBlock.HALF, DoubleBlockHalf.LOWER));
+		add(SBBlocks.WHITE_MUSHROOM_BLOCK.get(), block -> createMushroomBlockDrop(SBBlocks.WHITE_MUSHROOM_BLOCK.get(), SBBlocks.WHITE_MUSHROOM.get()));
 		dropSelf(SBBlocks.WHITE_MUSHROOM.get());
 		add(SBBlocks.POTTED_WHITE_MUSHROOM.get(), createPotFlowerItemTable(SBBlocks.WHITE_MUSHROOM.get()));
-		add(SBBlocks.WHITE_MUSHROOM_BLOCK.get(), block -> createMushroomBlockDrop(SBBlocks.WHITE_MUSHROOM_BLOCK.get(), SBBlocks.WHITE_MUSHROOM.get()));
+		add(SBBlocks.TALL_WHITE_MUSHROOM.get(), block -> createSinglePropConditionTable(block, DoublePlantBlock.HALF, DoubleBlockHalf.LOWER));
 		add(SBBlocks.THIN_MUSHROOM_STEM.get(), BlockLootSubProvider::createSilkTouchOnlyTable);
 
 		generateWoodFamilies();
@@ -136,7 +141,8 @@ public class SBBlockLoot extends BlockLootSubProvider {
 				.add(LootItem.lootTableItem(block).when(HAS_SHEARS)
 						.otherwise(applyExplosionDecay(block, LootItem.lootTableItem(Items.STICK)
 								.when(LootItemBlockStatePropertyCondition.hasBlockStateProperties(block)
-										.setProperties(StatePropertiesPredicate.Builder.properties().hasProperty(BlockStateProperties.DOUBLE_BLOCK_HALF, DoubleBlockHalf.LOWER)))
+										.setProperties(StatePropertiesPredicate.Builder.properties()
+												.hasProperty(BlockStateProperties.DOUBLE_BLOCK_HALF, DoubleBlockHalf.LOWER)))
 								.when(LootItemEntityPropertyCondition.entityPresent(LootContext.EntityTarget.THIS))
 								.apply(SetItemCountFunction.setCount(UniformGenerator.between(1.0F, 4.0F)))))));
 	}

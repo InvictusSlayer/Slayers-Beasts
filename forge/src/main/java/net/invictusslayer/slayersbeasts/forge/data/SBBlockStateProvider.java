@@ -68,12 +68,16 @@ public class SBBlockStateProvider extends BlockStateProvider {
 		slabWithItem(SBBlocks.CUT_BLACK_SANDSTONE_SLAB.get(), blockTexture(SBBlocks.CUT_BLACK_SANDSTONE.get()), extend(blockTexture(SBBlocks.BLACK_SANDSTONE.get()), "_top"), blockTexture(SBBlocks.CUT_BLACK_SANDSTONE.get()), extend(blockTexture(SBBlocks.BLACK_SANDSTONE.get()), "_top"));
 		columnWithItem(SBBlocks.CHISELED_BLACK_SANDSTONE.get(), blockTexture(SBBlocks.CHISELED_BLACK_SANDSTONE.get()), extend(blockTexture(SBBlocks.BLACK_SANDSTONE.get()), "_top"));
 
+		doubleCrossBlock(SBBlocks.TALL_BROWN_MUSHROOM.get());
+		doubleCrossBlock(SBBlocks.TALL_RED_MUSHROOM.get());
+		mushroomBlockWithItem(SBBlocks.BLACK_MUSHROOM_BLOCK.get(),"mushroom_block_dark_inside");
 		cross(SBBlocks.BLACK_MUSHROOM.get());
 		pottedCross(SBBlocks.POTTED_BLACK_MUSHROOM.get(), SBBlocks.BLACK_MUSHROOM.get());
-		mushroomBlockWithItem(SBBlocks.BLACK_MUSHROOM_BLOCK.get(),"mushroom_block_dark_inside");
+		doubleCrossBlock(SBBlocks.TALL_BLACK_MUSHROOM.get());
+		mushroomBlockWithItem(SBBlocks.WHITE_MUSHROOM_BLOCK.get(), null);
 		cross(SBBlocks.WHITE_MUSHROOM.get());
 		pottedCross(SBBlocks.POTTED_WHITE_MUSHROOM.get(), SBBlocks.WHITE_MUSHROOM.get());
-		mushroomBlockWithItem(SBBlocks.WHITE_MUSHROOM_BLOCK.get(), null);
+		doubleCrossBlock(SBBlocks.TALL_WHITE_MUSHROOM.get());
 		thinMushroomStemWithItem(SBBlocks.THIN_MUSHROOM_STEM.get(), new ResourceLocation("minecraft:block/mushroom_block_inside"), new ResourceLocation("minecraft:block/mushroom_stem"));
 
 		simpleCubeWithItem(SBBlocks.ALBINO_REDWOOD_LEAVES.get());
