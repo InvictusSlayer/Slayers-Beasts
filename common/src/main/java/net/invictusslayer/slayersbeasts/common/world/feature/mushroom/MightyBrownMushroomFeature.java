@@ -1,4 +1,4 @@
-package net.invictusslayer.slayersbeasts.common.world.feature.tree.mushroom;
+package net.invictusslayer.slayersbeasts.common.world.feature.mushroom;
 
 import com.mojang.serialization.Codec;
 import net.minecraft.core.BlockPos;
@@ -13,7 +13,7 @@ public class MightyBrownMushroomFeature extends AbstractMightyMushroomFeature {
 		super(codec);
 	}
 
-	protected void placeCap(LevelAccessor level, RandomSource random, BlockPos origin, HugeMushroomFeatureConfiguration config, int height, BlockPos.MutableBlockPos mutableBlockPos) {
+	protected void placeCap(LevelAccessor level, RandomSource random, BlockPos pos, HugeMushroomFeatureConfiguration config, int height, BlockPos.MutableBlockPos mutableBlockPos) {
 		for (int y = height - 2; y <= height; ++y) {
 			int stage = height - y;
 			int radius = stage == 1 ? 4 : 3;
@@ -21,7 +21,7 @@ public class MightyBrownMushroomFeature extends AbstractMightyMushroomFeature {
 			for (int x = -radius; x <= radius + 1; ++x) {
 				for (int z = -radius; z <= radius + 1; ++z) {
 					if (isBlock(x, z, stage)) {
-						mutableBlockPos.setWithOffset(origin, x, y, z);
+						mutableBlockPos.setWithOffset(pos, x, y, z);
 						if (!level.getBlockState(mutableBlockPos).isSolidRender(level, mutableBlockPos)) {
 							boolean flag = stage < 2;
 							boolean north = flag && z <= 0;
@@ -29,7 +29,7 @@ public class MightyBrownMushroomFeature extends AbstractMightyMushroomFeature {
 							boolean east = flag && x >= 0;
 							boolean west = flag && x <= 0;
 
-							BlockState state = config.capProvider.getState(random, origin).setValue(HugeMushroomBlock.DOWN, false).setValue(HugeMushroomBlock.WEST, west).setValue(HugeMushroomBlock.EAST, east).setValue(HugeMushroomBlock.NORTH, north).setValue(HugeMushroomBlock.SOUTH, south);
+							BlockState state = config.capProvider.getState(random, pos).setValue(HugeMushroomBlock.DOWN, false).setValue(HugeMushroomBlock.WEST, west).setValue(HugeMushroomBlock.EAST, east).setValue(HugeMushroomBlock.NORTH, north).setValue(HugeMushroomBlock.SOUTH, south);
 							setBlock(level, mutableBlockPos, state);
 						}
 					}
@@ -50,8 +50,7 @@ public class MightyBrownMushroomFeature extends AbstractMightyMushroomFeature {
 		return false;
 	}
 
-	protected int getTreeRadiusForHeight(int i, int height, int radius, int y) {
-		if (y <= height && y >= height - 2) return radius;
-		return 0;
+	protected int getTreeRadiusForHeight(int radius, int height) {
+		return height < 3 ? radius : 0;
 	}
 }

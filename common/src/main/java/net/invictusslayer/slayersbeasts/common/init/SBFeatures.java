@@ -10,7 +10,7 @@ import net.invictusslayer.slayersbeasts.common.world.feature.misc.AntMoundFeatur
 import net.invictusslayer.slayersbeasts.common.world.feature.misc.CryptFoundationFeature;
 import net.invictusslayer.slayersbeasts.common.world.feature.misc.PitFeature;
 import net.invictusslayer.slayersbeasts.common.world.feature.misc.StyphiumPatchFeature;
-import net.invictusslayer.slayersbeasts.common.world.feature.tree.mushroom.*;
+import net.invictusslayer.slayersbeasts.common.world.feature.mushroom.*;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.world.level.levelgen.feature.Feature;
 import net.minecraft.world.level.levelgen.feature.configurations.HugeMushroomFeatureConfiguration;
@@ -20,6 +20,7 @@ public class SBFeatures {
 	public static final DeferredRegister<Feature<?>> FEATURES = DeferredRegister.create(SlayersBeasts.MOD_ID, Registries.FEATURE);
 
 	public static final RegistrySupplier<BigMushroomFeature> BIG_MUSHROOM = FEATURES.register("big_mushroom", () -> new BigMushroomFeature(BigMushroomFeature.Configuration.CODEC));
+	public static final RegistrySupplier<BranchingMushroomFeature> BRANCHING_MUSHROOM = FEATURES.register("branching_mushroom", () -> new BranchingMushroomFeature(BranchingMushroomFeature.Configuration.CODEC));
 	public static final RegistrySupplier<HugeBlackMushroomFeature> HUGE_BLACK_MUSHROOM = FEATURES.register("huge_black_mushroom", () -> new HugeBlackMushroomFeature(HugeMushroomFeatureConfiguration.CODEC));
 	public static final RegistrySupplier<HugeWhiteMushroomFeature> HUGE_WHITE_MUSHROOM = FEATURES.register("huge_white_mushroom", () -> new HugeWhiteMushroomFeature(HugeMushroomFeatureConfiguration.CODEC));
 	public static final RegistrySupplier<MightyBlackMushroomFeature> MIGHTY_BLACK_MUSHROOM = FEATURES.register("mighty_black_mushroom", () -> new MightyBlackMushroomFeature(HugeMushroomFeatureConfiguration.CODEC));
