@@ -1,4 +1,4 @@
-package net.invictusslayer.slayersbeasts.common.world.feature.tree.mushroom;
+package net.invictusslayer.slayersbeasts.common.world.feature.mushroom;
 
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
