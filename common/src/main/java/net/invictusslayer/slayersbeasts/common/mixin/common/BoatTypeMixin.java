@@ -1,6 +1,7 @@
 package net.invictusslayer.slayersbeasts.common.mixin.common;
 
 import net.invictusslayer.slayersbeasts.common.entity.vehicle.SBBoatType;
+import net.invictusslayer.slayersbeasts.common.init.SBBlocks;
 import net.minecraft.world.entity.vehicle.Boat;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
@@ -13,18 +14,20 @@ import org.spongepowered.asm.mixin.gen.Invoker;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
 
 @Mixin(Boat.Type.class)
-public class BoatTypeMixin {
+public abstract class BoatTypeMixin {
 	@Shadow @Final @Mutable
 	private static Boat.Type[] $VALUES;
+	@Shadow @Final
+	private String name;
 
 	@Invoker("<init>")
-	private static Boat.Type newBoatType(String name, int id, Block planks, String type) {
+	private static Boat.Type newBoatType(String name, int id, Block block, String type) {
 		throw new AssertionError();
 	}
 
@@ -37,7 +40,22 @@ public class BoatTypeMixin {
 		SBBoatType.KAPOK = newBoatType("KAPOK", types.size() + 3, Blocks.OAK_PLANKS, "kapok");
 		SBBoatType.REDWOOD = newBoatType("REDWOOD", types.size() + 4, Blocks.OAK_PLANKS, "redwood");
 		SBBoatType.WILLOW = newBoatType("WILLOW", types.size() + 5, Blocks.OAK_PLANKS, "willow");
-		types.addAll(List.of(SBBoatType.ASPEN, SBBoatType.DESERT_OAK, SBBoatType.EUCALYPTUS, SBBoatType.KAPOK, SBBoatType.REDWOOD, SBBoatType.WILLOW));
+		types.addAll(SBBoatType.values());
 		$VALUES = types.toArray(new Boat.Type[0]);
+	}
+
+	@Shadow
+	public static Boat.Type byName(String name) {
+		return null;
+	}
+
+	@Inject(method = "getPlanks", at = @At("HEAD"), cancellable = true)
+	private void onGetPlanks(CallbackInfoReturnable<Block> cir) {
+		if (byName(name).equals(SBBoatType.ASPEN)) cir.setReturnValue(SBBlocks.ASPEN_PLANKS.get());
+		if (byName(name).equals(SBBoatType.DESERT_OAK)) cir.setReturnValue(SBBlocks.DESERT_OAK_PLANKS.get());
+		if (byName(name).equals(SBBoatType.EUCALYPTUS)) cir.setReturnValue(SBBlocks.EUCALYPTUS_PLANKS.get());
+		if (byName(name).equals(SBBoatType.KAPOK)) cir.setReturnValue(SBBlocks.KAPOK_PLANKS.get());
+		if (byName(name).equals(SBBoatType.REDWOOD)) cir.setReturnValue(SBBlocks.REDWOOD_PLANKS.get());
+		if (byName(name).equals(SBBoatType.WILLOW)) cir.setReturnValue(SBBlocks.WILLOW_PLANKS.get());
 	}
 }

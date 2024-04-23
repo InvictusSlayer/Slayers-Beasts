@@ -10,9 +10,29 @@ complete stage, configs will be added and I may migrate some of the more worldge
 - [**CurseForge**](https://www.curseforge.com/minecraft/mc-mods/slayersbeasts)
 
 ## Dependencies
-- [**Forge**](https://files.minecraftforge.net/net/minecraftforge/forge) / [**Fabric**](https://modrinth.com/mod/fabric-api/versions)
-- [**Architectury**](https://modrinth.com/mod/architectury-api/versions)
-- [**TerraBlender**](https://modrinth.com/mod/terrablender/versions) (*Should* be compatible with TerraBlender biome mods)
+
+### Required
+- [**Forge**](https://files.minecraftforge.net/net/minecraftforge/forge) / [**Fabric API**](https://modrinth.com/mod/fabric-api/versions)
+- [**Architectury API**](https://modrinth.com/mod/architectury-api/versions)
+- [**Cloth Config API**](https://modrinth.com/mod/cloth-config/versions)
+- [**TerraBlender**](https://modrinth.com/mod/terrablender/versions)
+
+### Optional
+- [**ModMenu**](https://modrinth.com/mod/modmenu/versions)
+
+## Compatibility
+These are the biome mods which have been confirmed to be compatible with Slayer's Beasts (As of the latest version), 
+but this mod *should* be compatible with all other TerraBlender biome mods.
+- Biomes O' Plenty
+- Oh The Biomes You'll Go
+- Terralith
+- Nature's Spirit
+- Wyther's Expanded Ecosphere
+- Terrestria
+- Regions Unexplored
+
+The biome region weights can be adjusted using the config which can be changed via ModMenu (Fabric only) or in the 
+config folder.
 
 The project is actively updated with new features and bug fixes. Please report any bugs or idea suggestions to the
 [issue tracker](https://github.com/InvictusSlayer/Slayers-Beasts/issues). 
