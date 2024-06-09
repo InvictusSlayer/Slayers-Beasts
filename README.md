@@ -21,6 +21,10 @@ complete stage, configs will be added and I may migrate some of the more worldge
 - [**ModMenu**](https://modrinth.com/mod/modmenu/versions)
 
 ## Compatibility
+There is an addon mod for all the [Dynamic Trees](https://modrinth.com/mod/dynamictrees-slayers-beasts) lovers which brings the growth functionality to the custom trees of 
+Slayer's Beasts - Forge users only, unless DT is ported to fabric.
+- [**DynamicTrees - Slayer's Beasts**](https://modrinth.com/mod/dynamictrees-slayers-beasts)
+
 These are the biome mods which have been confirmed to be compatible with Slayer's Beasts (As of the latest version), 
 but this mod *should* be compatible with all other TerraBlender biome mods.
 - Biomes O' Plenty
