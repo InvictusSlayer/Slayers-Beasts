@@ -9,4 +9,4 @@ pluginManagement {
 }
 
 rootProject.name = "${mod_id}"
-include "common", "fabric", "forge"
+include "common", "fabric", "forge", "neoforge"

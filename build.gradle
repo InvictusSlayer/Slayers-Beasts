@@ -46,12 +46,13 @@ subprojects {
 
     tasks.named("processResources", ProcessResources).configure {
         var replaceProperties = [
-                mc_version   : mc_version,    mc_range     : mc_range,    fabric_loader: fabric_loader,
-                forge_version: forge_version, forge_range  : forge_range, arch_version : arch_version,
-                tb_version   : tb_version,    mod_id       : mod_id,      mod_group    : mod_group,
-                mod_name     : mod_name,      mod_version  : mod_version, mod_authors  : mod_authors,
+                mc_version   : mc_version,    mc_range       : mc_range,    fabric_loader: fabric_loader,
+                forge_version: forge_version, forge_range    : forge_range, neo_version  : neo_version,
+                neo_range    : neo_range,     arch_version   : arch_version,
+                tb_version   : tb_version,    mod_id         : mod_id,      mod_group    : mod_group,
+                mod_name     : mod_name,      mod_version    : mod_version, mod_authors  : mod_authors,
                 mod_license  : mod_license,   mod_description: mod_description,
-                homepage_url : homepage_url,  source_url   : source_url,  issue_url: issue_url
+                homepage_url : homepage_url,  source_url     : source_url,  issue_url    : issue_url
         ]
         inputs.properties replaceProperties
         filesMatching(["pack.mcmeta", "fabric.mod.json", "META-INF/mods.toml"]) {
@@ -61,7 +62,7 @@ subprojects {
 
     tasks.withType(JavaCompile) {
         options.encoding = "UTF-8"
-        options.release = 17
+        options.release = 21
     }
 
     java.withSourcesJar()

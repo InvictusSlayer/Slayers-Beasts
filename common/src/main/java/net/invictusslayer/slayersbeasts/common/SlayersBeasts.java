@@ -53,7 +53,7 @@ public class SlayersBeasts {
 		SBStructureTypes.STRUCTURE_TYPES.register();
 
 		SBVillagerType.biomeSetup();
-		SBBiomeModifications.registerFeatures();
+//		SBBiomeModifications.registerFeatures();
 		SBEntities.registerAttributes();
 
 		LOGGER.info(SBPlatform.getConfigDirectory().toAbsolutePath().normalize().toString());

@@ -1,5 +1,5 @@
 modLoader="javafml"
-loaderVersion="${forge_range}"
+loaderVersion="[1,)"
 license="${mod_license}"
 issueTrackerURL="${issue_url}"
 showAsResourcePack=false
@@ -16,30 +16,35 @@ displayURL="${homepage_url}"
 #updateJSONURL=""
 #displayTest="MATCH_VERSION"
 
+[[mixins]]
+config="slayersbeasts.mixins.json"
+[[mixins]]
+config="slayersbeasts-neoforge.mixins.json"
+
 [[dependencies.slayersbeasts]]
 modId="minecraft"
-mandatory=true
+type="required"
 versionRange="${mc_range}"
 ordering="NONE"
 side="BOTH"
 
 [[dependencies.slayersbeasts]]
-modId="forge"
-mandatory=true
-versionRange="${forge_range}"
+modId="neoforge"
+type="required"
+versionRange="${neo_range}"
 ordering="NONE"
 side="BOTH"
 
 [[dependencies.slayersbeasts]]
 modId = "architectury"
-mandatory = true
+type="required"
 versionRange = "[${arch_version},)"
 ordering = "AFTER"
 side = "BOTH"
 
 [[dependencies.slayersbeasts]]
 modId="terrablender"
-mandatory=true
+type="required"
 versionRange="[${tb_version},)"
 ordering="NONE"
 side="BOTH"
