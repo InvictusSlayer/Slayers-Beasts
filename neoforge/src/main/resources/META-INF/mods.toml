@@ -1,5 +1,5 @@
 modLoader="javafml"
-loaderVersion="${forge_range}"
+loaderVersion="[1,)"
 license="${mod_license}"
 issueTrackerURL="${issue_url}"
 showAsResourcePack=false
@@ -16,6 +16,11 @@ displayURL="${homepage_url}"
 #updateJSONURL=""
 #displayTest="MATCH_VERSION"
 
+[[mixins]]
+config="slayersbeasts.mixins.json"
+[[mixins]]
+config="slayersbeasts-neoforge.mixins.json"
+
 [[dependencies.slayersbeasts]]
 modId="minecraft"
 mandatory=true
@@ -24,9 +29,9 @@ ordering="NONE"
 side="BOTH"
 
 [[dependencies.slayersbeasts]]
-modId="forge"
+modId="neoforge"
 mandatory=true
-versionRange="${forge_range}"
+versionRange="${neo_range}"
 ordering="NONE"
 side="BOTH"
 

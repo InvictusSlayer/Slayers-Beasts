@@ -9,7 +9,7 @@ architectury {
 
 loom {
     runs {
-        datagen {
+        data {
             inherit server
             name "Minecraft Data"
             vmArg "-Dfabric-api.datagen"
