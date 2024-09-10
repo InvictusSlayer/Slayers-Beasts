@@ -1,6 +1,7 @@
 package net.invictusslayer.slayersbeasts.common.world.feature.tree.foliage;
 
 import com.mojang.serialization.Codec;
+import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.invictusslayer.slayersbeasts.common.init.SBFoliagePlacers;
 import net.minecraft.core.BlockPos;
@@ -12,7 +13,7 @@ import net.minecraft.world.level.levelgen.feature.foliageplacers.FoliagePlacer;
 import net.minecraft.world.level.levelgen.feature.foliageplacers.FoliagePlacerType;
 
 public class StackedFoliagePlacer extends FoliagePlacer {
-	public static final Codec<StackedFoliagePlacer> CODEC = RecordCodecBuilder.create(instance -> foliagePlacerParts(instance).and(
+	public static final MapCodec<StackedFoliagePlacer> CODEC = RecordCodecBuilder.mapCodec(instance -> foliagePlacerParts(instance).and(
 					Codec.intRange(1, 5).fieldOf("stacks").forGetter(placer -> placer.stacks))
 			.apply(instance, StackedFoliagePlacer::new));
 	private final int stacks;

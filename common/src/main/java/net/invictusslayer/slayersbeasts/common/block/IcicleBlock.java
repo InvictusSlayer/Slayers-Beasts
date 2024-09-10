@@ -58,12 +58,10 @@ public class IcicleBlock extends Block implements Fallable, SimpleWaterloggedBlo
 		builder.add(TIP_DIRECTION, THICKNESS, WATERLOGGED);
 	}
 
-	@SuppressWarnings("deprecation")
 	public boolean canSurvive(BlockState state, LevelReader level, BlockPos pos) {
 		return isValidPlacement(level, pos, state.getValue(TIP_DIRECTION));
 	}
 
-	@SuppressWarnings("deprecation")
 	public BlockState updateShape(BlockState state, Direction direction, BlockState neighborState, LevelAccessor level, BlockPos pos, BlockPos neighborPos) {
 		if (state.getValue(WATERLOGGED)) {
 			level.scheduleTick(pos, Fluids.WATER, Fluids.WATER.getTickDelay(level));
@@ -87,7 +85,6 @@ public class IcicleBlock extends Block implements Fallable, SimpleWaterloggedBlo
 		return state.setValue(THICKNESS, thickness);
 	}
 
-	@SuppressWarnings("deprecation")
 	public void onProjectileHit(Level level, BlockState state, BlockHitResult hit, Projectile projectile) {
 		BlockPos pos = hit.getBlockPos();
 		if (!level.isClientSide && projectile.mayInteract(level, pos) && projectile instanceof ThrownTrident && projectile.getDeltaMovement().length() > 0.6D) {
@@ -103,7 +100,6 @@ public class IcicleBlock extends Block implements Fallable, SimpleWaterloggedBlo
 		}
 	}
 
-	@SuppressWarnings("deprecation")
 	public void tick(BlockState state, ServerLevel level, BlockPos pos, RandomSource random) {
 		if (isIcicleWithDirection(state, Direction.UP) && !canSurvive(state, level, pos)) {
 			level.destroyBlock(pos, true);
@@ -112,7 +108,6 @@ public class IcicleBlock extends Block implements Fallable, SimpleWaterloggedBlo
 		}
 	}
 
-	@SuppressWarnings("deprecation")
 	public void randomTick(BlockState state, ServerLevel level, BlockPos pos, RandomSource random) {
 		if (random.nextFloat() < 0.0114F && isStalactiteStartPos(state, level, pos)) {
 			growStalactiteOrStalagmiteIfPossible(state, level, pos, random);
@@ -131,17 +126,14 @@ public class IcicleBlock extends Block implements Fallable, SimpleWaterloggedBlo
 		return thickness == null ? null : this.defaultBlockState().setValue(TIP_DIRECTION, direction).setValue(THICKNESS, thickness).setValue(WATERLOGGED, level.getFluidState(clickedPos).getType() == Fluids.WATER);
 	}
 
-	@SuppressWarnings("deprecation")
 	public FluidState getFluidState(BlockState state) {
 		return state.getValue(WATERLOGGED) ? Fluids.WATER.getSource(false) : super.getFluidState(state);
 	}
 
-	@SuppressWarnings("deprecation")
 	public VoxelShape getOcclusionShape(BlockState state, BlockGetter level, BlockPos pos) {
 		return Shapes.empty();
 	}
 
-	@SuppressWarnings("deprecation")
 	public VoxelShape getShape(BlockState state, BlockGetter level, BlockPos pos, CollisionContext context) {
 		DripstoneThickness thickness = state.getValue(THICKNESS);
 		VoxelShape shape;
@@ -165,7 +157,6 @@ public class IcicleBlock extends Block implements Fallable, SimpleWaterloggedBlo
 		return shape.move(vec3.x, 0.0D, vec3.z);
 	}
 
-	@SuppressWarnings("deprecation")
 	public boolean isCollisionShapeFullBlock(BlockState state, BlockGetter level, BlockPos pos) {
 		return false;
 	}
@@ -338,8 +329,7 @@ public class IcicleBlock extends Block implements Fallable, SimpleWaterloggedBlo
 		return isIcicleWithDirection(state, Direction.DOWN) && !level.getBlockState(pos.above()).is(SBBlocks.ICICLE.get());
 	}
 
-	@SuppressWarnings("deprecation")
-	public boolean isPathfindable(BlockState state, BlockGetter level, BlockPos pos, PathComputationType type) {
+	public boolean isPathfindable(BlockState state, PathComputationType type) {
 		return false;
 	}
 

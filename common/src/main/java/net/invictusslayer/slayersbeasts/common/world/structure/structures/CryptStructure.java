@@ -1,6 +1,7 @@
 package net.invictusslayer.slayersbeasts.common.world.structure.structures;
 
 import com.mojang.serialization.Codec;
+import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.invictusslayer.slayersbeasts.common.init.SBStructureTypes;
 import net.invictusslayer.slayersbeasts.common.world.structure.pieces.CryptPieces;
@@ -16,7 +17,7 @@ import net.minecraft.world.level.levelgen.structure.pools.StructureTemplatePool;
 import java.util.Optional;
 
 public class CryptStructure extends Structure {
-	public static final Codec<CryptStructure> CODEC = RecordCodecBuilder.create(instance ->
+	public static final MapCodec<CryptStructure> CODEC = RecordCodecBuilder.mapCodec(instance ->
 			instance.group(settingsCodec(instance),
 							StructureTemplatePool.CODEC.fieldOf("start_pool").forGetter(structure -> structure.startPool),
 							HeightProvider.CODEC.fieldOf("start_height").forGetter(structure -> structure.startHeight))

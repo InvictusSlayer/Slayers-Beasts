@@ -1,6 +1,7 @@
 package net.invictusslayer.slayersbeasts.common.world.structure.structures;
 
 import com.mojang.serialization.Codec;
+import com.mojang.serialization.MapCodec;
 import net.invictusslayer.slayersbeasts.common.init.SBStructureTypes;
 import net.invictusslayer.slayersbeasts.common.world.structure.pieces.CryptPortalPieces;
 import net.minecraft.core.BlockPos;
@@ -12,7 +13,7 @@ import net.minecraft.world.level.levelgen.structure.pieces.StructurePiecesBuilde
 import java.util.Optional;
 
 public class CryptPortalStructure extends Structure {
-	public static final Codec<CryptPortalStructure> CODEC = simpleCodec(CryptPortalStructure::new);
+	public static final MapCodec<CryptPortalStructure> CODEC = simpleCodec(CryptPortalStructure::new);
 
 	public CryptPortalStructure(StructureSettings settings) {
 		super(settings);

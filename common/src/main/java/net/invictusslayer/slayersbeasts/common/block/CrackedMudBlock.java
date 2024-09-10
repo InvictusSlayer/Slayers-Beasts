@@ -30,7 +30,6 @@ public class CrackedMudBlock extends Block {
 		builder.add(TILT);
 	}
 
-	@SuppressWarnings("deprecation")
 	public void tick(BlockState state, ServerLevel level, BlockPos pos, RandomSource random) {
 		Tilt tilt = state.getValue(TILT);
 		if (tilt == Tilt.UNSTABLE) {

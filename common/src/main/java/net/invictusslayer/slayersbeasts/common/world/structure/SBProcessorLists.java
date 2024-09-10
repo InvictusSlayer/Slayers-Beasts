@@ -5,7 +5,7 @@ import net.invictusslayer.slayersbeasts.common.SlayersBeasts;
 import net.invictusslayer.slayersbeasts.common.init.SBBlocks;
 import net.minecraft.core.HolderGetter;
 import net.minecraft.core.registries.Registries;
-import net.minecraft.data.worldgen.BootstapContext;
+import net.minecraft.data.worldgen.BootstrapContext;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.TagKey;
@@ -18,7 +18,7 @@ public class SBProcessorLists {
 	public static final ResourceKey<StructureProcessorList> REDWOOD_PATH = createKey("redwood_path");
 	public static final ResourceKey<StructureProcessorList> STONE_FLOOR = createKey("stone_floor");
 
-	public static void bootstrap(BootstapContext<StructureProcessorList> context) {
+	public static void bootstrap(BootstrapContext<StructureProcessorList> context) {
 		HolderGetter<Block> blocks = context.lookup(Registries.BLOCK);
 
 		register(context, REDWOOD_PATH, rule(Blocks.GRAVEL, 0.4F, Blocks.COARSE_DIRT.defaultBlockState()), rule(Blocks.GRAVEL, 0.7F, Blocks.DIRT_PATH.defaultBlockState()), rule(Blocks.GRAVEL, 0.5F, SBBlocks.REDWOOD_PLANKS.get().defaultBlockState()));
@@ -45,7 +45,7 @@ public class SBProcessorLists {
 		return ResourceKey.create(Registries.PROCESSOR_LIST, new ResourceLocation(SlayersBeasts.MOD_ID, name));
 	}
 
-	private static void register(BootstapContext<StructureProcessorList> context, ResourceKey<StructureProcessorList> key, ProcessorRule... processors) {
+	private static void register(BootstrapContext<StructureProcessorList> context, ResourceKey<StructureProcessorList> key, ProcessorRule... processors) {
 		context.register(key, new StructureProcessorList(ImmutableList.of(new RuleProcessor(ImmutableList.copyOf(processors)))));
 	}
 }

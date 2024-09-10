@@ -2,7 +2,7 @@ package net.invictusslayer.slayersbeasts.common.world;
 
 import net.invictusslayer.slayersbeasts.common.SlayersBeasts;
 import net.minecraft.core.registries.Registries;
-import net.minecraft.data.worldgen.BootstapContext;
+import net.minecraft.data.worldgen.BootstrapContext;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.levelgen.synth.NormalNoise;
@@ -11,7 +11,7 @@ public class SBNoises {
 	public static final ResourceKey<NormalNoise.NoiseParameters> CAVE_ICE = createKey("cave_ice");
 	public static final ResourceKey<NormalNoise.NoiseParameters> SAND = createKey("sand");
 
-	public static void bootstrap(BootstapContext<NormalNoise.NoiseParameters> context) {
+	public static void bootstrap(BootstrapContext<NormalNoise.NoiseParameters> context) {
 		register(context, CAVE_ICE, -1, 1);
 		register(context, SAND, -4, 10, 6, 7, 0);
 	}
@@ -20,7 +20,7 @@ public class SBNoises {
 		return ResourceKey.create(Registries.NOISE, new ResourceLocation(SlayersBeasts.MOD_ID, key));
 	}
 
-	private static void register(BootstapContext<NormalNoise.NoiseParameters> context, ResourceKey<NormalNoise.NoiseParameters> key, int firstOctave, double amplitude, double... amplitudes) {
+	private static void register(BootstrapContext<NormalNoise.NoiseParameters> context, ResourceKey<NormalNoise.NoiseParameters> key, int firstOctave, double amplitude, double... amplitudes) {
 		context.register(key, new NormalNoise.NoiseParameters(firstOctave, amplitude, amplitudes));
 	}
 }

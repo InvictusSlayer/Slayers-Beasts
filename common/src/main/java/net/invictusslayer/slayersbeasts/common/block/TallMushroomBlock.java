@@ -53,7 +53,6 @@ public class TallMushroomBlock extends DoublePlantBlock implements BonemealableB
 		level.setBlock(pos.above(), state.setValue(HALF, DoubleBlockHalf.UPPER), 3);
 	}
 
-	@SuppressWarnings("deprecation")
 	public VoxelShape getShape(BlockState state, BlockGetter level, BlockPos pos, CollisionContext context) {
 		return state.getValue(HALF) == DoubleBlockHalf.LOWER ? LOWER : UPPER;
 	}

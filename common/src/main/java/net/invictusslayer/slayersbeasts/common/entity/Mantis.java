@@ -75,18 +75,14 @@ public class Mantis extends PathfinderMob {
 		return SBSounds.MANTIS_HURT.get();
 	}
 
-	public MobType getMobType() {
-		return MobType.ARTHROPOD;
-	}
-
 	public static boolean canSpawn(EntityType<Mantis> entity, LevelAccessor level, MobSpawnType spawnType, BlockPos pos, RandomSource random) {
 		return PathfinderMob.checkMobSpawnRules(entity, level, spawnType, pos, random) && level instanceof Level level1 && level1.getDifficulty() != Difficulty.PEACEFUL;
 	}
 
-	protected void defineSynchedData() {
-		super.defineSynchedData();
-		entityData.define(DATA_IS_LEAPING, false);
-		entityData.define(DATA_IS_SCUTTLING, false);
+	protected void defineSynchedData(SynchedEntityData.Builder builder) {
+		super.defineSynchedData(builder);
+		builder.define(DATA_IS_LEAPING, false);
+		builder.define(DATA_IS_SCUTTLING, false);
 	}
 
 	public boolean isScuttling() {
@@ -103,8 +99,8 @@ public class Mantis extends PathfinderMob {
 		entityData.set(DATA_IS_LEAPING, leaping);
 	}
 
-	public EntityDimensions getDimensions(Pose pose) {
-		return isScuttling() ? SCUTTLING_DIMENSIONS.scale(getScale()) : super.getDimensions(pose);
+	public EntityDimensions getDefaultDimensions(Pose pose) {
+		return isScuttling() ? SCUTTLING_DIMENSIONS.scale(getScale()) : super.getDefaultDimensions(pose);
 	}
 
 	static class MantisScuttleGoal extends MeleeAttackGoal {

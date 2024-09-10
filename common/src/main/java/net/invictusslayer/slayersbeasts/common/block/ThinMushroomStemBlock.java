@@ -14,7 +14,6 @@ public class ThinMushroomStemBlock extends Block {
 		super(properties);
 	}
 
-	@SuppressWarnings("deprecation")
 	public VoxelShape getShape(BlockState state, BlockGetter level, BlockPos pos, CollisionContext context) {
 		return SHAPE;
 	}

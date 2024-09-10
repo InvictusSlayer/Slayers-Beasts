@@ -65,15 +65,11 @@ public class Damselfly extends PathfinderMob {
 				.add(Attributes.FLYING_SPEED, 0.4D);
 	}
 
-	public MobType getMobType() {
-		return MobType.ARTHROPOD;
-	}
-
 	public static boolean canSpawn(EntityType<Damselfly> type, LevelAccessor level, MobSpawnType spawnType, BlockPos pos, RandomSource random) {
 		return PathfinderMob.checkMobSpawnRules(type, level, spawnType, pos, random);
 	}
 
-	public SpawnGroupData finalizeSpawn(ServerLevelAccessor level, DifficultyInstance difficulty, MobSpawnType type, SpawnGroupData spawnData, CompoundTag tag) {
+	public SpawnGroupData finalizeSpawn(ServerLevelAccessor level, DifficultyInstance difficulty, MobSpawnType type, SpawnGroupData spawnData) {
 		setDamselflyType(random.nextInt(2));
 		return new DamselflyGroupData();
 	}
@@ -105,10 +101,7 @@ public class Damselfly extends PathfinderMob {
 	}
 
 	public void readAdditionalSaveData(CompoundTag tag) {
-		savedPerchPos = null;
-		if (tag.contains("PerchPos")) {
-			savedPerchPos = NbtUtils.readBlockPos(tag.getCompound("PerchPos"));
-		}
+		savedPerchPos = NbtUtils.readBlockPos(tag, "PerchPos").orElse(null);
 
 		super.readAdditionalSaveData(tag);
 		ticksUntilPerch = tag.getInt("TicksSincePerch");
@@ -116,11 +109,11 @@ public class Damselfly extends PathfinderMob {
 	}
 
 
-	protected void defineSynchedData() {
-		super.defineSynchedData();
-		entityData.define(DATA_DAMSELFLY_TYPE, 0);
-		entityData.define(DATA_IS_FLYING, false);
-		entityData.define(DATA_IS_PERCHED, false);
+	protected void defineSynchedData(SynchedEntityData.Builder builder) {
+		super.defineSynchedData(builder);
+		builder.define(DATA_DAMSELFLY_TYPE, 0);
+		builder.define(DATA_IS_FLYING, false);
+		builder.define(DATA_IS_PERCHED, false);
 	}
 
 	public int getDamselflyType() {

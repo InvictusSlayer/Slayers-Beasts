@@ -53,9 +53,9 @@ public abstract class AbstractEnt extends PathfinderMob {
 		return SoundEvents.WOOD_BREAK;
 	}
 
-	protected void defineSynchedData() {
-		super.defineSynchedData();
-		entityData.define(DATA_VARIANT, 0);
+	protected void defineSynchedData(SynchedEntityData.Builder builder) {
+		super.defineSynchedData(builder);
+		builder.define(DATA_VARIANT, 0);
 	}
 
 	public void addAdditionalSaveData(CompoundTag tag) {
@@ -77,7 +77,7 @@ public abstract class AbstractEnt extends PathfinderMob {
 
 	protected abstract void setupAnimationStates();
 
-	public SpawnGroupData finalizeSpawn(ServerLevelAccessor level, DifficultyInstance difficulty, MobSpawnType type, SpawnGroupData spawnData, CompoundTag tag) {
+	public SpawnGroupData finalizeSpawn(ServerLevelAccessor level, DifficultyInstance difficulty, MobSpawnType type, SpawnGroupData spawnData) {
 		Variant variant = getRandomEntType(level);
 		if (spawnData instanceof EntGroupData antData) variant = antData.variant;
 		else spawnData = new EntGroupData(variant);

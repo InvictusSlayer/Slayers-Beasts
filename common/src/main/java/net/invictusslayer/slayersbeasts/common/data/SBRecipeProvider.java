@@ -5,6 +5,7 @@ import net.invictusslayer.slayersbeasts.common.block.SBBlockFamily;
 import net.invictusslayer.slayersbeasts.common.block.WoodFamily;
 import net.invictusslayer.slayersbeasts.common.init.SBBlocks;
 import net.invictusslayer.slayersbeasts.common.init.SBItems;
+import net.minecraft.core.HolderLookup;
 import net.minecraft.data.BlockFamily;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.recipes.*;
@@ -18,9 +19,11 @@ import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 
+import java.util.concurrent.CompletableFuture;
+
 public class SBRecipeProvider extends RecipeProvider {
-	public SBRecipeProvider(PackOutput output) {
-		super(output);
+	public SBRecipeProvider(PackOutput output, CompletableFuture<HolderLookup.Provider> provider) {
+		super(output, provider);
 	}
 
 	public void buildRecipes(RecipeOutput output) {

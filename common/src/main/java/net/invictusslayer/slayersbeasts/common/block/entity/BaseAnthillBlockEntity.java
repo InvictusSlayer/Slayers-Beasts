@@ -1,6 +1,7 @@
 package net.invictusslayer.slayersbeasts.common.block.entity;
 
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.HolderLookup;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.NbtUtils;
 import net.minecraft.world.level.block.entity.BlockEntity;
@@ -14,14 +15,14 @@ public abstract class BaseAnthillBlockEntity extends BlockEntity {
 		super(pType, pPos, pBlockState);
 	}
 
-	protected void saveAdditional(CompoundTag pTag) {
-		super.saveAdditional(pTag);
-		pTag.put("ParentNestPos", NbtUtils.writeBlockPos(getParentNestPos()));
+	protected void saveAdditional(CompoundTag tag, HolderLookup.Provider registries) {
+		super.saveAdditional(tag, registries);
+		tag.put("ParentNestPos", NbtUtils.writeBlockPos(getParentNestPos()));
 	}
 
-	public void load(CompoundTag pTag) {
-		super.load(pTag);
-		setParentNestPos(NbtUtils.readBlockPos(pTag.getCompound("ParentNestPos")));
+	public void loadAdditional(CompoundTag tag, HolderLookup.Provider registries) {
+		super.loadAdditional(tag, registries);
+		setParentNestPos(NbtUtils.readBlockPos(tag, "ParentNestPos").orElse(null));
 	}
 
 	public BlockPos getParentNestPos() {

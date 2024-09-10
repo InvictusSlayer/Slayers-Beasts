@@ -24,7 +24,6 @@ public class OothecaBlock extends Block {
 		}
 	}
 
-	@SuppressWarnings("deprecation")
 	public void spawnAfterBreak(BlockState state, ServerLevel pLevel, BlockPos pPos, ItemStack pStack, boolean pDropExperience) {
 		spawnInfestation(pLevel, pPos);
 	}

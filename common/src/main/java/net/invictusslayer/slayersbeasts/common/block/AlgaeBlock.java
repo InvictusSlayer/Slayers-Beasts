@@ -35,12 +35,10 @@ public class AlgaeBlock extends BushBlock implements BonemealableBlock {
 		return CODEC;
 	}
 
-	@SuppressWarnings("deprecation")
 	public VoxelShape getShape(BlockState state, BlockGetter level, BlockPos pos, CollisionContext context) {
 		return SHAPE;
 	}
 
-	@SuppressWarnings("deprecation")
 	public void entityInside(BlockState state, Level level, BlockPos pos, Entity entity) {
 		if (level instanceof ServerLevel && entity instanceof Boat) {
 			level.destroyBlock(new BlockPos(pos), true, entity);
@@ -75,7 +73,7 @@ public class AlgaeBlock extends BushBlock implements BonemealableBlock {
 		}
 	}
 
-	public boolean isPathfindable(BlockState state, BlockGetter level, BlockPos pos, PathComputationType type) {
+	public boolean isPathfindable(BlockState state, PathComputationType type) {
 		return false;
 	}
 }

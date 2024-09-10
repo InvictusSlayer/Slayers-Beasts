@@ -46,12 +46,10 @@ public class ObsidianSpikeBlock extends Block implements Fallable, SimpleWaterlo
 		builder.add(TIP_DIRECTION, THICKNESS, WATERLOGGED);
 	}
 
-	@SuppressWarnings("deprecation")
 	public boolean canSurvive(BlockState state, LevelReader level, BlockPos pos) {
 		return isValidPlacement(level, pos, state.getValue(TIP_DIRECTION));
 	}
 
-	@SuppressWarnings("deprecation")
 	public BlockState updateShape(BlockState state, Direction direction, BlockState neighborState, LevelAccessor level, BlockPos pos, BlockPos neighborPos) {
 		if (state.getValue(WATERLOGGED)) {
 			level.scheduleTick(pos, Fluids.WATER, Fluids.WATER.getTickDelay(level));
@@ -85,7 +83,6 @@ public class ObsidianSpikeBlock extends Block implements Fallable, SimpleWaterlo
 		}
 	}
 
-	@SuppressWarnings("deprecation")
 	public void tick(BlockState state, ServerLevel level, BlockPos pos, RandomSource random) {
 		if (isSpikeWithDirection(state, Direction.UP) && !canSurvive(state, level, pos)) {
 			level.destroyBlock(pos, true);
@@ -105,17 +102,14 @@ public class ObsidianSpikeBlock extends Block implements Fallable, SimpleWaterlo
 		return thickness == null ? null : defaultBlockState().setValue(TIP_DIRECTION, tipDirection).setValue(THICKNESS, thickness).setValue(WATERLOGGED, level.getFluidState(pos).getType() == Fluids.WATER);
 	}
 
-	@SuppressWarnings("deprecation")
 	public FluidState getFluidState(BlockState state) {
 		return state.getValue(WATERLOGGED) ? Fluids.WATER.getSource(false) : super.getFluidState(state);
 	}
 
-	@SuppressWarnings("deprecation")
 	public VoxelShape getOcclusionShape(BlockState state, BlockGetter level, BlockPos pos) {
 		return Shapes.empty();
 	}
 
-	@SuppressWarnings("deprecation")
 	public VoxelShape getShape(BlockState state, BlockGetter getter, BlockPos pos, CollisionContext context) {
 		DripstoneThickness thickness = state.getValue(THICKNESS);
 		VoxelShape shape;
@@ -139,7 +133,6 @@ public class ObsidianSpikeBlock extends Block implements Fallable, SimpleWaterlo
 		return shape.move(vec3.x, 0.0D, vec3.z);
 	}
 
-	@SuppressWarnings("deprecation")
 	public boolean isCollisionShapeFullBlock(BlockState state, BlockGetter level, BlockPos pos) {
 		return false;
 	}
@@ -209,8 +202,7 @@ public class ObsidianSpikeBlock extends Block implements Fallable, SimpleWaterlo
 		return thickness == DripstoneThickness.TIP || (isMerged && thickness == DripstoneThickness.TIP_MERGE);
 	}
 
-	@SuppressWarnings("deprecation")
-	public boolean isPathfindable(BlockState state, BlockGetter level, BlockPos pos, PathComputationType type) {
+	public boolean isPathfindable(BlockState state, PathComputationType type) {
 		return false;
 	}
 

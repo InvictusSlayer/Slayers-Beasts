@@ -44,9 +44,9 @@ public class Tyrachnid extends Monster implements RangedAttackMob {
 				.add(Attributes.ATTACK_KNOCKBACK, 3.0D);
 	}
 
-	protected void defineSynchedData() {
-		super.defineSynchedData();
-		entityData.define(DATA_IS_RESTING, true);
+	protected void defineSynchedData(SynchedEntityData.Builder builder) {
+		super.defineSynchedData(builder);
+		builder.define(DATA_IS_RESTING, true);
 	}
 
 	public boolean isResting() {

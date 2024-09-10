@@ -6,10 +6,13 @@ import net.invictusslayer.slayersbeasts.common.entity.AntSoldier;
 import net.invictusslayer.slayersbeasts.common.init.SBBlockEntities;
 import net.invictusslayer.slayersbeasts.common.init.SBBlocks;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.component.DataComponents;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.server.commands.data.DataCommands;
 import net.minecraft.stats.Stats;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
+import net.minecraft.world.ItemInteractionResult;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.boss.wither.WitherBoss;
 import net.minecraft.world.entity.item.ItemEntity;
@@ -21,6 +24,8 @@ import net.minecraft.world.entity.vehicle.MinecartTNT;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
+import net.minecraft.world.item.component.BlockItemStateProperties;
 import net.minecraft.world.level.GameRules;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.BaseEntityBlock;
@@ -32,6 +37,7 @@ import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.IntegerProperty;
+import net.minecraft.world.level.gameevent.GameEvent;
 import net.minecraft.world.level.storage.loot.LootParams;
 import net.minecraft.world.level.storage.loot.parameters.LootContextParams;
 import net.minecraft.world.phys.AABB;
@@ -88,9 +94,7 @@ public class AnthillBlock extends BaseEntityBlock {
 		}
 	}
 
-	@SuppressWarnings("deprecation")
-	public InteractionResult use(BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult result) {
-		ItemStack handItem = player.getItemInHand(hand);
+	public ItemInteractionResult useItemOn(ItemStack handItem, BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult result) {
 		int i = state.getValue(FUNGUS_LEVEL);
 		boolean flag = false;
 		if (i >= 5) {
@@ -123,9 +127,9 @@ public class AnthillBlock extends BaseEntityBlock {
 			}
 
 			this.releaseAntsAndResetMushroomLevel(level, state, pos, player, AnthillBlockEntity.AntReleaseStatus.EMERGENCY);
-			return InteractionResult.sidedSuccess(level.isClientSide);
+			return ItemInteractionResult.sidedSuccess(level.isClientSide);
 		} else {
-			return super.use(state, level, pos, player, hand, result);
+			return super.useItemOn(handItem, state, level, pos, player, hand, result);
 		}
 	}
 
@@ -162,21 +166,13 @@ public class AnthillBlock extends BaseEntityBlock {
 		if (!level.isClientSide && player.isCreative() && level.getGameRules().getBoolean(GameRules.RULE_DOBLOCKDROPS)) {
 			BlockEntity blockEntity = level.getBlockEntity(pos);
 			if (blockEntity instanceof AnthillBlockEntity anthillBlockEntity) {
-				ItemStack itemStack = new ItemStack(this);
 				int i = state.getValue(FUNGUS_LEVEL);
 				int j = state.getValue(SUPPLY_LEVEL);
 				boolean flag = !anthillBlockEntity.isEmpty();
 				if (flag || i > 0 || j > 0) {
-					if (flag) {
-						CompoundTag compoundTag = new CompoundTag();
-						compoundTag.put("Ants", anthillBlockEntity.writeAnts());
-						BlockItem.setBlockEntityData(itemStack, SBBlockEntities.ANTHILL.get(), compoundTag);
-					}
-
-					CompoundTag compoundTag1 = new CompoundTag();
-					compoundTag1.putInt("fungus_level", i);
-					compoundTag1.putInt("supply_level", j);
-					itemStack.addTagElement("BlockStateTag", compoundTag1);
+					ItemStack itemStack = new ItemStack(this);
+					itemStack.applyComponents(anthillBlockEntity.collectComponents());
+					itemStack.set(DataComponents.BLOCK_STATE, BlockItemStateProperties.EMPTY.with(FUNGUS_LEVEL, i).with(SUPPLY_LEVEL, j));
 					ItemEntity itemEntity = new ItemEntity(level, pos.getX(), pos.getY(), pos.getZ(), itemStack);
 					itemEntity.setDefaultPickUpDelay();
 					level.addFreshEntity(itemEntity);
@@ -187,7 +183,6 @@ public class AnthillBlock extends BaseEntityBlock {
 		return super.playerWillDestroy(level, pos, state, player);
 	}
 
-	@SuppressWarnings("deprecation")
 	public List<ItemStack> getDrops(BlockState state, LootParams.Builder builder) {
 		Entity entity = builder.getOptionalParameter(LootContextParams.THIS_ENTITY);
 		if (entity instanceof PrimedTnt || entity instanceof Creeper || entity instanceof WitherSkull ||

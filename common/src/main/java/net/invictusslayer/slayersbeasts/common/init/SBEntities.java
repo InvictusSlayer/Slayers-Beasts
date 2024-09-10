@@ -13,6 +13,7 @@ import net.invictusslayer.slayersbeasts.common.entity.*;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.MobCategory;
+import net.minecraft.world.entity.SpawnPlacementTypes;
 import net.minecraft.world.entity.SpawnPlacements;
 import net.minecraft.world.level.levelgen.Heightmap;
 
@@ -38,13 +39,13 @@ public class SBEntities {
 	public static final RegistrySupplier<EntityType<Irk>> IRK = ENTITIES.register("irk", () -> EntityType.Builder.of(Irk::new, MobCategory.MONSTER).sized(0.7F,0.8F).build("irk"));
 
 	public static void registerSpawns() {
-		SpawnPlacementsRegistry.register(MANTIS, SpawnPlacements.Type.ON_GROUND, Heightmap.Types.WORLD_SURFACE, Mantis::canSpawn);
-		SpawnPlacementsRegistry.register(ANT_WORKER, SpawnPlacements.Type.ON_GROUND, Heightmap.Types.WORLD_SURFACE, AntWorker::canSpawn);
-		SpawnPlacementsRegistry.register(ANT_SOLDIER, SpawnPlacements.Type.ON_GROUND, Heightmap.Types.WORLD_SURFACE, AntSoldier::canSpawn);
-		SpawnPlacementsRegistry.register(ANT_QUEEN, SpawnPlacements.Type.ON_GROUND, Heightmap.Types.WORLD_SURFACE, AntQueen::canSpawn);
-		SpawnPlacementsRegistry.register(DAMSELFLY, SpawnPlacements.Type.ON_GROUND, Heightmap.Types.WORLD_SURFACE, Damselfly::canSpawn);
-		SpawnPlacementsRegistry.register(ENT_MEDIUM, SpawnPlacements.Type.ON_GROUND, Heightmap.Types.WORLD_SURFACE, EntMedium::canSpawn);
-		SpawnPlacementsRegistry.register(SPORETRAP, SpawnPlacements.Type.ON_GROUND, Heightmap.Types.WORLD_SURFACE, Sporetrap::canSpawn);
+		SpawnPlacementsRegistry.register(MANTIS, SpawnPlacementTypes.ON_GROUND, Heightmap.Types.WORLD_SURFACE, Mantis::canSpawn);
+		SpawnPlacementsRegistry.register(ANT_WORKER, SpawnPlacementTypes.ON_GROUND, Heightmap.Types.WORLD_SURFACE, AntWorker::canSpawn);
+		SpawnPlacementsRegistry.register(ANT_SOLDIER, SpawnPlacementTypes.ON_GROUND, Heightmap.Types.WORLD_SURFACE, AntSoldier::canSpawn);
+		SpawnPlacementsRegistry.register(ANT_QUEEN, SpawnPlacementTypes.ON_GROUND, Heightmap.Types.WORLD_SURFACE, AntQueen::canSpawn);
+		SpawnPlacementsRegistry.register(DAMSELFLY, SpawnPlacementTypes.ON_GROUND, Heightmap.Types.WORLD_SURFACE, Damselfly::canSpawn);
+		SpawnPlacementsRegistry.register(ENT_MEDIUM, SpawnPlacementTypes.ON_GROUND, Heightmap.Types.WORLD_SURFACE, EntMedium::canSpawn);
+		SpawnPlacementsRegistry.register(SPORETRAP, SpawnPlacementTypes.ON_GROUND, Heightmap.Types.WORLD_SURFACE, Sporetrap::canSpawn);
 	}
 	
 	public static void registerAttributes() {

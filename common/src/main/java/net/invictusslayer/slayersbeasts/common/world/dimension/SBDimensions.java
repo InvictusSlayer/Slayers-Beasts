@@ -2,7 +2,7 @@ package net.invictusslayer.slayersbeasts.common.world.dimension;
 
 import net.invictusslayer.slayersbeasts.common.SlayersBeasts;
 import net.minecraft.core.registries.Registries;
-import net.minecraft.data.worldgen.BootstapContext;
+import net.minecraft.data.worldgen.BootstrapContext;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.BlockTags;
@@ -20,7 +20,7 @@ public class SBDimensions {
 	public static final ResourceKey<Level> SEPULCHRA = createDimensionKey("sepulchra");
 	public static final ResourceKey<DimensionType> SEPULCHRA_TYPE = createDimensionTypeKey("sepulchra");
 
-	public static void bootstrap(BootstapContext<DimensionType> context) {
+	public static void bootstrap(BootstrapContext<DimensionType> context) {
 		register(context, CRYPT_TYPE, new DimensionType(OptionalLong.of(6000L), false, true, false, false, 1, false, false, 0, 128, 128, BlockTags.INFINIBURN_OVERWORLD, BuiltinDimensionTypes.END_EFFECTS, 0.0F, new DimensionType.MonsterSettings(true, false, UniformInt.of(0, 14), 14)));
 		register(context, SEPULCHRA_TYPE, new DimensionType(OptionalLong.of(12000L), true, false, false, false, 1, true, true, -64, 384, 384, BlockTags.INFINIBURN_OVERWORLD, BuiltinDimensionTypes.OVERWORLD_EFFECTS, 0.0F, new DimensionType.MonsterSettings(false, true, UniformInt.of(0, 7), 7)));
 	}
@@ -33,7 +33,7 @@ public class SBDimensions {
 		return ResourceKey.create(Registries.DIMENSION_TYPE, new ResourceLocation(SlayersBeasts.MOD_ID, name));
 	}
 
-	private static void register(BootstapContext<DimensionType> context, ResourceKey<DimensionType> key, DimensionType type) {
+	private static void register(BootstrapContext<DimensionType> context, ResourceKey<DimensionType> key, DimensionType type) {
 		context.register(key, type);
 	}
 }

@@ -1,4 +1,4 @@
-architectury.common "fabric", "forge", "neoforge"
+architectury.common "fabric", "neoforge"
 
 dependencies {
     modImplementation "net.fabricmc:fabric-loader:${fabric_loader}"

@@ -27,9 +27,9 @@ public class AntSoldier extends AbstractAnt implements NeutralMob {
 		super(type, level);
 	}
 
-	protected void defineSynchedData() {
-		super.defineSynchedData();
-		this.entityData.define(DATA_REMAINING_ANGER_TIME, 0);
+	protected void defineSynchedData(SynchedEntityData.Builder builder) {
+		super.defineSynchedData(builder);
+		builder.define(DATA_REMAINING_ANGER_TIME, 0);
 	}
 
 	protected void registerGoals() {

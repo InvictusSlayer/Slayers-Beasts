@@ -1,20 +1,33 @@
 package net.invictusslayer.slayersbeasts.common.block.entity;
 
+import com.mojang.serialization.Codec;
+import com.mojang.serialization.codecs.RecordCodecBuilder;
+import io.netty.buffer.ByteBuf;
+import net.invictusslayer.slayersbeasts.common.SlayersBeasts;
 import net.invictusslayer.slayersbeasts.common.block.AnthillBlock;
+import net.invictusslayer.slayersbeasts.common.init.SBDataComponents;
 import net.invictusslayer.slayersbeasts.common.data.tag.SBTags;
 import net.invictusslayer.slayersbeasts.common.entity.AbstractAnt;
 import net.invictusslayer.slayersbeasts.common.entity.AntQueen;
 import net.invictusslayer.slayersbeasts.common.entity.AntSoldier;
 import net.invictusslayer.slayersbeasts.common.init.SBBlockEntities;
 import net.invictusslayer.slayersbeasts.common.init.SBBlocks;
+import net.invictusslayer.slayersbeasts.common.init.SBEntities;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.HolderLookup;
+import net.minecraft.core.component.DataComponentMap;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.ListTag;
+import net.minecraft.nbt.NbtOps;
 import net.minecraft.nbt.NbtUtils;
+import net.minecraft.network.codec.ByteBufCodecs;
+import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.component.CustomData;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntity;
@@ -38,28 +51,16 @@ public class AnthillBlockEntity extends BlockEntity {
 		inhabitantVariant = null;
 	}
 
-	protected void saveAdditional(CompoundTag tag) {
-		super.saveAdditional(tag);
-		tag.put("Ants", writeAnts());
+	protected void saveAdditional(CompoundTag tag, HolderLookup.Provider registries) {
+		super.saveAdditional(tag, registries);
+		tag.put("Ants", Occupant.LIST_CODEC.encodeStart(NbtOps.INSTANCE, getAnts()).getOrThrow());
 		tag.put("Upgrades", writeUpgrades());
 		if (getInhabitantVariant() != null) tag.putInt("InhabitantType", getInhabitantVariant().getId());
 		tag.putBoolean("HasQueen", hasQueen);
 	}
 
-	public ListTag writeAnts() {
-		ListTag tags = new ListTag();
-
-		for (AntData data : storedAnts) {
-			CompoundTag dataTag = data.entityData.copy();
-			dataTag.remove("UUID");
-			CompoundTag tag = new CompoundTag();
-			tag.put("EntityData", dataTag);
-			tag.putInt("TicksInNest", data.ticksInNest);
-			tag.putInt("MinOccupationTicks", data.minOccupationTicks);
-			tag.putBoolean("IsQueen", data.isQueen);
-			tags.add(tag);
-		}
-		return tags;
+	private List<Occupant> getAnts() {
+		return storedAnts.stream().map(AntData::toOccupant).toList();
 	}
 
 	public ListTag writeUpgrades() {
@@ -74,28 +75,42 @@ public class AnthillBlockEntity extends BlockEntity {
 		return listTag;
 	}
 
-	public void load(CompoundTag tag) {
-		super.load(tag);
+	public void loadAdditional(CompoundTag tag, HolderLookup.Provider registries) {
+		super.loadAdditional(tag, registries);
 		storedAnts.clear();
 		nestUpgrades.clear();
-		ListTag antList = tag.getList("Ants", 10);
 		ListTag upgradeList = tag.getList("Upgrades", 10);
 
-		for (int i = 0; i < antList.size(); ++i) {
-			CompoundTag antTag = antList.getCompound(i);
-			AntData data = new AntData(antTag.getCompound("EntityData"), antTag.getInt("TicksInNest"), antTag.getInt("MinOccupationTicks"), antTag.getBoolean("IsQueen"));
-			storedAnts.add(data);
-		}
+		if (tag.contains("ants")) Occupant.LIST_CODEC.parse(NbtOps.INSTANCE, tag.get("ants")).resultOrPartial(s ->
+				SlayersBeasts.LOGGER.error("Failed to parse Ants: {}", s)).ifPresent(list -> list.forEach(this::storeAnt));
 
 		for (int j = 0; j < upgradeList.size(); ++j) {
 			CompoundTag tag1 = upgradeList.getCompound(j);
-			BlockPos pos = NbtUtils.readBlockPos(tag1.getCompound("BlockPos"));
+			BlockPos pos = NbtUtils.readBlockPos(tag1, "BlockPos").orElse(null);
 			UpgradeData data = new UpgradeData(tag1.getInt("UpgradeType"), pos);
 			nestUpgrades.put(pos, data);
 		}
 
 		setInhabitantVariant(tag.contains("InhabitantType") ? AbstractAnt.Variant.byId(tag.getInt("InhabitantType")) : null);
 		hasQueen = tag.getBoolean("HasQueen");
+	}
+
+	protected void applyImplicitComponents(BlockEntity.DataComponentInput componentInput) {
+		super.applyImplicitComponents(componentInput);
+		storedAnts.clear();
+		List<Occupant> list = componentInput.getOrDefault(SBDataComponents.ANTS.get(), List.of());
+		list.forEach(this::storeAnt);
+	}
+
+	protected void collectImplicitComponents(DataComponentMap.Builder components) {
+		super.collectImplicitComponents(components);
+		components.set(SBDataComponents.ANTS.get(), getAnts());
+	}
+
+	@SuppressWarnings("deprecation")
+	public void removeComponentsFromTag(CompoundTag tag) {
+		super.removeComponentsFromTag(tag);
+		tag.remove("ants");
 	}
 
 	public static int getFungusLevel(BlockState state) {
@@ -127,15 +142,13 @@ public class AnthillBlockEntity extends BlockEntity {
 
 	private static void tickOccupants(Level level, BlockPos pos, BlockState blockState, List<AntData> dataList) {
 		boolean flag = false;
-		AntData antData;
-
-		for (Iterator<AntData> iterator = dataList.iterator(); iterator.hasNext(); ++antData.ticksInNest) {
-			antData = iterator.next();
-			if (antData.isQueen) continue;
-			if (antData.ticksInNest > antData.minOccupationTicks) {
-				AntReleaseStatus releaseStatus = antData.entityData.getBoolean("HasCargo") ?
-						AntReleaseStatus.CARGO_DELIVERED : AntReleaseStatus.ANT_RELEASED;
-				if (releaseOccupant(level, pos, blockState, antData, null, releaseStatus)) {
+		Iterator<AntData> iterator = dataList.iterator();
+		while (iterator.hasNext()) {
+			AntData data = iterator.next();
+			if (data.isQueen()) continue;
+			if (data.tick()) {
+				AntReleaseStatus releaseStatus = data.hasCargo() ? AntReleaseStatus.CARGO_DELIVERED : AntReleaseStatus.ANT_RELEASED;
+				if (releaseOccupant(level, pos, blockState, data.toOccupant(), null, releaseStatus)) {
 					flag = true;
 					iterator.remove();
 				}
@@ -234,7 +247,7 @@ public class AnthillBlockEntity extends BlockEntity {
 	private List<Entity> releaseAllOccupants(BlockState state, AntReleaseStatus releaseStatus) {
 		List<Entity> list = new ArrayList<>();
 		if (level != null) {
-			storedAnts.removeIf(data -> releaseOccupant(level, worldPosition, state, data, list, releaseStatus));
+			storedAnts.removeIf(data -> releaseOccupant(level, worldPosition, state, data.toOccupant(), list, releaseStatus));
 		}
 		if (!list.isEmpty()) {
 			super.setChanged();
@@ -243,22 +256,24 @@ public class AnthillBlockEntity extends BlockEntity {
 		return list;
 	}
 
-	private static boolean releaseOccupant(Level level, BlockPos pos, BlockState state, AntData data, List<Entity> storedInNest, AntReleaseStatus releaseStatus) {
+	private static boolean releaseOccupant(Level level, BlockPos pos, BlockState state, Occupant occupant, List<Entity> storedInNest, AntReleaseStatus releaseStatus) {
 		if (level.isRaining() && releaseStatus != AntReleaseStatus.EMERGENCY) return false;
 
 		BlockPos above = pos.above();
 		boolean flag = level.getBlockState(above).getCollisionShape(level, above).isEmpty();
 		if (!flag && releaseStatus != AntReleaseStatus.EMERGENCY) return false;
 
-		CompoundTag compoundTag = data.entityData.copy();
-		removeIgnoredAntTags(compoundTag);
-		compoundTag.put("NestPos", NbtUtils.writeBlockPos(pos));
-		Entity entity = EntityType.loadEntityRecursive(compoundTag, level, entity1 -> entity1);
+//		CompoundTag compoundTag = occupant.entityData.copyTag();
+//		removeIgnoredAntTags(compoundTag);
+//		compoundTag.put("NestPos", NbtUtils.writeBlockPos(pos));
+
+		Entity entity = occupant.createEntity(level, pos);
 		if (entity == null) return false;
 		if (!entity.getType().is(SBTags.EntityTypes.ANTHILL_INHABITANTS)) return false;
 		if (releaseStatus == AntReleaseStatus.PATROLLING && !(entity instanceof AntSoldier)) return false;
 
 		if (entity instanceof AbstractAnt ant) {
+
 			if (releaseStatus == AntReleaseStatus.CARGO_DELIVERED) {
 				int cargo = ant.getCargoType();
 				ant.setCargoType(99);
@@ -291,45 +306,104 @@ public class AnthillBlockEntity extends BlockEntity {
 		return level.addFreshEntity(entity);
 	}
 
-	public void addOccupant(Entity entity, AbstractAnt.Variant variant, boolean hasCargo) {
+	public void addOccupant(Entity entity, AbstractAnt.Variant variant) {
 		setInhabitantVariant(variant);
-		addOccupantWithPresetTicks(entity, hasCargo, 0);
-	}
-
-	public void addOccupantWithPresetTicks(Entity entity, boolean hasCargo, int timeInNest) {
 		if (storedAnts.size() >= 10) return;
 		entity.stopRiding();
 		entity.ejectPassengers();
 		CompoundTag tag = new CompoundTag();
 		entity.save(tag);
-		storeAnt(tag, timeInNest, hasCargo, entity);
+		storeAnt(Occupant.of(entity));
 		if (level != null) level.gameEvent(GameEvent.BLOCK_CHANGE, getBlockPos(), GameEvent.Context.of(entity, getBlockState()));
 
 		entity.discard();
 		super.setChanged();
 	}
 
-	public void storeAnt(CompoundTag data, int ticksInNest, boolean hasCargo, Entity entity) {
-		boolean isQueen = entity instanceof AntQueen;
-		storedAnts.add(new AntData(data, ticksInNest, hasCargo ? 2400 : 600, isQueen));
+	public void storeAnt(Occupant occupant) {
+		storedAnts.add(new AntData(occupant));
 	}
 
-	static void removeIgnoredAntTags(CompoundTag tag) {
-		for (String s : IGNORED_ANT_TAGS) tag.remove(s);
+	public record Occupant(CustomData entityData, int ticksInNest, int minTicksInNest, boolean isQueen) {
+		public static final Codec<Occupant> CODEC = RecordCodecBuilder.create(instance -> instance.group(
+				CustomData.CODEC.optionalFieldOf("entity_data", CustomData.EMPTY).forGetter(Occupant::entityData),
+				Codec.INT.fieldOf("ticks_in_nest").forGetter(Occupant::ticksInNest),
+				Codec.INT.fieldOf("min_ticks_in_nest").forGetter(Occupant::minTicksInNest),
+				Codec.BOOL.fieldOf("is_queen").forGetter(Occupant::isQueen)
+		).apply(instance, Occupant::new));
+		public static final Codec<List<Occupant>> LIST_CODEC = CODEC.listOf();
+		@SuppressWarnings("deprecation")
+		public static final StreamCodec<ByteBuf, Occupant> STREAM_CODEC = StreamCodec.composite(CustomData.STREAM_CODEC, Occupant::entityData,
+				ByteBufCodecs.VAR_INT, Occupant::ticksInNest, ByteBufCodecs.VAR_INT, Occupant::minTicksInNest, ByteBufCodecs.BOOL, Occupant::isQueen, Occupant::new);
+
+		public static Occupant of(Entity entity) {
+			CompoundTag tag = new CompoundTag();
+			entity.save(tag);
+			Objects.requireNonNull(tag);
+			IGNORED_ANT_TAGS.forEach(tag::remove);
+			boolean bl = tag.getBoolean("HasNectar");
+			return new Occupant(CustomData.of(tag), 0, bl ? 2400 : 600, entity instanceof AntQueen);
+		}
+
+		public static Occupant create(int ticksInNest) {
+			CompoundTag tag = new CompoundTag();
+			tag.putString("id", BuiltInRegistries.ENTITY_TYPE.getKey(SBEntities.ANT_WORKER.get()).toString());
+			return new Occupant(CustomData.of(tag), ticksInNest, 600, false);
+		}
+
+		public Entity createEntity(Level level, BlockPos pos) {
+			CompoundTag tag = entityData.copyTag();
+			Objects.requireNonNull(tag);
+			IGNORED_ANT_TAGS.forEach(tag::remove);
+			Entity entity = EntityType.loadEntityRecursive(tag, level, arg -> arg);
+			if (entity != null && entity.getType().is(SBTags.EntityTypes.ANTHILL_INHABITANTS)) {
+//				entity.setNoGravity(true);
+				if (entity instanceof AbstractAnt ant) {
+					ant.setNestPos(pos);
+				}
+
+				return entity;
+			}
+			return null;
+		}
+
+		public CustomData entityData() {
+			return entityData;
+		}
+
+		public int ticksInNest() {
+			return ticksInNest;
+		}
+
+		public int minTicksInNest() {
+			return minTicksInNest;
+		}
 	}
+	
+	private static class AntData {
+		private final Occupant occupant;
+		private int ticksInNest;
 
-	static class AntData {
-		final CompoundTag entityData;
-		int ticksInNest;
-		final int minOccupationTicks;
-		final boolean isQueen;
+		AntData(Occupant occupant) {
+			this.occupant = occupant;
+			this.ticksInNest = occupant.ticksInNest();
+		}
 
-		AntData(CompoundTag entityData, int ticksInNest, int minOccupationTicks, boolean isQueen) {
-			removeIgnoredAntTags(entityData);
-			this.entityData = entityData;
-			this.ticksInNest = ticksInNest;
-			this.minOccupationTicks = minOccupationTicks;
-			this.isQueen = isQueen;
+		public boolean tick() {
+			return ticksInNest++ > occupant.minTicksInNest();
+		}
+
+		public Occupant toOccupant() {
+			return new Occupant(occupant.entityData(), ticksInNest, occupant.ticksInNest(), occupant.isQueen());
+		}
+
+		public boolean isQueen() {
+			return occupant.isQueen();
+		}
+
+		@SuppressWarnings("deprecation")
+		public boolean hasCargo() {
+			return occupant.entityData().getUnsafe().getBoolean("HasCargo");
 		}
 	}
 

@@ -21,7 +21,6 @@ public class StyphiumBlock extends Block implements BonemealableBlock {
 		super(properties);
 	}
 
-	@SuppressWarnings("deprecation")
 	public void randomTick(BlockState state, ServerLevel level, BlockPos pos, RandomSource random) {
 		if (!canBeStyphium(state, level, pos)) {
 			boolean isDeepslate = state.is(SBBlocks.DEEPSLATE_STYPHIUM.get());

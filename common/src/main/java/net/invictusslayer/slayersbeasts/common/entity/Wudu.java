@@ -28,10 +28,10 @@ public class Wudu extends AbstractEnt {
 				.add(Attributes.ATTACK_KNOCKBACK, 1.0D);
 	}
 
-	protected void defineSynchedData() {
-		super.defineSynchedData();
-		entityData.define(DATA_HAS_LEFT_ARM, false);
-		entityData.define(DATA_HAS_RIGHT_ARM, false);
+	protected void defineSynchedData(SynchedEntityData.Builder builder) {
+		super.defineSynchedData(builder);
+		builder.define(DATA_HAS_LEFT_ARM, false);
+		builder.define(DATA_HAS_RIGHT_ARM, false);
 	}
 
 	protected void setupAnimationStates() {

@@ -17,10 +17,7 @@ import net.minecraft.util.RandomSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.level.BlockGetter;
-import net.minecraft.world.level.ChunkPos;
-import net.minecraft.world.level.Level;
-import net.minecraft.world.level.LevelAccessor;
+import net.minecraft.world.level.*;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
@@ -45,12 +42,10 @@ public class CryptPortalBlock extends Block {
 		super(properties);
 	}
 
-	@SuppressWarnings("deprecation")
 	public VoxelShape getShape(BlockState state, BlockGetter level, BlockPos pos, CollisionContext context) {
 		return SHAPE;
 	}
 
-	@SuppressWarnings("deprecation")
 	public BlockState updateShape(BlockState state, Direction facing, BlockState facingState, LevelAccessor level, BlockPos currentPos, BlockPos facingPos) {
 		List<BlockPos> posList = List.of(currentPos.north(), currentPos.east(), currentPos.south(), currentPos.west());
 		for (BlockPos pos : posList) {
@@ -63,16 +58,14 @@ public class CryptPortalBlock extends Block {
 		return super.updateShape(state, facing, facingState, level, currentPos, facingPos);
 	}
 
-	public ItemStack getCloneItemStack(BlockGetter worldIn, BlockPos pos, BlockState state) {
+	public ItemStack getCloneItemStack(LevelReader level, BlockPos pos, BlockState state) {
 		return ItemStack.EMPTY;
 	}
 
-	@SuppressWarnings("deprecation")
 	public boolean canBeReplaced(BlockState state, Fluid fluid) {
 		return false;
 	}
 
-	@SuppressWarnings("deprecation")
 	public void entityInside(BlockState state, Level level, BlockPos pos, Entity entity) {
 		if (entity instanceof ServerPlayer player && player.canChangeDimensions()) {
 			MinecraftServer server = level.getServer();

@@ -6,7 +6,7 @@ import net.invictusslayer.slayersbeasts.common.world.structure.SBProcessorLists;
 import net.minecraft.core.Holder;
 import net.minecraft.core.HolderGetter;
 import net.minecraft.core.registries.Registries;
-import net.minecraft.data.worldgen.BootstapContext;
+import net.minecraft.data.worldgen.BootstrapContext;
 import net.minecraft.data.worldgen.Pools;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.level.levelgen.structure.pools.StructurePoolElement;
@@ -21,7 +21,7 @@ public class RedwoodLodgePools extends SBPools {
 	private static final ResourceKey<StructureTemplatePool> CAMP = createKey("camp");
 	private static final ResourceKey<StructureTemplatePool> DECOR = createKey("decor");
 
-	public static void bootstrap(BootstapContext<StructureTemplatePool> context) {
+	public static void bootstrap(BootstrapContext<StructureTemplatePool> context) {
 		HolderGetter<StructureTemplatePool> pools = context.lookup(Registries.TEMPLATE_POOL);
 		HolderGetter<StructureProcessorList> processors = context.lookup(Registries.PROCESSOR_LIST);
 

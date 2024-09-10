@@ -22,7 +22,6 @@ public class TallDeadBushBlock extends DoublePlantBlock {
 		return state.is(BlockTags.DEAD_BUSH_MAY_PLACE_ON);
 	}
 
-	@SuppressWarnings("deprecation")
 	public VoxelShape getShape(BlockState state, BlockGetter level, BlockPos pos, CollisionContext context) {
 		return state.getValue(DoublePlantBlock.HALF) == DoubleBlockHalf.LOWER ? LOWER : UPPER;
 	}

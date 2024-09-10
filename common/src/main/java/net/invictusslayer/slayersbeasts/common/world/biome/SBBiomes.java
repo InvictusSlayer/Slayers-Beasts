@@ -3,7 +3,7 @@ package net.invictusslayer.slayersbeasts.common.world.biome;
 import net.invictusslayer.slayersbeasts.common.SlayersBeasts;
 import net.minecraft.core.HolderGetter;
 import net.minecraft.core.registries.Registries;
-import net.minecraft.data.worldgen.BootstapContext;
+import net.minecraft.data.worldgen.BootstrapContext;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.biome.Biome;
@@ -55,7 +55,7 @@ public class SBBiomes {
 	//Crypt
 	public static final ResourceKey<Biome> THE_CRYPT = createKey("the_crypt");
 
-	public static void bootstrap(BootstapContext<Biome> context) {
+	public static void bootstrap(BootstrapContext<Biome> context) {
 		HolderGetter<PlacedFeature> placed = context.lookup(Registries.PLACED_FEATURE);
 		HolderGetter<ConfiguredWorldCarver<?>> carver = context.lookup(Registries.CONFIGURED_CARVER);
 
@@ -97,7 +97,7 @@ public class SBBiomes {
 		return ResourceKey.create(Registries.BIOME, new ResourceLocation(SlayersBeasts.MOD_ID, name));
 	}
 
-	private static void register(BootstapContext<Biome> context, ResourceKey<Biome> key, Biome biome) {
+	private static void register(BootstrapContext<Biome> context, ResourceKey<Biome> key, Biome biome) {
 		context.register(key, biome);
 		BIOMES.add(key);
 	}

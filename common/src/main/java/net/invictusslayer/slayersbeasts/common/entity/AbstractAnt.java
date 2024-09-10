@@ -61,10 +61,6 @@ public abstract class AbstractAnt extends PathfinderMob {
 		targetSelector.addGoal(1, new AntAttackedGoal(this).setAlertOthers());
 	}
 
-	public MobType getMobType() {
-		return MobType.ARTHROPOD;
-	}
-
 	public void addAdditionalSaveData(CompoundTag tag) {
 		super.addAdditionalSaveData(tag);
 		if (nestPos != null) tag.put("NestPos", NbtUtils.writeBlockPos(nestPos));
@@ -76,17 +72,17 @@ public abstract class AbstractAnt extends PathfinderMob {
 
 	public void readAdditionalSaveData(CompoundTag tag) {
 		super.readAdditionalSaveData(tag);
-		nestPos = tag.contains("NestPos") ? NbtUtils.readBlockPos(tag.getCompound("NestPos")) : null;
+		nestPos = NbtUtils.readBlockPos(tag, "NestPos").orElse(null);
 		setCooldownToEnterNest(tag.getInt("CooldownToEnterNest"));
 		failedForagingTime = tag.getInt("FailedForagingTime");
 		setVariant(Variant.byId(tag.getInt("Variant")));
 		setCargoType(tag.getInt("CargoType"));
 	}
 
-	protected void defineSynchedData() {
-		super.defineSynchedData();
-		entityData.define(DATA_VARIANT, 0);
-		entityData.define(DATA_CARGO_TYPE, 0);
+	protected void defineSynchedData(SynchedEntityData.Builder builder) {
+		super.defineSynchedData(builder);
+		builder.define(DATA_VARIANT, 0);
+		builder.define(DATA_CARGO_TYPE, 0);
 	}
 
 	public void setCooldownToEnterNest(int cooldown) {
@@ -112,7 +108,7 @@ public abstract class AbstractAnt extends PathfinderMob {
 		if (tickCount % 20 == 0 && !hasValidNest()) nestPos = null;
 	}
 
-	public SpawnGroupData finalizeSpawn(ServerLevelAccessor level, DifficultyInstance difficulty, MobSpawnType type, SpawnGroupData spawnData, CompoundTag tag) {
+	public SpawnGroupData finalizeSpawn(ServerLevelAccessor level, DifficultyInstance difficulty, MobSpawnType type, SpawnGroupData spawnData) {
 		Variant variant = getRandomAntType(level);
 		if (spawnData instanceof AntGroupData antData) variant = antData.variant;
 		else spawnData = new AntGroupData(variant);
@@ -169,6 +165,13 @@ public abstract class AbstractAnt extends PathfinderMob {
 		public String getSerializedName() {
 			return name;
 		}
+	}
+
+	public void setNestPos(BlockPos pos) {
+		nestPos = pos;
+	}
+	public BlockPos getNestPos() {
+		return nestPos;
 	}
 
 	boolean hasValidNest() {
@@ -320,7 +323,7 @@ public abstract class AbstractAnt extends PathfinderMob {
 		public void start() {
 			BlockEntity blockEntity = ant.level().getBlockEntity(ant.nestPos);
 			if (blockEntity instanceof AnthillBlockEntity anthill) {
-				anthill.addOccupant(ant, ant.getVariant(), ant.getCargoType() != 99);
+				anthill.addOccupant(ant, ant.getVariant());
 			}
 		}
 	}

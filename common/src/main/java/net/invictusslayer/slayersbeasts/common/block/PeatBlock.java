@@ -32,9 +32,8 @@ public class PeatBlock extends FallingBlock {
 		return CODEC;
 	}
 
-	@SuppressWarnings("deprecation")
 	public void entityInside(BlockState state, Level level, BlockPos pos, Entity entity) {
-		if (!(entity instanceof LivingEntity) || entity.getFeetBlockState().is(this)) {
+		if (!(entity instanceof LivingEntity) || entity.getBlockStateOn().is(this)) {
 			entity.makeStuckInBlock(state, new Vec3(0.4D, 0.4D, 0.4D));
 			if (level.isClientSide) {
 				RandomSource random = level.getRandom();
@@ -48,22 +47,18 @@ public class PeatBlock extends FallingBlock {
 		entity.setSharedFlagOnFire(false);
 	}
 
-	@SuppressWarnings("deprecation")
 	public boolean skipRendering(BlockState state, BlockState adjacentState, Direction direction) {
 		return adjacentState.is(this) || super.skipRendering(state, adjacentState, direction);
 	}
 
-	@SuppressWarnings("deprecation")
 	public VoxelShape getOcclusionShape(BlockState state, BlockGetter level, BlockPos pos) {
 		return Shapes.empty();
 	}
 
-	@SuppressWarnings("deprecation")
 	public VoxelShape getVisualShape(BlockState state, BlockGetter level, BlockPos pos, CollisionContext context) {
 		return Shapes.empty();
 	}
 
-	@SuppressWarnings("deprecation")
 	public VoxelShape getCollisionShape(BlockState state, BlockGetter level, BlockPos pos, CollisionContext context) {
 		if (context instanceof EntityCollisionContext entitycollisioncontext) {
 			Entity entity = entitycollisioncontext.getEntity();
@@ -85,8 +80,7 @@ public class PeatBlock extends FallingBlock {
 		return Shapes.empty();
 	}
 
-	@SuppressWarnings("deprecation")
-	public boolean isPathfindable(BlockState state, BlockGetter level, BlockPos pos, PathComputationType type) {
+	public boolean isPathfindable(BlockState state, PathComputationType type) {
 		return true;
 	}
 }

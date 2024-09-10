@@ -1,6 +1,6 @@
 package net.invictusslayer.slayersbeasts.common.world.feature.tree.decorator;
 
-import com.mojang.serialization.Codec;
+import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.invictusslayer.slayersbeasts.common.init.SBTreeDecorators;
 import net.minecraft.core.BlockPos;
@@ -15,7 +15,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ButtressRootDecorator extends TreeDecorator {
-	public static final Codec<ButtressRootDecorator> CODEC = RecordCodecBuilder.create(instance ->
+	public static final MapCodec<ButtressRootDecorator> CODEC = RecordCodecBuilder.mapCodec(instance ->
 			instance.group(BlockStateProvider.CODEC.fieldOf("log_provider").forGetter(decorator -> decorator.logProvider),
 							BlockStateProvider.CODEC.fieldOf("dirt_provider").forGetter(decorator -> decorator.dirtProvider))
 					.apply(instance, ButtressRootDecorator::new));

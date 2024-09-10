@@ -6,10 +6,11 @@ import net.invictusslayer.slayersbeasts.common.block.WoodFamily;
 import net.invictusslayer.slayersbeasts.common.init.SBBlocks;
 import net.invictusslayer.slayersbeasts.common.init.SBItems;
 import net.minecraft.advancements.critereon.StatePropertiesPredicate;
+import net.minecraft.core.HolderLookup;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.data.BlockFamily;
 import net.minecraft.data.loot.BlockLootSubProvider;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.flag.FeatureFlags;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.enchantment.Enchantments;
@@ -89,22 +90,21 @@ public class SBBlockLoot extends BlockLootSubProvider {
 		add(SBBlocks.WILLOW_BRANCH_PLANT.get(), block -> createLeavesDrops(block, SBBlocks.WILLOW_SAPLING.get(), 0.05F));
 	}
 
-	public void generate(BiConsumer<ResourceLocation, LootTable.Builder> biConsumer) {
+	public void generate(HolderLookup.Provider provider, BiConsumer<ResourceKey<LootTable>, LootTable.Builder> biConsumer) {
 		generate();
-		HashSet<ResourceLocation> set = new HashSet<>();
+		HashSet<ResourceKey<LootTable>> set = new HashSet<>();
 		for (Block block : BuiltInRegistries.BLOCK) {
-			if (!block.getLootTable().getNamespace().equals(SlayersBeasts.MOD_ID)) continue;
-			ResourceLocation location;
-			if (!block.isEnabled(enabledFeatures) || (location = block.getLootTable()) == BuiltInLootTables.EMPTY || !set.add(location)) continue;
-			LootTable.Builder builder = map.remove(location);
-			if (builder == null) {
-				throw new IllegalStateException(String.format(Locale.ROOT, "Missing loottable '%s' for '%s'", location, BuiltInRegistries.BLOCK.getKey(block)));
-			}
-			biConsumer.accept(location, builder);
+			if (!block.getLootTable().location().getNamespace().equals(SlayersBeasts.MOD_ID)) continue;
+
+			ResourceKey<LootTable> key;
+			if (!block.isEnabled(enabledFeatures) || (key = block.getLootTable()) == BuiltInLootTables.EMPTY || !set.add(key)) continue;
+
+			LootTable.Builder builder = map.remove(key);
+			if (builder == null) throw new IllegalStateException(String.format(Locale.ROOT, "Missing loottable '%s' for '%s'", key, BuiltInRegistries.BLOCK.getKey(block)));
+
+			biConsumer.accept(key, builder);
 		}
-		if (!map.isEmpty()) {
-			throw new IllegalStateException("Created block loot tables for non-blocks: " + map.keySet());
-		}
+		if (!map.isEmpty()) throw new IllegalStateException("Created block loot tables for non-blocks: " + map.keySet());
 	}
 
 	private void generateWoodFamilies() {
@@ -151,6 +151,6 @@ public class SBBlockLoot extends BlockLootSubProvider {
 		return createSilkTouchDispatchTable(block, applyExplosionDecay(block,
 				LootItem.lootTableItem(SBItems.CRYSTALLINE_CLAW.get())
 						.apply(SetItemCountFunction.setCount(UniformGenerator.between(0.0F, 1.0F)))
-						.apply(ApplyBonusCount.addOreBonusCount(Enchantments.BLOCK_FORTUNE))));
+						.apply(ApplyBonusCount.addOreBonusCount(Enchantments.FORTUNE))));
 	}
 }

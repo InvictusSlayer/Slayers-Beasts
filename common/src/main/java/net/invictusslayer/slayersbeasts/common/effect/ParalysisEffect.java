@@ -9,7 +9,7 @@ public class ParalysisEffect extends MobEffect {
 		super(category, color);
 	}
 
-	public void applyEffectTick(LivingEntity entity, int amplifier) {
+	public boolean applyEffectTick(LivingEntity entity, int amplifier) {
 		if (!entity.level().isClientSide()) {
 			double x = entity.getX();
 			double y = entity.getY();
@@ -18,6 +18,7 @@ public class ParalysisEffect extends MobEffect {
 			entity.teleportTo(x, y, z);
 			entity.setDeltaMovement(0, 0, 0);
 		}
-		super.applyEffectTick(entity, amplifier);
+
+		return super.applyEffectTick(entity, amplifier);
 	}
 }

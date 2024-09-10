@@ -1,6 +1,7 @@
 package net.invictusslayer.slayersbeasts.common.world.feature.tree.decorator;
 
 import com.mojang.serialization.Codec;
+import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.invictusslayer.slayersbeasts.common.init.SBTreeDecorators;
 import net.minecraft.Util;
@@ -11,7 +12,7 @@ import net.minecraft.world.level.levelgen.feature.treedecorators.TreeDecorator;
 import net.minecraft.world.level.levelgen.feature.treedecorators.TreeDecoratorType;
 
 public class HangingBranchDecorator extends TreeDecorator {
-	public static final Codec<HangingBranchDecorator> CODEC = RecordCodecBuilder.create(instance ->
+	public static final MapCodec<HangingBranchDecorator> CODEC = RecordCodecBuilder.mapCodec(instance ->
 			instance.group(Codec.floatRange(0.0F, 1.0F).fieldOf("probability").forGetter(decorator -> decorator.probability),
 							BlockStateProvider.CODEC.fieldOf("head_provider").forGetter(decorator -> decorator.headProvider),
 							BlockStateProvider.CODEC.fieldOf("body_provider").forGetter(decorator -> decorator.bodyProvider))

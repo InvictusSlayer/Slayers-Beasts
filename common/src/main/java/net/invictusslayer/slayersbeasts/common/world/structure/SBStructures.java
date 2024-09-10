@@ -10,7 +10,7 @@ import net.invictusslayer.slayersbeasts.common.world.structure.structures.CryptS
 import net.minecraft.core.HolderGetter;
 import net.minecraft.core.HolderSet;
 import net.minecraft.core.registries.Registries;
-import net.minecraft.data.worldgen.BootstapContext;
+import net.minecraft.data.worldgen.BootstrapContext;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.MobCategory;
@@ -32,7 +32,7 @@ public class SBStructures {
 	public static final ResourceKey<Structure> CRYPT_PORTAL = createKey("crypt_portal");
 	public static final ResourceKey<Structure> REDWOOD_LODGE = createKey("redwood_lodge");
 
-	public static void bootstrap(BootstapContext<Structure> context) {
+	public static void bootstrap(BootstrapContext<Structure> context) {
 		HolderGetter<StructureTemplatePool> pools = context.lookup(Registries.TEMPLATE_POOL);
 		HolderGetter<Biome> biomes = context.lookup(Registries.BIOME);
 

@@ -5,7 +5,7 @@ import com.mojang.datafixers.util.Pair;
 import net.invictusslayer.slayersbeasts.common.SlayersBeasts;
 import net.minecraft.core.Holder;
 import net.minecraft.core.registries.Registries;
-import net.minecraft.data.worldgen.BootstapContext;
+import net.minecraft.data.worldgen.BootstrapContext;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.levelgen.structure.pools.SinglePoolElement;
@@ -17,7 +17,7 @@ import java.util.List;
 import java.util.function.Function;
 
 public class SBPools {
-	public static void bootstrap(BootstapContext<StructureTemplatePool> context) {
+	public static void bootstrap(BootstrapContext<StructureTemplatePool> context) {
 		CryptPools.bootstrap(context);
 		RedwoodLodgePools.bootstrap(context);
 	}
@@ -34,7 +34,7 @@ public class SBPools {
 		return ResourceKey.create(Registries.TEMPLATE_POOL, new ResourceLocation(SlayersBeasts.MOD_ID, parent + "/" + name));
 	}
 
-	protected static void register(BootstapContext<StructureTemplatePool> context, ResourceKey<StructureTemplatePool> key, Holder<StructureTemplatePool> fallback, StructureTemplatePool.Projection projection, List<Pair<Function<StructureTemplatePool.Projection, ? extends StructurePoolElement>, Integer>> list) {
+	protected static void register(BootstrapContext<StructureTemplatePool> context, ResourceKey<StructureTemplatePool> key, Holder<StructureTemplatePool> fallback, StructureTemplatePool.Projection projection, List<Pair<Function<StructureTemplatePool.Projection, ? extends StructurePoolElement>, Integer>> list) {
 		context.register(key, new StructureTemplatePool(fallback, list, projection));
 	}
 }

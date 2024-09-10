@@ -1,6 +1,7 @@
 package net.invictusslayer.slayersbeasts.common.world.feature.tree.foliage;
 
 import com.mojang.serialization.Codec;
+import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.invictusslayer.slayersbeasts.common.init.SBFoliagePlacers;
 import net.minecraft.core.BlockPos;
@@ -12,7 +13,7 @@ import net.minecraft.world.level.levelgen.feature.foliageplacers.FoliagePlacer;
 import net.minecraft.world.level.levelgen.feature.foliageplacers.FoliagePlacerType;
 
 public class RedwoodFoliagePlacer extends FoliagePlacer {
-	public static final Codec<RedwoodFoliagePlacer> CODEC = RecordCodecBuilder.create(instance -> foliagePlacerParts(instance).and(
+	public static final MapCodec<RedwoodFoliagePlacer> CODEC = RecordCodecBuilder.mapCodec(instance -> foliagePlacerParts(instance).and(
 			instance.group(IntProvider.codec(0, 15).fieldOf("mid_segments").forGetter(placer -> placer.midSegments),
 					Codec.intRange(1, 3).fieldOf("trunk_width").forGetter(placer -> placer.trunkWidth)))
 			.apply(instance, RedwoodFoliagePlacer::new));
