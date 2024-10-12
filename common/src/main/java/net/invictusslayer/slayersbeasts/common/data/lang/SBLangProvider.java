@@ -81,7 +81,7 @@ public abstract class SBLangProvider implements DataProvider {
 	}
 
 	protected void add(Enchantment key, String name) {
-		add(key.getDescriptionId(), name);
+		add(key.description().getString(), name);
 	}
 
 	protected void addEffect(Supplier<? extends MobEffect> key, String name) {

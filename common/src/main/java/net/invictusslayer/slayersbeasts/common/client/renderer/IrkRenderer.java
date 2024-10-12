@@ -9,7 +9,7 @@ import net.minecraft.client.renderer.entity.MobRenderer;
 import net.minecraft.resources.ResourceLocation;
 
 public class IrkRenderer<T extends Irk> extends MobRenderer<T, IrkModel<T>> {
-	private static final ResourceLocation TEXTURE = new ResourceLocation(SlayersBeasts.MOD_ID, "textures/entity/irk.png");
+	private static final ResourceLocation TEXTURE = ResourceLocation.fromNamespaceAndPath(SlayersBeasts.MOD_ID, "textures/entity/irk.png");
 
 	public IrkRenderer(EntityRendererProvider.Context context) {
 		super(context, new IrkModel<>(context.bakeLayer(IrkModel.LAYER_LOCATION)), 0.2F);

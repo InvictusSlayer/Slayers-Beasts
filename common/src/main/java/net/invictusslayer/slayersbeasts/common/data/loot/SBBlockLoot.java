@@ -8,11 +8,13 @@ import net.invictusslayer.slayersbeasts.common.init.SBItems;
 import net.minecraft.advancements.critereon.StatePropertiesPredicate;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.data.BlockFamily;
 import net.minecraft.data.loot.BlockLootSubProvider;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.flag.FeatureFlags;
 import net.minecraft.world.item.Items;
+import net.minecraft.world.item.enchantment.Enchantment;
 import net.minecraft.world.item.enchantment.Enchantments;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
@@ -37,8 +39,8 @@ import java.util.Set;
 import java.util.function.BiConsumer;
 
 public class SBBlockLoot extends BlockLootSubProvider {
-	public SBBlockLoot() {
-		super(Set.of(), FeatureFlags.REGISTRY.allFlags());
+	public SBBlockLoot(HolderLookup.Provider registries) {
+		super(Set.of(), FeatureFlags.REGISTRY.allFlags(), registries);
 	}
 
 	public void generate() {
@@ -80,7 +82,7 @@ public class SBBlockLoot extends BlockLootSubProvider {
 		dropSelf(SBBlocks.WHITE_MUSHROOM.get());
 		add(SBBlocks.POTTED_WHITE_MUSHROOM.get(), createPotFlowerItemTable(SBBlocks.WHITE_MUSHROOM.get()));
 		add(SBBlocks.TALL_WHITE_MUSHROOM.get(), block -> createSinglePropConditionTable(block, DoublePlantBlock.HALF, DoubleBlockHalf.LOWER));
-		add(SBBlocks.THIN_MUSHROOM_STEM.get(), BlockLootSubProvider::createSilkTouchOnlyTable);
+//		add(SBBlocks.THIN_MUSHROOM_STEM.get(), BlockLootSubProvider::createSilkTouchOnlyTable);
 
 		generateWoodFamilies();
 		add(SBBlocks.ALBINO_REDWOOD_LEAVES.get(), block -> createLeavesDrops(block, SBBlocks.ALBINO_REDWOOD_SAPLING.get(), 0.0033F));
@@ -90,7 +92,7 @@ public class SBBlockLoot extends BlockLootSubProvider {
 		add(SBBlocks.WILLOW_BRANCH_PLANT.get(), block -> createLeavesDrops(block, SBBlocks.WILLOW_SAPLING.get(), 0.05F));
 	}
 
-	public void generate(HolderLookup.Provider provider, BiConsumer<ResourceKey<LootTable>, LootTable.Builder> biConsumer) {
+	public void generate(BiConsumer<ResourceKey<LootTable>, LootTable.Builder> biConsumer) {
 		generate();
 		HashSet<ResourceKey<LootTable>> set = new HashSet<>();
 		for (Block block : BuiltInRegistries.BLOCK) {
@@ -148,9 +150,10 @@ public class SBBlockLoot extends BlockLootSubProvider {
 	}
 
 	private LootTable.Builder createExoskeletonOreDrops(Block block) {
+		HolderLookup.RegistryLookup<Enchantment> registryLookup = registries.lookupOrThrow(Registries.ENCHANTMENT);
 		return createSilkTouchDispatchTable(block, applyExplosionDecay(block,
 				LootItem.lootTableItem(SBItems.CRYSTALLINE_CLAW.get())
 						.apply(SetItemCountFunction.setCount(UniformGenerator.between(0.0F, 1.0F)))
-						.apply(ApplyBonusCount.addOreBonusCount(Enchantments.FORTUNE))));
+						.apply(ApplyBonusCount.addOreBonusCount(registryLookup.getOrThrow(Enchantments.FORTUNE)))));
 	}
 }

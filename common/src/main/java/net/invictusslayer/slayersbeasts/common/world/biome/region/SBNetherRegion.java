@@ -17,7 +17,7 @@ import java.util.function.Consumer;
 
 public class SBNetherRegion extends Region {
 	public SBNetherRegion(int weight) {
-		super(new ResourceLocation(SlayersBeasts.MOD_ID, "nether"), RegionType.NETHER, weight);
+		super(ResourceLocation.fromNamespaceAndPath(SlayersBeasts.MOD_ID, "nether"), RegionType.NETHER, weight);
 	}
 
 	public void addBiomes(Registry<Biome> registry, Consumer<Pair<Climate.ParameterPoint, ResourceKey<Biome>>> mapper) {

@@ -14,6 +14,6 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 public class FoxRendererMixin {
 	@Inject(method = "getTextureLocation(Lnet/minecraft/world/entity/animal/Fox;)Lnet/minecraft/resources/ResourceLocation;", at = @At("HEAD"), cancellable = true)
 	private void onGetTextureLocation(Fox entity, CallbackInfoReturnable<ResourceLocation> cir) {
-		if (entity.getVariant() == SBFoxType.GREY) cir.setReturnValue(new ResourceLocation(SlayersBeasts.MOD_ID, "textures/entity/fox/grey_fox" + (entity.isSleeping() ? "_sleep.png" : ".png")));
+		if (entity.getVariant() == SBFoxType.GREY) cir.setReturnValue(ResourceLocation.fromNamespaceAndPath(SlayersBeasts.MOD_ID, "textures/entity/fox/grey_fox" + (entity.isSleeping() ? "_sleep.png" : ".png")));
 	}
 }

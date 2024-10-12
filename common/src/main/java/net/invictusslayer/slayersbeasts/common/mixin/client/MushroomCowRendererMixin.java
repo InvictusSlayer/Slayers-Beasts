@@ -22,7 +22,7 @@ public class MushroomCowRendererMixin {
 
 	@Inject(method = "<clinit>", at = @At("TAIL"))
 	private static void onClinit(CallbackInfo ci) {
-		TEXTURES.put(SBMushroomCowType.BLACK, new ResourceLocation(SlayersBeasts.MOD_ID, "textures/entity/cow/black_mooshroom.png"));
-		TEXTURES.put(SBMushroomCowType.WHITE, new ResourceLocation(SlayersBeasts.MOD_ID, "textures/entity/cow/white_mooshroom.png"));
+		TEXTURES.put(SBMushroomCowType.BLACK, ResourceLocation.fromNamespaceAndPath(SlayersBeasts.MOD_ID, "textures/entity/cow/black_mooshroom.png"));
+		TEXTURES.put(SBMushroomCowType.WHITE, ResourceLocation.fromNamespaceAndPath(SlayersBeasts.MOD_ID, "textures/entity/cow/white_mooshroom.png"));
 	}
 }

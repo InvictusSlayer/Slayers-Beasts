@@ -33,7 +33,7 @@ public class SBBiomeModifiers {
 			List<Holder<PlacedFeature>> features = new ArrayList<>();
 			biomeFeatureStep.second.first.forEach(feature -> features.add(placed.getOrThrow(feature)));
 			HolderSet<PlacedFeature> feature = HolderSet.direct(features);
-			context.register(ResourceKey.create(NeoForgeRegistries.Keys.BIOME_MODIFIERS, new ResourceLocation(SlayersBeasts.MOD_ID, name)), new BiomeModifiers.AddFeaturesBiomeModifier(biomes.getOrThrow(biomeFeatureStep.first), feature, biomeFeatureStep.second.second));
+			context.register(ResourceKey.create(NeoForgeRegistries.Keys.BIOME_MODIFIERS, ResourceLocation.fromNamespaceAndPath(SlayersBeasts.MOD_ID, name)), new BiomeModifiers.AddFeaturesBiomeModifier(biomes.getOrThrow(biomeFeatureStep.first), feature, biomeFeatureStep.second.second));
 		});
 	}
 }

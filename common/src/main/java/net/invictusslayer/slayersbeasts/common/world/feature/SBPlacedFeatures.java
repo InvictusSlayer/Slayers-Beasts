@@ -169,7 +169,7 @@ public class SBPlacedFeatures {
 	}
 
 	private static ResourceKey<PlacedFeature> createKey(String name) {
-		return ResourceKey.create(Registries.PLACED_FEATURE, new ResourceLocation(SlayersBeasts.MOD_ID, name));
+		return ResourceKey.create(Registries.PLACED_FEATURE, ResourceLocation.fromNamespaceAndPath(SlayersBeasts.MOD_ID, name));
 	}
 
 	private static void register(BootstrapContext<PlacedFeature> context, ResourceKey<PlacedFeature> key, Holder<ConfiguredFeature<?, ?>> config, PlacementModifier... modifiers) {

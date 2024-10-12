@@ -42,7 +42,7 @@ public class SBProcessorLists {
 	}
 
 	private static ResourceKey<StructureProcessorList> createKey(String name) {
-		return ResourceKey.create(Registries.PROCESSOR_LIST, new ResourceLocation(SlayersBeasts.MOD_ID, name));
+		return ResourceKey.create(Registries.PROCESSOR_LIST, ResourceLocation.fromNamespaceAndPath(SlayersBeasts.MOD_ID, name));
 	}
 
 	private static void register(BootstrapContext<StructureProcessorList> context, ResourceKey<StructureProcessorList> key, ProcessorRule... processors) {

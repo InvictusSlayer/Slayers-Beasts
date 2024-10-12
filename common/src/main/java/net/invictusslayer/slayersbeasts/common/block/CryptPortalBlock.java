@@ -67,13 +67,14 @@ public class CryptPortalBlock extends Block {
 	}
 
 	public void entityInside(BlockState state, Level level, BlockPos pos, Entity entity) {
-		if (entity instanceof ServerPlayer player && player.canChangeDimensions()) {
+		if (entity instanceof ServerPlayer player) {
 			MinecraftServer server = level.getServer();
 			if (server == null) return;
 
 			ResourceKey<Level> destination = player.level().dimension() == SBDimensions.CRYPT ? Level.OVERWORLD : SBDimensions.CRYPT;
 			ServerLevel serverLevel = server.getLevel(destination);
 			if (serverLevel == null) return;
+			if (!player.canChangeDimensions(level, serverLevel)) return;
 
 			if (destination == SBDimensions.CRYPT) {
 				if (serverLevel.players().isEmpty()) resetCrypt(serverLevel);

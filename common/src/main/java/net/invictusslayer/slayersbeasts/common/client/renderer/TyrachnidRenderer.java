@@ -8,7 +8,7 @@ import net.minecraft.client.renderer.entity.MobRenderer;
 import net.minecraft.resources.ResourceLocation;
 
 public class TyrachnidRenderer<T extends Tyrachnid> extends MobRenderer<T, TyrachnidModel<T>> {
-	private static final ResourceLocation TEXTURE = new ResourceLocation(SlayersBeasts.MOD_ID, "textures/entity/tyrachnid.png");
+	private static final ResourceLocation TEXTURE = ResourceLocation.fromNamespaceAndPath(SlayersBeasts.MOD_ID, "textures/entity/tyrachnid.png");
 
 	public TyrachnidRenderer(EntityRendererProvider.Context context) {
 		super(context, new TyrachnidModel<>(context.bakeLayer(TyrachnidModel.LAYER_LOCATION)), 2F);

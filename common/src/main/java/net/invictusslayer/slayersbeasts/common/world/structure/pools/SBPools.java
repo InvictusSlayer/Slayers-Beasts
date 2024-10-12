@@ -14,6 +14,7 @@ import net.minecraft.world.level.levelgen.structure.pools.StructureTemplatePool;
 import net.minecraft.world.level.levelgen.structure.templatesystem.StructureProcessorList;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.function.Function;
 
 public class SBPools {
@@ -27,11 +28,11 @@ public class SBPools {
 	}
 
 	protected static Pair<Function<StructureTemplatePool.Projection, ? extends StructurePoolElement>, Integer> parentElement(String parent, String name, int weight, Holder<StructureProcessorList> processor) {
-		return Pair.of(projection -> new SinglePoolElement(Either.left(new ResourceLocation(SlayersBeasts.MOD_ID, parent + "/" + name)), processor, projection), weight);
+		return Pair.of(projection -> new SinglePoolElement(Either.left(ResourceLocation.fromNamespaceAndPath(SlayersBeasts.MOD_ID, parent + "/" + name)), processor, projection, Optional.empty()), weight);
 	}
 
 	protected static ResourceKey<StructureTemplatePool> createParentKey(String parent, String name) {
-		return ResourceKey.create(Registries.TEMPLATE_POOL, new ResourceLocation(SlayersBeasts.MOD_ID, parent + "/" + name));
+		return ResourceKey.create(Registries.TEMPLATE_POOL, ResourceLocation.fromNamespaceAndPath(SlayersBeasts.MOD_ID, parent + "/" + name));
 	}
 
 	protected static void register(BootstrapContext<StructureTemplatePool> context, ResourceKey<StructureTemplatePool> key, Holder<StructureTemplatePool> fallback, StructureTemplatePool.Projection projection, List<Pair<Function<StructureTemplatePool.Projection, ? extends StructurePoolElement>, Integer>> list) {

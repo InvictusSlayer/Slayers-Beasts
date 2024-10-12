@@ -27,7 +27,7 @@ public class SBStructureSets {
 	}
 
 	private static ResourceKey<StructureSet> createKey(String name) {
-		return ResourceKey.create(Registries.STRUCTURE_SET, new ResourceLocation(SlayersBeasts.MOD_ID, name));
+		return ResourceKey.create(Registries.STRUCTURE_SET, ResourceLocation.fromNamespaceAndPath(SlayersBeasts.MOD_ID, name));
 	}
 
 	private static void register(BootstrapContext<StructureSet> context, ResourceKey<StructureSet> key, List<StructureSet.StructureSelectionEntry> config, StructurePlacement placement) {

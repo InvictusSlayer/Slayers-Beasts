@@ -26,11 +26,11 @@ public class SBDimensions {
 	}
 
 	private static ResourceKey<Level> createDimensionKey(String name) {
-		return ResourceKey.create(Registries.DIMENSION, new ResourceLocation(SlayersBeasts.MOD_ID, name));
+		return ResourceKey.create(Registries.DIMENSION, ResourceLocation.fromNamespaceAndPath(SlayersBeasts.MOD_ID, name));
 	}
 
 	private static ResourceKey<DimensionType> createDimensionTypeKey(String name) {
-		return ResourceKey.create(Registries.DIMENSION_TYPE, new ResourceLocation(SlayersBeasts.MOD_ID, name));
+		return ResourceKey.create(Registries.DIMENSION_TYPE, ResourceLocation.fromNamespaceAndPath(SlayersBeasts.MOD_ID, name));
 	}
 
 	private static void register(BootstrapContext<DimensionType> context, ResourceKey<DimensionType> key, DimensionType type) {

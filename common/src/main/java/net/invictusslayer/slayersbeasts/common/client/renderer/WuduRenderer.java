@@ -8,9 +8,9 @@ import net.minecraft.client.renderer.entity.MobRenderer;
 import net.minecraft.resources.ResourceLocation;
 
 public class WuduRenderer<T extends Wudu> extends MobRenderer<T, WuduModel<T>> {
-	private static final ResourceLocation OAK = new ResourceLocation(SlayersBeasts.MOD_ID, "textures/entity/ent/wudu/oak.png");
-	private static final ResourceLocation BIRCH = new ResourceLocation(SlayersBeasts.MOD_ID, "textures/entity/ent/wudu/birch.png");
-	private static final ResourceLocation JUNGLE = new ResourceLocation(SlayersBeasts.MOD_ID, "textures/entity/ent/wudu/jungle.png");
+	private static final ResourceLocation OAK = ResourceLocation.fromNamespaceAndPath(SlayersBeasts.MOD_ID, "textures/entity/ent/wudu/oak.png");
+	private static final ResourceLocation BIRCH = ResourceLocation.fromNamespaceAndPath(SlayersBeasts.MOD_ID, "textures/entity/ent/wudu/birch.png");
+	private static final ResourceLocation JUNGLE = ResourceLocation.fromNamespaceAndPath(SlayersBeasts.MOD_ID, "textures/entity/ent/wudu/jungle.png");
 
 	public WuduRenderer(EntityRendererProvider.Context context) {
 		super(context, new WuduModel<>(context.bakeLayer(WuduModel.LAYER_LOCATION)), 0.5F);

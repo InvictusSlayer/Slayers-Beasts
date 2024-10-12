@@ -16,8 +16,8 @@ import net.minecraft.client.renderer.entity.layers.RenderLayer;
 import net.minecraft.resources.ResourceLocation;
 
 public class AntCargoLayer<T extends AntWorker> extends RenderLayer<T, AntWorkerModel<T>> {
-	private static final ResourceLocation LEAF = new ResourceLocation(SlayersBeasts.MOD_ID, "textures/entity/ant/cargo/leaf.png");
-	private static final ResourceLocation BARK = new ResourceLocation(SlayersBeasts.MOD_ID, "textures/entity/ant/cargo/bark.png");
+	private static final ResourceLocation LEAF = ResourceLocation.fromNamespaceAndPath(SlayersBeasts.MOD_ID, "textures/entity/ant/cargo/leaf.png");
+	private static final ResourceLocation BARK = ResourceLocation.fromNamespaceAndPath(SlayersBeasts.MOD_ID, "textures/entity/ant/cargo/bark.png");
 	private final AntCargoModel<T> model;
 
 	public AntCargoLayer(RenderLayerParent<T, AntWorkerModel<T>> parent, EntityModelSet set) {
@@ -33,14 +33,14 @@ public class AntCargoLayer<T extends AntWorker> extends RenderLayer<T, AntWorker
             model.prepareMobModel(entity, limbSwing, limbSwingAmount, partialTick);
             model.setupAnim(entity, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch);
             VertexConsumer consumer = bufferSource.getBuffer(RenderType.outline(LEAF));
-            model.renderToBuffer(poseStack, consumer, packedLight, LivingEntityRenderer.getOverlayCoords(entity, 0.0F), 0.0F, 0.0F, 0.0F, 1.0F);
+            model.renderToBuffer(poseStack, consumer, packedLight, LivingEntityRenderer.getOverlayCoords(entity, 0.0F));
 			return;
         }
 
         if (entity.getCargoType() == 1) {
-            renderColoredCutoutModel(model, LEAF, poseStack, bufferSource, packedLight, entity, 1.0F, 1.0F, 1.0F);
+            renderColoredCutoutModel(model, LEAF, poseStack, bufferSource, packedLight, entity, -1);
         } else if (entity.getCargoType() == 2) {
-            renderColoredCutoutModel(model, BARK, poseStack, bufferSource, packedLight, entity, 1.0F, 1.0F, 1.0F);
+            renderColoredCutoutModel(model, BARK, poseStack, bufferSource, packedLight, entity, -1);
         }
 	}
 }

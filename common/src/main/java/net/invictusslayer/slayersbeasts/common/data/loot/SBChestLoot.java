@@ -10,7 +10,7 @@ import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.storage.loot.LootPool;
 import net.minecraft.world.level.storage.loot.LootTable;
 import net.minecraft.world.level.storage.loot.entries.LootItem;
-import net.minecraft.world.level.storage.loot.functions.EnchantRandomlyFunction;
+import net.minecraft.world.level.storage.loot.functions.EnchantWithLevelsFunction;
 import net.minecraft.world.level.storage.loot.functions.SetItemCountFunction;
 import net.minecraft.world.level.storage.loot.functions.SetItemDamageFunction;
 import net.minecraft.world.level.storage.loot.providers.number.ConstantValue;
@@ -18,23 +18,23 @@ import net.minecraft.world.level.storage.loot.providers.number.UniformGenerator;
 
 import java.util.function.BiConsumer;
 
-public class SBChestLoot implements LootTableSubProvider {
-	public void generate(HolderLookup.Provider provider, BiConsumer<ResourceKey<LootTable>, LootTable.Builder> output) {
+public record SBChestLoot(HolderLookup.Provider registries) implements LootTableSubProvider {
+	public void generate(BiConsumer<ResourceKey<LootTable>, LootTable.Builder> output) {
 		output.accept(SBLootTables.CRYPT_COMMON, cryptCommon());
 		output.accept(SBLootTables.CRYPT_RARE, cryptRare());
 		output.accept(SBLootTables.REDWOOD_LOGS, redwoodLogs());
 		output.accept(SBLootTables.REDWOOD_TOOLS, redwoodTools());
 	}
 
-	private static LootTable.Builder cryptCommon() {
+	private LootTable.Builder cryptCommon() {
 		return LootTable.lootTable();
 	}
 
-	private static LootTable.Builder cryptRare() {
+	private LootTable.Builder cryptRare() {
 		return LootTable.lootTable();
 	}
 
-	private static LootTable.Builder redwoodLogs() {
+	private LootTable.Builder redwoodLogs() {
 		return LootTable.lootTable().withPool(LootPool.lootPool().setRolls(UniformGenerator.between(2F, 6F))
 				.add(LootItem.lootTableItem(SBBlocks.REDWOOD_LOG.get()).setWeight(5).apply(SetItemCountFunction.setCount(UniformGenerator.between(1F, 16F))))
 				.add(LootItem.lootTableItem(SBBlocks.WHITE_MUSHROOM_BLOCK.get()).setWeight(3).apply(SetItemCountFunction.setCount(UniformGenerator.between(1F, 10F))))
@@ -46,12 +46,12 @@ public class SBChestLoot implements LootTableSubProvider {
 				.add(LootItem.lootTableItem(SBBlocks.WHITE_MUSHROOM.get()).setWeight(3).apply(SetItemCountFunction.setCount(UniformGenerator.between(1F, 5F))))
 				.add(LootItem.lootTableItem(Items.STONE_AXE).setWeight(1))
 				.add(LootItem.lootTableItem(Items.IRON_AXE).setWeight(1))
-				.add(LootItem.lootTableItem(Items.IRON_AXE).setWeight(1).apply(EnchantRandomlyFunction.randomApplicableEnchantment()))
+				.add(LootItem.lootTableItem(Items.IRON_AXE).setWeight(1).apply(EnchantWithLevelsFunction.enchantWithLevels(registries, UniformGenerator.between(5F, 20F))))
 				.apply(SetItemDamageFunction.setDamage(UniformGenerator.between(0.5F, 0.9F)))
 		);
 	}
 
-	private static LootTable.Builder redwoodTools() {
+	private LootTable.Builder redwoodTools() {
 		return LootTable.lootTable().withPool(LootPool.lootPool().setRolls(UniformGenerator.between(2F, 6F))
 				.add(LootItem.lootTableItem(Items.COAL).setWeight(5)).apply(SetItemCountFunction.setCount(UniformGenerator.between(1F, 6F)))
 				.add(LootItem.lootTableItem(Items.BOOK).setWeight(3).apply(SetItemCountFunction.setCount(UniformGenerator.between(1F, 3F))))
@@ -60,11 +60,11 @@ public class SBChestLoot implements LootTableSubProvider {
 				.add(LootItem.lootTableItem(SBItems.REDWOOD_BOAT.get()).setWeight(5))
 				.add(LootItem.lootTableItem(Items.STONE_AXE).setWeight(1))
 				.add(LootItem.lootTableItem(Items.IRON_AXE).setWeight(1))
-				.add(LootItem.lootTableItem(Items.IRON_AXE).setWeight(1).apply(EnchantRandomlyFunction.randomApplicableEnchantment()))
-				.add(LootItem.lootTableItem(Items.IRON_SHOVEL).setWeight(1).apply(EnchantRandomlyFunction.randomApplicableEnchantment()))
+				.add(LootItem.lootTableItem(Items.IRON_AXE).setWeight(1).apply(EnchantWithLevelsFunction.enchantWithLevels(registries, UniformGenerator.between(5F, 20F))))
+				.add(LootItem.lootTableItem(Items.IRON_SHOVEL).setWeight(1).apply(EnchantWithLevelsFunction.enchantWithLevels(registries, UniformGenerator.between(5F, 20F))))
 				.add(LootItem.lootTableItem(Items.IRON_HOE).setWeight(1))
 				.add(LootItem.lootTableItem(Items.BOW).setWeight(1))
-				.add(LootItem.lootTableItem(Items.FISHING_ROD).setWeight(1).apply(EnchantRandomlyFunction.randomApplicableEnchantment()))
+				.add(LootItem.lootTableItem(Items.FISHING_ROD).setWeight(1).apply(EnchantWithLevelsFunction.enchantWithLevels(registries, UniformGenerator.between(5F, 20F))))
 				.apply(SetItemDamageFunction.setDamage(UniformGenerator.between(0.8F, 1F)))
 		);
 	}

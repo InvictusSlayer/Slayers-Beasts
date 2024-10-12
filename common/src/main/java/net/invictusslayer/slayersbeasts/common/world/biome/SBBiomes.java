@@ -94,7 +94,7 @@ public class SBBiomes {
 	}
 
 	private static ResourceKey<Biome> createKey(String name) {
-		return ResourceKey.create(Registries.BIOME, new ResourceLocation(SlayersBeasts.MOD_ID, name));
+		return ResourceKey.create(Registries.BIOME, ResourceLocation.fromNamespaceAndPath(SlayersBeasts.MOD_ID, name));
 	}
 
 	private static void register(BootstrapContext<Biome> context, ResourceKey<Biome> key, Biome biome) {

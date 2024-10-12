@@ -88,7 +88,7 @@ public class EnUsLangProvider extends SBLangProvider {
 		addBlock(SBBlocks.WHITE_MUSHROOM_BLOCK, "White Mushroom Block");
 		addBlock(SBBlocks.WHITE_MUSHROOM, "White Mushroom");
 		addBlock(SBBlocks.TALL_WHITE_MUSHROOM, "Tall White Mushroom");
-		addBlock(SBBlocks.THIN_MUSHROOM_STEM, "Thin Mushroom Stem");
+//		addBlock(SBBlocks.THIN_MUSHROOM_STEM, "Thin Mushroom Stem");
 
 		addWoodFamily(WoodFamily.ASPEN, "Aspen");
 		addWoodFamily(WoodFamily.CAJOLE, "Cajole");

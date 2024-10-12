@@ -1,6 +1,5 @@
 package net.invictusslayer.slayersbeasts.common.init;
 
-import dev.architectury.core.item.ArchitecturyRecordItem;
 import dev.architectury.core.item.ArchitecturySpawnEggItem;
 import dev.architectury.registry.registries.DeferredRegister;
 import dev.architectury.registry.registries.RegistrySupplier;
@@ -8,13 +7,14 @@ import net.invictusslayer.slayersbeasts.common.SlayersBeasts;
 import net.invictusslayer.slayersbeasts.common.entity.vehicle.SBBoatType;
 import net.invictusslayer.slayersbeasts.common.item.CryptPortalItem;
 import net.invictusslayer.slayersbeasts.common.item.SBFoods;
+import net.invictusslayer.slayersbeasts.common.item.SBJukeboxSongs;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.world.item.*;
 
 public class SBItems {
 	public static final DeferredRegister<Item> ITEMS = DeferredRegister.create(SlayersBeasts.MOD_ID, Registries.ITEM);
 
-	public static final RegistrySupplier<Item> MUSIC_DISC_INKISH = ITEMS.register("music_disc_inkish", () -> new ArchitecturyRecordItem(1, SBSounds.MUSIC_DISC_INKISH, new Item.Properties().stacksTo(1).rarity(Rarity.RARE), 220));
+	public static final RegistrySupplier<Item> MUSIC_DISC_INKISH = ITEMS.register("music_disc_inkish", () -> new Item(new Item.Properties().stacksTo(1).rarity(Rarity.RARE).jukeboxPlayable(SBJukeboxSongs.INKISH)));
 
 	public static final RegistrySupplier<Item> JADE = ITEMS.register("jade", () -> new CryptPortalItem(new Item.Properties()));
 	public static final RegistrySupplier<Item> JADE_SHARD = ITEMS.register("jade_shard", () -> new Item(new Item.Properties()));

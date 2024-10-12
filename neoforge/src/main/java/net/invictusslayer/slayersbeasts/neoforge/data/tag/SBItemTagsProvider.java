@@ -20,7 +20,7 @@ public class SBItemTagsProvider extends ItemTagsProvider {
 	}
 
 	protected void addTags(HolderLookup.Provider provider) {
-		tag(ItemTags.MUSIC_DISCS).add(SBItems.MUSIC_DISC_INKISH.get());
+//		tag(ItemTags.MUSIC_DISCS).add(SBItems.MUSIC_DISC_INKISH.get());
 
 		WoodFamily.getAllFamilies().forEach(family -> copy(family.getLogBlocks(), family.getLogItems()));
 		copy(BlockTags.LOGS_THAT_BURN, ItemTags.LOGS_THAT_BURN);

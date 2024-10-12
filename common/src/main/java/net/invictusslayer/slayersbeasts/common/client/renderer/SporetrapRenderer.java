@@ -8,7 +8,7 @@ import net.minecraft.client.renderer.entity.MobRenderer;
 import net.minecraft.resources.ResourceLocation;
 
 public class SporetrapRenderer<T extends Sporetrap> extends MobRenderer<T, SporetrapModel<T>> {
-	private static final ResourceLocation TEXTURE = new ResourceLocation(SlayersBeasts.MOD_ID, "textures/entity/sporetrap.png");
+	private static final ResourceLocation TEXTURE = ResourceLocation.fromNamespaceAndPath(SlayersBeasts.MOD_ID, "textures/entity/sporetrap.png");
 
 	public SporetrapRenderer(EntityRendererProvider.Context context) {
 		super(context, new SporetrapModel<>(context.bakeLayer(SporetrapModel.LAYER_LOCATION)), 0.5F);

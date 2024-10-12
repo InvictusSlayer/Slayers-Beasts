@@ -149,7 +149,7 @@ public class SBOverworldRegion extends Region {
 	};
 
 	public SBOverworldRegion(int weight) {
-		super(new ResourceLocation(SlayersBeasts.MOD_ID, "overworld"), RegionType.OVERWORLD, weight);
+		super(ResourceLocation.fromNamespaceAndPath(SlayersBeasts.MOD_ID, "overworld"), RegionType.OVERWORLD, weight);
 	}
 
 	public void addBiomes(Registry<Biome> registry, Consumer<Pair<Climate.ParameterPoint, ResourceKey<Biome>>> mapper) {

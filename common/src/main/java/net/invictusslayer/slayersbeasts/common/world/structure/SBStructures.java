@@ -50,6 +50,6 @@ public class SBStructures {
 	}
 
 	private static ResourceKey<Structure> createKey(String name) {
-		return ResourceKey.create(Registries.STRUCTURE, new ResourceLocation(SlayersBeasts.MOD_ID, name));
+		return ResourceKey.create(Registries.STRUCTURE, ResourceLocation.fromNamespaceAndPath(SlayersBeasts.MOD_ID, name));
 	}
 }

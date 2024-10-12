@@ -13,7 +13,7 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.Mth;
 
 public class SporetrapModel<T extends Sporetrap> extends EntityModel<T> {
-	public static final ModelLayerLocation LAYER_LOCATION = new ModelLayerLocation(new ResourceLocation(SlayersBeasts.MOD_ID, "sporetrap_model"), "main");
+	public static final ModelLayerLocation LAYER_LOCATION = new ModelLayerLocation(ResourceLocation.fromNamespaceAndPath(SlayersBeasts.MOD_ID, "sporetrap_model"), "main");
 	private final ModelPart base;
 	private final ModelPart innerLeaf1;
 	private final ModelPart innerLeaf2;
@@ -54,15 +54,15 @@ public class SporetrapModel<T extends Sporetrap> extends EntityModel<T> {
 //		this.innerLeaf4.zRot += f1;
 	}
 
-	public void renderToBuffer(PoseStack poseStack, VertexConsumer buffer, int packedLight, int packedOverlay, float red, float green, float blue, float alpha) {
-		base.render(poseStack, buffer, packedLight, packedOverlay);
-		innerLeaf1.render(poseStack, buffer, packedLight, packedOverlay);
-		innerLeaf2.render(poseStack, buffer, packedLight, packedOverlay);
-		innerLeaf3.render(poseStack, buffer, packedLight, packedOverlay);
-		innerLeaf4.render(poseStack, buffer, packedLight, packedOverlay);
-		stem.render(poseStack, buffer, packedLight, packedOverlay);
-		mouthTop.render(poseStack, buffer, packedLight, packedOverlay);
-		mouthBottom.render(poseStack, buffer, packedLight, packedOverlay);
+	public void renderToBuffer(PoseStack poseStack, VertexConsumer buffer, int packedLight, int packedOverlay, int colour) {
+		base.render(poseStack, buffer, packedLight, packedOverlay, colour);
+		innerLeaf1.render(poseStack, buffer, packedLight, packedOverlay, colour);
+		innerLeaf2.render(poseStack, buffer, packedLight, packedOverlay, colour);
+		innerLeaf3.render(poseStack, buffer, packedLight, packedOverlay, colour);
+		innerLeaf4.render(poseStack, buffer, packedLight, packedOverlay, colour);
+		stem.render(poseStack, buffer, packedLight, packedOverlay, colour);
+		mouthTop.render(poseStack, buffer, packedLight, packedOverlay, colour);
+		mouthBottom.render(poseStack, buffer, packedLight, packedOverlay, colour);
 	}
 
 	public static LayerDefinition createBodyLayer() {

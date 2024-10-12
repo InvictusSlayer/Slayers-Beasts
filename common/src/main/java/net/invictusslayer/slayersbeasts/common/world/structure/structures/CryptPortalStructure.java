@@ -1,6 +1,5 @@
 package net.invictusslayer.slayersbeasts.common.world.structure.structures;
 
-import com.mojang.serialization.Codec;
 import com.mojang.serialization.MapCodec;
 import net.invictusslayer.slayersbeasts.common.init.SBStructureTypes;
 import net.invictusslayer.slayersbeasts.common.world.structure.pieces.CryptPortalPieces;

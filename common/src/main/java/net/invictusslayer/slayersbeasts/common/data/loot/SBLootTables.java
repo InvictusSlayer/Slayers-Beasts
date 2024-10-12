@@ -20,7 +20,7 @@ public class SBLootTables {
 	public static final ResourceKey<LootTable> REDWOOD_TOOLS = register("chests/redwood_tools");
 
 	private static ResourceKey<LootTable> register(String path) {
-		ResourceKey<LootTable> key = ResourceKey.create(Registries.LOOT_TABLE, new ResourceLocation(SlayersBeasts.MOD_ID, path));
+		ResourceKey<LootTable> key = ResourceKey.create(Registries.LOOT_TABLE, ResourceLocation.fromNamespaceAndPath(SlayersBeasts.MOD_ID, path));
 		if (LOCATIONS.add(key)) return key;
 		else throw new IllegalArgumentException(key + " is already a registered loot table");
 	}

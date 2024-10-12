@@ -77,23 +77,23 @@ public class SBItemModelProvider extends ItemModelProvider {
 
 	private void block(RegistrySupplier<?> block, String suffix) {
 		withExistingParent(block.getId().getPath(),
-				new ResourceLocation("item/generated")).texture("layer0",
-				new ResourceLocation(SlayersBeasts.MOD_ID, "block/" + block.getId().getPath() + suffix));
+				ResourceLocation.fromNamespaceAndPath("minecraft", "item/generated")).texture("layer0",
+				ResourceLocation.fromNamespaceAndPath(SlayersBeasts.MOD_ID, "block/" + block.getId().getPath() + suffix));
 	}
 
 	private void item(RegistrySupplier<?> item) {
 		withExistingParent(item.getId().getPath(),
-				new ResourceLocation("item/generated")).texture("layer0",
-				new ResourceLocation(SlayersBeasts.MOD_ID, "item/" + item.getId().getPath()));
+				ResourceLocation.fromNamespaceAndPath("minecraft", "item/generated")).texture("layer0",
+				ResourceLocation.fromNamespaceAndPath(SlayersBeasts.MOD_ID, "item/" + item.getId().getPath()));
 	}
 
 //	private void handheldItem(RegistrySupplier<Item> item) {
 //		withExistingParent(item.getId().getPath(),
-//				new ResourceLocation("item/handheld")).texture("layer0",
-//				new ResourceLocation(SlayersBeasts.MOD_ID, "item/" + item.getId().getPath()));
+//				ResourceLocation.fromNamespaceAndPath("minecraft", "item/handheld")).texture("layer0",
+//				ResourceLocation.fromNamespaceAndPath(SlayersBeasts.MOD_ID, "item/" + item.getId().getPath()));
 //	}
 
 	private void spawnEgg(RegistrySupplier<Item> item) {
-		withExistingParent(item.getId().getPath(), new ResourceLocation("item/template_spawn_egg"));
+		withExistingParent(item.getId().getPath(), ResourceLocation.fromNamespaceAndPath("minecraft", "item/template_spawn_egg"));
 	}
 }

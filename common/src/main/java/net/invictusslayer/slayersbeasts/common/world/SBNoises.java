@@ -17,7 +17,7 @@ public class SBNoises {
 	}
 
 	private static ResourceKey<NormalNoise.NoiseParameters> createKey(String key) {
-		return ResourceKey.create(Registries.NOISE, new ResourceLocation(SlayersBeasts.MOD_ID, key));
+		return ResourceKey.create(Registries.NOISE, ResourceLocation.fromNamespaceAndPath(SlayersBeasts.MOD_ID, key));
 	}
 
 	private static void register(BootstrapContext<NormalNoise.NoiseParameters> context, ResourceKey<NormalNoise.NoiseParameters> key, int firstOctave, double amplitude, double... amplitudes) {

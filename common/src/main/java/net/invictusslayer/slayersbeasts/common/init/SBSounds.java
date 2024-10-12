@@ -16,6 +16,6 @@ public class SBSounds {
 	public static final RegistrySupplier<SoundEvent> MANTIS_HURT = register("entity.mantis.hurt");
 
 	private static RegistrySupplier<SoundEvent> register(String name) {
-		return SOUNDS.register(name, () -> SoundEvent.createVariableRangeEvent(new ResourceLocation(SlayersBeasts.MOD_ID, name)));
+		return SOUNDS.register(name, () -> SoundEvent.createVariableRangeEvent(ResourceLocation.fromNamespaceAndPath(SlayersBeasts.MOD_ID, name)));
 	}
 }

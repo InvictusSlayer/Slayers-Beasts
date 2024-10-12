@@ -17,7 +17,7 @@ import java.util.function.Consumer;
 
 public class SBEndRegion extends Region {
 	public SBEndRegion(int weight) {
-		super(new ResourceLocation(SlayersBeasts.MOD_ID, "end"), RegionType.NETHER, weight);
+		super(ResourceLocation.fromNamespaceAndPath(SlayersBeasts.MOD_ID, "end"), RegionType.NETHER, weight);
 	}
 // TODO: Add EnderBlender RegionType
 	public void addBiomes(Registry<Biome> registry, Consumer<Pair<Climate.ParameterPoint, ResourceKey<Biome>>> mapper) {

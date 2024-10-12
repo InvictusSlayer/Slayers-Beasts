@@ -28,7 +28,7 @@ public class SBTags {
 		public static final TagKey<Block> WILLOW_LOGS = tag("willow_logs");
 
 		private static TagKey<Block> tag(String name) {
-			return TagKey.create(Registries.BLOCK, new ResourceLocation(SlayersBeasts.MOD_ID, name));
+			return TagKey.create(Registries.BLOCK, ResourceLocation.fromNamespaceAndPath(SlayersBeasts.MOD_ID, name));
 		}
 	}
 
@@ -42,7 +42,7 @@ public class SBTags {
 		public static final TagKey<Item> WILLOW_LOGS = tag("willow_logs");
 
 		private static TagKey<Item> tag(String name) {
-			return TagKey.create(Registries.ITEM, new ResourceLocation(SlayersBeasts.MOD_ID, name));
+			return TagKey.create(Registries.ITEM, ResourceLocation.fromNamespaceAndPath(SlayersBeasts.MOD_ID, name));
 		}
 	}
 
@@ -85,7 +85,7 @@ public class SBTags {
 		}
 
 		private static TagKey<Biome> tag(String name) {
-			return TagKey.create(Registries.BIOME, new ResourceLocation(SlayersBeasts.MOD_ID, name));
+			return TagKey.create(Registries.BIOME, ResourceLocation.fromNamespaceAndPath(SlayersBeasts.MOD_ID, name));
 		}
 	}
 
@@ -94,7 +94,7 @@ public class SBTags {
 		public static final TagKey<EntityType<?>> PEAT_WALKABLE_MOBS = tag("peat_walkable_mobs");
 
 		private static TagKey<EntityType<?>> tag(String name) {
-			return TagKey.create(Registries.ENTITY_TYPE, new ResourceLocation(SlayersBeasts.MOD_ID, name));
+			return TagKey.create(Registries.ENTITY_TYPE, ResourceLocation.fromNamespaceAndPath(SlayersBeasts.MOD_ID, name));
 		}
 	}
 
@@ -102,7 +102,7 @@ public class SBTags {
 		public static final TagKey<PoiType> ANT_HOME = tag("ant_home");
 
 		private static TagKey<PoiType> tag(String name) {
-			return TagKey.create(Registries.POINT_OF_INTEREST_TYPE, new ResourceLocation(SlayersBeasts.MOD_ID, name));
+			return TagKey.create(Registries.POINT_OF_INTEREST_TYPE, ResourceLocation.fromNamespaceAndPath(SlayersBeasts.MOD_ID, name));
 		}
 	}
 }

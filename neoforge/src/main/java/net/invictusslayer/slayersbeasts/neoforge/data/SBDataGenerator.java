@@ -7,6 +7,7 @@ import net.invictusslayer.slayersbeasts.common.data.loot.SBBlockLoot;
 import net.invictusslayer.slayersbeasts.common.data.loot.SBChestLoot;
 import net.invictusslayer.slayersbeasts.common.data.loot.SBEntityLoot;
 import net.invictusslayer.slayersbeasts.common.data.loot.SBLootTables;
+import net.invictusslayer.slayersbeasts.common.item.SBJukeboxSongs;
 import net.invictusslayer.slayersbeasts.common.world.SBNoises;
 import net.invictusslayer.slayersbeasts.common.world.biome.SBBiomes;
 import net.invictusslayer.slayersbeasts.common.world.dimension.SBDimensions;
@@ -53,6 +54,7 @@ public class SBDataGenerator {
 			.add(Registries.TEMPLATE_POOL, SBPools::bootstrap)
 			.add(Registries.PROCESSOR_LIST, SBProcessorLists::bootstrap)
 			.add(Registries.NOISE, SBNoises::bootstrap)
+			.add(Registries.JUKEBOX_SONG, SBJukeboxSongs::bootstrap)
 			.add(NeoForgeRegistries.Keys.BIOME_MODIFIERS, SBBiomeModifiers::bootstrap);
 
 	@SubscribeEvent

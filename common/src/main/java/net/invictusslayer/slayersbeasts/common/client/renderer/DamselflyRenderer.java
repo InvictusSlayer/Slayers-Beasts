@@ -8,9 +8,9 @@ import net.minecraft.client.renderer.entity.MobRenderer;
 import net.minecraft.resources.ResourceLocation;
 
 public class DamselflyRenderer<T extends Damselfly> extends MobRenderer<T, DamselflyModel<T>> {
-	private static final ResourceLocation BLUE = new ResourceLocation(SlayersBeasts.MOD_ID, "textures/entity/damselfly/blue.png");
-	private static final ResourceLocation GREEN = new ResourceLocation(SlayersBeasts.MOD_ID, "textures/entity/damselfly/green.png");
-	private static final ResourceLocation YELLOW = new ResourceLocation(SlayersBeasts.MOD_ID, "textures/entity/damselfly/yellow.png");
+	private static final ResourceLocation BLUE = ResourceLocation.fromNamespaceAndPath(SlayersBeasts.MOD_ID, "textures/entity/damselfly/blue.png");
+	private static final ResourceLocation GREEN = ResourceLocation.fromNamespaceAndPath(SlayersBeasts.MOD_ID, "textures/entity/damselfly/green.png");
+	private static final ResourceLocation YELLOW = ResourceLocation.fromNamespaceAndPath(SlayersBeasts.MOD_ID, "textures/entity/damselfly/yellow.png");
 
 	public DamselflyRenderer(EntityRendererProvider.Context context) {
 		super(context, new DamselflyModel<>(context.bakeLayer(DamselflyModel.LAYER_LOCATION)), 0.5F);

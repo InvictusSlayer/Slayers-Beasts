@@ -23,6 +23,7 @@ import net.minecraft.world.level.levelgen.structure.pools.EmptyPoolElement;
 import net.minecraft.world.level.levelgen.structure.pools.JigsawJunction;
 import net.minecraft.world.level.levelgen.structure.pools.StructurePoolElement;
 import net.minecraft.world.level.levelgen.structure.pools.StructureTemplatePool;
+import net.minecraft.world.level.levelgen.structure.templatesystem.LiquidSettings;
 import net.minecraft.world.level.levelgen.structure.templatesystem.StructureTemplate;
 import net.minecraft.world.level.levelgen.structure.templatesystem.StructureTemplateManager;
 import net.minecraft.world.phys.AABB;
@@ -48,7 +49,7 @@ public class CryptPieces {
 
 		Vec3i vec3i = pos.subtract(pos);
 		BlockPos blockPos = pos.subtract(vec3i);
-		PoolElementStructurePiece piece = new PoolElementStructurePiece(manager, element, blockPos, element.getGroundLevelDelta(), Rotation.NONE, element.getBoundingBox(manager, blockPos, Rotation.NONE));
+		PoolElementStructurePiece piece = new PoolElementStructurePiece(manager, element, blockPos, element.getGroundLevelDelta(), Rotation.NONE, element.getBoundingBox(manager, blockPos, Rotation.NONE), LiquidSettings.IGNORE_WATERLOGGING);
 		BoundingBox box = piece.getBoundingBox();
 		int x = (box.maxX() + box.minX()) / 2;
 		int z = (box.maxZ() + box.minZ()) / 2;
@@ -189,7 +190,7 @@ public class CryptPieces {
 										k2 = poolElement.getGroundLevelDelta();
 									}
 
-									PoolElementStructurePiece piece1 = new PoolElementStructurePiece(this.manager, poolElement, blockPos4, k2, rotation1, boundingBox1);
+									PoolElementStructurePiece piece1 = new PoolElementStructurePiece(this.manager, poolElement, blockPos4, k2, rotation1, boundingBox1, LiquidSettings.IGNORE_WATERLOGGING);
 									int l2;
 									if (flag) {
 										l2 = y + j;
@@ -220,7 +221,7 @@ public class CryptPieces {
 
 		private static ResourceKey<StructureTemplatePool> readPoolName(StructureTemplate.StructureBlockInfo info) {
 			assert info.nbt() != null;
-			return ResourceKey.create(Registries.TEMPLATE_POOL, new ResourceLocation(info.nbt().getString("pool")));
+			return ResourceKey.create(Registries.TEMPLATE_POOL, ResourceLocation.fromNamespaceAndPath("minecraft", info.nbt().getString("pool")));
 		}
 	}
 }
