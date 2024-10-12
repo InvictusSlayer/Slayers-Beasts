@@ -5,6 +5,7 @@
 	"minVersion": "0.8",
 	"mixins": [
 		"common.BlockEntityTypeMixin",
+		"common.BoatMixin",
 		"common.BoatTypeMixin",
 		"common.ChestBoatMixin",
 		"common.FoxTypeMixin",
