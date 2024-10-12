@@ -1,0 +1,28 @@
+{
+  "entity.mantis.ambient": {
+    "sounds": [
+      "slayersbeasts:entity/mantis/ambient"
+    ],
+    "subtitle": "subtitles.slayersbeasts.entity.mantis.ambient"
+  },
+  "entity.mantis.death": {
+    "sounds": [
+      "slayersbeasts:entity/mantis/death"
+    ],
+    "subtitle": "subtitles.slayersbeasts.entity.mantis.death"
+  },
+  "entity.mantis.hurt": {
+    "sounds": [
+      "slayersbeasts:entity/mantis/hurt"
+    ],
+    "subtitle": "subtitles.slayersbeasts.entity.mantis.hurt"
+  },
+  "music_disc.inkish": {
+    "sounds": [
+      {
+        "name": "slayersbeasts:music_disc/inkish",
+        "stream": true
+      }
+    ]
+  }
+}

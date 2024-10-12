@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:random_selector",
+  "config": {
+    "default": "slayersbeasts:redwood",
+    "features": [
+      {
+        "chance": 0.2,
+        "feature": "slayersbeasts:giant_redwood"
+      },
+      {
+        "chance": 0.03,
+        "feature": {
+          "feature": "slayersbeasts:huge_white_mushroom",
+          "placement": []
+        }
+      },
+      {
+        "chance": 0.001,
+        "feature": "slayersbeasts:albino_redwood"
+      }
+    ]
+  }
+}

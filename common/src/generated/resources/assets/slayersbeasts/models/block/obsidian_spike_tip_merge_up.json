@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:block/cross",
+  "render_type": "minecraft:cutout",
+  "textures": {
+    "cross": "slayersbeasts:block/obsidian_spike_tip_merge_up"
+  }
+}

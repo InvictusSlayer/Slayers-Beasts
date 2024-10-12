@@ -1,0 +1,19 @@
+{
+  "variants": {
+    "facing=east": {
+      "model": "slayersbeasts:block/depleted_cryptalith",
+      "y": 270
+    },
+    "facing=north": {
+      "model": "slayersbeasts:block/depleted_cryptalith",
+      "y": 180
+    },
+    "facing=south": {
+      "model": "slayersbeasts:block/depleted_cryptalith"
+    },
+    "facing=west": {
+      "model": "slayersbeasts:block/depleted_cryptalith",
+      "y": 90
+    }
+  }
+}

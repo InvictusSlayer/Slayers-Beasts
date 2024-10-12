@@ -1,0 +1,21 @@
+{
+  "variants": {
+    "": [
+      {
+        "model": "slayersbeasts:block/rudosol"
+      },
+      {
+        "model": "slayersbeasts:block/rudosol",
+        "y": 90
+      },
+      {
+        "model": "slayersbeasts:block/rudosol",
+        "y": 180
+      },
+      {
+        "model": "slayersbeasts:block/rudosol",
+        "y": 270
+      }
+    ]
+  }
+}

@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/inner_stairs",
+  "textures": {
+    "bottom": "slayersbeasts:block/kapok_planks",
+    "side": "slayersbeasts:block/kapok_planks",
+    "top": "slayersbeasts:block/kapok_planks"
+  }
+}

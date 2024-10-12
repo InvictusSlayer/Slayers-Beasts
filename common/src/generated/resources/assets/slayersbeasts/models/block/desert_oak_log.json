@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:block/cube_column",
+  "textures": {
+    "end": "slayersbeasts:block/desert_oak_log_top",
+    "side": "slayersbeasts:block/desert_oak_log"
+  }
+}

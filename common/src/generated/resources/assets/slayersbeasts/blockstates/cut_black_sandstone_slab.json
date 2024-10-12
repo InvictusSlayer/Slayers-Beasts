@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "type=bottom": {
+      "model": "slayersbeasts:block/cut_black_sandstone_slab"
+    },
+    "type=double": {
+      "model": "slayersbeasts:block/cut_black_sandstone"
+    },
+    "type=top": {
+      "model": "slayersbeasts:block/cut_black_sandstone_slab_top"
+    }
+  }
+}

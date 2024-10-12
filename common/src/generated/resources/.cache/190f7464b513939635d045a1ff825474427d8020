@@ -1,0 +1,23 @@
+// 1.21.1	2024-10-12T15:45:51.4484913	Tags for minecraft:item mod id slayersbeasts
+4003e8342c72352cb5c53a187394820cb98f7a5c data/minecraft/tags/item/fence_gates.json
+97af5d19999bf2194eda87e34e96ef3349283cc0 data/minecraft/tags/item/logs_that_burn.json
+4317f96c9167ee95323432a5c43d204c1c74be8d data/minecraft/tags/item/planks.json
+45095e3c0f14fe79c1430c734902a54cbfd35902 data/minecraft/tags/item/sand.json
+1451986db6553cd83913aa56e5c5e2a19039b6ac data/minecraft/tags/item/saplings.json
+d6b3a47537aca014177a7fde92c6994468b560ce data/minecraft/tags/item/slabs.json
+45095e3c0f14fe79c1430c734902a54cbfd35902 data/minecraft/tags/item/smelts_to_glass.json
+a45194289814ce14d0cbb6eb66f54037fc425329 data/minecraft/tags/item/stairs.json
+c1711919b109296de4ba028a0f2ffbd90a3e6c91 data/minecraft/tags/item/walls.json
+91e3058852ed686489e0dd1a434f9e139f5d785a data/minecraft/tags/item/wooden_buttons.json
+f492045cd42a29ee4f34ca4bace2d2c82e49cb18 data/minecraft/tags/item/wooden_doors.json
+12f1430f99419d8ef4faeb77af521fbdc6b1e979 data/minecraft/tags/item/wooden_fences.json
+856141d1402dba35603820876dd669b33d280d69 data/minecraft/tags/item/wooden_pressure_plates.json
+3c2a9c05c202b9b6da9bed148b9093d559c8e110 data/minecraft/tags/item/wooden_slabs.json
+99936b401b33f250d4b46af49ffe6a648e2a043c data/minecraft/tags/item/wooden_stairs.json
+c8286db74fb3d33b7ab7adbee4ac6af6118cdbd5 data/slayersbeasts/tags/item/aspen_logs.json
+771cf5ae816536b17559ea1dd9c48c176c0641c6 data/slayersbeasts/tags/item/cajole_logs.json
+e178eaac6c6ec4ff2db63c0203907748e35ce68a data/slayersbeasts/tags/item/desert_oak_logs.json
+c7ce2d2dffe5cc31dd53ee6f4b00a091c3a623db data/slayersbeasts/tags/item/eucalyptus_logs.json
+89afc0236d2ff26d387cf6e3d6049b6024f2e169 data/slayersbeasts/tags/item/kapok_logs.json
+ef41e026611c670c1f206c845616d983de1a5fee data/slayersbeasts/tags/item/redwood_logs.json
+15349f347b466d208c6dd49b76f07fa0d34a635c data/slayersbeasts/tags/item/willow_logs.json

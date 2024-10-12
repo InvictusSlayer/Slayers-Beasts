@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_pegmatite": {
+      "conditions": {
+        "items": [
+          {
+            "items": "slayersbeasts:pegmatite"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "slayersbeasts:pegmatite_wall"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_pegmatite"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "slayersbeasts:pegmatite_wall"
+    ]
+  }
+}

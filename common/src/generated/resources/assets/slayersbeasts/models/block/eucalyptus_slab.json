@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/slab",
+  "textures": {
+    "bottom": "slayersbeasts:block/eucalyptus_planks",
+    "side": "slayersbeasts:block/eucalyptus_planks",
+    "top": "slayersbeasts:block/eucalyptus_planks"
+  }
+}

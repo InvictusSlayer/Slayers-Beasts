@@ -1,0 +1,8 @@
+{
+  "values": [
+    "slayersbeasts:eucalypt_woodland",
+    "#slayersbeasts:is_brushland",
+    "#minecraft:is_jungle",
+    "#minecraft:is_savanna"
+  ]
+}

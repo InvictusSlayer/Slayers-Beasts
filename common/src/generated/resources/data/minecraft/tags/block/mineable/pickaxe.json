@@ -1,0 +1,32 @@
+{
+  "values": [
+    "slayersbeasts:obsidian_spike",
+    "slayersbeasts:icicle",
+    "slayersbeasts:cryptalith",
+    "slayersbeasts:infused_cryptalith",
+    "slayersbeasts:depleted_cryptalith",
+    "slayersbeasts:styphium",
+    "slayersbeasts:deepslate_styphium",
+    "slayersbeasts:pegmatite",
+    "slayersbeasts:pegmatite_slab",
+    "slayersbeasts:pegmatite_stairs",
+    "slayersbeasts:pegmatite_wall",
+    "slayersbeasts:polished_pegmatite",
+    "slayersbeasts:polished_pegmatite_slab",
+    "slayersbeasts:polished_pegmatite_stairs",
+    "slayersbeasts:cracked_mud",
+    "slayersbeasts:jade_block",
+    "slayersbeasts:exoskeleton_ore",
+    "slayersbeasts:deepslate_exoskeleton_ore",
+    "slayersbeasts:black_sandstone",
+    "slayersbeasts:black_sandstone_slab",
+    "slayersbeasts:black_sandstone_stairs",
+    "slayersbeasts:black_sandstone_wall",
+    "slayersbeasts:smooth_black_sandstone",
+    "slayersbeasts:smooth_black_sandstone_slab",
+    "slayersbeasts:smooth_black_sandstone_stairs",
+    "slayersbeasts:cut_black_sandstone",
+    "slayersbeasts:cut_black_sandstone_slab",
+    "slayersbeasts:chiseled_black_sandstone"
+  ]
+}

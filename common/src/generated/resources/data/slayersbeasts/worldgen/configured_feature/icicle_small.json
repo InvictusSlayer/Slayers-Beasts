@@ -1,0 +1,73 @@
+{
+  "type": "minecraft:simple_random_selector",
+  "config": {
+    "features": [
+      {
+        "feature": {
+          "type": "slayersbeasts:icicle_small",
+          "config": {
+            "radial_spread_chance": 0.7,
+            "radial_spread_chance2": 0.5,
+            "radial_spread_chance3": 0.5,
+            "taller_icicle_chance": 0.2
+          }
+        },
+        "placement": [
+          {
+            "type": "minecraft:environment_scan",
+            "allowed_search_condition": {
+              "type": "minecraft:matching_blocks",
+              "blocks": [
+                "minecraft:air",
+                "minecraft:water"
+              ]
+            },
+            "direction_of_search": "down",
+            "max_steps": 12,
+            "target_condition": {
+              "type": "minecraft:solid"
+            }
+          },
+          {
+            "type": "minecraft:random_offset",
+            "xz_spread": 0,
+            "y_spread": 1
+          }
+        ]
+      },
+      {
+        "feature": {
+          "type": "slayersbeasts:icicle_small",
+          "config": {
+            "radial_spread_chance": 0.7,
+            "radial_spread_chance2": 0.5,
+            "radial_spread_chance3": 0.5,
+            "taller_icicle_chance": 0.2
+          }
+        },
+        "placement": [
+          {
+            "type": "minecraft:environment_scan",
+            "allowed_search_condition": {
+              "type": "minecraft:matching_blocks",
+              "blocks": [
+                "minecraft:air",
+                "minecraft:water"
+              ]
+            },
+            "direction_of_search": "up",
+            "max_steps": 12,
+            "target_condition": {
+              "type": "minecraft:solid"
+            }
+          },
+          {
+            "type": "minecraft:random_offset",
+            "xz_spread": 0,
+            "y_spread": -1
+          }
+        ]
+      }
+    ]
+  }
+}

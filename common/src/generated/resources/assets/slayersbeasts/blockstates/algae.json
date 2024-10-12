@@ -1,0 +1,21 @@
+{
+  "variants": {
+    "": [
+      {
+        "model": "slayersbeasts:block/algae"
+      },
+      {
+        "model": "slayersbeasts:block/algae",
+        "y": 90
+      },
+      {
+        "model": "slayersbeasts:block/algae",
+        "y": 180
+      },
+      {
+        "model": "slayersbeasts:block/algae",
+        "y": 270
+      }
+    ]
+  }
+}

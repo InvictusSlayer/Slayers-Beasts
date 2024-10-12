@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:random_selector",
+  "config": {
+    "default": "slayersbeasts:giant_willow",
+    "features": [
+      {
+        "chance": 0.5,
+        "feature": "slayersbeasts:giant_willow"
+      }
+    ]
+  }
+}

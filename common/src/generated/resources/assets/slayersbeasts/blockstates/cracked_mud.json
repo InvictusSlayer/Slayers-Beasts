@@ -1,0 +1,16 @@
+{
+  "variants": {
+    "tilt=full": {
+      "model": "slayersbeasts:block/cracked_mud_full"
+    },
+    "tilt=none": {
+      "model": "slayersbeasts:block/cracked_mud_none"
+    },
+    "tilt=partial": {
+      "model": "slayersbeasts:block/cracked_mud_partial"
+    },
+    "tilt=unstable": {
+      "model": "slayersbeasts:block/cracked_mud_unstable"
+    }
+  }
+}

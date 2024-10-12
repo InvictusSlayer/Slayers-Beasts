@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:block/template_single_face",
+  "textures": {
+    "texture": "slayersbeasts:block/black_mushroom_block"
+  }
+}

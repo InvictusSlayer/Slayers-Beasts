@@ -1,0 +1,76 @@
+{
+  "variants": {
+    "larva=0,larval_stage=0": {
+      "model": "slayersbeasts:block/anthill_hatchery"
+    },
+    "larva=0,larval_stage=1": {
+      "model": "slayersbeasts:block/anthill_hatchery"
+    },
+    "larva=0,larval_stage=2": {
+      "model": "slayersbeasts:block/anthill_hatchery"
+    },
+    "larva=0,larval_stage=3": {
+      "model": "slayersbeasts:block/anthill_hatchery"
+    },
+    "larva=0,larval_stage=4": {
+      "model": "slayersbeasts:block/anthill_hatchery"
+    },
+    "larva=0,larval_stage=5": {
+      "model": "slayersbeasts:block/anthill_hatchery"
+    },
+    "larva=1,larval_stage=0": {
+      "model": "slayersbeasts:block/anthill_hatchery"
+    },
+    "larva=1,larval_stage=1": {
+      "model": "slayersbeasts:block/anthill_hatchery"
+    },
+    "larva=1,larval_stage=2": {
+      "model": "slayersbeasts:block/anthill_hatchery"
+    },
+    "larva=1,larval_stage=3": {
+      "model": "slayersbeasts:block/anthill_hatchery"
+    },
+    "larva=1,larval_stage=4": {
+      "model": "slayersbeasts:block/anthill_hatchery"
+    },
+    "larva=1,larval_stage=5": {
+      "model": "slayersbeasts:block/anthill_hatchery"
+    },
+    "larva=2,larval_stage=0": {
+      "model": "slayersbeasts:block/anthill_hatchery"
+    },
+    "larva=2,larval_stage=1": {
+      "model": "slayersbeasts:block/anthill_hatchery"
+    },
+    "larva=2,larval_stage=2": {
+      "model": "slayersbeasts:block/anthill_hatchery"
+    },
+    "larva=2,larval_stage=3": {
+      "model": "slayersbeasts:block/anthill_hatchery"
+    },
+    "larva=2,larval_stage=4": {
+      "model": "slayersbeasts:block/anthill_hatchery"
+    },
+    "larva=2,larval_stage=5": {
+      "model": "slayersbeasts:block/anthill_hatchery"
+    },
+    "larva=3,larval_stage=0": {
+      "model": "slayersbeasts:block/anthill_hatchery"
+    },
+    "larva=3,larval_stage=1": {
+      "model": "slayersbeasts:block/anthill_hatchery"
+    },
+    "larva=3,larval_stage=2": {
+      "model": "slayersbeasts:block/anthill_hatchery"
+    },
+    "larva=3,larval_stage=3": {
+      "model": "slayersbeasts:block/anthill_hatchery"
+    },
+    "larva=3,larval_stage=4": {
+      "model": "slayersbeasts:block/anthill_hatchery"
+    },
+    "larva=3,larval_stage=5": {
+      "model": "slayersbeasts:block/anthill_hatchery"
+    }
+  }
+}

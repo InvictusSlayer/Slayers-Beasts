@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:block/button_pressed",
+  "textures": {
+    "texture": "slayersbeasts:block/aspen_planks"
+  }
+}

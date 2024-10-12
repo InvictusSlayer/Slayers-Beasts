@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "slayersbeasts:tanned_leather"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    },
+    "has_tied_leather": {
+      "conditions": {
+        "items": [
+          {
+            "items": "slayersbeasts:tied_leather"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_tied_leather"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "slayersbeasts:tanned_leather"
+    ]
+  }
+}

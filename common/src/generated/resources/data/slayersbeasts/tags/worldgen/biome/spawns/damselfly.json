@@ -1,0 +1,11 @@
+{
+  "values": [
+    "minecraft:sparse_jungle",
+    "minecraft:plains",
+    "minecraft:sunflower_plains",
+    "minecraft:meadow",
+    "minecraft:swamp",
+    "minecraft:mangrove_swamp",
+    "minecraft:river"
+  ]
+}

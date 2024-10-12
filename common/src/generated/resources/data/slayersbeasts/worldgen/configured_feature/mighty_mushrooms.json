@@ -1,0 +1,32 @@
+{
+  "type": "minecraft:random_selector",
+  "config": {
+    "default": {
+      "feature": "slayersbeasts:mighty_white_mushroom",
+      "placement": []
+    },
+    "features": [
+      {
+        "chance": 0.25,
+        "feature": {
+          "feature": "slayersbeasts:mighty_black_mushroom",
+          "placement": []
+        }
+      },
+      {
+        "chance": 0.25,
+        "feature": {
+          "feature": "slayersbeasts:mighty_brown_mushroom",
+          "placement": []
+        }
+      },
+      {
+        "chance": 0.25,
+        "feature": {
+          "feature": "slayersbeasts:mighty_red_mushroom",
+          "placement": []
+        }
+      }
+    ]
+  }
+}

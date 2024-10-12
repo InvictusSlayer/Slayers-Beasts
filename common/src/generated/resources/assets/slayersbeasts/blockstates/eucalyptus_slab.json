@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "type=bottom": {
+      "model": "slayersbeasts:block/eucalyptus_slab"
+    },
+    "type=double": {
+      "model": "slayersbeasts:block/eucalyptus_planks"
+    },
+    "type=top": {
+      "model": "slayersbeasts:block/eucalyptus_slab_top"
+    }
+  }
+}

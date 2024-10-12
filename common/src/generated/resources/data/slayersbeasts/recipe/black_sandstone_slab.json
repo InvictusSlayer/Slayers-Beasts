@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "key": {
+    "#": [
+      {
+        "item": "slayersbeasts:black_sandstone"
+      },
+      {
+        "item": "slayersbeasts:chiseled_black_sandstone"
+      }
+    ]
+  },
+  "pattern": [
+    "###"
+  ],
+  "result": {
+    "count": 6,
+    "id": "slayersbeasts:black_sandstone_slab"
+  }
+}

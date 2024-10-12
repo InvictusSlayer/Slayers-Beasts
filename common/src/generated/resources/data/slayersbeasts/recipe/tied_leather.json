@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "L": {
+      "item": "minecraft:leather"
+    },
+    "M": {
+      "item": "slayersbeasts:mud_ball"
+    },
+    "S": {
+      "item": "minecraft:string"
+    }
+  },
+  "pattern": [
+    "MSM",
+    "LSL",
+    "MSM"
+  ],
+  "result": {
+    "count": 1,
+    "id": "slayersbeasts:tied_leather"
+  }
+}

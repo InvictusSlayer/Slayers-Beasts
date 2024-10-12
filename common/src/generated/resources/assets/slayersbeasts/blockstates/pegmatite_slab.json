@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "type=bottom": {
+      "model": "slayersbeasts:block/pegmatite_slab"
+    },
+    "type=double": {
+      "model": "slayersbeasts:block/pegmatite"
+    },
+    "type=top": {
+      "model": "slayersbeasts:block/pegmatite_slab_top"
+    }
+  }
+}

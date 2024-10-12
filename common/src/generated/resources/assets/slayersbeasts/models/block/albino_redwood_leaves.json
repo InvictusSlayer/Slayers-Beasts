@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:block/cube_all",
+  "textures": {
+    "all": "slayersbeasts:block/albino_redwood_leaves"
+  }
+}

@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/inner_stairs",
+  "textures": {
+    "bottom": "slayersbeasts:block/pegmatite",
+    "side": "slayersbeasts:block/pegmatite",
+    "top": "slayersbeasts:block/pegmatite"
+  }
+}

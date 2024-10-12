@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "type=bottom": {
+      "model": "slayersbeasts:block/aspen_slab"
+    },
+    "type=double": {
+      "model": "slayersbeasts:block/aspen_planks"
+    },
+    "type=top": {
+      "model": "slayersbeasts:block/aspen_slab_top"
+    }
+  }
+}

@@ -1,0 +1,8 @@
+{
+  "values": [
+    "slayersbeasts:redwood_grove",
+    "slayersbeasts:old_growth_redwood_grove",
+    "#minecraft:is_forest",
+    "#minecraft:is_taiga"
+  ]
+}

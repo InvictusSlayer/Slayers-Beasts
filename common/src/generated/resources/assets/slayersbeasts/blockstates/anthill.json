@@ -1,0 +1,202 @@
+{
+  "variants": {
+    "fungus_level=0,supply_level=0": {
+      "model": "slayersbeasts:block/anthill"
+    },
+    "fungus_level=0,supply_level=1": {
+      "model": "slayersbeasts:block/anthill"
+    },
+    "fungus_level=0,supply_level=10": {
+      "model": "slayersbeasts:block/anthill"
+    },
+    "fungus_level=0,supply_level=2": {
+      "model": "slayersbeasts:block/anthill"
+    },
+    "fungus_level=0,supply_level=3": {
+      "model": "slayersbeasts:block/anthill"
+    },
+    "fungus_level=0,supply_level=4": {
+      "model": "slayersbeasts:block/anthill"
+    },
+    "fungus_level=0,supply_level=5": {
+      "model": "slayersbeasts:block/anthill"
+    },
+    "fungus_level=0,supply_level=6": {
+      "model": "slayersbeasts:block/anthill"
+    },
+    "fungus_level=0,supply_level=7": {
+      "model": "slayersbeasts:block/anthill"
+    },
+    "fungus_level=0,supply_level=8": {
+      "model": "slayersbeasts:block/anthill"
+    },
+    "fungus_level=0,supply_level=9": {
+      "model": "slayersbeasts:block/anthill"
+    },
+    "fungus_level=1,supply_level=0": {
+      "model": "slayersbeasts:block/anthill"
+    },
+    "fungus_level=1,supply_level=1": {
+      "model": "slayersbeasts:block/anthill"
+    },
+    "fungus_level=1,supply_level=10": {
+      "model": "slayersbeasts:block/anthill"
+    },
+    "fungus_level=1,supply_level=2": {
+      "model": "slayersbeasts:block/anthill"
+    },
+    "fungus_level=1,supply_level=3": {
+      "model": "slayersbeasts:block/anthill"
+    },
+    "fungus_level=1,supply_level=4": {
+      "model": "slayersbeasts:block/anthill"
+    },
+    "fungus_level=1,supply_level=5": {
+      "model": "slayersbeasts:block/anthill"
+    },
+    "fungus_level=1,supply_level=6": {
+      "model": "slayersbeasts:block/anthill"
+    },
+    "fungus_level=1,supply_level=7": {
+      "model": "slayersbeasts:block/anthill"
+    },
+    "fungus_level=1,supply_level=8": {
+      "model": "slayersbeasts:block/anthill"
+    },
+    "fungus_level=1,supply_level=9": {
+      "model": "slayersbeasts:block/anthill"
+    },
+    "fungus_level=2,supply_level=0": {
+      "model": "slayersbeasts:block/anthill"
+    },
+    "fungus_level=2,supply_level=1": {
+      "model": "slayersbeasts:block/anthill"
+    },
+    "fungus_level=2,supply_level=10": {
+      "model": "slayersbeasts:block/anthill"
+    },
+    "fungus_level=2,supply_level=2": {
+      "model": "slayersbeasts:block/anthill"
+    },
+    "fungus_level=2,supply_level=3": {
+      "model": "slayersbeasts:block/anthill"
+    },
+    "fungus_level=2,supply_level=4": {
+      "model": "slayersbeasts:block/anthill"
+    },
+    "fungus_level=2,supply_level=5": {
+      "model": "slayersbeasts:block/anthill"
+    },
+    "fungus_level=2,supply_level=6": {
+      "model": "slayersbeasts:block/anthill"
+    },
+    "fungus_level=2,supply_level=7": {
+      "model": "slayersbeasts:block/anthill"
+    },
+    "fungus_level=2,supply_level=8": {
+      "model": "slayersbeasts:block/anthill"
+    },
+    "fungus_level=2,supply_level=9": {
+      "model": "slayersbeasts:block/anthill"
+    },
+    "fungus_level=3,supply_level=0": {
+      "model": "slayersbeasts:block/anthill"
+    },
+    "fungus_level=3,supply_level=1": {
+      "model": "slayersbeasts:block/anthill"
+    },
+    "fungus_level=3,supply_level=10": {
+      "model": "slayersbeasts:block/anthill"
+    },
+    "fungus_level=3,supply_level=2": {
+      "model": "slayersbeasts:block/anthill"
+    },
+    "fungus_level=3,supply_level=3": {
+      "model": "slayersbeasts:block/anthill"
+    },
+    "fungus_level=3,supply_level=4": {
+      "model": "slayersbeasts:block/anthill"
+    },
+    "fungus_level=3,supply_level=5": {
+      "model": "slayersbeasts:block/anthill"
+    },
+    "fungus_level=3,supply_level=6": {
+      "model": "slayersbeasts:block/anthill"
+    },
+    "fungus_level=3,supply_level=7": {
+      "model": "slayersbeasts:block/anthill"
+    },
+    "fungus_level=3,supply_level=8": {
+      "model": "slayersbeasts:block/anthill"
+    },
+    "fungus_level=3,supply_level=9": {
+      "model": "slayersbeasts:block/anthill"
+    },
+    "fungus_level=4,supply_level=0": {
+      "model": "slayersbeasts:block/anthill"
+    },
+    "fungus_level=4,supply_level=1": {
+      "model": "slayersbeasts:block/anthill"
+    },
+    "fungus_level=4,supply_level=10": {
+      "model": "slayersbeasts:block/anthill"
+    },
+    "fungus_level=4,supply_level=2": {
+      "model": "slayersbeasts:block/anthill"
+    },
+    "fungus_level=4,supply_level=3": {
+      "model": "slayersbeasts:block/anthill"
+    },
+    "fungus_level=4,supply_level=4": {
+      "model": "slayersbeasts:block/anthill"
+    },
+    "fungus_level=4,supply_level=5": {
+      "model": "slayersbeasts:block/anthill"
+    },
+    "fungus_level=4,supply_level=6": {
+      "model": "slayersbeasts:block/anthill"
+    },
+    "fungus_level=4,supply_level=7": {
+      "model": "slayersbeasts:block/anthill"
+    },
+    "fungus_level=4,supply_level=8": {
+      "model": "slayersbeasts:block/anthill"
+    },
+    "fungus_level=4,supply_level=9": {
+      "model": "slayersbeasts:block/anthill"
+    },
+    "fungus_level=5,supply_level=0": {
+      "model": "slayersbeasts:block/anthill"
+    },
+    "fungus_level=5,supply_level=1": {
+      "model": "slayersbeasts:block/anthill"
+    },
+    "fungus_level=5,supply_level=10": {
+      "model": "slayersbeasts:block/anthill"
+    },
+    "fungus_level=5,supply_level=2": {
+      "model": "slayersbeasts:block/anthill"
+    },
+    "fungus_level=5,supply_level=3": {
+      "model": "slayersbeasts:block/anthill"
+    },
+    "fungus_level=5,supply_level=4": {
+      "model": "slayersbeasts:block/anthill"
+    },
+    "fungus_level=5,supply_level=5": {
+      "model": "slayersbeasts:block/anthill"
+    },
+    "fungus_level=5,supply_level=6": {
+      "model": "slayersbeasts:block/anthill"
+    },
+    "fungus_level=5,supply_level=7": {
+      "model": "slayersbeasts:block/anthill"
+    },
+    "fungus_level=5,supply_level=8": {
+      "model": "slayersbeasts:block/anthill"
+    },
+    "fungus_level=5,supply_level=9": {
+      "model": "slayersbeasts:block/anthill"
+    }
+  }
+}

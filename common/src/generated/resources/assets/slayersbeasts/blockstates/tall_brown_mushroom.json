@@ -1,0 +1,10 @@
+{
+  "variants": {
+    "half=lower": {
+      "model": "slayersbeasts:block/tall_brown_mushroom_bottom"
+    },
+    "half=upper": {
+      "model": "slayersbeasts:block/tall_brown_mushroom_top"
+    }
+  }
+}

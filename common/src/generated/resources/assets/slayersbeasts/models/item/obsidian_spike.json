@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "slayersbeasts:block/obsidian_spike_tip_up"
+  }
+}

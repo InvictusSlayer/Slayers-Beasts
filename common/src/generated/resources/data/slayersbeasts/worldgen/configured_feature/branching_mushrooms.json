@@ -1,0 +1,32 @@
+{
+  "type": "minecraft:random_selector",
+  "config": {
+    "default": {
+      "feature": "slayersbeasts:branching_white_mushroom",
+      "placement": []
+    },
+    "features": [
+      {
+        "chance": 0.25,
+        "feature": {
+          "feature": "slayersbeasts:branching_black_mushroom",
+          "placement": []
+        }
+      },
+      {
+        "chance": 0.25,
+        "feature": {
+          "feature": "slayersbeasts:branching_brown_mushroom",
+          "placement": []
+        }
+      },
+      {
+        "chance": 0.25,
+        "feature": {
+          "feature": "slayersbeasts:branching_red_mushroom",
+          "placement": []
+        }
+      }
+    ]
+  }
+}

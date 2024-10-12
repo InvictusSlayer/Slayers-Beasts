@@ -1,0 +1,14 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "building",
+  "group": "planks",
+  "ingredients": [
+    {
+      "tag": "slayersbeasts:desert_oak_logs"
+    }
+  ],
+  "result": {
+    "count": 4,
+    "id": "slayersbeasts:desert_oak_planks"
+  }
+}

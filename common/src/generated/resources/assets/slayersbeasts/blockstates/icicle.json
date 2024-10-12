@@ -1,0 +1,64 @@
+{
+  "variants": {
+    "thickness=base,vertical_direction=down,waterlogged=false": {
+      "model": "slayersbeasts:block/icicle_base_down"
+    },
+    "thickness=base,vertical_direction=down,waterlogged=true": {
+      "model": "slayersbeasts:block/icicle_base_down"
+    },
+    "thickness=base,vertical_direction=up,waterlogged=false": {
+      "model": "slayersbeasts:block/icicle_base_up"
+    },
+    "thickness=base,vertical_direction=up,waterlogged=true": {
+      "model": "slayersbeasts:block/icicle_base_up"
+    },
+    "thickness=frustum,vertical_direction=down,waterlogged=false": {
+      "model": "slayersbeasts:block/icicle_frustum_down"
+    },
+    "thickness=frustum,vertical_direction=down,waterlogged=true": {
+      "model": "slayersbeasts:block/icicle_frustum_down"
+    },
+    "thickness=frustum,vertical_direction=up,waterlogged=false": {
+      "model": "slayersbeasts:block/icicle_frustum_up"
+    },
+    "thickness=frustum,vertical_direction=up,waterlogged=true": {
+      "model": "slayersbeasts:block/icicle_frustum_up"
+    },
+    "thickness=middle,vertical_direction=down,waterlogged=false": {
+      "model": "slayersbeasts:block/icicle_middle_down"
+    },
+    "thickness=middle,vertical_direction=down,waterlogged=true": {
+      "model": "slayersbeasts:block/icicle_middle_down"
+    },
+    "thickness=middle,vertical_direction=up,waterlogged=false": {
+      "model": "slayersbeasts:block/icicle_middle_up"
+    },
+    "thickness=middle,vertical_direction=up,waterlogged=true": {
+      "model": "slayersbeasts:block/icicle_middle_up"
+    },
+    "thickness=tip,vertical_direction=down,waterlogged=false": {
+      "model": "slayersbeasts:block/icicle_tip_down"
+    },
+    "thickness=tip,vertical_direction=down,waterlogged=true": {
+      "model": "slayersbeasts:block/icicle_tip_down"
+    },
+    "thickness=tip,vertical_direction=up,waterlogged=false": {
+      "model": "slayersbeasts:block/icicle_tip_up"
+    },
+    "thickness=tip,vertical_direction=up,waterlogged=true": {
+      "model": "slayersbeasts:block/icicle_tip_up"
+    },
+    "thickness=tip_merge,vertical_direction=down,waterlogged=false": {
+      "model": "slayersbeasts:block/icicle_tip_merge_down"
+    },
+    "thickness=tip_merge,vertical_direction=down,waterlogged=true": {
+      "model": "slayersbeasts:block/icicle_tip_merge_down"
+    },
+    "thickness=tip_merge,vertical_direction=up,waterlogged=false": {
+      "model": "slayersbeasts:block/icicle_tip_merge_up"
+    },
+    "thickness=tip_merge,vertical_direction=up,waterlogged=true": {
+      "model": "slayersbeasts:block/icicle_tip_merge_up"
+    }
+  }
+}

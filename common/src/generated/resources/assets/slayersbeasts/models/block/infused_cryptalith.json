@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/cube_bottom_top",
+  "textures": {
+    "bottom": "slayersbeasts:block/cryptalith",
+    "side": "slayersbeasts:block/infused_cryptalith_side",
+    "top": "slayersbeasts:block/infused_cryptalith_top"
+  }
+}

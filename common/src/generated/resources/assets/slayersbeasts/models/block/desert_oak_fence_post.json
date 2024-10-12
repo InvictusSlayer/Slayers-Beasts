@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:block/fence_post",
+  "textures": {
+    "texture": "slayersbeasts:block/desert_oak_planks"
+  }
+}

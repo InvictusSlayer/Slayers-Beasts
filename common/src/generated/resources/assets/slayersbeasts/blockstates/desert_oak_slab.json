@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "type=bottom": {
+      "model": "slayersbeasts:block/desert_oak_slab"
+    },
+    "type=double": {
+      "model": "slayersbeasts:block/desert_oak_planks"
+    },
+    "type=top": {
+      "model": "slayersbeasts:block/desert_oak_slab_top"
+    }
+  }
+}

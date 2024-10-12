@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "type=bottom": {
+      "model": "slayersbeasts:block/kapok_slab"
+    },
+    "type=double": {
+      "model": "slayersbeasts:block/kapok_planks"
+    },
+    "type=top": {
+      "model": "slayersbeasts:block/kapok_slab_top"
+    }
+  }
+}

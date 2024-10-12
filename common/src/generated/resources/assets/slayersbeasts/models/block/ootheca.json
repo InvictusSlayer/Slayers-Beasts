@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/cube_bottom_top",
+  "textures": {
+    "bottom": "slayersbeasts:block/ootheca_bottom",
+    "side": "slayersbeasts:block/ootheca_side",
+    "top": "slayersbeasts:block/ootheca_top"
+  }
+}

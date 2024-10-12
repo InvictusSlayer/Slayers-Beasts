@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:block/wall_inventory",
+  "textures": {
+    "wall": "slayersbeasts:block/black_sandstone_side"
+  }
+}

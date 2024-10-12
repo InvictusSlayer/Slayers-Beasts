@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/cube_bottom_top",
+  "textures": {
+    "bottom": "slayersbeasts:block/styphium_bottom",
+    "side": "slayersbeasts:block/styphium_side",
+    "top": "slayersbeasts:block/styphium_top"
+  }
+}

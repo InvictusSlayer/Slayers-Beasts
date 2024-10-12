@@ -1,0 +1,12 @@
+{
+  "values": [
+    "slayersbeasts:rainforest",
+    "slayersbeasts:black_dunes",
+    "slayersbeasts:dead_sands",
+    "slayersbeasts:dusty_caverns",
+    "slayersbeasts:outback",
+    "slayersbeasts:eucalypt_woodland",
+    "slayersbeasts:volcanic_peaks",
+    "#slayersbeasts:is_brushland"
+  ]
+}

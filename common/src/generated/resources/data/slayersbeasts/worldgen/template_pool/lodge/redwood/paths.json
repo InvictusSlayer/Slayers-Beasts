@@ -1,0 +1,32 @@
+{
+  "elements": [
+    {
+      "element": {
+        "element_type": "minecraft:single_pool_element",
+        "location": "slayersbeasts:lodge/redwood/path_straight",
+        "processors": "slayersbeasts:redwood_path",
+        "projection": "terrain_matching"
+      },
+      "weight": 3
+    },
+    {
+      "element": {
+        "element_type": "minecraft:single_pool_element",
+        "location": "slayersbeasts:lodge/redwood/path_corner",
+        "processors": "slayersbeasts:redwood_path",
+        "projection": "terrain_matching"
+      },
+      "weight": 2
+    },
+    {
+      "element": {
+        "element_type": "minecraft:single_pool_element",
+        "location": "slayersbeasts:lodge/redwood/path_cross",
+        "processors": "slayersbeasts:redwood_path",
+        "projection": "terrain_matching"
+      },
+      "weight": 1
+    }
+  ],
+  "fallback": "slayersbeasts:lodge/redwood/decor"
+}

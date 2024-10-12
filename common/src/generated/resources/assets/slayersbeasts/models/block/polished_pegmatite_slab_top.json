@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/slab_top",
+  "textures": {
+    "bottom": "slayersbeasts:block/polished_pegmatite",
+    "side": "slayersbeasts:block/polished_pegmatite",
+    "top": "slayersbeasts:block/polished_pegmatite"
+  }
+}
