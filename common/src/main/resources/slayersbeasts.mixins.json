@@ -12,7 +12,8 @@
 		"common.MushroomBlockMixin",
 		"common.MushroomCowMixin",
 		"common.MushroomCowTypeMixin",
-		"common.TreeGrowerMixin"
+		"common.TreeGrowerMixin",
+		"common.VillagerTypeTradeMixin"
 	],
 	"client": [
 		"client.BoatRendererMixin",

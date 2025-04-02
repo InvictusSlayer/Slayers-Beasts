@@ -16,8 +16,8 @@ import net.invictusslayer.slayersbeasts.common.world.biome.SBSurfaceRuleData;
 import net.invictusslayer.slayersbeasts.common.world.biome.region.SBNetherRegion;
 import net.invictusslayer.slayersbeasts.common.world.biome.region.SBOverworldRegion;
 import net.invictusslayer.slayersbeasts.common.world.feature.SBConfiguredFeatures;
-import net.invictusslayer.slayersbeasts.common.world.feature.tree.IExtendedTreeGrower;
 import net.minecraft.client.renderer.Sheets;
+import net.minecraft.world.entity.animal.Fox;
 import net.minecraft.world.entity.animal.MushroomCow;
 import net.minecraft.world.entity.vehicle.Boat;
 import net.minecraft.world.level.block.Blocks;
@@ -55,7 +55,6 @@ public class SlayersBeasts {
 		SBStructurePieces.STRUCTURE_PIECES.register();
 		SBStructureTypes.STRUCTURE_TYPES.register();
 
-		SBVillagerType.biomeSetup();
 //		SBBiomeModifications.registerFeatures();
 		SBEntities.registerAttributes();
 
@@ -65,12 +64,14 @@ public class SlayersBeasts {
 	public static void commonSetup() {
 		LOGGER.info("Extended MushroomCow$Type values: {}", Arrays.toString(MushroomCow.MushroomType.values()));
 		LOGGER.info("Extended Boat$Type values: {}", Arrays.toString(Boat.Type.values()));
+		LOGGER.info("Extended Fox$Type values: {}", Arrays.toString(Fox.Type.values()));
 
 		SBFlammableBlocks.register();
 		SBStrippableBlocks.register();
 		SBDispensableItems.register();
 		SBBiomeModifications.registerSpawns();
 		SBEntities.registerSpawns();
+		SBVillagerType.setupBiomes();
 
 		((IExtendedMushroomBlock) SBBlocks.BLACK_MUSHROOM.get()).setMightyMushroom(SBConfiguredFeatures.MIGHTY_BLACK_MUSHROOM);
 		((IExtendedMushroomBlock) Blocks.BROWN_MUSHROOM).setMightyMushroom(SBConfiguredFeatures.MIGHTY_BROWN_MUSHROOM);
