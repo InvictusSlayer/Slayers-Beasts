@@ -39,7 +39,7 @@ public abstract class AbstractMightyMushroomFeature extends Feature<HugeMushroom
 	protected void placeStem(LevelAccessor level, RandomSource random, BlockPos pos, HugeMushroomFeatureConfiguration config, int maxHeight, BlockPos.MutableBlockPos mutableBlockPos) {
 		for (int i = 0; i < maxHeight - 1; ++i) {
 			mutableBlockPos.set(pos).move(Direction.UP, i);
-			if (!level.getBlockState(mutableBlockPos).isSolidRender(level, mutableBlockPos)) {
+			if (!level.getBlockState(mutableBlockPos).isSolidRender()) {
 				setBlock(level, mutableBlockPos, config.stemProvider.getState(random, pos));
 				setBlock(level, mutableBlockPos.south(), config.stemProvider.getState(random, pos));
 				setBlock(level, mutableBlockPos.east(), config.stemProvider.getState(random, pos));
@@ -56,7 +56,7 @@ public abstract class AbstractMightyMushroomFeature extends Feature<HugeMushroom
 	}
 
 	protected boolean isValidPosition(LevelAccessor level, BlockPos pos, int maxHeight, BlockPos.MutableBlockPos mutableBlockPos, HugeMushroomFeatureConfiguration config) {
-		if (pos.getY() <= level.getMinBuildHeight() || pos.getY() + maxHeight > level.getMaxBuildHeight()) return false;
+		if (pos.getY() <= level.getMinY() || pos.getY() + maxHeight > level.getMaxY()) return false;
 
 		List<BlockPos> posList = List.of(pos.below(), pos.below().south(), pos.below().east(), pos.below().south().east());
 		for (BlockPos blockPos : posList) {

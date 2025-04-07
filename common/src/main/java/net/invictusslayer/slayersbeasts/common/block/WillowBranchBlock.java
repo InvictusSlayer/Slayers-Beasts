@@ -4,7 +4,7 @@ import com.mojang.serialization.MapCodec;
 import net.invictusslayer.slayersbeasts.common.init.SBBlocks;
 import net.minecraft.core.Direction;
 import net.minecraft.util.RandomSource;
-import net.minecraft.world.level.LevelAccessor;
+import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.GrowingPlantHeadBlock;
 import net.minecraft.world.level.block.state.BlockState;
@@ -22,8 +22,8 @@ public class WillowBranchBlock extends GrowingPlantHeadBlock {
 		return CODEC;
 	}
 
-	public BlockState getStateForPlacement(LevelAccessor level) {
-		return this.defaultBlockState().setValue(AGE, level.getRandom().nextInt(10));
+	public BlockState getStateForPlacement(BlockPlaceContext context) {
+		return this.defaultBlockState().setValue(AGE, context.getLevel().getRandom().nextInt(10));
 	}
 
 	protected int getBlocksToGrowWhenBonemealed(RandomSource random) {

@@ -28,7 +28,7 @@ public class MushroomBlockMixin implements IExtendedMushroomBlock {
 
 	@Inject(method = "growMushroom", at = @At("HEAD"), cancellable = true)
 	private void onGrowMushroom(ServerLevel level, BlockPos pos, BlockState state, RandomSource random, CallbackInfoReturnable<Boolean> cir) {
-		Optional<? extends Holder<ConfiguredFeature<?, ?>>> feature = level.registryAccess().registryOrThrow(Registries.CONFIGURED_FEATURE).getHolder(mightyMushroom);
+		Optional<? extends Holder<ConfiguredFeature<?, ?>>> feature = level.registryAccess().lookupOrThrow(Registries.CONFIGURED_FEATURE).get(mightyMushroom);
 		if (feature.isEmpty()) cir.setReturnValue(false);
 
 		for (int x = 0; x >= -1; --x) {

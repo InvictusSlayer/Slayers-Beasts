@@ -65,11 +65,11 @@ public class Damselfly extends PathfinderMob {
 				.add(Attributes.FLYING_SPEED, 0.4D);
 	}
 
-	public static boolean canSpawn(EntityType<Damselfly> type, LevelAccessor level, MobSpawnType spawnType, BlockPos pos, RandomSource random) {
-		return PathfinderMob.checkMobSpawnRules(type, level, spawnType, pos, random);
+	public static boolean canSpawn(EntityType<Damselfly> type, LevelAccessor level, EntitySpawnReason reason, BlockPos pos, RandomSource random) {
+		return PathfinderMob.checkMobSpawnRules(type, level, reason, pos, random);
 	}
 
-	public SpawnGroupData finalizeSpawn(ServerLevelAccessor level, DifficultyInstance difficulty, MobSpawnType type, SpawnGroupData spawnData) {
+	public SpawnGroupData finalizeSpawn(ServerLevelAccessor level, DifficultyInstance difficulty, EntitySpawnReason reason, SpawnGroupData spawnData) {
 		setDamselflyType(random.nextInt(2));
 		return new DamselflyGroupData();
 	}
@@ -78,7 +78,7 @@ public class Damselfly extends PathfinderMob {
 		FlyingPathNavigation navigation = new FlyingPathNavigation(this, level);
 		navigation.setCanOpenDoors(false);
 		navigation.setCanFloat(false);
-		navigation.setCanPassDoors(true);
+		navigation.setCanOpenDoors(true);
 		return navigation;
 	}
 

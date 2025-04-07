@@ -3,9 +3,9 @@ package net.invictusslayer.slayersbeasts.common.entity;
 import net.minecraft.core.BlockPos;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.Difficulty;
+import net.minecraft.world.entity.EntitySpawnReason;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.Mob;
-import net.minecraft.world.entity.MobSpawnType;
 import net.minecraft.world.entity.PathfinderMob;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
@@ -43,8 +43,7 @@ public class Sporetrap extends PathfinderMob {
 				.add(Attributes.ATTACK_KNOCKBACK, 0.0D);
 	}
 
-	public static boolean canSpawn(EntityType<Sporetrap> entity, LevelAccessor levelAccess, MobSpawnType spawnType, BlockPos pos, RandomSource random) {
-		return PathfinderMob.checkMobSpawnRules(entity, levelAccess, spawnType, pos, random)
-				&& levelAccess instanceof final Level level && level.getDifficulty() != Difficulty.PEACEFUL;
+	public static boolean canSpawn(EntityType<Sporetrap> entity, LevelAccessor levelAccess, EntitySpawnReason reason, BlockPos pos, RandomSource random) {
+		return PathfinderMob.checkMobSpawnRules(entity, levelAccess, reason, pos, random) && levelAccess instanceof final Level level && level.getDifficulty() != Difficulty.PEACEFUL;
 	}
 }

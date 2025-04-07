@@ -73,7 +73,7 @@ public abstract class SBLangProvider implements DataProvider {
 	}
 
 	protected void add(ItemStack key, String name) {
-		add(key.getDescriptionId(), name);
+		add(key.getItem().getDescriptionId(), name);
 	}
 
 	protected void addEnchantment(Supplier<? extends Enchantment> key, String name) {
@@ -105,7 +105,7 @@ public abstract class SBLangProvider implements DataProvider {
 	}
 
 	protected void addSound(Supplier<? extends SoundEvent> key, String name) {
-		add(key.get().getLocation().toLanguageKey("subtitles"), name);
+		add(key.get().location().toLanguageKey("subtitles"), name);
 	}
 
 	protected void addItemDesc(Supplier<? extends Item> key, String name) {

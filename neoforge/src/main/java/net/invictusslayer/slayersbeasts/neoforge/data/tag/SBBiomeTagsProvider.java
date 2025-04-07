@@ -9,13 +9,12 @@ import net.minecraft.data.tags.BiomeTagsProvider;
 import net.minecraft.tags.BiomeTags;
 import net.minecraft.world.level.biome.Biomes;
 import net.neoforged.neoforge.common.Tags;
-import net.neoforged.neoforge.common.data.ExistingFileHelper;
 
 import java.util.concurrent.CompletableFuture;
 
 public class SBBiomeTagsProvider extends BiomeTagsProvider {
-	public SBBiomeTagsProvider(PackOutput output, CompletableFuture<HolderLookup.Provider> provider, ExistingFileHelper helper) {
-		super(output, provider, SlayersBeasts.MOD_ID, helper);
+	public SBBiomeTagsProvider(PackOutput output, CompletableFuture<HolderLookup.Provider> provider) {
+		super(output, provider, SlayersBeasts.MOD_ID);
 	}
 
 	protected void addTags(HolderLookup.Provider provider) {

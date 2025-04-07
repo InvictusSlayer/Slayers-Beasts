@@ -9,16 +9,16 @@ import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.item.FallingBlockEntity;
 import net.minecraft.world.item.context.BlockPlaceContext;
-import net.minecraft.world.level.BlockGetter;
-import net.minecraft.world.level.Level;
-import net.minecraft.world.level.LevelAccessor;
-import net.minecraft.world.level.LevelReader;
+import net.minecraft.world.level.*;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Fallable;
 import net.minecraft.world.level.block.SimpleWaterloggedBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
-import net.minecraft.world.level.block.state.properties.*;
+import net.minecraft.world.level.block.state.properties.BlockStateProperties;
+import net.minecraft.world.level.block.state.properties.BooleanProperty;
+import net.minecraft.world.level.block.state.properties.DripstoneThickness;
+import net.minecraft.world.level.block.state.properties.EnumProperty;
 import net.minecraft.world.level.material.FluidState;
 import net.minecraft.world.level.material.Fluids;
 import net.minecraft.world.level.pathfinder.PathComputationType;
@@ -28,7 +28,7 @@ import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
 
 public class ObsidianSpikeBlock extends Block implements Fallable, SimpleWaterloggedBlock {
-	public static final DirectionProperty TIP_DIRECTION = BlockStateProperties.VERTICAL_DIRECTION;
+	public static final EnumProperty<Direction> TIP_DIRECTION = BlockStateProperties.VERTICAL_DIRECTION;
 	public static final EnumProperty<DripstoneThickness> THICKNESS = BlockStateProperties.DRIPSTONE_THICKNESS;
 	public static final BooleanProperty WATERLOGGED = BlockStateProperties.WATERLOGGED;
 	private static final VoxelShape TIP_MERGE_SHAPE = Block.box(6.0D, 0.0D, 6.0D, 10.0D, 16.0D, 10.0D);
@@ -50,29 +50,27 @@ public class ObsidianSpikeBlock extends Block implements Fallable, SimpleWaterlo
 		return isValidPlacement(level, pos, state.getValue(TIP_DIRECTION));
 	}
 
-	public BlockState updateShape(BlockState state, Direction direction, BlockState neighborState, LevelAccessor level, BlockPos pos, BlockPos neighborPos) {
+	public BlockState updateShape(BlockState state, LevelReader level, ScheduledTickAccess access, BlockPos currentPos, Direction facing, BlockPos facingPos, BlockState facingState, RandomSource random) {
 		if (state.getValue(WATERLOGGED)) {
-			level.scheduleTick(pos, Fluids.WATER, Fluids.WATER.getTickDelay(level));
+			access.scheduleTick(currentPos, Fluids.WATER, Fluids.WATER.getTickDelay(level));
 		}
 
-		if (direction != Direction.UP && direction != Direction.DOWN) {
+		if (facing != Direction.UP && facing != Direction.DOWN) return state;
+
+		Direction tipDirection = state.getValue(TIP_DIRECTION);
+		if (tipDirection == Direction.DOWN && access.getBlockTicks().hasScheduledTick(currentPos, this)) {
 			return state;
-		} else {
-			Direction tipDirection = state.getValue(TIP_DIRECTION);
-			if (tipDirection == Direction.DOWN && level.getBlockTicks().hasScheduledTick(pos, this)) {
-				return state;
-			} else if (direction == tipDirection.getOpposite() && !canSurvive(state, level, pos)) {
-				if (tipDirection == Direction.DOWN) {
-					level.scheduleTick(pos, this, 2);
-				} else {
-					level.scheduleTick(pos, this, 1);
-				}
-
-				return state;
+		} else if (facing == tipDirection.getOpposite() && !canSurvive(state, level, currentPos)) {
+			if (tipDirection == Direction.DOWN) {
+				access.scheduleTick(currentPos, this, 2);
+			} else {
+				access.scheduleTick(currentPos, this, 1);
 			}
-			DripstoneThickness thickness = calculateThickness(level, pos, tipDirection, state.getValue(THICKNESS) == DripstoneThickness.TIP_MERGE);
-			return state.setValue(THICKNESS, thickness);
+			return state;
 		}
+
+		DripstoneThickness thickness = calculateThickness(level, currentPos, tipDirection, state.getValue(THICKNESS) == DripstoneThickness.TIP_MERGE);
+		return state.setValue(THICKNESS, thickness);
 	}
 
 	public void fallOn(Level level, BlockState state, BlockPos pos, Entity entity, float fallDistance) {
@@ -106,7 +104,7 @@ public class ObsidianSpikeBlock extends Block implements Fallable, SimpleWaterlo
 		return state.getValue(WATERLOGGED) ? Fluids.WATER.getSource(false) : super.getFluidState(state);
 	}
 
-	public VoxelShape getOcclusionShape(BlockState state, BlockGetter level, BlockPos pos) {
+	protected VoxelShape getOcclusionShape(BlockState state) {
 		return Shapes.empty();
 	}
 
@@ -129,7 +127,7 @@ public class ObsidianSpikeBlock extends Block implements Fallable, SimpleWaterlo
 			shape = BASE_SHAPE;
 		}
 
-		Vec3 vec3 = state.getOffset(getter, pos);
+		Vec3 vec3 = state.getOffset(pos);
 		return shape.move(vec3.x, 0.0D, vec3.z);
 	}
 

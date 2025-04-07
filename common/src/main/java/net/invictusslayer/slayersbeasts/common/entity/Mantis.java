@@ -6,6 +6,7 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.Difficulty;
@@ -55,8 +56,8 @@ public class Mantis extends PathfinderMob {
 				.add(Attributes.ATTACK_KNOCKBACK, 1.0D);
 	}
 
-	public boolean doHurtTarget(Entity entity) {
-		if (!super.doHurtTarget(entity)) {
+	public boolean doHurtTarget(ServerLevel level, Entity entity) {
+		if (!super.doHurtTarget(level, entity)) {
 			return false;
 		}
 		if (entity instanceof LivingEntity livingEntity && random.nextBoolean()) {
@@ -75,8 +76,8 @@ public class Mantis extends PathfinderMob {
 		return SBSounds.MANTIS_HURT.get();
 	}
 
-	public static boolean canSpawn(EntityType<Mantis> entity, LevelAccessor level, MobSpawnType spawnType, BlockPos pos, RandomSource random) {
-		return PathfinderMob.checkMobSpawnRules(entity, level, spawnType, pos, random) && level instanceof Level level1 && level1.getDifficulty() != Difficulty.PEACEFUL;
+	public static boolean canSpawn(EntityType<Mantis> entity, LevelAccessor level, EntitySpawnReason reason, BlockPos pos, RandomSource random) {
+		return PathfinderMob.checkMobSpawnRules(entity, level, reason, pos, random) && level instanceof Level level1 && level1.getDifficulty() != Difficulty.PEACEFUL;
 	}
 
 	protected void defineSynchedData(SynchedEntityData.Builder builder) {

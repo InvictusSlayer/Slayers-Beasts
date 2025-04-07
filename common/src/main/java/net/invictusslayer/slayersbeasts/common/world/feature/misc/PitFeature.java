@@ -32,7 +32,7 @@ public class PitFeature extends Feature<PitFeature.Configuration> {
 		int yMax = y < 7 ? 8 : y < 15 ? 16 : 32;
 		int zMax = z < 7 ? 8 : 16;
 
-		if (origin.getY() <= level.getMinBuildHeight() + y) return false;
+		if (origin.getY() <= level.getMinY() + y) return false;
 		origin = origin.below(y);
 		if (!level.canSeeSky(origin.offset(xMax / 2, y, zMax / 2))) return false;
 

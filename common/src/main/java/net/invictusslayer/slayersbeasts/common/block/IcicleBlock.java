@@ -12,17 +12,17 @@ import net.minecraft.world.entity.item.FallingBlockEntity;
 import net.minecraft.world.entity.projectile.Projectile;
 import net.minecraft.world.entity.projectile.ThrownTrident;
 import net.minecraft.world.item.context.BlockPlaceContext;
-import net.minecraft.world.level.BlockGetter;
-import net.minecraft.world.level.Level;
-import net.minecraft.world.level.LevelAccessor;
-import net.minecraft.world.level.LevelReader;
+import net.minecraft.world.level.*;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.Fallable;
 import net.minecraft.world.level.block.SimpleWaterloggedBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
-import net.minecraft.world.level.block.state.properties.*;
+import net.minecraft.world.level.block.state.properties.BlockStateProperties;
+import net.minecraft.world.level.block.state.properties.BooleanProperty;
+import net.minecraft.world.level.block.state.properties.DripstoneThickness;
+import net.minecraft.world.level.block.state.properties.EnumProperty;
 import net.minecraft.world.level.material.Fluid;
 import net.minecraft.world.level.material.FluidState;
 import net.minecraft.world.level.material.Fluids;
@@ -39,7 +39,7 @@ import java.util.function.BiPredicate;
 import java.util.function.Predicate;
 
 public class IcicleBlock extends Block implements Fallable, SimpleWaterloggedBlock {
-	public static final DirectionProperty TIP_DIRECTION = BlockStateProperties.VERTICAL_DIRECTION;
+	public static final EnumProperty<Direction> TIP_DIRECTION = BlockStateProperties.VERTICAL_DIRECTION;
 	public static final EnumProperty<DripstoneThickness> THICKNESS = BlockStateProperties.DRIPSTONE_THICKNESS;
 	public static final BooleanProperty WATERLOGGED = BlockStateProperties.WATERLOGGED;
 	private static final VoxelShape TIP_MERGE_SHAPE = Block.box(5.0D, 0.0D, 5.0D, 11.0D, 16.0D, 11.0D);
@@ -62,32 +62,34 @@ public class IcicleBlock extends Block implements Fallable, SimpleWaterloggedBlo
 		return isValidPlacement(level, pos, state.getValue(TIP_DIRECTION));
 	}
 
-	public BlockState updateShape(BlockState state, Direction direction, BlockState neighborState, LevelAccessor level, BlockPos pos, BlockPos neighborPos) {
+	public BlockState updateShape(BlockState state, LevelReader level, ScheduledTickAccess access, BlockPos currentPos, Direction facing, BlockPos facingPos, BlockState facingState, RandomSource random) {
 		if (state.getValue(WATERLOGGED)) {
-			level.scheduleTick(pos, Fluids.WATER, Fluids.WATER.getTickDelay(level));
+			access.scheduleTick(currentPos, Fluids.WATER, Fluids.WATER.getTickDelay(level));
 		}
 
-		if (direction != Direction.UP && direction != Direction.DOWN) return state;
+		if (facing != Direction.UP && facing != Direction.DOWN) return state;
 
 		Direction tipDirection = state.getValue(TIP_DIRECTION);
-		if (tipDirection == Direction.DOWN && level.getBlockTicks().hasScheduledTick(pos, this)) {
+		if (tipDirection == Direction.DOWN && access.getBlockTicks().hasScheduledTick(currentPos, this)) {
 			return state;
-		} else if (direction == tipDirection.getOpposite() && !canSurvive(state, level, pos)) {
+		} else if (facing == tipDirection.getOpposite() && !canSurvive(state, level, currentPos)) {
 			if (tipDirection == Direction.DOWN) {
-				level.scheduleTick(pos, this, 2);
+				access.scheduleTick(currentPos, this, 2);
 			} else {
-				level.scheduleTick(pos, this, 1);
+				access.scheduleTick(currentPos, this, 1);
 			}
 			return state;
 		}
 
-		DripstoneThickness thickness = calculateThickness(level, pos, tipDirection, state.getValue(THICKNESS) == DripstoneThickness.TIP_MERGE);
+		DripstoneThickness thickness = calculateThickness(level, currentPos, tipDirection, state.getValue(THICKNESS) == DripstoneThickness.TIP_MERGE);
 		return state.setValue(THICKNESS, thickness);
 	}
 
 	public void onProjectileHit(Level level, BlockState state, BlockHitResult hit, Projectile projectile) {
+		if (!(level instanceof ServerLevel serverLevel)) return;
+
 		BlockPos pos = hit.getBlockPos();
-		if (!level.isClientSide && projectile.mayInteract(level, pos) && projectile instanceof ThrownTrident && projectile.getDeltaMovement().length() > 0.6D) {
+		if (!level.isClientSide && projectile.mayInteract(serverLevel, pos) && projectile instanceof ThrownTrident && projectile.getDeltaMovement().length() > 0.6D) {
 			level.destroyBlock(pos, true);
 		}
 	}
@@ -130,7 +132,7 @@ public class IcicleBlock extends Block implements Fallable, SimpleWaterloggedBlo
 		return state.getValue(WATERLOGGED) ? Fluids.WATER.getSource(false) : super.getFluidState(state);
 	}
 
-	public VoxelShape getOcclusionShape(BlockState state, BlockGetter level, BlockPos pos) {
+	protected VoxelShape getOcclusionShape(BlockState state) {
 		return Shapes.empty();
 	}
 
@@ -153,7 +155,7 @@ public class IcicleBlock extends Block implements Fallable, SimpleWaterloggedBlo
 			shape = BASE_SHAPE;
 		}
 
-		Vec3 vec3 = state.getOffset(level, pos);
+		Vec3 vec3 = state.getOffset(pos);
 		return shape.move(vec3.x, 0.0D, vec3.z);
 	}
 
@@ -372,7 +374,7 @@ public class IcicleBlock extends Block implements Fallable, SimpleWaterloggedBlo
 	private static boolean canDripThrough(BlockGetter level, BlockPos pos, BlockState state) {
 		if (state.isAir()) {
 			return true;
-		} else if (state.isSolidRender(level, pos) || !state.getFluidState().isEmpty()) {
+		} else if (state.isSolidRender() || !state.getFluidState().isEmpty()) {
 			return false;
 		}
 		return !Shapes.joinIsNotEmpty(DRIP_THROUGH_SPACE, state.getCollisionShape(level, pos), BooleanOp.AND);
@@ -388,7 +390,7 @@ public class IcicleBlock extends Block implements Fallable, SimpleWaterloggedBlo
 	}
 
 	private static void spawnDripParticle(Level level, BlockPos pos, BlockState state) {
-		Vec3 vec3 = state.getOffset(level, pos);
+		Vec3 vec3 = state.getOffset(pos);
 		double d1 = (double) pos.getX() + 0.5D + vec3.x;
 		double d2 = (double) ((float) (pos.getY() + 1) - 0.6875F) - 0.0625D;
 		double d3 = (double) pos.getZ() + 0.5D + vec3.z;

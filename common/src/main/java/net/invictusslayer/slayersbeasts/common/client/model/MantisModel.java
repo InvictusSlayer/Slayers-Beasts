@@ -1,9 +1,12 @@
 package net.invictusslayer.slayersbeasts.common.client.model;
 
+import net.fabricmc.api.EnvType;
+import net.fabricmc.api.Environment;
 import net.invictusslayer.slayersbeasts.common.SlayersBeasts;
 import net.invictusslayer.slayersbeasts.common.client.animation.MantisAnimation;
+import net.invictusslayer.slayersbeasts.common.client.state.MantisRenderState;
 import net.invictusslayer.slayersbeasts.common.entity.Mantis;
-import net.minecraft.client.model.HierarchicalModel;
+import net.minecraft.client.model.EntityModel;
 import net.minecraft.client.model.geom.ModelLayerLocation;
 import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.model.geom.PartPose;
@@ -11,29 +14,26 @@ import net.minecraft.client.model.geom.builders.*;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.Mth;
 
-public class MantisModel<T extends Mantis> extends HierarchicalModel<T> {
+@Environment(EnvType.CLIENT)
+public class MantisModel extends EntityModel<MantisRenderState> {
 	public static final ModelLayerLocation LAYER_LOCATION = new ModelLayerLocation(ResourceLocation.fromNamespaceAndPath(SlayersBeasts.MOD_ID, "mantis_model"), "main");
-	private final ModelPart root;
 	private final ModelPart head;
 
 	public MantisModel(ModelPart root) {
-		this.root = root;
+		super(root);
 		this.head = root.getChild("body").getChild("head");
 	}
 
-	public ModelPart root() {
-		return root;
-	}
-
-	public void setupAnim(T entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {
-		root.getAllParts().forEach(ModelPart::resetPose);
-		head.xRot += headPitch * Mth.PI / 180F;
-		head.yRot = netHeadYaw * Mth.PI / 180F;
-		if (entity.isScuttling()) {
-			animateWalk(MantisAnimation.SCUTTLE, limbSwing, limbSwingAmount, 10, 10);
+	public void setupAnim(MantisRenderState state) {
+		super.setupAnim(state);
+		head.xRot = Mth.clamp(state.xRot, -22.5F, 22.5F) * Mth.PI / 180F;
+		head.yRot = Mth.clamp(state.yRot, -32.5F, 32.5F) * Mth.PI / 180F;
+		if (state.isScuttling) {
+			animateWalk(MantisAnimation.SCUTTLE, state.walkAnimationPos, state.walkAnimationSpeed, 10, 10);
+			animate(Mantis.strikeAnimationState, MantisAnimation.STRIKE, state.ageInTicks);
 		} else {
-			animateWalk(MantisAnimation.WALK, limbSwing, limbSwingAmount, 10, 10);
-			animate(Mantis.strikeAnimationState, MantisAnimation.STRIKE, ageInTicks);
+			animateWalk(MantisAnimation.WALK, state.walkAnimationPos, state.walkAnimationSpeed, 10, 10);
+			animate(Mantis.strikeAnimationState, MantisAnimation.STRIKE, state.ageInTicks);
 		}
 	}
 

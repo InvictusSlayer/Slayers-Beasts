@@ -239,7 +239,7 @@ public class SBOverworldBiomes {
 		BiomeDefaultFeatures.addDefaultMushrooms(biomeSettings);
 		BiomeDefaultFeatures.addDefaultExtraVegetation(biomeSettings);
 		biomeSettings.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, isDeep ? AquaticPlacements.SEAGRASS_DEEP_WARM : AquaticPlacements.SEAGRASS_DEEP);
-		biomeSettings.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, AquaticPlacements.SEAGRASS_SIMPLE);
+		biomeSettings.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, AquaticPlacements.SEAGRASS_NORMAL);
 		biomeSettings.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, AquaticPlacements.KELP_COLD);
 		biomeSettings.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, AquaticPlacements.KELP_WARM);
 
@@ -409,9 +409,9 @@ public class SBOverworldBiomes {
 		BiomeDefaultFeatures.commonSpawns(mobSettings);
 
 		BiomeGenerationSettings.Builder biomeSettings = new BiomeGenerationSettings.Builder(placedFeatures, worldCarvers);
-		biomeSettings.addCarver(GenerationStep.Carving.AIR, Carvers.CAVE);
-		biomeSettings.addCarver(GenerationStep.Carving.AIR, Carvers.CAVE_EXTRA_UNDERGROUND);
-		biomeSettings.addCarver(GenerationStep.Carving.AIR, Carvers.CANYON);
+		biomeSettings.addCarver(Carvers.CAVE);
+		biomeSettings.addCarver(Carvers.CAVE_EXTRA_UNDERGROUND);
+		biomeSettings.addCarver(Carvers.CANYON);
 		biomeSettings.addFeature(GenerationStep.Decoration.FLUID_SPRINGS, MiscOverworldPlacements.SPRING_WATER);
 		BiomeDefaultFeatures.addSurfaceFreezing(biomeSettings);
 		BiomeDefaultFeatures.addDefaultMushrooms(biomeSettings);

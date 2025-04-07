@@ -31,8 +31,8 @@ public class StyphiumBlock extends Block implements BonemealableBlock {
 	private static boolean canBeStyphium(BlockState state, LevelReader level, BlockPos pos) {
 		BlockPos above = pos.above();
 		BlockState stateAbove = level.getBlockState(above);
-		int i = LightEngine.getLightBlockInto(level, state, pos, stateAbove, above, Direction.UP, stateAbove.getLightBlock(level, above));
-		return i < level.getMaxLightLevel();
+		int i = LightEngine.getLightBlockInto(state, stateAbove, Direction.UP, stateAbove.getLightBlock());
+		return i < 15;
 	}
 
 	public boolean isValidBonemealTarget(LevelReader level, BlockPos pos, BlockState state) {
@@ -44,8 +44,8 @@ public class StyphiumBlock extends Block implements BonemealableBlock {
 	}
 
 	public void performBonemeal(ServerLevel level, RandomSource random, BlockPos pos, BlockState state) {
-		level.registryAccess().registry(Registries.CONFIGURED_FEATURE).flatMap(configured ->
-				configured.getHolder(SBConfiguredFeatures.STYPHIUM_PATCH_BONEMEAL)).ifPresent(holder ->
+		level.registryAccess().get(Registries.CONFIGURED_FEATURE).flatMap(configured ->
+				configured.value().get(SBConfiguredFeatures.STYPHIUM_PATCH_BONEMEAL)).ifPresent(holder ->
 				holder.value().place(level, level.getChunkSource().getGenerator(), random, pos.above()));
 	}
 

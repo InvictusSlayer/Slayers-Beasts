@@ -2,29 +2,24 @@ package net.invictusslayer.slayersbeasts.common.client.model;
 
 import net.invictusslayer.slayersbeasts.common.SlayersBeasts;
 import net.invictusslayer.slayersbeasts.common.client.animation.AntWorkerAnimation;
-import net.invictusslayer.slayersbeasts.common.entity.AntWorker;
-import net.minecraft.client.model.HierarchicalModel;
+import net.invictusslayer.slayersbeasts.common.client.state.AntWorkerRenderState;
+import net.minecraft.client.model.EntityModel;
 import net.minecraft.client.model.geom.ModelLayerLocation;
 import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.model.geom.PartPose;
 import net.minecraft.client.model.geom.builders.*;
 import net.minecraft.resources.ResourceLocation;
 
-public class AntWorkerModel<T extends AntWorker> extends HierarchicalModel<T> {
+public class AntWorkerModel extends EntityModel<AntWorkerRenderState> {
 	public static final ModelLayerLocation LAYER_LOCATION = new ModelLayerLocation(ResourceLocation.fromNamespaceAndPath(SlayersBeasts.MOD_ID, "ant_worker_model"), "main");
-	private final ModelPart root;
 
 	public AntWorkerModel(ModelPart root) {
-		this.root = root;
+		super(root);
 	}
 
-	public ModelPart root() {
-		return root;
-	}
-
-	public void setupAnim(T entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {
-		root.getAllParts().forEach(ModelPart::resetPose);
-		animateWalk(AntWorkerAnimation.WALK, limbSwing, limbSwingAmount, 20, 10);
+	public void setupAnim(AntWorkerRenderState state) {
+		super.setupAnim(state);
+		animateWalk(AntWorkerAnimation.WALK, state.walkAnimationPos, state.walkAnimationSpeed, 20, 10);
 	}
 
 	public static LayerDefinition createBodyLayer() {

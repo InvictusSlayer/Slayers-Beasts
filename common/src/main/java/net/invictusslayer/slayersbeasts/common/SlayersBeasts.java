@@ -8,7 +8,6 @@ import net.invictusslayer.slayersbeasts.common.block.SBFlammableBlocks;
 import net.invictusslayer.slayersbeasts.common.block.SBStrippableBlocks;
 import net.invictusslayer.slayersbeasts.common.block.SBWoodType;
 import net.invictusslayer.slayersbeasts.common.config.SBConfig;
-import net.invictusslayer.slayersbeasts.common.init.SBDataComponents;
 import net.invictusslayer.slayersbeasts.common.init.*;
 import net.invictusslayer.slayersbeasts.common.item.SBDispensableItems;
 import net.invictusslayer.slayersbeasts.common.world.biome.SBBiomeModifications;
@@ -19,7 +18,6 @@ import net.invictusslayer.slayersbeasts.common.world.feature.SBConfiguredFeature
 import net.minecraft.client.renderer.Sheets;
 import net.minecraft.world.entity.animal.Fox;
 import net.minecraft.world.entity.animal.MushroomCow;
-import net.minecraft.world.entity.vehicle.Boat;
 import net.minecraft.world.level.block.Blocks;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -38,10 +36,10 @@ public class SlayersBeasts {
 		CONFIG = AutoConfig.getConfigHolder(SBConfig.class).getConfig();
 
 		SBCreativeModeTabs.CREATIVE_TABS.register();
+		SBEntities.ENTITIES.register();
 		SBBlocks.BLOCKS.register();
 		SBItems.ITEMS.register();
 		SBBlockEntities.BLOCK_ENTITIES.register();
-		SBEntities.ENTITIES.register();
 		SBVillagerType.VILLAGER_TYPES.register();
 		SBEffects.EFFECTS.register();
 		SBPotions.POTIONS.register();
@@ -62,9 +60,8 @@ public class SlayersBeasts {
 	}
 
 	public static void commonSetup() {
-		LOGGER.info("Extended MushroomCow$Type values: {}", Arrays.toString(MushroomCow.MushroomType.values()));
-		LOGGER.info("Extended Boat$Type values: {}", Arrays.toString(Boat.Type.values()));
-		LOGGER.info("Extended Fox$Type values: {}", Arrays.toString(Fox.Type.values()));
+		LOGGER.info("Extended MushroomCow$Type values: {}", Arrays.toString(MushroomCow.Variant.values()));
+		LOGGER.info("Extended Fox$Type values: {}", Arrays.toString(Fox.Variant.values()));
 
 		SBFlammableBlocks.register();
 		SBStrippableBlocks.register();

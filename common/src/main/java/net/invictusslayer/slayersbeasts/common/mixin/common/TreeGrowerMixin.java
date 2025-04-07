@@ -37,7 +37,7 @@ public class TreeGrowerMixin implements IExtendedTreeGrower {
 	private void onGrowTree(ServerLevel level, ChunkGenerator chunkGen, BlockPos pos, BlockState state, RandomSource random, CallbackInfoReturnable<Boolean> cir) {
 		ResourceKey<ConfiguredFeature<?, ?>> feature = getConfiguredGigaFeature(random);
 		if (feature != null) {
-			Holder<ConfiguredFeature<?, ?>> holder = level.registryAccess().registryOrThrow(Registries.CONFIGURED_FEATURE).getHolder(feature).orElse(null);
+			Holder<ConfiguredFeature<?, ?>> holder = level.registryAccess().lookupOrThrow(Registries.CONFIGURED_FEATURE).get(feature).orElse(null);
 			if (holder != null) {
 				for (int x = 0; x >= -2; --x) {
 					for (int z = 0; z >= -2; --z) {

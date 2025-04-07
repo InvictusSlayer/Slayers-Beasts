@@ -54,14 +54,14 @@ public class BigMushroomFeature extends Feature<BigMushroomFeature.Configuration
 	}
 
 	private void checkAndSetBlock(WorldGenLevel level, BlockPos pos, BlockState state) {
-		if (!level.getBlockState(pos).isSolidRender(level, pos)) {
+		if (!level.getBlockState(pos).isSolidRender()) {
 			setBlock(level, pos, state);
 		}
 	}
 
 	private boolean isValidPosition(LevelAccessor level, BlockPos pos, BlockPos.MutableBlockPos mutableBlockPos, int height) {
 		int i = pos.getY();
-		if (i >= level.getMinBuildHeight() + 1 && i + height + 1 < level.getMaxBuildHeight()) {
+		if (i >= level.getMinY() + 1 && i + height + 1 < level.getMaxY()) {
 			BlockState below = level.getBlockState(pos.below());
 			if (!isDirt(below) && !below.is(BlockTags.MUSHROOM_GROW_BLOCK)) return false;
 

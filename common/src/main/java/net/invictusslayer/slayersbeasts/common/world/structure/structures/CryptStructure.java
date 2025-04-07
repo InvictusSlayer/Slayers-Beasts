@@ -12,6 +12,8 @@ import net.minecraft.world.level.levelgen.heightproviders.HeightProvider;
 import net.minecraft.world.level.levelgen.structure.Structure;
 import net.minecraft.world.level.levelgen.structure.StructureType;
 import net.minecraft.world.level.levelgen.structure.pools.StructureTemplatePool;
+import net.minecraft.world.level.levelgen.structure.pools.alias.PoolAliasLookup;
+import net.minecraft.world.level.levelgen.structure.templatesystem.LiquidSettings;
 
 import java.util.Optional;
 
@@ -34,7 +36,7 @@ public class CryptStructure extends Structure {
 		ChunkPos chunkPos = context.chunkPos();
 		int i = startHeight.sample(context.random(), new WorldGenerationContext(context.chunkGenerator(), context.heightAccessor()));
 		BlockPos pos = new BlockPos(chunkPos.getMinBlockX(), i, chunkPos.getMinBlockZ());
-		return CryptPieces.addPieces(context, startPool, pos, 128);
+		return CryptPieces.addPieces(context, startPool, pos, 128, PoolAliasLookup.EMPTY, LiquidSettings.APPLY_WATERLOGGING);
 	}
 
 	public StructureType<?> type() {

@@ -51,7 +51,7 @@ public class PeatBlock extends FallingBlock {
 		return adjacentState.is(this) || super.skipRendering(state, adjacentState, direction);
 	}
 
-	public VoxelShape getOcclusionShape(BlockState state, BlockGetter level, BlockPos pos) {
+	public VoxelShape getOcclusionShape(BlockState state) {
 		return Shapes.empty();
 	}
 

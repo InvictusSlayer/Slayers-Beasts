@@ -2,21 +2,18 @@ package net.invictusslayer.slayersbeasts.neoforge.data.tag;
 
 import net.invictusslayer.slayersbeasts.common.SlayersBeasts;
 import net.invictusslayer.slayersbeasts.common.block.WoodFamily;
-import net.invictusslayer.slayersbeasts.common.init.SBItems;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.tags.ItemTagsProvider;
-import net.minecraft.data.tags.TagsProvider;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.world.level.block.Block;
-import net.neoforged.neoforge.common.data.ExistingFileHelper;
 
 import java.util.concurrent.CompletableFuture;
 
 public class SBItemTagsProvider extends ItemTagsProvider {
-	public SBItemTagsProvider(PackOutput output, CompletableFuture<HolderLookup.Provider> provider, TagsProvider<Block> blockTags, ExistingFileHelper helper) {
-		super(output, provider, blockTags.contentsGetter(), SlayersBeasts.MOD_ID, helper);
+	public SBItemTagsProvider(PackOutput output, CompletableFuture<HolderLookup.Provider> provider, CompletableFuture<TagLookup<Block>> blockTags) {
+		super(output, provider, blockTags, SlayersBeasts.MOD_ID);
 	}
 
 	protected void addTags(HolderLookup.Provider provider) {

@@ -5,13 +5,12 @@ import net.invictusslayer.slayersbeasts.common.SlayersBeasts;
 import net.invictusslayer.slayersbeasts.common.init.SBSounds;
 import net.minecraft.data.PackOutput;
 import net.minecraft.sounds.SoundEvent;
-import net.neoforged.neoforge.common.data.ExistingFileHelper;
 import net.neoforged.neoforge.common.data.SoundDefinition;
 import net.neoforged.neoforge.common.data.SoundDefinitionsProvider;
 
 public class SBSoundDefinitionsProvider extends SoundDefinitionsProvider {
-	protected SBSoundDefinitionsProvider(PackOutput output, ExistingFileHelper helper) {
-		super(output, SlayersBeasts.MOD_ID, helper);
+	protected SBSoundDefinitionsProvider(PackOutput output) {
+		super(output, SlayersBeasts.MOD_ID);
 	}
 
 	public void registerSounds() {

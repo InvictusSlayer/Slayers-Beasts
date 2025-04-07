@@ -12,8 +12,8 @@ import net.minecraft.util.ByIdMap;
 import net.minecraft.util.StringRepresentable;
 import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.damagesource.DamageSource;
+import net.minecraft.world.entity.EntitySpawnReason;
 import net.minecraft.world.entity.EntityType;
-import net.minecraft.world.entity.MobSpawnType;
 import net.minecraft.world.entity.PathfinderMob;
 import net.minecraft.world.entity.SpawnGroupData;
 import net.minecraft.world.entity.ai.goal.*;
@@ -77,7 +77,7 @@ public abstract class AbstractEnt extends PathfinderMob {
 
 	protected abstract void setupAnimationStates();
 
-	public SpawnGroupData finalizeSpawn(ServerLevelAccessor level, DifficultyInstance difficulty, MobSpawnType type, SpawnGroupData spawnData) {
+	public SpawnGroupData finalizeSpawn(ServerLevelAccessor level, DifficultyInstance difficulty, EntitySpawnReason reason, SpawnGroupData spawnData) {
 		Variant variant = getRandomEntType(level);
 		if (spawnData instanceof EntGroupData antData) variant = antData.variant;
 		else spawnData = new EntGroupData(variant);

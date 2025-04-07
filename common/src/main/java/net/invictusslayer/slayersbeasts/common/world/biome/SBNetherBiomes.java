@@ -33,7 +33,7 @@ public class SBNetherBiomes {
 	}
 
 	private static void globalNetherGeneration(BiomeGenerationSettings.Builder biomeSettings) {
-		biomeSettings.addCarver(GenerationStep.Carving.AIR, Carvers.NETHER_CAVE);
+		biomeSettings.addCarver(Carvers.NETHER_CAVE);
 		biomeSettings.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, MiscOverworldPlacements.SPRING_LAVA);
 		biomeSettings.addFeature(GenerationStep.Decoration.UNDERGROUND_DECORATION, NetherPlacements.SPRING_OPEN);
 		biomeSettings.addFeature(GenerationStep.Decoration.UNDERGROUND_DECORATION, NetherPlacements.PATCH_FIRE);

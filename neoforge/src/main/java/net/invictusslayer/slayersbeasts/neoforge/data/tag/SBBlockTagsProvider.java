@@ -10,13 +10,12 @@ import net.minecraft.tags.BlockTags;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.neoforged.neoforge.common.data.BlockTagsProvider;
-import net.neoforged.neoforge.common.data.ExistingFileHelper;
 
 import java.util.concurrent.CompletableFuture;
 
 public class SBBlockTagsProvider extends BlockTagsProvider {
-	public SBBlockTagsProvider(PackOutput output, CompletableFuture<HolderLookup.Provider> provider, ExistingFileHelper helper) {
-		super(output, provider, SlayersBeasts.MOD_ID, helper);
+	public SBBlockTagsProvider(PackOutput output, CompletableFuture<HolderLookup.Provider> provider) {
+		super(output, provider, SlayersBeasts.MOD_ID);
 	}
 
 	protected void addTags(HolderLookup.Provider provider) {

@@ -1,6 +1,6 @@
 package net.invictusslayer.slayersbeasts.common.mixin.common;
 
-import net.invictusslayer.slayersbeasts.common.entity.SBMushroomCowType;
+import net.invictusslayer.slayersbeasts.common.entity.SBMushroomCowVariant;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.util.RandomSource;
@@ -23,7 +23,7 @@ public abstract class MushroomCowMixin {
 	private UUID lastLightningBoltUUID;
 
 	@Shadow
-	public abstract MushroomCow.MushroomType getVariant();
+	public abstract MushroomCow.Variant getVariant();
 
 	@Inject(method = "thunderHit", at = @At("HEAD"), cancellable = true)
 	private void onThunderHit(ServerLevel level, LightningBolt lightning, CallbackInfo ci) {
@@ -36,10 +36,10 @@ public abstract class MushroomCowMixin {
 		ci.cancel();
 	}
 
-	@Inject(method = "getOffspringType", at = @At("HEAD"), cancellable = true)
-	private void onGetOffspringType(MushroomCow mate, CallbackInfoReturnable<MushroomCow.MushroomType> cir) {
-		MushroomCow.MushroomType type = getVariant();
-		MushroomCow.MushroomType mateType = mate.getVariant();
+	@Inject(method = "getOffspringVariant", at = @At("HEAD"), cancellable = true)
+	private void onGetOffspringType(MushroomCow mate, CallbackInfoReturnable<MushroomCow.Variant> cir) {
+		MushroomCow.Variant type = getVariant();
+		MushroomCow.Variant mateType = mate.getVariant();
 		if (type == mateType && RandomSource.create().nextInt(1024) == 0) {
 			cir.setReturnValue(cycleVariant(type));
 		}
@@ -47,10 +47,10 @@ public abstract class MushroomCowMixin {
 	}
 
 	@Unique
-	private static MushroomCow.MushroomType cycleVariant(MushroomCow.MushroomType type) {
-		if (type == MushroomCow.MushroomType.RED) return MushroomCow.MushroomType.BROWN;
-		if (type == MushroomCow.MushroomType.BROWN) return SBMushroomCowType.WHITE;
-		if (type == SBMushroomCowType.WHITE) return SBMushroomCowType.BLACK;
-		return MushroomCow.MushroomType.RED;
+	private static MushroomCow.Variant cycleVariant(MushroomCow.Variant type) {
+		if (type == MushroomCow.Variant.RED) return MushroomCow.Variant.BROWN;
+		if (type == MushroomCow.Variant.BROWN) return SBMushroomCowVariant.WHITE;
+		if (type == SBMushroomCowVariant.WHITE) return SBMushroomCowVariant.BLACK;
+		return MushroomCow.Variant.RED;
 	}
 }

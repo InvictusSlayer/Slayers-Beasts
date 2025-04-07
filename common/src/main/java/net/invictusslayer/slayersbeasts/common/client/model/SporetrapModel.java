@@ -1,18 +1,19 @@
 package net.invictusslayer.slayersbeasts.common.client.model;
 
-import com.mojang.blaze3d.vertex.PoseStack;
-import com.mojang.blaze3d.vertex.VertexConsumer;
+import net.fabricmc.api.EnvType;
+import net.fabricmc.api.Environment;
 import net.invictusslayer.slayersbeasts.common.SlayersBeasts;
-import net.invictusslayer.slayersbeasts.common.entity.Sporetrap;
 import net.minecraft.client.model.EntityModel;
 import net.minecraft.client.model.geom.ModelLayerLocation;
 import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.model.geom.PartPose;
 import net.minecraft.client.model.geom.builders.*;
+import net.minecraft.client.renderer.entity.state.LivingEntityRenderState;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.Mth;
 
-public class SporetrapModel<T extends Sporetrap> extends EntityModel<T> {
+@Environment(EnvType.CLIENT)
+public class SporetrapModel extends EntityModel<LivingEntityRenderState> {
 	public static final ModelLayerLocation LAYER_LOCATION = new ModelLayerLocation(ResourceLocation.fromNamespaceAndPath(SlayersBeasts.MOD_ID, "sporetrap_model"), "main");
 	private final ModelPart base;
 	private final ModelPart innerLeaf1;
@@ -24,6 +25,7 @@ public class SporetrapModel<T extends Sporetrap> extends EntityModel<T> {
 	private final ModelPart mouthBottom;
 
 	public SporetrapModel(ModelPart root) {
+		super(root);
 		this.base = root.getChild("base");
 		this.innerLeaf1 = root.getChild("innerLeaf1");
 		this.innerLeaf2 = root.getChild("innerLeaf2");
@@ -34,12 +36,13 @@ public class SporetrapModel<T extends Sporetrap> extends EntityModel<T> {
 		this.mouthBottom = root.getChild("mouthBottom");
 	}
 
-	public void setupAnim(T pEntity, float pLimbSwing, float pLimbSwingAmount, float pAgeInTicks, float pNetHeadYaw, float pHeadPitch) {
-		float f1 = Mth.cos(pLimbSwing * 1.4F) * 0.8F * pLimbSwingAmount;
-		float f2 = Mth.cos(pLimbSwing * 1.4F + Mth.PI * 0.25F) * 0.8F * pLimbSwingAmount;
-		float f3 = Mth.cos(pLimbSwing * 1.4F + Mth.PI * 0.5F) * 0.8F * pLimbSwingAmount;
-		float f4 = Mth.cos(pLimbSwing * 1.4F + Mth.PI * 0.75F) * 0.8F * pLimbSwingAmount;
-		float f5 = Mth.cos(pLimbSwing * 1.4F + Mth.PI) * 0.8F * pLimbSwingAmount;
+	public void setupAnim(LivingEntityRenderState state) {
+		super.setupAnim(state);
+		float f1 = Mth.cos(state.walkAnimationPos * 1.4F) * 0.8F * state.walkAnimationSpeed;
+		float f2 = Mth.cos(state.walkAnimationPos * 1.4F + Mth.PI * 0.25F) * 0.8F * state.walkAnimationSpeed;
+		float f3 = Mth.cos(state.walkAnimationPos * 1.4F + Mth.PI * 0.5F) * 0.8F * state.walkAnimationSpeed;
+		float f4 = Mth.cos(state.walkAnimationPos * 1.4F + Mth.PI * 0.75F) * 0.8F * state.walkAnimationSpeed;
+		float f5 = Mth.cos(state.walkAnimationPos * 1.4F + Mth.PI) * 0.8F * state.walkAnimationSpeed;
 		this.mouthTop.xRot = -2.8F;
 		this.mouthBottom.xRot = 2.8F;
 		this.mouthTop.xRot += f1;
@@ -52,17 +55,6 @@ public class SporetrapModel<T extends Sporetrap> extends EntityModel<T> {
 //		this.innerLeaf2.xRot += f1;
 //		this.innerLeaf3.zRot += f1;
 //		this.innerLeaf4.zRot += f1;
-	}
-
-	public void renderToBuffer(PoseStack poseStack, VertexConsumer buffer, int packedLight, int packedOverlay, int colour) {
-		base.render(poseStack, buffer, packedLight, packedOverlay, colour);
-		innerLeaf1.render(poseStack, buffer, packedLight, packedOverlay, colour);
-		innerLeaf2.render(poseStack, buffer, packedLight, packedOverlay, colour);
-		innerLeaf3.render(poseStack, buffer, packedLight, packedOverlay, colour);
-		innerLeaf4.render(poseStack, buffer, packedLight, packedOverlay, colour);
-		stem.render(poseStack, buffer, packedLight, packedOverlay, colour);
-		mouthTop.render(poseStack, buffer, packedLight, packedOverlay, colour);
-		mouthBottom.render(poseStack, buffer, packedLight, packedOverlay, colour);
 	}
 
 	public static LayerDefinition createBodyLayer() {

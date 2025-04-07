@@ -22,7 +22,7 @@ public class MightyBrownMushroomFeature extends AbstractMightyMushroomFeature {
 				for (int z = -radius; z <= radius + 1; ++z) {
 					if (isBlock(x, z, stage)) {
 						mutableBlockPos.setWithOffset(pos, x, y, z);
-						if (!level.getBlockState(mutableBlockPos).isSolidRender(level, mutableBlockPos)) {
+						if (!level.getBlockState(mutableBlockPos).isSolidRender()) {
 							boolean flag = stage < 2;
 							boolean north = flag && z <= 0;
 							boolean south = flag && z >= 0;

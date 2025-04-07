@@ -108,7 +108,7 @@ public abstract class AbstractAnt extends PathfinderMob {
 		if (tickCount % 20 == 0 && !hasValidNest()) nestPos = null;
 	}
 
-	public SpawnGroupData finalizeSpawn(ServerLevelAccessor level, DifficultyInstance difficulty, MobSpawnType type, SpawnGroupData spawnData) {
+	public SpawnGroupData finalizeSpawn(ServerLevelAccessor level, DifficultyInstance difficulty, EntitySpawnReason reason, SpawnGroupData spawnData) {
 		Variant variant = getRandomAntType(level);
 		if (spawnData instanceof AntGroupData antData) variant = antData.variant;
 		else spawnData = new AntGroupData(variant);

@@ -1,8 +1,9 @@
 accessWidener   v2  named
 accessible  method  net/minecraft/client/renderer/Sheets createSignMaterial (Lnet/minecraft/world/level/block/state/properties/WoodType;)Lnet/minecraft/client/resources/model/Material;
 accessible  method  net/minecraft/client/renderer/Sheets createHangingSignMaterial (Lnet/minecraft/world/level/block/state/properties/WoodType;)Lnet/minecraft/client/resources/model/Material;
-accessible  method  net/minecraft/data/loot/BlockLootSubProvider createPotFlowerItemTable (Lnet/minecraft/world/level/ItemLike;)Lnet/minecraft/world/level/storage/loot/LootTable$Builder;
+accessible  method  net/minecraft/data/loot/BlockLootSubProvider createShearsOnlyDrop (Lnet/minecraft/world/level/ItemLike;)Lnet/minecraft/world/level/storage/loot/LootTable$Builder;
 accessible  method  net/minecraft/data/loot/BlockLootSubProvider createSilkTouchOnlyTable (Lnet/minecraft/world/level/ItemLike;)Lnet/minecraft/world/level/storage/loot/LootTable$Builder;
+accessible  method  net/minecraft/data/loot/BlockLootSubProvider createPotFlowerItemTable (Lnet/minecraft/world/level/ItemLike;)Lnet/minecraft/world/level/storage/loot/LootTable$Builder;
 accessible  method  net/minecraft/data/recipes/RecipeProvider buttonBuilder (Lnet/minecraft/world/level/ItemLike;Lnet/minecraft/world/item/crafting/Ingredient;)Lnet/minecraft/data/recipes/RecipeBuilder;
 accessible  method  net/minecraft/data/recipes/RecipeProvider fenceBuilder (Lnet/minecraft/world/level/ItemLike;Lnet/minecraft/world/item/crafting/Ingredient;)Lnet/minecraft/data/recipes/RecipeBuilder;
 accessible  method  net/minecraft/data/recipes/RecipeProvider fenceGateBuilder (Lnet/minecraft/world/level/ItemLike;Lnet/minecraft/world/item/crafting/Ingredient;)Lnet/minecraft/data/recipes/RecipeBuilder;
@@ -16,6 +17,7 @@ accessible  method  net/minecraft/world/entity/npc/VillagerType <init> (Ljava/la
 accessible  field   net/minecraft/world/entity/npc/VillagerType BY_BIOME Ljava/util/Map;
 accessible  field   net/minecraft/world/item/AxeItem STRIPPABLES Ljava/util/Map;
 mutable     field   net/minecraft/world/item/AxeItem STRIPPABLES Ljava/util/Map;
+accessible  method  net/minecraft/world/level/block/entity/BlockEntityType <init> (Lnet/minecraft/world/level/block/entity/BlockEntityType$BlockEntitySupplier;Ljava/util/Set;)V
 accessible  method  net/minecraft/world/level/block/FireBlock setFlammable (Lnet/minecraft/world/level/block/Block;II)V
 accessible  method  net/minecraft/world/level/block/state/properties/WoodType register (Lnet/minecraft/world/level/block/state/properties/WoodType;)Lnet/minecraft/world/level/block/state/properties/WoodType;
 accessible  method  net/minecraft/world/level/levelgen/feature/foliageplacers/FoliagePlacerType <init> (Lcom/mojang/serialization/MapCodec;)V

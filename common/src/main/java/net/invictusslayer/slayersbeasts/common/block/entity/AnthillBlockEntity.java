@@ -25,6 +25,7 @@ import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.EntitySpawnReason;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.component.CustomData;
@@ -220,7 +221,7 @@ public class AnthillBlockEntity extends BlockEntity {
 		List<BlockPos> posList = new ArrayList<>();
 		for (int y = 0; y > -4; y--) {
 			int radius = y + 5;
-			if (nestPos.getY() + y < level.getMinBuildHeight()) break;
+			if (nestPos.getY() + y < level.getMinY()) break;
 
 			for (int x = -radius; x <= radius; x++) {
 				for (int z = -radius; z <= radius; z++) {
@@ -355,7 +356,7 @@ public class AnthillBlockEntity extends BlockEntity {
 			CompoundTag tag = entityData.copyTag();
 			Objects.requireNonNull(tag);
 			IGNORED_ANT_TAGS.forEach(tag::remove);
-			Entity entity = EntityType.loadEntityRecursive(tag, level, arg -> arg);
+			Entity entity = EntityType.loadEntityRecursive(tag, level, EntitySpawnReason.LOAD, entity1 -> entity1);
 			if (entity != null && entity.getType().is(SBTags.EntityTypes.ANTHILL_INHABITANTS)) {
 //				entity.setNoGravity(true);
 				if (entity instanceof AbstractAnt ant) {

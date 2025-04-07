@@ -18,7 +18,7 @@ public class HugeWhiteMushroomFeature extends AbstractHugeMushroomFeature {
 	protected void placeTrunk(LevelAccessor level, RandomSource random, BlockPos pos, HugeMushroomFeatureConfiguration config, int maxHeight, BlockPos.MutableBlockPos mutableBlockPos) {
 		for (int i = 0; i < maxHeight - 1; ++i) {
 			mutableBlockPos.set(pos).move(Direction.UP, i);
-			if (!level.getBlockState(mutableBlockPos).isSolidRender(level, mutableBlockPos)) {
+			if (!level.getBlockState(mutableBlockPos).isSolidRender()) {
 				setBlock(level, mutableBlockPos, config.stemProvider.getState(random, pos).setValue(HugeMushroomBlock.UP, false).setValue(HugeMushroomBlock.DOWN, false));
 			}
 		}
@@ -35,7 +35,7 @@ public class HugeWhiteMushroomFeature extends AbstractHugeMushroomFeature {
 				for (int z = -radius; z <= radius; ++z) {
 					if (isBlock(x, z, stage)) {
 						mutableBlockPos.setWithOffset(origin, x, y, z);
-						if (!level.getBlockState(mutableBlockPos).isSolidRender(level, mutableBlockPos)) {
+						if (!level.getBlockState(mutableBlockPos).isSolidRender()) {
 							boolean north = z <= 0;
 							boolean south = z >= 0;
 							boolean east = x >= 0;
@@ -50,7 +50,7 @@ public class HugeWhiteMushroomFeature extends AbstractHugeMushroomFeature {
 
 			if (stage == 0) {
 				mutableBlockPos.setWithOffset(origin, 0, y, 0).move(direction);
-				if (!level.getBlockState(mutableBlockPos).isSolidRender(level, mutableBlockPos)) {
+				if (!level.getBlockState(mutableBlockPos).isSolidRender()) {
 					BlockState state = config.capProvider.getState(random, origin);
 					setBlock(level, mutableBlockPos, state);
 				}

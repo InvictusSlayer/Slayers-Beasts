@@ -41,7 +41,6 @@ public class CrackedMudBlock extends Block {
 		}
 	}
 
-	@SuppressWarnings("deprecation")
 	public void stepOn(Level level, BlockPos pos, BlockState state, Entity entity) {
 		if (!level.isClientSide) {
 			if (!entity.isSteppingCarefully() && entity instanceof LivingEntity && !level.getBlockState(pos.below()).isSolid()) {

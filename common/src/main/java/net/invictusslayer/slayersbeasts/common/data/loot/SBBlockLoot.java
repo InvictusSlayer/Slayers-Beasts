@@ -21,7 +21,6 @@ import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.DoublePlantBlock;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.block.state.properties.DoubleBlockHalf;
-import net.minecraft.world.level.storage.loot.BuiltInLootTables;
 import net.minecraft.world.level.storage.loot.LootContext;
 import net.minecraft.world.level.storage.loot.LootPool;
 import net.minecraft.world.level.storage.loot.LootTable;
@@ -68,7 +67,7 @@ public class SBBlockLoot extends BlockLootSubProvider {
 		add(SBBlocks.TALL_DEAD_BUSH.get(), this::createTallDeadBushDrops);
 		add(SBBlocks.CRACKED_MUD.get(), block -> createSingleItemTableWithSilkTouch(Blocks.PACKED_MUD, SBItems.MUD_BALL.get(), ConstantValue.exactly(4)));
 		dropSelf(SBBlocks.PEAT.get());
-		add(SBBlocks.ALGAE.get(), BlockLootSubProvider::createShearsOnlyDrop);
+		add(SBBlocks.ALGAE.get(), this::createShearsOnlyDrop);
 
 		dropSelf(SBBlocks.BLACK_SAND.get());
 
@@ -96,15 +95,16 @@ public class SBBlockLoot extends BlockLootSubProvider {
 		generate();
 		HashSet<ResourceKey<LootTable>> set = new HashSet<>();
 		for (Block block : BuiltInRegistries.BLOCK) {
-			if (!block.getLootTable().location().getNamespace().equals(SlayersBeasts.MOD_ID)) continue;
-
-			ResourceKey<LootTable> key;
-			if (!block.isEnabled(enabledFeatures) || (key = block.getLootTable()) == BuiltInLootTables.EMPTY || !set.add(key)) continue;
-
-			LootTable.Builder builder = map.remove(key);
-			if (builder == null) throw new IllegalStateException(String.format(Locale.ROOT, "Missing loottable '%s' for '%s'", key, BuiltInRegistries.BLOCK.getKey(block)));
-
-			biConsumer.accept(key, builder);
+			if (!block.isEnabled(enabledFeatures)) continue;
+			block.getLootTable().ifPresent(key -> {
+				if (key.location().getNamespace().equals(SlayersBeasts.MOD_ID)) {
+					if (set.add(key)) {
+						LootTable.Builder builder = map.remove(key);
+						if (builder == null) throw new IllegalStateException(String.format(Locale.ROOT, "Missing loottable '%s' for '%s'", key, BuiltInRegistries.BLOCK.getKey(block)));
+						biConsumer.accept(key, builder);
+					}
+				}
+			});
 		}
 		if (!map.isEmpty()) throw new IllegalStateException("Created block loot tables for non-blocks: " + map.keySet());
 	}
@@ -140,7 +140,7 @@ public class SBBlockLoot extends BlockLootSubProvider {
 
 	private LootTable.Builder createTallDeadBushDrops(Block block) {
 		return LootTable.lootTable().withPool(LootPool.lootPool().setRolls(ConstantValue.exactly(1.0F))
-				.add(LootItem.lootTableItem(block).when(HAS_SHEARS)
+				.add(LootItem.lootTableItem(block).when(hasShears())
 						.otherwise(applyExplosionDecay(block, LootItem.lootTableItem(Items.STICK)
 								.when(LootItemBlockStatePropertyCondition.hasBlockStateProperties(block)
 										.setProperties(StatePropertiesPredicate.Builder.properties()

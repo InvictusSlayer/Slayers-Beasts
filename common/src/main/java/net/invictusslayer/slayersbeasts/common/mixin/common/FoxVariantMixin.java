@@ -1,7 +1,7 @@
 package net.invictusslayer.slayersbeasts.common.mixin.common;
 
 import net.invictusslayer.slayersbeasts.common.data.tag.SBTags;
-import net.invictusslayer.slayersbeasts.common.entity.SBFoxType;
+import net.invictusslayer.slayersbeasts.common.entity.SBFoxVariant;
 import net.minecraft.core.Holder;
 import net.minecraft.world.entity.animal.Fox;
 import net.minecraft.world.level.biome.Biome;
@@ -19,26 +19,26 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 import java.util.ArrayList;
 import java.util.Arrays;
 
-@Mixin(Fox.Type.class)
-public class FoxTypeMixin {
+@Mixin(Fox.Variant.class)
+public class FoxVariantMixin {
 	@Shadow @Final @Mutable
-	private static Fox.Type[] $VALUES;
+	private static Fox.Variant[] $VALUES;
 
 	@Invoker("<init>")
-	private static Fox.Type newFoxType(String name, int id, int ordinal, String type) {
+	private static Fox.Variant newFoxVariant(String name, int id, int ordinal, String type) {
 		throw new AssertionError();
 	}
 
-	@Inject(method = "<clinit>", at = @At(value = "FIELD", opcode = Opcodes.PUTSTATIC, target = "Lnet/minecraft/world/entity/animal/Fox$Type;$VALUES:[Lnet/minecraft/world/entity/animal/Fox$Type;", shift = At.Shift.AFTER))
+	@Inject(method = "<clinit>", at = @At(value = "FIELD", opcode = Opcodes.PUTSTATIC, target = "Lnet/minecraft/world/entity/animal/Fox$Variant;$VALUES:[Lnet/minecraft/world/entity/animal/Fox$Variant;", shift = At.Shift.AFTER))
 	private static void onClinit(CallbackInfo ci) {
-		ArrayList<Fox.Type> types = new ArrayList<>(Arrays.asList($VALUES));
-		SBFoxType.GREY = newFoxType("GREY", types.size(), types.size(), "grey");
-		types.add(SBFoxType.GREY);
-		$VALUES = types.toArray(new Fox.Type[0]);
+		ArrayList<Fox.Variant> types = new ArrayList<>(Arrays.asList($VALUES));
+		SBFoxVariant.GREY = newFoxVariant("GREY", types.size(), types.size(), "grey");
+		types.add(SBFoxVariant.GREY);
+		$VALUES = types.toArray(new Fox.Variant[0]);
 	}
 
 	@Inject(method = "byBiome", at = @At("HEAD"), cancellable = true)
-	private static void onByBiome(Holder<Biome> biome, CallbackInfoReturnable<Fox.Type> cir) {
-		if (biome.is(SBTags.Biomes.SPAWNS_GREY_FOXES)) cir.setReturnValue(SBFoxType.GREY);
+	private static void onByBiome(Holder<Biome> biome, CallbackInfoReturnable<Fox.Variant> cir) {
+		if (biome.is(SBTags.Biomes.SPAWNS_GREY_FOXES)) cir.setReturnValue(SBFoxVariant.GREY);
 	}
 }

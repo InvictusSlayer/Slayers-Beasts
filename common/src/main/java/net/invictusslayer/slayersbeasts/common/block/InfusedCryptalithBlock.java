@@ -7,7 +7,6 @@ import net.minecraft.core.Direction;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.item.context.BlockPlaceContext;
-import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.HorizontalDirectionalBlock;
@@ -19,12 +18,12 @@ import net.minecraft.world.level.block.state.pattern.BlockPatternBuilder;
 import net.minecraft.world.level.block.state.predicate.BlockStatePredicate;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.block.state.properties.BooleanProperty;
-import net.minecraft.world.level.block.state.properties.DirectionProperty;
+import net.minecraft.world.level.block.state.properties.EnumProperty;
 import net.minecraft.world.level.pathfinder.PathComputationType;
 
 public class InfusedCryptalithBlock extends Block {
-	public static final DirectionProperty FACING = HorizontalDirectionalBlock.FACING;
-	public static final BooleanProperty ACTIVE = BlockStateProperties.EYE;
+	public static final EnumProperty<Direction> FACING = HorizontalDirectionalBlock.FACING;
+	public static final BooleanProperty ACTIVE = BlockStateProperties.ACTIVE;
 	private static BlockPattern portalShape;
 	
 	public InfusedCryptalithBlock(Properties properties) {

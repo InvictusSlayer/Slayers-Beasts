@@ -1,30 +1,28 @@
 package net.invictusslayer.slayersbeasts.common.client.model;
 
+import net.fabricmc.api.EnvType;
+import net.fabricmc.api.Environment;
 import net.invictusslayer.slayersbeasts.common.SlayersBeasts;
 import net.invictusslayer.slayersbeasts.common.client.animation.IrkAnimation;
-import net.invictusslayer.slayersbeasts.common.entity.Irk;
-import net.minecraft.client.model.HierarchicalModel;
+import net.minecraft.client.model.EntityModel;
 import net.minecraft.client.model.geom.ModelLayerLocation;
 import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.model.geom.PartPose;
 import net.minecraft.client.model.geom.builders.*;
+import net.minecraft.client.renderer.entity.state.LivingEntityRenderState;
 import net.minecraft.resources.ResourceLocation;
 
-public class IrkModel<T extends Irk> extends HierarchicalModel<T> {
+@Environment(EnvType.CLIENT)
+public class IrkModel extends EntityModel<LivingEntityRenderState> {
 	public static final ModelLayerLocation LAYER_LOCATION = new ModelLayerLocation(ResourceLocation.fromNamespaceAndPath(SlayersBeasts.MOD_ID, "irk_model"), "main");
-	private final ModelPart root;
 
 	public IrkModel(ModelPart root) {
-		this.root = root;
+		super(root);
 	}
 
-	public ModelPart root() {
-		return root;
-	}
-
-	public void setupAnim(T entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {
-		root.getAllParts().forEach(ModelPart::resetPose);
-		animateWalk(IrkAnimation.WALK, limbSwing, limbSwingAmount, 15, 10);
+	public void setupAnim(LivingEntityRenderState state) {
+		super.setupAnim(state);
+		animateWalk(IrkAnimation.WALK, state.walkAnimationPos, state.walkAnimationSpeed, 15, 10);
 	}
 
 	public static LayerDefinition createBodyLayer() {

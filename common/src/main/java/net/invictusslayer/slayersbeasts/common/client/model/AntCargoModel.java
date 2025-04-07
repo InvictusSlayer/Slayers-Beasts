@@ -1,9 +1,9 @@
 package net.invictusslayer.slayersbeasts.common.client.model;
 
-import com.mojang.blaze3d.vertex.PoseStack;
-import com.mojang.blaze3d.vertex.VertexConsumer;
+import net.fabricmc.api.EnvType;
+import net.fabricmc.api.Environment;
 import net.invictusslayer.slayersbeasts.common.SlayersBeasts;
-import net.invictusslayer.slayersbeasts.common.entity.AntWorker;
+import net.invictusslayer.slayersbeasts.common.client.state.AntWorkerRenderState;
 import net.minecraft.client.model.EntityModel;
 import net.minecraft.client.model.geom.ModelLayerLocation;
 import net.minecraft.client.model.geom.ModelPart;
@@ -11,18 +11,18 @@ import net.minecraft.client.model.geom.PartPose;
 import net.minecraft.client.model.geom.builders.*;
 import net.minecraft.resources.ResourceLocation;
 
-public class AntCargoModel<T extends AntWorker> extends EntityModel<T> {
+@Environment(EnvType.CLIENT)
+public class AntCargoModel extends EntityModel<AntWorkerRenderState> {
 	public static final ModelLayerLocation LAYER_LOCATION = new ModelLayerLocation(ResourceLocation.fromNamespaceAndPath(SlayersBeasts.MOD_ID, "ant_worker_model"), "cargo");
-	private final ModelPart cargo;
+//	private final ModelPart cargo;
 
 	public AntCargoModel(ModelPart root) {
-		this.cargo = root.getChild("cargo");
+		super(root);
+//		this.cargo = root.getChild("cargo");
 	}
 
-	public void setupAnim(T entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {}
-
-	public void renderToBuffer(PoseStack poseStack, VertexConsumer vertexConsumer, int packedLight, int packedOverlay, int colour) {
-		cargo.render(poseStack, vertexConsumer, packedLight, packedOverlay, colour);
+	public void setupAnim(AntWorkerRenderState state) {
+		super.setupAnim(state);
 	}
 
 	public static LayerDefinition createCargoLayer() {

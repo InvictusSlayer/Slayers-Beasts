@@ -25,22 +25,18 @@ import net.minecraft.core.RegistryAccess;
 import net.minecraft.core.RegistrySetBuilder;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
-import net.minecraft.data.DataGenerator;
-import net.minecraft.data.PackOutput;
 import net.minecraft.data.loot.LootTableProvider;
 import net.minecraft.resources.RegistryDataLoader;
 import net.minecraft.world.level.storage.loot.parameters.LootContextParamSets;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.common.data.DatapackBuiltinEntriesProvider;
-import net.neoforged.neoforge.common.data.ExistingFileHelper;
 import net.neoforged.neoforge.common.world.BiomeModifier;
 import net.neoforged.neoforge.data.event.GatherDataEvent;
 import net.neoforged.neoforge.registries.NeoForgeRegistries;
 
 import java.util.Collections;
 import java.util.List;
-import java.util.concurrent.CompletableFuture;
 
 @EventBusSubscriber(modid = SlayersBeasts.MOD_ID, bus = EventBusSubscriber.Bus.MOD)
 public class SBDataGenerator {
@@ -58,28 +54,20 @@ public class SBDataGenerator {
 			.add(NeoForgeRegistries.Keys.BIOME_MODIFIERS, SBBiomeModifiers::bootstrap);
 
 	@SubscribeEvent
-	public static void gatherData(GatherDataEvent event) {
-		DataGenerator gen = event.getGenerator();
-		PackOutput output = gen.getPackOutput();
-		CompletableFuture<HolderLookup.Provider> provider = event.getLookupProvider();
-		ExistingFileHelper helper = event.getExistingFileHelper();
-		boolean hasServer = event.includeServer();
+	public static void gatherData(GatherDataEvent.Client event) {
+		event.createProvider((output, provider) -> new DatapackBuiltinEntriesProvider(output, provider, BUILDER, Collections.singleton(SlayersBeasts.MOD_ID)));
 
-		gen.addProvider(hasServer, new DatapackBuiltinEntriesProvider(output, provider, BUILDER, Collections.singleton(SlayersBeasts.MOD_ID)));
+		event.createBlockAndItemTags(SBBlockTagsProvider::new, SBItemTagsProvider::new);
+		event.createProvider((output, provider) -> new SBBiomeTagsProvider(output, provider.thenApply(SBDataGenerator::patchRegistry)));
+		event.createProvider(SBEntityTagsProvider::new);
+		event.createProvider(SBPoiTagsProvider::new);
 
-		SBBlockTagsProvider blockTags = gen.addProvider(hasServer, new SBBlockTagsProvider(output, provider, helper));
-		gen.addProvider(hasServer, new SBItemTagsProvider(output, provider, blockTags, helper));
-		gen.addProvider(hasServer, new SBBiomeTagsProvider(output, provider.thenApply(SBDataGenerator::patchRegistry), helper));
-		gen.addProvider(hasServer, new SBEntityTagsProvider(output, provider, helper));
-		gen.addProvider(hasServer, new SBPoiTagsProvider(output, provider, helper));
+		event.createProvider(EnUsLangProvider::new);
+		event.createProvider(SBRecipeProvider.Runner::new);
+		event.createProvider(SBModelProvider::new);
+		event.createProvider(SBSoundDefinitionsProvider::new);
 
-		gen.addProvider(hasServer, new EnUsLangProvider(output));
-		gen.addProvider(hasServer, new SBRecipeProvider(output, provider));
-		gen.addProvider(hasServer, new SBBlockStateProvider(output, helper));
-		gen.addProvider(hasServer, new SBItemModelProvider(output, helper));
-		gen.addProvider(hasServer, new SBSoundDefinitionsProvider(output, helper));
-
-		gen.addProvider(hasServer, new LootTableProvider(output, SBLootTables.all(), List.of(
+		event.createProvider((output, provider) -> new LootTableProvider(output, SBLootTables.all(), List.of(
 				new LootTableProvider.SubProviderEntry(SBBlockLoot::new, LootContextParamSets.BLOCK),
 				new LootTableProvider.SubProviderEntry(SBEntityLoot::new, LootContextParamSets.ENTITY),
 				new LootTableProvider.SubProviderEntry(SBChestLoot::new, LootContextParamSets.CHEST)

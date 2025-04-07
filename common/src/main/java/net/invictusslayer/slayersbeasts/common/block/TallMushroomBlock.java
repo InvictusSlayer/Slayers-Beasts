@@ -40,7 +40,7 @@ public class TallMushroomBlock extends DoublePlantBlock implements BonemealableB
 	}
 
 	public void performBonemeal(ServerLevel level, RandomSource random, BlockPos pos, BlockState state) {
-		Optional<Holder.Reference<ConfiguredFeature<?, ?>>> optional = level.registryAccess().registryOrThrow(Registries.CONFIGURED_FEATURE).getHolder(feature);
+		Optional<Holder.Reference<ConfiguredFeature<?, ?>>> optional = level.registryAccess().lookupOrThrow(Registries.CONFIGURED_FEATURE).get(feature);
 		if (optional.isEmpty()) return;
 
 		if (state.getValue(HALF).equals(DoubleBlockHalf.UPPER)) pos = pos.below();
@@ -58,7 +58,7 @@ public class TallMushroomBlock extends DoublePlantBlock implements BonemealableB
 	}
 
 	protected boolean mayPlaceOn(BlockState state, BlockGetter level, BlockPos pos) {
-		return state.isSolidRender(level, pos);
+		return state.isSolidRender();
 	}
 
 	public boolean canSurvive(BlockState state, LevelReader level, BlockPos pos) {

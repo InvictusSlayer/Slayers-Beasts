@@ -47,8 +47,8 @@ public class AntQueen extends AbstractAnt implements NeutralMob {
 				.add(Attributes.KNOCKBACK_RESISTANCE, 0.7D);
 	}
 
-	public static boolean canSpawn(EntityType<AntQueen> entity, LevelAccessor level, MobSpawnType spawnType, BlockPos pos, RandomSource random) {
-		return PathfinderMob.checkMobSpawnRules(entity, level, spawnType, pos, random);
+	public static boolean canSpawn(EntityType<AntQueen> entity, LevelAccessor level, EntitySpawnReason reason, BlockPos pos, RandomSource random) {
+		return PathfinderMob.checkMobSpawnRules(entity, level, reason, pos, random);
 	}
 
 	public int getRemainingPersistentAngerTime() {

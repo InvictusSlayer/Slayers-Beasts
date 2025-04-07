@@ -48,7 +48,7 @@ public class SBEntityLoot extends EntityLootSubProvider {
 			EntityType<?> entityType = reference.get();
 //			if (canHaveLootTable(entityType)) {
 //				Map<ResourceKey<LootTable>, LootTable.Builder> map = this.map.remove(entityType);
-				ResourceKey<LootTable> resourceKey = entityType.getDefaultLootTable();
+//				ResourceKey<LootTable> resourceKey = entityType.getDefaultLootTable().get();
 //				if (resourceKey != BuiltInLootTables.EMPTY && (map == null || !map.containsKey(resourceKey)))
 //					throw new IllegalStateException(String.format(Locale.ROOT, "Missing loottable '%s' for '%s'", resourceKey, reference.getKey().location()));
 

@@ -128,7 +128,7 @@ public class BranchingMushroomFeature extends Feature<BranchingMushroomFeature.C
 	}
 
 	private boolean isValidPosition(LevelAccessor level, BlockPos origin, int maxHeight, BlockPos.MutableBlockPos mutableBlockPos, Configuration config) {
-		if (origin.getY() <= level.getMinBuildHeight() || origin.getY() + maxHeight > level.getMaxBuildHeight()) return false;
+		if (origin.getY() <= level.getMinY() || origin.getY() + maxHeight > level.getMaxY()) return false;
 
 		BlockState state = level.getBlockState(origin.below());
 		if (!isDirt(state) && !state.is(BlockTags.MUSHROOM_GROW_BLOCK)) return false;

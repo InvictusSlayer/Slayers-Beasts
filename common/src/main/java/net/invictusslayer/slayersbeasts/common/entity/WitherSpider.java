@@ -1,5 +1,6 @@
 package net.invictusslayer.slayersbeasts.common.entity;
 
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.damagesource.DamageSource;
@@ -53,8 +54,8 @@ public class WitherSpider extends Spider {
 		return SoundEvents.WITHER_SKELETON_HURT;
 	}
 
-	public boolean doHurtTarget(Entity entity) {
-		if (!super.doHurtTarget(entity)) return false;
+	public boolean doHurtTarget(ServerLevel level, Entity entity) {
+		if (!super.doHurtTarget(level, entity)) return false;
 		if (entity instanceof LivingEntity) {
 			((LivingEntity) entity).addEffect(new MobEffectInstance(MobEffects.WITHER, 200), this);
 		}

@@ -1,5 +1,6 @@
 package net.invictusslayer.slayersbeasts.common.effect;
 
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectCategory;
 import net.minecraft.world.entity.LivingEntity;
@@ -9,8 +10,8 @@ public class ParalysisEffect extends MobEffect {
 		super(category, color);
 	}
 
-	public boolean applyEffectTick(LivingEntity entity, int amplifier) {
-		if (!entity.level().isClientSide()) {
+	public boolean applyEffectTick(ServerLevel level, LivingEntity entity, int amplifier) {
+		if (!level.isClientSide()) {
 			double x = entity.getX();
 			double y = entity.getY();
 			double z = entity.getZ();
@@ -19,6 +20,6 @@ public class ParalysisEffect extends MobEffect {
 			entity.setDeltaMovement(0, 0, 0);
 		}
 
-		return super.applyEffectTick(entity, amplifier);
+		return super.applyEffectTick(level, entity, amplifier);
 	}
 }
