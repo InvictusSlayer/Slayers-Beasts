@@ -1,8 +1,0 @@
-architectury.common "fabric", "neoforge"
-
-dependencies {
-    modImplementation "net.fabricmc:fabric-loader:${fabric_loader}"
-    modApi "dev.architectury:architectury:${arch_version}"
-
-    modApi("me.shedaniel.cloth:cloth-config-fabric:${cloth_version}").exclude(group: "net.fabricmc.fabric-api")
-}

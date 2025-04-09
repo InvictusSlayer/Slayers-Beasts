@@ -1,0 +1,37 @@
+package net.invictusslayer.slayersbeasts.client.renderer;
+
+import com.mojang.blaze3d.vertex.PoseStack;
+import net.invictusslayer.slayersbeasts.SlayersBeasts;
+import net.invictusslayer.slayersbeasts.client.model.AntSoldierModel;
+import net.invictusslayer.slayersbeasts.client.state.AntSoldierRenderState;
+import net.invictusslayer.slayersbeasts.entity.AntSoldier;
+import net.minecraft.client.renderer.entity.EntityRendererProvider;
+import net.minecraft.client.renderer.entity.MobRenderer;
+import net.minecraft.resources.ResourceLocation;
+//$ client_env {
+import net.fabricmc.api.EnvType;
+import net.fabricmc.api.Environment;
+
+@Environment(EnvType.CLIENT)//$}
+public class AntSoldierRenderer extends MobRenderer<AntSoldier, AntSoldierRenderState, AntSoldierModel> {
+	private static final ResourceLocation WOOD = ResourceLocation.fromNamespaceAndPath(SlayersBeasts.MOD_ID, "textures/entity/ant/wood_soldier.png");
+	private static final ResourceLocation LEAFCUTTER = ResourceLocation.fromNamespaceAndPath(SlayersBeasts.MOD_ID, "textures/entity/ant/leafcutter_soldier.png");
+	private static final ResourceLocation MEADOW = ResourceLocation.fromNamespaceAndPath(SlayersBeasts.MOD_ID, "textures/entity/ant/meadow_soldier.png");
+
+	public AntSoldierRenderer(EntityRendererProvider.Context context) {
+		super(context, new AntSoldierModel(context.bakeLayer(AntSoldierModel.LAYER_LOCATION)), 0.3F);
+	}
+
+	protected void scale(AntSoldierRenderState state, PoseStack poseStack) {
+		float f = 1.5F;
+		poseStack.scale(f, f, f);
+	}
+
+	public ResourceLocation getTextureLocation(AntSoldierRenderState state) {
+		return state.texture;
+	}
+
+	public AntSoldierRenderState createRenderState() {
+		return new AntSoldierRenderState();
+	}
+}

@@ -1,0 +1,42 @@
+{
+	"schemaVersion": 1,
+	"id": "slayersbeasts",
+	"version": "${mod_version}",
+	"name": "${mod_name}",
+	"description": "${mod_description}",
+	"authors": [
+		"${mod_author}"
+	],
+	"contact": {
+		"homepage": "${homepage_url}",
+		"sources": "${source_url}",
+		"issues": "${issue_url}"
+	},
+	"license": "${mod_license}",
+	"icon": "assets/slayersbeasts.png",
+	"environment": "*",
+	"entrypoints": {
+		"main": [
+			"net.invictusslayer.slayersbeasts.loaders.fabric.SBFabric"
+		],
+		"client": [
+			"net.invictusslayer.slayersbeasts.loaders.fabric.client.SBFabricClient"
+		],
+		"modmenu": [
+			"net.invictusslayer.slayersbeasts.loaders.fabric.integration.SBModMenu"
+		],
+		"terrablender": [
+			"net.invictusslayer.slayersbeasts.loaders.fabric.integration.SBTerraBlender"
+		]
+	},
+	"mixins": [
+		"slayersbeasts.mixins.json",
+		"slayersbeasts-fabric.mixins.json"
+	],
+	"depends": {
+		"java": ">=17",
+		"minecraft": "${mc_range}",
+		"fabric": "${fabric_range}",
+		"terrablender": "${tb_range}"
+	}
+}
