@@ -9,14 +9,25 @@ architectury {
 
 loom {
     runs {
-        data {
-            data()
+        configureEach {
             programArgs "--all", "--mod", "${mod_id}"
             programArgs "--output", project(":common").file("src/generated/resources").absolutePath
             programArgs "--existing", file("src/main/resources").absolutePath
             programArgs "--existing", file("src/generated/resources").absolutePath
             programArgs "--existing", project(":common").file("src/main/resources").absolutePath
             programArgs "--existing", project(":common").file("src/generated/resources").absolutePath
+        }
+
+        clientData {
+            clientData()
+            environment("dataclient")
+            forgeTemplate("dataclient")
+        }
+
+        serverData {
+            serverData()
+            environment("dataserver")
+            forgeTemplate("dataserver")
         }
     }
 }

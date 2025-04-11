@@ -57,7 +57,7 @@ public abstract class SBLangProvider implements DataProvider {
 	}
 
 	protected void add(Block key, String name) {
-		add(key.getDescriptionId(), name);
+		add(key.asItem().getDescriptionId(), name);
 	}
 
 	protected void addItem(Supplier<? extends Item> key, String name) {

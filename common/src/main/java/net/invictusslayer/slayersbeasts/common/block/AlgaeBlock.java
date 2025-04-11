@@ -39,7 +39,7 @@ public class AlgaeBlock extends BushBlock implements BonemealableBlock {
 		return SHAPE;
 	}
 
-	public void entityInside(BlockState state, Level level, BlockPos pos, Entity entity) {
+	public void entityInside(BlockState state, Level level, BlockPos pos, Entity entity) { // TODO: remove this
 		if (level instanceof ServerLevel && entity instanceof Boat) {
 			level.destroyBlock(new BlockPos(pos), true, entity);
 		}

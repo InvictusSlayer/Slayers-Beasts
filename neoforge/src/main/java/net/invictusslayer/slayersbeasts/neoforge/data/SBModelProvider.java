@@ -16,9 +16,9 @@ import net.minecraft.client.data.models.model.*;
 import net.minecraft.core.Direction;
 import net.minecraft.data.BlockFamily;
 import net.minecraft.data.PackOutput;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.block.state.properties.DripstoneThickness;
 import net.minecraft.world.level.block.state.properties.Tilt;
@@ -44,93 +44,84 @@ public class SBModelProvider extends ModelProvider {
 		
 		blockGen.createRotatedVariantBlock(SBBlocks.RUDOSOL.get());
 		blockGen.createRotatedVariantBlock(SBBlocks.ARIDISOL.get());
-		blockGen.createAxisAlignedPillarBlock(SBBlocks.ANTHILL.get(), TexturedModel.COLUMN);
-		blockGen.createAxisAlignedPillarBlock(SBBlocks.ANTHILL_HATCHERY.get(), TexturedModel.COLUMN);
-		blockGen.createAxisAlignedPillarBlock(SBBlocks.OOTHECA.get(), TexturedModel.COLUMN);
+		blockGen.createTrivialBlock(SBBlocks.ANTHILL.get(), TexturedModel.COLUMN);
+		blockGen.createTrivialBlock(SBBlocks.ANTHILL_HATCHERY.get(), TexturedModel.COLUMN);
+		blockGen.createTrivialBlock(SBBlocks.OOTHECA.get(), TexturedModel.COLUMN);
 
 		blockGen.createTrivialCube(SBBlocks.GLEAMING_ICE.get());
-		createIcicle(blockGen, SBBlocks.ICICLE.get());
-		createIcicle(blockGen, SBBlocks.OBSIDIAN_SPIKE.get());
-		blockGen.createDoublePlant(SBBlocks.TALL_DEAD_BUSH.get(), BlockModelGenerators.PlantType.NOT_TINTED);
-		createCrackedMud(blockGen, SBBlocks.CRACKED_MUD.get());
+		createSpike(blockGen, SBBlocks.ICICLE.get(), "_frustum_down");
+		createSpike(blockGen, SBBlocks.OBSIDIAN_SPIKE.get(), "_tip_up");
+		createDoublePlantWithRenderType(blockGen, SBBlocks.TALL_DEAD_BUSH.get(), BlockModelGenerators.PlantType.NOT_TINTED);
+		createTiltingBlock(blockGen, SBBlocks.CRACKED_MUD.get());
 		blockGen.createTrivialCube(SBBlocks.PEAT.get());
-		createAlgae(blockGen, SBBlocks.ALGAE.get(), SBItems.ALGAE.get());
+		createFloatingPlant(blockGen, SBBlocks.ALGAE.get());
 
 		blockGen.createRotatedVariantBlock(SBBlocks.BLACK_SAND.get());
-		BlockModelGenerators.BlockFamilyProvider blackSandstone = blockGen.new BlockFamilyProvider(TexturedModel.TOP_BOTTOM_WITH_WALL.get(SBBlocks.BLACK_SANDSTONE.get()).getMapping());
-		blackSandstone.generateFor(SBBlockFamily.BLACK_SANDSTONE);
+		TexturedModel blackSandstoneModel = TexturedModel.TOP_BOTTOM_WITH_WALL.get(SBBlocks.BLACK_SANDSTONE.get());
+		BlockModelGenerators.BlockFamilyProvider blackSandstone = blockGen.new BlockFamilyProvider(blackSandstoneModel.getMapping());
+		blackSandstone.fullBlock(SBBlocks.BLACK_SANDSTONE.get(), blackSandstoneModel.getTemplate()).generateFor(SBBlockFamily.BLACK_SANDSTONE);
 
-		BlockModelGenerators.BlockFamilyProvider smoothBlackSandstone = blockGen.new BlockFamilyProvider(TexturedModel.createAllSame(TextureMapping.getBlockTexture(SBBlocks.BLACK_SANDSTONE.get(), "_top")).getMapping());
-		smoothBlackSandstone.generateFor(SBBlockFamily.SMOOTH_BLACK_SANDSTONE);
+		TexturedModel smoothBlackSandstoneModel = TexturedModel.createAllSame(TextureMapping.getBlockTexture(SBBlocks.BLACK_SANDSTONE.get(), "_top"));
+		BlockModelGenerators.BlockFamilyProvider smoothBlackSandstone = blockGen.new BlockFamilyProvider(smoothBlackSandstoneModel.getMapping());
+		smoothBlackSandstone.fullBlock(SBBlocks.SMOOTH_BLACK_SANDSTONE.get(), smoothBlackSandstoneModel.getTemplate()).generateFor(SBBlockFamily.SMOOTH_BLACK_SANDSTONE);
 
-		BlockModelGenerators.BlockFamilyProvider cutBlackSandstone = blockGen.new BlockFamilyProvider(TexturedModel.COLUMN.get(SBBlocks.BLACK_SANDSTONE.get()).updateTextures(mapping ->
-				mapping.put(TextureSlot.SIDE, TextureMapping.getBlockTexture(SBBlocks.CUT_BLACK_SANDSTONE.get()))).getMapping());
-		cutBlackSandstone.generateFor(SBBlockFamily.CUT_BLACK_SANDSTONE);
+		TexturedModel cutBlackSandstoneModel = TexturedModel.COLUMN.get(SBBlocks.BLACK_SANDSTONE.get()).updateTextures(mapping -> mapping.put(TextureSlot.SIDE, TextureMapping.getBlockTexture(SBBlocks.CUT_BLACK_SANDSTONE.get())));
+		BlockModelGenerators.BlockFamilyProvider cutBlackSandstone = blockGen.new BlockFamilyProvider(cutBlackSandstoneModel.getMapping());
+		cutBlackSandstone.fullBlock(SBBlocks.CUT_BLACK_SANDSTONE.get(), cutBlackSandstoneModel.getTemplate()).generateFor(SBBlockFamily.CUT_BLACK_SANDSTONE);
 
-		BlockModelGenerators.BlockFamilyProvider chiseledBlackSandstone = blockGen.new BlockFamilyProvider(TexturedModel.COLUMN.get(Blocks.CHISELED_SANDSTONE).updateTextures(mapping -> {
-			mapping.put(TextureSlot.END, TextureMapping.getBlockTexture(Blocks.SANDSTONE, "_top"));
-			mapping.put(TextureSlot.SIDE, TextureMapping.getBlockTexture(Blocks.CHISELED_SANDSTONE));
-		}).getMapping());
-		chiseledBlackSandstone.fullBlockVariant(SBBlocks.CHISELED_BLACK_SANDSTONE.get());
+//		BlockModelGenerators.BlockFamilyProvider chiseledBlackSandstone = blockGen.new BlockFamilyProvider(TexturedModel.COLUMN.get(SBBlocks.CHISELED_BLACK_SANDSTONE.get()).updateTextures(mapping -> {
+//			mapping.put(TextureSlot.END, TextureMapping.getBlockTexture(SBBlocks.BLACK_SANDSTONE.get(), "_top"));
+//			mapping.put(TextureSlot.SIDE, TextureMapping.getBlockTexture(SBBlocks.CHISELED_BLACK_SANDSTONE.get()));
+//		}).getMapping());
+//		chiseledBlackSandstone.fullBlockVariant(SBBlocks.CHISELED_BLACK_SANDSTONE.get());
 
-//		blockGen.createTrivialBlock(SBBlocks.BLACK_SANDSTONE.get(), TexturedModel.TOP_BOTTOM_WITH_WALL);
-//		blackSandstone.slab(SBBlocks.BLACK_SANDSTONE_SLAB.get());
-//		blackSandstone.stairs(SBBlocks.BLACK_SANDSTONE_STAIRS.get());
-//		blackSandstone.wall(SBBlocks.BLACK_SANDSTONE_WALL.get());
-//		blockGen.createTrivialBlock(SBBlocks.SMOOTH_BLACK_SANDSTONE.get(), TexturedModel.CUBE);
-//		smoothBlackSandstone.slab(SBBlocks.SMOOTH_BLACK_SANDSTONE_SLAB.get());
-//		smoothBlackSandstone.stairs(SBBlocks.SMOOTH_BLACK_SANDSTONE_STAIRS.get());
-//		blockGen.createTrivialBlock(SBBlocks.CUT_BLACK_SANDSTONE.get(), TexturedModel.COLUMN);
-//		cutBlackSandstone.slab(SBBlocks.CUT_BLACK_SANDSTONE_SLAB.get());
-//		blackSandstone.fullBlockVariant(SBBlocks.CHISELED_BLACK_SANDSTONE.get());
-
-		blockGen.createDoublePlant(SBBlocks.TALL_BROWN_MUSHROOM.get(), BlockModelGenerators.PlantType.NOT_TINTED);
-		blockGen.createDoublePlant(SBBlocks.TALL_RED_MUSHROOM.get(), BlockModelGenerators.PlantType.NOT_TINTED);
+		createDoublePlantWithRenderType(blockGen, SBBlocks.TALL_BROWN_MUSHROOM.get(), BlockModelGenerators.PlantType.NOT_TINTED);
+		createDoublePlantWithRenderType(blockGen, SBBlocks.TALL_RED_MUSHROOM.get(), BlockModelGenerators.PlantType.NOT_TINTED);
 		blockGen.createMushroomBlock(SBBlocks.BLACK_MUSHROOM_BLOCK.get());//,"mushroom_block_dark_inside"
-		blockGen.createPlant(SBBlocks.BLACK_MUSHROOM.get(), SBBlocks.POTTED_BLACK_MUSHROOM.get(), BlockModelGenerators.PlantType.NOT_TINTED);
-		blockGen.createDoublePlant(SBBlocks.TALL_BLACK_MUSHROOM.get(), BlockModelGenerators.PlantType.NOT_TINTED);
+		createPlantWithRenderType(blockGen, SBBlocks.BLACK_MUSHROOM.get(), SBBlocks.POTTED_BLACK_MUSHROOM.get(), BlockModelGenerators.PlantType.NOT_TINTED);
+		createDoublePlantWithRenderType(blockGen, SBBlocks.TALL_BLACK_MUSHROOM.get(), BlockModelGenerators.PlantType.NOT_TINTED);
 		blockGen.createMushroomBlock(SBBlocks.WHITE_MUSHROOM_BLOCK.get());
-		blockGen.createPlant(SBBlocks.WHITE_MUSHROOM.get(), SBBlocks.POTTED_WHITE_MUSHROOM.get(), BlockModelGenerators.PlantType.NOT_TINTED);
-		blockGen.createDoublePlant(SBBlocks.TALL_WHITE_MUSHROOM.get(), BlockModelGenerators.PlantType.NOT_TINTED);
+		createPlantWithRenderType(blockGen, SBBlocks.WHITE_MUSHROOM.get(), SBBlocks.POTTED_WHITE_MUSHROOM.get(), BlockModelGenerators.PlantType.NOT_TINTED);
+		createDoublePlantWithRenderType(blockGen, SBBlocks.TALL_WHITE_MUSHROOM.get(), BlockModelGenerators.PlantType.NOT_TINTED);
 //		createThinMushroomStem(blockGen, SBBlocks.THIN_MUSHROOM_STEM.get());
 
 		blockGen.createTrivialCube(SBBlocks.ALBINO_REDWOOD_LEAVES.get());
-		blockGen.createPlant(SBBlocks.ALBINO_REDWOOD_SAPLING.get(), SBBlocks.POTTED_ALBINO_REDWOOD_SAPLING.get(), BlockModelGenerators.PlantType.NOT_TINTED);
-		blockGen.createGrowingPlant(SBBlocks.WILLOW_BRANCH.get(), SBBlocks.WILLOW_BRANCH_PLANT.get(), BlockModelGenerators.PlantType.NOT_TINTED);
+		createPlantWithRenderType(blockGen, SBBlocks.ALBINO_REDWOOD_SAPLING.get(), SBBlocks.POTTED_ALBINO_REDWOOD_SAPLING.get(), BlockModelGenerators.PlantType.NOT_TINTED);
+		createGrowingPlantWithRenderType(blockGen, SBBlocks.WILLOW_BRANCH.get(), SBBlocks.WILLOW_BRANCH_PLANT.get(), BlockModelGenerators.PlantType.NOT_TINTED);
 
-		itemGen.createFlatItemModel(SBItems.MUSIC_DISC_INKISH.get(), ModelTemplates.FLAT_ITEM);
+		itemGen.generateFlatItem(SBItems.MUSIC_DISC_INKISH.get(), ModelTemplates.FLAT_ITEM);
 
-		itemGen.createFlatItemModel(SBItems.JADE.get(), ModelTemplates.FLAT_ITEM);
-//		item(SBItems.JADE_SHARD.get(), ModelTemplates.FLAT_ITEM);
-//		simpleItem(ModItems.CRYSTALLINE_WING.get(), ModelTemplates.FLAT_ITEM);
-//		simpleItem(ModItems.CRYSTALLINE_CLAW.get(), ModelTemplates.FLAT_ITEM);
-//		simpleItem(ModItems.CRYSTALLINE_CARAPACE.get(), ModelTemplates.FLAT_ITEM);
-//		simpleItem(ModItems.INSECT_WING.get(), ModelTemplates.FLAT_ITEM);
-		itemGen.createFlatItemModel(SBItems.INSECT_CLAW.get(), ModelTemplates.FLAT_ITEM);
-		itemGen.createFlatItemModel(SBItems.INSECT_EYE.get(), ModelTemplates.FLAT_ITEM);
-		itemGen.createFlatItemModel(SBItems.INSECT_LEG.get(), ModelTemplates.FLAT_ITEM);
-		itemGen.createFlatItemModel(SBItems.FRIED_INSECT_LEG.get(), ModelTemplates.FLAT_ITEM);
-		itemGen.createFlatItemModel(SBItems.WITHERBONE.get(), ModelTemplates.FLAT_ITEM);
-		itemGen.createFlatItemModel(SBItems.TIED_LEATHER.get(), ModelTemplates.FLAT_ITEM);
-		itemGen.createFlatItemModel(SBItems.TANNED_LEATHER.get(), ModelTemplates.FLAT_ITEM);
-		itemGen.createFlatItemModel(SBItems.MUD_BALL.get(), ModelTemplates.FLAT_ITEM);
+		itemGen.generateFlatItem(SBItems.JADE.get(), ModelTemplates.FLAT_ITEM);
+		itemGen.generateFlatItem(SBItems.JADE_SHARD.get(), ModelTemplates.FLAT_ITEM);
+		itemGen.generateFlatItem(SBItems.CRYSTALLINE_WING.get(), ModelTemplates.FLAT_ITEM);
+		itemGen.generateFlatItem(SBItems.CRYSTALLINE_CLAW.get(), ModelTemplates.FLAT_ITEM);
+		itemGen.generateFlatItem(SBItems.CRYSTALLINE_CARAPACE.get(), ModelTemplates.FLAT_ITEM);
+		itemGen.generateFlatItem(SBItems.INSECT_WING.get(), ModelTemplates.FLAT_ITEM);
+		itemGen.generateFlatItem(SBItems.INSECT_CLAW.get(), ModelTemplates.FLAT_ITEM);
+		itemGen.generateFlatItem(SBItems.INSECT_EYE.get(), ModelTemplates.FLAT_ITEM);
+		itemGen.generateFlatItem(SBItems.INSECT_LEG.get(), ModelTemplates.FLAT_ITEM);
+		itemGen.generateFlatItem(SBItems.FRIED_INSECT_LEG.get(), ModelTemplates.FLAT_ITEM);
+		itemGen.generateFlatItem(SBItems.WITHERBONE.get(), ModelTemplates.FLAT_ITEM);
+		itemGen.generateFlatItem(SBItems.TIED_LEATHER.get(), ModelTemplates.FLAT_ITEM);
+		itemGen.generateFlatItem(SBItems.TANNED_LEATHER.get(), ModelTemplates.FLAT_ITEM);
+		itemGen.generateFlatItem(SBItems.MUD_BALL.get(), ModelTemplates.FLAT_ITEM);
 
-		itemGen.createFlatItemModel(SBItems.MANTIS_SPAWN_EGG.get(), ModelTemplates.FLAT_ITEM);
-		itemGen.createFlatItemModel(SBItems.ANT_WORKER_SPAWN_EGG.get(), ModelTemplates.FLAT_ITEM);
-		itemGen.createFlatItemModel(SBItems.ANT_SOLDIER_SPAWN_EGG.get(), ModelTemplates.FLAT_ITEM);
-		itemGen.createFlatItemModel(SBItems.ANT_QUEEN_SPAWN_EGG.get(), ModelTemplates.FLAT_ITEM);
-		itemGen.createFlatItemModel(SBItems.WITHER_SPIDER_SPAWN_EGG.get(), ModelTemplates.FLAT_ITEM);
-		itemGen.createFlatItemModel(SBItems.TYRACHNID_SPAWN_EGG.get(), ModelTemplates.FLAT_ITEM);
-		itemGen.createFlatItemModel(SBItems.DAMSELFLY_SPAWN_EGG.get(), ModelTemplates.FLAT_ITEM);
-		itemGen.createFlatItemModel(SBItems.ENT_SPAWN_EGG.get(), ModelTemplates.FLAT_ITEM);
-		itemGen.createFlatItemModel(SBItems.WUDU_SPAWN_EGG.get(), ModelTemplates.FLAT_ITEM);
-		itemGen.createFlatItemModel(SBItems.SPORETRAP_SPAWN_EGG.get(), ModelTemplates.FLAT_ITEM);
+		itemGen.generateFlatItem(SBItems.MANTIS_SPAWN_EGG.get(), ModelTemplates.FLAT_ITEM);
+		itemGen.generateFlatItem(SBItems.ANT_WORKER_SPAWN_EGG.get(), ModelTemplates.FLAT_ITEM);
+		itemGen.generateFlatItem(SBItems.ANT_SOLDIER_SPAWN_EGG.get(), ModelTemplates.FLAT_ITEM);
+		itemGen.generateFlatItem(SBItems.ANT_QUEEN_SPAWN_EGG.get(), ModelTemplates.FLAT_ITEM);
+		itemGen.generateFlatItem(SBItems.WITHER_SPIDER_SPAWN_EGG.get(), ModelTemplates.FLAT_ITEM);
+		itemGen.generateFlatItem(SBItems.TYRACHNID_SPAWN_EGG.get(), ModelTemplates.FLAT_ITEM);
+		itemGen.generateFlatItem(SBItems.DAMSELFLY_SPAWN_EGG.get(), ModelTemplates.FLAT_ITEM);
+		itemGen.generateFlatItem(SBItems.ENT_SPAWN_EGG.get(), ModelTemplates.FLAT_ITEM);
+		itemGen.generateFlatItem(SBItems.WUDU_SPAWN_EGG.get(), ModelTemplates.FLAT_ITEM);
+		itemGen.generateFlatItem(SBItems.SPORETRAP_SPAWN_EGG.get(), ModelTemplates.FLAT_ITEM);
 	}
 
 	public void createInfusedCryptalith(BlockModelGenerators blockGen, Block block, Block bottom) {
-		TextureMapping mapping = new TextureMapping().put(TextureSlot.BOTTOM, TextureMapping.getBlockTexture(bottom)).put(TextureSlot.TOP, TextureMapping.getBlockTexture(block, "_top_active")).put(TextureSlot.SIDE, TextureMapping.getBlockTexture(block, "_side"));
-		TextureMapping mapping1 = new TextureMapping().put(TextureSlot.BOTTOM, TextureMapping.getBlockTexture(bottom)).put(TextureSlot.TOP, TextureMapping.getBlockTexture(block, "_top")).put(TextureSlot.SIDE, TextureMapping.getBlockTexture(block, "_side"));
-		blockGen.blockStateOutput.accept(MultiVariantGenerator.multiVariant(block).with(BlockModelGenerators.createBooleanModelDispatch(BlockStateProperties.ACTIVE, ModelTemplates.CUBE_BOTTOM_TOP.create(block, mapping, blockGen.modelOutput), ModelTemplates.CUBE_BOTTOM_TOP.create(block, mapping1, blockGen.modelOutput))).with(BlockModelGenerators.createHorizontalFacingDispatch()));
+		ResourceLocation active = ModelTemplates.CUBE_BOTTOM_TOP.createWithSuffix(block, "_active", new TextureMapping().put(TextureSlot.BOTTOM, TextureMapping.getBlockTexture(bottom)).put(TextureSlot.TOP, TextureMapping.getBlockTexture(block, "_top_active")).put(TextureSlot.SIDE, TextureMapping.getBlockTexture(block, "_side")), blockGen.modelOutput);
+		ResourceLocation inActive = ModelTemplates.CUBE_BOTTOM_TOP.create(block, new TextureMapping().put(TextureSlot.BOTTOM, TextureMapping.getBlockTexture(bottom)).put(TextureSlot.TOP, TextureMapping.getBlockTexture(block, "_top")).put(TextureSlot.SIDE, TextureMapping.getBlockTexture(block, "_side")), blockGen.modelOutput);
+		blockGen.blockStateOutput.accept(MultiVariantGenerator.multiVariant(block).with(BlockModelGenerators.createBooleanModelDispatch(BlockStateProperties.ACTIVE, active, inActive)).with(BlockModelGenerators.createHorizontalFacingDispatch()));
 	}
 
 	public void createDepletedCryptalith(BlockModelGenerators blockGen, Block block, Block bottom) {
@@ -143,34 +134,53 @@ public class SBModelProvider extends ModelProvider {
 		blockGen.blockStateOutput.accept(BlockModelGenerators.createSimpleBlock(block, ModelTemplates.CUBE_BOTTOM_TOP.create(block, mapping, blockGen.modelOutput)));
 	}
 
-	public void createCrackedMud(BlockModelGenerators blockGen, Block block) {
+	public void createTiltingBlock(BlockModelGenerators blockGen, Block block) {
 		PropertyDispatch.C1<Tilt> property = PropertyDispatch.property(BlockStateProperties.TILT);
-		for (Tilt tilt : Tilt.values()) property.select(tilt, createCrackedMudVariant(blockGen, block, tilt));
+		for (Tilt tilt : Tilt.values()) property.select(tilt, createTiltingBlockVariant(blockGen, block, tilt));
+		blockGen.registerSimpleItemModel(block.asItem(), TextureMapping.getBlockTexture(block).withSuffix("_unstable"));
 		blockGen.blockStateOutput.accept(MultiVariantGenerator.multiVariant(block).with(property));
 	}
 
-	public Variant createCrackedMudVariant(BlockModelGenerators blockGen, Block block, Tilt tilt) {
+	public Variant createTiltingBlockVariant(BlockModelGenerators blockGen, Block block, Tilt tilt) {
 		String suffix = "_" + tilt.getSerializedName();
 		TextureMapping mapping = TextureMapping.cube(TextureMapping.getBlockTexture(block, suffix));
 		return Variant.variant().with(VariantProperties.MODEL, ModelTemplates.CUBE_ALL.createWithSuffix(block, suffix, mapping, blockGen.modelOutput));
 	}
 
-	public void createIcicle(BlockModelGenerators blockGen, Block block) {
+	public void createSpike(BlockModelGenerators blockGen, Block block, String suffix) {
 		PropertyDispatch.C2<Direction, DripstoneThickness> properties = PropertyDispatch.properties(BlockStateProperties.VERTICAL_DIRECTION, BlockStateProperties.DRIPSTONE_THICKNESS);
-		for (DripstoneThickness thickness : DripstoneThickness.values()) properties.select(Direction.UP, thickness, createIcicleVariant(blockGen, block, Direction.UP, thickness));
-		for (DripstoneThickness thickness : DripstoneThickness.values()) properties.select(Direction.DOWN, thickness, createIcicleVariant(blockGen, block, Direction.DOWN, thickness));
+		for (DripstoneThickness thickness : DripstoneThickness.values()) properties.select(Direction.UP, thickness, createSpikeVariant(blockGen, block, Direction.UP, thickness));
+		for (DripstoneThickness thickness : DripstoneThickness.values()) properties.select(Direction.DOWN, thickness, createSpikeVariant(blockGen, block, Direction.DOWN, thickness));
+		blockGen.registerSimpleFlatItemModel(block, suffix);
 		blockGen.blockStateOutput.accept(MultiVariantGenerator.multiVariant(block).with(properties));
 	}
 
-	public Variant createIcicleVariant(BlockModelGenerators blockGen, Block block, Direction direction, DripstoneThickness thickness) {
+	public Variant createSpikeVariant(BlockModelGenerators blockGen, Block block, Direction direction, DripstoneThickness thickness) {
 		String suffix = "_" + thickness.getSerializedName() + "_" + direction.getSerializedName();
 		TextureMapping mapping = TextureMapping.cross(TextureMapping.getBlockTexture(block, suffix));
-		return Variant.variant().with(VariantProperties.MODEL, ModelTemplates.POINTED_DRIPSTONE.createWithSuffix(block, suffix, mapping, blockGen.modelOutput));
+		return Variant.variant().with(VariantProperties.MODEL, ModelTemplates.POINTED_DRIPSTONE.extend().renderType("minecraft:cutout").build().createWithSuffix(block, suffix, mapping, blockGen.modelOutput));
 	}
 
-	public void createAlgae(BlockModelGenerators blockGen, Block block, Item item) {
-		blockGen.registerSimpleItemModel(block, blockGen.createFlatItemModelWithBlockTexture(item, block));
+	public void createFloatingPlant(BlockModelGenerators blockGen, Block block) {
+		blockGen.registerSimpleFlatItemModel(block);
 		blockGen.blockStateOutput.accept(BlockModelGenerators.createRotatedVariant(block, ModelLocationUtils.getModelLocation(block)));
+	}
+
+	public void createPlantWithRenderType(BlockModelGenerators blockGen, Block plant, Block potted, BlockModelGenerators.PlantType type) {
+		blockGen.registerSimpleItemModel(plant.asItem(), type.createItemModel(blockGen, plant));
+		blockGen.blockStateOutput.accept(BlockModelGenerators.createSimpleBlock(plant, type.getCross().extend().renderType("minecraft:cutout").build().create(plant, type.getTextureMapping(plant), blockGen.modelOutput)));
+		blockGen.blockStateOutput.accept(BlockModelGenerators.createSimpleBlock(potted, type.getCrossPot().extend().renderType("minecraft:cutout").build().create(potted, type.getPlantTextureMapping(plant), blockGen.modelOutput)));
+	}
+
+	public void createDoublePlantWithRenderType(BlockModelGenerators blockGen, Block plant, BlockModelGenerators.PlantType type) {
+		blockGen.registerSimpleFlatItemModel(plant, "_top");
+		blockGen.createDoubleBlock(plant, blockGen.createSuffixedVariant(plant, "_top", type.getCross().extend().renderType("minecraft:cutout").build(), TextureMapping::cross), blockGen.createSuffixedVariant(plant, "_bottom", type.getCross().extend().renderType("minecraft:cutout").build(), TextureMapping::cross));
+	}
+
+	public void createGrowingPlantWithRenderType(BlockModelGenerators blockGen, Block plantEnd, Block plant, BlockModelGenerators.PlantType type) {
+		blockGen.registerSimpleFlatItemModel(plantEnd);
+		blockGen.blockStateOutput.accept(BlockModelGenerators.createSimpleBlock(plantEnd, type.getCross().extend().renderType("minecraft:cutout").build().create(plantEnd, type.getTextureMapping(plantEnd), blockGen.modelOutput)));
+		blockGen.blockStateOutput.accept(BlockModelGenerators.createSimpleBlock(plant, type.getCross().extend().renderType("minecraft:cutout").build().create(plant, type.getTextureMapping(plant), blockGen.modelOutput)));
 	}
 
 	private void generateWoodFamilies(BlockModelGenerators blockGen, ItemModelGenerators itemGen) {
@@ -180,47 +190,36 @@ public class SBModelProvider extends ModelProvider {
 			BlockModelGenerators.WoodProvider stripped = blockGen.woodProvider((Block) family.get(WoodFamily.Variant.STRIPPED_LOG).get());
 
 			family.getVariants().forEach((variant, supplier) -> {
-				if (!(supplier.get() instanceof Block block)) return;
+				if (supplier.get() == null) return;
 				switch (variant) {
-					case BOAT, CHEST_BOAT, HANGING_SIGN_ITEM, SIGN_ITEM -> itemGen.createFlatItemModel(block.asItem(), ModelTemplates.FLAT_ITEM);
-					case BUTTON -> planks.button(block);
-					case DOOR -> planks.door(block);
-					case FENCE -> planks.fence(block);
-					case FENCE_GATE -> planks.fenceGate(block);
-					case HANGING_SIGN -> blockGen.createHangingSign(block, (Block) family.get(WoodFamily.Variant.WALL_HANGING_SIGN).get(), (Block) family.get(WoodFamily.Variant.STRIPPED_LOG).get());
-					case LEAVES, PLANKS -> blockGen.createTrivialCube(block);
-					case LOG -> wood.log(block);
-					case SAPLING -> blockGen.createPlant(block, (Block) family.get(WoodFamily.Variant.POTTED_SAPLING).get(), BlockModelGenerators.PlantType.NOT_TINTED);
-					case SIGN -> planks.sign(block);
-					case SLAB -> planks.slab(block);
-					case STAIRS -> planks.stairs(block);
-					case STRIPPED_LOG -> stripped.log(block);
-					case STRIPPED_WOOD -> stripped.wood(block);
-					case PRESSURE_PLATE -> planks.pressurePlate(block);
-					case TRAPDOOR -> planks.trapdoor(block);
-					case WOOD -> wood.wood(block);
+					case BOAT_ITEM, CHEST_BOAT_ITEM -> itemGen.generateFlatItem((Item) supplier.get(), ModelTemplates.FLAT_ITEM);
+					case BUTTON -> planks.button((Block) supplier.get());
+					case DOOR -> planks.door((Block) supplier.get());
+					case FENCE -> planks.fence((Block) supplier.get());
+					case FENCE_GATE -> planks.fenceGate((Block) supplier.get());
+					case HANGING_SIGN -> blockGen.createHangingSign((Block) family.get(WoodFamily.Variant.STRIPPED_LOG).get(), (Block) supplier.get(), (Block) family.get(WoodFamily.Variant.WALL_HANGING_SIGN).get());
+					case LEAVES -> blockGen.createTrivialCube((Block) supplier.get());
+					case LOG -> wood.log((Block) supplier.get());
+					case SAPLING -> createPlantWithRenderType(blockGen, (Block) supplier.get(), (Block) family.get(WoodFamily.Variant.POTTED_SAPLING).get(), BlockModelGenerators.PlantType.NOT_TINTED);
+					case SIGN -> {
+						ResourceLocation location = ModelTemplates.PARTICLE_ONLY.create((Block) supplier.get(), TexturedModel.CUBE.get((Block) family.get(WoodFamily.Variant.PLANKS).get()).getMapping(), blockGen.modelOutput);
+						blockGen.blockStateOutput.accept(BlockModelGenerators.createSimpleBlock((Block) supplier.get(), location));
+						blockGen.blockStateOutput.accept(BlockModelGenerators.createSimpleBlock((Block) family.get(WoodFamily.Variant.WALL_SIGN).get(), location));
+						blockGen.registerSimpleFlatItemModel(((Block) supplier.get()).asItem());
+					}
+					case SLAB -> planks.slab((Block) supplier.get());
+					case STAIRS -> planks.stairs((Block) supplier.get());
+					case STRIPPED_LOG -> stripped.log((Block) supplier.get());
+					case STRIPPED_WOOD -> stripped.wood((Block) supplier.get());
+					case PRESSURE_PLATE -> planks.pressurePlate((Block) supplier.get());
+					case TRAPDOOR -> planks.trapdoor((Block) supplier.get());
+					case WOOD -> wood.wood((Block) supplier.get());
 				}
 			});
 		});
 	}
 
 	private void generateBlockFamilies(BlockModelGenerators blockGen) {
-		SBBlockFamily.getAllFamilies().filter(BlockFamily::shouldGenerateModel).forEach(family -> {
-			blockGen.family(family.getBaseBlock()).generateFor(family);
-//			BlockModelGenerators.BlockFamilyProvider provider = blockGen.familyWithExistingFullBlock(family.getBaseBlock());
-//			family.getVariants().forEach((variant, block) -> {
-//				switch (variant) {
-//					case SLAB -> provider.slab(block);
-//					case STAIRS -> provider.stairs(block);
-//					case FENCE -> provider.fence(block);
-//					case FENCE_GATE -> provider.fenceGate(block);
-//					case BUTTON -> provider.button(block);
-//					case PRESSURE_PLATE -> provider.pressurePlate(block);
-//					case DOOR -> provider.door(block);
-//					case TRAPDOOR -> provider.trapdoor(block);
-//					case WALL -> provider.wall(block);
-//				}
-//			});
-		});
+		SBBlockFamily.getAllFamilies().filter(BlockFamily::shouldGenerateModel).forEach(family -> blockGen.family(family.getBaseBlock()).generateFor(family));
 	}
 }

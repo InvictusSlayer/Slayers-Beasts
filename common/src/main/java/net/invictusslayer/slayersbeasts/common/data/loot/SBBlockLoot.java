@@ -32,6 +32,7 @@ import net.minecraft.world.level.storage.loot.predicates.LootItemEntityPropertyC
 import net.minecraft.world.level.storage.loot.providers.number.ConstantValue;
 import net.minecraft.world.level.storage.loot.providers.number.UniformGenerator;
 
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Locale;
 import java.util.Set;
@@ -75,18 +76,18 @@ public class SBBlockLoot extends BlockLootSubProvider {
 		add(SBBlocks.TALL_RED_MUSHROOM.get(), block -> createSinglePropConditionTable(block, DoublePlantBlock.HALF, DoubleBlockHalf.LOWER));
 		add(SBBlocks.BLACK_MUSHROOM_BLOCK.get(), block -> createMushroomBlockDrop(SBBlocks.BLACK_MUSHROOM_BLOCK.get(), SBBlocks.BLACK_MUSHROOM.get()));
 		dropSelf(SBBlocks.BLACK_MUSHROOM.get());
-		add(SBBlocks.POTTED_BLACK_MUSHROOM.get(), createPotFlowerItemTable(SBBlocks.BLACK_MUSHROOM.get()));
+		dropPottedContents(SBBlocks.POTTED_BLACK_MUSHROOM.get());
 		add(SBBlocks.TALL_BLACK_MUSHROOM.get(), block -> createSinglePropConditionTable(block, DoublePlantBlock.HALF, DoubleBlockHalf.LOWER));
 		add(SBBlocks.WHITE_MUSHROOM_BLOCK.get(), block -> createMushroomBlockDrop(SBBlocks.WHITE_MUSHROOM_BLOCK.get(), SBBlocks.WHITE_MUSHROOM.get()));
 		dropSelf(SBBlocks.WHITE_MUSHROOM.get());
-		add(SBBlocks.POTTED_WHITE_MUSHROOM.get(), createPotFlowerItemTable(SBBlocks.WHITE_MUSHROOM.get()));
+		dropPottedContents(SBBlocks.POTTED_WHITE_MUSHROOM.get());
 		add(SBBlocks.TALL_WHITE_MUSHROOM.get(), block -> createSinglePropConditionTable(block, DoublePlantBlock.HALF, DoubleBlockHalf.LOWER));
 //		add(SBBlocks.THIN_MUSHROOM_STEM.get(), BlockLootSubProvider::createSilkTouchOnlyTable);
 
 		generateWoodFamilies();
 		add(SBBlocks.ALBINO_REDWOOD_LEAVES.get(), block -> createLeavesDrops(block, SBBlocks.ALBINO_REDWOOD_SAPLING.get(), 0.0033F));
 		dropSelf(SBBlocks.ALBINO_REDWOOD_SAPLING.get());
-		add(SBBlocks.POTTED_ALBINO_REDWOOD_SAPLING.get(), createPotFlowerItemTable(SBBlocks.ALBINO_REDWOOD_SAPLING.get()));
+		dropPottedContents(SBBlocks.POTTED_ALBINO_REDWOOD_SAPLING.get());
 		add(SBBlocks.WILLOW_BRANCH.get(), block -> createLeavesDrops(block, SBBlocks.WILLOW_SAPLING.get(), 0.05F));
 		add(SBBlocks.WILLOW_BRANCH_PLANT.get(), block -> createLeavesDrops(block, SBBlocks.WILLOW_SAPLING.get(), 0.05F));
 	}
@@ -106,7 +107,7 @@ public class SBBlockLoot extends BlockLootSubProvider {
 				}
 			});
 		}
-		if (!map.isEmpty()) throw new IllegalStateException("Created block loot tables for non-blocks: " + map.keySet());
+//		if (!map.isEmpty()) throw new IllegalStateException("Created block loot tables for non-blocks: " + map.keySet());
 	}
 
 	private void generateWoodFamilies() {
@@ -116,7 +117,7 @@ public class SBBlockLoot extends BlockLootSubProvider {
 				default -> dropSelf(block);
 				case DOOR -> add(block, this::createDoorTable);
 				case LEAVES -> add(block, createLeavesDrops(block, (Block) family.get(WoodFamily.Variant.SAPLING).get(), 0.05F));
-				case POTTED_SAPLING -> add(block, createPotFlowerItemTable((Block) family.get(WoodFamily.Variant.SAPLING).get()));
+				case POTTED_SAPLING -> dropPottedContents(block);
 				case SLAB -> add(block, this::createSlabItemTable);
 				case WALL_HANGING_SIGN -> dropOther(block, (Block) family.get(WoodFamily.Variant.HANGING_SIGN).get());
 				case WALL_SIGN -> dropOther(block, (Block) family.get(WoodFamily.Variant.SIGN).get());

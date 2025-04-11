@@ -5,11 +5,9 @@ import net.invictusslayer.slayersbeasts.common.init.SBEntities;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
 import net.neoforged.bus.api.IEventBus;
-import net.neoforged.fml.ModContainer;
 import net.neoforged.fml.common.Mod;
 import net.neoforged.fml.event.lifecycle.FMLClientSetupEvent;
 import net.neoforged.fml.event.lifecycle.FMLCommonSetupEvent;
-import net.neoforged.neoforge.common.NeoForge;
 
 @Mod(SlayersBeasts.MOD_ID)
 public class SBNeoForge {
@@ -20,8 +18,6 @@ public class SBNeoForge {
 		bus.addListener(this::clientSetup);
 
 		SBEntities.registerLayersAndRenderers();
-
-//		NeoForge.EVENT_BUS.register(this);
 	}
 
 	public void commonSetup(FMLCommonSetupEvent event) {

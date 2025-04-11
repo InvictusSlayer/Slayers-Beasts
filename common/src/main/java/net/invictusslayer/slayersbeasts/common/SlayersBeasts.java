@@ -29,11 +29,10 @@ import java.util.Arrays;
 public class SlayersBeasts {
 	public static final String MOD_ID = "slayersbeasts";
 	public static final Logger LOGGER = LogManager.getLogger(MOD_ID);
-	public static SBConfig CONFIG;
+	public static SBConfig CONFIG = null;
 
 	public static void init() {
-		AutoConfig.register(SBConfig.class, Toml4jConfigSerializer::new);
-		CONFIG = AutoConfig.getConfigHolder(SBConfig.class).getConfig();
+		loadConfig();
 
 		SBCreativeModeTabs.CREATIVE_TABS.register();
 		SBEntities.ENTITIES.register();
@@ -57,6 +56,12 @@ public class SlayersBeasts {
 		SBEntities.registerAttributes();
 
 		LOGGER.info(SBPlatform.getConfigDirectory().toAbsolutePath().normalize().toString());
+	}
+
+	public static void loadConfig() {
+		if (CONFIG != null) return;
+		AutoConfig.register(SBConfig.class, Toml4jConfigSerializer::new);
+		CONFIG = AutoConfig.getConfigHolder(SBConfig.class).getConfig();
 	}
 
 	public static void commonSetup() {
@@ -88,6 +93,7 @@ public class SlayersBeasts {
 	}
 
 	public static void registerRegions() {
+		loadConfig();
 		if (CONFIG.worldgen.overworld_biomes) Regions.register(new SBOverworldRegion(CONFIG.worldgen.overworld_region_weight));
 		if (CONFIG.worldgen.nether_biomes) Regions.register(new SBNetherRegion(CONFIG.worldgen.nether_region_weight));
 //		if (CONFIG.worldgen.end_biomes) Regions.register(new SBEndRegion(CONFIG.worldgen.end_region_weight));

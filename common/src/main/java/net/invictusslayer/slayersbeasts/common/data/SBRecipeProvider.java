@@ -79,8 +79,7 @@ public class SBRecipeProvider extends RecipeProvider {
 			Ingredient ingredient = Ingredient.of(planks);
 
 			family.getVariants().forEach((variant, supplier) -> {
-				if (!(supplier.isPresent())) return;
-				ItemLike item = (ItemLike) supplier.get();
+				if (!(supplier.get() instanceof ItemLike item)) return;
 				switch (variant) {
 					case BOAT -> woodenBoat(item, planks);
 					case BUTTON -> woodenRecipe(output, buttonBuilder(item, ingredient), planks, "button");
