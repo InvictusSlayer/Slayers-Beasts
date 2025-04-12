@@ -25,4 +25,9 @@ public class MantisRenderer extends MobRenderer<Mantis, MantisRenderState, Manti
 	public MantisRenderState createRenderState() {
 		return new MantisRenderState();
 	}
+
+	public void extractRenderState(Mantis entity, MantisRenderState state, float f) {
+		super.extractRenderState(entity, state, f);
+		state.isScuttling = entity.isScuttling();
+	}
 }

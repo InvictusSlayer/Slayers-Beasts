@@ -27,10 +27,19 @@ public class AntSoldierRenderer extends MobRenderer<AntSoldier, AntSoldierRender
 	}
 
 	public ResourceLocation getTextureLocation(AntSoldierRenderState state) {
-		return state.texture;
+		return switch (state.variant) {
+			case WOOD -> WOOD;
+			case LEAFCUTTER -> LEAFCUTTER;
+			case MEADOW -> MEADOW;
+		};
 	}
 
 	public AntSoldierRenderState createRenderState() {
 		return new AntSoldierRenderState();
+	}
+
+	public void extractRenderState(AntSoldier entity, AntSoldierRenderState state, float f) {
+		super.extractRenderState(entity, state, f);
+		state.variant = entity.getVariant();
 	}
 }

@@ -29,10 +29,20 @@ public class AntWorkerRenderer extends MobRenderer<AntWorker, AntWorkerRenderSta
 	}
 
 	public ResourceLocation getTextureLocation(AntWorkerRenderState state) {
-		return state.texture;
+		return switch (state.variant) {
+			case WOOD -> WOOD;
+			case LEAFCUTTER -> LEAFCUTTER;
+			case MEADOW -> MEADOW;
+		};
 	}
 
 	public AntWorkerRenderState createRenderState() {
 		return new AntWorkerRenderState();
+	}
+
+	public void extractRenderState(AntWorker entity, AntWorkerRenderState state, float f) {
+		super.extractRenderState(entity, state, f);
+		state.variant = entity.getVariant();
+		state.cargo = entity.getCargoType();
 	}
 }

@@ -4,23 +4,23 @@ import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.invictusslayer.slayersbeasts.common.SlayersBeasts;
 import net.invictusslayer.slayersbeasts.common.client.animation.WuduAnimation;
+import net.invictusslayer.slayersbeasts.common.client.state.EntRenderState;
 import net.minecraft.client.model.EntityModel;
 import net.minecraft.client.model.geom.ModelLayerLocation;
 import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.model.geom.PartPose;
 import net.minecraft.client.model.geom.builders.*;
-import net.minecraft.client.renderer.entity.state.LivingEntityRenderState;
 import net.minecraft.resources.ResourceLocation;
 
 @Environment(EnvType.CLIENT)
-public class WuduModel extends EntityModel<LivingEntityRenderState> {
+public class WuduModel extends EntityModel<EntRenderState> {
 	public static final ModelLayerLocation LAYER_LOCATION = new ModelLayerLocation(ResourceLocation.fromNamespaceAndPath(SlayersBeasts.MOD_ID, "wudu_model"), "main");
 
 	public WuduModel(ModelPart root) {
 		super(root);
 	}
 
-	public void setupAnim(LivingEntityRenderState state) {
+	public void setupAnim(EntRenderState state) {
 		super.setupAnim(state);
 		animateWalk(WuduAnimation.CRAWL, state.walkAnimationPos, state.walkAnimationSpeed, 5, 10);
 	}

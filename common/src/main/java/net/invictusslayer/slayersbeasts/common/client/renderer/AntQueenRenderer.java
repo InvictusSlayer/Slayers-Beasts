@@ -21,16 +21,25 @@ public class AntQueenRenderer extends MobRenderer<AntQueen, AntQueenRenderState,
 		super(context, new AntQueenModel(context.bakeLayer(AntQueenModel.LAYER_LOCATION)), 0.3F);
 	}
 
-	protected void scale(AntQueenRenderState entity, PoseStack poseStack) {
+	protected void scale(AntQueenRenderState state, PoseStack poseStack) {
 		float f = 1.5F;
 		poseStack.scale(f, f, f);
 	}
 
 	public ResourceLocation getTextureLocation(AntQueenRenderState state) {
-		return state.texture;
+		return switch (state.variant) {
+			case WOOD -> WOOD;
+			case LEAFCUTTER -> LEAFCUTTER;
+			case MEADOW -> MEADOW;
+		};
 	}
 
 	public AntQueenRenderState createRenderState() {
 		return new AntQueenRenderState();
+	}
+
+	public void extractRenderState(AntQueen entity, AntQueenRenderState state, float f) {
+		super.extractRenderState(entity, state, f);
+		state.variant = entity.getVariant();
 	}
 }

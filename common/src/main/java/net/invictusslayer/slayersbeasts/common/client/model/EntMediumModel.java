@@ -4,17 +4,17 @@ import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.invictusslayer.slayersbeasts.common.SlayersBeasts;
 import net.invictusslayer.slayersbeasts.common.client.animation.EntMediumAnimation;
+import net.invictusslayer.slayersbeasts.common.client.state.EntRenderState;
 import net.minecraft.client.model.EntityModel;
 import net.minecraft.client.model.geom.ModelLayerLocation;
 import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.model.geom.PartPose;
 import net.minecraft.client.model.geom.builders.*;
-import net.minecraft.client.renderer.entity.state.LivingEntityRenderState;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.Mth;
 
 @Environment(EnvType.CLIENT)
-public class EntMediumModel extends EntityModel<LivingEntityRenderState> {
+public class EntMediumModel extends EntityModel<EntRenderState> {
 	public static final ModelLayerLocation LAYER_LOCATION = new ModelLayerLocation(ResourceLocation.fromNamespaceAndPath(SlayersBeasts.MOD_ID, "ent_medium_model"), "main");
 	private final ModelPart head;
 
@@ -23,7 +23,7 @@ public class EntMediumModel extends EntityModel<LivingEntityRenderState> {
 		this.head = root.getChild("body").getChild("head");
 	}
 
-	public void setupAnim(LivingEntityRenderState state) {
+	public void setupAnim(EntRenderState state) {
 		super.setupAnim(state);
 		head.yRot = Mth.clamp(state.yRot, -32.5F, 32.5F) * Mth.PI / 180F;
 		animateWalk(EntMediumAnimation.WALK, state.walkAnimationPos, state.walkAnimationSpeed, 8, 10);

@@ -4,27 +4,26 @@ import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.invictusslayer.slayersbeasts.common.SlayersBeasts;
 import net.invictusslayer.slayersbeasts.common.client.animation.DamselflyAnimation;
-import net.invictusslayer.slayersbeasts.common.entity.Damselfly;
+import net.invictusslayer.slayersbeasts.common.client.state.DamselflyRenderState;
 import net.minecraft.client.model.EntityModel;
 import net.minecraft.client.model.geom.ModelLayerLocation;
 import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.model.geom.PartPose;
 import net.minecraft.client.model.geom.builders.*;
-import net.minecraft.client.renderer.entity.state.LivingEntityRenderState;
 import net.minecraft.resources.ResourceLocation;
 
 @Environment(EnvType.CLIENT)
-public class DamselflyModel extends EntityModel<LivingEntityRenderState> {
+public class DamselflyModel extends EntityModel<DamselflyRenderState> {
 	public static final ModelLayerLocation LAYER_LOCATION = new ModelLayerLocation(ResourceLocation.fromNamespaceAndPath(SlayersBeasts.MOD_ID, "damselfly_model"), "main");
 
 	public DamselflyModel(ModelPart root) {
 		super(root);
 	}
 
-	public void setupAnim(LivingEntityRenderState state) {
+	public void setupAnim(DamselflyRenderState state) {
 		super.setupAnim(state);
-		animate(Damselfly.flyAnimationState, DamselflyAnimation.FLY, state.ageInTicks, 10);
-		animate(Damselfly.perchAnimationState, DamselflyAnimation.PERCH, state.ageInTicks, 1.5F);
+		animate(state.flyAnimationState, DamselflyAnimation.FLY, state.ageInTicks, 10);
+		animate(state.perchAnimationState, DamselflyAnimation.PERCH, state.ageInTicks, 1.5F);
 	}
 
 	public static LayerDefinition createBodyLayer() {
