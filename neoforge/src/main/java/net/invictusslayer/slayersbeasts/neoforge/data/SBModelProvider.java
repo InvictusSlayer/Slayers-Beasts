@@ -170,8 +170,8 @@ public class SBModelProvider extends ModelProvider {
 
 	public void createPlantWithRenderType(BlockModelGenerators blockGen, Block plant, Block potted, BlockModelGenerators.PlantType type) {
 		blockGen.registerSimpleItemModel(plant.asItem(), type.createItemModel(blockGen, plant));
-		blockGen.blockStateOutput.accept(BlockModelGenerators.createSimpleBlock(plant, type.getCross().extend().renderType("minecraft:cutout").build().create(plant, type.getTextureMapping(plant), blockGen.modelOutput)));
-		blockGen.blockStateOutput.accept(BlockModelGenerators.createSimpleBlock(potted, type.getCrossPot().extend().renderType("minecraft:cutout").build().create(potted, type.getPlantTextureMapping(plant), blockGen.modelOutput)));
+		blockGen.blockStateOutput.accept(BlockModelGenerators.createSimpleBlock(plant, cutoutModel(blockGen, plant, type.getTextureMapping(plant), type.getCross())));
+		blockGen.blockStateOutput.accept(BlockModelGenerators.createSimpleBlock(potted, cutoutModel(blockGen, potted, type.getPlantTextureMapping(plant), type.getCrossPot())));
 	}
 
 	public void createDoublePlantWithRenderType(BlockModelGenerators blockGen, Block plant, BlockModelGenerators.PlantType type) {
@@ -181,8 +181,8 @@ public class SBModelProvider extends ModelProvider {
 
 	public void createGrowingPlantWithRenderType(BlockModelGenerators blockGen, Block plantEnd, Block plant, BlockModelGenerators.PlantType type) {
 		blockGen.registerSimpleFlatItemModel(plantEnd);
-		blockGen.blockStateOutput.accept(BlockModelGenerators.createSimpleBlock(plantEnd, type.getCross().extend().renderType("minecraft:cutout").build().create(plantEnd, type.getTextureMapping(plantEnd), blockGen.modelOutput)));
-		blockGen.blockStateOutput.accept(BlockModelGenerators.createSimpleBlock(plant, type.getCross().extend().renderType("minecraft:cutout").build().create(plant, type.getTextureMapping(plant), blockGen.modelOutput)));
+		blockGen.blockStateOutput.accept(BlockModelGenerators.createSimpleBlock(plantEnd, cutoutModel(blockGen, plantEnd, type.getTextureMapping(plantEnd), type.getCross())));
+		blockGen.blockStateOutput.accept(BlockModelGenerators.createSimpleBlock(plant, cutoutModel(blockGen, plant, type.getTextureMapping(plant), type.getCross())));
 	}
 
 	private void generateWoodFamilies(BlockModelGenerators blockGen, ItemModelGenerators itemGen) {
@@ -196,7 +196,16 @@ public class SBModelProvider extends ModelProvider {
 				switch (variant) {
 					case BOAT_ITEM, CHEST_BOAT_ITEM -> itemGen.generateFlatItem((Item) supplier.get(), ModelTemplates.FLAT_ITEM);
 					case BUTTON -> planks.button((Block) supplier.get());
-					case DOOR -> planks.door((Block) supplier.get());
+					case DOOR -> {
+						Block door = (Block) supplier.get();
+						TextureMapping mapping = TextureMapping.door(door);
+						blockGen.blockStateOutput.accept(BlockModelGenerators.createDoor(door,
+								cutoutModel(blockGen, door, mapping, ModelTemplates.DOOR_BOTTOM_LEFT), cutoutModel(blockGen, door, mapping, ModelTemplates.DOOR_BOTTOM_LEFT_OPEN),
+								cutoutModel(blockGen, door, mapping, ModelTemplates.DOOR_BOTTOM_RIGHT), cutoutModel(blockGen, door, mapping, ModelTemplates.DOOR_BOTTOM_RIGHT_OPEN),
+								cutoutModel(blockGen, door, mapping, ModelTemplates.DOOR_TOP_LEFT), cutoutModel(blockGen, door, mapping, ModelTemplates.DOOR_TOP_LEFT_OPEN),
+								cutoutModel(blockGen, door, mapping, ModelTemplates.DOOR_TOP_RIGHT), cutoutModel(blockGen, door, mapping, ModelTemplates.DOOR_TOP_RIGHT_OPEN)));
+						blockGen.registerSimpleFlatItemModel(((Block) supplier.get()).asItem());
+					}
 					case FENCE -> planks.fence((Block) supplier.get());
 					case FENCE_GATE -> planks.fenceGate((Block) supplier.get());
 					case HANGING_SIGN -> blockGen.createHangingSign((Block) family.get(WoodFamily.Variant.STRIPPED_LOG).get(), (Block) supplier.get(), (Block) family.get(WoodFamily.Variant.WALL_HANGING_SIGN).get());
@@ -214,7 +223,13 @@ public class SBModelProvider extends ModelProvider {
 					case STRIPPED_LOG -> stripped.log((Block) supplier.get());
 					case STRIPPED_WOOD -> stripped.wood((Block) supplier.get());
 					case PRESSURE_PLATE -> planks.pressurePlate((Block) supplier.get());
-					case TRAPDOOR -> planks.trapdoor((Block) supplier.get());
+					case TRAPDOOR -> {
+						Block trapdoor = (Block) supplier.get();
+						TextureMapping mapping = TextureMapping.defaultTexture(trapdoor);
+						ResourceLocation bottom = cutoutModel(blockGen, trapdoor, mapping, ModelTemplates.ORIENTABLE_TRAPDOOR_BOTTOM);
+						blockGen.blockStateOutput.accept(BlockModelGenerators.createOrientableTrapdoor(trapdoor, cutoutModel(blockGen, trapdoor, mapping, ModelTemplates.ORIENTABLE_TRAPDOOR_TOP), bottom, cutoutModel(blockGen, trapdoor, mapping, ModelTemplates.ORIENTABLE_TRAPDOOR_OPEN)));
+						blockGen.registerSimpleItemModel(trapdoor, bottom);
+					}
 					case WOOD -> wood.wood((Block) supplier.get());
 				}
 			});
@@ -223,5 +238,9 @@ public class SBModelProvider extends ModelProvider {
 
 	private void generateBlockFamilies(BlockModelGenerators blockGen) {
 		SBBlockFamily.getAllFamilies().filter(BlockFamily::shouldGenerateModel).forEach(family -> blockGen.family(family.getBaseBlock()).generateFor(family));
+	}
+
+	private ResourceLocation cutoutModel(BlockModelGenerators blockGen, Block block, TextureMapping mapping, ModelTemplate template) {
+		return template.extend().renderType("minecraft:cutout").build().create(block, mapping, blockGen.modelOutput);
 	}
 }
