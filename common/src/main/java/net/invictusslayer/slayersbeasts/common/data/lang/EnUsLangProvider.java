@@ -91,6 +91,7 @@ public class EnUsLangProvider extends SBLangProvider {
 //		addBlock(SBBlocks.THIN_MUSHROOM_STEM, "Thin Mushroom Stem");
 
 		addWoodFamily(WoodFamily.ASPEN, "Aspen");
+		addWoodFamily(WoodFamily.BLOODWOOD, "Bloodwood");
 		addWoodFamily(WoodFamily.CAJOLE, "Cajole");
 		addWoodFamily(WoodFamily.DESERT_OAK, "Desert Oak");
 		addWoodFamily(WoodFamily.EUCALYPTUS, "Eucalyptus");

@@ -7,6 +7,8 @@ import net.minecraft.resources.ResourceLocation;
 public class SBModelLayers {
 	public static final ModelLayerLocation ASPEN_BOAT = register("boat/aspen");
 	public static final ModelLayerLocation ASPEN_CHEST_BOAT = register("chest_boat/aspen");
+	public static final ModelLayerLocation BLOODWOOD_BOAT = register("boat/bloodwood");
+	public static final ModelLayerLocation BLOODWOOD_CHEST_BOAT = register("chest_boat/bloodwood");
 	public static final ModelLayerLocation DESERT_OAK_BOAT = register("boat/desert_oak");
 	public static final ModelLayerLocation DESERT_OAK_CHEST_BOAT = register("chest_boat/desert_oak");
 	public static final ModelLayerLocation EUCALYPTUS_BOAT = register("boat/eucalyptus");

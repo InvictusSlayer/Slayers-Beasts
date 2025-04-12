@@ -20,6 +20,7 @@ public class SBTags {
 		public static final TagKey<Block> STYPHIUM_REPLACEABLE = tag("styphium_replaceable");
 
 		public static final TagKey<Block> ASPEN_LOGS = tag("aspen_logs");
+		public static final TagKey<Block> BLOODWOOD_LOGS = tag("bloodwood_logs");
 		public static final TagKey<Block> CAJOLE_LOGS = tag("cajole_logs");
 		public static final TagKey<Block> DESERT_OAK_LOGS = tag("desert_oak_logs");
 		public static final TagKey<Block> EUCALYPTUS_LOGS = tag("eucalyptus_logs");
@@ -34,6 +35,7 @@ public class SBTags {
 
 	public static class Items {
 		public static final TagKey<Item> ASPEN_LOGS = tag("aspen_logs");
+		public static final TagKey<Item> BLOODWOOD_LOGS = tag("bloodwood_logs");
 		public static final TagKey<Item> CAJOLE_LOGS = tag("cajole_logs");
 		public static final TagKey<Item> DESERT_OAK_LOGS = tag("desert_oak_logs");
 		public static final TagKey<Item> EUCALYPTUS_LOGS = tag("eucalyptus_logs");

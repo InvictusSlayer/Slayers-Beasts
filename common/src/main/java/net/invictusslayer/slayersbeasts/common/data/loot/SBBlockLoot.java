@@ -32,7 +32,6 @@ import net.minecraft.world.level.storage.loot.predicates.LootItemEntityPropertyC
 import net.minecraft.world.level.storage.loot.providers.number.ConstantValue;
 import net.minecraft.world.level.storage.loot.providers.number.UniformGenerator;
 
-import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Locale;
 import java.util.Set;
@@ -85,11 +84,11 @@ public class SBBlockLoot extends BlockLootSubProvider {
 //		add(SBBlocks.THIN_MUSHROOM_STEM.get(), BlockLootSubProvider::createSilkTouchOnlyTable);
 
 		generateWoodFamilies();
-		add(SBBlocks.ALBINO_REDWOOD_LEAVES.get(), block -> createLeavesDrops(block, SBBlocks.ALBINO_REDWOOD_SAPLING.get(), 0.0033F));
+		add(SBBlocks.ALBINO_REDWOOD_LEAVES.get(), block -> createLeavesDrops(block, SBBlocks.ALBINO_REDWOOD_SAPLING.get(), 0.01F));
 		dropSelf(SBBlocks.ALBINO_REDWOOD_SAPLING.get());
 		dropPottedContents(SBBlocks.POTTED_ALBINO_REDWOOD_SAPLING.get());
-		add(SBBlocks.WILLOW_BRANCH.get(), block -> createLeavesDrops(block, SBBlocks.WILLOW_SAPLING.get(), 0.05F));
-		add(SBBlocks.WILLOW_BRANCH_PLANT.get(), block -> createLeavesDrops(block, SBBlocks.WILLOW_SAPLING.get(), 0.05F));
+		add(SBBlocks.WILLOW_BRANCH.get(), block -> createLeavesDrops(block, SBBlocks.WILLOW_SAPLING.get(), 0.03F));
+		add(SBBlocks.WILLOW_BRANCH_PLANT.get(), block -> createLeavesDrops(block, SBBlocks.WILLOW_SAPLING.get(), 0.03F));
 	}
 
 	public void generate(BiConsumer<ResourceKey<LootTable>, LootTable.Builder> biConsumer) {

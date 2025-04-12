@@ -20,6 +20,7 @@ import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.MobCategory;
 import net.minecraft.world.entity.SpawnPlacementTypes;
+import net.minecraft.world.entity.monster.Monster;
 import net.minecraft.world.entity.vehicle.Boat;
 import net.minecraft.world.entity.vehicle.ChestBoat;
 import net.minecraft.world.item.Item;
@@ -48,6 +49,8 @@ public class SBEntities {
 
 	public static final RegistrySupplier<EntityType<Boat>> ASPEN_BOAT = registerBoat("aspen_boat", SBItems.ASPEN_BOAT);
 	public static final RegistrySupplier<EntityType<ChestBoat>> ASPEN_CHEST_BOAT = registerChestBoat("aspen_chest_boat", SBItems.ASPEN_CHEST_BOAT);
+	public static final RegistrySupplier<EntityType<Boat>> BLOODWOOD_BOAT = registerBoat("bloodwood_boat", SBItems.BLOODWOOD_BOAT);
+	public static final RegistrySupplier<EntityType<ChestBoat>> BLOODWOOD_CHEST_BOAT = registerChestBoat("bloodwood_chest_boat", SBItems.BLOODWOOD_CHEST_BOAT);
 	public static final RegistrySupplier<EntityType<Boat>> DESERT_OAK_BOAT = registerBoat("desert_oak_boat", SBItems.DESERT_OAK_BOAT);
 	public static final RegistrySupplier<EntityType<ChestBoat>> DESERT_OAK_CHEST_BOAT = registerChestBoat("desert_oak_chest_boat", SBItems.DESERT_OAK_CHEST_BOAT);
 	public static final RegistrySupplier<EntityType<Boat>> EUCALYPTUS_BOAT = registerBoat("eucalyptus_boat", SBItems.EUCALYPTUS_BOAT);
@@ -64,6 +67,7 @@ public class SBEntities {
 		SpawnPlacementsRegistry.register(ANT_WORKER, SpawnPlacementTypes.ON_GROUND, Heightmap.Types.WORLD_SURFACE, AntWorker::canSpawn);
 		SpawnPlacementsRegistry.register(ANT_SOLDIER, SpawnPlacementTypes.ON_GROUND, Heightmap.Types.WORLD_SURFACE, AntSoldier::canSpawn);
 		SpawnPlacementsRegistry.register(ANT_QUEEN, SpawnPlacementTypes.ON_GROUND, Heightmap.Types.WORLD_SURFACE, AntQueen::canSpawn);
+		SpawnPlacementsRegistry.register(WITHER_SPIDER, SpawnPlacementTypes.ON_GROUND, Heightmap.Types.WORLD_SURFACE, WitherSpider::canSpawn);
 		SpawnPlacementsRegistry.register(DAMSELFLY, SpawnPlacementTypes.ON_GROUND, Heightmap.Types.WORLD_SURFACE, Damselfly::canSpawn);
 		SpawnPlacementsRegistry.register(ENT_MEDIUM, SpawnPlacementTypes.ON_GROUND, Heightmap.Types.WORLD_SURFACE, EntMedium::canSpawn);
 		SpawnPlacementsRegistry.register(SPORETRAP, SpawnPlacementTypes.ON_GROUND, Heightmap.Types.WORLD_SURFACE, Sporetrap::canSpawn);

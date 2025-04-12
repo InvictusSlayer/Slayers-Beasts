@@ -63,6 +63,7 @@ public class SBConfiguredFeatures {
 	// Tree
 	public static final ResourceKey<ConfiguredFeature<?, ?>> ASPEN = createKey("aspen");
 	public static final ResourceKey<ConfiguredFeature<?, ?>> SUPER_ASPEN = createKey("super_aspen");
+	public static final ResourceKey<ConfiguredFeature<?, ?>> BLOODWOOD = createKey("bloodwood");
 	public static final ResourceKey<ConfiguredFeature<?, ?>> CAJOLE = createKey("cajole");
 	public static final ResourceKey<ConfiguredFeature<?, ?>> DESERT_OAK = createKey("desert_oak");
 	public static final ResourceKey<ConfiguredFeature<?, ?>> SUPER_DESERT_OAK = createKey("super_desert_oak");
@@ -151,6 +152,9 @@ public class SBConfiguredFeatures {
 		register(context, SUPER_ASPEN, Feature.TREE, new TreeConfiguration.TreeConfigurationBuilder(
 				BlockStateProvider.simple(SBBlocks.ASPEN_LOG.get()), new StraightTrunkPlacer(10, 5, 3),
 				BlockStateProvider.simple(SBBlocks.ASPEN_LEAVES.get()), new PointedFoliagePlacer(ConstantInt.of(0), ConstantInt.of(0), true), new TwoLayersFeatureSize(1, 0, 2)).build());
+		register(context, BLOODWOOD, Feature.TREE, new TreeConfiguration.TreeConfigurationBuilder(
+				BlockStateProvider.simple(SBBlocks.BLOODWOOD_LOG.get()), new StraightTrunkPlacer(7, 3, 2),
+				BlockStateProvider.simple(SBBlocks.BLOODWOOD_LEAVES.get()), new PointedFoliagePlacer(ConstantInt.of(0), ConstantInt.of(0), false), new TwoLayersFeatureSize(1, 0, 2)).build());
 		register(context, CAJOLE, Feature.TREE, new TreeConfiguration.TreeConfigurationBuilder(
 				BlockStateProvider.simple(SBBlocks.CAJOLE_LOG.get()), new CrossTrunkPlacer(7, 6, 3),
 				BlockStateProvider.simple(SBBlocks.CAJOLE_LEAVES.get()), new CajoleFoliagePlacer(ConstantInt.of(2), ConstantInt.of(0)), new TwoLayersFeatureSize(1, 0, 2))
@@ -209,7 +213,7 @@ public class SBConfiguredFeatures {
 		register(context, TREES_BAYOU, Feature.RANDOM_SELECTOR, new RandomFeatureConfiguration(List.of(new WeightedPlacedFeature(placed.getOrThrow(SBPlacedFeatures.GIANT_WILLOW), 0.1F), new WeightedPlacedFeature(placed.getOrThrow(TreePlacements.MANGROVE_CHECKED), 0.3F)), placed.getOrThrow(SBPlacedFeatures.CAJOLE)));
 		register(context, TREES_BRUSH, Feature.RANDOM_SELECTOR, new RandomFeatureConfiguration(List.of(new WeightedPlacedFeature(placed.getOrThrow(SBPlacedFeatures.DESERT_OAK), 0.5F)), placed.getOrThrow(TreePlacements.ACACIA_CHECKED)));
 		register(context, TREES_CHAPARRAL, Feature.RANDOM_SELECTOR, new RandomFeatureConfiguration(List.of(new WeightedPlacedFeature(placed.getOrThrow(SBPlacedFeatures.DESERT_OAK), 0.5F)), placed.getOrThrow(TreePlacements.OAK_CHECKED)));
-		register(context, TREES_EUCALYPT, Feature.RANDOM_SELECTOR, new RandomFeatureConfiguration(List.of(new WeightedPlacedFeature(placed.getOrThrow(SBPlacedFeatures.EUCALYPTUS), 0.5F)), placed.getOrThrow(SBPlacedFeatures.EUCALYPTUS)));
+		register(context, TREES_EUCALYPT, Feature.RANDOM_SELECTOR, new RandomFeatureConfiguration(List.of(new WeightedPlacedFeature(placed.getOrThrow(SBPlacedFeatures.BLOODWOOD), 0.3F)), placed.getOrThrow(SBPlacedFeatures.EUCALYPTUS)));
 		register(context, TREES_INKY, Feature.RANDOM_SELECTOR, new RandomFeatureConfiguration(List.of(new WeightedPlacedFeature(PlacementUtils.inlinePlaced(configured.getOrThrow(BRANCHING_BLACK_MUSHROOM)), 0.5F)), placed.getOrThrow(SBPlacedFeatures.CAJOLE)));
 		register(context, TREES_MUSHROOM, Feature.RANDOM_SELECTOR, new RandomFeatureConfiguration(List.of(new WeightedPlacedFeature(PlacementUtils.inlinePlaced(configured.getOrThrow(MIGHTY_MUSHROOMS)), 0.6F)), PlacementUtils.inlinePlaced(configured.getOrThrow(BRANCHING_MUSHROOMS))));
 		register(context, TREES_OUTBACK, Feature.RANDOM_SELECTOR, new RandomFeatureConfiguration(List.of(new WeightedPlacedFeature(placed.getOrThrow(SBPlacedFeatures.EUCALYPTUS), 0.2F), new WeightedPlacedFeature(placed.getOrThrow(SBPlacedFeatures.SUPER_DESERT_OAK), 0.3F)), placed.getOrThrow(SBPlacedFeatures.DESERT_OAK)));

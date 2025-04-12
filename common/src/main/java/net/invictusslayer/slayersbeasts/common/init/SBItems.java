@@ -54,6 +54,11 @@ public class SBItems {
 	public static final RegistrySupplier<Item> ASPEN_BOAT = ITEMS.register("aspen_boat", () -> new BoatItem(SBEntities.ASPEN_BOAT.get(), new Item.Properties().setId(createKey("aspen_boat")).stacksTo(1)));
 	public static final RegistrySupplier<Item> ASPEN_CHEST_BOAT = ITEMS.register("aspen_chest_boat", () -> new BoatItem(SBEntities.ASPEN_CHEST_BOAT.get(), new Item.Properties().setId(createKey("aspen_chest_boat")).stacksTo(1)));
 
+	public static final RegistrySupplier<Item> BLOODWOOD_SIGN = ITEMS.register("bloodwood_sign", () -> new SignItem(SBBlocks.BLOODWOOD_SIGN.get(), SBBlocks.BLOODWOOD_WALL_SIGN.get(), new Item.Properties().setId(createKey("bloodwood_sign")).stacksTo(16)));
+	public static final RegistrySupplier<Item> BLOODWOOD_HANGING_SIGN = ITEMS.register("bloodwood_hanging_sign", () -> new HangingSignItem(SBBlocks.BLOODWOOD_HANGING_SIGN.get(), SBBlocks.BLOODWOOD_WALL_HANGING_SIGN.get(), new Item.Properties().setId(createKey("bloodwood_hanging_sign")).stacksTo(16)));
+	public static final RegistrySupplier<Item> BLOODWOOD_BOAT = ITEMS.register("bloodwood_boat", () -> new BoatItem(SBEntities.BLOODWOOD_BOAT.get(), new Item.Properties().setId(createKey("bloodwood_boat")).stacksTo(1)));
+	public static final RegistrySupplier<Item> BLOODWOOD_CHEST_BOAT = ITEMS.register("bloodwood_chest_boat", () -> new BoatItem(SBEntities.BLOODWOOD_CHEST_BOAT.get(), new Item.Properties().setId(createKey("bloodwood_chest_boat")).stacksTo(1)));
+
 	public static final RegistrySupplier<Item> DESERT_OAK_SIGN = ITEMS.register("desert_oak_sign", () -> new SignItem(SBBlocks.DESERT_OAK_SIGN.get(), SBBlocks.DESERT_OAK_WALL_SIGN.get(), new Item.Properties().setId(createKey("desert_oak_sign")).stacksTo(16)));
 	public static final RegistrySupplier<Item> DESERT_OAK_HANGING_SIGN = ITEMS.register("desert_oak_hanging_sign", () -> new HangingSignItem(SBBlocks.DESERT_OAK_HANGING_SIGN.get(), SBBlocks.DESERT_OAK_WALL_HANGING_SIGN.get(), new Item.Properties().setId(createKey("desert_oak_hanging_sign")).stacksTo(16)));
 	public static final RegistrySupplier<Item> DESERT_OAK_BOAT = ITEMS.register("desert_oak_boat", () -> new BoatItem(SBEntities.DESERT_OAK_BOAT.get(), new Item.Properties().setId(createKey("desert_oak_boat")).stacksTo(1)));

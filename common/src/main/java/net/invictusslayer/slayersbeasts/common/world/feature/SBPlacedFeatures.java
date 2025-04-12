@@ -25,6 +25,7 @@ public class SBPlacedFeatures {
 	// Tree
 	public static final ResourceKey<PlacedFeature> ASPEN = createKey("aspen");
 	public static final ResourceKey<PlacedFeature> SUPER_ASPEN = createKey("super_aspen");
+	public static final ResourceKey<PlacedFeature> BLOODWOOD = createKey("bloodwood");
 	public static final ResourceKey<PlacedFeature> CAJOLE = createKey("cajole");
 	public static final ResourceKey<PlacedFeature> DESERT_OAK = createKey("desert_oak");
 	public static final ResourceKey<PlacedFeature> SUPER_DESERT_OAK = createKey("super_desert_oak");
@@ -90,6 +91,7 @@ public class SBPlacedFeatures {
 
 		register(context, ASPEN, configured.getOrThrow(SBConfiguredFeatures.ASPEN), PlacementUtils.filteredByBlockSurvival(SBBlocks.ASPEN_SAPLING.get()));
 		register(context, SUPER_ASPEN, configured.getOrThrow(SBConfiguredFeatures.SUPER_ASPEN), PlacementUtils.filteredByBlockSurvival(SBBlocks.ASPEN_SAPLING.get()));
+		register(context, BLOODWOOD, configured.getOrThrow(SBConfiguredFeatures.BLOODWOOD), PlacementUtils.filteredByBlockSurvival(SBBlocks.BLOODWOOD_SAPLING.get()));
 		register(context, CAJOLE, configured.getOrThrow(SBConfiguredFeatures.CAJOLE), PlacementUtils.filteredByBlockSurvival(SBBlocks.CAJOLE_SAPLING.get()));
 		register(context, DESERT_OAK, configured.getOrThrow(SBConfiguredFeatures.DESERT_OAK), PlacementUtils.filteredByBlockSurvival(SBBlocks.DESERT_OAK_SAPLING.get()));
 		register(context, SUPER_DESERT_OAK, configured.getOrThrow(SBConfiguredFeatures.SUPER_DESERT_OAK), PlacementUtils.filteredByBlockSurvival(SBBlocks.DESERT_OAK_SAPLING.get()));

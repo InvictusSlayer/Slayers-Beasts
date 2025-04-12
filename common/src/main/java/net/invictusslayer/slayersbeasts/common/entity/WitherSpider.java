@@ -1,15 +1,15 @@
 package net.invictusslayer.slayersbeasts.common.entity;
 
+import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
+import net.minecraft.util.RandomSource;
+import net.minecraft.world.Difficulty;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
-import net.minecraft.world.entity.Entity;
-import net.minecraft.world.entity.EntityType;
-import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.Mob;
+import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.ai.goal.*;
@@ -18,6 +18,7 @@ import net.minecraft.world.entity.ai.goal.target.NearestAttackableTargetGoal;
 import net.minecraft.world.entity.monster.Spider;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.LevelAccessor;
 
 public class WitherSpider extends Spider {
 	public WitherSpider(EntityType<WitherSpider> type, Level level) {
@@ -52,6 +53,10 @@ public class WitherSpider extends Spider {
 	}
 	protected SoundEvent getHurtSound(DamageSource source) {
 		return SoundEvents.WITHER_SKELETON_HURT;
+	}
+
+	public static boolean canSpawn(EntityType<WitherSpider> entity, LevelAccessor level, EntitySpawnReason reason, BlockPos pos, RandomSource random) {
+		return PathfinderMob.checkMobSpawnRules(entity, level, reason, pos, random) && level instanceof Level level1 && level1.getDifficulty() != Difficulty.PEACEFUL;
 	}
 
 	public boolean doHurtTarget(ServerLevel level, Entity entity) {

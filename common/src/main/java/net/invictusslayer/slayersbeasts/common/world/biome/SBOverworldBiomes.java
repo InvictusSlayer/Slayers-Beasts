@@ -39,7 +39,7 @@ public class SBOverworldBiomes {
 	public static Biome ancientGrove(HolderGetter<PlacedFeature> features, HolderGetter<ConfiguredWorldCarver<?>> carvers) {
 		MobSpawnSettings.Builder mobSettings = new MobSpawnSettings.Builder();
 		BiomeDefaultFeatures.commonSpawns(mobSettings);
-		mobSettings.addSpawn(MobCategory.AMBIENT, new MobSpawnSettings.SpawnerData(SBEntities.MANTIS.get(), 6, 1, 3));
+		mobSettings.addSpawn(MobCategory.MONSTER, new MobSpawnSettings.SpawnerData(SBEntities.MANTIS.get(), 6, 1, 3));
 
 		BiomeGenerationSettings.Builder biomeSettings = new BiomeGenerationSettings.Builder(features, carvers);
 		globalOverworldGeneration(biomeSettings);
@@ -305,7 +305,7 @@ public class SBOverworldBiomes {
 	public static Biome rainforest(HolderGetter<PlacedFeature> features, HolderGetter<ConfiguredWorldCarver<?>> carvers) {
 		MobSpawnSettings.Builder mobSettings = new MobSpawnSettings.Builder();
 		BiomeDefaultFeatures.commonSpawns(mobSettings);
-		mobSettings.addSpawn(MobCategory.AMBIENT, new MobSpawnSettings.SpawnerData(SBEntities.MANTIS.get(), 6, 1, 3));
+		mobSettings.addSpawn(MobCategory.MONSTER, new MobSpawnSettings.SpawnerData(SBEntities.MANTIS.get(), 6, 1, 3));
 		mobSettings.addSpawn(MobCategory.AMBIENT, new MobSpawnSettings.SpawnerData(SBEntities.DAMSELFLY.get(), 4, 1, 1));
 
 		BiomeGenerationSettings.Builder biomeSettings = new BiomeGenerationSettings.Builder(features, carvers);

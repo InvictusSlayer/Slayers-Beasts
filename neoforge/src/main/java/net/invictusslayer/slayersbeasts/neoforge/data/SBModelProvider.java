@@ -59,7 +59,10 @@ public class SBModelProvider extends ModelProvider {
 		blockGen.createRotatedVariantBlock(SBBlocks.BLACK_SAND.get());
 		TexturedModel blackSandstoneModel = TexturedModel.TOP_BOTTOM_WITH_WALL.get(SBBlocks.BLACK_SANDSTONE.get());
 		BlockModelGenerators.BlockFamilyProvider blackSandstone = blockGen.new BlockFamilyProvider(blackSandstoneModel.getMapping());
-		blackSandstone.fullBlock(SBBlocks.BLACK_SANDSTONE.get(), blackSandstoneModel.getTemplate()).generateFor(SBBlockFamily.BLACK_SANDSTONE);
+		blackSandstone.fullBlock(SBBlocks.BLACK_SANDSTONE.get(), blackSandstoneModel.getTemplate());
+		blackSandstone.slab(SBBlocks.BLACK_SANDSTONE_SLAB.get());
+		blackSandstone.stairs(SBBlocks.BLACK_SANDSTONE_STAIRS.get());
+		blackSandstone.wall(SBBlocks.BLACK_SANDSTONE_WALL.get());
 
 		TexturedModel smoothBlackSandstoneModel = TexturedModel.createAllSame(TextureMapping.getBlockTexture(SBBlocks.BLACK_SANDSTONE.get(), "_top"));
 		BlockModelGenerators.BlockFamilyProvider smoothBlackSandstone = blockGen.new BlockFamilyProvider(smoothBlackSandstoneModel.getMapping());
@@ -69,11 +72,10 @@ public class SBModelProvider extends ModelProvider {
 		BlockModelGenerators.BlockFamilyProvider cutBlackSandstone = blockGen.new BlockFamilyProvider(cutBlackSandstoneModel.getMapping());
 		cutBlackSandstone.fullBlock(SBBlocks.CUT_BLACK_SANDSTONE.get(), cutBlackSandstoneModel.getTemplate()).generateFor(SBBlockFamily.CUT_BLACK_SANDSTONE);
 
-//		BlockModelGenerators.BlockFamilyProvider chiseledBlackSandstone = blockGen.new BlockFamilyProvider(TexturedModel.COLUMN.get(SBBlocks.CHISELED_BLACK_SANDSTONE.get()).updateTextures(mapping -> {
-//			mapping.put(TextureSlot.END, TextureMapping.getBlockTexture(SBBlocks.BLACK_SANDSTONE.get(), "_top"));
-//			mapping.put(TextureSlot.SIDE, TextureMapping.getBlockTexture(SBBlocks.CHISELED_BLACK_SANDSTONE.get()));
-//		}).getMapping());
-//		chiseledBlackSandstone.fullBlockVariant(SBBlocks.CHISELED_BLACK_SANDSTONE.get());
+		blockGen.blockStateOutput.accept(BlockModelGenerators.createSimpleBlock(SBBlocks.CHISELED_BLACK_SANDSTONE.get(), TexturedModel.COLUMN.get(SBBlocks.CHISELED_BLACK_SANDSTONE.get()).updateTextures(mapping -> {
+			mapping.put(TextureSlot.END, TextureMapping.getBlockTexture(SBBlocks.BLACK_SANDSTONE.get(), "_top"));
+			mapping.put(TextureSlot.SIDE, TextureMapping.getBlockTexture(SBBlocks.CHISELED_BLACK_SANDSTONE.get()));
+		}).create(SBBlocks.CHISELED_BLACK_SANDSTONE.get(), blockGen.modelOutput)));
 
 		createDoublePlantWithRenderType(blockGen, SBBlocks.TALL_BROWN_MUSHROOM.get(), BlockModelGenerators.PlantType.NOT_TINTED);
 		createDoublePlantWithRenderType(blockGen, SBBlocks.TALL_RED_MUSHROOM.get(), BlockModelGenerators.PlantType.NOT_TINTED);
