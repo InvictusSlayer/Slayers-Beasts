@@ -44,7 +44,7 @@ subprojects {
         modImplementation "com.github.glitchfiend:TerraBlender-${project.name}:${mc_version}-${tb_version}"
     }
 
-    sourceSets.main.resources.srcDir "src/generated/resources"
+    sourceSets.main.resources.srcDir "src/main/generated"
 
     tasks.named("processResources", ProcessResources).configure {
         var replaceProperties = [
