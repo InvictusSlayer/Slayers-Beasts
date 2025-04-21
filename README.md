@@ -12,7 +12,7 @@ complete stage, configs will be added and I may migrate some of the more worldge
 ## Dependencies
 
 ### Required
-- [**Forge**](https://files.minecraftforge.net/net/minecraftforge/forge) / [**Fabric API**](https://modrinth.com/mod/fabric-api/versions)
+- [**NeoForge**](https://projects.neoforged.net/neoforged/neoforge) / [**Fabric API**](https://modrinth.com/mod/fabric-api/versions)
 - [**Architectury API**](https://modrinth.com/mod/architectury-api/versions)
 - [**Cloth Config API**](https://modrinth.com/mod/cloth-config/versions)
 - [**TerraBlender**](https://modrinth.com/mod/terrablender/versions)

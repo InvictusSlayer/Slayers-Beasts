@@ -19,29 +19,34 @@ import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.ai.goal.*;
 import net.minecraft.world.entity.ai.goal.target.HurtByTargetGoal;
 import net.minecraft.world.entity.ai.goal.target.NearestAttackableTargetGoal;
+import net.minecraft.world.entity.monster.Monster;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelAccessor;
 
-public class Mantis extends PathfinderMob {
-	private static final EntityDataAccessor<Boolean> DATA_IS_LEAPING = SynchedEntityData.defineId(Mantis.class, EntityDataSerializers.BOOLEAN);
+import java.util.Objects;
+
+public class Mantis extends Monster {
+	private static final EntityDataAccessor<Boolean> DATA_IS_STRIKING = SynchedEntityData.defineId(Mantis.class, EntityDataSerializers.BOOLEAN);
 	private static final EntityDataAccessor<Boolean> DATA_IS_SCUTTLING = SynchedEntityData.defineId(Mantis.class, EntityDataSerializers.BOOLEAN);
+	private static final EntityDataAccessor<Boolean> DATA_IS_LEAPING = SynchedEntityData.defineId(Mantis.class, EntityDataSerializers.BOOLEAN);
 	private static final EntityDimensions SCUTTLING_DIMENSIONS = EntityDimensions.scalable(SBEntities.MANTIS.get().getWidth(), SBEntities.MANTIS.get().getHeight() - 0.8F);
-	public static final AnimationState strikeAnimationState = new AnimationState();
+	public final AnimationState flapAnimationState = new AnimationState();
+	public final AnimationState strikeAnimationState = new AnimationState();
 
 	public Mantis(EntityType<Mantis> type, Level level) {
 		super(type, level);
 	}
 
 	protected void registerGoals() {
-		super.registerGoals();
 		goalSelector.addGoal(0, new FloatGoal(this));
-		goalSelector.addGoal(1, new MantisScuttleGoal(this, 1.5D, false));
+		goalSelector.addGoal(1, new MantisScuttleGoal(this, 1.5D, 32.0F, 8.0F));
 		goalSelector.addGoal(2, new MantisLeapGoal(this, 0.6F));
-		goalSelector.addGoal(3, new WaterAvoidingRandomStrollGoal(this, 0.8D));
-		goalSelector.addGoal(4, new LookAtPlayerGoal(this, Player.class, 8.0F));
-		goalSelector.addGoal(5, new RandomLookAroundGoal(this));
-		goalSelector.addGoal(6, new MantisFlutterGoal(this));
+		goalSelector.addGoal(3, new MeleeAttackGoal(this, 1.0D, true));
+		goalSelector.addGoal(4, new WaterAvoidingRandomStrollGoal(this, 0.8D));
+		goalSelector.addGoal(5, new LookAtPlayerGoal(this, Player.class, 8.0F));
+		goalSelector.addGoal(6, new RandomLookAroundGoal(this));
+		goalSelector.addGoal(7, new MantisPreenGoal(this));
 		targetSelector.addGoal(1, new HurtByTargetGoal(this));
 		targetSelector.addGoal(2, new NearestAttackableTargetGoal<>(this, Player.class, true));
 	}
@@ -49,7 +54,7 @@ public class Mantis extends PathfinderMob {
 	public static AttributeSupplier.Builder createAttributes() {
 		return Mob.createMobAttributes()
 				.add(Attributes.MOVEMENT_SPEED, 0.25F)
-				.add(Attributes.FOLLOW_RANGE, 16.0D)
+				.add(Attributes.FOLLOW_RANGE, 24.0D)
 				.add(Attributes.MAX_HEALTH, 15.0D)
 				.add(Attributes.ATTACK_DAMAGE, 2.0D)
 				.add(Attributes.ATTACK_SPEED, 2.0D)
@@ -69,9 +74,11 @@ public class Mantis extends PathfinderMob {
 	protected SoundEvent getAmbientSound() {
 		return SBSounds.MANTIS_AMBIENT.get();
 	}
+
 	protected SoundEvent getDeathSound() {
 		return SBSounds.MANTIS_DEATH.get();
 	}
+
 	protected SoundEvent getHurtSound(DamageSource damageSource) {
 		return SBSounds.MANTIS_HURT.get();
 	}
@@ -82,21 +89,48 @@ public class Mantis extends PathfinderMob {
 
 	protected void defineSynchedData(SynchedEntityData.Builder builder) {
 		super.defineSynchedData(builder);
-		builder.define(DATA_IS_LEAPING, false);
+		builder.define(DATA_IS_STRIKING, false);
 		builder.define(DATA_IS_SCUTTLING, false);
+		builder.define(DATA_IS_LEAPING, false);
+	}
+
+	public void tick() {
+		super.tick();
+
+		if (getTarget() != null) setStriking(getTarget().distanceToSqr(this) < 8.0F);
+		else setStriking(false);
+
+		if (level().isClientSide()) {
+			setupAnimationStates();
+		}
+	}
+
+	private void setupAnimationStates() {
+		flapAnimationState.animateWhen(isLeaping(), tickCount);
+		strikeAnimationState.animateWhen(isStriking(), tickCount);
+	}
+
+	public boolean isStriking() {
+		return entityData.get(DATA_IS_STRIKING);
+	}
+
+	public void setStriking(boolean striking) {
+		entityData.set(DATA_IS_STRIKING, striking);
 	}
 
 	public boolean isScuttling() {
 		return entityData.get(DATA_IS_SCUTTLING);
 	}
-	public void setScuttling(Boolean scuttling) {
+
+	public void setScuttling(boolean scuttling) {
 		entityData.set(DATA_IS_SCUTTLING, scuttling);
 	}
 
 	public boolean isLeaping() {
 		return entityData.get(DATA_IS_LEAPING);
 	}
-	public void setLeaping(Boolean leaping) {
+
+	public void setLeaping(boolean leaping) {
 		entityData.set(DATA_IS_LEAPING, leaping);
 	}
 
@@ -104,62 +138,67 @@ public class Mantis extends PathfinderMob {
 		return isScuttling() ? SCUTTLING_DIMENSIONS.scale(getScale()) : super.getDefaultDimensions(pose);
 	}
 
-	static class MantisScuttleGoal extends MeleeAttackGoal {
-		private final Mantis mob;
+	static class MantisScuttleGoal extends MoveTowardsTargetGoal {
+		private final Mantis mantis;
+		private final float outside;
 
-		public MantisScuttleGoal(Mantis mob, double speedModifier, boolean requiresLineOfSight) {
-			super(mob, speedModifier, requiresLineOfSight);
-			this.mob = mob;
+		public MantisScuttleGoal(Mantis mantis, double speedModifier, float within, float outside) {
+			super(mantis, speedModifier, within);
+			this.mantis = mantis;
+			this.outside = outside;
+		}
+
+		public boolean canUse() {
+			return super.canUse() && Objects.requireNonNull(mantis.getTarget()).distanceToSqr(mantis) > outside * outside;
 		}
 
 		public void start() {
-			mob.setScuttling(true);
+			mantis.setScuttling(true);
 			super.start();
 		}
 
 		public void stop() {
-			mob.setScuttling(false);
+			mantis.setScuttling(false);
 			super.stop();
 		}
 	}
 
 	static class MantisLeapGoal extends LeapAtTargetGoal {
-		private final Mantis mob;
+		private final Mantis mantis;
 
-		public MantisLeapGoal(Mantis mob, float yd) {
-			super(mob, yd);
-			this.mob = mob;
+		public MantisLeapGoal(Mantis mantis, float yd) {
+			super(mantis, yd);
+			this.mantis = mantis;
 		}
 
 		public void start() {
-			mob.setLeaping(true);
+			mantis.setLeaping(true);
 			super.start();
 		}
 
 		public void stop() {
-			mob.setLeaping(false);
+			mantis.setLeaping(false);
 		}
 	}
 
-	static class MantisFlutterGoal extends Goal {
-		private final Mantis mob;
-		private int flutterTime;
+	static class MantisPreenGoal extends Goal {
+		private final Mantis mantis;
+		private int preenTime;
 
-		public MantisFlutterGoal(Mantis mob) {
-			super();
-			this.mob = mob;
+		public MantisPreenGoal(Mantis mantis) {
+			this.mantis = mantis;
 		}
 
 		public boolean canUse() {
-			return mob.onGround() && mob.getRandom().nextFloat() < 0.02F;
+			return mantis.onGround() && mantis.getRandom().nextFloat() < 0.02F;
 		}
 
 		public boolean canContinueToUse() {
-			return flutterTime >= 0;
+			return preenTime >= 0;
 		}
 
 		public void start() {
-			flutterTime = 15 + mob.getRandom().nextInt(15);
+			preenTime = 15 + mantis.getRandom().nextInt(15);
 		}
 
 		public boolean requiresUpdateEveryTick() {
@@ -167,7 +206,7 @@ public class Mantis extends PathfinderMob {
 		}
 
 		public void tick() {
-			--flutterTime;
+			--preenTime;
 		}
 	}
 }

@@ -29,7 +29,7 @@ import net.minecraft.world.level.levelgen.Heightmap;
 public class SBEntities {
 	public static final DeferredRegister<EntityType<?>> ENTITIES = DeferredRegister.create(SlayersBeasts.MOD_ID, Registries.ENTITY_TYPE);
 
-	public static final RegistrySupplier<EntityType<Mantis>> MANTIS = register("mantis", EntityType.Builder.of(Mantis::new, MobCategory.MONSTER).sized(1.9F,2F));
+	public static final RegistrySupplier<EntityType<Mantis>> MANTIS = register("mantis", EntityType.Builder.of(Mantis::new, MobCategory.MONSTER).sized(1.6F,1.4F));
 
 	public static final RegistrySupplier<EntityType<AntWorker>> ANT_WORKER = register("ant_worker", EntityType.Builder.of(AntWorker::new, MobCategory.AMBIENT).sized(0.7F,0.4F));
 	public static final RegistrySupplier<EntityType<AntSoldier>> ANT_SOLDIER = register("ant_soldier", EntityType.Builder.of(AntSoldier::new, MobCategory.CREATURE).sized(1.8F,0.9F));
