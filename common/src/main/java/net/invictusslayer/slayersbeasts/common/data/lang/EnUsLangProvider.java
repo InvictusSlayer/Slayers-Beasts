@@ -93,6 +93,7 @@ public class EnUsLangProvider extends SBLangProvider {
 		addWoodFamily(WoodFamily.ASPEN, "Aspen");
 		addWoodFamily(WoodFamily.BLOODWOOD, "Bloodwood");
 		addWoodFamily(WoodFamily.CAJOLE, "Cajole");
+		addWoodFamily(WoodFamily.CYPRESS, "Cypress");
 		addWoodFamily(WoodFamily.DESERT_OAK, "Desert Oak");
 		addWoodFamily(WoodFamily.EUCALYPTUS, "Eucalyptus");
 		addWoodFamily(WoodFamily.KAPOK, "Kapok");
@@ -116,6 +117,7 @@ public class EnUsLangProvider extends SBLangProvider {
 		addEntityType(SBEntities.IRK, "Irk");
 		
 		add("itemGroup.slayersbeasts.slayers_tab", "Slayer's Beasts");
+		add("itemGroup.slayersbeasts.slayers_wood", "Slayer's Wood Types");
 
 		addEffect(SBEffects.PARALYSIS, "Paralysis");
 

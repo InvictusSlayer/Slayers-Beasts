@@ -11,7 +11,7 @@ import net.minecraft.world.item.ItemStack;
 public class SBCreativeModeTabs {
 	public static final DeferredRegister<CreativeModeTab> CREATIVE_TABS = DeferredRegister.create(SlayersBeasts.MOD_ID, Registries.CREATIVE_MODE_TAB);
 
-	public static final RegistrySupplier<CreativeModeTab> SLAYERS_TAB = CREATIVE_TABS.register("slayers_tab", () -> CreativeModeTab.builder(CreativeModeTab.Row.TOP, 0).icon(() -> new ItemStack(SBBlocks.WILLOW_SAPLING.get())).title(Component.translatable("itemGroup.slayersbeasts.slayers_tab")).displayItems(((display, tab) -> {
+	public static final RegistrySupplier<CreativeModeTab> SLAYERS_TAB = CREATIVE_TABS.register("slayers_tab", () -> CreativeModeTab.builder(CreativeModeTab.Row.TOP, 0).icon(() -> new ItemStack(SBItems.MANTIS_SPAWN_EGG.get())).title(Component.translatable("itemGroup.slayersbeasts.slayers_tab")).displayItems(((display, tab) -> {
 		tab.accept(SBItems.JADE.get());
 //		tab.accept(SBItems.JADE_SHARD.get());
 //		tab.accept(SBItems.CRYSTALLINE_WING.get());
@@ -78,8 +78,22 @@ public class SBCreativeModeTabs {
 		tab.accept(SBBlocks.WHITE_MUSHROOM_BLOCK.get());
 		tab.accept(SBBlocks.WHITE_MUSHROOM.get());
 		tab.accept(SBBlocks.TALL_WHITE_MUSHROOM.get());
-//				tab.accept(SBBlocks.THIN_MUSHROOM_STEM.get());
+//		tab.accept(SBBlocks.THIN_MUSHROOM_STEM.get());
 
+//		tab.accept(SBItems.MUSIC_DISC_INKISH.get());
+
+		tab.accept(SBItems.MANTIS_SPAWN_EGG.get());
+		tab.accept(SBItems.ANT_WORKER_SPAWN_EGG.get());
+		tab.accept(SBItems.ANT_SOLDIER_SPAWN_EGG.get());
+		tab.accept(SBItems.ANT_QUEEN_SPAWN_EGG.get());
+		tab.accept(SBItems.WITHER_SPIDER_SPAWN_EGG.get());
+		tab.accept(SBItems.TYRACHNID_SPAWN_EGG.get());
+		tab.accept(SBItems.DAMSELFLY_SPAWN_EGG.get());
+		tab.accept(SBItems.ENT_SPAWN_EGG.get());
+		tab.accept(SBItems.WUDU_SPAWN_EGG.get());
+	})).build());
+
+	public static final RegistrySupplier<CreativeModeTab> SLAYERS_WOOD = CREATIVE_TABS.register("slayers_wood", () -> CreativeModeTab.builder(CreativeModeTab.Row.TOP, 0).icon(() -> new ItemStack(SBBlocks.WILLOW_SAPLING.get())).title(Component.translatable("itemGroup.slayersbeasts.slayers_wood")).displayItems(((display, tab) -> {
 		tab.accept(SBBlocks.ASPEN_LOG.get());
 		tab.accept(SBBlocks.ASPEN_WOOD.get());
 		tab.accept(SBBlocks.STRIPPED_ASPEN_LOG.get());
@@ -119,6 +133,26 @@ public class SBCreativeModeTabs {
 		tab.accept(SBItems.BLOODWOOD_HANGING_SIGN.get());
 		tab.accept(SBItems.BLOODWOOD_BOAT.get());
 		tab.accept(SBItems.BLOODWOOD_CHEST_BOAT.get());
+
+		tab.accept(SBBlocks.CYPRESS_LOG.get());
+		tab.accept(SBBlocks.CYPRESS_WOOD.get());
+		tab.accept(SBBlocks.STRIPPED_CYPRESS_LOG.get());
+		tab.accept(SBBlocks.STRIPPED_CYPRESS_WOOD.get());
+		tab.accept(SBBlocks.CYPRESS_LEAVES.get());
+		tab.accept(SBBlocks.CYPRESS_SAPLING.get());
+		tab.accept(SBBlocks.CYPRESS_PLANKS.get());
+		tab.accept(SBBlocks.CYPRESS_STAIRS.get());
+		tab.accept(SBBlocks.CYPRESS_SLAB.get());
+		tab.accept(SBBlocks.CYPRESS_FENCE.get());
+		tab.accept(SBBlocks.CYPRESS_FENCE_GATE.get());
+		tab.accept(SBBlocks.CYPRESS_DOOR.get());
+		tab.accept(SBBlocks.CYPRESS_TRAPDOOR.get());
+		tab.accept(SBBlocks.CYPRESS_PRESSURE_PLATE.get());
+		tab.accept(SBBlocks.CYPRESS_BUTTON.get());
+		tab.accept(SBItems.CYPRESS_SIGN.get());
+		tab.accept(SBItems.CYPRESS_HANGING_SIGN.get());
+		tab.accept(SBItems.CYPRESS_BOAT.get());
+		tab.accept(SBItems.CYPRESS_CHEST_BOAT.get());
 
 		tab.accept(SBBlocks.DESERT_OAK_LOG.get());
 		tab.accept(SBBlocks.DESERT_OAK_WOOD.get());
@@ -186,6 +220,8 @@ public class SBCreativeModeTabs {
 		tab.accept(SBBlocks.STRIPPED_REDWOOD_WOOD.get());
 		tab.accept(SBBlocks.REDWOOD_LEAVES.get());
 		tab.accept(SBBlocks.REDWOOD_SAPLING.get());
+		tab.accept(SBBlocks.ALBINO_REDWOOD_LEAVES.get());
+		tab.accept(SBBlocks.ALBINO_REDWOOD_SAPLING.get());
 		tab.accept(SBBlocks.REDWOOD_PLANKS.get());
 		tab.accept(SBBlocks.REDWOOD_STAIRS.get());
 		tab.accept(SBBlocks.REDWOOD_SLAB.get());
@@ -199,14 +235,13 @@ public class SBCreativeModeTabs {
 		tab.accept(SBItems.REDWOOD_HANGING_SIGN.get());
 		tab.accept(SBItems.REDWOOD_BOAT.get());
 		tab.accept(SBItems.REDWOOD_CHEST_BOAT.get());
-		tab.accept(SBBlocks.ALBINO_REDWOOD_LEAVES.get());
-		tab.accept(SBBlocks.ALBINO_REDWOOD_SAPLING.get());
 
 		tab.accept(SBBlocks.WILLOW_LOG.get());
 		tab.accept(SBBlocks.WILLOW_WOOD.get());
 		tab.accept(SBBlocks.STRIPPED_WILLOW_LOG.get());
 		tab.accept(SBBlocks.STRIPPED_WILLOW_WOOD.get());
 		tab.accept(SBBlocks.WILLOW_LEAVES.get());
+		tab.accept(SBBlocks.WILLOW_BRANCH.get());
 		tab.accept(SBBlocks.WILLOW_SAPLING.get());
 		tab.accept(SBBlocks.WILLOW_PLANKS.get());
 		tab.accept(SBBlocks.WILLOW_STAIRS.get());
@@ -221,18 +256,5 @@ public class SBCreativeModeTabs {
 		tab.accept(SBItems.WILLOW_HANGING_SIGN.get());
 		tab.accept(SBItems.WILLOW_BOAT.get());
 		tab.accept(SBItems.WILLOW_CHEST_BOAT.get());
-		tab.accept(SBBlocks.WILLOW_BRANCH.get());
-
-		tab.accept(SBItems.MUSIC_DISC_INKISH.get());
-
-		tab.accept(SBItems.MANTIS_SPAWN_EGG.get());
-		tab.accept(SBItems.ANT_WORKER_SPAWN_EGG.get());
-		tab.accept(SBItems.ANT_SOLDIER_SPAWN_EGG.get());
-		tab.accept(SBItems.ANT_QUEEN_SPAWN_EGG.get());
-		tab.accept(SBItems.WITHER_SPIDER_SPAWN_EGG.get());
-		tab.accept(SBItems.TYRACHNID_SPAWN_EGG.get());
-		tab.accept(SBItems.DAMSELFLY_SPAWN_EGG.get());
-		tab.accept(SBItems.ENT_SPAWN_EGG.get());
-		tab.accept(SBItems.WUDU_SPAWN_EGG.get());
-			})).build());
+	})).build());
 }

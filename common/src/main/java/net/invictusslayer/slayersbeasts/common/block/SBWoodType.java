@@ -13,6 +13,7 @@ public class SBWoodType {
 	public static final WoodType ASPEN = register("aspen", SBBlockSetType.ASPEN);
 	public static final WoodType BLOODWOOD = register("bloodwood", SBBlockSetType.BLOODWOOD);
 	public static final WoodType CAJOLE = register("cajole", SBBlockSetType.CAJOLE);
+	public static final WoodType CYPRESS = register("cypress", SBBlockSetType.CYPRESS);
 	public static final WoodType DESERT_OAK = register("desert_oak", SBBlockSetType.DESERT_OAK);
 	public static final WoodType EUCALYPTUS = register("eucalyptus", SBBlockSetType.EUCALYPTUS);
 	public static final WoodType KAPOK = register("kapok", SBBlockSetType.KAPOK);

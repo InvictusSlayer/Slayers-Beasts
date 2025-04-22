@@ -7,6 +7,7 @@ public class SBBlockSetType {
 	public static final BlockSetType ASPEN = register("aspen");
 	public static final BlockSetType BLOODWOOD = register("bloodwood");
 	public static final BlockSetType CAJOLE = register("cajole");
+	public static final BlockSetType CYPRESS = register("cypress");
 	public static final BlockSetType DESERT_OAK = register("desert_oak");
 	public static final BlockSetType EUCALYPTUS = register("eucalyptus");
 	public static final BlockSetType KAPOK = register("kapok");
