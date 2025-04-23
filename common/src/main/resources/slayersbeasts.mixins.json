@@ -5,12 +5,14 @@
 	"minVersion": "0.8",
 	"mixins": [
 		"common.BlockEntityTypeMixin",
+		"common.BoatMixin",
 		"common.BoatTypeMixin",
 		"common.ChestBoatMixin",
 		"common.FoxTypeMixin",
 		"common.MushroomBlockMixin",
 		"common.MushroomCowMixin",
-		"common.MushroomCowTypeMixin"
+		"common.MushroomCowTypeMixin",
+		"common.VillagerTypeTradeMixin"
 	],
 	"client": [
 		"client.BoatRendererMixin",

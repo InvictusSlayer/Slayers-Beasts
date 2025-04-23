@@ -1,10 +1,13 @@
 package net.invictusslayer.slayersbeasts.common.client.animation;
 
+import net.fabricmc.api.EnvType;
+import net.fabricmc.api.Environment;
 import net.minecraft.client.animation.AnimationChannel;
 import net.minecraft.client.animation.AnimationDefinition;
 import net.minecraft.client.animation.Keyframe;
 import net.minecraft.client.animation.KeyframeAnimations;
 
+@Environment(EnvType.CLIENT)
 public class WuduAnimation {
 	public static final AnimationDefinition GROW_LEFT_ARM = AnimationDefinition.Builder.withLength(3f)
 			.addAnimation("arm_left",

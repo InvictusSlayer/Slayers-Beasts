@@ -6,8 +6,10 @@ import net.minecraft.nbt.NbtUtils;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
+import net.minecraft.util.ByIdMap;
 import net.minecraft.util.Mth;
 import net.minecraft.util.RandomSource;
+import net.minecraft.util.StringRepresentable;
 import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.*;
@@ -32,14 +34,15 @@ import net.minecraft.world.phys.Vec3;
 
 import java.util.EnumSet;
 import java.util.Optional;
+import java.util.function.IntFunction;
 import java.util.function.Predicate;
 
 public class Damselfly extends PathfinderMob {
-	private static final EntityDataAccessor<Integer> DATA_DAMSELFLY_TYPE = SynchedEntityData.defineId(Damselfly.class, EntityDataSerializers.INT);
+	private static final EntityDataAccessor<Integer> DATA_VARIANT = SynchedEntityData.defineId(Damselfly.class, EntityDataSerializers.INT);
 	private static final EntityDataAccessor<Boolean> DATA_IS_FLYING = SynchedEntityData.defineId(Damselfly.class, EntityDataSerializers.BOOLEAN);
 	private static final EntityDataAccessor<Boolean> DATA_IS_PERCHED = SynchedEntityData.defineId(Damselfly.class, EntityDataSerializers.BOOLEAN);
-	public static final AnimationState flyAnimationState = new AnimationState();
-	public static final AnimationState perchAnimationState = new AnimationState();
+	public final AnimationState flyAnimationState = new AnimationState();
+	public final AnimationState perchAnimationState = new AnimationState();
 	BlockPos savedPerchPos;
 	private int ticksUntilPerch;
 
@@ -65,16 +68,12 @@ public class Damselfly extends PathfinderMob {
 				.add(Attributes.FLYING_SPEED, 0.4D);
 	}
 
-	public MobType getMobType() {
-		return MobType.ARTHROPOD;
-	}
-
 	public static boolean canSpawn(EntityType<Damselfly> type, LevelAccessor level, MobSpawnType spawnType, BlockPos pos, RandomSource random) {
 		return PathfinderMob.checkMobSpawnRules(type, level, spawnType, pos, random);
 	}
 
 	public SpawnGroupData finalizeSpawn(ServerLevelAccessor level, DifficultyInstance difficulty, MobSpawnType type, SpawnGroupData spawnData, CompoundTag tag) {
-		setDamselflyType(random.nextInt(2));
+		setVariant(Variant.byId(level.getRandom().nextInt(Variant.values().length)));
 		return new DamselflyGroupData();
 	}
 
@@ -96,43 +95,38 @@ public class Damselfly extends PathfinderMob {
 
 	public void addAdditionalSaveData(CompoundTag tag) {
 		super.addAdditionalSaveData(tag);
-		if (savedPerchPos != null) {
-			tag.put("PerchPos", NbtUtils.writeBlockPos(savedPerchPos));
-		}
-
+		if (savedPerchPos != null) tag.put("PerchPos", NbtUtils.writeBlockPos(savedPerchPos));
 		tag.putInt("TicksSincePerch", ticksUntilPerch);
-		tag.putInt("DamselflyType", getDamselflyType());
+		tag.putInt("Variant", getVariant().getId());
 	}
 
 	public void readAdditionalSaveData(CompoundTag tag) {
-		savedPerchPos = null;
-		if (tag.contains("PerchPos")) {
-			savedPerchPos = NbtUtils.readBlockPos(tag.getCompound("PerchPos"));
-		}
-
 		super.readAdditionalSaveData(tag);
+		savedPerchPos = tag.contains("PerchPos") ? NbtUtils.readBlockPos(tag.getCompound("PerchPos")) : null;
 		ticksUntilPerch = tag.getInt("TicksSincePerch");
-		setDamselflyType(tag.getInt("DamselflyType"));
+		setVariant(Variant.byId(tag.getInt("Variant")));
 	}
 
 
 	protected void defineSynchedData() {
 		super.defineSynchedData();
-		entityData.define(DATA_DAMSELFLY_TYPE, 0);
+		entityData.define(DATA_VARIANT, 0);
 		entityData.define(DATA_IS_FLYING, false);
 		entityData.define(DATA_IS_PERCHED, false);
 	}
 
-	public int getDamselflyType() {
-		return entityData.get(DATA_DAMSELFLY_TYPE);
+	public Variant getVariant() {
+		return Variant.byId(entityData.get(DATA_VARIANT));
 	}
-	public void setDamselflyType(int type) {
-		entityData.set(DATA_DAMSELFLY_TYPE, type);
+
+	public void setVariant(Variant variant) {
+		entityData.set(DATA_VARIANT, variant.ordinal());
 	}
 
 	public boolean isFlying() {
 		return entityData.get(DATA_IS_FLYING);
 	}
+
 	public void setFlying(boolean flying) {
 		entityData.set(DATA_IS_FLYING, flying);
 	}
@@ -140,6 +134,7 @@ public class Damselfly extends PathfinderMob {
 	public boolean isPerched() {
 		return entityData.get(DATA_IS_PERCHED);
 	}
+
 	public void setPerched(boolean perched) {
 		entityData.set(DATA_IS_PERCHED, perched);
 	}
@@ -147,6 +142,7 @@ public class Damselfly extends PathfinderMob {
 	public boolean causeFallDamage(float fallDistance, float multiplier, DamageSource source) {
 		return false;
 	}
+
 	protected void checkFallDamage(double y, boolean onGround, BlockState state, BlockPos pos) {}
 
 	public void resetTicksUntilPerch() {
@@ -331,5 +327,32 @@ public class Damselfly extends PathfinderMob {
 
 	public static class DamselflyGroupData implements SpawnGroupData {
 		private DamselflyGroupData() {}
+	}
+
+	public enum Variant implements StringRepresentable {
+		BLUE(0, "blue"),
+		GREEN(1, "green"),
+		YELLOW(2, "yellow");
+
+		private static final IntFunction<Variant> BY_ID = ByIdMap.continuous(Variant::getId, values(), ByIdMap.OutOfBoundsStrategy.CLAMP);
+		final int id;
+		final String name;
+
+		Variant(int id, String name) {
+			this.id = id;
+			this.name = name;
+		}
+
+		public static Variant byId(int id) {
+			return BY_ID.apply(id);
+		}
+
+		public int getId() {
+			return id;
+		}
+
+		public String getSerializedName() {
+			return name;
+		}
 	}
 }

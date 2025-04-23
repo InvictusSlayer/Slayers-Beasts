@@ -36,16 +36,16 @@ public class SBItemModelProvider extends ItemModelProvider {
 		item(SBItems.TANNED_LEATHER);
 		item(SBItems.MUD_BALL);
 
-		spawnEgg(SBItems.MANTIS_SPAWN_EGG);
+		item(SBItems.MANTIS_SPAWN_EGG);
 		item(SBItems.ANT_WORKER_SPAWN_EGG);
 		item(SBItems.ANT_SOLDIER_SPAWN_EGG);
 		item(SBItems.ANT_QUEEN_SPAWN_EGG);
-		spawnEgg(SBItems.WITHER_SPIDER_SPAWN_EGG);
-		spawnEgg(SBItems.TYRACHNID_SPAWN_EGG);
-		spawnEgg(SBItems.DAMSELFLY_SPAWN_EGG);
-		spawnEgg(SBItems.ENT_SPAWN_EGG);
-		spawnEgg(SBItems.WUDU_SPAWN_EGG);
-		spawnEgg(SBItems.SPORETRAP_SPAWN_EGG);
+		item(SBItems.WITHER_SPIDER_SPAWN_EGG);
+		item(SBItems.TYRACHNID_SPAWN_EGG);
+		item(SBItems.DAMSELFLY_SPAWN_EGG);
+		item(SBItems.ENT_SPAWN_EGG);
+		item(SBItems.WUDU_SPAWN_EGG);
+//		item(SBItems.SPORETRAP_SPAWN_EGG);
 
 		block(SBBlocks.ICICLE, "_frustum_down");
 		block(SBBlocks.OBSIDIAN_SPIKE, "_tip_up");
@@ -92,8 +92,4 @@ public class SBItemModelProvider extends ItemModelProvider {
 //				new ResourceLocation("item/handheld")).texture("layer0",
 //				new ResourceLocation(SlayersBeasts.MOD_ID, "item/" + item.getId().getPath()));
 //	}
-
-	private void spawnEgg(RegistrySupplier<Item> item) {
-		withExistingParent(item.getId().getPath(), new ResourceLocation("item/template_spawn_egg"));
-	}
 }

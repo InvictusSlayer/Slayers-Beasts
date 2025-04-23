@@ -83,7 +83,7 @@ public class SBBlocks {
 	public static final RegistrySupplier<Block> WHITE_MUSHROOM = register("white_mushroom", () -> new MushroomBlock(BlockBehaviour.Properties.of().mapColor(MapColor.TERRACOTTA_WHITE).noCollission().randomTicks().instabreak().sound(SoundType.GRASS).hasPostProcess((state, level, pos) -> true).pushReaction(PushReaction.DESTROY), SBConfiguredFeatures.HUGE_WHITE_MUSHROOM));
 	public static final RegistrySupplier<Block> POTTED_WHITE_MUSHROOM = BLOCKS.register("potted_white_mushroom", () -> new FlowerPotBlock(WHITE_MUSHROOM.get(), BlockBehaviour.Properties.copy(Blocks.POTTED_RED_MUSHROOM)));
 	public static final RegistrySupplier<Block> TALL_WHITE_MUSHROOM = register("tall_white_mushroom", () -> new TallMushroomBlock(BlockBehaviour.Properties.of().mapColor(MapColor.TERRACOTTA_WHITE).noCollission().randomTicks().instabreak().sound(SoundType.GRASS).hasPostProcess((state, level, pos) -> true).pushReaction(PushReaction.DESTROY), SBConfiguredFeatures.BRANCHING_WHITE_MUSHROOM));
-	public static final RegistrySupplier<Block> THIN_MUSHROOM_STEM = register("thin_mushroom_stem", () -> new ThinMushroomStemBlock(BlockBehaviour.Properties.copy(Blocks.MUSHROOM_STEM)));
+//	public static final RegistrySupplier<Block> THIN_MUSHROOM_STEM = register("thin_mushroom_stem", () -> new ThinMushroomStemBlock(BlockBehaviour.Properties.copy(Blocks.MUSHROOM_STEM)));
 
 	public static final RegistrySupplier<Block> ASPEN_LOG = register("aspen_log", () -> new RotatedPillarBlock(BlockBehaviour.Properties.copy(Blocks.OAK_LOG)));
 	public static final RegistrySupplier<Block> ASPEN_WOOD = register("aspen_wood", () -> new RotatedPillarBlock(BlockBehaviour.Properties.copy(Blocks.OAK_WOOD)));
@@ -106,6 +106,27 @@ public class SBBlocks {
 	public static final RegistrySupplier<Block> ASPEN_HANGING_SIGN = BLOCKS.register("aspen_hanging_sign", () -> new CeilingHangingSignBlock(BlockBehaviour.Properties.copy(Blocks.OAK_HANGING_SIGN), SBWoodType.ASPEN));
 	public static final RegistrySupplier<Block> ASPEN_WALL_HANGING_SIGN = BLOCKS.register("aspen_wall_hanging_sign", () -> new WallHangingSignBlock(BlockBehaviour.Properties.copy(Blocks.OAK_WALL_HANGING_SIGN), SBWoodType.ASPEN));
 
+	public static final RegistrySupplier<Block> BLOODWOOD_LOG = register("bloodwood_log", () -> new RotatedPillarBlock(BlockBehaviour.Properties.copy(Blocks.OAK_LOG)));
+	public static final RegistrySupplier<Block> BLOODWOOD_WOOD = register("bloodwood_wood", () -> new RotatedPillarBlock(BlockBehaviour.Properties.copy(Blocks.OAK_WOOD)));
+	public static final RegistrySupplier<Block> STRIPPED_BLOODWOOD_LOG = register("stripped_bloodwood_log", () -> new RotatedPillarBlock(BlockBehaviour.Properties.copy(Blocks.STRIPPED_OAK_LOG)));
+	public static final RegistrySupplier<Block> STRIPPED_BLOODWOOD_WOOD = register("stripped_bloodwood_wood", () -> new RotatedPillarBlock(BlockBehaviour.Properties.copy(Blocks.STRIPPED_OAK_WOOD)));
+	public static final RegistrySupplier<Block> BLOODWOOD_LEAVES = register("bloodwood_leaves", () -> new LeavesBlock(BlockBehaviour.Properties.copy(Blocks.OAK_LEAVES)));
+	public static final RegistrySupplier<Block> BLOODWOOD_SAPLING = register("bloodwood_sapling", () -> new SaplingBlock(new BloodwoodGrower(), BlockBehaviour.Properties.copy(Blocks.OAK_SAPLING)));
+	public static final RegistrySupplier<Block> POTTED_BLOODWOOD_SAPLING = BLOCKS.register("potted_bloodwood_sapling", () -> new FlowerPotBlock(BLOODWOOD_SAPLING.get(), BlockBehaviour.Properties.copy(Blocks.POTTED_OAK_SAPLING)));
+	public static final RegistrySupplier<Block> BLOODWOOD_PLANKS = register("bloodwood_planks", () -> new Block(BlockBehaviour.Properties.copy(Blocks.OAK_PLANKS)));
+	public static final RegistrySupplier<Block> BLOODWOOD_STAIRS = register("bloodwood_stairs", () -> new StairBlock(BLOODWOOD_PLANKS.get().defaultBlockState(), BlockBehaviour.Properties.copy(Blocks.OAK_STAIRS)));
+	public static final RegistrySupplier<Block> BLOODWOOD_SLAB = register("bloodwood_slab", () -> new SlabBlock(BlockBehaviour.Properties.copy(Blocks.OAK_SLAB)));
+	public static final RegistrySupplier<Block> BLOODWOOD_FENCE = register("bloodwood_fence", () -> new FenceBlock(BlockBehaviour.Properties.copy(Blocks.OAK_FENCE)));
+	public static final RegistrySupplier<Block> BLOODWOOD_FENCE_GATE = register("bloodwood_fence_gate", () -> new FenceGateBlock(BlockBehaviour.Properties.copy(Blocks.OAK_FENCE_GATE), SBWoodType.BLOODWOOD));
+	public static final RegistrySupplier<Block> BLOODWOOD_DOOR = register("bloodwood_door", () -> new DoorBlock(BlockBehaviour.Properties.copy(Blocks.OAK_DOOR), SBBlockSetType.BLOODWOOD));
+	public static final RegistrySupplier<Block> BLOODWOOD_TRAPDOOR = register("bloodwood_trapdoor", () -> new TrapDoorBlock(BlockBehaviour.Properties.copy(Blocks.OAK_TRAPDOOR), SBBlockSetType.BLOODWOOD));
+	public static final RegistrySupplier<Block> BLOODWOOD_PRESSURE_PLATE = register("bloodwood_pressure_plate", () -> woodenPressurePlate(BlockBehaviour.Properties.copy(Blocks.OAK_PRESSURE_PLATE), SBBlockSetType.BLOODWOOD));
+	public static final RegistrySupplier<Block> BLOODWOOD_BUTTON = register("bloodwood_button", () -> woodenButton(BlockBehaviour.Properties.copy(Blocks.OAK_BUTTON), SBBlockSetType.BLOODWOOD));
+	public static final RegistrySupplier<Block> BLOODWOOD_SIGN = BLOCKS.register("bloodwood_sign", () -> new StandingSignBlock(BlockBehaviour.Properties.copy(Blocks.OAK_SIGN), SBWoodType.BLOODWOOD));
+	public static final RegistrySupplier<Block> BLOODWOOD_WALL_SIGN = BLOCKS.register("bloodwood_wall_sign", () -> new WallSignBlock(BlockBehaviour.Properties.copy(Blocks.OAK_WALL_SIGN), SBWoodType.BLOODWOOD));
+	public static final RegistrySupplier<Block> BLOODWOOD_HANGING_SIGN = BLOCKS.register("bloodwood_hanging_sign", () -> new CeilingHangingSignBlock(BlockBehaviour.Properties.copy(Blocks.OAK_HANGING_SIGN), SBWoodType.BLOODWOOD));
+	public static final RegistrySupplier<Block> BLOODWOOD_WALL_HANGING_SIGN = BLOCKS.register("bloodwood_wall_hanging_sign", () -> new WallHangingSignBlock(BlockBehaviour.Properties.copy(Blocks.OAK_WALL_HANGING_SIGN), SBWoodType.BLOODWOOD));
+
 	public static final RegistrySupplier<Block> CAJOLE_LOG = register("cajole_log", () -> new RotatedPillarBlock(BlockBehaviour.Properties.copy(Blocks.OAK_LOG)));
 	public static final RegistrySupplier<Block> STRIPPED_CAJOLE_LOG = register("stripped_cajole_log", () -> new RotatedPillarBlock(BlockBehaviour.Properties.copy(Blocks.STRIPPED_OAK_LOG)));
 	public static final RegistrySupplier<Block> CAJOLE_WOOD = register("cajole_wood", () -> new RotatedPillarBlock(BlockBehaviour.Properties.copy(Blocks.OAK_WOOD)));
@@ -121,6 +142,27 @@ public class SBBlocks {
 	public static final RegistrySupplier<Block> CAJOLE_PRESSURE_PLATE = register("cajole_pressure_plate", () -> woodenPressurePlate(BlockBehaviour.Properties.copy(Blocks.OAK_PRESSURE_PLATE), SBBlockSetType.CAJOLE));
 	public static final RegistrySupplier<Block> CAJOLE_DOOR = register("cajole_door", () -> new DoorBlock(BlockBehaviour.Properties.copy(Blocks.OAK_DOOR), SBBlockSetType.CAJOLE));
 	public static final RegistrySupplier<Block> CAJOLE_TRAPDOOR = register("cajole_trapdoor", () -> new TrapDoorBlock(BlockBehaviour.Properties.copy(Blocks.OAK_TRAPDOOR), SBBlockSetType.CAJOLE));
+
+	public static final RegistrySupplier<Block> CYPRESS_LOG = register("cypress_log", () -> new RotatedPillarBlock(BlockBehaviour.Properties.copy(Blocks.OAK_LOG)));
+	public static final RegistrySupplier<Block> CYPRESS_WOOD = register("cypress_wood", () -> new RotatedPillarBlock(BlockBehaviour.Properties.copy(Blocks.OAK_WOOD)));
+	public static final RegistrySupplier<Block> STRIPPED_CYPRESS_LOG = register("stripped_cypress_log", () -> new RotatedPillarBlock(BlockBehaviour.Properties.copy(Blocks.STRIPPED_OAK_LOG)));
+	public static final RegistrySupplier<Block> STRIPPED_CYPRESS_WOOD = register("stripped_cypress_wood", () -> new RotatedPillarBlock(BlockBehaviour.Properties.copy(Blocks.STRIPPED_OAK_WOOD)));
+	public static final RegistrySupplier<Block> CYPRESS_LEAVES = register("cypress_leaves", () -> new LeavesBlock(BlockBehaviour.Properties.copy(Blocks.OAK_LEAVES)));
+	public static final RegistrySupplier<Block> CYPRESS_SAPLING = register("cypress_sapling", () -> new SaplingBlock(new CypressGrower(), BlockBehaviour.Properties.copy(Blocks.OAK_SAPLING)));
+	public static final RegistrySupplier<Block> POTTED_CYPRESS_SAPLING = BLOCKS.register("potted_cypress_sapling", () -> new FlowerPotBlock(CYPRESS_SAPLING.get(), BlockBehaviour.Properties.copy(Blocks.POTTED_OAK_SAPLING)));
+	public static final RegistrySupplier<Block> CYPRESS_PLANKS = register("cypress_planks", () -> new Block(BlockBehaviour.Properties.copy(Blocks.OAK_PLANKS)));
+	public static final RegistrySupplier<Block> CYPRESS_STAIRS = register("cypress_stairs", () -> new StairBlock(CYPRESS_PLANKS.get().defaultBlockState(), BlockBehaviour.Properties.copy(Blocks.OAK_STAIRS)));
+	public static final RegistrySupplier<Block> CYPRESS_SLAB = register("cypress_slab", () -> new SlabBlock(BlockBehaviour.Properties.copy(Blocks.OAK_SLAB)));
+	public static final RegistrySupplier<Block> CYPRESS_FENCE = register("cypress_fence", () -> new FenceBlock(BlockBehaviour.Properties.copy(Blocks.OAK_FENCE)));
+	public static final RegistrySupplier<Block> CYPRESS_FENCE_GATE = register("cypress_fence_gate", () -> new FenceGateBlock(BlockBehaviour.Properties.copy(Blocks.OAK_FENCE_GATE), SBWoodType.CYPRESS));
+	public static final RegistrySupplier<Block> CYPRESS_DOOR = register("cypress_door", () -> new DoorBlock(BlockBehaviour.Properties.copy(Blocks.OAK_DOOR), SBBlockSetType.CYPRESS));
+	public static final RegistrySupplier<Block> CYPRESS_TRAPDOOR = register("cypress_trapdoor", () -> new TrapDoorBlock(BlockBehaviour.Properties.copy(Blocks.OAK_TRAPDOOR), SBBlockSetType.CYPRESS));
+	public static final RegistrySupplier<Block> CYPRESS_PRESSURE_PLATE = register("cypress_pressure_plate", () -> woodenPressurePlate(BlockBehaviour.Properties.copy(Blocks.OAK_PRESSURE_PLATE), SBBlockSetType.CYPRESS));
+	public static final RegistrySupplier<Block> CYPRESS_BUTTON = register("cypress_button", () -> woodenButton(BlockBehaviour.Properties.copy(Blocks.OAK_BUTTON), SBBlockSetType.CYPRESS));
+	public static final RegistrySupplier<Block> CYPRESS_SIGN = BLOCKS.register("cypress_sign", () -> new StandingSignBlock(BlockBehaviour.Properties.copy(Blocks.OAK_SIGN), SBWoodType.CYPRESS));
+	public static final RegistrySupplier<Block> CYPRESS_WALL_SIGN = BLOCKS.register("cypress_wall_sign", () -> new WallSignBlock(BlockBehaviour.Properties.copy(Blocks.OAK_WALL_SIGN), SBWoodType.CYPRESS));
+	public static final RegistrySupplier<Block> CYPRESS_HANGING_SIGN = BLOCKS.register("cypress_hanging_sign", () -> new CeilingHangingSignBlock(BlockBehaviour.Properties.copy(Blocks.OAK_HANGING_SIGN), SBWoodType.CYPRESS));
+	public static final RegistrySupplier<Block> CYPRESS_WALL_HANGING_SIGN = BLOCKS.register("cypress_wall_hanging_sign", () -> new WallHangingSignBlock(BlockBehaviour.Properties.copy(Blocks.OAK_WALL_HANGING_SIGN), SBWoodType.CYPRESS));
 
 	public static final RegistrySupplier<Block> DESERT_OAK_LOG = register("desert_oak_log", () -> new RotatedPillarBlock(BlockBehaviour.Properties.copy(Blocks.OAK_LOG)));
 	public static final RegistrySupplier<Block> DESERT_OAK_WOOD = register("desert_oak_wood", () -> new RotatedPillarBlock(BlockBehaviour.Properties.copy(Blocks.OAK_WOOD)));

@@ -1,6 +1,8 @@
 package net.invictusslayer.slayersbeasts.common.client.renderer;
 
 import com.mojang.blaze3d.vertex.PoseStack;
+import net.fabricmc.api.EnvType;
+import net.fabricmc.api.Environment;
 import net.invictusslayer.slayersbeasts.common.SlayersBeasts;
 import net.invictusslayer.slayersbeasts.common.client.model.AntWorkerModel;
 import net.invictusslayer.slayersbeasts.common.client.renderer.layer.AntCargoLayer;
@@ -9,6 +11,7 @@ import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.client.renderer.entity.MobRenderer;
 import net.minecraft.resources.ResourceLocation;
 
+@Environment(EnvType.CLIENT)
 public class AntWorkerRenderer<T extends AntWorker> extends MobRenderer<T, AntWorkerModel<T>> {
 	private static final ResourceLocation WOOD = new ResourceLocation(SlayersBeasts.MOD_ID, "textures/entity/ant/wood_worker.png");
 	private static final ResourceLocation LEAFCUTTER = new ResourceLocation(SlayersBeasts.MOD_ID, "textures/entity/ant/leafcutter_worker.png");
