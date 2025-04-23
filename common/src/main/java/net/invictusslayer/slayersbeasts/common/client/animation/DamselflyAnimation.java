@@ -1,10 +1,13 @@
 package net.invictusslayer.slayersbeasts.common.client.animation;
 
+import net.fabricmc.api.EnvType;
+import net.fabricmc.api.Environment;
 import net.minecraft.client.animation.AnimationChannel;
 import net.minecraft.client.animation.AnimationDefinition;
 import net.minecraft.client.animation.Keyframe;
 import net.minecraft.client.animation.KeyframeAnimations;
 
+@Environment(EnvType.CLIENT)
 public class DamselflyAnimation {
 	public static final AnimationDefinition FLY = AnimationDefinition.Builder.withLength(1f).looping()
 			.addAnimation("wing_left_front",

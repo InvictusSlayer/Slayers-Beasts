@@ -18,6 +18,8 @@ public abstract class BoatMixin {
 	@Inject(method = "getDropItem", at = @At("HEAD"), cancellable = true)
 	private void onGetDropItem(CallbackInfoReturnable<Item> cir) {
 		if (getVariant() == SBBoatType.ASPEN) cir.setReturnValue(SBItems.ASPEN_BOAT.get());
+		if (getVariant() == SBBoatType.BLOODWOOD) cir.setReturnValue(SBItems.BLOODWOOD_BOAT.get());
+		if (getVariant() == SBBoatType.CYPRESS) cir.setReturnValue(SBItems.CYPRESS_BOAT.get());
 		if (getVariant() == SBBoatType.DESERT_OAK) cir.setReturnValue(SBItems.DESERT_OAK_BOAT.get());
 		if (getVariant() == SBBoatType.EUCALYPTUS) cir.setReturnValue(SBItems.EUCALYPTUS_BOAT.get());
 		if (getVariant() == SBBoatType.KAPOK) cir.setReturnValue(SBItems.KAPOK_BOAT.get());

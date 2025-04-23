@@ -20,8 +20,6 @@ public class SBNeoForge {
 		bus.addListener(this::clientSetup);
 
 		SBEntities.registerLayersAndRenderers();
-
-//		NeoForge.EVENT_BUS.register(this);
 	}
 
 	public void commonSetup(FMLCommonSetupEvent event) {

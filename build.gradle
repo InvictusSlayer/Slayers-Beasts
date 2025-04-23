@@ -1,6 +1,6 @@
 plugins {
     id "architectury-plugin" version "3.4-SNAPSHOT"
-    id "dev.architectury.loom" version "1.7.+" apply false
+    id "dev.architectury.loom" version "1.10.+" apply false
 }
 
 architectury.minecraft = mc_version
@@ -36,15 +36,15 @@ subprojects {
         minecraft "com.mojang:minecraft:${mc_version}"
         mappings loom.layered() {
             officialMojangMappings()
-//            parchment "org.parchmentmc.data:parchment-${mc_version}:${parch_version}@zip"
-            parchment "org.parchmentmc.data:parchment-1.21:${parch_version}@zip"
+            parchment "org.parchmentmc.data:parchment-${mc_version}:${parch_version}@zip"
+//            parchment "org.parchmentmc.data:parchment-___:${parch_version}@zip"
         }
 
 //        modRuntimeOnly "mezz.jei:jei-${mc_version}-${project.name}:${jei_version}"
         modImplementation "com.github.glitchfiend:TerraBlender-${project.name}:${mc_version}-${tb_version}"
     }
 
-    sourceSets.main.resources.srcDir "src/generated/resources"
+    sourceSets.main.resources.srcDir "src/main/generated"
 
     tasks.named("processResources", ProcessResources).configure {
         var replaceProperties = [

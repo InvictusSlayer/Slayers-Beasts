@@ -21,6 +21,8 @@ public class ChestBoatMixin extends Boat {
 	@Inject(method = "getDropItem", at = @At("HEAD"), cancellable = true)
 	private void onGetDropItem(CallbackInfoReturnable<Item> cir) {
 		if (getVariant() == SBBoatType.ASPEN) cir.setReturnValue(SBItems.ASPEN_CHEST_BOAT.get());
+		if (getVariant() == SBBoatType.BLOODWOOD) cir.setReturnValue(SBItems.BLOODWOOD_CHEST_BOAT.get());
+		if (getVariant() == SBBoatType.CYPRESS) cir.setReturnValue(SBItems.CYPRESS_CHEST_BOAT.get());
 		if (getVariant() == SBBoatType.DESERT_OAK) cir.setReturnValue(SBItems.DESERT_OAK_CHEST_BOAT.get());
 		if (getVariant() == SBBoatType.EUCALYPTUS) cir.setReturnValue(SBItems.EUCALYPTUS_CHEST_BOAT.get());
 		if (getVariant() == SBBoatType.KAPOK) cir.setReturnValue(SBItems.KAPOK_CHEST_BOAT.get());

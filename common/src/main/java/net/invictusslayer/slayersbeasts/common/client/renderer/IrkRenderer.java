@@ -1,6 +1,8 @@
 package net.invictusslayer.slayersbeasts.common.client.renderer;
 
 import com.mojang.blaze3d.vertex.PoseStack;
+import net.fabricmc.api.EnvType;
+import net.fabricmc.api.Environment;
 import net.invictusslayer.slayersbeasts.common.SlayersBeasts;
 import net.invictusslayer.slayersbeasts.common.client.model.IrkModel;
 import net.invictusslayer.slayersbeasts.common.entity.Irk;
@@ -8,6 +10,7 @@ import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.client.renderer.entity.MobRenderer;
 import net.minecraft.resources.ResourceLocation;
 
+@Environment(EnvType.CLIENT)
 public class IrkRenderer<T extends Irk> extends MobRenderer<T, IrkModel<T>> {
 	private static final ResourceLocation TEXTURE = ResourceLocation.fromNamespaceAndPath(SlayersBeasts.MOD_ID, "textures/entity/irk.png");
 

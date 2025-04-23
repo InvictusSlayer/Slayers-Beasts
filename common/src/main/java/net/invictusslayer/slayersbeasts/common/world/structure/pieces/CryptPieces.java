@@ -3,6 +3,7 @@ package net.invictusslayer.slayersbeasts.common.world.structure.pieces;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Queues;
 import com.mojang.logging.LogUtils;
+import net.invictusslayer.slayersbeasts.common.SlayersBeasts;
 import net.minecraft.core.*;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.data.worldgen.Pools;
@@ -221,7 +222,7 @@ public class CryptPieces {
 
 		private static ResourceKey<StructureTemplatePool> readPoolName(StructureTemplate.StructureBlockInfo info) {
 			assert info.nbt() != null;
-			return ResourceKey.create(Registries.TEMPLATE_POOL, ResourceLocation.fromNamespaceAndPath("minecraft", info.nbt().getString("pool")));
+			return ResourceKey.create(Registries.TEMPLATE_POOL, ResourceLocation.parse(info.nbt().getString("pool")));
 		}
 	}
 }

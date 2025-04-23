@@ -1,5 +1,7 @@
 package net.invictusslayer.slayersbeasts.common.client.model;
 
+import net.fabricmc.api.EnvType;
+import net.fabricmc.api.Environment;
 import net.invictusslayer.slayersbeasts.common.SlayersBeasts;
 import net.invictusslayer.slayersbeasts.common.client.animation.DamselflyAnimation;
 import net.invictusslayer.slayersbeasts.common.entity.Damselfly;
@@ -10,6 +12,7 @@ import net.minecraft.client.model.geom.PartPose;
 import net.minecraft.client.model.geom.builders.*;
 import net.minecraft.resources.ResourceLocation;
 
+@Environment(EnvType.CLIENT)
 public class DamselflyModel<T extends Damselfly> extends HierarchicalModel<T> {
 	public static final ModelLayerLocation LAYER_LOCATION = new ModelLayerLocation(ResourceLocation.fromNamespaceAndPath(SlayersBeasts.MOD_ID, "damselfly_model"), "main");
 	private final ModelPart root;
@@ -24,8 +27,8 @@ public class DamselflyModel<T extends Damselfly> extends HierarchicalModel<T> {
 
 	public void setupAnim(T entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {
 		root.getAllParts().forEach(ModelPart::resetPose);
-		animate(Damselfly.flyAnimationState, DamselflyAnimation.FLY, ageInTicks, 10);
-		animate(Damselfly.perchAnimationState, DamselflyAnimation.PERCH, ageInTicks, 1.5F);
+		animate(entity.flyAnimationState, DamselflyAnimation.FLY, ageInTicks, 10);
+		animate(entity.perchAnimationState, DamselflyAnimation.PERCH, ageInTicks, 1.5F);
 	}
 
 	public static LayerDefinition createBodyLayer() {

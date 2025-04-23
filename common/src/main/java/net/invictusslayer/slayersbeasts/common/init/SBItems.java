@@ -1,6 +1,5 @@
 package net.invictusslayer.slayersbeasts.common.init;
 
-import dev.architectury.core.item.ArchitecturySpawnEggItem;
 import dev.architectury.registry.registries.DeferredRegister;
 import dev.architectury.registry.registries.RegistrySupplier;
 import net.invictusslayer.slayersbeasts.common.SlayersBeasts;
@@ -34,16 +33,16 @@ public class SBItems {
 
 	public static final RegistrySupplier<Item> MUD_BALL = ITEMS.register("mud_ball", () -> new Item(new Item.Properties()));
 
-	public static final RegistrySupplier<Item> MANTIS_SPAWN_EGG = ITEMS.register("mantis_spawn_egg", () -> new ArchitecturySpawnEggItem(SBEntities.MANTIS, 0x43df51, 0xecf171, new Item.Properties()));
-	public static final RegistrySupplier<Item> ANT_WORKER_SPAWN_EGG = ITEMS.register("ant_worker_spawn_egg", () -> new ArchitecturySpawnEggItem(SBEntities.ANT_WORKER, 0xffffff, 0xffffff, new Item.Properties()));
-	public static final RegistrySupplier<Item> ANT_SOLDIER_SPAWN_EGG = ITEMS.register("ant_soldier_spawn_egg", () -> new ArchitecturySpawnEggItem(SBEntities.ANT_SOLDIER, 0xffffff, 0xffffff, new Item.Properties()));
-	public static final RegistrySupplier<Item> ANT_QUEEN_SPAWN_EGG = ITEMS.register("ant_queen_spawn_egg", () -> new ArchitecturySpawnEggItem(SBEntities.ANT_QUEEN, 0xffffff, 0xffffff, new Item.Properties()));
-	public static final RegistrySupplier<Item> WITHER_SPIDER_SPAWN_EGG = ITEMS.register("wither_spider_spawn_egg", () -> new ArchitecturySpawnEggItem(SBEntities.WITHER_SPIDER, 0x3d0f0f, 0x171313, new Item.Properties()));
-	public static final RegistrySupplier<Item> TYRACHNID_SPAWN_EGG = ITEMS.register("tyrachnid_spawn_egg", () -> new ArchitecturySpawnEggItem(SBEntities.TYRACHNID, 0x3d0f0f, 0xb34b05, new Item.Properties()));
-	public static final RegistrySupplier<Item> DAMSELFLY_SPAWN_EGG = ITEMS.register("damselfly_spawn_egg", () -> new ArchitecturySpawnEggItem(SBEntities.DAMSELFLY, 0x4f1785, 0x4dcf29, new Item.Properties()));
-	public static final RegistrySupplier<Item> ENT_SPAWN_EGG = ITEMS.register("ent_spawn_egg", () -> new ArchitecturySpawnEggItem(SBEntities.ENT_MEDIUM, 0xffffff, 0x71aa71, new Item.Properties()));
-	public static final RegistrySupplier<Item> WUDU_SPAWN_EGG = ITEMS.register("wudu_spawn_egg", () -> new ArchitecturySpawnEggItem(SBEntities.WUDU, 0x917142, 0x4bb749, new Item.Properties()));
-	public static final RegistrySupplier<Item> SPORETRAP_SPAWN_EGG = ITEMS.register("sporetrap_spawn_egg", () -> new ArchitecturySpawnEggItem(SBEntities.SPORETRAP, 0x2f7f2f, 0xffff31, new Item.Properties()));
+	public static final RegistrySupplier<Item> MANTIS_SPAWN_EGG = ITEMS.register("mantis_spawn_egg", () -> new SpawnEggItem(SBEntities.MANTIS.get(), 0xffffff, 0xffffff, new Item.Properties()));
+	public static final RegistrySupplier<Item> ANT_WORKER_SPAWN_EGG = ITEMS.register("ant_worker_spawn_egg", () -> new SpawnEggItem(SBEntities.ANT_WORKER.get(), 0xffffff, 0xffffff, new Item.Properties()));
+	public static final RegistrySupplier<Item> ANT_SOLDIER_SPAWN_EGG = ITEMS.register("ant_soldier_spawn_egg", () -> new SpawnEggItem(SBEntities.ANT_SOLDIER.get(), 0xffffff, 0xffffff, new Item.Properties()));
+	public static final RegistrySupplier<Item> ANT_QUEEN_SPAWN_EGG = ITEMS.register("ant_queen_spawn_egg", () -> new SpawnEggItem(SBEntities.ANT_QUEEN.get(), 0xffffff, 0xffffff, new Item.Properties()));
+	public static final RegistrySupplier<Item> WITHER_SPIDER_SPAWN_EGG = ITEMS.register("wither_spider_spawn_egg", () -> new SpawnEggItem(SBEntities.WITHER_SPIDER.get(), 0xffffff, 0xffffff, new Item.Properties()));
+	public static final RegistrySupplier<Item> TYRACHNID_SPAWN_EGG = ITEMS.register("tyrachnid_spawn_egg", () -> new SpawnEggItem(SBEntities.TYRACHNID.get(), 0xffffff, 0xffffff, new Item.Properties()));
+	public static final RegistrySupplier<Item> DAMSELFLY_SPAWN_EGG = ITEMS.register("damselfly_spawn_egg", () -> new SpawnEggItem(SBEntities.DAMSELFLY.get(), 0xffffff, 0xffffff, new Item.Properties()));
+	public static final RegistrySupplier<Item> ENT_SPAWN_EGG = ITEMS.register("ent_spawn_egg", () -> new SpawnEggItem(SBEntities.ENT_MEDIUM.get(), 0xffffff, 0xffffff, new Item.Properties()));
+	public static final RegistrySupplier<Item> WUDU_SPAWN_EGG = ITEMS.register("wudu_spawn_egg", () -> new SpawnEggItem(SBEntities.WUDU.get(), 0xffffff, 0xffffff, new Item.Properties()));
+	public static final RegistrySupplier<Item> SPORETRAP_SPAWN_EGG = ITEMS.register("sporetrap_spawn_egg", () -> new SpawnEggItem(SBEntities.SPORETRAP.get(), 0xffffff, 0xffffff, new Item.Properties()));
 
 	public static final RegistrySupplier<Item> ALGAE = ITEMS.register("algae", () -> new PlaceOnWaterBlockItem(SBBlocks.ALGAE.get(), new Item.Properties()));
 
@@ -51,6 +50,16 @@ public class SBItems {
 	public static final RegistrySupplier<Item> ASPEN_HANGING_SIGN = ITEMS.register("aspen_hanging_sign", () -> new HangingSignItem(SBBlocks.ASPEN_HANGING_SIGN.get(), SBBlocks.ASPEN_WALL_HANGING_SIGN.get(), new Item.Properties().stacksTo(16)));
 	public static final RegistrySupplier<Item> ASPEN_BOAT = ITEMS.register("aspen_boat", () -> new BoatItem(false, SBBoatType.ASPEN, new Item.Properties().stacksTo(1)));
 	public static final RegistrySupplier<Item> ASPEN_CHEST_BOAT = ITEMS.register("aspen_chest_boat", () -> new BoatItem(true, SBBoatType.ASPEN, new Item.Properties().stacksTo(1)));
+
+	public static final RegistrySupplier<Item> BLOODWOOD_SIGN = ITEMS.register("bloodwood_sign", () -> new SignItem(new Item.Properties().stacksTo(16), SBBlocks.BLOODWOOD_SIGN.get(), SBBlocks.BLOODWOOD_WALL_SIGN.get()));
+	public static final RegistrySupplier<Item> BLOODWOOD_HANGING_SIGN = ITEMS.register("bloodwood_hanging_sign", () -> new HangingSignItem(SBBlocks.BLOODWOOD_HANGING_SIGN.get(), SBBlocks.BLOODWOOD_WALL_HANGING_SIGN.get(), new Item.Properties().stacksTo(16)));
+	public static final RegistrySupplier<Item> BLOODWOOD_BOAT = ITEMS.register("bloodwood_boat", () -> new BoatItem(false, SBBoatType.BLOODWOOD, new Item.Properties().stacksTo(1)));
+	public static final RegistrySupplier<Item> BLOODWOOD_CHEST_BOAT = ITEMS.register("bloodwood_chest_boat", () -> new BoatItem(true, SBBoatType.BLOODWOOD, new Item.Properties().stacksTo(1)));
+
+	public static final RegistrySupplier<Item> CYPRESS_SIGN = ITEMS.register("cypress_sign", () -> new SignItem(new Item.Properties().stacksTo(16), SBBlocks.CYPRESS_SIGN.get(), SBBlocks.CYPRESS_WALL_SIGN.get()));
+	public static final RegistrySupplier<Item> CYPRESS_HANGING_SIGN = ITEMS.register("cypress_hanging_sign", () -> new HangingSignItem(SBBlocks.CYPRESS_HANGING_SIGN.get(), SBBlocks.CYPRESS_WALL_HANGING_SIGN.get(), new Item.Properties().stacksTo(16)));
+	public static final RegistrySupplier<Item> CYPRESS_BOAT = ITEMS.register("cypress_boat", () -> new BoatItem(false, SBBoatType.CYPRESS, new Item.Properties().stacksTo(1)));
+	public static final RegistrySupplier<Item> CYPRESS_CHEST_BOAT = ITEMS.register("cypress_chest_boat", () -> new BoatItem(true, SBBoatType.CYPRESS, new Item.Properties().stacksTo(1)));
 
 	public static final RegistrySupplier<Item> DESERT_OAK_SIGN = ITEMS.register("desert_oak_sign", () -> new SignItem(new Item.Properties().stacksTo(16), SBBlocks.DESERT_OAK_SIGN.get(), SBBlocks.DESERT_OAK_WALL_SIGN.get()));
 	public static final RegistrySupplier<Item> DESERT_OAK_HANGING_SIGN = ITEMS.register("desert_oak_hanging_sign", () -> new HangingSignItem(SBBlocks.DESERT_OAK_HANGING_SIGN.get(), SBBlocks.DESERT_OAK_WALL_HANGING_SIGN.get(), new Item.Properties().stacksTo(16)));
