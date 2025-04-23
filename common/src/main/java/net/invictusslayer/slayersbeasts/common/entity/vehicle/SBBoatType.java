@@ -6,6 +6,8 @@ import java.util.List;
 
 public class SBBoatType {
 	public static Boat.Type ASPEN;
+	public static Boat.Type BLOODWOOD;
+	public static Boat.Type CYPRESS;
 	public static Boat.Type DESERT_OAK;
 	public static Boat.Type EUCALYPTUS;
 	public static Boat.Type KAPOK;
@@ -13,6 +15,6 @@ public class SBBoatType {
 	public static Boat.Type WILLOW;
 
 	public static List<Boat.Type> values() {
-		return List.of(ASPEN, DESERT_OAK, EUCALYPTUS, KAPOK, REDWOOD, WILLOW);
+		return List.of(ASPEN, BLOODWOOD, CYPRESS, DESERT_OAK, EUCALYPTUS, KAPOK, REDWOOD, WILLOW);
 	}
 }

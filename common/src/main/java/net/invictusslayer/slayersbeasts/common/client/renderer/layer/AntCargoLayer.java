@@ -2,6 +2,8 @@ package net.invictusslayer.slayersbeasts.common.client.renderer.layer;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
+import net.fabricmc.api.EnvType;
+import net.fabricmc.api.Environment;
 import net.invictusslayer.slayersbeasts.common.SlayersBeasts;
 import net.invictusslayer.slayersbeasts.common.client.model.AntCargoModel;
 import net.invictusslayer.slayersbeasts.common.client.model.AntWorkerModel;
@@ -15,6 +17,7 @@ import net.minecraft.client.renderer.entity.RenderLayerParent;
 import net.minecraft.client.renderer.entity.layers.RenderLayer;
 import net.minecraft.resources.ResourceLocation;
 
+@Environment(EnvType.CLIENT)
 public class AntCargoLayer<T extends AntWorker> extends RenderLayer<T, AntWorkerModel<T>> {
 	private static final ResourceLocation LEAF = new ResourceLocation(SlayersBeasts.MOD_ID, "textures/entity/ant/cargo/leaf.png");
 	private static final ResourceLocation BARK = new ResourceLocation(SlayersBeasts.MOD_ID, "textures/entity/ant/cargo/bark.png");

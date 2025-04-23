@@ -74,7 +74,7 @@ public class SBBlockStateProvider extends BlockStateProvider {
 		cross(SBBlocks.WHITE_MUSHROOM.get());
 		pottedCross(SBBlocks.POTTED_WHITE_MUSHROOM.get(), SBBlocks.WHITE_MUSHROOM.get());
 		doubleCrossBlock(SBBlocks.TALL_WHITE_MUSHROOM.get());
-		thinMushroomStemWithItem(SBBlocks.THIN_MUSHROOM_STEM.get(), new ResourceLocation("minecraft:block/mushroom_block_inside"), new ResourceLocation("minecraft:block/mushroom_stem"));
+//		thinMushroomStemWithItem(SBBlocks.THIN_MUSHROOM_STEM.get(), new ResourceLocation("minecraft:block/mushroom_block_inside"), new ResourceLocation("minecraft:block/mushroom_stem"));
 
 		simpleCubeWithItem(SBBlocks.ALBINO_REDWOOD_LEAVES.get());
 		cross(SBBlocks.ALBINO_REDWOOD_SAPLING.get());

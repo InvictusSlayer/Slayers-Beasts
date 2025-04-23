@@ -1,5 +1,7 @@
 package net.invictusslayer.slayersbeasts.common.client.model;
 
+import net.fabricmc.api.EnvType;
+import net.fabricmc.api.Environment;
 import net.invictusslayer.slayersbeasts.common.SlayersBeasts;
 import net.invictusslayer.slayersbeasts.common.client.animation.TyrachnidAnimation;
 import net.invictusslayer.slayersbeasts.common.entity.Tyrachnid;
@@ -10,6 +12,7 @@ import net.minecraft.client.model.geom.PartPose;
 import net.minecraft.client.model.geom.builders.*;
 import net.minecraft.resources.ResourceLocation;
 
+@Environment(EnvType.CLIENT)
 public class TyrachnidModel<T extends Tyrachnid> extends HierarchicalModel<T> {
 	public static final ModelLayerLocation LAYER_LOCATION = new ModelLayerLocation(new ResourceLocation(SlayersBeasts.MOD_ID, "tyrachnid_model"), "main");
 	private final ModelPart root;

@@ -1,5 +1,7 @@
 package net.invictusslayer.slayersbeasts.common.client.model;
 
+import net.fabricmc.api.EnvType;
+import net.fabricmc.api.Environment;
 import net.invictusslayer.slayersbeasts.common.SlayersBeasts;
 import net.invictusslayer.slayersbeasts.common.client.animation.WitherSpiderAnimation;
 import net.invictusslayer.slayersbeasts.common.entity.WitherSpider;
@@ -11,6 +13,7 @@ import net.minecraft.client.model.geom.builders.*;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.Mth;
 
+@Environment(EnvType.CLIENT)
 public class WitherSpiderModel<T extends WitherSpider> extends HierarchicalModel<T> {
 	public static final ModelLayerLocation LAYER_LOCATION = new ModelLayerLocation(new ResourceLocation(SlayersBeasts.MOD_ID, "wither_spider_model"), "main");
 	private final ModelPart root;

@@ -2,6 +2,8 @@ package net.invictusslayer.slayersbeasts.common.client.model;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
+import net.fabricmc.api.EnvType;
+import net.fabricmc.api.Environment;
 import net.invictusslayer.slayersbeasts.common.SlayersBeasts;
 import net.invictusslayer.slayersbeasts.common.entity.Sporetrap;
 import net.minecraft.client.model.EntityModel;
@@ -12,6 +14,7 @@ import net.minecraft.client.model.geom.builders.*;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.Mth;
 
+@Environment(EnvType.CLIENT)
 public class SporetrapModel<T extends Sporetrap> extends EntityModel<T> {
 	public static final ModelLayerLocation LAYER_LOCATION = new ModelLayerLocation(new ResourceLocation(SlayersBeasts.MOD_ID, "sporetrap_model"), "main");
 	private final ModelPart base;

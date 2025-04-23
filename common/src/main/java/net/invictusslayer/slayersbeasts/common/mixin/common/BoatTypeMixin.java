@@ -35,11 +35,13 @@ public abstract class BoatTypeMixin {
 	private static void onClinit(CallbackInfo ci) {
 		ArrayList<Boat.Type> types = new ArrayList<>(Arrays.asList($VALUES));
 		SBBoatType.ASPEN = newBoatType("ASPEN", types.size(), Blocks.OAK_PLANKS, "aspen");
-		SBBoatType.DESERT_OAK = newBoatType("DESERT_OAK", types.size() + 1, Blocks.OAK_PLANKS, "desert_oak");
-		SBBoatType.EUCALYPTUS = newBoatType("EUCALYPTUS", types.size() + 2, Blocks.OAK_PLANKS, "eucalyptus");
-		SBBoatType.KAPOK = newBoatType("KAPOK", types.size() + 3, Blocks.OAK_PLANKS, "kapok");
-		SBBoatType.REDWOOD = newBoatType("REDWOOD", types.size() + 4, Blocks.OAK_PLANKS, "redwood");
-		SBBoatType.WILLOW = newBoatType("WILLOW", types.size() + 5, Blocks.OAK_PLANKS, "willow");
+		SBBoatType.BLOODWOOD = newBoatType("BLOODWOOD", types.size() + 1, Blocks.OAK_PLANKS, "bloodwood");
+		SBBoatType.CYPRESS = newBoatType("CYPRESS", types.size() + 2, Blocks.OAK_PLANKS, "cypress");
+		SBBoatType.DESERT_OAK = newBoatType("DESERT_OAK", types.size() + 3, Blocks.OAK_PLANKS, "desert_oak");
+		SBBoatType.EUCALYPTUS = newBoatType("EUCALYPTUS", types.size() + 4, Blocks.OAK_PLANKS, "eucalyptus");
+		SBBoatType.KAPOK = newBoatType("KAPOK", types.size() + 5, Blocks.OAK_PLANKS, "kapok");
+		SBBoatType.REDWOOD = newBoatType("REDWOOD", types.size() + 6, Blocks.OAK_PLANKS, "redwood");
+		SBBoatType.WILLOW = newBoatType("WILLOW", types.size() + 7, Blocks.OAK_PLANKS, "willow");
 		types.addAll(SBBoatType.values());
 		$VALUES = types.toArray(new Boat.Type[0]);
 	}
@@ -52,6 +54,8 @@ public abstract class BoatTypeMixin {
 	@Inject(method = "getPlanks", at = @At("HEAD"), cancellable = true)
 	private void onGetPlanks(CallbackInfoReturnable<Block> cir) {
 		if (byName(name).equals(SBBoatType.ASPEN)) cir.setReturnValue(SBBlocks.ASPEN_PLANKS.get());
+		if (byName(name).equals(SBBoatType.BLOODWOOD)) cir.setReturnValue(SBBlocks.BLOODWOOD_PLANKS.get());
+		if (byName(name).equals(SBBoatType.CYPRESS)) cir.setReturnValue(SBBlocks.CYPRESS_PLANKS.get());
 		if (byName(name).equals(SBBoatType.DESERT_OAK)) cir.setReturnValue(SBBlocks.DESERT_OAK_PLANKS.get());
 		if (byName(name).equals(SBBoatType.EUCALYPTUS)) cir.setReturnValue(SBBlocks.EUCALYPTUS_PLANKS.get());
 		if (byName(name).equals(SBBoatType.KAPOK)) cir.setReturnValue(SBBlocks.KAPOK_PLANKS.get());

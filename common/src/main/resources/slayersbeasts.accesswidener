@@ -10,6 +10,8 @@ accessible  method  net/minecraft/data/recipes/RecipeProvider pressurePlateBuild
 accessible  method  net/minecraft/data/recipes/RecipeProvider signBuilder (Lnet/minecraft/world/level/ItemLike;Lnet/minecraft/world/item/crafting/Ingredient;)Lnet/minecraft/data/recipes/RecipeBuilder;
 accessible  method  net/minecraft/data/recipes/RecipeProvider trapdoorBuilder (Lnet/minecraft/world/level/ItemLike;Lnet/minecraft/world/item/crafting/Ingredient;)Lnet/minecraft/data/recipes/RecipeBuilder;
 accessible  field   net/minecraft/world/entity/Entity portalEntrancePos Lnet/minecraft/core/BlockPos;
+accessible  class   net/minecraft/world/entity/npc/VillagerTrades$EmeraldsForVillagerTypeItem
+accessible  method  net/minecraft/world/entity/npc/VillagerType <init> (Ljava/lang/String;)V
 accessible  field   net/minecraft/world/entity/npc/VillagerType BY_BIOME Ljava/util/Map;
 accessible  field   net/minecraft/world/item/AxeItem STRIPPABLES Ljava/util/Map;
 mutable     field   net/minecraft/world/item/AxeItem STRIPPABLES Ljava/util/Map;
