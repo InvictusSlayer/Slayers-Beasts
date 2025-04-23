@@ -114,6 +114,46 @@ public class SBCreativeModeTabs {
 		tab.accept(SBItems.ASPEN_BOAT.get());
 		tab.accept(SBItems.ASPEN_CHEST_BOAT.get());
 
+		tab.accept(SBBlocks.BLOODWOOD_LOG.get());
+		tab.accept(SBBlocks.BLOODWOOD_WOOD.get());
+		tab.accept(SBBlocks.STRIPPED_BLOODWOOD_LOG.get());
+		tab.accept(SBBlocks.STRIPPED_BLOODWOOD_WOOD.get());
+		tab.accept(SBBlocks.BLOODWOOD_LEAVES.get());
+		tab.accept(SBBlocks.BLOODWOOD_SAPLING.get());
+		tab.accept(SBBlocks.BLOODWOOD_PLANKS.get());
+		tab.accept(SBBlocks.BLOODWOOD_STAIRS.get());
+		tab.accept(SBBlocks.BLOODWOOD_SLAB.get());
+		tab.accept(SBBlocks.BLOODWOOD_FENCE.get());
+		tab.accept(SBBlocks.BLOODWOOD_FENCE_GATE.get());
+		tab.accept(SBBlocks.BLOODWOOD_DOOR.get());
+		tab.accept(SBBlocks.BLOODWOOD_TRAPDOOR.get());
+		tab.accept(SBBlocks.BLOODWOOD_PRESSURE_PLATE.get());
+		tab.accept(SBBlocks.BLOODWOOD_BUTTON.get());
+		tab.accept(SBItems.BLOODWOOD_SIGN.get());
+		tab.accept(SBItems.BLOODWOOD_HANGING_SIGN.get());
+		tab.accept(SBItems.BLOODWOOD_BOAT.get());
+		tab.accept(SBItems.BLOODWOOD_CHEST_BOAT.get());
+
+		tab.accept(SBBlocks.CYPRESS_LOG.get());
+		tab.accept(SBBlocks.CYPRESS_WOOD.get());
+		tab.accept(SBBlocks.STRIPPED_CYPRESS_LOG.get());
+		tab.accept(SBBlocks.STRIPPED_CYPRESS_WOOD.get());
+		tab.accept(SBBlocks.CYPRESS_LEAVES.get());
+		tab.accept(SBBlocks.CYPRESS_SAPLING.get());
+		tab.accept(SBBlocks.CYPRESS_PLANKS.get());
+		tab.accept(SBBlocks.CYPRESS_STAIRS.get());
+		tab.accept(SBBlocks.CYPRESS_SLAB.get());
+		tab.accept(SBBlocks.CYPRESS_FENCE.get());
+		tab.accept(SBBlocks.CYPRESS_FENCE_GATE.get());
+		tab.accept(SBBlocks.CYPRESS_DOOR.get());
+		tab.accept(SBBlocks.CYPRESS_TRAPDOOR.get());
+		tab.accept(SBBlocks.CYPRESS_PRESSURE_PLATE.get());
+		tab.accept(SBBlocks.CYPRESS_BUTTON.get());
+		tab.accept(SBItems.CYPRESS_SIGN.get());
+		tab.accept(SBItems.CYPRESS_HANGING_SIGN.get());
+		tab.accept(SBItems.CYPRESS_BOAT.get());
+		tab.accept(SBItems.CYPRESS_CHEST_BOAT.get());
+
 		tab.accept(SBBlocks.DESERT_OAK_LOG.get());
 		tab.accept(SBBlocks.DESERT_OAK_WOOD.get());
 		tab.accept(SBBlocks.STRIPPED_DESERT_OAK_LOG.get());
