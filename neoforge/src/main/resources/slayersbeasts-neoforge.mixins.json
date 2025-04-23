@@ -1,6 +1,6 @@
 {
 	"required": true,
-	"package": "net.invictusslayer.slayersbeasts.forge.mixin",
+	"package": "net.invictusslayer.slayersbeasts.neoforge.mixin",
 	"compatibilityLevel": "JAVA_17",
 	"minVersion": "0.8",
 	"mixins": [

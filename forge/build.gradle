@@ -19,11 +19,11 @@ loom {
         data {
             data()
             programArgs "--all", "--mod", "${mod_id}"
-            programArgs "--output", project(":common").file("src/generated/resources").absolutePath
+            programArgs "--output", project(":common").file("src/main/generated").absolutePath
             programArgs "--existing", file("src/main/resources").absolutePath
-            programArgs "--existing", file("src/generated/resources").absolutePath
+            programArgs "--existing", file("src/main/generated").absolutePath
             programArgs "--existing", project(":common").file("src/main/resources").absolutePath
-            programArgs "--existing", project(":common").file("src/generated/resources").absolutePath
+            programArgs "--existing", project(":common").file("src/main/generated").absolutePath
         }
     }
 }
