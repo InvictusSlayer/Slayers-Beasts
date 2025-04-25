@@ -1,5 +1,10 @@
+import com.modrinth.minotaur.TaskModrinthUpload
+import net.darkhax.curseforgegradle.TaskPublishCurseForge
+
 plugins {
     id "com.github.johnrengelman.shadow" version "8.1.1"
+    id "net.darkhax.curseforgegradle" version "1.1.+"
+    id "com.modrinth.minotaur" version "2.+"
 }
 
 architectury {
@@ -76,5 +81,40 @@ sourcesJar {
 components.java {
     withVariantsFromConfiguration(project.configurations.shadowRuntimeElements) {
         skip()
+    }
+}
+
+task publishCurseForge(type: TaskPublishCurseForge) {
+    apiToken = System.getenv("CURSEFORGE_TOKEN")
+
+    def mainFile = upload(curseforge_id, remapJar)
+    mainFile.displayName = "${mod_id}-${mc_version}-${mod_version} [NeoForge]"
+    mainFile.releaseType = release_type
+    mainFile.changelog = "${project.property("changelog")}"
+    mainFile.changelogType = "markdown"
+    mainFile.addGameVersion(mc_version)
+    mainFile.addModLoader("fabric")
+    mainFile.addRequirement("architectury-api")
+    mainFile.addRequirement("cloth-config")
+    mainFile.addRequirement("terrablender-fabric")
+}
+
+task publishModrinth(type: TaskModrinthUpload) {
+    modrinth {
+        token = System.getenv("MODRINTH_TOKEN")
+        projectId = modrinth_id
+        versionName = "${mod_name} ${mc_version}-${mod_version} [Fabric]"
+        versionNumber = "${mod_version}+fabric"
+        versionType = release_type
+        changelog = "${project.property("changelog")}"
+        uploadFile = remapJar
+        additionalFiles = [sourcesJar]
+        gameVersions = [mc_version]
+        loaders = ["fabric"]
+        dependencies {
+            required.project "architectury-api"
+            required.project "cloth-config"
+            required.project "terrablender"
+        }
     }
 }
