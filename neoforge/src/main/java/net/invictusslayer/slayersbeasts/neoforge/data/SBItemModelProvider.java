@@ -1,18 +1,17 @@
 package net.invictusslayer.slayersbeasts.neoforge.data;
 
-import dev.architectury.registry.registries.RegistrySupplier;
 import net.invictusslayer.slayersbeasts.common.SlayersBeasts;
 import net.invictusslayer.slayersbeasts.common.block.WoodFamily;
 import net.invictusslayer.slayersbeasts.common.init.SBBlocks;
 import net.invictusslayer.slayersbeasts.common.init.SBItems;
 import net.minecraft.data.PackOutput;
-import net.minecraft.resources.ResourceLocation;
 import net.neoforged.neoforge.client.model.generators.ItemModelProvider;
-import net.neoforged.neoforge.common.data.ExistingFileHelper;
+
+import java.util.function.Supplier;
 
 public class SBItemModelProvider extends ItemModelProvider {
-	public SBItemModelProvider(PackOutput output, ExistingFileHelper helper) {
-		super(output, SlayersBeasts.MOD_ID, helper);
+	public SBItemModelProvider(PackOutput output) {
+		super(output, SlayersBeasts.MOD_ID, null);
 	}
 
 	protected void registerModels() {
@@ -70,23 +69,23 @@ public class SBItemModelProvider extends ItemModelProvider {
 		}));
 	}
 
-	private void block(RegistrySupplier<?> block) {
+	private void block(Supplier<?> block) {
 		block(block, "");
 	}
 
-	private void block(RegistrySupplier<?> block, String suffix) {
-		withExistingParent(block.getId().getPath(),
-				ResourceLocation.fromNamespaceAndPath("minecraft", "item/generated")).texture("layer0",
-				ResourceLocation.fromNamespaceAndPath(SlayersBeasts.MOD_ID, "block/" + block.getId().getPath() + suffix));
+	private void block(Supplier<?> block, String suffix) {
+//		withExistingParent(block.getPath(),
+//				ResourceLocation.fromNamespaceAndPath("minecraft", "item/generated")).texture("layer0",
+//				ResourceLocation.fromNamespaceAndPath(SlayersBeasts.MOD_ID, "block/" + block.get().getPath() + suffix));
 	}
 
-	private void item(RegistrySupplier<?> item) {
-		withExistingParent(item.getId().getPath(),
-				ResourceLocation.fromNamespaceAndPath("minecraft", "item/generated")).texture("layer0",
-				ResourceLocation.fromNamespaceAndPath(SlayersBeasts.MOD_ID, "item/" + item.getId().getPath()));
+	private void item(Supplier<?> item) {
+//		withExistingParent(item.getId().getPath(),
+//				ResourceLocation.fromNamespaceAndPath("minecraft", "item/generated")).texture("layer0",
+//				ResourceLocation.fromNamespaceAndPath(SlayersBeasts.MOD_ID, "item/" + item.getId().getPath()));
 	}
 
-//	private void handheldItem(RegistrySupplier<Item> item) {
+//	private void handheldItem(Supplier<Item> item) {
 //		withExistingParent(item.getId().getPath(),
 //				ResourceLocation.fromNamespaceAndPath("minecraft", "item/handheld")).texture("layer0",
 //				ResourceLocation.fromNamespaceAndPath(SlayersBeasts.MOD_ID, "item/" + item.getId().getPath()));

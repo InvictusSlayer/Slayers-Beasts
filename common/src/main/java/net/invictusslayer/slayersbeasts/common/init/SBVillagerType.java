@@ -1,23 +1,20 @@
 package net.invictusslayer.slayersbeasts.common.init;
 
-import dev.architectury.registry.registries.DeferredRegister;
-import dev.architectury.registry.registries.RegistrySupplier;
 import net.invictusslayer.slayersbeasts.common.SlayersBeasts;
 import net.invictusslayer.slayersbeasts.common.world.biome.SBBiomes;
-import net.minecraft.core.registries.Registries;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.entity.npc.VillagerType;
 import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.biome.Biomes;
 
 import java.util.List;
+import java.util.function.Supplier;
 
 public class SBVillagerType {
-	public static final DeferredRegister<VillagerType> VILLAGER_TYPES = DeferredRegister.create(SlayersBeasts.MOD_ID, Registries.VILLAGER_TYPE);
-
-	public static final RegistrySupplier<VillagerType> CAVE = VILLAGER_TYPES.register("cave", () -> new VillagerType("cave"));
-//	public static final RegistrySupplier<VillagerType> MUSHROOM = VILLAGER_TYPES.register("mushroom", () -> new VillagerType("mushroom"));
-//	public static final RegistrySupplier<VillagerType> REDWOOD = VILLAGER_TYPES.register("redwood", () -> new VillagerType("redwood"));
+	public static final Supplier<VillagerType> CAVE = register("cave", () -> new VillagerType("cave"));
+//	public static final Supplier<VillagerType> MUSHROOM = register("mushroom", () -> new VillagerType("mushroom"));
+//	public static final Supplier<VillagerType> REDWOOD = register("redwood", () -> new VillagerType("redwood"));
 
 	public static void setupBiomes() {
 		addBiomes(VillagerType.DESERT, SBBiomes.BLACK_DUNES, SBBiomes.DEAD_SANDS, SBBiomes.OUTBACK);
@@ -34,5 +31,13 @@ public class SBVillagerType {
 	@SafeVarargs
 	private static void addBiomes(VillagerType type, ResourceKey<Biome>... biomes) {
 		List.of(biomes).forEach(biome -> VillagerType.BY_BIOME.put(biome, type));
+	}
+
+	private static <T extends VillagerType> Supplier<T> register(String name, Supplier<T> supplier) {
+		return SlayersBeasts.PLATFORM.register(BuiltInRegistries.VILLAGER_TYPE, name, supplier);
+	}
+
+	public static void register() {
+		SlayersBeasts.LOGGER.info("Registering SBVillagerTypes...");
 	}
 }

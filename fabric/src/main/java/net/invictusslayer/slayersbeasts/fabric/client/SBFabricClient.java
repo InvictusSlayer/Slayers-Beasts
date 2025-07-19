@@ -4,10 +4,12 @@ import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.fabricmc.fabric.api.blockrenderlayer.v1.BlockRenderLayerMap;
+import net.fabricmc.fabric.api.client.rendering.v1.EntityModelLayerRegistry;
+import net.fabricmc.fabric.api.client.rendering.v1.EntityRendererRegistry;
 import net.invictusslayer.slayersbeasts.common.SlayersBeasts;
 import net.invictusslayer.slayersbeasts.common.block.WoodFamily;
+import net.invictusslayer.slayersbeasts.common.client.SBClient;
 import net.invictusslayer.slayersbeasts.common.init.SBBlocks;
-import net.invictusslayer.slayersbeasts.common.init.SBEntities;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.world.level.block.Block;
 
@@ -15,7 +17,8 @@ import net.minecraft.world.level.block.Block;
 public class SBFabricClient implements ClientModInitializer {
 	public void onInitializeClient() {
 		SlayersBeasts.clientSetup();
-		SBEntities.registerLayersAndRenderers();
+		SBClient.registerModelLayers((location, definition) -> EntityModelLayerRegistry.registerModelLayer(location, definition::get));
+		SBClient.registerRenderers(EntityRendererRegistry::register);
 
 		renderWoodFamilies();
 		BlockRenderLayerMap.INSTANCE.putBlocks(RenderType.cutout(),

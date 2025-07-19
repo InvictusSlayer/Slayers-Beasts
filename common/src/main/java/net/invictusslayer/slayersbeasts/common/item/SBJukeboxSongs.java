@@ -19,7 +19,7 @@ public class SBJukeboxSongs {
 	public static void bootstrap(BootstrapContext<JukeboxSong> context) {
 		HolderGetter<SoundEvent> soundEvents = context.lookup(Registries.SOUND_EVENT);
 
-//		register(context, INKISH, soundEvents.getOrThrow(SBSounds.MUSIC_DISC_INKISH.getKey()), 220, 1); TODO
+		register(context, INKISH, soundEvents.getOrThrow(SBSounds.MUSIC_DISC_INKISH.get().key()), 220, 1);
 	}
 
 	private static ResourceKey<JukeboxSong> createKey(String key) {

@@ -1,6 +1,5 @@
 package net.invictusslayer.slayersbeasts.common.world.biome;
 
-import dev.architectury.registry.level.biome.BiomeModifications;
 import net.invictusslayer.slayersbeasts.SBPlatform;
 import net.invictusslayer.slayersbeasts.common.data.tag.SBTags;
 import net.invictusslayer.slayersbeasts.common.init.SBEntities;
@@ -12,7 +11,6 @@ import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.MobCategory;
 import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.biome.Biomes;
-import net.minecraft.world.level.biome.MobSpawnSettings;
 import net.minecraft.world.level.levelgen.GenerationStep;
 
 public class SBBiomeModifications {
@@ -35,10 +33,10 @@ public class SBBiomeModifications {
 	}
 
 	public static void addSpawn(ResourceKey<Biome> biome, EntityType<?> entity, int weight, int min, int max, MobCategory category) {
-		BiomeModifications.addProperties(context -> context.getKey().get().equals(biome.location()), (context, mutable) -> mutable.getSpawnProperties().addSpawn(category, new MobSpawnSettings.SpawnerData(entity, weight, min, max)));
+//		BiomeModifications.addProperties(context -> context.getKey().get().equals(biome.location()), (context, mutable) -> mutable.getSpawnProperties().addSpawn(category, new MobSpawnSettings.SpawnerData(entity, weight, min, max)));
 	}
 
 	public static void addSpawn(TagKey<Biome> biomes, EntityType<?> entity, int weight, int min, int max, MobCategory category) {
-		BiomeModifications.addProperties(context -> context.hasTag(biomes), (context, mutable) -> mutable.getSpawnProperties().addSpawn(category, new MobSpawnSettings.SpawnerData(entity, weight, min, max)));
+//		BiomeModifications.addProperties(context -> context.hasTag(biomes), (context, mutable) -> mutable.getSpawnProperties().addSpawn(category, new MobSpawnSettings.SpawnerData(entity, weight, min, max)));
 	}
 }
