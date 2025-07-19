@@ -196,13 +196,13 @@ public class SBBlockStateProvider extends BlockStateProvider {
 	}
 
 	private void pottedCross(Block potted, Block plant) {
-		simpleBlock(potted, models().singleTexture(name(potted), new ResourceLocation("flower_pot_cross"), "plant", blockTexture(plant)).renderType("cutout"));
+		simpleBlock(potted, models().singleTexture(name(potted), ResourceLocation.withDefaultNamespace("flower_pot_cross"), "plant", blockTexture(plant)).renderType("cutout"));
 	}
 
 	private void mushroomBlockWithItem(Block block, String inside) {
 		ModelFile outsideModel = models().withExistingParent(name(block), "minecraft:block/template_single_face").texture("texture", blockTexture(block));
-		ModelFile insideModel = inside != null ? models().withExistingParent(inside, "minecraft:block/template_single_face").texture("texture", new ResourceLocation(SlayersBeasts.MOD_ID, "block/" + inside)) :
-				models().getExistingFile(new ResourceLocation("minecraft:block/mushroom_block_inside"));
+		ModelFile insideModel = inside != null ? models().withExistingParent(inside, "minecraft:block/template_single_face").texture("texture", ResourceLocation.fromNamespaceAndPath(SlayersBeasts.MOD_ID, "block/" + inside)) :
+				models().getExistingFile(ResourceLocation.withDefaultNamespace("block/mushroom_block_inside"));
 		getMultipartBuilder(block).part().modelFile(outsideModel).addModel().condition(BlockStateProperties.NORTH, true).end()
 				.part().modelFile(outsideModel).rotationY(90).uvLock(true).addModel().condition(BlockStateProperties.EAST, true).end()
 				.part().modelFile(outsideModel).rotationY(180).uvLock(true).addModel().condition(BlockStateProperties.SOUTH, true).end()
@@ -326,6 +326,6 @@ public class SBBlockStateProvider extends BlockStateProvider {
 	}
 
 	private ResourceLocation extend(ResourceLocation location, String suffix) {
-		return new ResourceLocation(location.getNamespace(), location.getPath() + suffix);
+		return ResourceLocation.fromNamespaceAndPath(location.getNamespace(), location.getPath() + suffix);
 	}
 }

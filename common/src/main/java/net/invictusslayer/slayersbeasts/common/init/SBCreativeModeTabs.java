@@ -1,17 +1,15 @@
 package net.invictusslayer.slayersbeasts.common.init;
 
-import dev.architectury.registry.registries.DeferredRegister;
-import dev.architectury.registry.registries.RegistrySupplier;
 import net.invictusslayer.slayersbeasts.common.SlayersBeasts;
-import net.minecraft.core.registries.Registries;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.ItemStack;
 
-public class SBCreativeModeTabs {
-	public static final DeferredRegister<CreativeModeTab> CREATIVE_TABS = DeferredRegister.create(SlayersBeasts.MOD_ID, Registries.CREATIVE_MODE_TAB);
+import java.util.function.Supplier;
 
-	public static final RegistrySupplier<CreativeModeTab> SLAYERS_TAB = CREATIVE_TABS.register("slayers_tab", () -> CreativeModeTab.builder(CreativeModeTab.Row.TOP, 0).icon(() -> new ItemStack(SBItems.MANTIS_SPAWN_EGG.get())).title(Component.translatable("itemGroup.slayersbeasts.slayers_tab")).displayItems(((display, tab) -> {
+public class SBCreativeModeTabs {
+	public static final Supplier<CreativeModeTab> SLAYERS_TAB = register("slayers_tab", () -> CreativeModeTab.builder(CreativeModeTab.Row.TOP, 0).icon(() -> new ItemStack(SBItems.MANTIS_SPAWN_EGG.get())).title(Component.translatable("itemGroup.slayersbeasts.slayers_tab")).displayItems(((display, tab) -> {
 		tab.accept(SBItems.JADE.get());
 //		tab.accept(SBItems.JADE_SHARD.get());
 //		tab.accept(SBItems.CRYSTALLINE_WING.get());
@@ -93,7 +91,7 @@ public class SBCreativeModeTabs {
 		tab.accept(SBItems.WUDU_SPAWN_EGG.get());
 	})).build());
 
-	public static final RegistrySupplier<CreativeModeTab> SLAYERS_WOOD = CREATIVE_TABS.register("slayers_wood", () -> CreativeModeTab.builder(CreativeModeTab.Row.TOP, 0).icon(() -> new ItemStack(SBBlocks.WILLOW_SAPLING.get())).title(Component.translatable("itemGroup.slayersbeasts.slayers_wood")).displayItems(((display, tab) -> {
+	public static final Supplier<CreativeModeTab> SLAYERS_WOOD = register("slayers_wood", () -> CreativeModeTab.builder(CreativeModeTab.Row.TOP, 0).icon(() -> new ItemStack(SBBlocks.WILLOW_SAPLING.get())).title(Component.translatable("itemGroup.slayersbeasts.slayers_wood")).displayItems(((display, tab) -> {
 		tab.accept(SBBlocks.ASPEN_LOG.get());
 		tab.accept(SBBlocks.ASPEN_WOOD.get());
 		tab.accept(SBBlocks.STRIPPED_ASPEN_LOG.get());
@@ -257,4 +255,12 @@ public class SBCreativeModeTabs {
 		tab.accept(SBItems.WILLOW_BOAT.get());
 		tab.accept(SBItems.WILLOW_CHEST_BOAT.get());
 	})).build());
+
+	private static <T extends CreativeModeTab> Supplier<T> register(String name, Supplier<T> supplier) {
+		return SlayersBeasts.PLATFORM.register(BuiltInRegistries.CREATIVE_MODE_TAB, name, supplier);
+	}
+
+	public static void register() {
+		SlayersBeasts.LOGGER.info("Registering SBCreativeModeTabs...");
+	}
 }

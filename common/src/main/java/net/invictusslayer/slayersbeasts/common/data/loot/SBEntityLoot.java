@@ -2,7 +2,7 @@ package net.invictusslayer.slayersbeasts.common.data.loot;
 
 import net.invictusslayer.slayersbeasts.common.init.SBEntities;
 import net.minecraft.data.loot.EntityLootSubProvider;
-import net.minecraft.world.entity.EntityType;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.flag.FeatureFlags;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.storage.loot.LootPool;
@@ -13,18 +13,16 @@ import net.minecraft.world.level.storage.loot.functions.SetItemCountFunction;
 import net.minecraft.world.level.storage.loot.providers.number.ConstantValue;
 import net.minecraft.world.level.storage.loot.providers.number.UniformGenerator;
 
-import java.util.HashSet;
-import java.util.Set;
-import java.util.stream.Stream;
+import java.util.function.BiConsumer;
 
 public class SBEntityLoot extends EntityLootSubProvider {
-	private final Set<EntityType<?>> ENTITIES = new HashSet<>();
-
 	public SBEntityLoot() {
 		super(FeatureFlags.REGISTRY.allFlags());
 	}
 
-	public void generate() {
+	public void generate() {}
+
+	public void generate(BiConsumer<ResourceLocation, LootTable.Builder> biConsumer) {
 		add(SBEntities.MANTIS.get(), LootTable.lootTable());
 		add(SBEntities.ANT_WORKER.get(), LootTable.lootTable());
 		add(SBEntities.ANT_SOLDIER.get(), LootTable.lootTable());
@@ -35,14 +33,5 @@ public class SBEntityLoot extends EntityLootSubProvider {
 		add(SBEntities.ENT_MEDIUM.get(), LootTable.lootTable());
 		add(SBEntities.WUDU.get(), LootTable.lootTable());
 		add(SBEntities.SPORETRAP.get(), LootTable.lootTable());
-	}
-
-	protected void add(EntityType<?> entity, LootTable.Builder builder) {
-		super.add(entity, builder);
-		ENTITIES.add(entity);
-	}
-
-	protected Stream<EntityType<?>> getKnownEntityTypes() {
-		return ENTITIES.stream();
 	}
 }

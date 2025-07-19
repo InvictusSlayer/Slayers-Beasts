@@ -1,9 +1,10 @@
 package net.invictusslayer.slayersbeasts.common.block;
 
 import com.google.common.collect.Maps;
-import dev.architectury.registry.registries.RegistrySupplier;
 import net.minecraft.world.item.AxeItem;
 import net.minecraft.world.level.block.Block;
+
+import java.util.function.Supplier;
 
 public class SBStrippableBlocks {
 	public static void register() {
@@ -17,7 +18,7 @@ public class SBStrippableBlocks {
 		});
 	}
 	
-	private static void register(RegistrySupplier<?> block, RegistrySupplier<?> result) {
+	private static void register(Supplier<?> block, Supplier<?> result) {
 		AxeItem.STRIPPABLES = Maps.newHashMap(AxeItem.STRIPPABLES);
 		AxeItem.STRIPPABLES.put((Block) block.get(), (Block) result.get());
 	}

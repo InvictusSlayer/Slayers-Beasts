@@ -1,8 +1,6 @@
 package net.invictusslayer.slayersbeasts.forge.data.tag;
 
 import net.invictusslayer.slayersbeasts.common.SlayersBeasts;
-import net.invictusslayer.slayersbeasts.common.data.tag.SBTags;
-import net.invictusslayer.slayersbeasts.common.init.SBPois;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.tags.PoiTypeTagsProvider;
@@ -16,6 +14,6 @@ public class SBPoiTagsProvider extends PoiTypeTagsProvider {
 	}
 
 	protected void addTags(HolderLookup.Provider pProvider) {
-		tag(SBTags.PoiTypes.ANT_HOME).add(SBPois.ANTHILL.getKey());
+//		tag(SBTags.PoiTypes.ANT_HOME).add(SBPois.ANTHILL.getKey()); TODO
 	}
 }

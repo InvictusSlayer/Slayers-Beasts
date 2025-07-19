@@ -17,7 +17,7 @@ import net.invictusslayer.slayersbeasts.common.world.structure.SBStructureSets;
 import net.invictusslayer.slayersbeasts.common.world.structure.SBStructures;
 import net.invictusslayer.slayersbeasts.common.world.structure.pools.SBPools;
 import net.invictusslayer.slayersbeasts.forge.data.tag.*;
-import net.invictusslayer.slayersbeasts.forge.world.SBBiomeModifiers;
+import net.invictusslayer.slayersbeasts.forge.world.SBForgeBiomeModifiers;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.RegistryAccess;
 import net.minecraft.core.RegistrySetBuilder;
@@ -39,7 +39,7 @@ import java.util.List;
 import java.util.concurrent.CompletableFuture;
 
 @Mod.EventBusSubscriber(modid = SlayersBeasts.MOD_ID, bus = Mod.EventBusSubscriber.Bus.MOD)
-public class SBDataGenerator {
+public class SBForgeDataGen {
 	private static final RegistrySetBuilder BUILDER = new RegistrySetBuilder()
 			.add(Registries.CONFIGURED_FEATURE, SBConfiguredFeatures::bootstrap)
 			.add(Registries.PLACED_FEATURE, SBPlacedFeatures::bootstrap)
@@ -50,7 +50,7 @@ public class SBDataGenerator {
 			.add(Registries.TEMPLATE_POOL, SBPools::bootstrap)
 			.add(Registries.PROCESSOR_LIST, SBProcessorLists::bootstrap)
 			.add(Registries.NOISE, SBNoises::bootstrap)
-			.add(ForgeRegistries.Keys.BIOME_MODIFIERS, SBBiomeModifiers::bootstrap);
+			.add(ForgeRegistries.Keys.BIOME_MODIFIERS, SBForgeBiomeModifiers::bootstrap);
 
 	@SubscribeEvent
 	public static void gatherData(GatherDataEvent event) {
@@ -64,7 +64,7 @@ public class SBDataGenerator {
 
 		SBBlockTagsProvider blockTags = gen.addProvider(hasServer, new SBBlockTagsProvider(output, provider, helper));
 		gen.addProvider(hasServer, new SBItemTagsProvider(output, provider, blockTags, helper));
-		gen.addProvider(hasServer, new SBBiomeTagsProvider(output, provider.thenApply(SBDataGenerator::patchRegistry), helper));
+		gen.addProvider(hasServer, new SBBiomeTagsProvider(output, provider.thenApply(SBForgeDataGen::patchRegistry), helper));
 		gen.addProvider(hasServer, new SBEntityTagsProvider(output, provider, helper));
 		gen.addProvider(hasServer, new SBPoiTagsProvider(output, provider, helper));
 

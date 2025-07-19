@@ -1,12 +1,10 @@
 package net.invictusslayer.slayersbeasts.common.data.loot;
 
-import net.invictusslayer.slayersbeasts.common.SlayersBeasts;
 import net.invictusslayer.slayersbeasts.common.block.SBBlockFamily;
 import net.invictusslayer.slayersbeasts.common.block.WoodFamily;
 import net.invictusslayer.slayersbeasts.common.init.SBBlocks;
 import net.invictusslayer.slayersbeasts.common.init.SBItems;
 import net.minecraft.advancements.critereon.StatePropertiesPredicate;
-import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.data.BlockFamily;
 import net.minecraft.data.loot.BlockLootSubProvider;
 import net.minecraft.resources.ResourceLocation;
@@ -18,7 +16,6 @@ import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.DoublePlantBlock;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.block.state.properties.DoubleBlockHalf;
-import net.minecraft.world.level.storage.loot.BuiltInLootTables;
 import net.minecraft.world.level.storage.loot.LootContext;
 import net.minecraft.world.level.storage.loot.LootPool;
 import net.minecraft.world.level.storage.loot.LootTable;
@@ -30,8 +27,6 @@ import net.minecraft.world.level.storage.loot.predicates.LootItemEntityPropertyC
 import net.minecraft.world.level.storage.loot.providers.number.ConstantValue;
 import net.minecraft.world.level.storage.loot.providers.number.UniformGenerator;
 
-import java.util.HashSet;
-import java.util.Locale;
 import java.util.Set;
 import java.util.function.BiConsumer;
 
@@ -40,7 +35,9 @@ public class SBBlockLoot extends BlockLootSubProvider {
 		super(Set.of(), FeatureFlags.REGISTRY.allFlags());
 	}
 
-	public void generate() {
+	public void generate() {}
+
+	public void generate(BiConsumer<ResourceLocation, LootTable.Builder> biConsumer) {
 		generateBlockFamilies();
 
 		dropSelf(SBBlocks.CRYPTALITH.get());
@@ -87,24 +84,6 @@ public class SBBlockLoot extends BlockLootSubProvider {
 		dropPottedContents(SBBlocks.POTTED_ALBINO_REDWOOD_SAPLING.get());
 		add(SBBlocks.WILLOW_BRANCH.get(), block -> createLeavesDrops(block, SBBlocks.WILLOW_SAPLING.get(), 0.03F));
 		add(SBBlocks.WILLOW_BRANCH_PLANT.get(), block -> createLeavesDrops(block, SBBlocks.WILLOW_SAPLING.get(), 0.03F));
-	}
-
-	public void generate(BiConsumer<ResourceLocation, LootTable.Builder> biConsumer) {
-		generate();
-		HashSet<ResourceLocation> set = new HashSet<>();
-		for (Block block : BuiltInRegistries.BLOCK) {
-			if (!block.getLootTable().getNamespace().equals(SlayersBeasts.MOD_ID)) continue;
-			ResourceLocation location;
-			if (!block.isEnabled(enabledFeatures) || (location = block.getLootTable()) == BuiltInLootTables.EMPTY || !set.add(location)) continue;
-			LootTable.Builder builder = map.remove(location);
-			if (builder == null) {
-				throw new IllegalStateException(String.format(Locale.ROOT, "Missing loottable '%s' for '%s'", location, BuiltInRegistries.BLOCK.getKey(block)));
-			}
-			biConsumer.accept(location, builder);
-		}
-		if (!map.isEmpty()) {
-			throw new IllegalStateException("Created block loot tables for non-blocks: " + map.keySet());
-		}
 	}
 
 	private void generateWoodFamilies() {

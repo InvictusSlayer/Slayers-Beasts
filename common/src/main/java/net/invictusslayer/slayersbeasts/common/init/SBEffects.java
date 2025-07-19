@@ -1,15 +1,22 @@
 package net.invictusslayer.slayersbeasts.common.init;
 
-import dev.architectury.registry.registries.DeferredRegister;
-import dev.architectury.registry.registries.RegistrySupplier;
 import net.invictusslayer.slayersbeasts.common.SlayersBeasts;
 import net.invictusslayer.slayersbeasts.common.effect.ParalysisEffect;
-import net.minecraft.core.registries.Registries;
+import net.minecraft.core.Holder;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectCategory;
 
-public class SBEffects {
-	public static final DeferredRegister<MobEffect> EFFECTS = DeferredRegister.create(SlayersBeasts.MOD_ID, Registries.MOB_EFFECT);
+import java.util.function.Supplier;
 
-	public static final RegistrySupplier<MobEffect> PARALYSIS = EFFECTS.register("paralysis", () -> new ParalysisEffect(MobEffectCategory.HARMFUL, 0xe4e924));
+public class SBEffects {
+	public static final Supplier<Holder.Reference<MobEffect>> PARALYSIS = register("paralysis", () -> new ParalysisEffect(MobEffectCategory.HARMFUL, 0xe4e924));
+
+	private static Supplier<Holder.Reference<MobEffect>> register(String name, Supplier<MobEffect> supplier) {
+		return SlayersBeasts.PLATFORM.registerHolder(BuiltInRegistries.MOB_EFFECT, name, supplier);
+	}
+
+	public static void register() {
+		SlayersBeasts.LOGGER.info("Registering SBMobEffects...");
+	}
 }

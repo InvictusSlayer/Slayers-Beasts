@@ -9,10 +9,11 @@
 	],
 	"contact": {
 		"homepage": "${homepage_url}",
-		"sources": "${source_url}"
+		"sources": "${source_url}",
+		"issues": "${issue_url}"
 	},
 	"license": "${mod_license}",
-	"icon": "assets/slayersbeasts.png",
+	"icon": "assets/logo.png",
 	"environment": "*",
 	"entrypoints": {
 		"main": [
@@ -36,7 +37,6 @@
 		"java": ">=17",
 		"minecraft": "${mc_version}",
 		"fabric": ">=${fabric_loader}",
-		"architectury": ">=${arch_version}",
 		"terrablender": ">=${tb_version}"
 	}
 }
