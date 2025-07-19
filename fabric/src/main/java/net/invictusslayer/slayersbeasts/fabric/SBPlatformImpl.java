@@ -15,10 +15,6 @@ import java.nio.file.Path;
 import java.util.List;
 
 public class SBPlatformImpl {
-	public static Path getConfigDirectory() {
-		return FabricLoader.getInstance().getConfigDir();
-	}
-
 	@SafeVarargs
 	public static void addFeatureBiomeModifier(String name, TagKey<Biome> biomes, GenerationStep.Decoration step, ResourceKey<PlacedFeature>... features) {
 		for (int i = 0; i < features.length; i++) {

@@ -2,7 +2,6 @@ package net.invictusslayer.slayersbeasts.common;
 
 import me.shedaniel.autoconfig.AutoConfig;
 import me.shedaniel.autoconfig.serializer.Toml4jConfigSerializer;
-import net.invictusslayer.slayersbeasts.SBPlatform;
 import net.invictusslayer.slayersbeasts.common.block.IExtendedMushroomBlock;
 import net.invictusslayer.slayersbeasts.common.block.SBFlammableBlocks;
 import net.invictusslayer.slayersbeasts.common.block.SBStrippableBlocks;
@@ -10,11 +9,11 @@ import net.invictusslayer.slayersbeasts.common.block.SBWoodType;
 import net.invictusslayer.slayersbeasts.common.config.SBConfig;
 import net.invictusslayer.slayersbeasts.common.init.*;
 import net.invictusslayer.slayersbeasts.common.item.SBDispensableItems;
-import net.invictusslayer.slayersbeasts.common.world.biome.SBBiomeModifications;
 import net.invictusslayer.slayersbeasts.common.world.biome.SBSurfaceRuleData;
 import net.invictusslayer.slayersbeasts.common.world.biome.region.SBNetherRegion;
 import net.invictusslayer.slayersbeasts.common.world.biome.region.SBOverworldRegion;
 import net.invictusslayer.slayersbeasts.common.world.feature.SBConfiguredFeatures;
+import net.minecraft.client.data.models.ModelProvider;
 import net.minecraft.client.renderer.Sheets;
 import net.minecraft.world.entity.animal.Fox;
 import net.minecraft.world.entity.animal.MushroomCow;
@@ -25,43 +24,52 @@ import terrablender.api.Regions;
 import terrablender.api.SurfaceRuleManager;
 
 import java.util.Arrays;
+import java.util.ServiceLoader;
 
 public class SlayersBeasts {
 	public static final String MOD_ID = "slayersbeasts";
 	public static final Logger LOGGER = LogManager.getLogger(MOD_ID);
 	public static SBConfig CONFIG = null;
+	public static IPlatformHandler PLATFORM = null;
 
 	public static void init() {
+		loadPlatform(IPlatformHandler.class);
 		loadConfig();
 
-		SBCreativeModeTabs.CREATIVE_TABS.register();
-		SBEntities.ENTITIES.register();
-		SBBlocks.BLOCKS.register();
-		SBItems.ITEMS.register();
-		SBBlockEntities.BLOCK_ENTITIES.register();
-		SBVillagerType.VILLAGER_TYPES.register();
-		SBEffects.EFFECTS.register();
-		SBPotions.POTIONS.register();
-		SBSounds.SOUNDS.register();
-		SBDataComponents.DATA_COMPONENTS.register();
-		SBPois.POIS.register();
-		SBFeatures.FEATURES.register();
-		SBTreeDecorators.TREE_DECORATORS.register();
-		SBFoliagePlacers.FOLIAGE_PLACERS.register();
-		SBTrunkPlacers.TRUNK_PLACERS.register();
-		SBStructurePieces.STRUCTURE_PIECES.register();
-		SBStructureTypes.STRUCTURE_TYPES.register();
+		SBItems.register();
+		SBBlocks.register();
+		SBEntities.register();
+		SBCreativeModeTabs.register();
+		SBVillagerType.register();
+		SBBlockEntities.register();
+		SBEffects.register();
+		SBPotions.register();
+		SBSounds.register();
+		SBDataComponents.register();
+		SBPois.register();
+		SBFeatures.register();
+		SBTreeDecorators.register();
+		SBFoliagePlacers.register();
+		SBTrunkPlacers.register();
+		SBStructurePieces.register();
+		SBStructureTypes.register();
 
 //		SBBiomeModifications.registerFeatures();
-		SBEntities.registerAttributes();
 
-		LOGGER.info(SBPlatform.getConfigDirectory().toAbsolutePath().normalize().toString());
+		LOGGER.info(PLATFORM.configPath().toAbsolutePath().normalize().toString());
 	}
 
 	public static void loadConfig() {
 		if (CONFIG != null) return;
 		AutoConfig.register(SBConfig.class, Toml4jConfigSerializer::new);
 		CONFIG = AutoConfig.getConfigHolder(SBConfig.class).getConfig();
+	}
+
+	public static <T extends IPlatformHandler> void loadPlatform(Class<T> clazz) {
+		if (PLATFORM != null) return;
+		final T loadedService = ServiceLoader.load(clazz).findFirst().orElseThrow(() -> new NullPointerException("Failed to load service for " + clazz.getName()));
+		LOGGER.debug("Loaded {} for service {}", loadedService, clazz);
+		PLATFORM = loadedService;
 	}
 
 	public static void commonSetup() {
@@ -71,8 +79,7 @@ public class SlayersBeasts {
 		SBFlammableBlocks.register();
 		SBStrippableBlocks.register();
 		SBDispensableItems.register();
-		SBBiomeModifications.registerSpawns();
-		SBEntities.registerSpawns();
+//		SBBiomeModifications.registerSpawns();
 		SBVillagerType.setupBiomes();
 
 		((IExtendedMushroomBlock) SBBlocks.BLACK_MUSHROOM.get()).setMightyMushroom(SBConfiguredFeatures.MIGHTY_BLACK_MUSHROOM);

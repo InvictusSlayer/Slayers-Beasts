@@ -51,13 +51,12 @@ repositories {
 
 dependencies {
     neoForge "net.neoforged:neoforge:${neo_version}"
-    modApi "dev.architectury:architectury-neoforge:${arch_version}"
 
     modApi "me.shedaniel.cloth:cloth-config-neoforge:${cloth_version}"
 //    modRuntimeOnly "mezz.jei:jei-${mc_version}-neoforge:${jei_version}"
 
-    common(project(path: ":common", configuration: "namedElements")) { transitive false }
-    shadowCommon(project(path: ":common", configuration: "transformProductionNeoForge")) { transitive = false }
+    common(project(path: ":common", configuration: "namedElements")).transitive(false)
+    shadowCommon(project(path: ":common", configuration: "transformProductionNeoForge")).transitive(false)
 }
 
 shadowJar {
@@ -69,7 +68,7 @@ shadowJar {
 }
 
 remapJar {
-    input.set shadowJar.archiveFile
+    inputFile.set shadowJar.archiveFile
     dependsOn shadowJar
     atAccessWideners.add("${mod_id}.accesswidener")
 }
@@ -90,7 +89,7 @@ components.java {
     }
 }
 
-task publishCurseForge(type: TaskPublishCurseForge) {
+tasks.register('publishCurseForge', TaskPublishCurseForge) {
     apiToken = System.getenv("CURSEFORGE_TOKEN")
 
     def mainFile = upload(curseforge_id, remapJar)
@@ -100,12 +99,11 @@ task publishCurseForge(type: TaskPublishCurseForge) {
     mainFile.changelogType = "markdown"
     mainFile.addGameVersion(mc_version)
     mainFile.addModLoader("neoforge")
-    mainFile.addRequirement("architectury-api")
     mainFile.addRequirement("cloth-config")
     mainFile.addRequirement("terrablender-neoforge")
 }
 
-task publishModrinth(type: TaskModrinthUpload) {
+tasks.register('publishModrinth', TaskModrinthUpload) {
     modrinth {
         token = System.getenv("MODRINTH_TOKEN")
         projectId = modrinth_id
@@ -118,7 +116,6 @@ task publishModrinth(type: TaskModrinthUpload) {
         gameVersions = [mc_version]
         loaders = ["neoforge"]
         dependencies {
-            required.project "architectury-api"
             required.project "cloth-config"
             required.project "terrablender"
         }

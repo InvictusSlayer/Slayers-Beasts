@@ -1,5 +1,10 @@
+import com.modrinth.minotaur.TaskModrinthUpload
+import net.darkhax.curseforgegradle.TaskPublishCurseForge
+
 plugins {
     id "com.github.johnrengelman.shadow" version "8.1.1"
+    id "net.darkhax.curseforgegradle" version "1.1.+"
+    id "com.modrinth.minotaur" version "2.+"
 }
 
 architectury {
@@ -19,11 +24,11 @@ loom {
         data {
             data()
             programArgs "--all", "--mod", "${mod_id}"
-            programArgs "--output", project(":common").file("src/generated/resources").absolutePath
+            programArgs "--output", project(":common").file("src/main/generated").absolutePath
             programArgs "--existing", file("src/main/resources").absolutePath
-            programArgs "--existing", file("src/generated/resources").absolutePath
+            programArgs "--existing", file("src/main/generated").absolutePath
             programArgs "--existing", project(":common").file("src/main/resources").absolutePath
-            programArgs "--existing", project(":common").file("src/generated/resources").absolutePath
+            programArgs "--existing", project(":common").file("src/main/generated").absolutePath
         }
     }
 }
@@ -38,12 +43,11 @@ configurations {
 
 dependencies {
     forge "net.minecraftforge:forge:${mc_version}-${forge_version}"
-    modApi "dev.architectury:architectury-forge:${arch_version}"
 
     modApi "me.shedaniel.cloth:cloth-config-forge:${cloth_version}"
 
-    common(project(path: ":common", configuration: "namedElements")) { transitive false }
-    shadowCommon(project(path: ":common", configuration: "transformProductionForge")) { transitive = false }
+    common(project(path: ":common", configuration: "namedElements")).transitive(false)
+    shadowCommon(project(path: ":common", configuration: "transformProductionFabric")).transitive(false)
 }
 
 shadowJar {
@@ -55,7 +59,7 @@ shadowJar {
 }
 
 remapJar {
-    input.set shadowJar.archiveFile
+    inputFile.set shadowJar.archiveFile
     dependsOn shadowJar
 }
 
@@ -72,5 +76,38 @@ sourcesJar {
 components.java {
     withVariantsFromConfiguration(project.configurations.shadowRuntimeElements) {
         skip()
+    }
+}
+
+tasks.register('publishCurseForge', TaskPublishCurseForge) {
+    apiToken = System.getenv("CURSEFORGE_TOKEN")
+
+    def mainFile = upload(curseforge_id, remapJar)
+    mainFile.displayName = "${mod_id}-${mc_version}-${mod_version} [Forge]"
+    mainFile.releaseType = release_type
+    mainFile.changelog = "${project.property("changelog")}"
+    mainFile.changelogType = "markdown"
+    mainFile.addGameVersion(mc_version)
+    mainFile.addModLoader("forge")
+    mainFile.addRequirement("cloth-config")
+    mainFile.addRequirement("terrablender-forge")
+}
+
+tasks.register('publishModrinth', TaskModrinthUpload) {
+    modrinth {
+        token = System.getenv("MODRINTH_TOKEN")
+        projectId = modrinth_id
+        versionName = "${mod_name} ${mc_version}-${mod_version} [Forge]"
+        versionNumber = "${mod_version}+forge"
+        versionType = release_type
+        changelog = "${project.property("changelog")}"
+        uploadFile = remapJar
+        additionalFiles = [sourcesJar]
+        gameVersions = [mc_version]
+        loaders = ["forge"]
+        dependencies {
+            required.project "cloth-config"
+            required.project "terrablender"
+        }
     }
 }

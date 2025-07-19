@@ -3,6 +3,7 @@ package net.invictusslayer.slayersbeasts.common.data.lang;
 import com.google.gson.JsonObject;
 import net.invictusslayer.slayersbeasts.common.SlayersBeasts;
 import net.invictusslayer.slayersbeasts.common.block.WoodFamily;
+import net.minecraft.core.Holder;
 import net.minecraft.data.BlockFamily;
 import net.minecraft.data.CachedOutput;
 import net.minecraft.data.DataProvider;
@@ -84,8 +85,8 @@ public abstract class SBLangProvider implements DataProvider {
 		add(key.description().getString(), name);
 	}
 
-	protected void addEffect(Supplier<? extends MobEffect> key, String name) {
-		add(key.get(), name);
+	protected void addEffect(Supplier<Holder.Reference<MobEffect>> key, String name) {
+		add(key.get().value(), name);
 	}
 
 	protected void add(MobEffect key, String name) {
@@ -139,42 +140,34 @@ public abstract class SBLangProvider implements DataProvider {
 
 	protected void addWoodFamily(WoodFamily family, String prefix) {
 		family.getVariants().forEach((variant, object) -> {
-			if (variant.getName() != null && object.isPresent()) {
+			if (variant.getName() != null && object.get() != null) {
 				String name = prefix + " " + variant.getName();
-				if (object.get() instanceof Block block) {
-					addBlock(() -> block, name);
-				} else if (object.get() instanceof Item item) {
-					addItem(() -> item, name);
-				}
+				if (object.get() instanceof Block block) addBlock(() -> block, name);
+				else if (object.get() instanceof Item item) addItem(() -> item, name);
 			}
 		});
 	}
 
 	protected void addBlockFamily(BlockFamily family, String name) {
-		addBlock(family::getBaseBlock, name);
+		addBlockFamily(family, name, false);
+	}
+
+	protected void addBlockFamily(BlockFamily family, String name, boolean ignoreBase) {
+		if (!ignoreBase) addBlock(family::getBaseBlock, name);
 		family.getVariants().forEach(((variant, block) -> {
-			if (variant.equals(BlockFamily.Variant.BUTTON)) {
-				addBlock(() -> block, name + " Button");
-			} else if (variant.equals(BlockFamily.Variant.CHISELED)) {
-				addBlock(() -> block, "Chiseled " + name);
-			} else if (variant.equals(BlockFamily.Variant.DOOR)) {
-				addBlock(() -> block, name + " Door");
-			} else if (variant.equals(BlockFamily.Variant.FENCE)) {
-				addBlock(() -> block, name + " Fence");
-			} else if (variant.equals(BlockFamily.Variant.FENCE_GATE)) {
-				addBlock(() -> block, name + " Fence Gate");
-			} else if (variant.equals(BlockFamily.Variant.SIGN)) {
-				addBlock(() -> block, name + " Sign");
-			} else if (variant.equals(BlockFamily.Variant.SLAB)) {
-				addBlock(() -> block, name + " Slab");
-			} else if (variant.equals(BlockFamily.Variant.STAIRS)) {
-				addBlock(() -> block, name + " Stairs");
-			} else if (variant.equals(BlockFamily.Variant.PRESSURE_PLATE)) {
-				addBlock(() -> block, name + " Pressure Plate");
-			} else if (variant.equals(BlockFamily.Variant.TRAPDOOR)) {
-				addBlock(() -> block, name + " Trapdoor");
-			} else if (variant.equals(BlockFamily.Variant.WALL)) {
-				addBlock(() -> block, name + " Wall");
+			switch (variant) {
+				case BUTTON -> addBlock(() -> block, name + " Button");
+				case CHISELED -> addBlock(() -> block, "Chiseled " + name);
+				case CRACKED -> addBlock(() -> block, "Cracked " + name);
+				case DOOR -> addBlock(() -> block, name + " Door");
+				case FENCE -> addBlock(() -> block, name + " Fence");
+				case FENCE_GATE -> addBlock(() -> block, name + " Fence Gate");
+				case SIGN -> addBlock(() -> block, name + " Sign");
+				case SLAB -> addBlock(() -> block, name + " Slab");
+				case STAIRS -> addBlock(() -> block, name + " Stairs");
+				case PRESSURE_PLATE -> addBlock(() -> block, name + " Pressure Plate");
+				case TRAPDOOR -> addBlock(() -> block, name + " Trapdoor");
+				case WALL -> addBlock(() -> block, name + " Wall");
 			}
 		}));
 	}

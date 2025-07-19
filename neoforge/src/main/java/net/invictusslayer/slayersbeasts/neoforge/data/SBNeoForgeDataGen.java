@@ -18,7 +18,7 @@ import net.invictusslayer.slayersbeasts.common.world.structure.SBStructureSets;
 import net.invictusslayer.slayersbeasts.common.world.structure.SBStructures;
 import net.invictusslayer.slayersbeasts.common.world.structure.pools.SBPools;
 import net.invictusslayer.slayersbeasts.neoforge.data.tag.*;
-import net.invictusslayer.slayersbeasts.neoforge.world.SBBiomeModifiers;
+import net.invictusslayer.slayersbeasts.neoforge.world.SBNeoForgeBiomeModifiers;
 import net.minecraft.core.Cloner;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.RegistryAccess;
@@ -38,8 +38,8 @@ import net.neoforged.neoforge.registries.NeoForgeRegistries;
 import java.util.Collections;
 import java.util.List;
 
-@EventBusSubscriber(modid = SlayersBeasts.MOD_ID, bus = EventBusSubscriber.Bus.MOD)
-public class SBDataGenerator {
+@EventBusSubscriber(modid = SlayersBeasts.MOD_ID)
+public class SBNeoForgeDataGen {
 	private static final RegistrySetBuilder BUILDER = new RegistrySetBuilder()
 			.add(Registries.CONFIGURED_FEATURE, SBConfiguredFeatures::bootstrap)
 			.add(Registries.PLACED_FEATURE, SBPlacedFeatures::bootstrap)
@@ -51,14 +51,14 @@ public class SBDataGenerator {
 			.add(Registries.PROCESSOR_LIST, SBProcessorLists::bootstrap)
 			.add(Registries.NOISE, SBNoises::bootstrap)
 			.add(Registries.JUKEBOX_SONG, SBJukeboxSongs::bootstrap)
-			.add(NeoForgeRegistries.Keys.BIOME_MODIFIERS, SBBiomeModifiers::bootstrap);
+			.add(NeoForgeRegistries.Keys.BIOME_MODIFIERS, SBNeoForgeBiomeModifiers::bootstrap);
 
 	@SubscribeEvent
 	public static void gatherData(GatherDataEvent.Client event) {
 		event.createProvider((output, provider) -> new DatapackBuiltinEntriesProvider(output, provider, BUILDER, Collections.singleton(SlayersBeasts.MOD_ID)));
 
 		event.createBlockAndItemTags(SBBlockTagsProvider::new, SBItemTagsProvider::new);
-		event.createProvider((output, provider) -> new SBBiomeTagsProvider(output, provider.thenApply(SBDataGenerator::patchRegistry)));
+		event.createProvider((output, provider) -> new SBBiomeTagsProvider(output, provider.thenApply(SBNeoForgeDataGen::patchRegistry)));
 		event.createProvider(SBEntityTagsProvider::new);
 		event.createProvider(SBPoiTagsProvider::new);
 

@@ -1,9 +1,12 @@
-package net.invictusslayer.slayersbeasts.common.init;
+package net.invictusslayer.slayersbeasts.common.client.model;
 
+import net.fabricmc.api.EnvType;
+import net.fabricmc.api.Environment;
 import net.invictusslayer.slayersbeasts.common.SlayersBeasts;
 import net.minecraft.client.model.geom.ModelLayerLocation;
 import net.minecraft.resources.ResourceLocation;
 
+@Environment(EnvType.CLIENT)
 public class SBModelLayers {
 	public static final ModelLayerLocation ASPEN_BOAT = register("boat/aspen");
 	public static final ModelLayerLocation ASPEN_CHEST_BOAT = register("chest_boat/aspen");

@@ -1,10 +1,11 @@
 package net.invictusslayer.slayersbeasts.common.block;
 
-import dev.architectury.registry.registries.RegistrySupplier;
 import net.invictusslayer.slayersbeasts.common.init.SBBlocks;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.FireBlock;
+
+import java.util.function.Supplier;
 
 public class SBFlammableBlocks {
 	public static void register() {
@@ -28,7 +29,7 @@ public class SBFlammableBlocks {
 		}));
 	}
 	
-	private static void register(RegistrySupplier<?> block, int flammability, int encouragement) {
+	private static void register(Supplier<?> block, int flammability, int encouragement) {
 		((FireBlock) Blocks.FIRE).setFlammable((Block) block.get(), encouragement, flammability);
 	}
 }

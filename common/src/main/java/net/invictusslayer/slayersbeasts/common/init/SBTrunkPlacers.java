@@ -1,16 +1,22 @@
 package net.invictusslayer.slayersbeasts.common.init;
 
-import dev.architectury.registry.registries.DeferredRegister;
-import dev.architectury.registry.registries.RegistrySupplier;
 import net.invictusslayer.slayersbeasts.common.SlayersBeasts;
 import net.invictusslayer.slayersbeasts.common.world.feature.tree.trunk.ColossalTrunkPlacer;
 import net.invictusslayer.slayersbeasts.common.world.feature.tree.trunk.CrossTrunkPlacer;
-import net.minecraft.core.registries.Registries;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.world.level.levelgen.feature.trunkplacers.TrunkPlacerType;
 
-public class SBTrunkPlacers {
-	public static final DeferredRegister<TrunkPlacerType<?>> TRUNK_PLACERS = DeferredRegister.create(SlayersBeasts.MOD_ID, Registries.TRUNK_PLACER_TYPE);
+import java.util.function.Supplier;
 
-	public static final RegistrySupplier<TrunkPlacerType<?>> COLOSSAL_TRUNK_PLACER = TRUNK_PLACERS.register("colossal_trunk_placer", () -> new TrunkPlacerType<>(ColossalTrunkPlacer.CODEC));
-	public static final RegistrySupplier<TrunkPlacerType<?>> CROSS_TRUNK_PLACER = TRUNK_PLACERS.register("cross_trunk_placer", () -> new TrunkPlacerType<>(CrossTrunkPlacer.CODEC));
+public class SBTrunkPlacers {
+	public static final Supplier<TrunkPlacerType<?>> COLOSSAL_TRUNK_PLACER = register("colossal_trunk_placer", () -> new TrunkPlacerType<>(ColossalTrunkPlacer.CODEC));
+	public static final Supplier<TrunkPlacerType<?>> CROSS_TRUNK_PLACER = register("cross_trunk_placer", () -> new TrunkPlacerType<>(CrossTrunkPlacer.CODEC));
+
+	private static <T extends TrunkPlacerType<?>> Supplier<T> register(String name, Supplier<T> supplier) {
+		return SlayersBeasts.PLATFORM.register(BuiltInRegistries.TRUNK_PLACER_TYPE, name, supplier);
+	}
+
+	public static void register() {
+		SlayersBeasts.LOGGER.info("Registering SBTrunkPlacers...");
+	}
 }

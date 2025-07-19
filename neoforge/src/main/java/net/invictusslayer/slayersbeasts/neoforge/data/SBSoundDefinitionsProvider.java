@@ -1,12 +1,15 @@
 package net.invictusslayer.slayersbeasts.neoforge.data;
 
-import dev.architectury.registry.registries.RegistrySupplier;
 import net.invictusslayer.slayersbeasts.common.SlayersBeasts;
 import net.invictusslayer.slayersbeasts.common.init.SBSounds;
+import net.minecraft.core.Holder;
 import net.minecraft.data.PackOutput;
 import net.minecraft.sounds.SoundEvent;
 import net.neoforged.neoforge.common.data.SoundDefinition;
 import net.neoforged.neoforge.common.data.SoundDefinitionsProvider;
+
+import java.util.Objects;
+import java.util.function.Supplier;
 
 public class SBSoundDefinitionsProvider extends SoundDefinitionsProvider {
 	protected SBSoundDefinitionsProvider(PackOutput output) {
@@ -21,11 +24,11 @@ public class SBSoundDefinitionsProvider extends SoundDefinitionsProvider {
 		addSound(SBSounds.MANTIS_HURT);
 	}
 
-	private void addMusicDisc(RegistrySupplier<SoundEvent> sound) {
-		add(sound, SoundDefinition.definition().with(sound(sound.getId().toString().replace(".", "/")).stream()));
+	private void addMusicDisc(Supplier<Holder.Reference<SoundEvent>> sound) {
+		add(sound.get().value(), SoundDefinition.definition().with(sound(Objects.requireNonNull(sound.get().getKey()).location().toString().replace(".", "/")).stream()));
 	}
 
-	private void addSound(RegistrySupplier<SoundEvent> sound) {
-		add(sound, SoundDefinition.definition().with(sound(sound.getId().toString().replace(".", "/"))).subtitle(sound.getId().toLanguageKey("subtitles")));
+	private void addSound(Supplier<SoundEvent> sound) {
+		add(sound.get(), SoundDefinition.definition().with(sound(sound.get().location().toString().replace(".", "/"))).subtitle(sound.get().location().toLanguageKey("subtitles")));
 	}
 }

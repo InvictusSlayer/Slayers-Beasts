@@ -11,7 +11,7 @@ displayName="${mod_name}"
 authors="${mod_authors}"
 #credits=""
 description='''${mod_description}'''
-logoFile="assets/${mod_id}.png"
+logoFile="assets/logo.png"
 displayURL="${homepage_url}"
 #updateJSONURL=""
 #displayTest="MATCH_VERSION"
@@ -29,13 +29,6 @@ mandatory=true
 versionRange="${forge_range}"
 ordering="NONE"
 side="BOTH"
-
-[[dependencies.slayersbeasts]]
-modId = "architectury"
-mandatory = true
-versionRange = "[${arch_version},)"
-ordering = "AFTER"
-side = "BOTH"
 
 [[dependencies.slayersbeasts]]
 modId="terrablender"
