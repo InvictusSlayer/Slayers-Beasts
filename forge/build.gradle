@@ -1,113 +1,90 @@
-import com.modrinth.minotaur.TaskModrinthUpload
-import net.darkhax.curseforgegradle.TaskPublishCurseForge
-
 plugins {
-    id "com.github.johnrengelman.shadow" version "8.1.1"
-    id "net.darkhax.curseforgegradle" version "1.1.+"
-    id "com.modrinth.minotaur" version "2.+"
+    id "multiloader-loader"
+    id "net.neoforged.moddev.legacyforge"
+    id "com.hypherionmc.modutils.modpublisher" version "2.+"
 }
 
-architectury {
-    platformSetupLoomIde()
-    forge()
+mixin {
+    add(sourceSets.main, "${mod_id}.refmap.json")
+
+    config("${mod_id}.mixins.json")
+    config("${mod_id}-forge.mixins.json")
 }
 
-loom {
-    forge {
-        convertAccessWideners = true
-        extraAccessWideners.add loom.accessWidenerPath.get().asFile.name
+legacyForge {
+    version = "${mc_version}-${forge_version}"
 
-        mixinConfigs "${mod_id}.mixins.json", "${mod_id}-forge.mixins.json"
+    validateAccessTransformers = true
+
+    def at = project(":common").file("src/main/resources/META-INF/accesstransformer.cfg")
+    if (at.exists()) {
+        accessTransformers = [at.absolutePath]
     }
-
+    parchment {
+        minecraftVersion = parch_mc_version
+        mappingsVersion = parch_version
+    }
     runs {
+        client {
+            client()
+        }
         data {
             data()
-            programArgs "--all", "--mod", "${mod_id}"
-            programArgs "--output", project(":common").file("src/main/generated").absolutePath
-            programArgs "--existing", file("src/main/resources").absolutePath
-            programArgs "--existing", file("src/main/generated").absolutePath
-            programArgs "--existing", project(":common").file("src/main/resources").absolutePath
-            programArgs "--existing", project(":common").file("src/main/generated").absolutePath
+            programArguments.addAll "--mod", mod_id, "--all", "--output", file("src/main/generated/").getAbsolutePath(), "--existing", file("src/main/resources/").getAbsolutePath()
+        }
+        server {
+            server()
+        }
+    }
+
+    mods {
+        "${mod_id}" {
+            sourceSet sourceSets.main
         }
     }
 }
 
-configurations {
-    common
-    shadowCommon
-    compileClasspath.extendsFrom common
-    runtimeClasspath.extendsFrom common
-    developmentForge.extendsFrom common
-}
+sourceSets.main.resources.srcDir "src/main/generated"
 
 dependencies {
-    forge "net.minecraftforge:forge:${mc_version}-${forge_version}"
+    compileOnly project(":common")
+    annotationProcessor("org.spongepowered:mixin:0.8.5-SNAPSHOT:processor")
 
-    modApi "me.shedaniel.cloth:cloth-config-forge:${cloth_version}"
-
-    common(project(path: ":common", configuration: "namedElements")).transitive(false)
-    shadowCommon(project(path: ":common", configuration: "transformProductionFabric")).transitive(false)
-}
-
-shadowJar {
-    exclude "fabric.mod.json"
-    exclude "architectury.common.json"
-
-    configurations = [project.configurations.shadowCommon]
-    archiveClassifier = "dev-shadow"
-}
-
-remapJar {
-    inputFile.set shadowJar.archiveFile
-    dependsOn shadowJar
+    implementation("maven.modrinth:scabbard:${scab_version}+forge")
+    implementation("com.github.glitchfiend:TerraBlender-forge:${mc_version}-${tb_version}")
+    api("me.shedaniel.cloth:cloth-config-forge:${cloth_version}")
 }
 
 jar {
-    archiveClassifier = "dev"
+    finalizedBy("reobfJar")
+    manifest.attributes([
+            "MixinConfigs": "${mod_id}.mixins.json,${mod_id}-forge.mixins.json"
+    ])
 }
 
-sourcesJar {
-    def commonSources = project(":common").sourcesJar
-    dependsOn commonSources
-    from commonSources.archiveFile.map { zipTree(it) }
-}
-
-components.java {
-    withVariantsFromConfiguration(project.configurations.shadowRuntimeElements) {
-        skip()
+publisher {
+    apiKeys {
+        modrinth System.getenv("MODRINTH_TOKEN")
+        curseforge System.getenv("CURSEFORGE_TOKEN")
     }
-}
+    setCurseID("$curseforge_id")
+    setModrinthID("$modrinth_id")
+    setVersionType("$release_type")
+    setChangelog(projectDir.toPath().parent.resolve("CHANGELOG.md").toFile().readLines().join("\n"))
 
-tasks.register('publishCurseForge', TaskPublishCurseForge) {
-    apiToken = System.getenv("CURSEFORGE_TOKEN")
+    setDisplayName("$mod_name ${project.version} [Forge]")
+    setVersion("${mod_version}+forge")
+    setGameVersions("$mc_version")
+    setLoaders("forge")
 
-    def mainFile = upload(curseforge_id, remapJar)
-    mainFile.displayName = "${mod_id}-${mc_version}-${mod_version} [Forge]"
-    mainFile.releaseType = release_type
-    mainFile.changelog = "${project.property("changelog")}"
-    mainFile.changelogType = "markdown"
-    mainFile.addGameVersion(mc_version)
-    mainFile.addModLoader("forge")
-    mainFile.addRequirement("cloth-config")
-    mainFile.addRequirement("terrablender-forge")
-}
+    setArtifact(jar)
+    addAdditionalFile(sourcesJar)
+    setCurseEnvironment("both")
 
-tasks.register('publishModrinth', TaskModrinthUpload) {
-    modrinth {
-        token = System.getenv("MODRINTH_TOKEN")
-        projectId = modrinth_id
-        versionName = "${mod_name} ${mc_version}-${mod_version} [Forge]"
-        versionNumber = "${mod_version}+forge"
-        versionType = release_type
-        changelog = "${project.property("changelog")}"
-        uploadFile = remapJar
-        additionalFiles = [sourcesJar]
-        gameVersions = [mc_version]
-        loaders = ["forge"]
-        dependencies {
-            required.project "cloth-config"
-            required.project "terrablender"
-        }
+    curseDepends {
+        required "scabbard", "cloth-config", "terrablender-forge"
+    }
+    modrinthDepends {
+        required "scabbard", "cloth-config", "terrablender"
     }
 }

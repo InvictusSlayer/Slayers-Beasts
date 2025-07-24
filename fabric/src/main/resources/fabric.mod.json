@@ -17,16 +17,16 @@
 	"environment": "*",
 	"entrypoints": {
 		"main": [
-			"net.invictusslayer.slayersbeasts.fabric.SBFabric"
+          "net.invictusslayer.slayersbeasts.SBFabric"
 		],
 		"client": [
-			"net.invictusslayer.slayersbeasts.fabric.client.SBFabricClient"
+          "net.invictusslayer.slayersbeasts.client.SBFabricClient"
 		],
 		"modmenu": [
-			"net.invictusslayer.slayersbeasts.fabric.integration.SBModMenu"
+          "net.invictusslayer.slayersbeasts.integration.SBModMenu"
 		],
 		"terrablender": [
-			"net.invictusslayer.slayersbeasts.fabric.integration.SBTerraBlender"
+          "net.invictusslayer.slayersbeasts.integration.SBTerraBlender"
 		]
 	},
 	"mixins": [
@@ -34,9 +34,12 @@
 		"slayersbeasts-fabric.mixins.json"
 	],
 	"depends": {
-		"java": ">=17",
-		"minecraft": "${mc_version}",
+		"java": ">=${java_version}",
+		"minecraft": "~${mc_version}",
 		"fabric": ">=${fabric_loader}",
+		"fabric-api": "*",
 		"terrablender": ">=${tb_version}"
+	},
+	"suggests": {
 	}
 }
