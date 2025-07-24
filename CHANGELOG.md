@@ -1,0 +1,3 @@
+- added scabbard
+- moved from arch loom to multiloader
+- temporarily disabled cloth config
