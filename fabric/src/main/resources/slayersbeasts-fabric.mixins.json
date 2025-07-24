@@ -1,11 +1,14 @@
 {
 	"required": true,
-	"package": "net.invictusslayer.slayersbeasts.fabric.mixin",
-	"compatibilityLevel": "JAVA_21",
 	"minVersion": "0.8",
+	"package": "net.invictusslayer.slayersbeasts.mixin",
+	"refmap": "${mod_id}.refmap.json",
+	"compatibilityLevel": "JAVA_21",
 	"mixins": [
 	],
 	"client": [
+	],
+	"server": [
 	],
 	"injectors": {
 		"defaultRequire": 1
