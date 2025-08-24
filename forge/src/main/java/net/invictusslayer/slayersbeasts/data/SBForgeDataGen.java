@@ -1,8 +1,9 @@
 package net.invictusslayer.slayersbeasts.data;
 
+import net.invictusslayer.scabbard.world.biome.ForgeBiomeModifications;
 import net.invictusslayer.slayersbeasts.SlayersBeasts;
 import net.invictusslayer.slayersbeasts.data.tag.SBBiomeTagsProvider;
-import net.invictusslayer.slayersbeasts.world.SBForgeBiomeModifiers;
+import net.invictusslayer.slayersbeasts.world.biome.SBBiomeModifications;
 import net.minecraft.core.Cloner;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.RegistryAccess;
@@ -14,19 +15,15 @@ import net.minecraft.resources.RegistryDataLoader;
 import net.minecraftforge.common.data.DatapackBuiltinEntriesProvider;
 import net.minecraftforge.common.data.ExistingFileHelper;
 import net.minecraftforge.data.event.GatherDataEvent;
-import net.minecraftforge.eventbus.api.SubscribeEvent;
-import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.registries.ForgeRegistries;
 
 import java.util.Collections;
 import java.util.concurrent.CompletableFuture;
 
-@Mod.EventBusSubscriber(modid = SlayersBeasts.MOD_ID, bus = Mod.EventBusSubscriber.Bus.MOD)
 public class SBForgeDataGen {
 	private static final RegistrySetBuilder BUILDER = new RegistrySetBuilder()
-			.add(ForgeRegistries.Keys.BIOME_MODIFIERS, SBForgeBiomeModifiers::bootstrap);
+			.add(ForgeRegistries.Keys.BIOME_MODIFIERS, context -> ForgeBiomeModifications.bootstrap(context, SBBiomeModifications.HANDLER));
 
-	@SubscribeEvent
 	public static void gatherData(GatherDataEvent event) {
 		DataGenerator gen = event.getGenerator();
 		PackOutput output = gen.getPackOutput();

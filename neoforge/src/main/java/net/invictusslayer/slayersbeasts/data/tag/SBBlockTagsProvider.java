@@ -2,7 +2,6 @@ package net.invictusslayer.slayersbeasts.data.tag;
 
 import net.invictusslayer.slayersbeasts.SlayersBeasts;
 import net.invictusslayer.slayersbeasts.block.SBWoodFamily;
-import net.invictusslayer.slayersbeasts.data.tag.SBTags;
 import net.invictusslayer.slayersbeasts.init.SBBlocks;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
