@@ -13,6 +13,7 @@ accessible  method  net/minecraft/world/level/levelgen/feature/foliageplacers/Fo
 accessible  method  net/minecraft/world/level/levelgen/feature/treedecorators/TreeDecoratorType <init> (Lcom/mojang/serialization/MapCodec;)V
 accessible  method  net/minecraft/world/level/levelgen/feature/trunkplacers/TrunkPlacerType <init> (Lcom/mojang/serialization/MapCodec;)V
 
+accessible  method  net/minecraft/world/level/block/FireBlock setFlammable (Lnet/minecraft/world/level/block/Block;II)V
 accessible  field   net/minecraft/world/entity/npc/VillagerType BY_BIOME Ljava/util/Map;
 accessible  method  net/minecraft/world/entity/npc/VillagerType <init> (Ljava/lang/String;)V
 
@@ -22,7 +23,7 @@ accessible  method  net/minecraft/client/renderer/Sheets createHangingSignMateri
 
 accessible  class   net/minecraft/world/entity/npc/VillagerTrades$EmeraldsForVillagerTypeItem
 
-accessible  method  net/minecraft/world/level/levelgen/structure/pools/SinglePoolElement <init> (Lcom/mojang/datafixers/util/Either;Lnet/minecraft/core/Holder;Lnet/minecraft/world/level/levelgen/structure/pools/StructureTemplatePool$Projection;Ljava/util/Optional;)V
+accessible  method  net/minecraft/world/level/levelgen/structure/pools/SinglePoolElement <init> (Lcom/mojang/datafixers/util/Either;Lnet/minecraft/core/Holder;Lnet/minecraft/world/level/levelgen/structure/pools/StructureTemplatePool$Projection;)V
 
 accessible  method  net/minecraft/data/recipes/RecipeProvider buttonBuilder (Lnet/minecraft/world/level/ItemLike;Lnet/minecraft/world/item/crafting/Ingredient;)Lnet/minecraft/data/recipes/RecipeBuilder;
 accessible  method  net/minecraft/data/recipes/RecipeProvider fenceBuilder (Lnet/minecraft/world/level/ItemLike;Lnet/minecraft/world/item/crafting/Ingredient;)Lnet/minecraft/data/recipes/RecipeBuilder;

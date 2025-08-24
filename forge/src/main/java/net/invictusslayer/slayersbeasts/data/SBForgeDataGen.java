@@ -1,5 +1,6 @@
 package net.invictusslayer.slayersbeasts.data;
 
+import net.invictusslayer.scabbard.world.biome.ForgeBiomeModifications;
 import net.invictusslayer.slayersbeasts.SlayersBeasts;
 import net.invictusslayer.slayersbeasts.data.lang.EnUsLangProvider;
 import net.invictusslayer.slayersbeasts.data.loot.SBBlockLoot;
@@ -7,8 +8,8 @@ import net.invictusslayer.slayersbeasts.data.loot.SBChestLoot;
 import net.invictusslayer.slayersbeasts.data.loot.SBEntityLoot;
 import net.invictusslayer.slayersbeasts.data.loot.SBLootTables;
 import net.invictusslayer.slayersbeasts.data.tag.*;
-import net.invictusslayer.slayersbeasts.world.SBForgeBiomeModifiers;
 import net.invictusslayer.slayersbeasts.world.SBNoises;
+import net.invictusslayer.slayersbeasts.world.biome.SBBiomeModifications;
 import net.invictusslayer.slayersbeasts.world.biome.SBBiomes;
 import net.invictusslayer.slayersbeasts.world.dimension.SBDimensions;
 import net.invictusslayer.slayersbeasts.world.feature.SBConfiguredFeatures;
@@ -29,15 +30,12 @@ import net.minecraft.world.level.storage.loot.parameters.LootContextParamSets;
 import net.minecraftforge.common.data.DatapackBuiltinEntriesProvider;
 import net.minecraftforge.common.data.ExistingFileHelper;
 import net.minecraftforge.data.event.GatherDataEvent;
-import net.minecraftforge.eventbus.api.SubscribeEvent;
-import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.registries.ForgeRegistries;
 
 import java.util.Collections;
 import java.util.List;
 import java.util.concurrent.CompletableFuture;
 
-@Mod.EventBusSubscriber(modid = SlayersBeasts.MOD_ID, bus = Mod.EventBusSubscriber.Bus.MOD)
 public class SBForgeDataGen {
 	private static final RegistrySetBuilder BUILDER = new RegistrySetBuilder()
 			.add(Registries.CONFIGURED_FEATURE, SBConfiguredFeatures::bootstrap)
@@ -49,9 +47,8 @@ public class SBForgeDataGen {
 			.add(Registries.TEMPLATE_POOL, SBPools::bootstrap)
 			.add(Registries.PROCESSOR_LIST, SBProcessorLists::bootstrap)
 			.add(Registries.NOISE, SBNoises::bootstrap)
-			.add(ForgeRegistries.Keys.BIOME_MODIFIERS, SBForgeBiomeModifiers::bootstrap);
+			.add(ForgeRegistries.Keys.BIOME_MODIFIERS, context -> ForgeBiomeModifications.bootstrap(context, SBBiomeModifications.HANDLER));
 
-	@SubscribeEvent
 	public static void gatherData(GatherDataEvent event) {
 		DataGenerator gen = event.getGenerator();
 		PackOutput output = gen.getPackOutput();

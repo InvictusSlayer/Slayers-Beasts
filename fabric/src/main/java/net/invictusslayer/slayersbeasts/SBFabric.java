@@ -3,6 +3,7 @@ package net.invictusslayer.slayersbeasts;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.object.builder.v1.entity.FabricDefaultAttributeRegistry;
 import net.invictusslayer.slayersbeasts.init.SBEntities;
+import net.invictusslayer.slayersbeasts.world.biome.SBBiomeModifications;
 import net.minecraft.world.entity.SpawnPlacements;
 
 public class SBFabric implements ModInitializer {
@@ -20,6 +21,7 @@ public class SBFabric implements ModInitializer {
 		INITIALISED = true;
 
 		SlayersBeasts.init();
+		SBBiomeModifications.register();
 		SlayersBeasts.commonSetup();
 		SBEntities.registerAttributes(FabricDefaultAttributeRegistry::register);
 		SBEntities.registerSpawns(placement -> SpawnPlacements.register(placement.entity(), placement.placement(), placement.heightmap(), placement.predicate()));

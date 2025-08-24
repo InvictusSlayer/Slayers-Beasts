@@ -11,15 +11,20 @@ mixin {
     config("${mod_id}-forge.mixins.json")
 }
 
+jar {
+    finalizedBy("reobfJar")
+    manifest {
+        attributes["MixinConfigs"] = "${mod_id}.mixins.json,${mod_id}-forge.mixins.json"
+    }
+}
+
 legacyForge {
     version = "${mc_version}-${forge_version}"
 
     validateAccessTransformers = true
 
     def at = project(":common").file("src/main/resources/META-INF/accesstransformer.cfg")
-    if (at.exists()) {
-        accessTransformers = [at.absolutePath]
-    }
+    if (at.exists()) accessTransformers = [at.absolutePath]
     parchment {
         minecraftVersion = parch_mc_version
         mappingsVersion = parch_version
@@ -53,13 +58,6 @@ dependencies {
     implementation("maven.modrinth:scabbard:${scab_version}+forge")
     implementation("com.github.glitchfiend:TerraBlender-forge:${mc_version}-${tb_version}")
     api("me.shedaniel.cloth:cloth-config-forge:${cloth_version}")
-}
-
-jar {
-    finalizedBy("reobfJar")
-    manifest.attributes([
-            "MixinConfigs": "${mod_id}.mixins.json,${mod_id}-forge.mixins.json"
-    ])
 }
 
 publisher {
