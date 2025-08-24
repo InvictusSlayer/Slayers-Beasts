@@ -2,8 +2,11 @@ package net.invictusslayer.slayersbeasts;
 
 import net.invictusslayer.scabbard.platform.ForgePlatformHandler;
 import net.invictusslayer.slayersbeasts.client.SBForgeClient;
+import net.invictusslayer.slayersbeasts.data.SBForgeDataGen;
 import net.invictusslayer.slayersbeasts.init.SBEntities;
+import net.invictusslayer.slayersbeasts.world.biome.SBBiomeModifications;
 import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.data.event.GatherDataEvent;
 import net.minecraftforge.event.entity.EntityAttributeCreationEvent;
 import net.minecraftforge.event.entity.SpawnPlacementRegisterEvent;
 import net.minecraftforge.eventbus.api.IEventBus;
@@ -24,6 +27,10 @@ public class SBForge {
 			SlayersBeasts.commonSetup();
 			SlayersBeasts.registerRegions();
 		}));
+		bus.addListener((GatherDataEvent event) -> {
+			SBBiomeModifications.register();
+			SBForgeDataGen.gatherData(event);
+		});
 		bus.addListener((EntityAttributeCreationEvent event) -> SBEntities.registerAttributes(event::put));
 		bus.addListener((SpawnPlacementRegisterEvent event) -> SBEntities.registerSpawns(placement -> event.register(placement.entity(), placement.placement(), placement.heightmap(), placement.predicate(), SpawnPlacementRegisterEvent.Operation.OR)));
 

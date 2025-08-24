@@ -74,6 +74,7 @@ public class SBTags {
 		public static final TagKey<Biome> SPAWNS_GREY_FOXES = spawnsTag("grey_foxes");
 
 		public static final TagKey<Biome> SPAWNS_MANTIS = spawnsTag("mantis");
+		public static final TagKey<Biome> SPAWNS_WITHER_SPIDER = spawnsTag("wither_spider");
 		public static final TagKey<Biome> SPAWNS_DAMSELFLY = spawnsTag("damselfly");
 
 		private static TagKey<Biome> structureTag(String name) {

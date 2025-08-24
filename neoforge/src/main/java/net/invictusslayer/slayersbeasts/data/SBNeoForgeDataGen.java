@@ -1,5 +1,6 @@
 package net.invictusslayer.slayersbeasts.data;
 
+import net.invictusslayer.scabbard.world.biome.NeoForgeBiomeModifications;
 import net.invictusslayer.slayersbeasts.SlayersBeasts;
 import net.invictusslayer.slayersbeasts.data.lang.EnUsLangProvider;
 import net.invictusslayer.slayersbeasts.data.loot.SBBlockLoot;
@@ -8,8 +9,8 @@ import net.invictusslayer.slayersbeasts.data.loot.SBEntityLoot;
 import net.invictusslayer.slayersbeasts.data.loot.SBLootTables;
 import net.invictusslayer.slayersbeasts.data.tag.*;
 import net.invictusslayer.slayersbeasts.item.SBJukeboxSongs;
-import net.invictusslayer.slayersbeasts.world.SBNeoForgeBiomeModifiers;
 import net.invictusslayer.slayersbeasts.world.SBNoises;
+import net.invictusslayer.slayersbeasts.world.biome.SBBiomeModifications;
 import net.invictusslayer.slayersbeasts.world.biome.SBBiomes;
 import net.invictusslayer.slayersbeasts.world.dimension.SBDimensions;
 import net.invictusslayer.slayersbeasts.world.feature.SBConfiguredFeatures;
@@ -27,7 +28,6 @@ import net.minecraft.core.registries.Registries;
 import net.minecraft.data.loot.LootTableProvider;
 import net.minecraft.resources.RegistryDataLoader;
 import net.minecraft.world.level.storage.loot.parameters.LootContextParamSets;
-import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.neoforge.common.data.DatapackBuiltinEntriesProvider;
 import net.neoforged.neoforge.common.world.BiomeModifier;
 import net.neoforged.neoforge.data.event.GatherDataEvent;
@@ -48,9 +48,8 @@ public class SBNeoForgeDataGen {
 			.add(Registries.PROCESSOR_LIST, SBProcessorLists::bootstrap)
 			.add(Registries.NOISE, SBNoises::bootstrap)
 			.add(Registries.JUKEBOX_SONG, SBJukeboxSongs::bootstrap)
-			.add(NeoForgeRegistries.Keys.BIOME_MODIFIERS, SBNeoForgeBiomeModifiers::bootstrap);
+			.add(NeoForgeRegistries.Keys.BIOME_MODIFIERS, context -> NeoForgeBiomeModifications.bootstrap(context, SBBiomeModifications.HANDLER));
 
-	@SubscribeEvent
 	public static void gatherData(GatherDataEvent.Client event) {
 		event.createProvider((output, provider) -> new DatapackBuiltinEntriesProvider(output, provider, BUILDER, Collections.singleton(SlayersBeasts.MOD_ID)));
 
