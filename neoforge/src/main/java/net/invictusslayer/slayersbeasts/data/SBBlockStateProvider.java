@@ -18,10 +18,11 @@ import net.minecraft.world.level.block.state.properties.DoubleBlockHalf;
 import net.neoforged.neoforge.client.model.generators.BlockStateProvider;
 import net.neoforged.neoforge.client.model.generators.ConfiguredModel;
 import net.neoforged.neoforge.client.model.generators.ModelFile;
+import net.neoforged.neoforge.common.data.ExistingFileHelper;
 
 public class SBBlockStateProvider extends BlockStateProvider {
-	public SBBlockStateProvider(PackOutput output) {
-		super(output, SlayersBeasts.MOD_ID, null);
+	public SBBlockStateProvider(PackOutput output, ExistingFileHelper helper) {
+		super(output, SlayersBeasts.MOD_ID, helper);
 	}
 
 	protected void registerStatesAndModels() {

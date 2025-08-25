@@ -5,6 +5,7 @@ import net.invictusslayer.slayersbeasts.init.SBSounds;
 import net.minecraft.core.Holder;
 import net.minecraft.data.PackOutput;
 import net.minecraft.sounds.SoundEvent;
+import net.neoforged.neoforge.common.data.ExistingFileHelper;
 import net.neoforged.neoforge.common.data.SoundDefinition;
 import net.neoforged.neoforge.common.data.SoundDefinitionsProvider;
 
@@ -12,8 +13,8 @@ import java.util.Objects;
 import java.util.function.Supplier;
 
 public class SBSoundDefinitionsProvider extends SoundDefinitionsProvider {
-	protected SBSoundDefinitionsProvider(PackOutput output) {
-		super(output, SlayersBeasts.MOD_ID, null);
+	protected SBSoundDefinitionsProvider(PackOutput output, ExistingFileHelper helper) {
+		super(output, SlayersBeasts.MOD_ID, helper);
 	}
 
 	public void registerSounds() {
@@ -29,6 +30,6 @@ public class SBSoundDefinitionsProvider extends SoundDefinitionsProvider {
 	}
 
 	private void addSound(Supplier<SoundEvent> sound) {
-		add(sound.get(), SoundDefinition.definition().with(sound(sound.get().toString().replace(".", "/"))).subtitle(sound.get().getLocation().toLanguageKey("subtitles")));
+		add(sound.get(), SoundDefinition.definition().with(sound(sound.get().getLocation().toString().replace(".", "/"))).subtitle(sound.get().getLocation().toLanguageKey("subtitles")));
 	}
 }

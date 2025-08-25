@@ -29,6 +29,7 @@ import net.minecraft.data.loot.LootTableProvider;
 import net.minecraft.resources.RegistryDataLoader;
 import net.minecraft.world.level.storage.loot.parameters.LootContextParamSets;
 import net.neoforged.neoforge.common.data.DatapackBuiltinEntriesProvider;
+import net.neoforged.neoforge.common.data.ExistingFileHelper;
 import net.neoforged.neoforge.common.world.BiomeModifier;
 import net.neoforged.neoforge.data.event.GatherDataEvent;
 import net.neoforged.neoforge.registries.NeoForgeRegistries;
@@ -51,18 +52,20 @@ public class SBNeoForgeDataGen {
 			.add(NeoForgeRegistries.Keys.BIOME_MODIFIERS, context -> NeoForgeBiomeModifications.bootstrap(context, SBBiomeModifications.HANDLER));
 
 	public static void gatherData(GatherDataEvent event) {
+		ExistingFileHelper helper = event.getExistingFileHelper();
+
 		event.createProvider((output, provider) -> new DatapackBuiltinEntriesProvider(output, provider, BUILDER, Collections.singleton(SlayersBeasts.MOD_ID)));
 
-		event.createBlockAndItemTags(SBBlockTagsProvider::new, SBItemTagsProvider::new);
-		event.createProvider((output, provider) -> new SBBiomeTagsProvider(output, provider.thenApply(SBNeoForgeDataGen::patchRegistry)));
+		event.createBlockAndItemTags((output, provider) -> new SBBlockTagsProvider(output, provider, helper), SBItemTagsProvider::new);
+		event.createProvider((output, provider) -> new SBBiomeTagsProvider(output, provider.thenApply(SBNeoForgeDataGen::patchRegistry), helper));
 		event.createProvider(SBEntityTagsProvider::new);
 		event.createProvider(SBPoiTagsProvider::new);
 
 		event.createProvider(EnUsLangProvider::new);
 		event.createProvider(SBRecipeProvider::new);
-		event.createProvider(SBBlockStateProvider::new);
-		event.createProvider(SBItemModelProvider::new);
-		event.createProvider(SBSoundDefinitionsProvider::new);
+		event.createProvider(output -> new SBBlockStateProvider(output, helper));
+		event.createProvider(output -> new SBItemModelProvider(output, helper));
+		event.createProvider(output -> new SBSoundDefinitionsProvider(output, helper));
 
 		event.createProvider((output, provider) -> new LootTableProvider(output, SBLootTables.all(), List.of(
 				new LootTableProvider.SubProviderEntry(SBBlockLoot::new, LootContextParamSets.BLOCK),

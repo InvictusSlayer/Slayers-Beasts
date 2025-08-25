@@ -54,7 +54,7 @@ minecraft {
         data {
             workingDirectory file("run-data")
             ideaModule "${rootProject.name}.${project.name}.main"
-            args "--mod", mod_id, "--all", "--output", file("src/main/generated/"), "--existing", file("src/main/resources/")
+            args "--mod", mod_id, "--all", "--output", file("src/main/generated/"), "--existing", file("src/main/resources/"), "--existing", project(":common").file("src/main/generated")
             taskName "runData"
             mods {
                 modDataRun {

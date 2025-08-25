@@ -4,14 +4,19 @@ import net.invictusslayer.slayersbeasts.SlayersBeasts;
 import net.invictusslayer.slayersbeasts.block.SBWoodFamily;
 import net.invictusslayer.slayersbeasts.init.SBBlocks;
 import net.invictusslayer.slayersbeasts.init.SBItems;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.data.PackOutput;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.level.ItemLike;
+import net.minecraft.world.level.block.Block;
 import net.neoforged.neoforge.client.model.generators.ItemModelProvider;
+import net.neoforged.neoforge.common.data.ExistingFileHelper;
 
 import java.util.function.Supplier;
 
 public class SBItemModelProvider extends ItemModelProvider {
-	public SBItemModelProvider(PackOutput output) {
-		super(output, SlayersBeasts.MOD_ID, null);
+	public SBItemModelProvider(PackOutput output, ExistingFileHelper helper) {
+		super(output, SlayersBeasts.MOD_ID, helper);
 	}
 
 	protected void registerModels() {
@@ -63,31 +68,28 @@ public class SBItemModelProvider extends ItemModelProvider {
 	private void generateWoodFamilies() {
 		SBWoodFamily.getAllFamilies().forEach(family -> family.getVariants().forEach((variant, supplier) -> {
 			switch (variant) {
-				case DOOR, BOAT, CHEST_BOAT, HANGING_SIGN_ITEM, SIGN_ITEM -> item(supplier);
-				case SAPLING -> block(supplier);
+				case DOOR, BOAT, CHEST_BOAT, HANGING_SIGN_ITEM, SIGN_ITEM -> item((Supplier<? extends ItemLike>) supplier);
+				case SAPLING -> block((Supplier<? extends Block>) supplier);
 			}
 		}));
 	}
 
-	private void block(Supplier<?> block) {
+	private void block(Supplier<? extends Block> block) {
 		block(block, "");
 	}
 
-	private void block(Supplier<?> block, String suffix) {
-//		withExistingParent(block.getPath(),
-//				ResourceLocation.fromNamespaceAndPath("minecraft", "item/generated")).texture("layer0",
-//				ResourceLocation.fromNamespaceAndPath(SlayersBeasts.MOD_ID, "block/" + block.get().getPath() + suffix));
+	private void block(Supplier<? extends Block> block, String suffix) {
+		singleTexture(BuiltInRegistries.BLOCK.getKey(block.get()).getPath(), ResourceLocation.withDefaultNamespace("item/generated"), "layer0",
+				ResourceLocation.fromNamespaceAndPath(SlayersBeasts.MOD_ID, "block/" + BuiltInRegistries.BLOCK.getKey(block.get()).getPath() + suffix));
 	}
 
-	private void item(Supplier<?> item) {
-//		withExistingParent(item.getId().getPath(),
-//				ResourceLocation.fromNamespaceAndPath("minecraft", "item/generated")).texture("layer0",
-//				ResourceLocation.fromNamespaceAndPath(SlayersBeasts.MOD_ID, "item/" + item.getId().getPath()));
+	private void item(Supplier<? extends ItemLike> item) {
+		singleTexture(BuiltInRegistries.ITEM.getKey(item.get().asItem()).getPath(), ResourceLocation.withDefaultNamespace("item/generated"), "layer0",
+				ResourceLocation.fromNamespaceAndPath(SlayersBeasts.MOD_ID, "item/" + BuiltInRegistries.ITEM.getKey(item.get().asItem()).getPath()));
 	}
 
 //	private void handheldItem(Supplier<Item> item) {
-//		withExistingParent(item.getId().getPath(),
-//				ResourceLocation.fromNamespaceAndPath("minecraft", "item/handheld")).texture("layer0",
-//				ResourceLocation.fromNamespaceAndPath(SlayersBeasts.MOD_ID, "item/" + item.getId().getPath()));
+//      singleTexture(BuiltInRegistries.ITEM.getKey(item.get()).getPath(), ResourceLocation.withDefaultNamespace("item/handheld"), "layer0",
+//		        ResourceLocation.fromNamespaceAndPath(SlayersBeasts.MOD_ID, "item/" + BuiltInRegistries.ITEM.getKey(item.get()).getPath()));
 //	}
 }
