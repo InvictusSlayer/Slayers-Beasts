@@ -25,10 +25,10 @@ public class SBSoundDefinitionsProvider extends SoundDefinitionsProvider {
 	}
 
 	private void addMusicDisc(Supplier<Holder.Reference<SoundEvent>> sound) {
-		add(sound.get().value(), SoundDefinition.definition().with(sound(sound.get().value().getLocation().getPath().replace(".", "/")).stream()));
+		add(sound.get().value(), SoundDefinition.definition().with(sound(sound.get().value().getLocation().toString().replace(".", "/")).stream()));
 	}
 
 	private void addSound(Supplier<SoundEvent> sound) {
-		add(sound.get(), SoundDefinition.definition().with(sound(sound.get().getLocation().getPath().replace(".", "/"))).subtitle(sound.get().getLocation().toLanguageKey("subtitles")));
+		add(sound.get(), SoundDefinition.definition().with(sound(sound.get().getLocation().toString().replace(".", "/"))).subtitle(sound.get().getLocation().toLanguageKey("subtitles")));
 	}
 }

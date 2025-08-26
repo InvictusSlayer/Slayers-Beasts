@@ -35,7 +35,11 @@ legacyForge {
         }
         data {
             data()
-            programArguments.addAll "--mod", mod_id, "--all", "--output", file("src/main/generated/").getAbsolutePath(), "--existing", file("src/main/resources/").getAbsolutePath()
+            programArguments.addAll "--all", "--mod", "${mod_id}"
+            programArguments.addAll "--output", rootProject.project(":common").file("src/main/generated").absolutePath
+            programArguments.addAll "--existing", file("src/main/resources").absolutePath
+            programArguments.addAll "--existing", rootProject.project(":common").file("src/main/resources").absolutePath
+            programArguments.addAll "--existing", rootProject.project(":common").file("src/main/generated").absolutePath
         }
         server {
             server()
@@ -49,7 +53,7 @@ legacyForge {
     }
 }
 
-sourceSets.main.resources.srcDir "src/main/generated"
+sourceSets.main.resources.srcDir project(":common").file("src/main/generated").absolutePath
 
 dependencies {
     compileOnly project(":common")
