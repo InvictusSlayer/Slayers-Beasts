@@ -2,8 +2,8 @@ package net.invictusslayer.slayersbeasts;
 
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.object.builder.v1.entity.FabricDefaultAttributeRegistry;
-import net.invictusslayer.slayersbeasts.init.SBEntities;
-import net.invictusslayer.slayersbeasts.world.biome.SBBiomeModifications;
+import net.invictusslayer.slayersbeasts.registries.SBEntities;
+import net.invictusslayer.slayersbeasts.world.level.biome.SBBiomeModifications;
 import net.minecraft.world.entity.SpawnPlacements;
 
 public class SBFabric implements ModInitializer {

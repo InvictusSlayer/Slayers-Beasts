@@ -1,7 +1,7 @@
 package net.invictusslayer.slayersbeasts.mixin.client;
 
 import net.invictusslayer.slayersbeasts.SlayersBeasts;
-import net.invictusslayer.slayersbeasts.entity.vehicle.SBBoatType;
+import net.invictusslayer.slayersbeasts.world.entity.vehicle.SBBoatType;
 import net.minecraft.client.renderer.entity.BoatRenderer;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.vehicle.Boat;

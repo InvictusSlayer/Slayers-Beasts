@@ -1,7 +1,7 @@
 package net.invictusslayer.slayersbeasts.data;
 
 import net.invictusslayer.slayersbeasts.SlayersBeasts;
-import net.invictusslayer.slayersbeasts.init.SBSounds;
+import net.invictusslayer.slayersbeasts.registries.SBSounds;
 import net.minecraft.core.Holder;
 import net.minecraft.data.PackOutput;
 import net.minecraft.sounds.SoundEvent;

@@ -2,11 +2,11 @@ package net.invictusslayer.slayersbeasts.data;
 
 import net.invictusslayer.scabbard.world.level.WoodFamily;
 import net.invictusslayer.slayersbeasts.SlayersBeasts;
-import net.invictusslayer.slayersbeasts.block.DepletedCryptalithBlock;
-import net.invictusslayer.slayersbeasts.block.InfusedCryptalithBlock;
-import net.invictusslayer.slayersbeasts.block.SBBlockFamily;
-import net.invictusslayer.slayersbeasts.block.SBWoodFamily;
-import net.invictusslayer.slayersbeasts.init.SBBlocks;
+import net.invictusslayer.slayersbeasts.registries.SBBlocks;
+import net.invictusslayer.slayersbeasts.world.level.block.DepletedCryptalithBlock;
+import net.invictusslayer.slayersbeasts.world.level.block.InfusedCryptalithBlock;
+import net.invictusslayer.slayersbeasts.world.level.block.SBBlockFamily;
+import net.invictusslayer.slayersbeasts.world.level.block.SBWoodFamily;
 import net.minecraft.core.Direction;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.data.BlockFamily;

@@ -2,10 +2,10 @@ package net.invictusslayer.slayersbeasts.data;
 
 import net.invictusslayer.scabbard.world.level.WoodFamily;
 import net.invictusslayer.slayersbeasts.SlayersBeasts;
-import net.invictusslayer.slayersbeasts.block.SBBlockFamily;
-import net.invictusslayer.slayersbeasts.block.SBWoodFamily;
-import net.invictusslayer.slayersbeasts.init.SBBlocks;
-import net.invictusslayer.slayersbeasts.init.SBItems;
+import net.invictusslayer.slayersbeasts.registries.SBBlocks;
+import net.invictusslayer.slayersbeasts.registries.SBItems;
+import net.invictusslayer.slayersbeasts.world.level.block.SBBlockFamily;
+import net.invictusslayer.slayersbeasts.world.level.block.SBWoodFamily;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.BlockFamily;
 import net.minecraft.data.PackOutput;
@@ -103,15 +103,15 @@ public class SBRecipeProvider extends RecipeProvider {
 		SBBlockFamily.getAllFamilies().filter(BlockFamily::shouldGenerateRecipe).forEach(family -> generateRecipes(output, family, FeatureFlagSet.of(FeatureFlags.VANILLA)));
 	}
 
-	protected static void twoByTwoPacker(RecipeOutput output, RecipeCategory category, ItemLike pPacked, ItemLike pUnpacked) {
+	public static void twoByTwoPacker(RecipeOutput output, RecipeCategory category, ItemLike pPacked, ItemLike pUnpacked) {
 		ShapedRecipeBuilder.shaped(category, pPacked, 1).define('#', pUnpacked).pattern("##").pattern("##").unlockedBy(getHasName(pUnpacked), has(pUnpacked)).save(output, ResourceLocation.fromNamespaceAndPath(SlayersBeasts.MOD_ID, getSimpleRecipeName(pUnpacked)));
 	}
 
-	protected static void nineBlockStorageRecipes(RecipeOutput output, RecipeCategory unpackedCategory, ItemLike unpacked, RecipeCategory packedCategory, ItemLike packed) {
+	public static void nineBlockStorageRecipes(RecipeOutput output, RecipeCategory unpackedCategory, ItemLike unpacked, RecipeCategory packedCategory, ItemLike packed) {
 		nineBlockStorageRecipes(output, unpackedCategory, unpacked, packedCategory, packed, getSimpleRecipeName(packed), getSimpleRecipeName(unpacked));
 	}
 
-	protected static void nineBlockStorageRecipes(RecipeOutput output, RecipeCategory unpackedCategory, ItemLike unpacked, RecipeCategory packedCategory, ItemLike packed, String packedName, String unpackedName) {
+	public static void nineBlockStorageRecipes(RecipeOutput output, RecipeCategory unpackedCategory, ItemLike unpacked, RecipeCategory packedCategory, ItemLike packed, String packedName, String unpackedName) {
 		ShapelessRecipeBuilder.shapeless(unpackedCategory, unpacked, 9).requires(packed).group(null).unlockedBy(getHasName(packed), has(packed)).save(output, ResourceLocation.fromNamespaceAndPath(SlayersBeasts.MOD_ID, unpackedName));
 		ShapedRecipeBuilder.shaped(packedCategory, packed).define('#', unpacked).pattern("###").pattern("###").pattern("###").group(null).unlockedBy(getHasName(unpacked), has(unpacked)).save(output, ResourceLocation.fromNamespaceAndPath(SlayersBeasts.MOD_ID, packedName));
 	}

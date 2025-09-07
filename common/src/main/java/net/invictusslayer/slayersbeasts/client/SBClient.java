@@ -2,7 +2,7 @@ package net.invictusslayer.slayersbeasts.client;
 
 import net.invictusslayer.slayersbeasts.client.model.*;
 import net.invictusslayer.slayersbeasts.client.renderer.*;
-import net.invictusslayer.slayersbeasts.init.SBEntities;
+import net.invictusslayer.slayersbeasts.registries.SBEntities;
 import net.minecraft.client.model.geom.ModelLayerLocation;
 import net.minecraft.client.model.geom.builders.LayerDefinition;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;

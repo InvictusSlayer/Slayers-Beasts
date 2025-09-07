@@ -1,6 +1,6 @@
 package net.invictusslayer.slayersbeasts.mixin.common;
 
-import net.invictusslayer.slayersbeasts.block.IExtendedMushroomBlock;
+import net.invictusslayer.slayersbeasts.world.level.block.IExtendedMushroomBlock;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Holder;
 import net.minecraft.core.registries.Registries;

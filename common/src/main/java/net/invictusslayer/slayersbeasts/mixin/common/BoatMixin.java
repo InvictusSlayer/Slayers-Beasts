@@ -1,7 +1,7 @@
 package net.invictusslayer.slayersbeasts.mixin.common;
 
-import net.invictusslayer.slayersbeasts.entity.vehicle.SBBoatType;
-import net.invictusslayer.slayersbeasts.init.SBItems;
+import net.invictusslayer.slayersbeasts.world.entity.vehicle.SBBoatType;
+import net.invictusslayer.slayersbeasts.registries.SBItems;
 import net.minecraft.world.entity.vehicle.Boat;
 import net.minecraft.world.item.Item;
 import org.spongepowered.asm.mixin.Mixin;

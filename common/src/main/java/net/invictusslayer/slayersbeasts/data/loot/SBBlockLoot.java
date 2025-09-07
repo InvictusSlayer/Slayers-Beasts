@@ -1,10 +1,10 @@
 package net.invictusslayer.slayersbeasts.data.loot;
 
 import net.invictusslayer.scabbard.world.level.WoodFamily;
-import net.invictusslayer.slayersbeasts.block.SBBlockFamily;
-import net.invictusslayer.slayersbeasts.block.SBWoodFamily;
-import net.invictusslayer.slayersbeasts.init.SBBlocks;
-import net.invictusslayer.slayersbeasts.init.SBItems;
+import net.invictusslayer.slayersbeasts.world.level.block.SBBlockFamily;
+import net.invictusslayer.slayersbeasts.world.level.block.SBWoodFamily;
+import net.invictusslayer.slayersbeasts.registries.SBBlocks;
+import net.invictusslayer.slayersbeasts.registries.SBItems;
 import net.minecraft.advancements.critereon.StatePropertiesPredicate;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.registries.Registries;
