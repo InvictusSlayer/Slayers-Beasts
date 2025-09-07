@@ -1,10 +1,10 @@
 package net.invictusslayer.slayersbeasts.client;
 
 import net.invictusslayer.scabbard.world.level.WoodFamily;
-import net.invictusslayer.slayersbeasts.block.SBWoodFamily;
 import net.invictusslayer.slayersbeasts.client.model.*;
 import net.invictusslayer.slayersbeasts.client.renderer.*;
-import net.invictusslayer.slayersbeasts.init.SBEntities;
+import net.invictusslayer.slayersbeasts.registries.SBEntities;
+import net.invictusslayer.slayersbeasts.world.level.block.SBWoodFamily;
 import net.minecraft.client.model.BoatModel;
 import net.minecraft.client.model.geom.ModelLayerLocation;
 import net.minecraft.client.model.geom.builders.LayerDefinition;

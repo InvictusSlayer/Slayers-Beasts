@@ -1,6 +1,6 @@
 package net.invictusslayer.slayersbeasts.data.loot;
 
-import net.invictusslayer.slayersbeasts.init.SBEntities;
+import net.invictusslayer.slayersbeasts.registries.SBEntities;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.loot.EntityLootSubProvider;
 import net.minecraft.resources.ResourceKey;

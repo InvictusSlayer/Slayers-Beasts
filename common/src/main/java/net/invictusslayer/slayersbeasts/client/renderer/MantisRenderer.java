@@ -3,7 +3,7 @@ package net.invictusslayer.slayersbeasts.client.renderer;
 import net.invictusslayer.slayersbeasts.SlayersBeasts;
 import net.invictusslayer.slayersbeasts.client.model.MantisModel;
 import net.invictusslayer.slayersbeasts.client.state.MantisRenderState;
-import net.invictusslayer.slayersbeasts.entity.Mantis;
+import net.invictusslayer.slayersbeasts.world.entity.Mantis;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.client.renderer.entity.MobRenderer;
 import net.minecraft.resources.ResourceLocation;

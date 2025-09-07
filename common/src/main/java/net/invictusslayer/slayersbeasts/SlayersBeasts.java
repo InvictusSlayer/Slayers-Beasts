@@ -1,17 +1,19 @@
 package net.invictusslayer.slayersbeasts;
 
+import me.shedaniel.autoconfig.AutoConfig;
+import me.shedaniel.autoconfig.serializer.Toml4jConfigSerializer;
 import net.invictusslayer.scabbard.platform.IPlatformHandler;
-import net.invictusslayer.slayersbeasts.block.IExtendedMushroomBlock;
-import net.invictusslayer.slayersbeasts.block.SBFlammableBlocks;
-import net.invictusslayer.slayersbeasts.block.SBStrippableBlocks;
-import net.invictusslayer.slayersbeasts.block.SBWoodType;
+import net.invictusslayer.slayersbeasts.world.level.block.IExtendedMushroomBlock;
+import net.invictusslayer.slayersbeasts.world.level.block.SBFlammableBlocks;
+import net.invictusslayer.slayersbeasts.world.level.block.SBStrippableBlocks;
+import net.invictusslayer.slayersbeasts.world.level.block.SBWoodType;
 import net.invictusslayer.slayersbeasts.config.SBConfig;
-import net.invictusslayer.slayersbeasts.init.*;
-import net.invictusslayer.slayersbeasts.item.SBDispensableItems;
-import net.invictusslayer.slayersbeasts.world.biome.SBSurfaceRuleData;
-import net.invictusslayer.slayersbeasts.world.biome.region.SBNetherRegion;
-import net.invictusslayer.slayersbeasts.world.biome.region.SBOverworldRegion;
-import net.invictusslayer.slayersbeasts.world.feature.SBConfiguredFeatures;
+import net.invictusslayer.slayersbeasts.registries.*;
+import net.invictusslayer.slayersbeasts.world.item.SBDispensableItems;
+import net.invictusslayer.slayersbeasts.world.level.biome.SBSurfaceRuleData;
+import net.invictusslayer.slayersbeasts.world.level.biome.region.SBNetherRegion;
+import net.invictusslayer.slayersbeasts.world.level.biome.region.SBOverworldRegion;
+import net.invictusslayer.slayersbeasts.world.level.gen.feature.SBConfiguredFeatures;
 import net.minecraft.client.renderer.Sheets;
 import net.minecraft.world.entity.animal.Fox;
 import net.minecraft.world.entity.animal.MushroomCow;
@@ -56,9 +58,9 @@ public class SlayersBeasts {
 	}
 
 	public static void loadConfig() {
-//		if (CONFIG != null) return;
-//		AutoConfig.register(SBConfig.class, Toml4jConfigSerializer::new);
-//		CONFIG = AutoConfig.getConfigHolder(SBConfig.class).getConfig();
+		if (CONFIG != null) return;
+		AutoConfig.register(SBConfig.class, Toml4jConfigSerializer::new);
+		CONFIG = AutoConfig.getConfigHolder(SBConfig.class).getConfig();
 	}
 
 	public static <T extends IPlatformHandler> void loadPlatform(Class<T> clazz) {
@@ -72,9 +74,9 @@ public class SlayersBeasts {
 		LOGGER.info("Extended MushroomCow$Type values: {}", Arrays.toString(MushroomCow.Variant.values()));
 		LOGGER.info("Extended Fox$Type values: {}", Arrays.toString(Fox.Variant.values()));
 
-		SBFlammableBlocks.registerAll();
-		SBStrippableBlocks.registerAll();
-		SBDispensableItems.registerAll();
+		SBFlammableBlocks.register();
+		SBStrippableBlocks.register();
+		SBDispensableItems.register();
 		SBVillagerType.setupBiomes();
 
 		((IExtendedMushroomBlock) SBBlocks.BLACK_MUSHROOM.get()).setMightyMushroom(SBConfiguredFeatures.MIGHTY_BLACK_MUSHROOM);
@@ -96,8 +98,8 @@ public class SlayersBeasts {
 
 	public static void registerRegions() {
 		loadConfig();
-		/*if (CONFIG.worldgen.overworld_biomes)*/ Regions.register(new SBOverworldRegion(2));//CONFIG.worldgen.overworld_region_weight));
-		/*if (CONFIG.worldgen.nether_biomes)*/ Regions.register(new SBNetherRegion(2));//CONFIG.worldgen.nether_region_weight));
+		if (CONFIG.worldgen.overworld_biomes) Regions.register(new SBOverworldRegion(CONFIG.worldgen.overworld_region_weight));
+		if (CONFIG.worldgen.nether_biomes) Regions.register(new SBNetherRegion(CONFIG.worldgen.nether_region_weight));
 //		if (CONFIG.worldgen.end_biomes) Regions.register(new SBEndRegion(CONFIG.worldgen.end_region_weight));
 	}
 }

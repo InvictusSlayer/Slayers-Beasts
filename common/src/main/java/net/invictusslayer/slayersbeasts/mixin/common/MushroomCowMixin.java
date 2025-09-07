@@ -1,6 +1,6 @@
 package net.invictusslayer.slayersbeasts.mixin.common;
 
-import net.invictusslayer.slayersbeasts.entity.SBMushroomCowVariant;
+import net.invictusslayer.slayersbeasts.world.entity.SBMushroomCowVariant;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.util.RandomSource;

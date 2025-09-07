@@ -2,8 +2,8 @@ package net.invictusslayer.slayersbeasts.data;
 
 import net.invictusslayer.scabbard.world.biome.ForgeBiomeModifications;
 import net.invictusslayer.slayersbeasts.SlayersBeasts;
-import net.invictusslayer.slayersbeasts.data.tag.SBBiomeTagsProvider;
-import net.invictusslayer.slayersbeasts.world.biome.SBBiomeModifications;
+import net.invictusslayer.slayersbeasts.data.tags.SBBiomeTagsProvider;
+import net.invictusslayer.slayersbeasts.world.level.biome.SBBiomeModifications;
 import net.minecraft.core.Cloner;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.RegistryAccess;

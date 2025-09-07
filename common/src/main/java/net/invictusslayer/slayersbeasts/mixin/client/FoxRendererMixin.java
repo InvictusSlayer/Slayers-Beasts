@@ -1,7 +1,7 @@
 package net.invictusslayer.slayersbeasts.mixin.client;
 
 import net.invictusslayer.slayersbeasts.SlayersBeasts;
-import net.invictusslayer.slayersbeasts.entity.SBFoxVariant;
+import net.invictusslayer.slayersbeasts.world.entity.SBFoxVariant;
 import net.minecraft.client.renderer.entity.FoxRenderer;
 import net.minecraft.client.renderer.entity.state.FoxRenderState;
 import net.minecraft.resources.ResourceLocation;

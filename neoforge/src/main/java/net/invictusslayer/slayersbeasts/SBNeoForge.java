@@ -2,8 +2,8 @@ package net.invictusslayer.slayersbeasts;
 
 import net.invictusslayer.scabbard.platform.NeoForgePlatformHandler;
 import net.invictusslayer.slayersbeasts.data.SBNeoForgeDataGen;
-import net.invictusslayer.slayersbeasts.init.SBEntities;
-import net.invictusslayer.slayersbeasts.world.biome.SBBiomeModifications;
+import net.invictusslayer.slayersbeasts.registries.SBEntities;
+import net.invictusslayer.slayersbeasts.world.level.biome.SBBiomeModifications;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.fml.common.Mod;
 import net.neoforged.fml.event.lifecycle.FMLCommonSetupEvent;

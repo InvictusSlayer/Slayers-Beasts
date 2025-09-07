@@ -3,13 +3,16 @@ package net.invictusslayer.slayersbeasts.data.lang;
 import net.invictusslayer.scabbard.data.LangProvider;
 import net.invictusslayer.scabbard.world.level.WoodFamily;
 import net.invictusslayer.slayersbeasts.SlayersBeasts;
-import net.invictusslayer.slayersbeasts.block.SBBlockFamily;
-import net.invictusslayer.slayersbeasts.block.SBWoodFamily;
-import net.invictusslayer.slayersbeasts.init.*;
+import net.invictusslayer.slayersbeasts.registries.*;
+import net.invictusslayer.slayersbeasts.world.level.block.SBBlockFamily;
+import net.invictusslayer.slayersbeasts.world.level.block.SBWoodFamily;
 import net.minecraft.data.BlockFamily;
 import net.minecraft.data.PackOutput;
+import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
+
+import java.util.function.Supplier;
 
 public class EnUsLangProvider extends LangProvider {
 	public EnUsLangProvider(PackOutput output) {
@@ -170,12 +173,32 @@ public class EnUsLangProvider extends LangProvider {
 		addConfigOptionPrefix("worldgen.enabled_biomes.end_spikes", "End Spikes", "End Biomes:");
 	}
 
-	protected void addWoodFamily(WoodFamily family, String prefix) {
+	protected void addWoodFamily(WoodFamily family, String name) {
 		family.getVariants().forEach((variant, object) -> {
-			if (variant.getName() != null && object.get() != null) {
-				String name = prefix + " " + variant.getName();
-				if (object.get() instanceof Block block) addBlock(() -> block, name);
-				else if (object.get() instanceof Item item) addItem(() -> item, name);
+			switch (variant) {
+				case BOAT -> addEntityType((Supplier<? extends EntityType<?>>) object, name + " Boat");
+				case BOAT_ITEM -> addItem((Supplier<? extends Item>) object, name + " Boat");
+				case BUTTON -> addBlock((Supplier<? extends Block>) object, name + " Button");
+				case CHEST_BOAT -> addEntityType((Supplier<? extends EntityType<?>>) object, name + " Boat with Chest");
+				case CHEST_BOAT_ITEM -> addItem((Supplier<? extends Item>) object, name + " Boat with Chest");
+				case DOOR -> addBlock((Supplier<? extends Block>) object, name + " Door");
+				case FENCE -> addBlock((Supplier<? extends Block>) object, name + " Fence");
+				case FENCE_GATE -> addBlock((Supplier<? extends Block>) object, name + " Fence Gate");
+				case HANGING_SIGN -> addBlock((Supplier<? extends Block>) object, name + " Hanging Sign");
+				case LEAVES -> addBlock((Supplier<? extends Block>) object, name + " Leaves");
+				case LOG -> addBlock((Supplier<? extends Block>) object, name + " Log");
+				case PLANKS -> addBlock((Supplier<? extends Block>) object, name + " Planks");
+//				case POTTED_SAPLING -> addBlock((Supplier<? extends Block>) object, "Potted " + name + " Sapling");
+				case PRESSURE_PLATE -> addBlock((Supplier<? extends Block>) object, name + " Pressure Plate");
+				case SAPLING -> addBlock((Supplier<? extends Block>) object, name + " Sapling");
+				case SIGN -> addBlock((Supplier<? extends Block>) object, name + " Sign");
+				case STAIRS -> addBlock((Supplier<? extends Block>) object, name + " Stairs");
+				case STRIPPED_LOG -> addBlock((Supplier<? extends Block>) object, "Stripped " + name + " Log");
+				case STRIPPED_WOOD -> addBlock((Supplier<? extends Block>) object, "Stripped " + name + " Wood");
+				case TRAPDOOR -> addBlock((Supplier<? extends Block>) object, name + " Trapdoor");
+//				case WALL_HANGING_SIGN -> addBlock((Supplier<? extends Block>) object, name + " Wall Hanging Sign");
+//				case WALL_SIGN -> addBlock((Supplier<? extends Block>) object, name + " Wall Sign");
+				case WOOD -> addBlock((Supplier<? extends Block>) object, name + " Wood");
 			}
 		});
 	}

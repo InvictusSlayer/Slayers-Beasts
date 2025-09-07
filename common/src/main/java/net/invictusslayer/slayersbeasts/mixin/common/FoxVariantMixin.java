@@ -1,7 +1,7 @@
 package net.invictusslayer.slayersbeasts.mixin.common;
 
-import net.invictusslayer.slayersbeasts.data.tag.SBTags;
-import net.invictusslayer.slayersbeasts.entity.SBFoxVariant;
+import net.invictusslayer.slayersbeasts.data.tags.SBTags;
+import net.invictusslayer.slayersbeasts.world.entity.SBFoxVariant;
 import net.minecraft.core.Holder;
 import net.minecraft.world.entity.animal.Fox;
 import net.minecraft.world.level.biome.Biome;

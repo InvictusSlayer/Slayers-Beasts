@@ -3,7 +3,7 @@ package net.invictusslayer.slayersbeasts.client.renderer;
 import net.invictusslayer.slayersbeasts.SlayersBeasts;
 import net.invictusslayer.slayersbeasts.client.model.WuduModel;
 import net.invictusslayer.slayersbeasts.client.state.EntRenderState;
-import net.invictusslayer.slayersbeasts.entity.Wudu;
+import net.invictusslayer.slayersbeasts.world.entity.Wudu;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.client.renderer.entity.MobRenderer;
 import net.minecraft.resources.ResourceLocation;

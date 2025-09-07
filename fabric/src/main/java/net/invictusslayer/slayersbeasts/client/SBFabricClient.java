@@ -7,8 +7,8 @@ import net.fabricmc.fabric.api.blockrenderlayer.v1.BlockRenderLayerMap;
 import net.fabricmc.fabric.api.client.rendering.v1.EntityModelLayerRegistry;
 import net.fabricmc.fabric.api.client.rendering.v1.EntityRendererRegistry;
 import net.invictusslayer.slayersbeasts.SlayersBeasts;
-import net.invictusslayer.slayersbeasts.block.SBWoodFamily;
-import net.invictusslayer.slayersbeasts.init.SBBlocks;
+import net.invictusslayer.slayersbeasts.world.level.block.SBWoodFamily;
+import net.invictusslayer.slayersbeasts.registries.SBBlocks;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.world.level.block.Block;
 

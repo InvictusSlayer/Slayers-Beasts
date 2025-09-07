@@ -1,7 +1,7 @@
 package net.invictusslayer.slayersbeasts.data.loot;
 
-import net.invictusslayer.slayersbeasts.init.SBBlocks;
-import net.invictusslayer.slayersbeasts.init.SBItems;
+import net.invictusslayer.slayersbeasts.registries.SBBlocks;
+import net.invictusslayer.slayersbeasts.registries.SBItems;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.loot.LootTableSubProvider;
 import net.minecraft.resources.ResourceKey;
@@ -10,7 +10,7 @@ import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.storage.loot.LootPool;
 import net.minecraft.world.level.storage.loot.LootTable;
 import net.minecraft.world.level.storage.loot.entries.LootItem;
-import net.minecraft.world.level.storage.loot.functions.EnchantWithLevelsFunction;
+import net.minecraft.world.level.storage.loot.functions.EnchantRandomlyFunction;
 import net.minecraft.world.level.storage.loot.functions.SetItemCountFunction;
 import net.minecraft.world.level.storage.loot.functions.SetItemDamageFunction;
 import net.minecraft.world.level.storage.loot.providers.number.ConstantValue;
@@ -46,7 +46,7 @@ public record SBChestLoot(HolderLookup.Provider registries) implements LootTable
 				.add(LootItem.lootTableItem(SBBlocks.WHITE_MUSHROOM.get()).setWeight(3).apply(SetItemCountFunction.setCount(UniformGenerator.between(1F, 5F))))
 				.add(LootItem.lootTableItem(Items.STONE_AXE).setWeight(1))
 				.add(LootItem.lootTableItem(Items.IRON_AXE).setWeight(1))
-				.add(LootItem.lootTableItem(Items.IRON_AXE).setWeight(1).apply(EnchantWithLevelsFunction.enchantWithLevels(registries, UniformGenerator.between(5F, 20F))))
+				.add(LootItem.lootTableItem(Items.IRON_AXE).setWeight(1).apply(EnchantRandomlyFunction.randomApplicableEnchantment(registries)))
 				.apply(SetItemDamageFunction.setDamage(UniformGenerator.between(0.5F, 0.9F)))
 		);
 	}
@@ -60,11 +60,11 @@ public record SBChestLoot(HolderLookup.Provider registries) implements LootTable
 				.add(LootItem.lootTableItem(SBItems.REDWOOD_BOAT.get()).setWeight(5))
 				.add(LootItem.lootTableItem(Items.STONE_AXE).setWeight(1))
 				.add(LootItem.lootTableItem(Items.IRON_AXE).setWeight(1))
-				.add(LootItem.lootTableItem(Items.IRON_AXE).setWeight(1).apply(EnchantWithLevelsFunction.enchantWithLevels(registries, UniformGenerator.between(5F, 20F))))
-				.add(LootItem.lootTableItem(Items.IRON_SHOVEL).setWeight(1).apply(EnchantWithLevelsFunction.enchantWithLevels(registries, UniformGenerator.between(5F, 20F))))
+				.add(LootItem.lootTableItem(Items.IRON_AXE).setWeight(1).apply(EnchantRandomlyFunction.randomApplicableEnchantment(registries)))
+				.add(LootItem.lootTableItem(Items.IRON_SHOVEL).setWeight(1).apply(EnchantRandomlyFunction.randomApplicableEnchantment(registries)))
 				.add(LootItem.lootTableItem(Items.IRON_HOE).setWeight(1))
 				.add(LootItem.lootTableItem(Items.BOW).setWeight(1))
-				.add(LootItem.lootTableItem(Items.FISHING_ROD).setWeight(1).apply(EnchantWithLevelsFunction.enchantWithLevels(registries, UniformGenerator.between(5F, 20F))))
+				.add(LootItem.lootTableItem(Items.FISHING_ROD).setWeight(1).apply(EnchantRandomlyFunction.randomApplicableEnchantment(registries)))
 				.apply(SetItemDamageFunction.setDamage(UniformGenerator.between(0.8F, 1F)))
 		);
 	}

@@ -1,6 +1,6 @@
 package net.invictusslayer.slayersbeasts.client.state;
 
-import net.invictusslayer.slayersbeasts.entity.Damselfly;
+import net.invictusslayer.slayersbeasts.world.entity.Damselfly;
 import net.minecraft.client.renderer.entity.state.LivingEntityRenderState;
 import net.minecraft.world.entity.AnimationState;
 
