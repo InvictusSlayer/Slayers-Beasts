@@ -2,7 +2,7 @@ package net.invictusslayer.slayersbeasts.client.model;
 
 import net.invictusslayer.slayersbeasts.SlayersBeasts;
 import net.invictusslayer.slayersbeasts.client.animation.DamselflyAnimation;
-import net.invictusslayer.slayersbeasts.entity.Damselfly;
+import net.invictusslayer.slayersbeasts.world.entity.Damselfly;
 import net.minecraft.client.model.HierarchicalModel;
 import net.minecraft.client.model.geom.ModelLayerLocation;
 import net.minecraft.client.model.geom.ModelPart;

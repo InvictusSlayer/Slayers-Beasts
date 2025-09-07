@@ -3,7 +3,7 @@ package net.invictusslayer.slayersbeasts.client.renderer;
 import com.mojang.blaze3d.vertex.PoseStack;
 import net.invictusslayer.slayersbeasts.SlayersBeasts;
 import net.invictusslayer.slayersbeasts.client.model.AntQueenModel;
-import net.invictusslayer.slayersbeasts.entity.AntQueen;
+import net.invictusslayer.slayersbeasts.world.entity.AntQueen;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.client.renderer.entity.MobRenderer;
 import net.minecraft.resources.ResourceLocation;

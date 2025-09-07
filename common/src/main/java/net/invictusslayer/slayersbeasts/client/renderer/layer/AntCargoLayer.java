@@ -5,7 +5,7 @@ import com.mojang.blaze3d.vertex.VertexConsumer;
 import net.invictusslayer.slayersbeasts.SlayersBeasts;
 import net.invictusslayer.slayersbeasts.client.model.AntCargoModel;
 import net.invictusslayer.slayersbeasts.client.model.AntWorkerModel;
-import net.invictusslayer.slayersbeasts.entity.AntWorker;
+import net.invictusslayer.slayersbeasts.world.entity.AntWorker;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.geom.EntityModelSet;
 import net.minecraft.client.renderer.MultiBufferSource;

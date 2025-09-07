@@ -3,7 +3,7 @@ package net.invictusslayer.slayersbeasts.mixin.client;
 import com.google.common.collect.ImmutableMap;
 import com.mojang.datafixers.util.Pair;
 import net.invictusslayer.slayersbeasts.SlayersBeasts;
-import net.invictusslayer.slayersbeasts.entity.vehicle.SBBoatType;
+import net.invictusslayer.slayersbeasts.world.entity.vehicle.SBBoatType;
 import net.minecraft.client.model.ListModel;
 import net.minecraft.client.renderer.entity.BoatRenderer;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;

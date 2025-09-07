@@ -3,7 +3,7 @@ package net.invictusslayer.slayersbeasts.client.renderer;
 import com.mojang.blaze3d.vertex.PoseStack;
 import net.invictusslayer.slayersbeasts.SlayersBeasts;
 import net.invictusslayer.slayersbeasts.client.model.EntMediumModel;
-import net.invictusslayer.slayersbeasts.entity.EntMedium;
+import net.invictusslayer.slayersbeasts.world.entity.EntMedium;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.client.renderer.entity.MobRenderer;
 import net.minecraft.resources.ResourceLocation;

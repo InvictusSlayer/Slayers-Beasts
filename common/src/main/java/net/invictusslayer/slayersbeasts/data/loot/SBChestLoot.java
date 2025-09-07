@@ -1,7 +1,7 @@
 package net.invictusslayer.slayersbeasts.data.loot;
 
-import net.invictusslayer.slayersbeasts.init.SBBlocks;
-import net.invictusslayer.slayersbeasts.init.SBItems;
+import net.invictusslayer.slayersbeasts.registries.SBBlocks;
+import net.invictusslayer.slayersbeasts.registries.SBItems;
 import net.minecraft.data.loot.LootTableSubProvider;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Items;

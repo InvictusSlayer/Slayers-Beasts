@@ -2,7 +2,7 @@ package net.invictusslayer.slayersbeasts.client.model;
 
 import net.invictusslayer.slayersbeasts.SlayersBeasts;
 import net.invictusslayer.slayersbeasts.client.animation.AntSoldierAnimation;
-import net.invictusslayer.slayersbeasts.entity.AntSoldier;
+import net.invictusslayer.slayersbeasts.world.entity.AntSoldier;
 import net.minecraft.client.model.HierarchicalModel;
 import net.minecraft.client.model.geom.ModelLayerLocation;
 import net.minecraft.client.model.geom.ModelPart;

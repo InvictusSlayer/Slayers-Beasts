@@ -2,7 +2,7 @@ package net.invictusslayer.slayersbeasts.client.model;
 
 import net.invictusslayer.slayersbeasts.SlayersBeasts;
 import net.invictusslayer.slayersbeasts.client.animation.MantisAnimation;
-import net.invictusslayer.slayersbeasts.entity.Mantis;
+import net.invictusslayer.slayersbeasts.world.entity.Mantis;
 import net.minecraft.client.model.HierarchicalModel;
 import net.minecraft.client.model.geom.ModelLayerLocation;
 import net.minecraft.client.model.geom.ModelPart;

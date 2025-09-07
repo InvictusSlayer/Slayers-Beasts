@@ -2,7 +2,7 @@ package net.invictusslayer.slayersbeasts.client.model;
 
 import net.invictusslayer.slayersbeasts.SlayersBeasts;
 import net.invictusslayer.slayersbeasts.client.animation.WuduAnimation;
-import net.invictusslayer.slayersbeasts.entity.Wudu;
+import net.invictusslayer.slayersbeasts.world.entity.Wudu;
 import net.minecraft.client.model.HierarchicalModel;
 import net.minecraft.client.model.geom.ModelLayerLocation;
 import net.minecraft.client.model.geom.ModelPart;

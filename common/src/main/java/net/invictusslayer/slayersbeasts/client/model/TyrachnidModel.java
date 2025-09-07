@@ -2,7 +2,7 @@ package net.invictusslayer.slayersbeasts.client.model;
 
 import net.invictusslayer.slayersbeasts.SlayersBeasts;
 import net.invictusslayer.slayersbeasts.client.animation.TyrachnidAnimation;
-import net.invictusslayer.slayersbeasts.entity.Tyrachnid;
+import net.invictusslayer.slayersbeasts.world.entity.Tyrachnid;
 import net.minecraft.client.model.HierarchicalModel;
 import net.minecraft.client.model.geom.ModelLayerLocation;
 import net.minecraft.client.model.geom.ModelPart;

@@ -4,7 +4,7 @@ import com.mojang.blaze3d.vertex.PoseStack;
 import net.invictusslayer.slayersbeasts.SlayersBeasts;
 import net.invictusslayer.slayersbeasts.client.model.AntWorkerModel;
 import net.invictusslayer.slayersbeasts.client.renderer.layer.AntCargoLayer;
-import net.invictusslayer.slayersbeasts.entity.AntWorker;
+import net.invictusslayer.slayersbeasts.world.entity.AntWorker;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.client.renderer.entity.MobRenderer;
 import net.minecraft.resources.ResourceLocation;

@@ -1,7 +1,7 @@
 package net.invictusslayer.slayersbeasts.mixin.client;
 
 import net.invictusslayer.slayersbeasts.SlayersBeasts;
-import net.invictusslayer.slayersbeasts.entity.SBMushroomCowType;
+import net.invictusslayer.slayersbeasts.world.entity.SBMushroomCowType;
 import net.minecraft.client.renderer.entity.MushroomCowRenderer;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.animal.MushroomCow;
