@@ -5,6 +5,8 @@ import net.invictusslayer.slayersbeasts.world.entity.vehicle.SBBoatType;
 import net.invictusslayer.slayersbeasts.world.item.CryptPortalItem;
 import net.invictusslayer.slayersbeasts.world.item.SBFoods;
 import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.Mob;
 import net.minecraft.world.item.*;
 
 import java.util.function.Supplier;
@@ -30,16 +32,16 @@ public class SBItems {
 
 	public static final Supplier<Item> MUD_BALL = register("mud_ball", () -> new Item(new Item.Properties()));
 
-	public static final Supplier<Item> MANTIS_SPAWN_EGG = register("mantis_spawn_egg", () -> new SpawnEggItem(SBEntities.MANTIS.get(), 0xffffff, 0xffffff, new Item.Properties()));
-	public static final Supplier<Item> ANT_WORKER_SPAWN_EGG = register("ant_worker_spawn_egg", () -> new SpawnEggItem(SBEntities.ANT_WORKER.get(), 0xffffff, 0xffffff, new Item.Properties()));
-	public static final Supplier<Item> ANT_SOLDIER_SPAWN_EGG = register("ant_soldier_spawn_egg", () -> new SpawnEggItem(SBEntities.ANT_SOLDIER.get(), 0xffffff, 0xffffff, new Item.Properties()));
-	public static final Supplier<Item> ANT_QUEEN_SPAWN_EGG = register("ant_queen_spawn_egg", () -> new SpawnEggItem(SBEntities.ANT_QUEEN.get(), 0xffffff, 0xffffff, new Item.Properties()));
-	public static final Supplier<Item> WITHER_SPIDER_SPAWN_EGG = register("wither_spider_spawn_egg", () -> new SpawnEggItem(SBEntities.WITHER_SPIDER.get(), 0xffffff, 0xffffff, new Item.Properties()));
-	public static final Supplier<Item> TYRACHNID_SPAWN_EGG = register("tyrachnid_spawn_egg", () -> new SpawnEggItem(SBEntities.TYRACHNID.get(), 0xffffff, 0xffffff, new Item.Properties()));
-	public static final Supplier<Item> DAMSELFLY_SPAWN_EGG = register("damselfly_spawn_egg", () -> new SpawnEggItem(SBEntities.DAMSELFLY.get(), 0xffffff, 0xffffff, new Item.Properties()));
-	public static final Supplier<Item> ENT_SPAWN_EGG = register("ent_spawn_egg", () -> new SpawnEggItem(SBEntities.ENT_MEDIUM.get(), 0xffffff, 0xffffff, new Item.Properties()));
-	public static final Supplier<Item> WUDU_SPAWN_EGG = register("wudu_spawn_egg", () -> new SpawnEggItem(SBEntities.WUDU.get(), 0xffffff, 0xffffff, new Item.Properties()));
-	public static final Supplier<Item> SPORETRAP_SPAWN_EGG = register("sporetrap_spawn_egg", () -> new SpawnEggItem(SBEntities.SPORETRAP.get(), 0xffffff, 0xffffff, new Item.Properties()));
+	public static final Supplier<SpawnEggItem> MANTIS_SPAWN_EGG = registerSpawnEgg("mantis_spawn_egg", SBEntities.MANTIS::get, 0xffffff, 0xffffff, new Item.Properties());
+	public static final Supplier<SpawnEggItem> ANT_WORKER_SPAWN_EGG = registerSpawnEgg("ant_worker_spawn_egg", SBEntities.ANT_WORKER::get, 0xffffff, 0xffffff, new Item.Properties());
+	public static final Supplier<SpawnEggItem> ANT_SOLDIER_SPAWN_EGG = registerSpawnEgg("ant_soldier_spawn_egg", SBEntities.ANT_SOLDIER::get, 0xffffff, 0xffffff, new Item.Properties());
+	public static final Supplier<SpawnEggItem> ANT_QUEEN_SPAWN_EGG = registerSpawnEgg("ant_queen_spawn_egg", SBEntities.ANT_QUEEN::get, 0xffffff, 0xffffff, new Item.Properties());
+	public static final Supplier<SpawnEggItem> WITHER_SPIDER_SPAWN_EGG = registerSpawnEgg("wither_spider_spawn_egg", SBEntities.WITHER_SPIDER::get, 0xffffff, 0xffffff, new Item.Properties());
+	public static final Supplier<SpawnEggItem> TYRACHNID_SPAWN_EGG = registerSpawnEgg("tyrachnid_spawn_egg", SBEntities.TYRACHNID::get, 0xffffff, 0xffffff, new Item.Properties());
+	public static final Supplier<SpawnEggItem> DAMSELFLY_SPAWN_EGG = registerSpawnEgg("damselfly_spawn_egg", SBEntities.DAMSELFLY::get, 0xffffff, 0xffffff, new Item.Properties());
+	public static final Supplier<SpawnEggItem> ENT_SPAWN_EGG = registerSpawnEgg("ent_spawn_egg", SBEntities.ENT_MEDIUM::get, 0xffffff, 0xffffff, new Item.Properties());
+	public static final Supplier<SpawnEggItem> WUDU_SPAWN_EGG = registerSpawnEgg("wudu_spawn_egg", SBEntities.WUDU::get, 0xffffff, 0xffffff, new Item.Properties());
+	public static final Supplier<SpawnEggItem> SPORETRAP_SPAWN_EGG = registerSpawnEgg("sporetrap_spawn_egg", SBEntities.SPORETRAP::get, 0xffffff, 0xffffff, new Item.Properties());
 
 	public static final Supplier<Item> ASPEN_SIGN = register("aspen_sign", () -> new SignItem(new Item.Properties().stacksTo(16), SBBlocks.ASPEN_SIGN.get(), SBBlocks.ASPEN_WALL_SIGN.get()));
 	public static final Supplier<Item> ASPEN_HANGING_SIGN = register("aspen_hanging_sign", () -> new HangingSignItem(SBBlocks.ASPEN_HANGING_SIGN.get(), SBBlocks.ASPEN_WALL_HANGING_SIGN.get(), new Item.Properties().stacksTo(16)));
@@ -80,6 +82,10 @@ public class SBItems {
 	public static final Supplier<Item> WILLOW_HANGING_SIGN = register("willow_hanging_sign", () -> new HangingSignItem(SBBlocks.WILLOW_HANGING_SIGN.get(), SBBlocks.WILLOW_WALL_HANGING_SIGN.get(), new Item.Properties().stacksTo(16)));
 	public static final Supplier<Item> WILLOW_BOAT = register("willow_boat", () -> new BoatItem(false, SBBoatType.WILLOW, new Item.Properties().stacksTo(1)));
 	public static final Supplier<Item> WILLOW_CHEST_BOAT = register("willow_chest_boat", () -> new BoatItem(true, SBBoatType.WILLOW, new Item.Properties().stacksTo(1)));
+
+	static Supplier<SpawnEggItem> registerSpawnEgg(String name, Supplier<EntityType<? extends Mob>> entity, int bgColor, int fgColor, Item.Properties props) {
+		return SlayersBeasts.PLATFORM.registerSpawnEgg(SlayersBeasts.MOD_ID, name, entity, bgColor, fgColor, props);
+	}
 
 	static <T extends Item> Supplier<T> register(String name, Supplier<T> supplier) {
 		return SlayersBeasts.PLATFORM.register(BuiltInRegistries.ITEM, SlayersBeasts.MOD_ID, name, supplier);

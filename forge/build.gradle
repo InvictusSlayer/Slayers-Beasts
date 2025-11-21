@@ -61,8 +61,8 @@ dependencies {
     compileOnly(annotationProcessor("io.github.llamalad7:mixinextras-common:0.5.0"))
     implementation(jarJar("io.github.llamalad7:mixinextras-forge:0.5.0"))
 
-    implementation("maven.modrinth:scabbard:${scab_version}+forge")
-    implementation("com.github.glitchfiend:TerraBlender-forge:${mc_version}-${tb_version}")
+    modImplementation("maven.modrinth:scabbard:${scab_version}+forge")
+    modImplementation("com.github.glitchfiend:TerraBlender-forge:${mc_version}-${tb_version}")
     api("me.shedaniel.cloth:cloth-config-forge:${cloth_version}")
 }
 

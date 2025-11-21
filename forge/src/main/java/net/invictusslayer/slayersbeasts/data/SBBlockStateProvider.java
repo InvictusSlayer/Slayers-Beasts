@@ -21,6 +21,7 @@ import net.minecraftforge.common.data.ExistingFileHelper;
 import net.minecraftforge.registries.ForgeRegistries;
 
 import java.util.Objects;
+import java.util.function.Supplier;
 
 public class SBBlockStateProvider extends BlockStateProvider {
 	public SBBlockStateProvider(PackOutput output, ExistingFileHelper helper) {
@@ -88,27 +89,28 @@ public class SBBlockStateProvider extends BlockStateProvider {
 
 	private void generateWoodFamilies() {
 		SBWoodFamily.getAllFamilies().forEach(family -> {
-			Block planks = (Block) family.get(WoodFamily.Variant.PLANKS).get();
-			Block stripped = (Block) family.get(WoodFamily.Variant.STRIPPED_LOG).get();
+			Supplier<Block> planks = (Supplier<Block>) family.get(WoodFamily.Variant.PLANKS);
+			Supplier<Block> stripped = (Supplier<Block>) family.get(WoodFamily.Variant.STRIPPED_LOG);
+			if (planks != null) simpleCubeWithItem(planks.get());
 
 			family.getVariants().forEach((variant, supplier) -> {
 				if (!(supplier.get() instanceof Block block)) return;
 				switch (variant) {
-					case BUTTON -> buttonWithItem(block, planks);
-					case DOOR -> doorBlockWithRenderType((DoorBlock) block, extend(blockTexture(block), "_bottom"), extend(blockTexture(block), "_top"), "cutout");
-					case FENCE -> fenceWithItem(block, planks);
-					case FENCE_GATE -> fenceGateWithItem(block, planks);
-					case HANGING_SIGN -> hangingSign(block, (Block) family.get(WoodFamily.Variant.WALL_HANGING_SIGN).get(), blockTexture(stripped));
-					case LEAVES, PLANKS -> simpleCubeWithItem(block);
+					case BUTTON -> buttonWithItem(block, planks.get());
+					case DOOR -> doorBlockWithRenderType((DoorBlock) block, extend(block, "_bottom"), extend(block, "_top"), "cutout");
+					case FENCE -> fenceWithItem(block, planks.get());
+					case FENCE_GATE -> fenceGateWithItem(block, planks.get());
+					case HANGING_SIGN -> hangingSign(block, (Block) family.get(WoodFamily.Variant.WALL_HANGING_SIGN).get(), blockTexture(stripped.get()));
+					case LEAVES -> simpleCubeWithItem(block);
 					case LOG -> logWithItem(block);
 					case SAPLING -> cross(block);
-					case SIGN -> signBlock((StandingSignBlock) block, (WallSignBlock) family.get(WoodFamily.Variant.WALL_SIGN).get(), blockTexture(planks));
-					case SLAB -> simpleSlabWithItem(block, planks);
-					case STAIRS -> simpleStairWithItem(block, planks);
-					case STRIPPED_LOG -> logWithItem(stripped);
-					case STRIPPED_WOOD -> woodWithItem(block, stripped);
+					case SIGN -> signBlock((StandingSignBlock) block, (WallSignBlock) family.get(WoodFamily.Variant.WALL_SIGN).get(), blockTexture(planks.get()));
+					case SLAB -> simpleSlabWithItem(block, planks.get());
+					case STAIRS -> simpleStairWithItem(block, planks.get());
+					case STRIPPED_LOG -> logWithItem(stripped.get());
+					case STRIPPED_WOOD -> woodWithItem(block, stripped.get());
 					case POTTED_SAPLING -> pottedCross(block, (Block) family.get(WoodFamily.Variant.SAPLING).get());
-					case PRESSURE_PLATE -> pressurePlateWithItem(block, planks);
+					case PRESSURE_PLATE -> pressurePlateWithItem(block, planks.get());
 					case TRAPDOOR -> trapdoorWithItem(block);
 					case WOOD -> woodWithItem(block, (Block) family.get(WoodFamily.Variant.LOG).get());
 				}
@@ -122,13 +124,14 @@ public class SBBlockStateProvider extends BlockStateProvider {
 			simpleCubeWithItem(base);
 			family.getVariants().forEach((variant, block) -> {
 				switch (variant) {
+					case CHISELED, CRACKED -> simpleCubeWithItem(block);
 					case SLAB -> simpleSlabWithItem(block, base);
 					case STAIRS -> simpleStairWithItem(block, base);
 					case FENCE -> fenceWithItem(block, base);
 					case FENCE_GATE -> fenceGateWithItem(block, base);
 					case BUTTON -> buttonWithItem(block, base);
 					case PRESSURE_PLATE -> pressurePlateWithItem(block, base);
-					case DOOR -> doorBlockWithRenderType((DoorBlock) block, extend(blockTexture(block), "_bottom"), extend(blockTexture(block), "_top"), "cutout");
+					case DOOR -> doorBlockWithRenderType((DoorBlock) block, extend(block, "_bottom"), extend(block, "_top"), "cutout");
 					case TRAPDOOR -> trapdoorWithItem(block);
 					case WALL -> wallWithItem(block, blockTexture(base));
 				}
@@ -157,7 +160,7 @@ public class SBBlockStateProvider extends BlockStateProvider {
 	private void doubleCrossBlock(Block block) {
 		getVariantBuilder(block).forAllStates(state -> {
 			String suffix = state.getValue(BlockStateProperties.DOUBLE_BLOCK_HALF) == DoubleBlockHalf.LOWER ? "_bottom" : "_top";
-			return ConfiguredModel.builder().modelFile(models().cross(name(block) + suffix, extend(blockTexture(block), suffix)).renderType("cutout")).build();
+			return ConfiguredModel.builder().modelFile(models().cross(name(block) + suffix, extend(block, suffix)).renderType("cutout")).build();
 		});
 	}
 
@@ -165,8 +168,8 @@ public class SBBlockStateProvider extends BlockStateProvider {
 		Block block = SBBlocks.INFUSED_CRYPTALITH.get();
 		getVariantBuilder(block).forAllStates(state -> {
 			String suffix = state.getValue(BlockStateProperties.EYE) ? "_active" : "";
-			return ConfiguredModel.builder().modelFile(models().cubeBottomTop(name(block) + suffix, extend(blockTexture(block),
-							"_side"), blockTexture(SBBlocks.CRYPTALITH.get()), extend(blockTexture(block), "_top" + suffix)))
+			return ConfiguredModel.builder().modelFile(models().cubeBottomTop(name(block) + suffix, extend(block,
+							"_side"), blockTexture(SBBlocks.CRYPTALITH.get()), extend(block, "_top" + suffix)))
 					.rotationY((int) state.getValue(InfusedCryptalithBlock.FACING).toYRot()).build();
 		});
 		simpleBlockItem(block, models().withExistingParent(name(block), "minecraft:block/cube_bottom_top"));
@@ -174,8 +177,8 @@ public class SBBlockStateProvider extends BlockStateProvider {
 	private void depletedCryptalith() {
 		Block block = SBBlocks.DEPLETED_CRYPTALITH.get();
 		getVariantBuilder(block).forAllStates(state ->
-				ConfiguredModel.builder().modelFile(models().cubeBottomTop(name(block), extend(blockTexture(block), "_side"),
-								blockTexture(SBBlocks.CRYPTALITH.get()), extend(blockTexture(block), "_top")))
+				ConfiguredModel.builder().modelFile(models().cubeBottomTop(name(block), extend(block, "_side"),
+								blockTexture(SBBlocks.CRYPTALITH.get()), extend(block, "_top")))
 						.rotationY((int) state.getValue(DepletedCryptalithBlock.FACING).toYRot()).build());
 		simpleBlockItem(block, models().withExistingParent(name(block), "minecraft:block/cube_bottom_top"));
 	}
@@ -183,7 +186,7 @@ public class SBBlockStateProvider extends BlockStateProvider {
 	private void dripstone(Block block) {
 		getVariantBuilder(block).forAllStates(state -> {
 			String suffix = "_" + state.getValue(BlockStateProperties.DRIPSTONE_THICKNESS).getSerializedName() + "_" + state.getValue(BlockStateProperties.VERTICAL_DIRECTION).getSerializedName();
-			return ConfiguredModel.builder().modelFile(models().cross(name(block) + suffix, extend(blockTexture(block), suffix)).renderType("cutout")).build();
+			return ConfiguredModel.builder().modelFile(models().cross(name(block) + suffix, extend(block, suffix)).renderType("cutout")).build();
 		});
 	}
 
@@ -297,7 +300,7 @@ public class SBBlockStateProvider extends BlockStateProvider {
 	private void tiltCubeWithItem(Block block) {
 		getVariantBuilder(block).forAllStates(state -> {
 			String tilt = "_" + state.getValue(BlockStateProperties.TILT).getSerializedName();
-			return ConfiguredModel.builder().modelFile(models().cubeAll(name(block) + tilt, extend(blockTexture(block), tilt))).build();
+			return ConfiguredModel.builder().modelFile(models().cubeAll(name(block) + tilt, extend(block, tilt))).build();
 		});
 		simpleBlockItem(block, models().withExistingParent(name(block) + "_none", "minecraft:block/cube_all"));
 	}
@@ -312,7 +315,7 @@ public class SBBlockStateProvider extends BlockStateProvider {
 	}
 
 	private void simpleCubeBottomTopWithItem(Block block) {
-		cubeBottomTopWithItem(block, extend(blockTexture(block), "_side"), extend(blockTexture(block), "_bottom"), extend(blockTexture(block), "_top"));
+		cubeBottomTopWithItem(block, extend(block, "_side"), extend(block, "_bottom"), extend(block, "_top"));
 	}
 	private void cubeBottomTopWithItem(Block block, ResourceLocation side, ResourceLocation bottom, ResourceLocation top) {
 		getVariantBuilder(block).forAllStates(state -> ConfiguredModel.builder()
@@ -324,7 +327,11 @@ public class SBBlockStateProvider extends BlockStateProvider {
 		return Objects.requireNonNull(ForgeRegistries.BLOCKS.getKey(block)).getPath();
 	}
 
-	private ResourceLocation extend(ResourceLocation location, String suffix) {
-		return ResourceLocation.fromNamespaceAndPath(location.getNamespace(), location.getPath() + suffix);
+	private ResourceLocation extend(Block block, String suffix) {
+		return extend(blockTexture(block), suffix);
+	}
+
+	private ResourceLocation extend(ResourceLocation loc, String suffix) {
+		return ResourceLocation.fromNamespaceAndPath(loc.getNamespace(), loc.getPath() + suffix);
 	}
 }
