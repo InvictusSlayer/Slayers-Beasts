@@ -114,7 +114,7 @@ publisher {
     setCurseEnvironment("both")
 
     curseDepends {
-        required "scabbard", "cloth-config", "terrablender-forge"
+        required "scabbard", "cloth-config", "terrablender"
     }
     modrinthDepends {
         required "scabbard", "cloth-config", "terrablender"
