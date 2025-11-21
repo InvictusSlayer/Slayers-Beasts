@@ -1,3 +1,2 @@
-- added scabbard
 - moved from arch loom to multiloader
-- temporarily disabled cloth config
+- now using the Scabbard library for registration
