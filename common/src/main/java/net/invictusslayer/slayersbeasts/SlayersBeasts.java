@@ -76,8 +76,8 @@ public class SlayersBeasts {
 		LOGGER.info("Extended Boat$Type values: {}", Arrays.toString(Boat.Type.values()));
 		LOGGER.info("Extended Fox$Type values: {}", Arrays.toString(Fox.Type.values()));
 
-		SBFlammableBlocks.register();
-		SBStrippableBlocks.register();
+//		SBFlammableBlocks.register();
+//		SBStrippableBlocks.register();
 		SBDispensableItems.register();
 		SBVillagerType.setupBiomes();
 
@@ -93,8 +93,8 @@ public class SlayersBeasts {
 
 	public static void clientSetup() {
 		SBWoodType.values().forEach(type -> {
-			Sheets.SIGN_MATERIALS.put(type, Sheets.createSignMaterial(type));
-			Sheets.HANGING_SIGN_MATERIALS.put(type, Sheets.createHangingSignMaterial(type));
+//			Sheets.SIGN_MATERIALS.put(type, Sheets.createSignMaterial(type));
+//			Sheets.HANGING_SIGN_MATERIALS.put(type, Sheets.createHangingSignMaterial(type));
 		});
 	}
 
