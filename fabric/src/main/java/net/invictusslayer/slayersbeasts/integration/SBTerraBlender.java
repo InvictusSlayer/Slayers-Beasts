@@ -5,6 +5,7 @@ import net.invictusslayer.slayersbeasts.SlayersBeasts;
 import terrablender.api.TerraBlenderApi;
 
 public class SBTerraBlender implements TerraBlenderApi {
+	@Override
 	public void onTerraBlenderInitialized() {
 		SBFabric.fabricInit();
 		SlayersBeasts.registerRegions();

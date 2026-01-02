@@ -100,15 +100,15 @@ jar {
 
 processResources {
     var expandProps = [
-            "mod_id"         : mod_id,         "mod_group"       : mod_group,    "mod_version"  : mod_version,
-            "mod_name"       : mod_name,       "mod_authors"     : mod_authors,  "mod_credits"  : mod_credits,
+            "mod_id"         : mod_id,         "mod_group"       : mod_group,   "mod_version"   : mod_version,
+            "mod_name"       : mod_name,       "mod_authors"     : mod_authors, "mod_credits"   : mod_credits,
             "mod_license"    : mod_license,    "mod_description" : mod_description,
-            "homepage_url"   : homepage_url,   "source_url"      : source_url,   "issue_url"    : issue_url,
-            "mc_version"     : mc_version,     "mc_range"        : mc_range,     "java_version" : java_version,
+            "homepage_url"   : homepage_url,   "source_url"      : source_url,  "issue_url"     : issue_url,
+            "mc_version"     : mc_version,     "mc_range"        : mc_range,    "java_version"  : java_version,
             "fabric_version" : fabric_version, "fabric_loader"   : fabric_loader,
             "forge_version"  : forge_version,  "forge_range"     : forge_range,
             "neo_version"    : neo_version,    "neo_range"       : neo_range,
-            "tb_version"     : tb_version,     "cloth_version"   : cloth_version
+            "scab_version"   : scab_version,   "tb_version"      : tb_version,  "cloth_version" : cloth_version
     ]
 
     var jsonExpandProps = expandProps.collectEntries {
