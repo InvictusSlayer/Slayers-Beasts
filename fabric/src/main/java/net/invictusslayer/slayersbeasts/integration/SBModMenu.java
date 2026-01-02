@@ -9,6 +9,7 @@ import net.invictusslayer.slayersbeasts.config.SBConfig;
 
 @Environment(EnvType.CLIENT)
 public class SBModMenu implements ModMenuApi {
+	@Override
 	public ConfigScreenFactory<?> getModConfigScreenFactory() {
 		return parent -> AutoConfig.getConfigScreen(SBConfig.class, parent).get();
 	}

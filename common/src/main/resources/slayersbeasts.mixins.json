@@ -1,8 +1,9 @@
 {
 	"required": true,
-	"package": "net.invictusslayer.slayersbeasts.mixin",
-	"compatibilityLevel": "JAVA_17",
 	"minVersion": "0.8",
+	"package": "net.invictusslayer.slayersbeasts.mixin",
+	"refmap": "${mod_id}.refmap.json",
+	"compatibilityLevel": "JAVA_17",
 	"mixins": [
 		"common.BlockEntityTypeMixin",
 		"common.BoatMixin",
@@ -11,13 +12,14 @@
 		"common.FoxTypeMixin",
 		"common.MushroomBlockMixin",
 		"common.MushroomCowMixin",
-		"common.MushroomCowTypeMixin",
-		"common.VillagerTypeTradeMixin"
+		"common.MushroomCowTypeMixin"
 	],
 	"client": [
 		"client.BoatRendererMixin",
 		"client.FoxRendererMixin",
 		"client.MushroomCowRendererMixin"
+	],
+	"server": [
 	],
 	"injectors": {
 		"defaultRequire": 1

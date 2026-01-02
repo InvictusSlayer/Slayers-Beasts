@@ -81,7 +81,7 @@ publisher {
     setGameVersions("$mc_version")
     setLoaders("forge")
 
-    setArtifact(jar)
+    setArtifact(reobfJar)
     addAdditionalFile(sourcesJar)
     setCurseEnvironment("both")
 

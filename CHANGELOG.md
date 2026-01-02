@@ -1,2 +1,3 @@
-- moved from arch loom to multiloader
-- now using the Scabbard library for registration
+- temporarily disabled vanilla compat - closes #22
+- removed redundant mixin
+- added scabbard dependency checking
