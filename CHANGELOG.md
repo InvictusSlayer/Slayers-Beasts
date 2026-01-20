@@ -1,3 +1,1 @@
-- temporarily disabled vanilla compat - closes #22
-- removed redundant mixin
-- added scabbard dependency checking
+- fixed biome modifier feature order cycle issues
