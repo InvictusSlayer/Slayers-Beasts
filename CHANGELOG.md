@@ -1,1 +1,1 @@
-- fixed biome modifier feature order cycle issues
+- moved to new scabbard vanilla compat registering
