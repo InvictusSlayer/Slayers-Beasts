@@ -1,6 +1,7 @@
 package net.invictusslayer.slayersbeasts.world.level.gen.feature;
 
 import com.google.common.collect.ImmutableList;
+import net.invictusslayer.scabbard.world.biome.BiomeModifierHandler;
 import net.invictusslayer.slayersbeasts.SlayersBeasts;
 import net.invictusslayer.slayersbeasts.registries.SBBlocks;
 import net.minecraft.core.Holder;
@@ -118,35 +119,35 @@ public class SBPlacedFeatures {
 		register(context, TREES_RAINFOREST, configured.getOrThrow(SBConfiguredFeatures.TREES_RAINFOREST), VegetationPlacements.treePlacement(PlacementUtils.countExtra(10, 0.1F, 1)));
 		register(context, TREES_REDWOOD, configured.getOrThrow(SBConfiguredFeatures.TREES_REDWOOD), VegetationPlacements.treePlacement(PlacementUtils.countExtra(10, 0.1F, 1), SBBlocks.REDWOOD_SAPLING.get()));
 		register(context, TREES_OLD_GROWTH_REDWOOD, configured.getOrThrow(SBConfiguredFeatures.TREES_OLD_GROWTH_REDWOOD), VegetationPlacements.treePlacement(PlacementUtils.countExtra(10, 0.1F, 1), SBBlocks.REDWOOD_SAPLING.get()));
-		register(context, TREES_RIVER, configured.getOrThrow(SBConfiguredFeatures.TREES_RIVER), VegetationPlacements.treePlacement(PlacementUtils.countExtra(0, 0.05F, 1), SBBlocks.WILLOW_SAPLING.get()));
-		register(context, PATCH_ALGAE_COMMON, configured.getOrThrow(SBConfiguredFeatures.PATCH_ALGAE), VegetationPlacements.worldSurfaceSquaredWithCount(5));
-		register(context, PATCH_ALGAE_NORMAL, configured.getOrThrow(SBConfiguredFeatures.PATCH_ALGAE), VegetationPlacements.worldSurfaceSquaredWithCount(1));
+		registerWithModifier(context, TREES_RIVER, configured.getOrThrow(SBConfiguredFeatures.TREES_RIVER), VegetationPlacements.treePlacement(PlacementUtils.countExtra(0, 0.05F, 1), SBBlocks.WILLOW_SAPLING.get()));
+		registerWithModifier(context, PATCH_ALGAE_COMMON, configured.getOrThrow(SBConfiguredFeatures.PATCH_ALGAE), VegetationPlacements.worldSurfaceSquaredWithCount(5));
+		registerWithModifier(context, PATCH_ALGAE_NORMAL, configured.getOrThrow(SBConfiguredFeatures.PATCH_ALGAE), VegetationPlacements.worldSurfaceSquaredWithCount(1));
 		register(context, PATCH_TALL_DEAD_BUSH, configured.getOrThrow(SBConfiguredFeatures.PATCH_TALL_DEAD_BUSH), InSquarePlacement.spread(), PlacementUtils.HEIGHTMAP_WORLD_SURFACE, BiomeFilter.biome());
 		register(context, PATCH_TALL_DEAD_BUSH_BRUSH, configured.getOrThrow(SBConfiguredFeatures.PATCH_TALL_DEAD_BUSH), VegetationPlacements.worldSurfaceSquaredWithCount(20));
 		register(context, BLACK_MUSHROOM_COMMON, configured.getOrThrow(SBConfiguredFeatures.PATCH_BLACK_MUSHROOM), mushroomPlacement(9, CountPlacement.of(3)));
-		register(context, BLACK_MUSHROOM_RARE, configured.getOrThrow(SBConfiguredFeatures.PATCH_BLACK_MUSHROOM), mushroomPlacement(256, null));
+		registerWithModifier(context, BLACK_MUSHROOM_RARE, configured.getOrThrow(SBConfiguredFeatures.PATCH_BLACK_MUSHROOM), mushroomPlacement(256, null));
 		register(context, WHITE_MUSHROOM_COMMON, configured.getOrThrow(SBConfiguredFeatures.PATCH_WHITE_MUSHROOM), mushroomPlacement(9, CountPlacement.of(3)));
-		register(context, WHITE_MUSHROOM_RARE, configured.getOrThrow(SBConfiguredFeatures.PATCH_WHITE_MUSHROOM), mushroomPlacement(256, null));
+		registerWithModifier(context, WHITE_MUSHROOM_RARE, configured.getOrThrow(SBConfiguredFeatures.PATCH_WHITE_MUSHROOM), mushroomPlacement(256, null));
 
 		register(context, ICICLE_CLUSTER, configured.getOrThrow(SBConfiguredFeatures.ICICLE_CLUSTER), CountPlacement.of(UniformInt.of(48, 96)), InSquarePlacement.spread(), PlacementUtils.RANGE_BOTTOM_TO_MAX_TERRAIN_HEIGHT, BiomeFilter.biome());
 		register(context, ICICLE_LARGE, configured.getOrThrow(SBConfiguredFeatures.ICICLE_LARGE), CountPlacement.of(UniformInt.of(10, 48)), InSquarePlacement.spread(), PlacementUtils.RANGE_BOTTOM_TO_MAX_TERRAIN_HEIGHT, BiomeFilter.biome());
 		register(context, ICICLE_SMALL, configured.getOrThrow(SBConfiguredFeatures.ICICLE_SMALL), CountPlacement.of(UniformInt.of(192, 256)), InSquarePlacement.spread(), PlacementUtils.RANGE_BOTTOM_TO_MAX_TERRAIN_HEIGHT, CountPlacement.of(UniformInt.of(1, 5)), RandomOffsetPlacement.of(ClampedNormalInt.of(0.0F, 3.0F, -10, 10), ClampedNormalInt.of(0.0F, 0.6F, -2, 2)), BiomeFilter.biome());
 		register(context, STYPHIUM_PATCH, configured.getOrThrow(SBConfiguredFeatures.STYPHIUM_PATCH), CountPlacement.of(256), InSquarePlacement.spread(), PlacementUtils.RANGE_BOTTOM_TO_MAX_TERRAIN_HEIGHT, BiomeFilter.biome());
 
-		register(context, ORE_EXOSKELETON, configured.getOrThrow(SBConfiguredFeatures.ORE_EXOSKELETON), rareOrePlacement(1, HeightRangePlacement.triangle(VerticalAnchor.aboveBottom(-80), VerticalAnchor.aboveBottom(80))));
-		register(context, ORE_EXOSKELETON_LUSH, configured.getOrThrow(SBConfiguredFeatures.ORE_EXOSKELETON), commonOrePlacement(10, HeightRangePlacement.uniform(VerticalAnchor.bottom(), VerticalAnchor.absolute(64))));
+		registerWithModifier(context, ORE_EXOSKELETON, configured.getOrThrow(SBConfiguredFeatures.ORE_EXOSKELETON), rareOrePlacement(1, HeightRangePlacement.triangle(VerticalAnchor.aboveBottom(-80), VerticalAnchor.aboveBottom(80))));
+		registerWithModifier(context, ORE_EXOSKELETON_LUSH, configured.getOrThrow(SBConfiguredFeatures.ORE_EXOSKELETON), commonOrePlacement(10, HeightRangePlacement.uniform(VerticalAnchor.bottom(), VerticalAnchor.absolute(64))));
 		register(context, ORE_OBSIDIAN, configured.getOrThrow(SBConfiguredFeatures.ORE_OBSIDIAN), commonOrePlacement(10, HeightRangePlacement.uniform(VerticalAnchor.absolute(0), VerticalAnchor.absolute(160))));
-		register(context, ORE_PEGMATITE_UPPER, configured.getOrThrow(SBConfiguredFeatures.ORE_PEGMATITE), rareOrePlacement(12, HeightRangePlacement.uniform(VerticalAnchor.absolute(64), VerticalAnchor.absolute(128))));
-		register(context, ORE_PEGMATITE_LOWER, configured.getOrThrow(SBConfiguredFeatures.ORE_PEGMATITE), commonOrePlacement(1, HeightRangePlacement.uniform(VerticalAnchor.absolute(0), VerticalAnchor.absolute(60))));
+		registerWithModifier(context, ORE_PEGMATITE_UPPER, configured.getOrThrow(SBConfiguredFeatures.ORE_PEGMATITE), rareOrePlacement(12, HeightRangePlacement.uniform(VerticalAnchor.absolute(64), VerticalAnchor.absolute(128))));
+		registerWithModifier(context, ORE_PEGMATITE_LOWER, configured.getOrThrow(SBConfiguredFeatures.ORE_PEGMATITE), commonOrePlacement(1, HeightRangePlacement.uniform(VerticalAnchor.absolute(0), VerticalAnchor.absolute(60))));
 		register(context, ORE_BASALT_VOLCANIC, configured.getOrThrow(SBConfiguredFeatures.ORE_BASALT), commonOrePlacement(4, HeightRangePlacement.uniform(VerticalAnchor.absolute(0), VerticalAnchor.absolute(160))));
 		register(context, ORE_GRANITE_VOLCANIC, configured.getOrThrow(OreFeatures.ORE_GRANITE), commonOrePlacement(4, HeightRangePlacement.uniform(VerticalAnchor.absolute(0), VerticalAnchor.absolute(160))));
 		register(context, ORE_PEGMATITE_VOLCANIC, configured.getOrThrow(SBConfiguredFeatures.ORE_PEGMATITE), commonOrePlacement(4, HeightRangePlacement.uniform(VerticalAnchor.absolute(0), VerticalAnchor.absolute(160))));
 
 		register(context, ANT_MOUND_MUD, configured.getOrThrow(SBConfiguredFeatures.ANT_MOUND_MUD), RarityFilter.onAverageOnceEvery(6), InSquarePlacement.spread(), PlacementUtils.HEIGHTMAP_WORLD_SURFACE, BiomeFilter.biome());
 		register(context, ANT_MOUND_RUDOSOL, configured.getOrThrow(SBConfiguredFeatures.ANT_MOUND_RUDOSOL), RarityFilter.onAverageOnceEvery(6), InSquarePlacement.spread(), PlacementUtils.HEIGHTMAP_WORLD_SURFACE, BiomeFilter.biome());
-		register(context, MUD_PIT_SHALLOW, configured.getOrThrow(SBConfiguredFeatures.MUD_PIT_SHALLOW), RarityFilter.onAverageOnceEvery(4), InSquarePlacement.spread(), PlacementUtils.HEIGHTMAP_WORLD_SURFACE, BiomeFilter.biome());
-		register(context, MUD_PIT_NORMAL, configured.getOrThrow(SBConfiguredFeatures.MUD_PIT_NORMAL), RarityFilter.onAverageOnceEvery(6), InSquarePlacement.spread(), PlacementUtils.HEIGHTMAP_WORLD_SURFACE, BiomeFilter.biome());
-		register(context, MUD_PIT_DEEP, configured.getOrThrow(SBConfiguredFeatures.MUD_PIT_DEEP), RarityFilter.onAverageOnceEvery(9), InSquarePlacement.spread(), PlacementUtils.HEIGHTMAP_WORLD_SURFACE, BiomeFilter.biome());
+		registerWithModifier(context, MUD_PIT_SHALLOW, configured.getOrThrow(SBConfiguredFeatures.MUD_PIT_SHALLOW), RarityFilter.onAverageOnceEvery(4), InSquarePlacement.spread(), PlacementUtils.HEIGHTMAP_WORLD_SURFACE, BiomeFilter.biome());
+		registerWithModifier(context, MUD_PIT_NORMAL, configured.getOrThrow(SBConfiguredFeatures.MUD_PIT_NORMAL), RarityFilter.onAverageOnceEvery(6), InSquarePlacement.spread(), PlacementUtils.HEIGHTMAP_WORLD_SURFACE, BiomeFilter.biome());
+		registerWithModifier(context, MUD_PIT_DEEP, configured.getOrThrow(SBConfiguredFeatures.MUD_PIT_DEEP), RarityFilter.onAverageOnceEvery(9), InSquarePlacement.spread(), PlacementUtils.HEIGHTMAP_WORLD_SURFACE, BiomeFilter.biome());
 		register(context, LAKE_LAVA_VOLCANIC, configured.getOrThrow(SBConfiguredFeatures.LAKE_LAVA_VOLCANIC), RarityFilter.onAverageOnceEvery(2), InSquarePlacement.spread(), PlacementUtils.HEIGHTMAP_WORLD_SURFACE, BiomeFilter.biome());
 		register(context, SPRING_LAVA_VOLCANIC, configured.getOrThrow(SBConfiguredFeatures.SPRING_LAVA_VOLCANIC), CountPlacement.of(20), InSquarePlacement.spread(), HeightRangePlacement.of(VeryBiasedToBottomHeight.of(VerticalAnchor.bottom(), VerticalAnchor.belowTop(8), 8)), BiomeFilter.biome());
 	}
@@ -174,6 +175,15 @@ public class SBPlacedFeatures {
 
 	private static ResourceKey<PlacedFeature> createKey(String name) {
 		return ResourceKey.create(Registries.PLACED_FEATURE, new ResourceLocation(SlayersBeasts.MOD_ID, name));
+	}
+
+	private static void registerWithModifier(BootstapContext<PlacedFeature> context, ResourceKey<PlacedFeature> key, Holder<ConfiguredFeature<?, ?>> config, PlacementModifier... modifiers) {
+		registerWithModifier(context, key, config, List.of(modifiers));
+	}
+
+	private static void registerWithModifier(BootstapContext<PlacedFeature> context, ResourceKey<PlacedFeature> key, Holder<ConfiguredFeature<?, ?>> config, List<PlacementModifier> modifiers) {
+		register(context, key, config, modifiers);
+		register(context, BiomeModifierHandler.modifierKey(key), config, modifiers);
 	}
 
 	private static void register(BootstapContext<PlacedFeature> context, ResourceKey<PlacedFeature> key, Holder<ConfiguredFeature<?, ?>> config, PlacementModifier... modifiers) {

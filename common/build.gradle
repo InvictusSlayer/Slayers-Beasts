@@ -17,7 +17,7 @@ legacyForge {
 dependencies {
     compileOnly group: "org.spongepowered", name: "mixin", version: "0.8.5"
 
-    implementation("maven.modrinth:scabbard:${scab_version}+forge")
+    modImplementation("maven.modrinth:scabbard:${scab_version}+forge")
     implementation("com.github.glitchfiend:TerraBlender-common:${mc_version}-${tb_version}")
     api("me.shedaniel.cloth:cloth-config-forge:${cloth_version}")
 
