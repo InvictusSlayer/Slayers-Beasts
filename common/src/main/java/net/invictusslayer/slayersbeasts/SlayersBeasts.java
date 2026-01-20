@@ -3,10 +3,7 @@ package net.invictusslayer.slayersbeasts;
 import me.shedaniel.autoconfig.AutoConfig;
 import me.shedaniel.autoconfig.serializer.Toml4jConfigSerializer;
 import net.invictusslayer.scabbard.platform.IPlatformHandler;
-import net.invictusslayer.slayersbeasts.world.level.block.IExtendedMushroomBlock;
-import net.invictusslayer.slayersbeasts.world.level.block.SBFlammableBlocks;
-import net.invictusslayer.slayersbeasts.world.level.block.SBStrippableBlocks;
-import net.invictusslayer.slayersbeasts.world.level.block.SBWoodType;
+import net.invictusslayer.slayersbeasts.world.level.block.*;
 import net.invictusslayer.slayersbeasts.config.SBConfig;
 import net.invictusslayer.slayersbeasts.registries.*;
 import net.invictusslayer.slayersbeasts.world.item.SBDispensableItems;
@@ -14,7 +11,6 @@ import net.invictusslayer.slayersbeasts.world.level.biome.SBSurfaceRuleData;
 import net.invictusslayer.slayersbeasts.world.level.biome.region.SBNetherRegion;
 import net.invictusslayer.slayersbeasts.world.level.biome.region.SBOverworldRegion;
 import net.invictusslayer.slayersbeasts.world.level.gen.feature.SBConfiguredFeatures;
-import net.minecraft.client.renderer.Sheets;
 import net.minecraft.world.entity.animal.Fox;
 import net.minecraft.world.entity.animal.MushroomCow;
 import net.minecraft.world.entity.vehicle.Boat;
@@ -76,8 +72,7 @@ public class SlayersBeasts {
 		LOGGER.info("Extended Boat$Type values: {}", Arrays.toString(Boat.Type.values()));
 		LOGGER.info("Extended Fox$Type values: {}", Arrays.toString(Fox.Type.values()));
 
-//		SBFlammableBlocks.register();
-//		SBStrippableBlocks.register();
+		SBVanillaCompat.register(PLATFORM);
 		SBDispensableItems.register();
 		SBVillagerType.setupBiomes();
 
