@@ -3,7 +3,7 @@
 	"minVersion": "0.8",
 	"package": "net.invictusslayer.slayersbeasts.mixin",
 	"refmap": "${mod_id}.refmap.json",
-	"compatibilityLevel": "JAVA_21",
+	"compatibilityLevel": "JAVA_18",
 	"mixins": [
 		"common.BlockEntityTypeMixin",
 		"common.BoatMixin",
@@ -13,8 +13,7 @@
 		"common.MushroomBlockMixin",
 		"common.MushroomCowMixin",
 		"common.MushroomCowTypeMixin",
-		"common.TreeGrowerMixin",
-		"common.VillagerTypeTradeMixin"
+		"common.TreeGrowerMixin"
 	],
 	"client": [
 		"client.BoatRendererMixin",
