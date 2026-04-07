@@ -36,6 +36,13 @@ ordering="NONE"
 side="BOTH"
 
 [[dependencies.slayersbeasts]]
+modId="scabbard"
+mandatory=true
+versionRange="[${scab_version},)"
+ordering="BEFORE"
+side="BOTH"
+
+[[dependencies.slayersbeasts]]
 modId="terrablender"
 type="required"
 versionRange="[${tb_version},)"
