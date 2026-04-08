@@ -45,6 +45,7 @@ public class SBItemModelProvider extends ItemModelProvider {
 		item(SBItems.ANT_QUEEN_SPAWN_EGG);
 		item(SBItems.WITHER_SPIDER_SPAWN_EGG);
 		item(SBItems.TYRACHNID_SPAWN_EGG);
+//		item(SBItems.BUTTERFLY_SPAWN_EGG);
 		item(SBItems.DAMSELFLY_SPAWN_EGG);
 		item(SBItems.ENT_SPAWN_EGG);
 		item(SBItems.WUDU_SPAWN_EGG);
