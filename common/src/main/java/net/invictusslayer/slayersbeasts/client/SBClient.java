@@ -27,6 +27,7 @@ public class SBClient {
 		consumer.accept(AntCargoModel.LAYER_LOCATION, AntCargoModel::createCargoLayer);
 		consumer.accept(WitherSpiderModel.LAYER_LOCATION, WitherSpiderModel::createBodyLayer);
 		consumer.accept(TyrachnidModel.LAYER_LOCATION, TyrachnidModel::createBodyLayer);
+		consumer.accept(ButterflyModel.LAYER_LOCATION, ButterflyModel::createBodyLayer);
 		consumer.accept(DamselflyModel.LAYER_LOCATION, DamselflyModel::createBodyLayer);
 		consumer.accept(EntMediumModel.LAYER_LOCATION, EntMediumModel::createBodyLayer);
 		consumer.accept(WuduModel.LAYER_LOCATION, WuduModel::createBodyLayer);
@@ -46,6 +47,7 @@ public class SBClient {
 		consumer.accept(SBEntities.ANT_QUEEN.get(), AntQueenRenderer::new);
 		consumer.accept(SBEntities.WITHER_SPIDER.get(), WitherSpiderRenderer::new);
 		consumer.accept(SBEntities.TYRACHNID.get(), TyrachnidRenderer::new);
+		consumer.accept(SBEntities.BUTTERFLY.get(), ButterflyRenderer::new);
 		consumer.accept(SBEntities.DAMSELFLY.get(), DamselflyRenderer::new);
 		consumer.accept(SBEntities.ENT_MEDIUM.get(), EntMediumRenderer::new);
 		consumer.accept(SBEntities.WUDU.get(), WuduRenderer::new);

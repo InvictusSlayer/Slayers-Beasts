@@ -31,7 +31,8 @@ public class SBBiomeModifications {
 
 		addSpawn("add_mantis", SBTags.Biomes.SPAWNS_MANTIS, SBEntities.MANTIS.get(), 6, 1, 2);
 		addSpawn("add_wither_spider", SBTags.Biomes.SPAWNS_WITHER_SPIDER, SBEntities.WITHER_SPIDER.get(), 4, 1, 1);
-		addSpawn("add_damselfly", SBTags.Biomes.SPAWNS_DAMSELFLY, SBEntities.DAMSELFLY.get(), 3, 1, 3);
+		addSpawn("add_butterfly", SBTags.Biomes.SPAWNS_BUTTERFLY, SBEntities.BUTTERFLY.get(), 3, 1, 2);
+		addSpawn("add_damselfly", SBTags.Biomes.SPAWNS_DAMSELFLY, SBEntities.DAMSELFLY.get(), 3, 1, 2);
 		addSpawn("add_oak_ents", SBTags.Biomes.SPAWNS_OAK_ENTS, SBEntities.ENT_MEDIUM.get(), 4, 1, 1);
 	}
 

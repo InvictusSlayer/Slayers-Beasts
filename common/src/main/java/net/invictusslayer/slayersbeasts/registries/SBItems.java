@@ -40,6 +40,7 @@ public class SBItems {
 	public static final Supplier<Item> ANT_QUEEN_SPAWN_EGG = register("ant_queen_spawn_egg", () -> new SpawnEggItem(SBEntities.ANT_QUEEN.get(), new Item.Properties().setId(createKey("ant_queen_spawn_egg"))));
 	public static final Supplier<Item> WITHER_SPIDER_SPAWN_EGG = register("wither_spider_spawn_egg", () -> new SpawnEggItem(SBEntities.WITHER_SPIDER.get(), new Item.Properties().setId(createKey("wither_spider_spawn_egg"))));
 	public static final Supplier<Item> TYRACHNID_SPAWN_EGG = register("tyrachnid_spawn_egg", () -> new SpawnEggItem(SBEntities.TYRACHNID.get(), new Item.Properties().setId(createKey("tyrachnid_spawn_egg"))));
+	public static final Supplier<Item> BUTTERFLY_SPAWN_EGG = register("butterfly_spawn_egg", () -> new SpawnEggItem(SBEntities.BUTTERFLY.get(), new Item.Properties().setId(createKey("butterfly_spawn_egg"))));
 	public static final Supplier<Item> DAMSELFLY_SPAWN_EGG = register("damselfly_spawn_egg", () -> new SpawnEggItem(SBEntities.DAMSELFLY.get(), new Item.Properties().setId(createKey("damselfly_spawn_egg"))));
 	public static final Supplier<Item> ENT_SPAWN_EGG = register("ent_spawn_egg", () -> new SpawnEggItem(SBEntities.ENT_MEDIUM.get(), new Item.Properties().setId(createKey("ent_spawn_egg"))));
 	public static final Supplier<Item> WUDU_SPAWN_EGG = register("wudu_spawn_egg", () -> new SpawnEggItem(SBEntities.WUDU.get(), new Item.Properties().setId(createKey("wudu_spawn_egg"))));
