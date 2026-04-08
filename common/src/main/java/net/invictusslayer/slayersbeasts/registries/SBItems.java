@@ -38,6 +38,7 @@ public class SBItems {
 	public static final Supplier<SpawnEggItem> ANT_QUEEN_SPAWN_EGG = registerSpawnEgg("ant_queen_spawn_egg", SBEntities.ANT_QUEEN::get, 0xffffff, 0xffffff, new Item.Properties());
 	public static final Supplier<SpawnEggItem> WITHER_SPIDER_SPAWN_EGG = registerSpawnEgg("wither_spider_spawn_egg", SBEntities.WITHER_SPIDER::get, 0xffffff, 0xffffff, new Item.Properties());
 	public static final Supplier<SpawnEggItem> TYRACHNID_SPAWN_EGG = registerSpawnEgg("tyrachnid_spawn_egg", SBEntities.TYRACHNID::get, 0xffffff, 0xffffff, new Item.Properties());
+	public static final Supplier<SpawnEggItem> BUTTERFLY_SPAWN_EGG = registerSpawnEgg("butterfly_spawn_egg", SBEntities.BUTTERFLY::get, 0xffffff, 0xffffff, new Item.Properties());
 	public static final Supplier<SpawnEggItem> DAMSELFLY_SPAWN_EGG = registerSpawnEgg("damselfly_spawn_egg", SBEntities.DAMSELFLY::get, 0xffffff, 0xffffff, new Item.Properties());
 	public static final Supplier<SpawnEggItem> ENT_SPAWN_EGG = registerSpawnEgg("ent_spawn_egg", SBEntities.ENT_MEDIUM::get, 0xffffff, 0xffffff, new Item.Properties());
 	public static final Supplier<SpawnEggItem> WUDU_SPAWN_EGG = registerSpawnEgg("wudu_spawn_egg", SBEntities.WUDU::get, 0xffffff, 0xffffff, new Item.Properties());

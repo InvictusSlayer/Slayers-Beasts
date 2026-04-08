@@ -36,6 +36,7 @@ public class SBBiomeTagsProvider extends BiomeTagsProvider {
 		tag(SBTags.Biomes.SPAWNS_JUNGLE_ENTS).addTag(BiomeTags.IS_JUNGLE);
 		tag(SBTags.Biomes.SPAWNS_GREY_FOXES).add(SBBiomes.CHAPARRAL, SBBiomes.REDWOOD_GROVE, SBBiomes.OLD_GROWTH_REDWOOD_GROVE);
 		tag(SBTags.Biomes.SPAWNS_MANTIS).add(Biomes.LUSH_CAVES, Biomes.MANGROVE_SWAMP, Biomes.SPARSE_JUNGLE, Biomes.JUNGLE, Biomes.BAMBOO_JUNGLE);
+		tag(SBTags.Biomes.SPAWNS_BUTTERFLY).add(Biomes.PLAINS, Biomes.SUNFLOWER_PLAINS, Biomes.MEADOW, Biomes.FLOWER_FOREST, Biomes.FOREST, Biomes.BIRCH_FOREST, Biomes.OLD_GROWTH_BIRCH_FOREST);
 		tag(SBTags.Biomes.SPAWNS_DAMSELFLY).add(Biomes.SPARSE_JUNGLE, Biomes.PLAINS, Biomes.SUNFLOWER_PLAINS, Biomes.MEADOW, Biomes.SWAMP, Biomes.MANGROVE_SWAMP, Biomes.RIVER);
 
 		tag(Tags.Biomes.IS_DESERT).add(SBBiomes.BLACK_DUNES, SBBiomes.DEAD_SANDS, SBBiomes.DUSTY_CAVERNS);

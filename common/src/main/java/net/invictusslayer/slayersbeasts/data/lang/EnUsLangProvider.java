@@ -42,6 +42,7 @@ public class EnUsLangProvider extends LangProvider {
 		addItem(SBItems.ANT_QUEEN_SPAWN_EGG, "Queen Ant Spawn Egg");
 		addItem(SBItems.WITHER_SPIDER_SPAWN_EGG, "Wither Spider Spawn Egg");
 		addItem(SBItems.TYRACHNID_SPAWN_EGG, "Tyrachnid Spawn Egg");
+		addItem(SBItems.BUTTERFLY_SPAWN_EGG, "Butterfly Spawn Egg");
 		addItem(SBItems.DAMSELFLY_SPAWN_EGG, "Damselfly Spawn Egg");
 		addItem(SBItems.ENT_SPAWN_EGG, "Ent Spawn Egg");
 		addItem(SBItems.WUDU_SPAWN_EGG, "Wudu Spawn Egg");
@@ -118,6 +119,7 @@ public class EnUsLangProvider extends LangProvider {
 		addEntityType(SBEntities.ANT_QUEEN, "Queen Ant");
 		addEntityType(SBEntities.WITHER_SPIDER, "Wither Spider");
 		addEntityType(SBEntities.TYRACHNID, "Tyrachnid");
+		addEntityType(SBEntities.BUTTERFLY, "Butterfly");
 		addEntityType(SBEntities.DAMSELFLY, "Damselfly");
 		addEntityType(SBEntities.ENT_MEDIUM, "Ent");
 		addEntityType(SBEntities.WUDU, "Wudu");
