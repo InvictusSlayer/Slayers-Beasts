@@ -14,6 +14,9 @@ public class SBTags {
 	public static class Blocks {
 		public static final TagKey<Block> SEPULCHRA_PORTAL_FRAME = tag("sepulchra_portal_frame");
 
+		public static final TagKey<Block> BUTTERFLY_PERCH = tag("butterfly_perch");
+		public static final TagKey<Block> DAMSELFLY_PERCH = tag("damselfly_perch");
+
 		public static final TagKey<Block> ANTHILLS = tag("anthills");
 		public static final TagKey<Block> ANTHILL_REPLACEABLE = tag("anthill_replaceable");
 		public static final TagKey<Block> ICICLE_REPLACEABLE = tag("icicle_replaceable");

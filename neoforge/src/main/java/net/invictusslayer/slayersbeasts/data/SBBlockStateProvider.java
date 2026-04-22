@@ -256,7 +256,7 @@ public class SBBlockStateProvider extends BlockStateProvider {
 	}
 	private void buttonWithItem(Block block, Block texture) {
 		buttonBlock((ButtonBlock) block, blockTexture(texture));
-		simpleBlockItem(block, models().withExistingParent(name(block), "minecraft:block/button_inventory"));
+		simpleBlockItem(block, models().withExistingParent(name(block) + "_inventory", "minecraft:block/button_inventory").texture("texture", blockTexture(texture)));
 	}
 	private void pressurePlateWithItem(Block block, Block texture) {
 		pressurePlateBlock((PressurePlateBlock) block, blockTexture(texture));

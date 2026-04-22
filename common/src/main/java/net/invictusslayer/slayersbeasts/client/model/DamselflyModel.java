@@ -18,14 +18,16 @@ public class DamselflyModel<T extends Damselfly> extends HierarchicalModel<T> {
 		this.root = root;
 	}
 
+	@Override
 	public ModelPart root() {
 		return root;
 	}
 
+	@Override
 	public void setupAnim(T entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {
 		root.getAllParts().forEach(ModelPart::resetPose);
-		animate(entity.flyAnimationState, DamselflyAnimation.FLY, ageInTicks, 10);
-		animate(entity.perchAnimationState, DamselflyAnimation.PERCH, ageInTicks, 1.5F);
+		animate(entity.flyAnimationState, DamselflyAnimation.FLY, ageInTicks, 10.0F);
+		animate(entity.perchAnimationState, DamselflyAnimation.PERCH, ageInTicks, 2.0F);
 	}
 
 	public static LayerDefinition createBodyLayer() {
