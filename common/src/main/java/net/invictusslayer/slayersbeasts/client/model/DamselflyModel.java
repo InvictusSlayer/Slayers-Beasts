@@ -17,10 +17,11 @@ public class DamselflyModel extends EntityModel<DamselflyRenderState> {
 		super(root);
 	}
 
+	@Override
 	public void setupAnim(DamselflyRenderState state) {
 		super.setupAnim(state);
-		animate(state.flyAnimationState, DamselflyAnimation.FLY, state.ageInTicks, 10);
-		animate(state.perchAnimationState, DamselflyAnimation.PERCH, state.ageInTicks, 1.5F);
+		animate(state.flyAnimationState, DamselflyAnimation.FLY, state.ageInTicks, 10.0F);
+		animate(state.perchAnimationState, DamselflyAnimation.PERCH, state.ageInTicks, 2.0F);
 	}
 
 	public static LayerDefinition createBodyLayer() {

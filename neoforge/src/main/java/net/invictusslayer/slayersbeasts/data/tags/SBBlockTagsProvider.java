@@ -21,6 +21,9 @@ public class SBBlockTagsProvider extends BlockTagsProvider {
 		generateWoodFamilies();
 
 		tag(SBTags.Blocks.SEPULCHRA_PORTAL_FRAME).add(SBBlocks.JADE_BLOCK.get());
+		tag(SBTags.Blocks.BUTTERFLY_PERCH).addTag(BlockTags.SMALL_FLOWERS).addTag(BlockTags.TALL_FLOWERS).add(Blocks.GRASS, Blocks.TALL_GRASS, Blocks.FERN, Blocks.LARGE_FERN);
+		tag(SBTags.Blocks.DAMSELFLY_PERCH).add(Blocks.GRASS, Blocks.TALL_GRASS, Blocks.FERN, Blocks.LARGE_FERN);
+
 		tag(SBTags.Blocks.ANTHILLS).add(SBBlocks.ANTHILL.get(), SBBlocks.ANTHILL_HATCHERY.get());
 		tag(SBTags.Blocks.ANTHILL_REPLACEABLE).addTag(BlockTags.DIRT).addTag(BlockTags.BASE_STONE_OVERWORLD);
 		tag(SBTags.Blocks.ICICLE_REPLACEABLE).add(Blocks.PACKED_ICE, Blocks.ICE, Blocks.BLUE_ICE).addTag(BlockTags.BASE_STONE_OVERWORLD);

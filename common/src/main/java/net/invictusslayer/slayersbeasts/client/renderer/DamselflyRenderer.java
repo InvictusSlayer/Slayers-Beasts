@@ -1,5 +1,6 @@
 package net.invictusslayer.slayersbeasts.client.renderer;
 
+import com.mojang.blaze3d.vertex.PoseStack;
 import net.invictusslayer.slayersbeasts.SlayersBeasts;
 import net.invictusslayer.slayersbeasts.client.model.DamselflyModel;
 import net.invictusslayer.slayersbeasts.client.state.DamselflyRenderState;
@@ -14,7 +15,13 @@ public class DamselflyRenderer extends MobRenderer<Damselfly, DamselflyRenderSta
 	private static final ResourceLocation YELLOW = ResourceLocation.fromNamespaceAndPath(SlayersBeasts.MOD_ID, "textures/entity/damselfly/yellow.png");
 
 	public DamselflyRenderer(EntityRendererProvider.Context context) {
-		super(context, new DamselflyModel(context.bakeLayer(DamselflyModel.LAYER_LOCATION)), 0.5F);
+		super(context, new DamselflyModel(context.bakeLayer(DamselflyModel.LAYER_LOCATION)), 0.25F);
+	}
+
+	@Override
+	protected void scale(T livingEntity, PoseStack poseStack, float partialTickTime) {
+		float f = 0.8F;
+		poseStack.scale(f, f, f);
 	}
 
 	public ResourceLocation getTextureLocation(DamselflyRenderState state) {
