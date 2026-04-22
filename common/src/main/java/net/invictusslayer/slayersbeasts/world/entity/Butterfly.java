@@ -1,6 +1,9 @@
 package net.invictusslayer.slayersbeasts.world.entity;
 
+import net.invictusslayer.slayersbeasts.SlayersBeasts;
+import net.invictusslayer.slayersbeasts.data.tags.SBTags;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.NbtUtils;
 import net.minecraft.network.syncher.EntityDataAccessor;
@@ -11,7 +14,6 @@ import net.minecraft.util.Mth;
 import net.minecraft.util.RandomSource;
 import net.minecraft.util.StringRepresentable;
 import net.minecraft.world.DifficultyInstance;
-import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
@@ -22,6 +24,7 @@ import net.minecraft.world.entity.ai.navigation.FlyingPathNavigation;
 import net.minecraft.world.entity.ai.navigation.PathNavigation;
 import net.minecraft.world.entity.ai.util.AirAndWaterRandomPos;
 import net.minecraft.world.entity.ai.util.HoverRandomPos;
+import net.minecraft.world.entity.animal.FlyingAnimal;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.ServerLevelAccessor;
@@ -37,7 +40,7 @@ import java.util.Optional;
 import java.util.function.IntFunction;
 import java.util.function.Predicate;
 
-public class Butterfly extends PathfinderMob implements VariantHolder<Butterfly.Variant> {
+public class Butterfly extends PathfinderMob implements VariantHolder<Butterfly.Variant>, FlyingAnimal {
 	private static final EntityDataAccessor<Integer> DATA_VARIANT = SynchedEntityData.defineId(Butterfly.class, EntityDataSerializers.INT);
 	private static final EntityDataAccessor<Boolean> DATA_IS_FLYING = SynchedEntityData.defineId(Butterfly.class, EntityDataSerializers.BOOLEAN);
 	public final AnimationState idleAnimationState = new AnimationState();
@@ -55,14 +58,14 @@ public class Butterfly extends PathfinderMob implements VariantHolder<Butterfly.
 	protected void registerGoals() {
 		super.registerGoals();
 		goalSelector.addGoal(0, new ButterflyPerchGoal(this));
-		goalSelector.addGoal(1, new DamselflyWanderGoal(this));
+		goalSelector.addGoal(1, new ButterflyWanderGoal(this));
 		goalSelector.addGoal(2, new FloatGoal(this));
 		goalSelector.addGoal(3, new ButterflyHoverGoal(this));
 	}
 
 	public static AttributeSupplier.Builder createAttributes() {
 		return Mob.createMobAttributes()
-				.add(Attributes.MAX_HEALTH, 8.0D)
+				.add(Attributes.MAX_HEALTH, 6.0D)
 				.add(Attributes.MOVEMENT_SPEED, 0.25D)
 				.add(Attributes.FLYING_SPEED, 0.2D);
 	}
@@ -92,6 +95,7 @@ public class Butterfly extends PathfinderMob implements VariantHolder<Butterfly.
 		}
 	}
 
+	@Override
 	public void addAdditionalSaveData(CompoundTag tag) {
 		super.addAdditionalSaveData(tag);
 		if (savedPerchPos != null) tag.put("PerchPos", NbtUtils.writeBlockPos(savedPerchPos));
@@ -99,6 +103,7 @@ public class Butterfly extends PathfinderMob implements VariantHolder<Butterfly.
 		tag.putInt("Variant", getVariant().getId());
 	}
 
+	@Override
 	public void readAdditionalSaveData(CompoundTag tag) {
 		super.readAdditionalSaveData(tag);
 		savedPerchPos = tag.contains("PerchPos") ? NbtUtils.readBlockPos(tag.getCompound("PerchPos")) : null;
@@ -106,21 +111,24 @@ public class Butterfly extends PathfinderMob implements VariantHolder<Butterfly.
 		setVariant(Variant.byId(tag.getInt("Variant")));
 	}
 
-
+	@Override
 	protected void defineSynchedData() {
 		super.defineSynchedData();
 		entityData.define(DATA_VARIANT, 0);
 		entityData.define(DATA_IS_FLYING, false);
 	}
 
+	@Override
 	public Variant getVariant() {
 		return Variant.byId(entityData.get(DATA_VARIANT));
 	}
 
+	@Override
 	public void setVariant(Variant variant) {
 		entityData.set(DATA_VARIANT, variant.ordinal());
 	}
 
+	@Override
 	public boolean isFlying() {
 		return entityData.get(DATA_IS_FLYING);
 	}
@@ -129,14 +137,11 @@ public class Butterfly extends PathfinderMob implements VariantHolder<Butterfly.
 		entityData.set(DATA_IS_FLYING, flying);
 	}
 
-	public boolean causeFallDamage(float fallDistance, float multiplier, DamageSource source) {
-		return false;
-	}
-
+	@Override
 	protected void checkFallDamage(double y, boolean onGround, BlockState state, BlockPos pos) {}
 
 	public void resetTicksUntilPerch() {
-		ticksUntilPerch = 100 + getRandom().nextInt(100);
+		ticksUntilPerch = 240 + getRandom().nextInt(160);
 	}
 
 	boolean isTooFarAway(Vec3 pos) {
@@ -157,16 +162,13 @@ public class Butterfly extends PathfinderMob implements VariantHolder<Butterfly.
 
 	static class ButterflyPerchGoal extends Goal {
 		private final Butterfly mob;
-		private int perchTicks;
+		private int travelTicks, perchTicks;
 		private Vec3 perchPos;
 		private final Predicate<BlockState> VALID_PERCH_BLOCKS = state -> {
-			if (state.hasProperty(BlockStateProperties.WATERLOGGED) && state.getValue(BlockStateProperties.WATERLOGGED)) {
-				return false;
-			} else if (state.is(Blocks.TALL_GRASS)) {
-				return state.getValue(DoublePlantBlock.HALF) == DoubleBlockHalf.UPPER;
-			} else {
-				return false;
-			}
+			if (!state.is(SBTags.Blocks.BUTTERFLY_PERCH)) return false;
+			if (state.hasProperty(BlockStateProperties.WATERLOGGED) && state.getValue(BlockStateProperties.WATERLOGGED)) return false;
+			if (state.hasProperty(BlockStateProperties.DOUBLE_BLOCK_HALF)) return state.getValue(DoublePlantBlock.HALF) == DoubleBlockHalf.UPPER;
+			return !state.is(Blocks.WITHER_ROSE);
 		};
 
 		ButterflyPerchGoal(Butterfly mob) {
@@ -174,52 +176,68 @@ public class Butterfly extends PathfinderMob implements VariantHolder<Butterfly.
 			this.mob = mob;
 		}
 
+		@Override
 		public boolean canUse() {
-			if (mob.ticksUntilPerch > 0) {
-				return false;
-			} else {
-				Optional<BlockPos> optional = findNearbyPerch();
-				if (optional.isPresent()) {
-					mob.savedPerchPos = optional.get();
-					perchPos = Vec3.atBottomCenterOf(mob.savedPerchPos).add(0.0D, 1.0D, 0.0D);
-					perchTicks = 120 + mob.getRandom().nextInt(80);
-					return true;
-				} else {
-					mob.resetTicksUntilPerch();
-					return false;
-				}
+			if (mob.ticksUntilPerch > 0) return false;
+
+			Optional<BlockPos> optional = findNearbyPerch();
+			if (optional.isPresent()) {
+				mob.savedPerchPos = optional.get();
+				BlockState state = mob.level().getBlockState(mob.savedPerchPos);
+				double y = state.getShape(mob.level(), mob.savedPerchPos).max(Direction.Axis.Y);
+//				SlayersBeasts.LOGGER.info(y);
+				perchPos = Vec3.atBottomCenterOf(mob.savedPerchPos).add(0.0D, 1.0D, 0.0D);
+				return true;
 			}
+
+			mob.resetTicksUntilPerch();
+			return false;
 		}
 
+		@Override
 		public boolean canContinueToUse() {
-			return perchTicks > 0;
+			return perchTicks > 0 && perchPos != null;
 		}
 
-		public boolean requiresUpdateEveryTick() {
-			return true;
+		@Override
+		public void start() {
+			travelTicks = 0;
+			perchTicks = 120 + mob.getRandom().nextInt(80);
 		}
 
+		@Override
 		public void stop() {
 			mob.setFlying(true);
 			mob.resetTicksUntilPerch();
+			mob.savedPerchPos = null;
+			mob.navigation.stop();
 		}
 
+		@Override
 		public void tick() {
-			if (mob.savedPerchPos == null) {
-				perchTicks = 0;
+			if (!VALID_PERCH_BLOCKS.test(mob.level().getBlockState(mob.savedPerchPos))) {
+				perchPos = null;
+				return;
 			}
+
+			++travelTicks;
+			if (travelTicks > adjustedTickDelay(600)) {
+				perchPos = null;
+				return;
+			}
+
 			if (mob.position().distanceTo(perchPos) <= 0.1D) {
 				mob.setFlying(false);
-				--perchTicks;
-			} else {
-				if (mob.navigation.isDone()) {
-					if (mob.isTooFarAway(perchPos)) {
-						mob.savedPerchPos = null;
-					} else {
-						mob.setFlying(true);
-						mob.navigation.moveTo(mob.navigation.createPath(new BlockPos((int) perchPos.x, (int) perchPos.y, (int) perchPos.z), 1), 1.0D);
-						setWantedPos();
-					}
+				return;
+			}
+
+			if (mob.navigation.isDone()) {
+				if (mob.isTooFarAway(perchPos)) {
+					perchPos = null;
+				} else {
+					mob.setFlying(true);
+					mob.navigation.moveTo(perchPos.x, perchPos.y, perchPos.z, 1.0D);
+					setWantedPos();
 				}
 			}
 		}
@@ -233,70 +251,74 @@ public class Butterfly extends PathfinderMob implements VariantHolder<Butterfly.
 		}
 
 		private Optional<BlockPos> findNearestBlock(Predicate<BlockState> predicate) {
-			BlockPos blockPos = mob.blockPosition();
-			BlockPos.MutableBlockPos mutableBlockPos = new BlockPos.MutableBlockPos();
+			BlockPos pos = mob.blockPosition();
+			BlockPos.MutableBlockPos mutable = new BlockPos.MutableBlockPos();
 
 			for (int y = 0; y <= 5; y = y > 0 ? -y : 1 - y) {
 				for (int i = 0; i < 5; ++i) {
 					for (int x = 0; x <= i; x = x > 0 ? -x : 1 - x) {
 						for (int z = x < i && x > -i ? i : 0; z <= i; z = z > 0 ? -z : 1 - z) {
-							mutableBlockPos.setWithOffset(blockPos, x, y - 1, z);
-							if (blockPos.closerThan(mutableBlockPos, 5.0) &&
-									predicate.test(mob.level().getBlockState(mutableBlockPos))) {
-								return Optional.of(mutableBlockPos);
-							}
+							mutable.setWithOffset(pos, x, y - 1, z);
+							if (pos.closerThan(mutable, 5.0) && predicate.test(mob.level().getBlockState(mutable)))
+								return Optional.of(mutable);
 						}
 					}
 				}
 			}
-
 			return Optional.empty();
 		}
 	}
 
 	static class ButterflyHoverGoal extends Goal {
 		private final Butterfly mob;
-		private int hoverTime;
+		private int hoverTicks;
 
 		ButterflyHoverGoal(Butterfly mob) {
 			setFlags(EnumSet.of(Flag.MOVE));
 			this.mob = mob;
 		}
 
+		@Override
 		public boolean canUse() {
 			return mob.navigation.isDone();
 		}
 
+		@Override
 		public boolean canContinueToUse() {
-			return mob.navigation.isDone() && hoverTime >= 0;
+			return mob.navigation.isDone() && hoverTicks >= 0;
 		}
 
+		@Override
 		public void start() {
 			mob.setFlying(true);
-			hoverTime = 40 + mob.getRandom().nextInt(40);
+			hoverTicks = 40 + mob.getRandom().nextInt(40);
 		}
 
+		@Override
 		public void tick() {
-			--hoverTime;
+			--hoverTicks;
 		}
 	}
 
-	class DamselflyWanderGoal extends Goal {
+	class ButterflyWanderGoal extends Goal {
 		private final Butterfly mob;
 
-		DamselflyWanderGoal(Butterfly mob) {
+		ButterflyWanderGoal(Butterfly mob) {
 			setFlags(EnumSet.of(Flag.MOVE));
 			this.mob = mob;
 		}
 
+		@Override
 		public boolean canUse() {
 			return mob.navigation.isDone() && mob.random.nextInt(20) == 0;
 		}
 
+		@Override
 		public boolean canContinueToUse() {
 			return mob.navigation.isInProgress();
 		}
 
+		@Override
 		public void start() {
 			mob.setFlying(true);
 			Vec3 vec3 = findPos();
