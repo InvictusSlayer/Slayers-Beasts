@@ -6,7 +6,6 @@ import net.invictusslayer.scabbard.platform.IPlatformHandler;
 import net.invictusslayer.slayersbeasts.world.level.block.*;
 import net.invictusslayer.slayersbeasts.config.SBConfig;
 import net.invictusslayer.slayersbeasts.registries.*;
-import net.invictusslayer.slayersbeasts.world.item.SBDispensableItems;
 import net.invictusslayer.slayersbeasts.world.level.biome.SBSurfaceRuleData;
 import net.invictusslayer.slayersbeasts.world.level.biome.region.SBNetherRegion;
 import net.invictusslayer.slayersbeasts.world.level.biome.region.SBOverworldRegion;
@@ -72,7 +71,6 @@ public class SlayersBeasts {
 		LOGGER.info("Extended Fox$Type values: {}", Arrays.toString(Fox.Type.values()));
 
 		SBVanillaCompat.register(PLATFORM);
-		SBDispensableItems.register();
 		SBVillagerType.setupBiomes();
 
 		((IExtendedMushroomBlock) SBBlocks.BLACK_MUSHROOM.get()).setMightyMushroom(SBConfiguredFeatures.MIGHTY_BLACK_MUSHROOM);

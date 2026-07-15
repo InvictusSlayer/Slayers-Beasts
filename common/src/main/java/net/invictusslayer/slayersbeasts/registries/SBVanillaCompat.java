@@ -8,6 +8,7 @@ public class SBVanillaCompat {
 		SBWoodFamily.getAllFamilies().forEach(family -> {
 			family.registerFlammability(platform);
 			family.registerStrippability(platform);
+            family.registerDispensability();
 		});
 
 		platform.addFlammableBlock(SBBlocks.PEAT.get(), 5, 5);

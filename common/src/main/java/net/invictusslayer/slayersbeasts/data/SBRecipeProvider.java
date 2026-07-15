@@ -67,29 +67,36 @@ public class SBRecipeProvider extends RecipeProvider {
 
 	private void generateWoodFamilies(Consumer<FinishedRecipe> output) {
 		SBWoodFamily.getAllFamilies().forEach(family -> {
-			Block planks = (Block) family.get(WoodFamily.Variant.PLANKS).get();
-			Ingredient ingredient = Ingredient.of(planks);
+            family.getBlock(WoodFamily.Variant.PLANKS).ifPresent(planks -> {
+                planksFromLog(output, planks, family.getLogItems(), 4);
+                Ingredient ingredient = Ingredient.of(planks);
 
-			family.getVariants().forEach((variant, supplier) -> {
-				if (!(supplier.get() instanceof ItemLike item)) return;
-				switch (variant) {
-					case BOAT -> woodenBoat(output, item, planks);
-					case BUTTON -> woodenRecipe(output, buttonBuilder(item, ingredient), planks, "button");
-					case CHEST_BOAT -> chestBoat(output, item, (Item) family.get(WoodFamily.Variant.BOAT).get());
-					case DOOR -> woodenRecipe(output, doorBuilder(item, ingredient), planks, "door");
-					case FENCE -> woodenRecipe(output, fenceBuilder(item, ingredient), planks, "fence");
-					case FENCE_GATE -> woodenRecipe(output, fenceGateBuilder(item, ingredient), planks, "fence_gate");
-					case HANGING_SIGN_ITEM -> hangingSign(output, item, (Block) family.get(WoodFamily.Variant.STRIPPED_LOG).get());
-					case PLANKS -> planksFromLog(output, item, family.getLogItems(), 4);
-					case PRESSURE_PLATE -> woodenRecipe(output, pressurePlateBuilder(RecipeCategory.REDSTONE, item, ingredient), planks, "pressure_plate");
-					case SIGN_ITEM -> woodenRecipe(output, signBuilder(item, ingredient), planks, "sign");
-					case SLAB -> woodenRecipe(output, slabBuilder(RecipeCategory.BUILDING_BLOCKS, item, ingredient), planks, "slab");
-					case STAIRS -> woodenRecipe(output, stairBuilder(item, ingredient), planks, "stairs");
-					case STRIPPED_WOOD -> woodFromLogs(output, item, (Block) family.get(WoodFamily.Variant.STRIPPED_LOG).get());
-					case TRAPDOOR -> woodenRecipe(output, trapdoorBuilder(item, ingredient), planks, "trapdoor");
-					case WOOD -> woodFromLogs(output, item, (Block) family.get(WoodFamily.Variant.LOG).get());
-				}
-			});
+                family.getVariants().forEach((variant, supplier) -> {
+                    if (!(supplier.get() instanceof ItemLike item)) return;
+                    switch (variant) {
+                        case BOAT -> woodenBoat(output, item, planks);
+                        case BUTTON -> woodenRecipe(output, buttonBuilder(item, ingredient), planks, "button");
+                        case DOOR -> woodenRecipe(output, doorBuilder(item, ingredient), planks, "door");
+                        case FENCE -> woodenRecipe(output, fenceBuilder(item, ingredient), planks, "fence");
+                        case FENCE_GATE -> woodenRecipe(output, fenceGateBuilder(item, ingredient), planks, "fence_gate");
+                        case PRESSURE_PLATE -> woodenRecipe(output, pressurePlateBuilder(RecipeCategory.REDSTONE, item, ingredient), planks, "pressure_plate");
+                        case SIGN_ITEM -> woodenRecipe(output, signBuilder(item, ingredient), planks, "sign");
+                        case SLAB -> woodenRecipe(output, slabBuilder(RecipeCategory.BUILDING_BLOCKS, item, ingredient), planks, "slab");
+                        case STAIRS -> woodenRecipe(output, stairBuilder(item, ingredient), planks, "stairs");
+                        case TRAPDOOR -> woodenRecipe(output, trapdoorBuilder(item, ingredient), planks, "trapdoor");
+                    }
+                });
+            });
+
+            family.getBlock(WoodFamily.Variant.LOG).ifPresent(log ->
+                    family.getBlock(WoodFamily.Variant.WOOD).ifPresent(wood -> woodFromLogs(output, wood, log)));
+            family.getBlock(WoodFamily.Variant.STRIPPED_LOG).ifPresent(stripped -> {
+                family.getBlock(WoodFamily.Variant.STRIPPED_WOOD).ifPresent(block -> woodFromLogs(output, block, stripped));
+                family.getItem(WoodFamily.Variant.HANGING_SIGN_ITEM).ifPresent(item -> hangingSign(output, item, stripped));
+            });
+
+            family.getItem(WoodFamily.Variant.BOAT).ifPresent(boat ->
+                    family.getItem(WoodFamily.Variant.CHEST_BOAT).ifPresent(chest -> chestBoat(output, chest, boat)));
 		});
 	}
 
