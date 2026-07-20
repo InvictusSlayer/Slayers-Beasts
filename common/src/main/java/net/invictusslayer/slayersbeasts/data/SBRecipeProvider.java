@@ -1,6 +1,6 @@
 package net.invictusslayer.slayersbeasts.data;
 
-import net.invictusslayer.scabbard.world.level.WoodFamily;
+import net.invictusslayer.scabbard.data.RecipeProvider;
 import net.invictusslayer.slayersbeasts.SlayersBeasts;
 import net.invictusslayer.slayersbeasts.world.level.block.SBBlockFamily;
 import net.invictusslayer.slayersbeasts.world.level.block.SBWoodFamily;
@@ -8,26 +8,20 @@ import net.invictusslayer.slayersbeasts.registries.SBBlocks;
 import net.invictusslayer.slayersbeasts.registries.SBItems;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.recipes.*;
-import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.flag.FeatureFlagSet;
-import net.minecraft.world.flag.FeatureFlags;
-import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.Ingredient;
-import net.minecraft.world.level.ItemLike;
-import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 
 import java.util.function.Consumer;
 
 public class SBRecipeProvider extends RecipeProvider {
 	public SBRecipeProvider(PackOutput output) {
-		super(output);
+		super(output, SlayersBeasts.MOD_ID);
 	}
 
 	public void buildRecipes(Consumer<FinishedRecipe> output) {
-		generateBlockFamilies(output);
-		generateWoodFamilies(output);
+        SBBlockFamily.getAllFamilies().forEach(family -> generateBlockFamily(output, family));
+        SBWoodFamily.getAllFamilies().forEach(family -> generateWoodFamily(output, family));
 
 		SimpleCookingRecipeBuilder.smoking(Ingredient.of(SBItems.TIED_LEATHER.get()), RecipeCategory.MISC, SBItems.TANNED_LEATHER.get(), 0.5F, 200).unlockedBy("has_tied_leather", has(SBItems.TIED_LEATHER.get())).save(output);
 		ShapedRecipeBuilder.shaped(RecipeCategory.MISC, SBItems.TIED_LEATHER.get()).define('S', Items.STRING).define('L', Items.LEATHER).define('M', SBItems.MUD_BALL.get())
@@ -63,61 +57,5 @@ public class SBRecipeProvider extends RecipeProvider {
 		stonecutterResultFromBase(output, RecipeCategory.BUILDING_BLOCKS, SBBlocks.POLISHED_PEGMATITE_SLAB.get(), SBBlocks.POLISHED_PEGMATITE.get(), 2);
 		stonecutterResultFromBase(output, RecipeCategory.BUILDING_BLOCKS, SBBlocks.POLISHED_PEGMATITE_STAIRS.get(), SBBlocks.PEGMATITE.get());
 		stonecutterResultFromBase(output, RecipeCategory.BUILDING_BLOCKS, SBBlocks.POLISHED_PEGMATITE_STAIRS.get(), SBBlocks.POLISHED_PEGMATITE.get());
-	}
-
-	private void generateWoodFamilies(Consumer<FinishedRecipe> output) {
-		SBWoodFamily.getAllFamilies().forEach(family -> {
-            family.getBlock(WoodFamily.Variant.PLANKS).ifPresent(planks -> {
-                planksFromLog(output, planks, family.getLogItems(), 4);
-                Ingredient ingredient = Ingredient.of(planks);
-
-                family.getVariants().forEach((variant, supplier) -> {
-                    if (!(supplier.get() instanceof ItemLike item)) return;
-                    switch (variant) {
-                        case BOAT -> woodenBoat(output, item, planks);
-                        case BUTTON -> woodenRecipe(output, buttonBuilder(item, ingredient), planks, "button");
-                        case DOOR -> woodenRecipe(output, doorBuilder(item, ingredient), planks, "door");
-                        case FENCE -> woodenRecipe(output, fenceBuilder(item, ingredient), planks, "fence");
-                        case FENCE_GATE -> woodenRecipe(output, fenceGateBuilder(item, ingredient), planks, "fence_gate");
-                        case PRESSURE_PLATE -> woodenRecipe(output, pressurePlateBuilder(RecipeCategory.REDSTONE, item, ingredient), planks, "pressure_plate");
-                        case SIGN_ITEM -> woodenRecipe(output, signBuilder(item, ingredient), planks, "sign");
-                        case SLAB -> woodenRecipe(output, slabBuilder(RecipeCategory.BUILDING_BLOCKS, item, ingredient), planks, "slab");
-                        case STAIRS -> woodenRecipe(output, stairBuilder(item, ingredient), planks, "stairs");
-                        case TRAPDOOR -> woodenRecipe(output, trapdoorBuilder(item, ingredient), planks, "trapdoor");
-                    }
-                });
-            });
-
-            family.getBlock(WoodFamily.Variant.LOG).ifPresent(log ->
-                    family.getBlock(WoodFamily.Variant.WOOD).ifPresent(wood -> woodFromLogs(output, wood, log)));
-            family.getBlock(WoodFamily.Variant.STRIPPED_LOG).ifPresent(stripped -> {
-                family.getBlock(WoodFamily.Variant.STRIPPED_WOOD).ifPresent(block -> woodFromLogs(output, block, stripped));
-                family.getItem(WoodFamily.Variant.HANGING_SIGN_ITEM).ifPresent(item -> hangingSign(output, item, stripped));
-            });
-
-            family.getItem(WoodFamily.Variant.BOAT).ifPresent(boat ->
-                    family.getItem(WoodFamily.Variant.CHEST_BOAT).ifPresent(chest -> chestBoat(output, chest, boat)));
-		});
-	}
-
-	private static void woodenRecipe(Consumer<FinishedRecipe> output, RecipeBuilder builder, Block planks, String group) {
-		builder.unlockedBy("has_planks", has(planks)).group("wooden_" + group).save(output);
-	}
-
-	private void generateBlockFamilies(Consumer<FinishedRecipe> output) {
-		SBBlockFamily.getAllFamilies().filter(family -> family.shouldGenerateRecipe(FeatureFlagSet.of(FeatureFlags.VANILLA))).forEach(family -> generateRecipes(output, family));
-	}
-
-	public static void twoByTwoPacker(Consumer<FinishedRecipe> output, RecipeCategory category, ItemLike pPacked, ItemLike pUnpacked) {
-		ShapedRecipeBuilder.shaped(category, pPacked, 1).define('#', pUnpacked).pattern("##").pattern("##").unlockedBy(getHasName(pUnpacked), has(pUnpacked)).save(output, new ResourceLocation(SlayersBeasts.MOD_ID, getSimpleRecipeName(pUnpacked)));
-	}
-
-	public static void nineBlockStorageRecipes(Consumer<FinishedRecipe> output, RecipeCategory unpackedCategory, ItemLike unpacked, RecipeCategory packedCategory, ItemLike packed) {
-		nineBlockStorageRecipes(output, unpackedCategory, unpacked, packedCategory, packed, getSimpleRecipeName(packed), getSimpleRecipeName(unpacked));
-	}
-
-	protected static void nineBlockStorageRecipes(Consumer<FinishedRecipe> output, RecipeCategory unpackedCategory, ItemLike unpacked, RecipeCategory packedCategory, ItemLike packed, String packedName, String unpackedName) {
-		ShapelessRecipeBuilder.shapeless(unpackedCategory, unpacked, 9).requires(packed).group(null).unlockedBy(getHasName(packed), has(packed)).save(output, new ResourceLocation(SlayersBeasts.MOD_ID, unpackedName));
-		ShapedRecipeBuilder.shaped(packedCategory, packed).define('#', unpacked).pattern("###").pattern("###").pattern("###").group(null).unlockedBy(getHasName(unpacked), has(unpacked)).save(output, new ResourceLocation(SlayersBeasts.MOD_ID, packedName));
 	}
 }
