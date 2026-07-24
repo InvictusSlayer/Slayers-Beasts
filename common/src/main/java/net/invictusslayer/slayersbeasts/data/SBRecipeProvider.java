@@ -7,7 +7,6 @@ import net.invictusslayer.slayersbeasts.registries.SBItems;
 import net.invictusslayer.slayersbeasts.world.level.block.SBBlockFamily;
 import net.invictusslayer.slayersbeasts.world.level.block.SBWoodFamily;
 import net.minecraft.core.HolderLookup;
-import net.minecraft.data.BlockFamily;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.recipes.*;
 import net.minecraft.world.item.Items;
@@ -21,7 +20,7 @@ public class SBRecipeProvider extends RecipeProvider {
 		super(output, provider, SlayersBeasts.MOD_ID);
 	}
 
-	public void buildRecipes(Consumer<FinishedRecipe> output) {
+	public void buildRecipes(RecipeOutput output) {
         SBBlockFamily.getAllFamilies().forEach(family -> generateBlockFamily(output, family));
         SBWoodFamily.getAllFamilies().forEach(family -> generateWoodFamily(output, family));
 

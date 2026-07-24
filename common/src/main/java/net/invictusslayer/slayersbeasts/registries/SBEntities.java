@@ -37,7 +37,7 @@ public class SBEntities {
 		consumer.accept((SpawnPlacement<T>) new SpawnPlacement<>(ANT_SOLDIER.get(), SpawnPlacementTypes.ON_GROUND, Heightmap.Types.WORLD_SURFACE, AntSoldier::canSpawn));
 		consumer.accept((SpawnPlacement<T>) new SpawnPlacement<>(ANT_QUEEN.get(), SpawnPlacementTypes.ON_GROUND, Heightmap.Types.WORLD_SURFACE, AntQueen::canSpawn));
 		consumer.accept((SpawnPlacement<T>) new SpawnPlacement<>(WITHER_SPIDER.get(), SpawnPlacementTypes.ON_GROUND, Heightmap.Types.WORLD_SURFACE, WitherSpider::canSpawn));
-		consumer.accept((SpawnPlacement<T>) new SpawnPlacement<>(BUTTERFLY.get(), SpawnPlacementsTypes.ON_GROUND, Heightmap.Types.WORLD_SURFACE, Butterfly::canSpawn));
+		consumer.accept((SpawnPlacement<T>) new SpawnPlacement<>(BUTTERFLY.get(), SpawnPlacementTypes.ON_GROUND, Heightmap.Types.WORLD_SURFACE, Butterfly::canSpawn));
 		consumer.accept((SpawnPlacement<T>) new SpawnPlacement<>(DAMSELFLY.get(), SpawnPlacementTypes.ON_GROUND, Heightmap.Types.WORLD_SURFACE, Damselfly::canSpawn));
 		consumer.accept((SpawnPlacement<T>) new SpawnPlacement<>(ENT_MEDIUM.get(), SpawnPlacementTypes.ON_GROUND, Heightmap.Types.WORLD_SURFACE, EntMedium::canSpawn));
 		consumer.accept((SpawnPlacement<T>) new SpawnPlacement<>(SPORETRAP.get(), SpawnPlacementTypes.ON_GROUND, Heightmap.Types.WORLD_SURFACE, Sporetrap::canSpawn));
