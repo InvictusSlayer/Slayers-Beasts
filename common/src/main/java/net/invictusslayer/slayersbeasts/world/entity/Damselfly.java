@@ -115,9 +115,9 @@ public class Damselfly extends PathfinderMob implements VariantHolder<Damselfly.
 
 	@Override
 	protected void defineSynchedData(SynchedEntityData.Builder builder) {
-		super.defineSynchedData();
-		entityData.define(DATA_VARIANT, 0);
-		entityData.define(DATA_IS_FLYING, false);
+		super.defineSynchedData(builder);
+		builder.define(DATA_VARIANT, 0);
+		builder.define(DATA_IS_FLYING, false);
 	}
 
 	@Override

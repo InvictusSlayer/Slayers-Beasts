@@ -9,7 +9,7 @@ import net.minecraft.client.renderer.entity.MobRenderer;
 import net.minecraft.resources.ResourceLocation;
 
 public class ButterflyRenderer<T extends Butterfly> extends MobRenderer<T, ButterflyModel<T>> {
-	private static final ResourceLocation TORTOISESHELL = new ResourceLocation(SlayersBeasts.MOD_ID, "textures/entity/butterfly/tortoiseshell.png");
+	private static final ResourceLocation TORTOISESHELL = ResourceLocation.fromNamespaceAndPath(SlayersBeasts.MOD_ID, "textures/entity/butterfly/tortoiseshell.png");
 
 	public ButterflyRenderer(EntityRendererProvider.Context context) {
 		super(context, new ButterflyModel<>(context.bakeLayer(ButterflyModel.LAYER_LOCATION)), 0.25F);

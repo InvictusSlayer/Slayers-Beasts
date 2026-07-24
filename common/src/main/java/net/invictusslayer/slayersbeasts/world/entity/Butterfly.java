@@ -106,16 +106,16 @@ public class Butterfly extends PathfinderMob implements VariantHolder<Butterfly.
 	@Override
 	public void readAdditionalSaveData(CompoundTag tag) {
 		super.readAdditionalSaveData(tag);
-		savedPerchPos = tag.contains("PerchPos") ? NbtUtils.readBlockPos(tag.getCompound("PerchPos")) : null;
+		savedPerchPos = NbtUtils.readBlockPos(tag, "PerchPos").orElse(null);
 		ticksUntilPerch = tag.getInt("TicksSincePerch");
 		setVariant(Variant.byId(tag.getInt("Variant")));
 	}
 
 	@Override
-	protected void defineSynchedData() {
-		super.defineSynchedData();
-		entityData.define(DATA_VARIANT, 0);
-		entityData.define(DATA_IS_FLYING, false);
+	protected void defineSynchedData(SynchedEntityData.Builder builder) {
+		super.defineSynchedData(builder);
+		builder.define(DATA_VARIANT, 0);
+		builder.define(DATA_IS_FLYING, false);
 	}
 
 	@Override
