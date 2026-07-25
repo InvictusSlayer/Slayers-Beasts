@@ -70,11 +70,11 @@ public class Butterfly extends PathfinderMob implements VariantHolder<Butterfly.
 				.add(Attributes.FLYING_SPEED, 0.2D);
 	}
 
-	public static boolean canSpawn(EntityType<Butterfly> type, LevelAccessor level, MobSpawnType spawnType, BlockPos pos, RandomSource random) {
-		return PathfinderMob.checkMobSpawnRules(type, level, spawnType, pos, random);
+	public static boolean canSpawn(EntityType<Butterfly> type, LevelAccessor level, EntitySpawnReason reason, BlockPos pos, RandomSource random) {
+		return PathfinderMob.checkMobSpawnRules(type, level, reason, pos, random);
 	}
 
-	public SpawnGroupData finalizeSpawn(ServerLevelAccessor level, DifficultyInstance difficulty, MobSpawnType type, SpawnGroupData spawnData, CompoundTag tag) {
+	public SpawnGroupData finalizeSpawn(ServerLevelAccessor level, DifficultyInstance difficulty, EntitySpawnReason reason, SpawnGroupData spawnData, CompoundTag tag) {
 		setVariant(Variant.byId(level.getRandom().nextInt(Variant.values().length)));
 		return new ButterflyGroupData();
 	}
@@ -83,7 +83,6 @@ public class Butterfly extends PathfinderMob implements VariantHolder<Butterfly.
 		FlyingPathNavigation navigation = new FlyingPathNavigation(this, level);
 		navigation.setCanOpenDoors(false);
 		navigation.setCanFloat(false);
-		navigation.setCanPassDoors(true);
 		return navigation;
 	}
 

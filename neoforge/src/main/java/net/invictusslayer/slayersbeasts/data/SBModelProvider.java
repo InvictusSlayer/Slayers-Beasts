@@ -115,7 +115,7 @@ public class SBModelProvider extends ModelProvider {
 		itemGen.generateFlatItem(SBItems.ANT_QUEEN_SPAWN_EGG.get(), ModelTemplates.FLAT_ITEM);
 		itemGen.generateFlatItem(SBItems.WITHER_SPIDER_SPAWN_EGG.get(), ModelTemplates.FLAT_ITEM);
 		itemGen.generateFlatItem(SBItems.TYRACHNID_SPAWN_EGG.get(), ModelTemplates.FLAT_ITEM);
-		//itemGen.generateFlatItem(SBItems.BUTTERFLY_SPAWN_EGG.get(), ModelTemplates.FLAT_ITEM);
+		itemGen.generateFlatItem(SBItems.BUTTERFLY_SPAWN_EGG.get(), ModelTemplates.FLAT_ITEM);
 		itemGen.generateFlatItem(SBItems.DAMSELFLY_SPAWN_EGG.get(), ModelTemplates.FLAT_ITEM);
 		itemGen.generateFlatItem(SBItems.ENT_SPAWN_EGG.get(), ModelTemplates.FLAT_ITEM);
 		itemGen.generateFlatItem(SBItems.WUDU_SPAWN_EGG.get(), ModelTemplates.FLAT_ITEM);

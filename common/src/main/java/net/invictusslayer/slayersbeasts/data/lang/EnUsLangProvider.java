@@ -186,14 +186,15 @@ public class EnUsLangProvider extends LangProvider {
 				case DOOR -> addBlock((Supplier<? extends Block>) object, name + " Door");
 				case FENCE -> addBlock((Supplier<? extends Block>) object, name + " Fence");
 				case FENCE_GATE -> addBlock((Supplier<? extends Block>) object, name + " Fence Gate");
-				case HANGING_SIGN -> addBlock((Supplier<? extends Block>) object, name + " Hanging Sign");
+				case HANGING_SIGN_ITEM -> addItem((Supplier<? extends Item>) object, name + " Hanging Sign");
 				case LEAVES -> addBlock((Supplier<? extends Block>) object, name + " Leaves");
 				case LOG -> addBlock((Supplier<? extends Block>) object, name + " Log");
 				case PLANKS -> addBlock((Supplier<? extends Block>) object, name + " Planks");
 //				case POTTED_SAPLING -> addBlock((Supplier<? extends Block>) object, "Potted " + name + " Sapling");
 				case PRESSURE_PLATE -> addBlock((Supplier<? extends Block>) object, name + " Pressure Plate");
 				case SAPLING -> addBlock((Supplier<? extends Block>) object, name + " Sapling");
-				case SIGN -> addBlock((Supplier<? extends Block>) object, name + " Sign");
+				case SIGN_ITEM -> addItem((Supplier<? extends Item>) object, name + " Sign");
+				case SLAB -> addBlock((Supplier<? extends Block>) object, name + " Slab");
 				case STAIRS -> addBlock((Supplier<? extends Block>) object, name + " Stairs");
 				case STRIPPED_LOG -> addBlock((Supplier<? extends Block>) object, "Stripped " + name + " Log");
 				case STRIPPED_WOOD -> addBlock((Supplier<? extends Block>) object, "Stripped " + name + " Wood");

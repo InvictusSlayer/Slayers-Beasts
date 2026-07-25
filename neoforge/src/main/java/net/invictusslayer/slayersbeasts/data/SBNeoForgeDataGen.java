@@ -26,6 +26,8 @@ import net.minecraft.core.RegistrySetBuilder;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.data.loot.LootTableProvider;
+import net.minecraft.data.recipes.RecipeOutput;
+import net.minecraft.data.recipes.RecipeProvider;
 import net.minecraft.resources.RegistryDataLoader;
 import net.minecraft.world.level.storage.loot.parameters.LootContextParamSets;
 import net.neoforged.neoforge.common.data.DatapackBuiltinEntriesProvider;
@@ -59,7 +61,17 @@ public class SBNeoForgeDataGen {
 		event.createProvider(SBPoiTagsProvider::new);
 
 		event.createProvider(EnUsLangProvider::new);
-		event.createProvider(SBRecipeProvider.Runner::new);
+		event.createProvider((output, provider) -> new RecipeProvider.Runner(output, provider) {
+			@Override
+			public String getName() {
+				return "Recipes - " + SlayersBeasts.MOD_ID;
+			}
+
+			@Override
+			protected RecipeProvider createRecipeProvider(HolderLookup.Provider provider, RecipeOutput output1) {
+				return new SBRecipeProvider(provider, output1);
+			}
+		});
 		event.createProvider(SBModelProvider::new);
 		event.createProvider(SBSoundDefinitionsProvider::new);
 

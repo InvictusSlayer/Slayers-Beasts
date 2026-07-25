@@ -2,32 +2,26 @@ package net.invictusslayer.slayersbeasts.client.model;
 
 import net.invictusslayer.slayersbeasts.SlayersBeasts;
 import net.invictusslayer.slayersbeasts.client.animation.ButterflyAnimation;
-import net.invictusslayer.slayersbeasts.world.entity.Butterfly;
-import net.minecraft.client.model.HierarchicalModel;
+import net.invictusslayer.slayersbeasts.client.state.ButterflyRenderState;
+import net.minecraft.client.model.EntityModel;
 import net.minecraft.client.model.geom.ModelLayerLocation;
 import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.model.geom.PartPose;
 import net.minecraft.client.model.geom.builders.*;
 import net.minecraft.resources.ResourceLocation;
 
-public class ButterflyModel<T extends Butterfly> extends HierarchicalModel<T> {
+public class ButterflyModel extends EntityModel<ButterflyRenderState> {
 	public static final ModelLayerLocation LAYER_LOCATION = new ModelLayerLocation(ResourceLocation.fromNamespaceAndPath(SlayersBeasts.MOD_ID, "butterfly_model"), "main");
-	private final ModelPart root;
 
 	public ButterflyModel(ModelPart root) {
-		this.root = root;
+		super(root);
 	}
 
 	@Override
-	public ModelPart root() {
-		return root;
-	}
-
-	@Override
-	public void setupAnim(T entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {
-		root.getAllParts().forEach(ModelPart::resetPose);
-		animate(entity.idleAnimationState, ButterflyAnimation.IDLE_CLOSED, ageInTicks);
-		animate(entity.flyingAnimationState, ButterflyAnimation.FLYING, ageInTicks, 2.0F);
+	public void setupAnim(ButterflyRenderState state) {
+		super.setupAnim(state);
+		animate(state.idleAnimationState, ButterflyAnimation.IDLE_CLOSED, state.ageInTicks);
+		animate(state.flyingAnimationState, ButterflyAnimation.FLYING, state.ageInTicks, 2.0F);
 	}
 
 	public static LayerDefinition createBodyLayer() {

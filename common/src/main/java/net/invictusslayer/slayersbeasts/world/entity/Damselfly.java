@@ -84,7 +84,6 @@ public class Damselfly extends PathfinderMob implements VariantHolder<Damselfly.
 		FlyingPathNavigation navigation = new FlyingPathNavigation(this, level);
 		navigation.setCanOpenDoors(false);
 		navigation.setCanFloat(false);
-		navigation.setCanOpenDoors(true);
 		return navigation;
 	}
 

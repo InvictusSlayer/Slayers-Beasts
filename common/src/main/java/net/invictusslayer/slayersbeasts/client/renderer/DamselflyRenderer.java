@@ -19,7 +19,7 @@ public class DamselflyRenderer extends MobRenderer<Damselfly, DamselflyRenderSta
 	}
 
 	@Override
-	protected void scale(T livingEntity, PoseStack poseStack, float partialTickTime) {
+	protected void scale(DamselflyRenderState state, PoseStack poseStack) {
 		float f = 0.8F;
 		poseStack.scale(f, f, f);
 	}

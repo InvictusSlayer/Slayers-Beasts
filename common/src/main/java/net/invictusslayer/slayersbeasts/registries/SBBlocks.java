@@ -286,13 +286,13 @@ public class SBBlocks {
 
 	private static <T extends Block> Supplier<T> registerWaterBlockItem(String name, Supplier<T> supplier) {
 		Supplier<T> block = registerBlock(name, supplier);
-		SBItems.register(name, () -> new PlaceOnWaterBlockItem(block.get(), new Item.Properties().setId(ResourceKey.create(Registries.ITEM, ResourceLocation.fromNamespaceAndPath(SlayersBeasts.MOD_ID, name)))));
+		SBItems.register(name, () -> new PlaceOnWaterBlockItem(block.get(), new Item.Properties().useBlockDescriptionPrefix().setId(ResourceKey.create(Registries.ITEM, ResourceLocation.fromNamespaceAndPath(SlayersBeasts.MOD_ID, name)))));
 		return block;
 	}
 
 	private static <T extends Block> Supplier<T> registerBlockItem(String name, Supplier<T> supplier) {
 		Supplier<T> block = registerBlock(name, supplier);
-		SBItems.register(name, () -> new BlockItem(block.get(), new Item.Properties().setId(ResourceKey.create(Registries.ITEM, ResourceLocation.fromNamespaceAndPath(SlayersBeasts.MOD_ID, name)))));
+		SBItems.register(name, () -> new BlockItem(block.get(), new Item.Properties().useBlockDescriptionPrefix().setId(ResourceKey.create(Registries.ITEM, ResourceLocation.fromNamespaceAndPath(SlayersBeasts.MOD_ID, name)))));
 		return block;
 	}
 
