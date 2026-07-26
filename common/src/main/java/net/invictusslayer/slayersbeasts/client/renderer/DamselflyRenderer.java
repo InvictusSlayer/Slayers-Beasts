@@ -9,26 +9,22 @@ import net.minecraft.client.renderer.entity.MobRenderer;
 import net.minecraft.resources.ResourceLocation;
 
 public class DamselflyRenderer<T extends Damselfly> extends MobRenderer<T, DamselflyModel<T>> {
-	private static final ResourceLocation BLUE = new ResourceLocation(SlayersBeasts.MOD_ID, "textures/entity/damselfly/blue.png");
-	private static final ResourceLocation GREEN = new ResourceLocation(SlayersBeasts.MOD_ID, "textures/entity/damselfly/green.png");
-	private static final ResourceLocation YELLOW = new ResourceLocation(SlayersBeasts.MOD_ID, "textures/entity/damselfly/yellow.png");
+    private static final ResourceLocation BLUE_GREEN = new ResourceLocation(SlayersBeasts.MOD_ID, "textures/entity/damselfly/blue_green.png");
 
-	public DamselflyRenderer(EntityRendererProvider.Context context) {
-		super(context, new DamselflyModel<>(context.bakeLayer(DamselflyModel.LAYER_LOCATION)), 0.25F);
-	}
+    public DamselflyRenderer(EntityRendererProvider.Context context) {
+        super(context, new DamselflyModel<>(context.bakeLayer(DamselflyModel.LAYER_LOCATION)), 0.25F);
+    }
 
-	@Override
-	protected void scale(T livingEntity, PoseStack poseStack, float partialTickTime) {
-		float f = 0.8F;
-		poseStack.scale(f, f, f);
-	}
+    @Override
+    protected void scale(T livingEntity, PoseStack poseStack, float partialTickTime) {
+        float f = 0.8F;
+        poseStack.scale(f, f, f);
+    }
 
-	@Override
-	public ResourceLocation getTextureLocation(T entity) {
-		return switch (entity.getVariant()) {
-			case BLUE -> BLUE;
-			case GREEN -> GREEN;
-			case YELLOW -> YELLOW;
-		};
-	}
+    @Override
+    public ResourceLocation getTextureLocation(T entity) {
+        return switch (entity.getVariant()) {
+            case BLUE_GREEN -> BLUE_GREEN;
+        };
+    }
 }
