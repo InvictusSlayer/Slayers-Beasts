@@ -23,10 +23,8 @@ minecraft {
 
     reobf = false
 
-    def at = file("src/main/resources/META-INF/accesstransformer.cfg")
-    if (at.exists()) {
-        accessTransformer = at
-    }
+    def at = project(":forge").file("src/main/resources/META-INF/accesstransformer.cfg")
+    if (at.exists()) accessTransformers = [at.absolutePath]
 
     runs {
         client {
