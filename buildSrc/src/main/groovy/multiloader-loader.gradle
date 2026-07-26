@@ -23,6 +23,7 @@ tasks.named("compileJava", JavaCompile) {
 }
 
 processResources {
+    duplicatesStrategy = DuplicatesStrategy.INCLUDE
     exclude("META-INF/accesstransformer.cfg")
 
     dependsOn(configurations.commonResources)
