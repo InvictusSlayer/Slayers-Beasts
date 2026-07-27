@@ -31,6 +31,7 @@ public class SBEntityLoot extends EntityLootSubProvider {
 		add(SBEntities.TYRACHNID.get(), LootTable.lootTable());
 		add(SBEntities.BUTTERFLY.get(), LootTable.lootTable());
 		add(SBEntities.DAMSELFLY.get(), LootTable.lootTable());
+		add(SBEntities.SNAIL.get(), LootTable.lootTable());
 		add(SBEntities.ENT_MEDIUM.get(), LootTable.lootTable());
 		add(SBEntities.WUDU.get(), LootTable.lootTable());
 		add(SBEntities.SPORETRAP.get(), LootTable.lootTable());
