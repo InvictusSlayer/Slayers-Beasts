@@ -21,7 +21,7 @@ public class SBForge {
 		IEventBus bus = context.getModEventBus();
 
 		SlayersBeasts.init();
-		ForgePlatformHandler.register(bus);
+		((ForgePlatformHandler) SlayersBeasts.PLATFORM).register(bus);
 
 		bus.addListener((FMLCommonSetupEvent event) -> event.enqueueWork(() -> {
 			SlayersBeasts.commonSetup();
